@@ -14,4 +14,10 @@ test('Set duration to 6 minutes', () => {
   expect(mobTimer.getDuration()).toEqual(6);
 });
 
+test('Start timer', () => {
+  const mobTimer = new MobTimer();
+  mobTimer.start();
+  expect(mobTimer.getStartTime()-new Date().getTime()).toBeLessThan(100);
+});
+
 
