@@ -5,12 +5,13 @@ test('Create a mob url', () => {
 });
 
 test('Default duration is 5 minutes', () => {
-  expect(MobTimer.getDuration()).toEqual(5);
+  expect(new MobTimer().getDuration()).toEqual(5);
 });
 
 test('Set duration to 6 minutes', () => {
-  MobTimer.setDuration(6);
-  expect(MobTimer.getDuration()).toEqual(6);
+  const mobTimer = new MobTimer();
+  mobTimer.setDuration(6);
+  expect(mobTimer.getDuration()).toEqual(6);
 });
 
 

@@ -4,14 +4,14 @@ export function mobUrl(mobName) {
 
 export class MobTimer {
 
-    static __duration: number = 5;
+    __duration: number = 5;
     
-    static getDuration(): any {
-        return MobTimer.__duration;
+    getDuration(): any {
+        return this.__duration;
     }
 
-    static setDuration(duration) {
-        MobTimer.__duration = duration;
+    setDuration(duration) {
+        this.__duration = duration;
     } 
 
 }
