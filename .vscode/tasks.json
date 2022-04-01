@@ -62,6 +62,35 @@
 			"problemMatcher": [],
 			"label": "jest2",
 			"detail": "tsc && jest out/*.test.js"
+		},
+		{
+			"label": "shell2",
+			"type": "shell",
+			"command": "cd HelloWorld && bash",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "run test and terminal",
+			"type": "shell",
+			"command": "echo here",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"jest2",
+				"shell2"
+			],
+			"problemMatcher": []
 		}
 	]
 }
