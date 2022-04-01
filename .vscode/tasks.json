@@ -14,7 +14,7 @@
 		{
 			"label": "jest",
 			"type": "shell",
-			"command": "cd HelloWorld && yarn test --watch && bash",
+			"command": "cd HelloWorld && yarn test --watch --verbose && bash",
 			"group": "test",
 			"presentation": {
 				"reveal": "always",
@@ -45,8 +45,23 @@
 				"reveal": "always",
 				"panel": "new"
 			},
-			"dependsOn": ["tsc","jest", "shell"],
+			"dependsOn": [
+				"tsc",
+				"jest",
+				"shell"
+			],
 			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"command": "cd HelloWorld && yarn test --watch && bash",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "jest2",
+			"detail": "tsc && jest out/*.test.js"
 		}
 	]
 }
