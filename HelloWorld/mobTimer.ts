@@ -9,7 +9,7 @@ export class MobTimer {
   private _startTimeSeconds: number;
 
   private _secondsRemaining: number = 0;
-  getSecondsRemaining(): number {
+  public get secondsRemaining(): number {
     if (this._startTimeSeconds) {
       // Todo: Extract methods for converting seconds to/from minutes (and same for ms)
       //       e.g., maybe duration.seconds, duration.minutes (or getSeconds...)
@@ -21,10 +21,10 @@ export class MobTimer {
   }
 
   private _duration: Duration = new Duration(5);
-  getDuration(): Duration {
+  public get duration(): Duration {
     return this._duration;
   }
-  setDurationMinutes(duration: number): void {
+  public set durationMinutes(duration: number) {
     this._duration = new Duration(duration);
   }
 
@@ -39,7 +39,7 @@ export class MobTimer {
 
   start() {
     this._isRunning = true;
-    this._secondsRemaining = this._duration.getMinutes() * 60;
+    this._secondsRemaining = this._duration.minutes * 60;
 
     this._startTimeSeconds = new Date().getTime() / 1000;
   }
