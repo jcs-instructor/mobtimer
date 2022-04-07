@@ -33,7 +33,7 @@ export class MobTimer {
   }
 
   private _isRunning: boolean = false;
-  getIsRunning(): boolean {
+  public get isRunning(): boolean {
     return this._isRunning;
   }
 
