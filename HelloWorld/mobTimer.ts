@@ -6,42 +6,41 @@ import { Duration } from './duration'
 
 export class MobTimer {
   
-  private startTimeSeconds: number;
+  private _startTimeSeconds: number;
 
-  private secondsRemaining: number = 0;
+  private _secondsRemaining: number = 0;
   getSecondsRemaining(): number {
-    if (this.startTimeSeconds) {
+    if (this._startTimeSeconds) {
       // Todo: Extract methods for converting seconds to/from minutes (and same for ms)
       //       e.g., maybe duration.seconds, duration.minutes (or getSeconds...)
-      this.secondsRemaining = 
-        (this.duration.getMinutes() * 60) + 
-        Math.round(this.startTimeSeconds - (MobTimer.getCurrentMilliseconds()/1000));
+      this._secondsRemaining = 
+        (this._duration.getMinutes() * 60) + 
+        Math.round(this._startTimeSeconds - (MobTimer.getCurrentMilliseconds()/1000));
     }
-    return this.secondsRemaining;
+    return this._secondsRemaining;
   }
 
-  private duration: Duration = new Duration(5);
+  private _duration: Duration = new Duration(5);
   getDuration(): Duration {
-    return this.duration;
+    return this._duration;
   }
   setDurationMinutes(duration: number): void {
-    this.duration = new Duration(duration);
+    this._duration = new Duration(duration);
   }
 
   private static getCurrentMilliseconds() {
     return new Date().getTime();
   }
 
-  private isRunning: boolean = false;
-
+  private _isRunning: boolean = false;
   getIsRunning(): boolean {
-    return this.isRunning;
+    return this._isRunning;
   }
 
   start() {
-    this.isRunning = true;
-    this.secondsRemaining = this.duration.getMinutes() * 60;
+    this._isRunning = true;
+    this._secondsRemaining = this._duration.getMinutes() * 60;
 
-    this.startTimeSeconds = new Date().getTime() / 1000;
+    this._startTimeSeconds = new Date().getTime() / 1000;
   }
 }
