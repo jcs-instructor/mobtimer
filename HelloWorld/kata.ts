@@ -3,8 +3,9 @@ export function mobUrl(mobName) {
 }
 
 export class MobTimer {
+  private secondsRemaining: number = 0;
   getSecondsRemaining(): number {
-    return 0;
+    return this.secondsRemaining;
   }
   
   private isRunning: boolean = false;
@@ -19,6 +20,8 @@ export class MobTimer {
     // private startTime: number;
     start() {
       this.isRunning = true;
+      this.secondsRemaining = this.duration*60;
+
       // this.startTime = new Date().getTime();
     }
 
