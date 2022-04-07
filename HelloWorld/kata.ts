@@ -1,5 +1,5 @@
 export function mobUrl(mobName) {
-    return 'https://mobti.me/'+mobName;
+  return "https://mobti.me/" + mobName;
 }
 
 export class MobTimer {
@@ -7,32 +7,25 @@ export class MobTimer {
   getSecondsRemaining(): number {
     return this.secondsRemaining;
   }
-  
+
+  private duration: number = 5;
+  getDuration(): number {
+    return this.duration;
+  }
+  setDuration(duration: number): void {
+    this.duration = duration;
+  }
+
   private isRunning: boolean = false;
-  
-    getIsRunning(): boolean {
-        return this.isRunning;
-      }
 
-    // getStartTime(): number {
-    //   return this.startTime;
-    // }
-    // private startTime: number;
-    start() {
-      this.isRunning = true;
-      this.secondsRemaining = this.duration*60;
+  getIsRunning(): boolean {
+    return this.isRunning;
+  }
 
-      // this.startTime = new Date().getTime();
-    }
+  start() {
+    this.isRunning = true;
+    this.secondsRemaining = this.duration * 60;
 
-    private duration: number = 5;
-    
-    getDuration(): number {
-        return this.duration;
-    }
-
-    setDuration(duration: number): void {
-        this.duration = duration;
-    } 
-
+    // this.startTime = new Date().getTime();
+  }
 }
