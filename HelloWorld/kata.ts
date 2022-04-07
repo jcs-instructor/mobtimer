@@ -3,22 +3,29 @@ export function mobUrl(mobName) {
 }
 
 export class MobTimer {
-    getStartTime(): number {
-      return this.startTime;
-    }
-    private startTime: number;
-    start() {
-      this.startTime = new Date().getTime();
+  
+  private isRunning: boolean = false;
+  getIsRunning(): boolean {
+      return this.isRunning;
     }
 
-    __duration: number = 5;
+    // getStartTime(): number {
+    //   return this.startTime;
+    // }
+    // private startTime: number;
+    start() {
+      this.isRunning = true;
+      // this.startTime = new Date().getTime();
+    }
+
+    private duration: number = 5;
     
     getDuration(): number {
-        return this.__duration;
+        return this.duration;
     }
 
     setDuration(duration: number): void {
-        this.__duration = duration;
+        this.duration = duration;
     } 
 
 }
