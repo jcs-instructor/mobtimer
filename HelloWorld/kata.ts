@@ -21,8 +21,8 @@ export class MobTimer {
   }
 
   private duration: Duration = new Duration(5);
-  getDurationMinutes(): number {
-    return this.duration.getMinutes();
+  getDuration(): Duration {
+    return this.duration;
   }
   setDurationMinutes(duration: number): void {
     this.duration = new Duration(duration);
