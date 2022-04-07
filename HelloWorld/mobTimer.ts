@@ -14,7 +14,7 @@ export class MobTimer {
       // Todo: Extract methods for converting seconds to/from minutes (and same for ms)
       //       e.g., maybe duration.seconds, duration.minutes (or getSeconds...)
       this._secondsRemaining = 
-        (this._duration.getMinutes() * 60) + 
+        (this._duration.minutes * 60) + 
         Math.round(this._startTimeSeconds - (MobTimer.getCurrentMilliseconds()/1000));
     }
     return this._secondsRemaining;

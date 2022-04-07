@@ -1,12 +1,11 @@
 export class Duration {
-    private minutes: number;
+    private _minutes: number;
     
     constructor(minutes: number) {
-        this.minutes = minutes;
+        this._minutes = minutes;
     }
 
-    getMinutes(): number {
-        return this.minutes;
+    public get minutes(): number {
+        return this._minutes;
     }
-  
 }
