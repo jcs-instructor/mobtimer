@@ -3,11 +3,15 @@ export function mobUrl(mobName) {
 }
 
 export class MobTimer {
+  getSecondsRemaining(): number {
+    return 0;
+  }
   
   private isRunning: boolean = false;
-  getIsRunning(): boolean {
-      return this.isRunning;
-    }
+  
+    getIsRunning(): boolean {
+        return this.isRunning;
+      }
 
     // getStartTime(): number {
     //   return this.startTime;
