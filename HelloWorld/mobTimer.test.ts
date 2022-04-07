@@ -1,4 +1,4 @@
-import { mobUrl, MobTimer } from './kata'
+import { mobUrl, MobTimer } from './mobTimer'
 
 test('Create a mob url', () => {
   expect(mobUrl('arrested-egg')).toBe('https://mobti.me/arrested-egg');

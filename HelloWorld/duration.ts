@@ -3,7 +3,6 @@ export class Duration {
     
     constructor(minutes: number) {
         this.minutes = minutes;
-
     }
 
     getMinutes(): number {
