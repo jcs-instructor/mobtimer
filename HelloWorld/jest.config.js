@@ -1,10 +1,8 @@
-/*
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  // All imported modules in your tests should be mocked automatically
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+    // All imported modules in your tests should be mocked automatically
   // automock: false,
 
   // Stop running tests after `n` failures
