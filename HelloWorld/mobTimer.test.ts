@@ -29,7 +29,7 @@ test('Get seconds remaining before start', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   expect(mobTimer.secondsRemaining).toEqual(0);
-  expect(mobTimer.timeString).toEqual("00:00");  
+  expect(mobTimer.timeRemainingString).toEqual("00:00");  
 });
 
 test('Get seconds remaining after start', () => {
@@ -37,7 +37,7 @@ test('Get seconds remaining after start', () => {
   mobTimer.durationMinutes = 5.5;
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(5.5*60);
-  expect(mobTimer.timeString).toEqual("05:30");  
+  expect(mobTimer.timeRemainingString).toEqual("05:30");  
 });
 
 test('Get seconds remaining after start', () => {
@@ -45,7 +45,7 @@ test('Get seconds remaining after start', () => {
   mobTimer.durationMinutes = 12;
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(12*60);
-  expect(mobTimer.timeString).toEqual("12:00");  
+  expect(mobTimer.timeRemainingString).toEqual("12:00");  
 });
 
 test('Get seconds remaining 2 seconds after start', async () => {
@@ -54,7 +54,7 @@ test('Get seconds remaining 2 seconds after start', async () => {
   mobTimer.start();
   await delaySeconds(2); 
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 2);
-  expect(mobTimer.timeString).toEqual("05:58");
+  expect(mobTimer.timeRemainingString).toEqual("05:58");
 });
 
 function delaySeconds(seconds: number) {

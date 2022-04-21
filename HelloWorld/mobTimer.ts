@@ -10,7 +10,7 @@ export class MobTimer {
   private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
 
-  public get timeString(): any {
+  public get timeRemainingString(): any {
     return TimeUtil.getTimeString(this._secondsRemaining);
   }
   
