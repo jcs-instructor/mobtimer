@@ -47,7 +47,7 @@ export class MobTimer {
 }
 
 function getMinutesPart(_secondsRemaining: number): string {
-  return "0" + Math.round(_secondsRemaining / 60 - 0.49);
+  return "0" + Math.trunc(_secondsRemaining / 60);
 }
 
 function getSecondsPart(_secondsRemaining: number) {
