@@ -2,8 +2,6 @@ export function mobUrl(mobName) {
   return "https://mobti.me/" + mobName;
 }
 
-import { Duration } from './duration'
-
 export class MobTimer {
   
   private _durationMinutes: number = 5;
@@ -14,8 +12,7 @@ export class MobTimer {
 
   public get secondsRemaining(): number {
     if (this._startTimeSeconds) {
-      // Todo: Extract methods for converting seconds to/from minutes (and same for ms)
-      //       e.g., maybe duration.seconds, durationMinutes (or getSeconds...)
+      // Todo: Look at refactoring magic numbers or removing entire function
       this._secondsRemaining = 
         (this._durationMinutes * 60) + 
         Math.round(this._startTimeSeconds - (MobTimer.getCurrentMilliseconds()/1000));
