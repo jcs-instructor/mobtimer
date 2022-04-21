@@ -5,11 +5,13 @@ export function mobUrl(mobName) {
 export class MobTimer {
   
   private _durationMinutes: number = 5;
-  private _startTimeSeconds: number;
-
-  
   private _secondsRemaining: number = 0;
-
+  private _startTimeSeconds: number;
+  
+  public get timeString(): any {
+    return getMinutesPart(this._secondsRemaining) + ":" + getSecondsPart(this._secondsRemaining);
+  }
+  
   public get secondsRemaining(): number {
     if (this._startTimeSeconds) {
       // Todo: Look at refactoring magic numbers or removing entire function
@@ -43,3 +45,12 @@ export class MobTimer {
     this._startTimeSeconds = new Date().getTime() / 1000;
   }
 }
+
+function getMinutesPart(_secondsRemaining: number): string {
+  return "0" + Math.round(_secondsRemaining / 60 - 0.49);
+}
+
+function getSecondsPart(_secondsRemaining: number) {
+  return ((_secondsRemaining % 60) + "").padStart(2, "0"); 
+}
+

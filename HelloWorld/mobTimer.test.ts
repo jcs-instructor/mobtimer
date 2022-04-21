@@ -8,12 +8,6 @@ test('Default duration is 5 minutes', () => {
   expect(new MobTimer().durationMinutes).toEqual(5);
 });
 
-test('Set duration to 6 minutes', () => {
-  const mobTimer = new MobTimer();
-  mobTimer.durationMinutes = 6;
-  expect(mobTimer.durationMinutes).toEqual(6);
-});
-
 test('Set duration to 3.5 minutes', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 3.5;
@@ -42,6 +36,7 @@ test('Get seconds remaining after start', () => {
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(6*60);
+  expect(mobTimer.timeString).toEqual("06:00");  
 });
 
 test('Get seconds remaining 2 seconds after start', async () => {
@@ -50,6 +45,7 @@ test('Get seconds remaining 2 seconds after start', async () => {
   mobTimer.start();
   await delaySeconds(2); 
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 2);
+  expect(mobTimer.timeString).toEqual("05:58");
 });
 
 function delaySeconds(seconds: number) {
