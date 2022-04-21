@@ -1,3 +1,5 @@
+import { TimeUtil } from "./getMinutesPart";
+
 export function mobUrl(mobName) {
   return "https://mobti.me/" + mobName;
 }
@@ -10,7 +12,8 @@ export class MobTimer {
 
   // todo: Consider making this a standalone function (move outside the class)
   public get timeString(): any {
-    return getMinutesPart(this._secondsRemaining) + ":" + getSecondsPart(this._secondsRemaining);
+    return TimeUtil.getMinutesPart(this._secondsRemaining) + ":" + 
+           TimeUtil.getSecondsPart(this._secondsRemaining);
   }
   
   public get secondsRemaining(): number {
@@ -46,14 +49,4 @@ export class MobTimer {
   }
 }
 
-// Todo: move these 2 functions (to utility file and/or class)
-function getMinutesPart(secondsRemaining: number): string {
-  const minutesPart = Math.trunc(secondsRemaining / 60);
-  return minutesPart.toString().padStart(2,"0");
-}
-
-function getSecondsPart(secondsRemaining: number) {
-  const secondsPart = (secondsRemaining % 60);
-  return secondsPart.toString().padStart(2, "0"); 
-}
 
