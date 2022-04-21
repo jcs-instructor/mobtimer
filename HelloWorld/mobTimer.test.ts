@@ -29,6 +29,7 @@ test('Get seconds remaining before start', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   expect(mobTimer.secondsRemaining).toEqual(0);
+  expect(mobTimer.timeString).toEqual("00:00");  
 });
 
 test('Get seconds remaining after start', () => {
