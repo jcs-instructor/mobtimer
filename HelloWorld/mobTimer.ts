@@ -1,5 +1,6 @@
 import { TimeUtil } from "./timeUtil";
 
+// todo: move or remove
 export function mobUrl(mobName) {
   return "https://mobti.me/" + mobName;
 }
@@ -16,11 +17,9 @@ export class MobTimer {
   
   public get secondsRemaining(): number {
     if (this._startTimeSeconds) {
-      // Todo: Look at refactoring magic numbers or removing entire function
-      this._secondsRemaining = 
-        TimeUtil.minutesToSeconds(this._durationMinutes) + 
-        Math.round(this._startTimeSeconds - 
-        TimeUtil.getCurrentSeconds());
+      const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
+      const timeElapsedSeconds = TimeUtil.getCurrentSeconds() - this._startTimeSeconds;
+      this._secondsRemaining = durationSeconds - Math.round(timeElapsedSeconds);
     }
     return this._secondsRemaining;
   }
