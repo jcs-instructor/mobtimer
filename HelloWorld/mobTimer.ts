@@ -47,7 +47,7 @@ export class MobTimer {
 }
 
 function getMinutesPart(_secondsRemaining: number): string {
-  return "0" + Math.trunc(_secondsRemaining / 60);
+  return (Math.trunc(_secondsRemaining / 60) + "").padStart(2,"0");
 }
 
 function getSecondsPart(_secondsRemaining: number) {
