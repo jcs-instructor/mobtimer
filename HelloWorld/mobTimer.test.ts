@@ -33,10 +33,10 @@ test('Get seconds remaining before start', () => {
 
 test('Get seconds remaining after start', () => {
   const mobTimer = new MobTimer();
-  mobTimer.durationMinutes = 6;
+  mobTimer.durationMinutes = 5.5;
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(6*60);
-  expect(mobTimer.timeString).toEqual("06:00");  
+  expect(mobTimer.secondsRemaining).toEqual(5.5*60);
+  expect(mobTimer.timeString).toEqual("05:30");  
 });
 
 test('Get seconds remaining after start', () => {
