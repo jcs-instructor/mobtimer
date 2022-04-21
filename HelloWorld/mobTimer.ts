@@ -1,4 +1,4 @@
-import { TimeUtil } from "./getMinutesPart";
+import { TimeUtil } from "./timeUtil";
 
 export function mobUrl(mobName) {
   return "https://mobti.me/" + mobName;
@@ -10,10 +10,8 @@ export class MobTimer {
   private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
 
-  // todo: Consider making this a standalone function (move outside the class)
   public get timeString(): any {
-    return TimeUtil.getMinutesPart(this._secondsRemaining) + ":" + 
-           TimeUtil.getSecondsPart(this._secondsRemaining);
+    return TimeUtil.getTimeString(this._secondsRemaining);
   }
   
   public get secondsRemaining(): number {
