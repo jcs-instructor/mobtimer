@@ -1,13 +1,19 @@
+**Practices to Focus On**:
+- **Phrases**:
+  - "Got it" (ELMO)
+  - "Hold on" (Navigator wants floor)
+- **Remember to give credit to co-author**.  Example: `Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com>` (email is the github user email)
+
+---
+
+**Established Practices**:
 - **Terminology**
     - VSCode Bar
     - Inline icons
     - Code Tab
     - Browser Tab
     - Left code pane, right code pane
-- **Remember to give credit to co-author**.  Example: `Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com>` (email is the github user email)
 - **Always verbalize intent**: Navigator verbalize your intent (why) before directing, when coding or exploring code
 - **Avoid rabbit holes**: When exploring and mob timer elapses, reevaluate if going down a productive path
 - **Scribe**: If desired, in retro, request that talker and scribe should be separate people
-- **Phrases**:
-  - "Got it" (ELMO)
-  - "Hold on" (Navigator wants floor)
+- **Commit frequently on feature branch**
