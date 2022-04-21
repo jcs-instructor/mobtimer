@@ -18,8 +18,9 @@ export class MobTimer {
     if (this._startTimeSeconds) {
       // Todo: Look at refactoring magic numbers or removing entire function
       this._secondsRemaining = 
-        (this._durationMinutes * 60) + 
-        Math.round(this._startTimeSeconds - (MobTimer.getCurrentMilliseconds()/1000));
+        TimeUtil.minutesToSeconds(this._durationMinutes) + 
+        Math.round(this._startTimeSeconds - 
+        TimeUtil.getCurrentSeconds());
     }
     return this._secondsRemaining;
   }
@@ -29,10 +30,6 @@ export class MobTimer {
   }
   public set durationMinutes(duration: number) {
     this._durationMinutes = duration;
-  }
-
-  private static getCurrentMilliseconds() {
-    return new Date().getTime();
   }
 
   private _isRunning: boolean = false;

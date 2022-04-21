@@ -1,6 +1,19 @@
 export class TimeUtil {
   
-  static getTimeString(seconds: number): any {
+  static getCurrentSeconds() {
+    const currentMilliseconds = new Date().getTime();
+    return this.millisecondsToSeconds(currentMilliseconds); 
+  }
+
+  static millisecondsToSeconds(milliseconds: number) {
+    return milliseconds / 1000;
+  }
+  
+  static minutesToSeconds(minutes: number) : number {
+    return minutes * 60;
+  }
+  
+  static getTimeString(seconds: number): string {
     return this.getMinutesPart(seconds) + ":" + 
            this.getSecondsPart(seconds);
   }
