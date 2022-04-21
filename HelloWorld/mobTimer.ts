@@ -7,7 +7,8 @@ export class MobTimer {
   private _durationMinutes: number = 5;
   private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
-  
+
+  // todo: Consider making this a standalone function (move outside the class)
   public get timeString(): any {
     return getMinutesPart(this._secondsRemaining) + ":" + getSecondsPart(this._secondsRemaining);
   }
@@ -41,11 +42,11 @@ export class MobTimer {
   start() {
     this._isRunning = true;
     this._secondsRemaining = this._durationMinutes * 60;
-
     this._startTimeSeconds = new Date().getTime() / 1000;
   }
 }
 
+// Todo: move these 2 functions (to utility file and/or class)
 function getMinutesPart(secondsRemaining: number): string {
   const minutesPart = Math.trunc(secondsRemaining / 60);
   return minutesPart.toString().padStart(2,"0");
