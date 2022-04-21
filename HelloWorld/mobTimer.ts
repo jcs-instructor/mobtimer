@@ -1,10 +1,5 @@
 import { TimeUtil } from "./timeUtil";
 
-// todo: move or remove
-export function mobUrl(mobName) {
-  return "https://mobti.me/" + mobName;
-}
-
 export class MobTimer {
   
   private _durationMinutes: number = 5;

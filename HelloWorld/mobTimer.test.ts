@@ -1,8 +1,4 @@
-import { mobUrl, MobTimer } from './mobTimer'
-
-test('Create a mob url', () => {
-  expect(mobUrl('arrested-egg')).toBe('https://mobti.me/arrested-egg');
-});
+import { MobTimer } from './mobTimer'
 
 test('Default duration is 5 minutes', () => {
   expect(new MobTimer().durationMinutes).toEqual(5);
