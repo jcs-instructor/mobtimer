@@ -20,6 +20,7 @@ test('Start timer', () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
   expect(mobTimer.state).toEqual("RUNNING");
+  expect(mobTimer.stateEnum).toEqual(StateEnum.Running);
 });
 
 test('Get seconds remaining before start', () => {
