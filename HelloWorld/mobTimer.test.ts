@@ -24,23 +24,20 @@ test('Start timer', () => {
 test('Get seconds remaining before start for turn duration with single digit minutes', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
-  expect(mobTimer.secondsRemaining).toEqual(0);
   expect(mobTimer.timeRemainingString).toEqual("00:00");  
 });
 
-test('Get seconds remaining after start for turn duration with fractional minutes', () => {
+test('Get seconds remaining string after start for turn duration with fractional minutes', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 5.5;
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(5.5*60);
   expect(mobTimer.timeRemainingString).toEqual("05:30");  
 });
 
-test('Get seconds remaining after start for turn duration with double digit minutes', () => {
+test('Get seconds remaining string after start for turn duration with double digit minutes', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 12;
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(12*60);
   expect(mobTimer.timeRemainingString).toEqual("12:00");  
 });
 
