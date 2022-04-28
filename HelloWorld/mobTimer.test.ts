@@ -84,6 +84,7 @@ test('Get seconds remaining after running 1 second and paused 1', async () => {
 });
 
 // todo: add test to pause, resume, and pause again
+// todo: tests now take 9+ sec. to run - see if can shorten
 
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );

@@ -32,18 +32,23 @@ export class MobTimer {
   }
   
   public get secondsRemaining(): number {    
-    let timeElapsedSeconds;
-    if (this._whenStartedInSeconds) {
-      const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
-      if (this._state == State.Paused) {
-        timeElapsedSeconds = this._whenPausedInSeconds - this._whenStartedInSeconds; 
-      }
-      else {
-        timeElapsedSeconds = TimeUtil.getCurrentSeconds() - this._whenStartedInSeconds; 
-      }
-      return durationSeconds - Math.round(timeElapsedSeconds);
+    // When the timer is ready, show "0:00" for the time.
+    if (this._state == State.Ready) {
+      return 0;
     }
-    return 0;
+    const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
+    const timeElapsedSeconds = this.calculateTimeElapsedSeconds();
+    return durationSeconds - Math.round(timeElapsedSeconds);
+  }
+
+  private calculateTimeElapsedSeconds() {
+    if (this._state == State.Ready) {
+      return 0;
+    } else if (this._state == State.Paused) {
+      return this._whenPausedInSeconds - this._whenStartedInSeconds;
+    } else {
+      return TimeUtil.getCurrentSeconds() - this._whenStartedInSeconds;
+    }
   }
 
   public get durationMinutes(): number {
