@@ -1,8 +1,5 @@
 import { TimeUtil } from "./timeUtil";
 
-
-
-
 export enum State {
   Ready = "READY",
   Running = "RUNNING",
