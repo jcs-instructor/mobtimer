@@ -1,7 +1,7 @@
 import { TimeUtil } from "./timeUtil";
 
 
-export enum StateEnum {
+export enum State {
   Ready = "READY",
   Running = "RUNNING",
 }
@@ -11,14 +11,9 @@ export class MobTimer {
   private _durationMinutes: number = 5;
   private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
-  private _state: string = "READY"; // todo: make enum 
-  private _stateEnum: StateEnum = StateEnum.Ready;
+  private _state: State = State.Ready;
 
-  public get stateEnum(): StateEnum {
-    return this._stateEnum;
-  }
-
-  public get state(): string {
+  public get state(): State {
     return this._state;
   }
 
@@ -43,8 +38,7 @@ export class MobTimer {
   }
 
   start() {
-    this._state = "RUNNING";
-    this._stateEnum = StateEnum.Running;
+    this._state = State.Running;
     this._secondsRemaining = this._durationMinutes * 60;
     this._startTimeSeconds = new Date().getTime() / 1000;
   }
