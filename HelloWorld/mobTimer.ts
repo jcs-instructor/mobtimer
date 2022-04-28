@@ -1,9 +1,12 @@
 import { TimeUtil } from "./timeUtil";
 
 
+
+
 export enum State {
   Ready = "READY",
   Running = "RUNNING",
+  Paused = "PAUSED",
 }
 
 export class MobTimer {
@@ -12,6 +15,16 @@ export class MobTimer {
   private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
   private _state: State = State.Ready;
+
+  start() {
+    this._state = State.Running;
+    this._secondsRemaining = this._durationMinutes * 60;
+    this._startTimeSeconds = new Date().getTime() / 1000;
+  }
+
+  pause() {
+    this._state = State.Paused;
+  }
 
   public get state(): State {
     return this._state;
@@ -36,12 +49,7 @@ export class MobTimer {
   public set durationMinutes(duration: number) {
     this._durationMinutes = duration;
   }
-
-  start() {
-    this._state = State.Running;
-    this._secondsRemaining = this._durationMinutes * 60;
-    this._startTimeSeconds = new Date().getTime() / 1000;
-  }
+  
 }
 
 

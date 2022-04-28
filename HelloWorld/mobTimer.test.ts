@@ -53,6 +53,14 @@ test('Get seconds remaining 2 seconds after start', async () => {
   expect(mobTimer.timeRemainingString).toEqual("05:58");
 });
 
+test('Pause timer', () => {
+  const mobTimer = new MobTimer();
+  mobTimer.start();
+  mobTimer.pause();
+  expect(mobTimer.state).toEqual(State.Paused);
+});
+
+
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );
 }
