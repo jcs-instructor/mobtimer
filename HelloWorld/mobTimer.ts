@@ -9,18 +9,18 @@ export enum State {
 export class MobTimer {
   
   private _durationMinutes: number = 5;
-  private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
   private _state: State = State.Ready;
+  private _timePausedSeconds: number;
 
   start() {
     this._state = State.Running;
-    this._secondsRemaining = this._durationMinutes * 60;
     this._startTimeSeconds = new Date().getTime() / 1000;
   }
 
   pause() {
     this._state = State.Paused;
+    this._timePausedSeconds = new Date().getTime() / 1000;
   }
 
   public get state(): State {
@@ -28,16 +28,16 @@ export class MobTimer {
   }
 
   public get timeRemainingString(): any {
-    return TimeUtil.getTimeString(this._secondsRemaining);
+    return TimeUtil.getTimeString(this.secondsRemaining);
   }
   
   public get secondsRemaining(): number {
     if (this._startTimeSeconds) {
       const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
       const timeElapsedSeconds = TimeUtil.getCurrentSeconds() - this._startTimeSeconds;
-      this._secondsRemaining = durationSeconds - Math.round(timeElapsedSeconds);
+      return durationSeconds - Math.round(timeElapsedSeconds);
     }
-    return this._secondsRemaining;
+    return 0;
   }
 
   public get durationMinutes(): number {

@@ -46,12 +46,20 @@ test('Get seconds remaining after start for turn duration with double digit minu
 
 test('Get seconds remaining 2 seconds after start', async () => {
   const mobTimer = new MobTimer();
-  mobTimer.durationMinutes = 6;
+  mobTimer.durationMinutes = 6; 
   mobTimer.start();
   await delaySeconds(2); 
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 2);
+});
+
+test('Get time remaining string 2 seconds after start', async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.durationMinutes = 6; 
+  mobTimer.start();
+  await delaySeconds(2); 
   expect(mobTimer.timeRemainingString).toEqual("05:58");
 });
+
 
 test('Pause timer', () => {
   const mobTimer = new MobTimer();
@@ -59,6 +67,19 @@ test('Pause timer', () => {
   mobTimer.pause();
   expect(mobTimer.state).toEqual(State.Paused);
 });
+
+/*
+test('Get seconds remaining after two second pause', async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  mobTimer.pause();
+  await delaySeconds(2); 
+  expect(mobTimer.secondsRemaining).toEqual(6*60);
+  expect(mobTimer.timeRemainingString).toEqual("06:00");
+});
+*/
+
 
 
 function delaySeconds(seconds: number) {
