@@ -10,15 +10,16 @@ test('Set duration to 3.5 minutes', () => {
   expect(mobTimer.durationMinutes).toEqual(3.5);
 });
 
+test('Initial state - timer is not running', () => {
+  const mobTimer = new MobTimer();  
+  expect(mobTimer.isRunning).toEqual(false);
+  expect(mobTimer.state).toEqual("READY");
+});
+
 test('Start timer', () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
   expect(mobTimer.isRunning).toEqual(true);
-});
-
-test('Initial state - timer is not running', () => {
-  const mobTimer = new MobTimer();  
-  expect(mobTimer.isRunning).toEqual(false);
 });
 
 test('Get seconds remaining before start', () => {

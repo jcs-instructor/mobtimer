@@ -5,6 +5,11 @@ export class MobTimer {
   private _durationMinutes: number = 5;
   private _secondsRemaining: number = 0;
   private _startTimeSeconds: number;
+  private _state: string = "READY";
+
+  public get state(): string {
+    return this._state;
+  }
 
   public get timeRemainingString(): any {
     return TimeUtil.getTimeString(this._secondsRemaining);
