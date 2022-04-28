@@ -31,13 +31,8 @@ export class MobTimer {
     this._durationMinutes = duration;
   }
 
-  private _isRunning: boolean = false;
-  public get isRunning(): boolean {
-    return this._isRunning;
-  }
-
   start() {
-    this._isRunning = true;
+    this._state = "RUNNING";
     this._secondsRemaining = this._durationMinutes * 60;
     this._startTimeSeconds = new Date().getTime() / 1000;
   }
