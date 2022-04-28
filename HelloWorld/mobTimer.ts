@@ -15,12 +15,12 @@ export class MobTimer {
 
   start() {
     this._state = State.Running;
-    this._startTimeSeconds = new Date().getTime() / 1000;
+    this._startTimeSeconds = TimeUtil.getCurrentSeconds();
   }
 
   pause() {
     this._state = State.Paused;
-    this._timePausedSeconds = new Date().getTime() / 1000;
+    this._timePausedSeconds = TimeUtil.getCurrentSeconds();
   }
 
   public get state(): State {
