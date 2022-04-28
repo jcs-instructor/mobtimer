@@ -1,4 +1,4 @@
-import { MobTimer } from './mobTimer'
+import { MobTimer, StateEnum } from './mobTimer'
 
 test('Default duration is 5 minutes', () => {
   expect(new MobTimer().durationMinutes).toEqual(5);
@@ -13,6 +13,7 @@ test('Set duration to 3.5 minutes', () => {
 test('Initial state - timer is not running', () => {
   const mobTimer = new MobTimer();  
   expect(mobTimer.state).toEqual("READY");
+  expect(mobTimer.stateEnum).toEqual(StateEnum.Ready);
 });
 
 test('Start timer', () => {
