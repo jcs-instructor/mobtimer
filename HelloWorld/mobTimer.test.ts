@@ -41,7 +41,7 @@ test('Get seconds remaining string after start for turn duration with double dig
   expect(mobTimer.timeRemainingString).toEqual("12:00");  
 });
 
-test('Get seconds remaining 2 seconds after start', async () => {
+test('Get seconds remaining 1 second after start', async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6; 
   mobTimer.start();
@@ -49,14 +49,13 @@ test('Get seconds remaining 2 seconds after start', async () => {
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 1);
 });
 
-test('Get time remaining string 2 seconds after start', async () => {
+test('Get time remaining string 1 second after start', async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6; 
   mobTimer.start();
   await delaySeconds(1); 
   expect(mobTimer.timeRemainingString).toEqual("05:59");
 });
-
 
 test('Pause timer', () => {
   const mobTimer = new MobTimer();
@@ -65,18 +64,23 @@ test('Pause timer', () => {
   expect(mobTimer.state).toEqual(State.Paused);
 });
 
+test('Get seconds remaining after 1 second pause', async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  mobTimer.pause();
+  await delaySeconds(1); 
+  expect(mobTimer.timeRemainingString).toEqual("06:00");
+});
 
-// test('Get seconds remaining after two second pause', async () => {
+// test('Get seconds remaining after 1 second pause', async () => {
 //   const mobTimer = new MobTimer();
 //   mobTimer.durationMinutes = 6;
 //   mobTimer.start();
 //   mobTimer.pause();
-//   await delaySeconds(2); 
+//   await delaySeconds(1); 
 //   expect(mobTimer.timeRemainingString).toEqual("06:00");
 // });
-
-
-
 
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );

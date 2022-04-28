@@ -31,10 +31,16 @@ export class MobTimer {
     return TimeUtil.getTimeString(this.secondsRemaining);
   }
   
-  public get secondsRemaining(): number {
+  public get secondsRemaining(): number {    
+    let timeElapsedSeconds;
     if (this._startTimeSeconds) {
       const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
-      const timeElapsedSeconds = TimeUtil.getCurrentSeconds() - this._startTimeSeconds;
+      if (this._state == State.Paused) {
+        timeElapsedSeconds = this._timePausedSeconds - this._startTimeSeconds; 
+      }
+      else {
+        timeElapsedSeconds = TimeUtil.getCurrentSeconds() - this._startTimeSeconds; 
+      }
       return durationSeconds - Math.round(timeElapsedSeconds);
     }
     return 0;
