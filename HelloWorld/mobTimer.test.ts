@@ -105,8 +105,7 @@ test('Get seconds remaining after running 1 second and paused 1', () => {
 
 test('Get seconds remaining after running 1 second, paused 1 second, and resume 1 second', () => {
   const mobTimer = new MobTimer();
-  const mockCurrentTime = new MockCurrentTime();
-  mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   mockCurrentTime.delaySeconds(1); 
@@ -116,6 +115,12 @@ test('Get seconds remaining after running 1 second, paused 1 second, and resume 
   mockCurrentTime.delaySeconds(3); 
   expect(mobTimer.secondsRemainingString).toEqual("05:56");
 });
+
+function createMockCurrentTime(mobTimer: MobTimer) {
+  const mockCurrentTime = new MockCurrentTime();
+  mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
+  return mockCurrentTime;
+}
 
 // todo: try pausing and resuming more than one time
 
