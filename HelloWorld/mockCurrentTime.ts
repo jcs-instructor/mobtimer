@@ -1,9 +1,11 @@
-let mockCurrentTimeSeconds = 0;
+export class MockCurrentTime {
+  private _mockCurrentTimeSeconds = 0;
 
-export function mockCurrentTimeSecondsFunc() {
-  return mockCurrentTimeSeconds;
-}
+  public mockCurrentTimeSecondsFunc () {
+    return this._mockCurrentTimeSeconds;
+  }
 
-export function mockDelaySeconds(seconds: number) {
-  mockCurrentTimeSeconds += seconds;
+  public mockDelaySeconds(seconds: number) {
+    this._mockCurrentTimeSeconds += seconds;
+  }
 }
