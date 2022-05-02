@@ -32,7 +32,7 @@ export class MobTimer {
     return this._state;
   }
 
-  public get timeRemainingString(): any {
+  public get secondsRemainingString(): any {
     return TimeUtil.getTimeString(this.secondsRemaining);
   }
   
