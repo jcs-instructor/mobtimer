@@ -118,10 +118,6 @@ function createMockCurrentTime(mobTimer: MobTimer) {
   return mockCurrentTime;
 }
 
-// todo: try pausing and resuming more than one time
-
-
-
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );
 }
