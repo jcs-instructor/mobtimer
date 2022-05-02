@@ -1,4 +1,5 @@
 import { MobTimer, State } from './mobTimer'
+import { mockCurrentTimeSecondsFunc, mockDelaySeconds } from './mockCurrentTime'
 
 test('Default duration is 5 minutes', () => {
   expect(new MobTimer().durationMinutes).toEqual(5);
@@ -40,12 +41,6 @@ test('Get seconds remaining string after start for turn duration with double dig
   mobTimer.start();
   expect(mobTimer.timeRemainingString).toEqual("12:00");  
 });
-
-let mockCurrentTimeSeconds = 0;
-
-function mockCurrentTimeSecondsFunc() {
-  return mockCurrentTimeSeconds;
-}
 
 test('Get seconds remaining 1 second after start', () => {
   const mobTimer = new MobTimer();
@@ -94,6 +89,3 @@ test('Get seconds remaining after running 1 second and paused 1', () => {
 
 // todo: add test to pause, resume, and pause again
 
-function mockDelaySeconds(seconds: number) {
-  mockCurrentTimeSeconds += seconds;
-}
