@@ -1,7 +1,7 @@
 export class MockCurrentTime {
   private _mockCurrentTimeSeconds = 0;
 
-  public mockCurrentTimeSecondsFunc () {
+  public mockNowInSecondsFunc() {
     return this._mockCurrentTimeSeconds;
   }
 

@@ -1,6 +1,6 @@
 export class TimeUtil {
   
-  static getCurrentSeconds() {
+  static getNowInSeconds() {
     const currentMilliseconds = new Date().getTime();
     return TimeUtil.millisecondsToSeconds(currentMilliseconds); 
   }

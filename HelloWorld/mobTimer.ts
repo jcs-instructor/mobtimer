@@ -14,28 +14,27 @@ export class MobTimer {
   private _whenStartedInSeconds: number;
   private _state: State = State.Ready;
   private _whenPausedInSeconds: number;
-  private _currentTimeSecondsFunc = TimeUtil.getCurrentSeconds;
-  //todo: remove "time" from "timeElapsed" everywhere
-  private _previouslyAccumulatedTimeElapsedSeconds = 0;
+  private _nowInSecondsFunc = TimeUtil.getNowInSeconds;
+  private _previouslyAccumulatedElapsedSeconds = 0;
     
   start() {
     this._state = State.Running;
-    this._whenStartedInSeconds = this._currentTimeSecondsFunc();
+    this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
   resume() {
     this._state = State.Resumed;
-    this._whenStartedInSeconds = this._currentTimeSecondsFunc();
+    this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
-  public set currentTimeSecondsFunc(func: () => number) {
-    this._currentTimeSecondsFunc = func;
+  public set nowInSecondsFunc(func: () => number) {
+    this._nowInSecondsFunc = func;
   }
 
   pause() {
     this._state = State.Paused;
-    this._whenPausedInSeconds = this._currentTimeSecondsFunc();
-    this._previouslyAccumulatedTimeElapsedSeconds += 
+    this._whenPausedInSeconds = this._nowInSecondsFunc();
+    this._previouslyAccumulatedElapsedSeconds += 
       (this._whenPausedInSeconds - this._whenStartedInSeconds);
   }
 
@@ -53,17 +52,17 @@ export class MobTimer {
       return 0;
     }
     const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
-    const timeElapsedSeconds = this.calculateTimeElapsedSeconds();
-    return durationSeconds - Math.round(timeElapsedSeconds);
+    const elapsedSeconds = this.calculateElapsedSeconds();
+    return durationSeconds - Math.round(elapsedSeconds);
   }
 
-  private calculateTimeElapsedSeconds() {
+  private calculateElapsedSeconds() {
     if (this._state == State.Ready) {
       return 0;
     } else if (this._state == State.Paused) {
-      return this._previouslyAccumulatedTimeElapsedSeconds;
+      return this._previouslyAccumulatedElapsedSeconds;
     } else {
-      return this._previouslyAccumulatedTimeElapsedSeconds + (this._currentTimeSecondsFunc() - this._whenStartedInSeconds);
+      return this._previouslyAccumulatedElapsedSeconds + (this._nowInSecondsFunc() - this._whenStartedInSeconds);
     }
   }
 
