@@ -1,11 +1,11 @@
 export class MockCurrentTime {
   private _mockCurrentTimeSeconds = 0;
 
-  public mockNowInSecondsFunc() {
+  public nowInSecondsFunc() {
     return this._mockCurrentTimeSeconds;
   }
 
-  public mockDelaySeconds(seconds: number) {
+  public delaySeconds(seconds: number) {
     this._mockCurrentTimeSeconds += seconds;
   }
 }
