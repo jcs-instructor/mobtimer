@@ -1,9 +1,11 @@
 import { TimeUtil } from "./timeUtil";
 
+
 export enum State {
   Ready = "READY",
   Running = "RUNNING",
   Paused = "PAUSED",
+  Resumed = "RESUMED"
 }
 
 export class MobTimer {
@@ -18,6 +20,11 @@ export class MobTimer {
     
   start() {
     this._state = State.Running;
+    this._whenStartedInSeconds = this._currentTimeSecondsFunc();
+  }
+
+  resume() {
+    this._state = State.Resumed;
     this._whenStartedInSeconds = this._currentTimeSecondsFunc();
   }
 

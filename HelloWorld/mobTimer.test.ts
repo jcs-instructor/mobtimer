@@ -103,6 +103,21 @@ test('Get seconds remaining after running 1 second and paused 1', () => {
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
+test('Get seconds remaining after running 1 second, paused 1 second, and resume 1 second', () => {
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = new MockCurrentTime();
+  mobTimer.currentTimeSecondsFunc = () => mockCurrentTime.mockCurrentTimeSecondsFunc();
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  mockCurrentTime.mockDelaySeconds(1); 
+  mobTimer.pause();
+  mockCurrentTime.mockDelaySeconds(1); 
+  mobTimer.resume();
+  mockCurrentTime.mockDelaySeconds(1); 
+  expect(mobTimer.secondsRemainingString).toEqual("05:58");
+});
+
+
 
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );
