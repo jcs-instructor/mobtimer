@@ -8,19 +8,24 @@ export enum State {
 
 export class MobTimer {
   
-  private _durationMinutes: number = 5;
+  private _durationMinutes = 5;
   private _whenStartedInSeconds: number;
   private _state: State = State.Ready;
   private _whenPausedInSeconds: number;
-
+  private _currentTimeSecondsFunc = TimeUtil.getCurrentSeconds;
+    
   start() {
     this._state = State.Running;
-    this._whenStartedInSeconds = TimeUtil.getCurrentSeconds();
+    this._whenStartedInSeconds = this._currentTimeSecondsFunc();
+  }
+
+  public set currentTimeSecondsFunc(func: () => number) {
+    this._currentTimeSecondsFunc = func;
   }
 
   pause() {
     this._state = State.Paused;
-    this._whenPausedInSeconds = TimeUtil.getCurrentSeconds();
+    this._whenPausedInSeconds = this._currentTimeSecondsFunc();
   }
 
   public get state(): State {
@@ -47,7 +52,7 @@ export class MobTimer {
     } else if (this._state == State.Paused) {
       return this._whenPausedInSeconds - this._whenStartedInSeconds;
     } else {
-      return TimeUtil.getCurrentSeconds() - this._whenStartedInSeconds;
+      return this._currentTimeSecondsFunc() - this._whenStartedInSeconds;
     }
   }
 
