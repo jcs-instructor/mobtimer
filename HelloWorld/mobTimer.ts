@@ -63,7 +63,7 @@ export class MobTimer {
     } else if (this._state == State.Paused) {
       return this._previouslyAccumulatedTimeElapsedSeconds;
     } else {
-      return (this._currentTimeSecondsFunc() - this._whenStartedInSeconds);
+      return this._previouslyAccumulatedTimeElapsedSeconds + (this._currentTimeSecondsFunc() - this._whenStartedInSeconds);
     }
   }
 

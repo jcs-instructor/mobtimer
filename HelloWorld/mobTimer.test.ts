@@ -99,7 +99,7 @@ test('Get seconds remaining after running 1 second and paused 1', () => {
   mobTimer.start();
   mockCurrentTime.mockDelaySeconds(1); 
   mobTimer.pause();
-  mockCurrentTime.mockDelaySeconds(1); 
+  mockCurrentTime.mockDelaySeconds(2); 
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -111,11 +111,13 @@ test('Get seconds remaining after running 1 second, paused 1 second, and resume 
   mobTimer.start();
   mockCurrentTime.mockDelaySeconds(1); 
   mobTimer.pause();
-  mockCurrentTime.mockDelaySeconds(1); 
+  mockCurrentTime.mockDelaySeconds(2); 
   mobTimer.resume();
-  mockCurrentTime.mockDelaySeconds(1); 
-  expect(mobTimer.secondsRemainingString).toEqual("05:58");
+  mockCurrentTime.mockDelaySeconds(3); 
+  expect(mobTimer.secondsRemainingString).toEqual("05:56");
 });
+
+// todo: try pausing and resuming more than one time
 
 
 
