@@ -13,6 +13,8 @@ export class MobTimer {
   private _state: State = State.Ready;
   private _whenPausedInSeconds: number;
   private _currentTimeSecondsFunc = TimeUtil.getCurrentSeconds;
+  //todo: remove "time" from "timeElapsed" everywhere
+  private _previouslyAccumulatedTimeElapsedSeconds = 0;
     
   start() {
     this._state = State.Running;
@@ -26,6 +28,8 @@ export class MobTimer {
   pause() {
     this._state = State.Paused;
     this._whenPausedInSeconds = this._currentTimeSecondsFunc();
+    this._previouslyAccumulatedTimeElapsedSeconds += 
+      (this._whenPausedInSeconds - this._whenStartedInSeconds);
   }
 
   public get state(): State {
@@ -50,9 +54,9 @@ export class MobTimer {
     if (this._state == State.Ready) {
       return 0;
     } else if (this._state == State.Paused) {
-      return this._whenPausedInSeconds - this._whenStartedInSeconds;
+      return this._previouslyAccumulatedTimeElapsedSeconds;
     } else {
-      return this._currentTimeSecondsFunc() - this._whenStartedInSeconds;
+      return (this._currentTimeSecondsFunc() - this._whenStartedInSeconds);
     }
   }
 
