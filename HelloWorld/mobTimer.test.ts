@@ -41,11 +41,19 @@ test('Get seconds remaining string after start for turn duration with double dig
   expect(mobTimer.timeRemainingString).toEqual("12:00");  
 });
 
+let mockCurrentTimeSeconds = 0;
+
+function mockCurrentTimeSecondsFunc() {
+  return mockCurrentTimeSeconds;
+}
+
 test('Get seconds remaining 1 second after start', async () => {
   const mobTimer = new MobTimer();
+  mobTimer.currentTimeSecondsFunc = mockCurrentTimeSecondsFunc;
+  mockCurrentTimeSeconds = 6*60; 
   mobTimer.durationMinutes = 6; 
   mobTimer.start();
-  await delaySeconds(1); 
+  await delaySeconds2(1); 
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 1);
 });
 
@@ -88,4 +96,11 @@ test('Get seconds remaining after running 1 second and paused 1', async () => {
 
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );
+}
+
+function delaySeconds2(seconds: number) {
+  return new Promise( resolve => { 
+    mockCurrentTimeSeconds += seconds;
+    resolve(0);
+  } );
 }
