@@ -47,7 +47,7 @@ function mockCurrentTimeSecondsFunc() {
   return mockCurrentTimeSeconds;
 }
 
-test('Get seconds remaining 1 second after start', async () => {
+test('Get seconds remaining 1 second after start', () => {
   const mobTimer = new MobTimer();
   mobTimer.currentTimeSecondsFunc = mockCurrentTimeSecondsFunc;
   mobTimer.durationMinutes = 6; 
@@ -56,7 +56,7 @@ test('Get seconds remaining 1 second after start', async () => {
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 1);
 });
 
-test('Get time remaining string 1 second after start', async () => {
+test('Get time remaining string 1 second after start', () => {
   const mobTimer = new MobTimer();
   mobTimer.currentTimeSecondsFunc = mockCurrentTimeSecondsFunc;
   mobTimer.durationMinutes = 6; 
@@ -72,7 +72,7 @@ test('Pause timer', () => {
   expect(mobTimer.state).toEqual(State.Paused);
 });
 
-test('Get seconds remaining after 1 second pause', async () => {
+test('Get seconds remaining after 1 second pause', () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
@@ -81,7 +81,7 @@ test('Get seconds remaining after 1 second pause', async () => {
   expect(mobTimer.timeRemainingString).toEqual("06:00");
 });
 
-test('Get seconds remaining after running 1 second and paused 1', async () => {
+test('Get seconds remaining after running 1 second and paused 1', () => {
   const mobTimer = new MobTimer();
   mobTimer.currentTimeSecondsFunc = mockCurrentTimeSecondsFunc;
   mobTimer.durationMinutes = 6;
@@ -93,11 +93,6 @@ test('Get seconds remaining after running 1 second and paused 1', async () => {
 });
 
 // todo: add test to pause, resume, and pause again
-// todo: tests now take 9+ sec. to run - see if can shorten
-
-function delaySeconds(seconds: number) {
-  return new Promise( resolve => setTimeout(resolve, seconds*1000) );
-}
 
 function mockDelaySeconds(seconds: number) {
   mockCurrentTimeSeconds += seconds;
