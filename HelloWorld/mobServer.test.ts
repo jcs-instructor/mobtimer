@@ -32,7 +32,7 @@ test("Socket updates a timer", async () => {
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
 
     socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket.send(JSON.stringify({ action: "update", value: { durationMinutes: 32} }));    
+    socket.send(JSON.stringify({ action: "update", durationMinutes: 32 }));    
     await waitForSocketToClose(socket);
 
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
@@ -50,7 +50,7 @@ test("Two sockets, first socket updates a timer", async () => {
 
     socket1.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
     socket2.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket1.send(JSON.stringify({ action: "update", value: { durationMinutes: 32} }));    
+    socket1.send(JSON.stringify({ action: "update", durationMinutes: 32 }));    
     await waitForSocketToClose(socket1);
     await waitForSocketToClose(socket2);
 
@@ -71,7 +71,7 @@ test("Three sockets, two mobs: first socket updates a timer", async () => {
 
     socket1.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
     socket2.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket1.send(JSON.stringify({ action: "update", value: { durationMinutes: 32} }));    
+    socket1.send(JSON.stringify({ action: "update", durationMinutes: 32 }));    
     socket3.send(JSON.stringify({ action: "join", mobName: "terrible-team" }));    
     await waitForSocketToClose(socket1);
     await waitForSocketToClose(socket2);

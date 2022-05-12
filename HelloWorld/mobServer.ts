@@ -29,7 +29,7 @@ export class MobServer {
           socket.mobName = mobName;
         }
         if (parsedMessage.action === "update") {
-          mobTimer.durationMinutes = 32;
+          mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
         }
         MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
       });
