@@ -26,6 +26,22 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
     mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
+test("Socket updates a timer", async () => {
+    const mockWSS = new WS(wssUrl);
+    MobServer.createMobServer(mockWSS);
+    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+
+    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket.send(JSON.stringify({ action: "update", value: { durationMinutes: 32} }));    
+    await waitForSocketToClose(socket);
+
+    const parsedMessage = JSON.parse(messagesReceivedBySocket[1]); // last message received
+    expect(parsedMessage.durationMinutes).toEqual(32); 
+    
+    // Clean up server
+    mockWSS.close(); // redundant with afterEach WS.clean()
+});
+
 async function setupSocket(mockWSS: WS) {
     const messages = [];
     const client = new WebSocket(wssUrl);

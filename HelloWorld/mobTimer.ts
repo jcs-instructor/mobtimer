@@ -38,7 +38,8 @@ export class MobTimer {
   }
   public get state() {
     return { 
-      status: this._status
+      status: this._status,
+      durationMinutes: this._durationMinutes,
     };
   }
 

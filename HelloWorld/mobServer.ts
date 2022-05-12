@@ -4,8 +4,13 @@ import { MobTimer } from "./mobTimer";
 export class MobServer {
   static createMobServer(wss: lib) {
     wss.on("connection", (socket) => {
-      socket.on("message", message => {
-          socket.send(JSON.stringify(new MobTimer().state));          
+      socket.on("message", (message: string) => {
+          const mobTimer = new MobTimer();
+          const parsedMessage = JSON.parse(message);
+          if (parsedMessage.action === "update") {
+            mobTimer.durationMinutes = 32;
+          }   
+          socket.send(JSON.stringify(mobTimer.state));          
         });
     });
   }
