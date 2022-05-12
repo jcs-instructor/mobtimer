@@ -35,7 +35,7 @@ test("Socket updates a timer", async () => {
     socket.send(JSON.stringify({ action: "update", value: { durationMinutes: 32} }));    
     await waitForSocketToClose(socket);
 
-    const parsedMessage = JSON.parse(messagesReceivedBySocket[1]); // last message received
+    const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
     expect(parsedMessage.durationMinutes).toEqual(32); 
     
     // Clean up server
