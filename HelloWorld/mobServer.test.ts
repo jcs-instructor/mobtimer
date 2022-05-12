@@ -42,6 +42,28 @@ test("Socket updates a timer", async () => {
     mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
+test("Two sockets, first socket updates a timer", async () => {
+    const mockWSS = new WS(wssUrl);
+    MobServer.createMobServer(mockWSS); // mockWSS.server
+    const { socket: socket1, messagesReceivedBySocket: messagesReceivedBySocket1 } = await setupSocket(mockWSS);
+    const { socket: socket2, messagesReceivedBySocket: messagesReceivedBySocket2 } = await setupSocket(mockWSS);
+    console.log("xxxxxxxxxxx", mockWSS.server.clients());
+
+    socket1.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket2.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket1.send(JSON.stringify({ action: "update", value: { durationMinutes: 32} }));    
+    await waitForSocketToClose(socket1);
+    await waitForSocketToClose(socket2);
+
+    console.log("messagesReceivedBySocket2:", messagesReceivedBySocket2);
+    const parsedMessage2 = JSON.parse(messagesReceivedBySocket2.slice(-1)[0]); 
+
+    expect(parsedMessage2.durationMinutes).toEqual(32); 
+    
+    // Clean up server
+    mockWSS.close(); // redundant with afterEach WS.clean()
+});
+
 async function setupSocket(mockWSS: WS) {
     const messages = [];
     const client = new WebSocket(wssUrl);
