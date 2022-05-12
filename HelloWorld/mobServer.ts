@@ -8,7 +8,7 @@ export class MobServer {
           if (message === "close me") {
               socket.send("close you");
           } else {
-              socket.send(JSON.stringify(new MobTimer().state));
+              socket.send(JSON.stringify(new MobTimer().status));
           }
       });
     });

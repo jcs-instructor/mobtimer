@@ -25,7 +25,7 @@ test("When mob server is created, a socket can send and receive a close message"
     await waitForSocketToClose(socket);
     expect(messagesReceivedBySocket).toEqual([closeYou]);
     // todo in separate test: const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
-    //                        expect(parsedMessage).toEqual(new MobTimer().state);
+    //                        expect(parsedMessage).toEqual(new MobTimer().status);
     
     // Clean up server
     mockWSS.close(); // redundant with afterEach WS.clean()
@@ -44,7 +44,7 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
     socket.send(closeMe); // todo: get rid of this?
     await waitForSocketToClose(socket);
     const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
-    expect(parsedMessage).toEqual(new MobTimer().state);
+    expect(parsedMessage).toEqual(new MobTimer().status);
     
     // Clean up server
     mockWSS.close(); // redundant with afterEach WS.clean()

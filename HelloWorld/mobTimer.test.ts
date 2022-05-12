@@ -1,4 +1,4 @@
-import { MobTimer, State } from './mobTimer'
+import { MobTimer, Status } from './mobTimer'
 import { MockCurrentTime } from './mockCurrentTime'
 
 test('Default duration is 5 minutes', () => {
@@ -11,15 +11,15 @@ test('Set duration to 3.5 minutes', () => {
   expect(mobTimer.durationMinutes).toEqual(3.5);
 });
 
-test('Initial state - timer is Ready', () => {
+test('Initial status - timer is Ready', () => {
   const mobTimer = new MobTimer();  
-  expect(mobTimer.state).toEqual(State.Ready);
+  expect(mobTimer.status).toEqual(Status.Ready);
 });
 
 test('Start timer', () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
-  expect(mobTimer.state).toEqual(State.Running);
+  expect(mobTimer.status).toEqual(Status.Running);
 });
 
 test('Get seconds remaining before start for turn duration with single digit minutes', () => {
@@ -74,7 +74,7 @@ test('Pause timer', () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
   mobTimer.pause();
-  expect(mobTimer.state).toEqual(State.Paused);
+  expect(mobTimer.status).toEqual(Status.Paused);
 });
 
 test('Get seconds remaining after 1 second pause', () => {
