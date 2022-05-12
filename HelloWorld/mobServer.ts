@@ -1,10 +1,10 @@
-import lib from "jest-websocket-mock";
+// todo: import { Server } from ??? "jest-websocket-mock";
 import { MobTimer } from "./mobTimer";
 
 export class MobServer {
 
   static broadcast(wss, message) {
-    wss.server.clients().forEach((client) => {
+    wss.clients().forEach((client) => {
       client.send(message);
     });
   }

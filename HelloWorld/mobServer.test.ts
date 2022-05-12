@@ -10,7 +10,7 @@ afterEach(() => {
 
 test("When mob server is created, when socket joins mob a new mob timer is returned", async () => {
     // Set up server
-    const mockWSS = new WS(wssUrl);
+    const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
 
     // Set up socket
@@ -27,7 +27,7 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
 });
 
 test("Socket updates a timer", async () => {
-    const mockWSS = new WS(wssUrl);
+    const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
 
@@ -43,7 +43,7 @@ test("Socket updates a timer", async () => {
 });
 
 test("Two sockets, first socket updates a timer", async () => {
-    const mockWSS = new WS(wssUrl);
+    const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS); // mockWSS.server
     const { socket: socket1, messagesReceivedBySocket: messagesReceivedBySocket1 } = await setupSocket(mockWSS);
     const { socket: socket2, messagesReceivedBySocket: messagesReceivedBySocket2 } = await setupSocket(mockWSS);
@@ -62,7 +62,7 @@ test("Two sockets, first socket updates a timer", async () => {
     mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
-async function setupSocket(mockWSS: WS) {
+async function setupSocket(mockWSS: any) {
     const messages = [];
     const client = new WebSocket(wssUrl);
     await mockWSS.connected;
