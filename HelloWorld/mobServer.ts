@@ -2,6 +2,13 @@ import lib from "jest-websocket-mock";
 import { MobTimer } from "./mobTimer";
 
 export class MobServer {
+
+  static broadcast(wss, message) {
+    wss.server.clients().forEach((client) => {
+      client.send(message);
+    });
+  }
+
   static createMobServer(wss: any) {
     //const wss=new WebSocket.Server({server:bserver});
     const mobTimer = new MobTimer();
@@ -11,15 +18,9 @@ export class MobServer {
         if (parsedMessage.action === "update") {
           mobTimer.durationMinutes = 32;
         }
-        broadcast(mobTimer.state);
-        // socket.send(JSON.stringify(mobTimer.state));
+        MobServer.broadcast(wss, JSON.stringify(mobTimer.state));
       });
     });
-
-    function broadcast(state) {
-      wss.server.clients().forEach((client) => {
-        client.send(JSON.stringify(state));
-      });
-    }
+    
   }
 }
