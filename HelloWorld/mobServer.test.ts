@@ -1,5 +1,6 @@
 import WS from 'jest-websocket-mock';
 import { MobServer } from './mobServer';
+import { MobTimer } from './mobTimer';
 
 const wssUrl = "wss://localhost:1234";
 
@@ -25,6 +26,25 @@ test("When mob server is created, a socket can send and receive a close message"
     expect(messagesReceivedBySocket).toEqual([closeYou]);
     // todo in separate test: const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
     //                        expect(parsedMessage).toEqual(new MobTimer().state);
+    
+    // Clean up server
+    mockWSS.close(); // redundant with afterEach WS.clean()
+});
+
+test("When mob server is created, when socket joins mob a new mob timer is returned", async () => {
+    // Set up server
+    const mockWSS = new WS(wssUrl);
+    MobServer.createMobServer(mockWSS);
+
+    // Set up socket
+    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+
+    // Socket sends joins message
+    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket.send(closeMe); // todo: get rid of this?
+    await waitForSocketToClose(socket);
+    const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
+    expect(parsedMessage).toEqual(new MobTimer().state);
     
     // Clean up server
     mockWSS.close(); // redundant with afterEach WS.clean()
