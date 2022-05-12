@@ -4,31 +4,8 @@ import { MobTimer } from './mobTimer';
 
 const wssUrl = "wss://localhost:1234";
 
-const closeMe = "close me";
-const closeYou = "close you";
-
 afterEach(() => {
     WS.clean();
-});
-
-test("When mob server is created, a socket can send and receive a close message", async () => {
-    // Set up server
-    const mockWSS = new WS(wssUrl);
-    MobServer.createMobServer(mockWSS);
-
-    // Set up socket
-    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
-
-    // Socket sends close-me message
-    // todo in separate test: socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket.send(closeMe);
-    await waitForSocketToClose(socket);
-    expect(messagesReceivedBySocket).toEqual([closeYou]);
-    // todo in separate test: const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
-    //                        expect(parsedMessage).toEqual(new MobTimer().status);
-    
-    // Clean up server
-    mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
 test("When mob server is created, when socket joins mob a new mob timer is returned", async () => {
@@ -41,10 +18,9 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
 
     // Socket sends joins message
     socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket.send(closeMe); // todo: get rid of this?
     await waitForSocketToClose(socket);
     const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
-    expect(parsedMessage).toEqual(new MobTimer().status);
+    expect(parsedMessage).toEqual(new MobTimer().status); // todo: should be new state object, not status
     
     // Clean up server
     mockWSS.close(); // redundant with afterEach WS.clean()
@@ -55,9 +31,6 @@ async function setupSocket(mockWSS: WS) {
     const client = new WebSocket(wssUrl);
     await mockWSS.connected;
     client.onmessage = (e) => {
-        if (e.data === closeYou) {
-            client.close();
-        }
         messages.push(e.data);
         console.log("debug pushed messages", messages);
     };
@@ -67,7 +40,7 @@ async function setupSocket(mockWSS: WS) {
 function waitForSocketToClose(socket) {
     return new Promise<void>(function (resolve) {
         setTimeout(function () {
-            console.log('here');
+            socket.close();
             if (socket.readyState === socket.CLOSED) {
                 resolve();
             } else {
