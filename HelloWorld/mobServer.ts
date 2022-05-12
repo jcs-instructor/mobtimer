@@ -6,9 +6,9 @@ export class MobServer {
   static _mobs: Map<string, MobTimer> = new Map();
 
   static broadcast(wss, mobName, message) {
-    wss.clients().forEach((client) => {
-      if (client.mobName === mobName) {
-        client.send(message);
+    wss.clients().forEach((socket) => {
+      if (socket.mobName === mobName) {
+        socket.send(message);
       }      
     });
   }
