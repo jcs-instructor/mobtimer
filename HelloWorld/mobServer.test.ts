@@ -20,7 +20,7 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
     socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
     await waitForSocketToClose(socket);
     const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
-    expect(parsedMessage).toEqual(new MobTimer().state); // todo: should be new state object, not status
+    expect(parsedMessage).toEqual(new MobTimer().state); 
     
     // Clean up server
     mockWSS.close(); // redundant with afterEach WS.clean()
