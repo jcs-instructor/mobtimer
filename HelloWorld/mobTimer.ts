@@ -36,6 +36,11 @@ export class MobTimer {
     this._previouslyAccumulatedElapsedSeconds += 
       (this._whenPausedInSeconds - this._whenStartedInSeconds);
   }
+  public get state() {
+    return { 
+      status: this._status
+    };
+  }
 
   public get status(): Status {
     return this._status;
