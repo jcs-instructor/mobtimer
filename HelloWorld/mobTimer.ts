@@ -1,6 +1,5 @@
 import { TimeUtil } from "./timeUtil";
 
-
 export enum State {
   Ready = "READY",
   Running = "RUNNING",
@@ -42,7 +41,7 @@ export class MobTimer {
     return this._state;
   }
 
-  public get secondsRemainingString(): any {
+  public get secondsRemainingString(): number {
     return TimeUtil.getTimeString(this.secondsRemaining);
   }
   
@@ -74,5 +73,3 @@ export class MobTimer {
   }
   
 }
-
-

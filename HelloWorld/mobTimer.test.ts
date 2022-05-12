@@ -11,7 +11,7 @@ test('Set duration to 3.5 minutes', () => {
   expect(mobTimer.durationMinutes).toEqual(3.5);
 });
 
-test('Initial state - timer is not running', () => {
+test('Initial state - timer is Ready', () => {
   const mobTimer = new MobTimer();  
   expect(mobTimer.state).toEqual(State.Ready);
 });
@@ -70,7 +70,6 @@ test('Get seconds remaining 1 second after start (real)', async () => {
   expect(mobTimer.secondsRemaining).toEqual(6*60 - 1);
 });
 
-
 test('Pause timer', () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
@@ -121,5 +120,3 @@ function createMockCurrentTime(mobTimer: MobTimer) {
 function delaySeconds(seconds: number) {
   return new Promise( resolve => setTimeout(resolve, seconds*1000) );
 }
-// todo: add test to pause, resume, and pause again
-
