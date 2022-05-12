@@ -15,17 +15,18 @@ export class MobServer {
 
   static createMobServer(wss: any) {
     //const wss=new WebSocket.Server({server:bserver});
-    let mobTimer = new MobTimer();
+    let mobTimer: MobTimer;
     wss.on("connection", (socket) => {
       socket.on("message", (message: string) => {
         const parsedMessage = JSON.parse(message);
         if (parsedMessage.action === "join") {
-          mobTimer = MobServer._mobs.get(parsedMessage.mobName);
+          const mobName = parsedMessage.mobName;
+          mobTimer = MobServer._mobs.get(mobName);
           if (!mobTimer) {
             mobTimer = new MobTimer();
-            MobServer._mobs.set(parsedMessage.mobName, mobTimer);
+            MobServer._mobs.set(mobName, mobTimer);
           }
-          socket.mobName = parsedMessage.mobName;
+          socket.mobName = mobName;
         }
         if (parsedMessage.action === "update") {
           mobTimer.durationMinutes = 32;
