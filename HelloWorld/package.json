@@ -14,5 +14,8 @@
   },
   "scripts": {
     "test": "jest --watch --verbose"
+  },
+  "dependencies": {
+    "jest-websocket-mock": "^2.3.0"
   }
 }
