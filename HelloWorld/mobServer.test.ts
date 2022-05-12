@@ -68,7 +68,6 @@ async function setupSocket(mockWSS: any) {
     await mockWSS.connected;
     client.onmessage = (e) => {
         messages.push(e.data);
-        console.log("debug pushed messages", messages);
     };
     return { socket: client, messagesReceivedBySocket: messages };
 };
