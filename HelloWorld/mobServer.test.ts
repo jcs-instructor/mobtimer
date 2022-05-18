@@ -6,6 +6,7 @@ const wssUrl = "wss://localhost:1234";
 
 afterEach(() => {
     WS.clean();
+    MobServer.reset();
 });
 
 test("Test can reset mob server", async () => {
@@ -18,11 +19,7 @@ test("Test can reset mob server", async () => {
     await waitForSocketToClose(socket);
 
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
-    expect(parsedMessage.durationMinutes).toEqual(32); 
-    MobServer.reset();
-    
-    // Clean up server
-    mockWSS.close(); // redundant with afterEach WS.clean()
+    expect(parsedMessage.durationMinutes).toEqual(32);     
 });
 
 
@@ -38,10 +35,7 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
     socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
     await waitForSocketToClose(socket);
     const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
-    expect(parsedMessage).toEqual(new MobTimer().state); 
-    
-    // Clean up server
-    mockWSS.close(); // redundant with afterEach WS.clean()
+    expect(parsedMessage).toEqual(new MobTimer().state);     
 });
 
 test("Socket updates a timer", async () => {
@@ -55,10 +49,6 @@ test("Socket updates a timer", async () => {
 
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
     expect(parsedMessage.durationMinutes).toEqual(32); 
-    
-    // Clean up server
-
-    mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
 test("Two sockets, first socket updates a timer", async () => {
@@ -76,9 +66,6 @@ test("Two sockets, first socket updates a timer", async () => {
     const parsedMessage2 = JSON.parse(messagesReceivedBySocket2.slice(-1)[0]); 
 
     expect(parsedMessage2.durationMinutes).toEqual(32); 
-    
-    // Clean up server
-    mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
 test("Three sockets, two mobs: first socket updates a timer", async () => {
@@ -99,10 +86,7 @@ test("Three sockets, two mobs: first socket updates a timer", async () => {
     const parsedMessage3 = JSON.parse(messagesReceivedBySocket3.slice(-1)[0]); 
 
     expect(parsedMessage2.durationMinutes).toEqual(32); 
-    expect(parsedMessage3.durationMinutes).toEqual(5); 
-    
-    // Clean up server
-    mockWSS.close(); // redundant with afterEach WS.clean()
+    expect(parsedMessage3.durationMinutes).toEqual(5);     
 });
 
 async function setupSocket(mockWSS: any) {
