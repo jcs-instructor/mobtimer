@@ -3,7 +3,7 @@ import { MobTimer } from "./mobTimer";
 
 export class MobServer {
   
-  static _mobs: Map<string, MobTimer> = new Map();
+  private static _mobs: Map<string, MobTimer> = new Map();
 
   static broadcast(wss, mobName, message) {
     wss.clients().forEach((socket) => {
@@ -33,7 +33,11 @@ export class MobServer {
         }
         MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
       });
-    });
-    
+    });    
   }
+
+  static reset() {
+    MobServer._mobs = new Map();
+  }
+
 }

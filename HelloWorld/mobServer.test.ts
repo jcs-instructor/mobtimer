@@ -8,6 +8,24 @@ afterEach(() => {
     WS.clean();
 });
 
+test("Test can reset mob server", async () => {
+    const mockWSS = new WS(wssUrl).server;
+    MobServer.createMobServer(mockWSS);
+    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+
+    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket.send(JSON.stringify({ action: "update", durationMinutes: 32 }));    
+    await waitForSocketToClose(socket);
+
+    const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
+    expect(parsedMessage.durationMinutes).toEqual(32); 
+    MobServer.reset();
+    
+    // Clean up server
+    mockWSS.close(); // redundant with afterEach WS.clean()
+});
+
+
 test("When mob server is created, when socket joins mob a new mob timer is returned", async () => {
     // Set up server
     const mockWSS = new WS(wssUrl).server;
@@ -39,6 +57,7 @@ test("Socket updates a timer", async () => {
     expect(parsedMessage.durationMinutes).toEqual(32); 
     
     // Clean up server
+
     mockWSS.close(); // redundant with afterEach WS.clean()
 });
 
