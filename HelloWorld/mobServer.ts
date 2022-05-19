@@ -41,6 +41,10 @@ export class MobServer {
         mobTimer.pause();
         break;
        }
+       case "start": {
+        mobTimer.start();
+        break;
+       }
       }
 
     MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));

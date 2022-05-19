@@ -51,7 +51,7 @@ test("Socket updates a timer", async () => {
     expect(parsedMessage.durationMinutes).toEqual(32); 
 });
 
-test("Socket updates a timer", async () => {
+test("Socket pauses a timer", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
@@ -62,6 +62,19 @@ test("Socket updates a timer", async () => {
 
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
     expect(parsedMessage.status).toEqual(Status.Paused); 
+});
+
+test("Socket starts a timer", async () => {
+    const mockWSS = new WS(wssUrl).server;
+    MobServer.createMobServer(mockWSS);
+    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+
+    joinMob(socket, "awesome-team");    
+    socket.send(JSON.stringify({ action: "start" }));    
+    await waitForSocketToClose(socket);
+
+    const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
+    expect(parsedMessage.status).toEqual(Status.Running); 
 });
 
 test("Two sockets, first socket updates a timer", async () => {
