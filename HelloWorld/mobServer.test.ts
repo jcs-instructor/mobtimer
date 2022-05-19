@@ -1,6 +1,6 @@
 import WS from 'jest-websocket-mock';
 import { MobServer } from './mobServer';
-import { MobTimer } from './mobTimer';
+import { MobTimer, Status } from './mobTimer';
 
 const wssUrl = "wss://localhost:1234";
 
@@ -49,6 +49,19 @@ test("Socket updates a timer", async () => {
 
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
     expect(parsedMessage.durationMinutes).toEqual(32); 
+});
+
+test("Socket updates a timer", async () => {
+    const mockWSS = new WS(wssUrl).server;
+    MobServer.createMobServer(mockWSS);
+    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+
+    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket.send(JSON.stringify({ action: "pause" }));    
+    await waitForSocketToClose(socket);
+
+    const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
+    expect(parsedMessage.status).toEqual(Status.Paused); 
 });
 
 test("Two sockets, first socket updates a timer", async () => {

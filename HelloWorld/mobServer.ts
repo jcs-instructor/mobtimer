@@ -37,7 +37,11 @@ export class MobServer {
         mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
         break;
        }
-    }
+       case "pause": {
+        mobTimer.pause();
+        break;
+       }
+      }
 
     MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
     return mobTimer;
