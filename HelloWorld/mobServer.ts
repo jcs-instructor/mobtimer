@@ -32,11 +32,7 @@ export class MobServer {
         socket.mobName = mobName;
         break;
        }
-       case "update": {        
-        mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
-        break;
-       }
-       case "update2": {
+       case "update": {
         // update mobTimer state variables
         mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
         break;
