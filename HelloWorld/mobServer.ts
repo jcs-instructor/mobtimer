@@ -19,20 +19,29 @@ export class MobServer {
     wss.on("connection", (socket) => {
       socket.on("message", (message: string) => {
         const parsedMessage = JSON.parse(message);
-
-        if (parsedMessage.action === "join") {
-          const mobName = parsedMessage.mobName;
-          mobTimer = MobServer.getOrRegisterMob(mobTimer, mobName);
-          socket.mobName = mobName;
-        } else if (parsedMessage.action === "update") {
-          // update mobTimer state variables
-          mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
-        }
-
-        // broadcast changed state to all sockets associated with mobname
-        MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
+        mobTimer = MobServer.processMessage(parsedMessage, mobTimer, socket, wss);
       });
     });    
+  }
+
+  private static processMessage(parsedMessage: any, mobTimer: MobTimer, socket: any, wss: any) {
+    switch (parsedMessage.action){
+       case "join": {
+        const mobName = parsedMessage.mobName;
+        mobTimer = MobServer.getOrRegisterMob(mobTimer, mobName);
+        socket.mobName = mobName;
+        break;
+       }
+       case "update": {
+        // update mobTimer state variables
+        mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
+        break;
+       }
+    }
+
+    // broadcast changed state to all sockets associated with mobname
+    MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
+    return mobTimer;
   }
 
   private static getOrRegisterMob(mobTimer: MobTimer, mobName: any) {
