@@ -1,5 +1,5 @@
-// todo: import { Server } from ??? "jest-websocket-mock";
 import { MobTimer } from "./mobTimer";
+import { Server, WebSocket } from 'ws'
 
 export class MobServer {
   
@@ -13,7 +13,7 @@ export class MobServer {
     });
   }
 
-  static createMobServer(wss: any) {
+  static createMobServer(wss: Server) {
     //const wss=new WebSocket.Server({server:bserver});
     let mobTimer: MobTimer;
     wss.on("connection", (socket) => {
@@ -24,7 +24,7 @@ export class MobServer {
     });    
   }
 
-  private static processMessage(parsedMessage: any, mobTimer: MobTimer, socket: any, wss: any) {
+  private static processMessage(parsedMessage: any, mobTimer: MobTimer, socket: WebSocket, wss: Server) {
     switch (parsedMessage.action){
        case "join": {
         const mobName = parsedMessage.mobName;
@@ -32,8 +32,7 @@ export class MobServer {
         socket.mobName = mobName;
         break;
        }
-       case "update": {
-        // update mobTimer state variables
+       case "update": {        
         mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
         break;
        }
@@ -44,12 +43,11 @@ export class MobServer {
        }
     }
 
-    // broadcast changed state to all sockets associated with mobname
     MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
     return mobTimer;
   }
 
-  private static getOrRegisterMob(mobTimer: MobTimer, mobName: any) {
+  private static getOrRegisterMob(mobTimer: MobTimer, mobName: string) {
     mobTimer = MobServer._mobs.get(mobName);
     if (!mobTimer) {
       mobTimer = new MobTimer();
