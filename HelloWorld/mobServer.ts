@@ -22,18 +22,10 @@ export class MobServer {
 
         if (parsedMessage.action === "join") {
           const mobName = parsedMessage.mobName;
-          // register mob - get the existing mob or add it
-          mobTimer = MobServer._mobs.get(mobName);
-          if (!mobTimer) {
-            mobTimer = new MobTimer();
-            MobServer._mobs.set(mobName, mobTimer);
-          }
-          // associate this socket with mobname
+          mobTimer = MobServer.getOrRegisterMob(mobTimer, mobName);
           socket.mobName = mobName;
-        }
-
-        // update mobTimer state variables
-        if (parsedMessage.action === "update") {
+        } else if (parsedMessage.action === "update") {
+          // update mobTimer state variables
           mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
         }
 
@@ -41,6 +33,15 @@ export class MobServer {
         MobServer.broadcast(wss, socket.mobName, JSON.stringify(mobTimer.state));
       });
     });    
+  }
+
+  private static getOrRegisterMob(mobTimer: MobTimer, mobName: any) {
+    mobTimer = MobServer._mobs.get(mobName);
+    if (!mobTimer) {
+      mobTimer = new MobTimer();
+      MobServer._mobs.set(mobName, mobTimer);
+    }
+    return mobTimer;
   }
 
   static reset() {
