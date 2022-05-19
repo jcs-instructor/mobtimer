@@ -33,7 +33,6 @@ export class MobServer {
         break;
        }
        case "update": {
-        // update mobTimer state variables
         // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
         mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
         break;
