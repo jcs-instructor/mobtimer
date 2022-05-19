@@ -14,7 +14,7 @@ test("Test can reset mob server", async () => {
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
 
-    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    joinMob(socket, "awesome-team");    
     socket.send(JSON.stringify({ action: "update", value: {durationMinutes: 32 }}));    
     await waitForSocketToClose(socket);
 
@@ -32,7 +32,7 @@ test("When mob server is created, when socket joins mob a new mob timer is retur
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
 
     // Socket sends joins message
-    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    joinMob(socket, "awesome-team");    
     await waitForSocketToClose(socket);
     const parsedMessage = JSON.parse(messagesReceivedBySocket[0]);
     expect(parsedMessage).toEqual(new MobTimer().state);     
@@ -43,7 +43,7 @@ test("Socket updates a timer", async () => {
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
 
-    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    joinMob(socket, "awesome-team");    
     socket.send(JSON.stringify({ action: "update", value: {durationMinutes: 32 }}));    
     await waitForSocketToClose(socket);
 
@@ -56,7 +56,7 @@ test("Socket updates a timer", async () => {
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
 
-    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    joinMob(socket, "awesome-team");    
     socket.send(JSON.stringify({ action: "pause" }));    
     await waitForSocketToClose(socket);
 
@@ -70,8 +70,8 @@ test("Two sockets, first socket updates a timer", async () => {
     const { socket: socket1, messagesReceivedBySocket: messagesReceivedBySocket1 } = await setupSocket(mockWSS);
     const { socket: socket2, messagesReceivedBySocket: messagesReceivedBySocket2 } = await setupSocket(mockWSS);
 
-    socket1.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket2.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    joinMob(socket1, "awesome-team");
+    joinMob(socket2, "awesome-team");
     socket1.send(JSON.stringify({ action: "update", value: {durationMinutes: 32 }}));    
     await waitForSocketToClose(socket1);
     await waitForSocketToClose(socket2);
@@ -88,10 +88,10 @@ test("Three sockets, two mobs: first socket updates a timer", async () => {
     const { socket: socket2, messagesReceivedBySocket: messagesReceivedBySocket2 } = await setupSocket(mockWSS);
     const { socket: socket3, messagesReceivedBySocket: messagesReceivedBySocket3 } = await setupSocket(mockWSS);
 
-    socket1.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
-    socket2.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    joinMob(socket1, "awesome-team");
+    joinMob(socket2, "awesome-team");
     socket1.send(JSON.stringify({ action: "update", value: {durationMinutes: 32 }}));    
-    socket3.send(JSON.stringify({ action: "join", mobName: "terrible-team" }));    
+    joinMob(socket3, "good-team");
     await waitForSocketToClose(socket1);
     await waitForSocketToClose(socket2);
 
@@ -101,6 +101,10 @@ test("Three sockets, two mobs: first socket updates a timer", async () => {
     expect(parsedMessage2.durationMinutes).toEqual(32); 
     expect(parsedMessage3.durationMinutes).toEqual(5);     
 });
+
+function joinMob(socket: WebSocket, mobName: string) {
+    socket.send(JSON.stringify({ action: "join", mobName: mobName }));
+}
 
 async function setupSocket(mockWSS: any) {
     const messages = [];
