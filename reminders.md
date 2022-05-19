@@ -1,3 +1,7 @@
+**Practices to Try**:
+- **5/25/2022:** Each person gets approx. 1 hour to be the leader on what we work on
+---
+
 **Practices to Focus On**:
 - **Phrases**:
   - "Got it" (ELMO)
