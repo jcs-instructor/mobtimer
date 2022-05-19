@@ -51,6 +51,19 @@ test("Socket updates a timer", async () => {
     expect(parsedMessage.durationMinutes).toEqual(32); 
 });
 
+test("ALTERNATIVE: Socket updates a timer", async () => {
+    const mockWSS = new WS(wssUrl).server;
+    MobServer.createMobServer(mockWSS);
+    const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+
+    socket.send(JSON.stringify({ action: "join", mobName: "awesome-team" }));    
+    socket.send(JSON.stringify({ action: "update2", value: {durationMinutes: 32 }}));    
+    await waitForSocketToClose(socket);
+
+    const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
+    expect(parsedMessage.durationMinutes).toEqual(32); 
+});
+
 test("Two sockets, first socket updates a timer", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS); // mockWSS.server

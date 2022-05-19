@@ -37,6 +37,11 @@ export class MobServer {
         mobTimer.durationMinutes = parsedMessage.durationMinutes || mobTimer.durationMinutes;
         break;
        }
+       case "update2": {
+        // update mobTimer state variables
+        mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
+        break;
+       }
     }
 
     // broadcast changed state to all sockets associated with mobname
