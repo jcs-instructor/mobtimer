@@ -65,7 +65,7 @@ test("Socket pauses a timer", async () => {
     expect(parsedMessage.status).toEqual(Status.Paused); 
 });
 
-test.only("Socket starts a timer", async () => {
+test("Socket starts a timer", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
@@ -73,7 +73,7 @@ test.only("Socket starts a timer", async () => {
 
     mobWebSocket.joinMob("awesome-team");    
     socket.send(JSON.stringify({ action: "start" }));    
-    await mobWebSocket.waitForSocketToClose(socket);
+    await mobWebSocket.waitForSocketToClose();
 
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
     expect(parsedMessage.status).toEqual(Status.Running); 
