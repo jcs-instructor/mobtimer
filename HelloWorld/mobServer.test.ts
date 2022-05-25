@@ -1,6 +1,7 @@
 import WS from 'jest-websocket-mock';
 import { MobServer } from './mobServer';
 import { MobTimer, Status } from './mobTimer';
+import { MobWebSocket } from './mobWebSocket';
 
 const wssUrl = "wss://localhost:1234";
 
@@ -9,6 +10,7 @@ afterEach(() => {
     MobServer.reset();
 });
 
+// todo: How does this test the reset feature?
 test("Test can reset mob server", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
@@ -21,7 +23,6 @@ test("Test can reset mob server", async () => {
     const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]); 
     expect(parsedMessage.durationMinutes).toEqual(32);     
 });
-
 
 test("When mob server is created, when socket joins mob a new mob timer is returned", async () => {
     // Set up server
@@ -68,8 +69,9 @@ test("Socket starts a timer", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
     const { socket, messagesReceivedBySocket } = await setupSocket(mockWSS);
+    const mobWebSocket = new MobWebSocket(socket);
 
-    joinMob(socket, "awesome-team");    
+    mobWebSocket.joinMob("awesome-team");    
     socket.send(JSON.stringify({ action: "start" }));    
     await waitForSocketToClose(socket);
 
@@ -77,6 +79,7 @@ test("Socket starts a timer", async () => {
     expect(parsedMessage.status).toEqual(Status.Running); 
 });
 
+// todo: Should probably assert also that the other socket's timer is unchanged - similar to the three sockets test below it
 test("Two sockets, first socket updates a timer", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS); // mockWSS.server
