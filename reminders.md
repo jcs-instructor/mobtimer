@@ -6,7 +6,9 @@
 - **Phrases**:
   - "Got it" (ELMO)
   - "Hold on" (Navigator wants floor)
-- **Remember to give credit to co-author**.  Example: `Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com>` (email is the github user email)
+- **Remember to give credit to co-author**: 
+`Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com>` 
+`Co-authored-by: Joel Silberman <42779942+jcs-instructor@users.noreply.github.com>`
 
 ---
 
