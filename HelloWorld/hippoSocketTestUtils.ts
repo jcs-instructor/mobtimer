@@ -1,8 +1,9 @@
 import { Server } from "http";
 import * as http from "http";
 import { Data } from "ws";
-import * as WebSocket from "ws";
+import WebSocket from "ws";
 import createWebSocketServer from "./hippoWebSocketServer";
+import { WebSocketInterface } from "./hippoMobWebSocket";
 
 export function joinMessage(mobName: string) {
     return JSON.stringify({ action: "join", mobName: mobName });
@@ -29,7 +30,7 @@ function startServer(port: number): Promise<Server> {
  * @param socket The socket whose `readyState` is being watched
  * @param state The desired `readyState` for the socket
  */
-function waitForSocketState(socket: WebSocket, state: number): Promise<void> {
+function waitForSocketState(socket: WebSocketInterface, state: number): Promise<void> {
     return new Promise(function (resolve) {
         setTimeout(function () {
             if (socket.readyState === state) {
