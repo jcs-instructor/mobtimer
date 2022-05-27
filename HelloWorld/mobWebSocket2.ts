@@ -1,6 +1,25 @@
-import { WebSocket } from 'ws';
 
+import { Server } from 'ws';
+
+export interface MobWebSocketTestInterface extends WebSocket {
+    mobName?: string;
+    messages?: string[];
+}
+
+export interface MobWebSocketInterface extends WebSocket {
+    mobName?: string;
+}
 export class MobWebSocket2 {
+
+    public static async setupToLogMessages(mockWSS: Server, wssUrl: string) {
+        const client: MobWebSocketTestInterface = new WebSocket(wssUrl);
+        client.messages = [];
+        await mockWSS.connected;
+        client.onmessage = (e) => {
+            client.messages.push(e.data);
+        };
+        return client;
+    };
 
     public static joinMessage(mobName: string) {
         return JSON.stringify({ action: "join", mobName: mobName });
@@ -10,22 +29,16 @@ export class MobWebSocket2 {
         return JSON.stringify({ action: "update", value: { durationMinutes: 32 } })
     }
 
-    private _socket: WebSocket;
-    constructor(socket: WebSocket) {
-        this._socket = socket;
-    }
 
     // todo: change to loop (not recursion)
-    waitToClose() {
-        const socket = this._socket;
-        const thisInstance = this;
+    public static waitToClose(socket: WebSocket) {
         return new Promise<void>(function (resolve) {
             setTimeout(function () {
                 socket.close();
                 if (socket.readyState === socket.CLOSED) {
                     resolve();
                 } else {
-                    thisInstance.waitToClose().then(resolve);
+                    MobWebSocket2.waitToClose(socket).then(resolve);
                 }
             }, 5);
         });

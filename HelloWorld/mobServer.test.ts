@@ -2,7 +2,8 @@ import WS from 'jest-websocket-mock';
 import { MobServer } from './mobServer';
 import { MobTimer, Status } from './mobTimer';
 import { MobWebSocket } from './mobWebSocket';
-import { MobWebSocket2 } from './mobWebSocket2';
+import { MobWebSocket2, MobWebSocketTestInterface } from './mobWebSocket2';
+import { setup as setup2 } from './funky2';
 
 const wssUrl = "wss://localhost:1234";
 
@@ -15,13 +16,13 @@ afterEach(() => {
 test("Test can reset mob server", async () => {
     const mockWSS = new WS(wssUrl).server;
     MobServer.createMobServer(mockWSS);
-    const { socket, messagesReceivedBySocket } = await setup(mockWSS);
+    const socket = await MobWebSocket2.setupToLogMessages(mockWSS, wssUrl);
 
     socket.send(MobWebSocket2.joinMessage("awesome-team"));
     socket.send(MobWebSocket2.updateMessage(32));
     await waitToClose(socket);
 
-    const parsedMessage = JSON.parse(messagesReceivedBySocket.slice(-1)[0]);
+    const parsedMessage = JSON.parse(socket.messages.slice(-1)[0]);
     expect(parsedMessage.durationMinutes).toEqual(32);
 });
 
