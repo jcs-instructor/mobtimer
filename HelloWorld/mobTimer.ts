@@ -8,14 +8,18 @@ export enum Status {
 }
 
 export class MobTimer {
-  
+
+  private _mobName = "";
   private _durationMinutes = 5;
   private _whenStartedInSeconds: number;
   private _status: Status = Status.Ready;
   private _whenPausedInSeconds: number;
   private _nowInSecondsFunc = TimeUtil.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
-    
+
+  constructor(mobName: string = "") {
+    this._mobName = mobName
+  }
   start() {
     this._status = Status.Running;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
@@ -33,11 +37,12 @@ export class MobTimer {
   pause() {
     this._status = Status.Paused;
     this._whenPausedInSeconds = this._nowInSecondsFunc();
-    this._previouslyAccumulatedElapsedSeconds += 
+    this._previouslyAccumulatedElapsedSeconds +=
       (this._whenPausedInSeconds - this._whenStartedInSeconds);
   }
   public get state() {
-    return { 
+    return {
+      mobName: this._mobName,
       status: this._status,
       durationMinutes: this._durationMinutes,
     };
@@ -50,8 +55,8 @@ export class MobTimer {
   public get secondsRemainingString(): string {
     return TimeUtil.getTimeString(this.secondsRemaining);
   }
-  
-  public get secondsRemaining(): number {    
+
+  public get secondsRemaining(): number {
     // When the timer is ready, show "0:00" for the time.
     if (this._status == Status.Ready) {
       return 0;
@@ -77,5 +82,5 @@ export class MobTimer {
   public set durationMinutes(duration: number) {
     this._durationMinutes = duration;
   }
-  
+
 }
