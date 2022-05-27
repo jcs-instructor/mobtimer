@@ -24,7 +24,7 @@ describe("WebSocket Server", () => {
         let responseMessage: string;
 
         client.on("message", (data) => {
-            responseMessage = data.toString();
+            client.receivedMessages.push(data.toString());
 
             // Close the client after it receives the response
             client.close();
@@ -33,9 +33,9 @@ describe("WebSocket Server", () => {
         // Send client message
         console.log("about to send", testMessage)
         client.send(testMessage);
-
         // Perform assertions on the response
         await waitForSocketState(client, client.CLOSED);
+        responseMessage = client.receivedMessages[0];
         const parsedMessage = JSON.parse(responseMessage);
         expect(parsedMessage).toEqual(new MobTimer("awesome-team").state);
     });
@@ -56,7 +56,6 @@ describe("WebSocket Server", () => {
         });
 
         // Send client message
-        console.log("about to send", testMessage)
         client.send(testMessage);
 
         // Perform assertions on the response
