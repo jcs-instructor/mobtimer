@@ -2,7 +2,7 @@ import WebSocket from "ws";
 import { startServer, waitForSocketState } from "./mobSocketUtils";
 import * as util from "./mobSocketUtils"
 import { MobTimer } from "./mobTimer";
-import { mobTestSocket } from "./mobTestSocket";
+import { MobTestSocket } from "./mobTestSocket";
 
 const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -17,7 +17,7 @@ describe("WebSocket Server", () => {
 
     test("Create mob", async () => {
         // Create test client
-        const client = new mobTestSocket(`ws://localhost:${port}`);
+        const client = new MobTestSocket(`ws://localhost:${port}`);
         await waitForSocketState(client, client.OPEN);
 
         const testMessage = util.joinMessage("awesome-team");

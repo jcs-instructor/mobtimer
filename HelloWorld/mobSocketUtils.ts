@@ -1,7 +1,7 @@
-import { httpServer } from "http";
+import { HttpServer } from "http";
 import * as http from "http";
 import { Data } from "ws";
-import WebSocket from "ws";
+import WebSocket, { Server } from "ws";
 import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 
@@ -16,7 +16,7 @@ export function updateMessage(durationMinutes: number) {
  * @param port Port for the server to listen on
  * @returns The created server
  */
-export function startServer(port: number): Promise<Server> {
+export function startServer(port: number): Promise<HttpServer> {
     const server = http.createServer();
     createWebSocketServer(server);
 
@@ -58,7 +58,7 @@ function getOrRegisterMob(mobName: string) {
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function createWebSocketServer(server: httpServer): void {
+function createWebSocketServer(server: HttpServer): void {
 
     const wss = new WebSocket.Server({ server });
 
