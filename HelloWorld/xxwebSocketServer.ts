@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { Server } from "http";
 import { MobTimer } from "./mobTimer";
-import { processMessage, } from "./xxmobSocketUtils";
+import { processMessage, } from "./mobSocketUtils";
 
 /**
  * Creates a WebSocket server from a Node http server. The server must
