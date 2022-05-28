@@ -1,5 +1,6 @@
 import WebSocket from "ws";
-import { startServer, waitForSocketState } from "./mobWebSocketUtils";
+import { startMobServer } from "./mobWebSocketUtils";
+import { waitForSocketState } from "./webSocketUtils";
 import * as util from "./mobWebSocketUtils"
 import { MobTimer } from "./mobTimer";
 import { MobWebTestSocket } from "./mobWebTestSocket";
@@ -10,7 +11,7 @@ describe("WebSocket Server", () => {
     let server;
 
     beforeAll(async () => {
-        server = await startServer(port);
+        server = await startMobServer(port);
     });
 
     afterAll(() => server.close());
