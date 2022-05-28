@@ -2,7 +2,7 @@ import WebSocket from "ws";
 import { startServer, waitForSocketState } from "./mobWebSocketUtils";
 import * as util from "./mobWebSocketUtils"
 import { MobTimer } from "./mobTimer";
-import { MobTestSocket } from "./mobWebTestSocket";
+import { MobWebTestSocket } from "./mobWebTestSocket";
 
 const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -17,15 +17,13 @@ describe("WebSocket Server", () => {
 
     test("Create mob", async () => {
         // Create test client
-        const client = new MobTestSocket(`ws://localhost:${port}`);
+        const client = new MobWebTestSocket(`ws://localhost:${port}`);
         await waitForSocketState(client, client.OPEN);
 
         const testMessage = util.joinMessage("awesome-team");
         let responseMessage: string;
 
-        client.on("message", (data) => {
-            client.receivedMessages.push(data.toString());
-        });
+
 
         // Send client message
         client.send(testMessage);
