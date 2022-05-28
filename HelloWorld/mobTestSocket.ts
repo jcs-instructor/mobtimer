@@ -1,6 +1,6 @@
-import { mobWebSocket, WebSocketInterface } from './mobWebSocket'
+import { MobWebSocket, WebSocketInterface } from './mobWebSocket'
 
-class mobTestSocket extends mobWebSocket implements WebSocketInterface {
+class mobTestSocket extends MobWebSocket implements WebSocketInterface {
     receivedMessages: string[] = []
 }
 

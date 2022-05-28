@@ -2,7 +2,7 @@ import WebSocket from 'ws';
 export interface WebSocketInterface extends WebSocket {
 
 };
-class mobWebSocket extends WebSocket implements WebSocketInterface {
+class MobWebSocket extends WebSocket implements WebSocketInterface {
     _mobName: string
     constructor(url) {
         super(url)
@@ -10,7 +10,7 @@ class mobWebSocket extends WebSocket implements WebSocketInterface {
 
 }
 
-export { mobWebSocket }
+export { MobWebSocket }
 
 
 

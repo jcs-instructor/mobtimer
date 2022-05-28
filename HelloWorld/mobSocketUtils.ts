@@ -80,7 +80,7 @@ function createWebSocketServer(server: Server): void {
     });
 }
 
-export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocketInterface, wss: Server) {
+export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocket, wss: Server) {
     switch (parsedMessage.action) {
         case "join": {
             const mobName = parsedMessage.mobName;
