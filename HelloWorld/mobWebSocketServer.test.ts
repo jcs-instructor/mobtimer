@@ -2,7 +2,7 @@ import WebSocket from "ws";
 import { startServer, waitForSocketState } from "./mobSocketUtils";
 import * as util from "./mobSocketUtils"
 import { MobTimer } from "./mobTimer";
-import { mobTestSocket } from "./xxMobTestSocket";
+import { mobTestSocket } from "./mobTestSocket";
 
 const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
