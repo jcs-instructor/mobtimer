@@ -31,7 +31,6 @@ describe("WebSocket Server", () => {
         });
 
         // Send client message
-        console.log("about to send", testMessage)
         client.send(testMessage);
         // Perform assertions on the response
         await waitForSocketState(client, client.CLOSED);

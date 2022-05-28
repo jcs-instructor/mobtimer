@@ -4,11 +4,12 @@ import { Data } from "ws";
 import WebSocket from "ws";
 import createWebSocketServer from "./hippoWebSocketServer";
 import { WebSocketInterface } from "./hippoMobWebSocket";
+import { MobTimer } from "./mobTimer";
 
 export function joinMessage(mobName: string) {
     return JSON.stringify({ action: "join", mobName: mobName });
 }
-
+const _mobs: Map<string, MobTimer> = new Map();
 export function updateMessage(durationMinutes: number) {
     return JSON.stringify({ action: "update", value: { durationMinutes: 32 } })
 }/**
@@ -40,6 +41,40 @@ function waitForSocketState(socket: WebSocketInterface, state: number): Promise<
             }
         });
     });
+}
+
+function getOrRegisterMob(mobTimer: MobTimer, mobName: string) {
+    mobTimer = _mobs.get(mobName);
+    if (!mobTimer) {
+        mobTimer = new MobTimer();
+        _mobs.set(mobName, mobTimer);
+    }
+    return mobTimer;
+}
+
+export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocketInterface, wss: Server) {
+    switch (parsedMessage.action) {
+        case "join": {
+            const mobName = parsedMessage.mobName;
+            mobTimer = getOrRegisterMob(mobTimer, mobName);
+            socket.mobName = mobName;
+            break;
+        }
+        case "update": {
+            // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
+            mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
+            break;
+        }
+        case "pause": {
+            mobTimer.pause();
+            break;
+        }
+        case "start": {
+            mobTimer.start();
+            break;
+        }
+    }
+    return mobTimer;
 }
 
 /**
