@@ -2,7 +2,7 @@ import { Server } from "http";
 import * as http from "http";
 import { Data } from "ws";
 import WebSocket from "ws";
-import { WebSocketInterface } from "./hippoMobWebSocket";
+import { WebSocketInterface } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 
 export function joinMessage(mobName: string) {
