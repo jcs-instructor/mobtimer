@@ -25,14 +25,12 @@ describe("WebSocket Server", () => {
 
         client.on("message", (data) => {
             client.receivedMessages.push(data.toString());
-
-            // Close the client after it receives the response
-            client.close();
         });
 
         // Send client message
         client.send(testMessage);
         // Perform assertions on the response
+        client.close()
         await waitForSocketState(client, client.CLOSED);
         responseMessage = client.receivedMessages[0];
         const parsedMessage = JSON.parse(responseMessage);
@@ -49,13 +47,11 @@ describe("WebSocket Server", () => {
 
         client.on("message", (data) => {
             responseMessage = data.toString();
-
-            // Close the client after it receives the response
-            client.close();
         });
 
         // Send client message
         client.send(testMessage);
+        client.close()
 
         // Perform assertions on the response
         await waitForSocketState(client, client.CLOSED);
