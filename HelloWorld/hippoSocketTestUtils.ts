@@ -49,7 +49,7 @@ export function getOrRegisterMob(mobName: string) {
     if (!mobTimer) {
         console.log("Registering debug")
         mobTimer = new MobTimer(mobName);
-        //     _mobs.set(mobName, mobTimer);
+        _mobs.set(mobName, mobTimer);
     }
     return mobTimer;
 }
