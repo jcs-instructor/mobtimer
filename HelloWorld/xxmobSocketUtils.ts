@@ -2,7 +2,6 @@ import { Server } from "http";
 import * as http from "http";
 import { Data } from "ws";
 import WebSocket from "ws";
-import createWebSocketServer from "./hippoWebSocketServer";
 import { WebSocketInterface } from "./hippoMobWebSocket";
 import { MobTimer } from "./mobTimer";
 
@@ -17,7 +16,7 @@ export function updateMessage(durationMinutes: number) {
  * @param port Port for the server to listen on
  * @returns The created server
  */
-function startServer(port: number): Promise<Server> {
+export function startServer(port: number): Promise<Server> {
     const server = http.createServer();
     createWebSocketServer(server);
 
@@ -31,7 +30,7 @@ function startServer(port: number): Promise<Server> {
  * @param socket The socket whose `readyState` is being watched
  * @param state The desired `readyState` for the socket
  */
-function waitForSocketState(socket: WebSocketInterface, state: number): Promise<void> {
+export function waitForSocketState(socket: WebSocketInterface, state: number): Promise<void> {
     return new Promise(function (resolve) {
         setTimeout(function () {
             if (socket.readyState === state) {
@@ -43,7 +42,7 @@ function waitForSocketState(socket: WebSocketInterface, state: number): Promise<
     });
 }
 
-export function getOrRegisterMob(mobName: string) {
+function getOrRegisterMob(mobName: string) {
     console.log('debug', _mobs);
     let mobTimer = _mobs.get(mobName);
     if (!mobTimer) {
@@ -52,6 +51,33 @@ export function getOrRegisterMob(mobName: string) {
         _mobs.set(mobName, mobTimer);
     }
     return mobTimer;
+}
+
+/**
+ * Creates a WebSocket server from a Node http server. The server must
+ * be started externally.
+ * @param server The http server from which to create the WebSocket server
+ */
+function createWebSocketServer(server: Server): void {
+
+    const wss = new WebSocket.Server({ server });
+
+    wss.on("connection", function (webSocket) {
+        webSocket.on("message", function (message) {
+            let isString = typeof message == "string";
+            let textMessage: any = isString ? message : message.toString()
+            let isJson = textMessage.includes("{")
+            let mobTimer: MobTimer;
+            let mobName
+            if (isJson) {
+                const parsedMessage = JSON.parse(textMessage);
+                mobName = JSON.parse(textMessage).mobName;
+                mobTimer = processMessage(parsedMessage, mobTimer, webSocket, wss);
+            }
+            let sendMessage = isJson ? JSON.stringify(mobTimer.state) : textMessage
+            webSocket.send(sendMessage);
+        });
+    });
 }
 
 export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocketInterface, wss: Server) {
@@ -80,22 +106,13 @@ export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: M
 }
 
 /**
- * Creates a socket client that connects to the specified `port`.
- * @param port The port to connect to on the localhost
- * @returns Tuple containing the created client and any messages it receives
- */
-async function createSocketClient(port: number): Promise<[WebSocket, Data[]]>;
-
-/**
  * Creates a socket client that connects to the specified `port`. The client automatically
  * closes its socket after it receives the specified number of messages.
  * @param port The port to connect to on the localhost
  * @param closeAfter The number of messages to receive before closing the socket
  * @returns Tuple containing the created client and any messages it receives
  */
-async function createSocketClient(port: number, closeAfter: number): Promise<[WebSocket, Data[]]>;
-
-async function createSocketClient(port: number, closeAfter?: number): Promise<[WebSocket, Data[]]> {
+export async function createSocketClient(port: number, closeAfter?: number): Promise<[WebSocket, Data[]]> {
     const client = new WebSocket(`ws://localhost:${port}`);
     await waitForSocketState(client, client.OPEN);
     const messages: WebSocket.Data[] = [];
@@ -110,5 +127,3 @@ async function createSocketClient(port: number, closeAfter?: number): Promise<[W
 
     return [client, messages];
 }
-
-export { startServer, waitForSocketState, createSocketClient };

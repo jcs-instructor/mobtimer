@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { Server } from "http";
 import { MobTimer } from "./mobTimer";
-import { getOrRegisterMob, processMessage, } from "./hippoSocketTestUtils";
+import { processMessage, } from "./xxmobSocketUtils";
 
 /**
  * Creates a WebSocket server from a Node http server. The server must

@@ -2,7 +2,7 @@ import WebSocket from 'ws';
 export interface WebSocketInterface extends WebSocket {
 
 };
-class hippoMobWebSocket extends WebSocket implements WebSocketInterface {
+class mobWebSocket extends WebSocket implements WebSocketInterface {
     _mobName: string
     constructor(url) {
         super(url)
@@ -10,7 +10,7 @@ class hippoMobWebSocket extends WebSocket implements WebSocketInterface {
 
 }
 
-export { hippoMobWebSocket }
+export { mobWebSocket }
 
 
 

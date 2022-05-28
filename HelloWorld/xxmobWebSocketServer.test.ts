@@ -1,8 +1,8 @@
 import WebSocket from "ws";
-import { startServer, waitForSocketState } from "./hippoSocketTestUtils";
-import * as util from "./hippoSocketTestUtils"
+import { startServer, waitForSocketState } from "./xxmobSocketUtils";
+import * as util from "./xxmobSocketUtils"
 import { MobTimer } from "./mobTimer";
-import { hippoMobTestSocket } from "./hippoMobTestSocket";
+import { mobTestSocket } from "./xxMobTestSocket";
 
 const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -17,7 +17,7 @@ describe("WebSocket Server", () => {
 
     test("Create mob", async () => {
         // Create test client
-        const client = new hippoMobTestSocket(`ws://localhost:${port}`);
+        const client = new mobTestSocket(`ws://localhost:${port}`);
         await waitForSocketState(client, client.OPEN);
 
         const testMessage = util.joinMessage("awesome-team");
