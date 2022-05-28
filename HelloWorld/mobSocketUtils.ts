@@ -1,4 +1,4 @@
-import { Server } from "http";
+import { httpServer } from "http";
 import * as http from "http";
 import { Data } from "ws";
 import WebSocket from "ws";
@@ -58,7 +58,7 @@ function getOrRegisterMob(mobName: string) {
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function createWebSocketServer(server: Server): void {
+function createWebSocketServer(server: httpServer): void {
 
     const wss = new WebSocket.Server({ server });
 
