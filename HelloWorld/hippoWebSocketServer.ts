@@ -22,15 +22,7 @@ function createWebSocketServer(server: Server): void {
             if (isJson) {
                 const parsedMessage = JSON.parse(textMessage);
                 mobName = JSON.parse(textMessage).mobName;
-                switch (parsedMessage.action) {
-                    case "join": {
-                        const mobName = parsedMessage.mobName;
-                        console.log("debug about to register");
-                        mobTimer = getOrRegisterMob(mobName);
-                        webSocket.mobName = mobName;
-                        break;
-                    }
-                }
+                mobTimer = processMessage(parsedMessage, mobTimer, webSocket, wss);
             }
             let sendMessage = isJson ? JSON.stringify(mobTimer.state) : textMessage
             webSocket.send(sendMessage);
