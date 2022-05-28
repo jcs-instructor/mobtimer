@@ -2,7 +2,7 @@ import { Server } from "http";
 import * as http from "http";
 import { Data } from "ws";
 import WebSocket from "ws";
-import { WebSocketInterface } from "./mobWebSocket";
+import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 
 export function joinMessage(mobName: string) {
@@ -62,7 +62,7 @@ function createWebSocketServer(server: Server): void {
 
     const wss = new WebSocket.Server({ server });
 
-    wss.on("connection", function (webSocket) {
+    wss.on("connection", function (webSocket: MobWebSocket) {
         webSocket.on("message", function (message) {
             let isString = typeof message == "string";
             let textMessage: any = isString ? message : message.toString()
@@ -85,7 +85,7 @@ export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: M
         case "join": {
             const mobName = parsedMessage.mobName;
             mobTimer = getOrRegisterMob(mobName);
-            socket.mobName = mobName;
+            socket._mobName = mobName;
             break;
         }
         case "update": {
