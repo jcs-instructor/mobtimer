@@ -43,11 +43,13 @@ function waitForSocketState(socket: WebSocketInterface, state: number): Promise<
     });
 }
 
-function getOrRegisterMob(mobTimer: MobTimer, mobName: string) {
-    mobTimer = _mobs.get(mobName);
+export function getOrRegisterMob(mobName: string) {
+    console.log('debug', _mobs);
+    let mobTimer = _mobs.get(mobName);
     if (!mobTimer) {
-        mobTimer = new MobTimer();
-        _mobs.set(mobName, mobTimer);
+        console.log("Registering debug")
+        mobTimer = new MobTimer(mobName);
+        //     _mobs.set(mobName, mobTimer);
     }
     return mobTimer;
 }
@@ -56,7 +58,7 @@ export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: M
     switch (parsedMessage.action) {
         case "join": {
             const mobName = parsedMessage.mobName;
-            mobTimer = getOrRegisterMob(mobTimer, mobName);
+            mobTimer = getOrRegisterMob(mobName);
             socket.mobName = mobName;
             break;
         }

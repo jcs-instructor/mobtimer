@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { Server } from "http";
 import { MobTimer } from "./mobTimer";
-import { processMessage } from "./hippoSocketTestUtils";
+import { getOrRegisterMob, processMessage, } from "./hippoSocketTestUtils";
 
 /**
  * Creates a WebSocket server from a Node http server. The server must
@@ -22,19 +22,22 @@ function createWebSocketServer(server: Server): void {
             if (isJson) {
                 const parsedMessage = JSON.parse(textMessage);
                 mobName = JSON.parse(textMessage).mobName;
-                switch (parsedMessage) {
+                switch (parsedMessage.action) {
                     case "join": {
                         const mobName = parsedMessage.mobName;
-                        // mobTimer = getOrRegisterMob(mobTimer, mobName);
+                        console.log("debug about to register");
+                        mobTimer = getOrRegisterMob(mobName);
                         webSocket.mobName = mobName;
                         break;
                     }
                 }
             }
-            let sendMessage = isJson ? JSON.stringify(new MobTimer(mobName).state) : textMessage
+            let sendMessage = isJson ? JSON.stringify(mobTimer.state) : textMessage
             webSocket.send(sendMessage);
         });
     });
 }
 
 export default createWebSocketServer;
+
+
