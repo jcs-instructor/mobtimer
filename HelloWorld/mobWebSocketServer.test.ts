@@ -1,6 +1,6 @@
 import WebSocket from "ws";
-import { startServer, waitForSocketState } from "./mobSocketUtils";
-import * as util from "./mobSocketUtils"
+import { startServer, waitForSocketState } from "./mobWebSocketUtils";
+import * as util from "./mobWebSocketUtils"
 import { MobTimer } from "./mobTimer";
 import { MobTestSocket } from "./mobWebTestSocket";
 
