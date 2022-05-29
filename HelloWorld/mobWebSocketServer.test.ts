@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketUtils";
 import { waitForSocketState } from "./webSocketUtils";
-import * as util from "./mobWebSocketUtils"
+import * as mobMessage from "./mobWebMessages";
 import { MobTimer } from "./mobTimer";
 import { MobWebTestSocket } from "./mobWebTestSocket";
 
@@ -21,7 +21,7 @@ describe("WebSocket Server", () => {
         const client = new MobWebTestSocket(`ws://localhost:${port}`);
         await waitForSocketState(client, client.OPEN);
 
-        const testMessage = util.joinMessage("awesome-team");
+        const testMessage = mobMessage.joinMessage("awesome-team");
         let responseMessage: string;
 
 

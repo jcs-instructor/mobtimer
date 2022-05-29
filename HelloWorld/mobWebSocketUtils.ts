@@ -6,13 +6,38 @@ import { MobTimer } from "./mobTimer";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
-function getOrRegisterMob(mobName: string) {
+function _getOrRegisterMob(mobName: string) {
     console.log('debug', _mobs);
     let mobTimer = _mobs.get(mobName);
     if (!mobTimer) {
         console.log("Registering debug")
         mobTimer = new MobTimer(mobName);
         _mobs.set(mobName, mobTimer);
+    }
+    return mobTimer;
+}
+
+function _processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocket, wss: Server) {
+    switch (parsedMessage.action) {
+        case "join": {
+            const mobName = parsedMessage.mobName;
+            mobTimer = _getOrRegisterMob(mobName);
+            socket._mobName = mobName;
+            break;
+        }
+        case "update": {
+            // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
+            mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
+            break;
+        }
+        case "pause": {
+            mobTimer.pause();
+            break;
+        }
+        case "start": {
+            mobTimer.start();
+            break;
+        }
     }
     return mobTimer;
 }
@@ -36,7 +61,7 @@ export function createMobWebSocketServer(server: HttpServer): void {
             if (isJson) {
                 const parsedMessage = JSON.parse(textMessage);
                 mobName = JSON.parse(textMessage).mobName;
-                mobTimer = processMessage(parsedMessage, mobTimer, webSocket, wss);
+                mobTimer = _processMessage(parsedMessage, mobTimer, webSocket, wss);
             }
             let sendMessage = isJson ? JSON.stringify(mobTimer.state) : textMessage
             webSocket.send(sendMessage);
@@ -44,35 +69,6 @@ export function createMobWebSocketServer(server: HttpServer): void {
     });
 }
 
-// TODO: refactor message functions so they are together and related
-export function joinMessage(mobName: string) {
-    return JSON.stringify({ action: "join", mobName: mobName });
-}
-
-export function processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocket, wss: Server) {
-    switch (parsedMessage.action) {
-        case "join": {
-            const mobName = parsedMessage.mobName;
-            mobTimer = getOrRegisterMob(mobName);
-            socket._mobName = mobName;
-            break;
-        }
-        case "update": {
-            // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
-            mobTimer.durationMinutes = parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
-            break;
-        }
-        case "pause": {
-            mobTimer.pause();
-            break;
-        }
-        case "start": {
-            mobTimer.start();
-            break;
-        }
-    }
-    return mobTimer;
-}
 
 /**
  * Creates and starts a WebSocket server from a simple http server for testing purposes.
@@ -88,9 +84,6 @@ export function startMobServer(port: number): Promise<HttpServer> {
     });
 }
 
-export function updateMessage(durationMinutes: number) {
-    return JSON.stringify({ action: "update", value: { durationMinutes: 32 } })
-}
 
 
 
