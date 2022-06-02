@@ -17,7 +17,8 @@ function _getOrRegisterMob(mobName: string) {
     return mobTimer;
 }
 
-function _processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebSocket, wss: Server) {
+function _processMessage(parsedMessage: any, socket: MobWebSocket, wss: Server) {
+    let mobTimer: MobTimer;
     switch (parsedMessage.action) {
         case "join": {
             const mobName = parsedMessage.mobName;
@@ -55,11 +56,10 @@ export function createMobWebSocketServer(server: HttpServer): void {
         webSocket.on("message", function (message) {
             let isString = typeof message == "string";
             let textMessage: string = (isString ? message : message.toString()) as string;
-            let mobTimer: MobTimer;
             let mobName: string; 
             const parsedMessage = JSON.parse(textMessage);
             mobName = JSON.parse(textMessage).mobName;
-            mobTimer = _processMessage(parsedMessage, mobTimer, webSocket, wss);
+            let mobTimer = _processMessage(parsedMessage, webSocket, wss);
             let sendMessage = JSON.stringify(mobTimer.state);
             webSocket.send(sendMessage);
         });
