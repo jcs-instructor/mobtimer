@@ -22,7 +22,7 @@ function _processMessage(parsedMessage: any, mobTimer: MobTimer, socket: MobWebS
         case "join": {
             const mobName = parsedMessage.mobName;
             mobTimer = _getOrRegisterMob(mobName);
-            socket._mobName = mobName;
+            socket.mobName = mobName;
             break;
         }
         case "update": {

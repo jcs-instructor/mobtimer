@@ -24,8 +24,6 @@ describe("WebSocket Server", () => {
         const testMessage = mobMessage.joinMessage("awesome-team");
         let responseMessage: string;
 
-
-
         // Send client message
         client.send(testMessage);
         // Perform assertions on the response
