@@ -54,16 +54,13 @@ export function createMobWebSocketServer(server: HttpServer): void {
     wss.on("connection", function (webSocket: MobWebSocket) {
         webSocket.on("message", function (message) {
             let isString = typeof message == "string";
-            let textMessage: any = isString ? message : message.toString()
-            let isJson = textMessage.includes("{")
+            let textMessage: string = (isString ? message : message.toString()) as string;
             let mobTimer: MobTimer;
-            let mobName
-            if (isJson) {
-                const parsedMessage = JSON.parse(textMessage);
-                mobName = JSON.parse(textMessage).mobName;
-                mobTimer = _processMessage(parsedMessage, mobTimer, webSocket, wss);
-            }
-            let sendMessage = isJson ? JSON.stringify(mobTimer.state) : textMessage
+            let mobName: string; 
+            const parsedMessage = JSON.parse(textMessage);
+            mobName = JSON.parse(textMessage).mobName;
+            mobTimer = _processMessage(parsedMessage, mobTimer, webSocket, wss);
+            let sendMessage = JSON.stringify(mobTimer.state);
             webSocket.send(sendMessage);
         });
     });

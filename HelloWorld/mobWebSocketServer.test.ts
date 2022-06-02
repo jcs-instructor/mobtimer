@@ -24,6 +24,8 @@ describe("WebSocket Server", () => {
         const testMessage = mobMessage.joinMessage("awesome-team");
         let responseMessage: string;
 
+
+
         // Send client message
         client.send(testMessage);
         // Perform assertions on the response
@@ -34,24 +36,4 @@ describe("WebSocket Server", () => {
         expect(parsedMessage).toEqual(new MobTimer("awesome-team").state);
     });
 
-    test("Server echoes the message it receives from client", async () => {
-        // Create test client
-        const client = new WebSocket(`ws://localhost:${port}`);
-        await waitForSocketState(client, client.OPEN);
-
-        const testMessage = "This is a test message";
-        let responseMessage: WebSocket.Data;
-
-        client.on("message", (data) => {
-            responseMessage = data.toString();
-        });
-
-        // Send client message
-        client.send(testMessage);
-        client.close()
-
-        // Perform assertions on the response
-        await waitForSocketState(client, client.CLOSED);
-        expect(responseMessage).toBe(testMessage);
-    });
 });
