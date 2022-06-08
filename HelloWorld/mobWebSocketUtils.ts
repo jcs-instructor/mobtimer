@@ -21,6 +21,7 @@ function _processMessage(parsedMessage: any, socket: MobWebSocket, wss: Server) 
     let mobTimer: MobTimer;
     switch (parsedMessage.action) {
         case "join": {
+            console.log("-- JOINING ---");
             const mobName = parsedMessage.mobName;
             mobTimer = _getOrRegisterMob(mobName);
             socket.mobName = mobName;
@@ -32,6 +33,7 @@ function _processMessage(parsedMessage: any, socket: MobWebSocket, wss: Server) 
             break;
         }
         case "pause": {
+            console.log("-- PAUSING ---");
             mobTimer.pause();
             break;
         }
