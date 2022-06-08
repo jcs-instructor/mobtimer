@@ -36,7 +36,7 @@ describe("WebSocket Server", () => {
 
   test("Pause timer", async () => {
     const testMessage = MobMessages.joinMessage("awesome-team");
-    await sendMessage(testMessage);
+    sendMessage(testMessage);
     const pauseJson = MobMessages.pauseMessage();
     const parsedMessage = await sendMessage(pauseJson);
   });
@@ -52,13 +52,18 @@ describe("WebSocket Server", () => {
 });
 
 async function sendMessage(message: string) {
-  const client = new MobWebTestSocket(`ws://localhost:${port}`);
-  await waitForSocketState(client, client.OPEN);
-  let responseMessage: string;
-  client.send(message);
-  client.close();
-  await waitForSocketState(client, client.CLOSED);
-  responseMessage = client.receivedMessages[0];
-  const parsedMessage = JSON.parse(responseMessage);
-  return parsedMessage;
+    console.log("- 1 -");
+    const client = new MobWebTestSocket(`ws://localhost:${port}`);
+    console.log("- 2 -");
+    await waitForSocketState(client, client.OPEN);
+    console.log("- 3 -");
+    let responseMessage: string;
+    client.send(message);
+    client.close();
+    console.log("- 4 -");
+    await waitForSocketState(client, client.CLOSED);
+    responseMessage = client.receivedMessages[0];
+    console.log("- 5 -");
+    const parsedMessage = JSON.parse(responseMessage);
+    return parsedMessage;
 }
