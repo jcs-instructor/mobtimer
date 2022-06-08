@@ -34,13 +34,19 @@ describe("WebSocket Server", () => {
     expect(parsedMessage2).toEqual(new MobTimer("good-team").state);
   });
 
-//   test("Pause timer", async () => {
-//     const joinMessage = MobMessages.joinMessage("awesome-team");
-//     await sendMessage(joinMessage);
-//     const pauseMessage2 = MobMessages.pauseMessage();
-//     const parsedMessage = await sendMessage(pauseMessage2);
-//     expect(parsedMessage.status).toEqual(Status.Paused);
-//   });
+  test("Pause timer", async () => {
+    const testMessage = MobMessages.joinMessage("awesome-team");
+    await sendMessage(testMessage);
+    const pauseJson = MobMessages.pauseMessage();
+    const parsedMessage = await sendMessage(pauseJson);
+  });
+  //   test("Pause timer", async () => {
+  //     const joinMessage = MobMessages.joinMessage("awesome-team");
+  //     await sendMessage(joinMessage);
+  //     const pauseMessage2 = MobMessages.pauseMessage();
+  //     const parsedMessage = await sendMessage(pauseMessage2);
+  //     expect(parsedMessage.status).toEqual(Status.Paused);
+  //   });
 
   // todo: add tests for update and start messages
 });
