@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketUtils";
 import { waitForSocketState } from "./webSocketUtils";
-import * as mobMessage from "./mobWebMessages";
+import * as MobMessages from "./mobWebMessages";
 import { MobTimer, Status } from "./mobTimer";
 import { MobWebTestSocket } from "./mobWebTestSocket";
 
@@ -17,16 +17,16 @@ describe("WebSocket Server", () => {
   afterAll(() => server.close());
 
   test("Create mob", async () => {
-    const testMessage = mobMessage.joinMessage("awesome-team");
+    const testMessage = MobMessages.joinMessage("awesome-team");
     const parsedMessage = await sendMessage(testMessage);
     expect(parsedMessage).toEqual(new MobTimer("awesome-team").state);
   });
 
   test("Create 2 mobs", async () => {
-    const testMessage = mobMessage.joinMessage("awesome-team");
+    const testMessage = MobMessages.joinMessage("awesome-team");
     const parsedMessage = await sendMessage(testMessage);
 
-    const testMessage2 = mobMessage.joinMessage("good-team");
+    const testMessage2 = MobMessages.joinMessage("good-team");
     const parsedMessage2 = await sendMessage(testMessage2);
 
     // Assertions
@@ -34,13 +34,13 @@ describe("WebSocket Server", () => {
     expect(parsedMessage2).toEqual(new MobTimer("good-team").state);
   });
 
-  test("Pause timer", async () => {
-    const joinMessage = mobMessage.joinMessage("awesome-team");
-    await sendMessage(joinMessage);
-    const pauseMessage = mobMessage.pauseMessage();
-    const parsedMessage = await sendMessage(pauseMessage);
-    expect(parsedMessage.status).toEqual(Status.Paused);
-  });
+//   test("Pause timer", async () => {
+//     const joinMessage = MobMessages.joinMessage("awesome-team");
+//     await sendMessage(joinMessage);
+//     const pauseMessage2 = MobMessages.pauseMessage();
+//     const parsedMessage = await sendMessage(pauseMessage2);
+//     expect(parsedMessage.status).toEqual(Status.Paused);
+//   });
 
   // todo: add tests for update and start messages
 });
