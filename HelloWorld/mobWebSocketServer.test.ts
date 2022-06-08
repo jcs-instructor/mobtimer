@@ -35,7 +35,15 @@ describe("WebSocket Server", () => {
     });
 
 
-    // todo: add tests for update, pause, and start messages
+    test("Pause timer", async () => {
+        const joinMessage = mobMessage.joinMessage("awesome-team");
+        await sendMessage(joinMessage);
+        const pauseMessage = mobMessage.pauseMessage();
+        const parsedMessage = await sendMessage(pauseMessage);
+        expect(parsedMessage.status).toEqual(MobTimer.Pause); // const/enum
+    });
+
+    // todo: add tests for update and start messages
 
 });
 
