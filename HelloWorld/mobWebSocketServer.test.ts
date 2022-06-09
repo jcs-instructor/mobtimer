@@ -37,6 +37,23 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);
   });
 
+  test("Create 2 mobs", async () => {
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
+
+    const socket2 = await openSocket();
+    await socket2.joinMob("good-team");
+    await socket2.send(MobMessages.updateMessage(17));
+
+    await socket.closeSocket();
+    await socket2.closeSocket();
+
+    expect(socket.getLastJson().durationMinutes).toEqual(
+      new MobTimer("awesome-team").state.durationMinutes
+    );
+    expect(socket2.getLastJson().durationMinutes).toEqual(17);
+  });
+
   test("Start timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
