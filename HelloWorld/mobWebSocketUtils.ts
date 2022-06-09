@@ -6,7 +6,7 @@ import { MobTimer } from "./mobTimer";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
-// todo: refactor into 2 methods 
+// todo: refactor into 2 methods
 function _getOrRegisterMob(mobName: string) {
   // get mob
   let mobTimer = _mobs.get(mobName);
@@ -23,10 +23,16 @@ function _processMessage(
   socket: MobWebSocket,
   wss: Server
 ) {
-  const mobName: string = parsedMessage.action === "join" ?
-    parsedMessage.mobName : 
-    socket.mobName;
-  const mobTimer: MobTimer = _getOrRegisterMob(mobName);
+  let mobName: string;
+  let mobTimer: MobTimer;
+
+  if (parsedMessage.action === "join") {
+    mobName = parsedMessage.mobName;
+    mobTimer = _getOrRegisterMob(mobName);
+  } else {
+    mobName = socket.mobName;
+    mobTimer = _getOrRegisterMob(mobName);
+  }
   switch (parsedMessage.action) {
     case "join": {
       socket.mobName = mobName;
