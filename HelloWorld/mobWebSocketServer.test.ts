@@ -37,7 +37,7 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);
   });
 
-  test("Create 2 mobs", async () => {
+  test("Modify one of two mob timers", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
 
