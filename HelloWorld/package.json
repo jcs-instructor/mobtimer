@@ -13,7 +13,8 @@
     "yarn": "^1.22.18"
   },
   "scripts": {
-    "test": "jest --watch --verbose"
+    "test": "jest --watch --verbose",
+    "debug": "node --debug-brk --inspect ./node_modules/jest/bin/jest -i" 
   },
   "dependencies": {
     "@types/ws": "^8.5.3",
