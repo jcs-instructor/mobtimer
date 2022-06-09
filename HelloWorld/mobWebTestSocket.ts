@@ -1,5 +1,5 @@
 import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
-import { waitForSocketState } from "./webSocketUtils";
+import { waitForSocketState } from "./testUtils";
 import { joinMessage } from "./mobWebMessages";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {

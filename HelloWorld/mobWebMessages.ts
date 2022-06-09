@@ -1,3 +1,5 @@
+// TODO: refactor message functions so they are together and related
+
 export function joinMessage(mobName: string) {
   return JSON.stringify({ action: "join", mobName });
 }
@@ -17,3 +19,4 @@ export function startMessage() {
 export function resumeMessage(): any {
   return JSON.stringify({ action: "resume" });
 }
+
