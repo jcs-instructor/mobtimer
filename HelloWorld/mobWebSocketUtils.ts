@@ -39,6 +39,7 @@ function _processMessage(
       break;
     }
     case "start": {
+      mobTimer = _getOrRegisterMob(socket.mobName);
       mobTimer.start();
       break;
     }
