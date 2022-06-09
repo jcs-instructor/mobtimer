@@ -26,11 +26,11 @@ describe("WebSocket Server", () => {
     const { socket, parsedMessage } = await sendMessage(testMessage);
 
     const testMessage2 = MobMessages.joinMessage("good-team");
-    const parsedMessage2 = await sendMessage(testMessage2);
+    const { socket: socket2, parsedMessage: parsedMessage2 } = await sendMessage(testMessage2);
 
     // Assertions
-    expect(parsedMessage).toEqual(new MobTimer("awesome-team").state);
-    expect(parsedMessage2).toEqual(new MobTimer("good-team").state);
+    expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
+    expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);
   });
 
   // test("Pause timer", async () => {
