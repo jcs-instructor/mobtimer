@@ -19,7 +19,7 @@ describe("WebSocket Server", () => {
   test("Create mob", async () => {
     const testMessage = MobMessages.joinMessage("awesome-team");
     const { socket, parsedMessage } = await sendMessage(testMessage);
-    expect(JSON.parse(socket.receivedMessages[0])).toEqual(new MobTimer("awesome-team").state);
+    expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
 
   test("Create 2 mobs", async () => {
