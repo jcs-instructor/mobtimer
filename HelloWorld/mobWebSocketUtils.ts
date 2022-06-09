@@ -6,11 +6,12 @@ import { MobTimer } from "./mobTimer";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
-// todo: refactor into 2 methods
+function _getMob(mobName: string) {
+  return _mobs.get(mobName);
+}
+
 function _getOrRegisterMob(mobName: string) {
-  // get mob
-  let mobTimer = _mobs.get(mobName);
-  // register if not found
+  let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
     _mobs.set(mobName, mobTimer);
@@ -31,7 +32,7 @@ function _processMessage(
     mobTimer = _getOrRegisterMob(mobName);
   } else {
     mobName = socket.mobName;
-    mobTimer = _getOrRegisterMob(mobName);
+    mobTimer = _getMob(mobName);
   }
   switch (parsedMessage.action) {
     case "join": {
