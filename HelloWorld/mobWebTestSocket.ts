@@ -2,8 +2,7 @@ import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   getLastJson(): any {
-    // todo: refactor
-    return JSON.parse(this.receivedMessages[this.receivedMessages.length - 1]);
+    return JSON.parse(this.receivedMessages.at(-1));
   }
 
   receivedMessages: string[] = [];
