@@ -1,11 +1,10 @@
 import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketUtils";
-import { waitForSocketState } from "./webSocketUtils";
 import * as MobMessages from "./mobWebMessages";
 import { MobTimer, Status } from "./mobTimer";
-import { MobWebTestSocket } from "./mobWebTestSocket";
+import { sendMessage } from "./testUtils";
 
-const port = 3000 + Number(process.env.JEST_WORKER_ID);
+export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
   let server;
@@ -24,7 +23,7 @@ describe("WebSocket Server", () => {
 
   test("Create 2 mobs", async () => {
     const testMessage = MobMessages.joinMessage("awesome-team");
-    const parsedMessage = await sendMessage(testMessage);
+    const { socket, parsedMessage } = await sendMessage(testMessage);
 
     const testMessage2 = MobMessages.joinMessage("good-team");
     const parsedMessage2 = await sendMessage(testMessage2);
@@ -51,14 +50,4 @@ describe("WebSocket Server", () => {
   // todo: add tests for update and start messages
 });
 
-async function sendMessage(message: string) {
-  const socket = new MobWebTestSocket(`ws://localhost:${port}`);
-  await waitForSocketState(socket, socket.OPEN);
-  let responseMessage: string;
-  socket.send(message);
-  socket.close();
-  await waitForSocketState(socket, socket.CLOSED);
-  responseMessage = socket.receivedMessages[0];
-  const parsedMessage = JSON.parse(responseMessage);
-  return { socket, parsedMessage };
-}
+
