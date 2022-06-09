@@ -1,6 +1,4 @@
-// TODO: refactor message functions so they are together and related
-
-export function joinMessage(mobName: string) {
+/export function joinMessage(mobName: string) {
   return JSON.stringify({ action: "join", mobName });
 }
 
