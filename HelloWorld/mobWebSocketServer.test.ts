@@ -17,7 +17,8 @@ describe("WebSocket Server", () => {
   afterAll(() => server.close());
 
   test("Create mob", async () => {
-    const socket = await joinMob("awesome-team");
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
     await socket.closeSocket();
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
@@ -56,6 +57,7 @@ describe("WebSocket Server", () => {
 
   // todo: add tests for update and start messages
 });
+// todo: delete
 async function joinMob(mobName: string) {
   const socket = await openSocket();
   const testMessage = MobMessages.joinMessage(mobName);
