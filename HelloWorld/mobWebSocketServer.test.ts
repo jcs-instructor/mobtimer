@@ -16,21 +16,18 @@ describe("WebSocket Server", () => {
   afterAll(() => server.close());
 
   test("Create mob", async () => {
-    const socket = await openSocket();
-    const testMessage = MobMessages.joinMessage("awesome-team");
-    socket.send(testMessage);
+    const socket = await joinMob("awesome-team");
     await closeSocket(socket);
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
 
   test("Create 2 mobs", async () => {
-    const testMessage = MobMessages.joinMessage("awesome-team");
-    const socket = await sendMessage(testMessage);
+    const socket = await joinMob("awesome-team");
+    const socket2 = await joinMob("good-team");
 
-    const testMessage2 = MobMessages.joinMessage("good-team");
-    const socket2 = await sendMessage(testMessage2);
+    await closeSocket(socket);
+    await closeSocket(socket2);
 
-    // Assertions
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
     expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);
   });
@@ -51,3 +48,10 @@ describe("WebSocket Server", () => {
 
   // todo: add tests for update and start messages
 });
+async function joinMob(mobName: string) {
+  const socket = await openSocket();
+  const testMessage = MobMessages.joinMessage(mobName);
+  socket.send(testMessage);
+  return socket;
+}
+
