@@ -2,16 +2,12 @@ import { waitForSocketState } from "./webSocketUtils";
 import { MobWebTestSocket } from "./mobWebTestSocket";
 import { port } from "./mobWebSocketServer.test";
 
+// todo: remove
 export async function sendMessage(message: string) {
   const socket = await openSocket();
   socket.send(message);
   await closeSocket(socket);
   return socket;
-}
-
-export async function closeSocket(socket: MobWebTestSocket) {
-  socket.close();
-  await waitForSocketState(socket, socket.CLOSED);
 }
 
 export async function openSocket() {

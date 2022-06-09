@@ -17,7 +17,7 @@ describe("WebSocket Server", () => {
 
   test("Create mob", async () => {
     const socket = await joinMob("awesome-team");
-    await closeSocket(socket);
+    await socket.closeSocket();
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
 
@@ -25,8 +25,8 @@ describe("WebSocket Server", () => {
     const socket = await joinMob("awesome-team");
     const socket2 = await joinMob("good-team");
 
-    await closeSocket(socket);
-    await closeSocket(socket2);
+    await socket.closeSocket();
+    await socket2.closeSocket();
 
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
     expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);

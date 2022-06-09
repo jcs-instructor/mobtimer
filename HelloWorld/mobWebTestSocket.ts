@@ -1,4 +1,5 @@
 import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
+import { waitForSocketState } from "./webSocketUtils";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   getLastJson(): any {
@@ -12,6 +13,11 @@ class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
     this.on("message", (data) => {
       this.receivedMessages.push(data.toString());
     });
+  }
+
+  async closeSocket() {
+    this.close();
+    await waitForSocketState(this, this.CLOSED);
   }
 }
 
