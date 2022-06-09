@@ -1,4 +1,4 @@
-/export function joinMessage(mobName: string) {
+export function joinMessage(mobName: string) {
   return JSON.stringify({ action: "join", mobName });
 }
 
