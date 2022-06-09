@@ -6,8 +6,11 @@ import { MobTimer } from "./mobTimer";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
+// todo: refactor into 2 methods 
 function _getOrRegisterMob(mobName: string) {
+  // get mob
   let mobTimer = _mobs.get(mobName);
+  // register if not found
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
     _mobs.set(mobName, mobTimer);

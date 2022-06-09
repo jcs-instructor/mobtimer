@@ -3,7 +3,7 @@ import { startMobServer } from "./mobWebSocketUtils";
 import * as MobMessages from "./mobWebMessages";
 import { MobTimer } from "./mobTimer";
 import { Status } from "./status";
-import { closeSocket, openSocket, sendMessage } from "./testUtils";
+import { openSocket } from "./testUtils";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -44,5 +44,7 @@ describe("WebSocket Server", () => {
     await await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Running);
   });
+
+  // todo: test pause & update!!!!!
 
 });
