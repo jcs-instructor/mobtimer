@@ -26,7 +26,7 @@ describe("WebSocket Server", () => {
   test("Create 2 mobs", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    
+
     const socket2 = await openSocket();
     await socket2.joinMob("good-team");
 
@@ -45,6 +45,14 @@ describe("WebSocket Server", () => {
     expect(socket.getLastJson().status).toEqual(Status.Running);
   });
 
-  // todo: test pause & update!!!!!
+  test("Pause timer", async () => {
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
+    await socket.send(MobMessages.startMessage());
+    await socket.send(MobMessages.pauseMessage());
+    await await socket.closeSocket();
+    expect(socket.getLastJson().status).toEqual(Status.Paused);
+  });
 
+  // todo: test pause & update!!!!!
 });
