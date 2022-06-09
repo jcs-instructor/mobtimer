@@ -1,4 +1,3 @@
-import { HttpServer } from "http";
 import * as http from "http";
 import WebSocket, { Server } from "ws";
 import { MobWebSocket } from "./mobWebSocket";
@@ -66,7 +65,7 @@ function _processMessage(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-export function createMobWebSocketServer(server: HttpServer): void {
+export function createMobWebSocketServer(server: http.Server): void {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
@@ -90,7 +89,7 @@ export function createMobWebSocketServer(server: HttpServer): void {
  * @param port Port for the server to listen on
  * @returns The created server
  */
-export function startMobServer(port: number): Promise<HttpServer> {
+export function startMobServer(port: number): Promise<http.Server> {
   const server = http.createServer();
   createMobWebSocketServer(server);
 
