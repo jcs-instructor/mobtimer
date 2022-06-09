@@ -71,6 +71,16 @@ describe("WebSocket Server", () => {
     expect(socket.getLastJson().status).toEqual(Status.Paused);
   });
 
+  test("Resume timer", async () => {
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
+    await socket.send(MobMessages.startMessage());
+    await socket.send(MobMessages.pauseMessage());
+    await socket.send(MobMessages.resumeMessage());
+    await await socket.closeSocket();
+    expect(socket.getLastJson().status).toEqual(Status.Resumed);
+  });
+
   test("Update timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");

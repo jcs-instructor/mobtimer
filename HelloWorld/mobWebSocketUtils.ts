@@ -38,12 +38,16 @@ function _processMessage(
         parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
       break;
     }
+    case "start": {
+      mobTimer.start();
+      break;
+    }
     case "pause": {
       mobTimer.pause();
       break;
     }
-    case "start": {
-      mobTimer.start();
+    case "resume": {
+      mobTimer.resume();
       break;
     }
   }
