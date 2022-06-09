@@ -1,7 +1,8 @@
 import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketUtils";
 import * as MobMessages from "./mobWebMessages";
-import { MobTimer, Status } from "./mobTimer";
+import { MobTimer } from "./mobTimer";
+import { Status } from "./status";
 import { closeSocket, openSocket, sendMessage } from "./testUtils";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
@@ -34,9 +35,11 @@ describe("WebSocket Server", () => {
 
   test("Start timer", async () => {
     const socket = await joinMob("awesome-team");
+    await socket.send(MobMessages.startMessage());
     await await socket.closeSocket();
-    expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
+    expect(socket.getLastJson().status).toEqual(Status.Running);
   });
+
   // test("Pause timer", async () => {
   //   const testMessage = MobMessages.joinMessage("awesome-team");
   //   sendMessage(testMessage);

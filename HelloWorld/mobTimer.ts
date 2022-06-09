@@ -1,11 +1,5 @@
+import { Status } from "./status";
 import { TimeUtil } from "./timeUtil";
-
-export enum Status {
-  Ready = "READY",
-  Running = "RUNNING",
-  Paused = "PAUSED",
-  Resumed = "RESUMED"
-}
 
 export class MobTimer {
 

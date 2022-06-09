@@ -11,3 +11,7 @@ export function updateMessage(durationMinutes: number) {
 export function pauseMessage() {
   return JSON.stringify({ action: "pause" });
 }
+
+export function startMessage() {
+  return JSON.stringify({ action: "start" });
+}

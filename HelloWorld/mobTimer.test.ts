@@ -1,4 +1,5 @@
-import { MobTimer, Status } from './mobTimer'
+import { MobTimer } from './mobTimer'
+import { Status } from "./status";
 import { MockCurrentTime } from './mockCurrentTime'
 
 test('Default duration is 5 minutes', () => {

@@ -12,9 +12,7 @@ export function waitForSocketState(
 ): Promise<void> {
   return new Promise(function (resolve) {
     setTimeout(function () {
-      console.log("checking ", state);
       if (socket.readyState === state) {
-        console.log("resolved");
         resolve();
       } else {
         waitForSocketState(socket, state).then(resolve);
