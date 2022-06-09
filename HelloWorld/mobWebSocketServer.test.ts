@@ -2,7 +2,7 @@ import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketUtils";
 import * as MobMessages from "./mobWebMessages";
 import { MobTimer, Status } from "./mobTimer";
-import { sendMessage } from "./testUtils";
+import { closeSocket, openSocket, sendMessage } from "./testUtils";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -16,8 +16,10 @@ describe("WebSocket Server", () => {
   afterAll(() => server.close());
 
   test("Create mob", async () => {
+    const socket = await openSocket();
     const testMessage = MobMessages.joinMessage("awesome-team");
-    const socket = await sendMessage(testMessage);
+    socket.send(testMessage);
+    await closeSocket(socket);
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
 
@@ -49,5 +51,3 @@ describe("WebSocket Server", () => {
 
   // todo: add tests for update and start messages
 });
-
-

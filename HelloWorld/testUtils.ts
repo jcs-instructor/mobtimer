@@ -9,14 +9,13 @@ export async function sendMessage(message: string) {
   return socket;
 }
 
-async function closeSocket(socket: MobWebTestSocket) {
+export async function closeSocket(socket: MobWebTestSocket) {
   socket.close();
   await waitForSocketState(socket, socket.CLOSED);
 }
 
-async function openSocket() {
+export async function openSocket() {
   const socket = new MobWebTestSocket(`ws://localhost:${port}`);
   await waitForSocketState(socket, socket.OPEN);
   return socket;
 }
-
