@@ -54,5 +54,12 @@ describe("WebSocket Server", () => {
     expect(socket.getLastJson().status).toEqual(Status.Paused);
   });
 
-  // todo: test pause & update!!!!!
+  test("Update timer", async () => {
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
+    await socket.send(MobMessages.startMessage());
+    await socket.send(MobMessages.updateMessage(40));
+    await await socket.closeSocket();
+    expect(socket.getLastJson().durationMinutes).toEqual(40);
+  });
 });
