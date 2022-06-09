@@ -17,16 +17,16 @@ describe("WebSocket Server", () => {
 
   test("Create mob", async () => {
     const testMessage = MobMessages.joinMessage("awesome-team");
-    const { socket, parsedMessage } = await sendMessage(testMessage);
+    const socket = await sendMessage(testMessage);
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
 
   test("Create 2 mobs", async () => {
     const testMessage = MobMessages.joinMessage("awesome-team");
-    const { socket, parsedMessage } = await sendMessage(testMessage);
+    const socket = await sendMessage(testMessage);
 
     const testMessage2 = MobMessages.joinMessage("good-team");
-    const { socket: socket2, parsedMessage: parsedMessage2 } = await sendMessage(testMessage2);
+    const socket2 = await sendMessage(testMessage2);
 
     // Assertions
     expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
