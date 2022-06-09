@@ -20,11 +20,12 @@ function _processMessage(
   socket: MobWebSocket,
   wss: Server
 ) {
-  let mobTimer: MobTimer;
+  const mobName: string = parsedMessage.action === "join" ?
+    parsedMessage.mobName : 
+    socket.mobName;
+  const mobTimer: MobTimer = _getOrRegisterMob(mobName);
   switch (parsedMessage.action) {
     case "join": {
-      const mobName = parsedMessage.mobName;
-      mobTimer = _getOrRegisterMob(mobName);
       socket.mobName = mobName;
       break;
     }
@@ -39,7 +40,6 @@ function _processMessage(
       break;
     }
     case "start": {
-      mobTimer = _getOrRegisterMob(socket.mobName);
       mobTimer.start();
       break;
     }
