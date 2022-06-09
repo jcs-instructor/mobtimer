@@ -32,6 +32,11 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);
   });
 
+  test("Start timer", async () => {
+    const socket = await joinMob("awesome-team");
+    await await socket.closeSocket();
+    expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
+  });
   // test("Pause timer", async () => {
   //   const testMessage = MobMessages.joinMessage("awesome-team");
   //   sendMessage(testMessage);
@@ -54,4 +59,3 @@ async function joinMob(mobName: string) {
   socket.send(testMessage);
   return socket;
 }
-
