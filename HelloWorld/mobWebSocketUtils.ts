@@ -7,10 +7,8 @@ import { MobTimer } from "./mobTimer";
 const _mobs: Map<string, MobTimer> = new Map();
 
 function _getOrRegisterMob(mobName: string) {
-  console.log("debug", _mobs);
   let mobTimer = _mobs.get(mobName);
   if (!mobTimer) {
-    console.log("Registering debug");
     mobTimer = new MobTimer(mobName);
     _mobs.set(mobName, mobTimer);
   }
@@ -25,7 +23,6 @@ function _processMessage(
   let mobTimer: MobTimer;
   switch (parsedMessage.action) {
     case "join": {
-      console.log("-- JOINING ---");
       const mobName = parsedMessage.mobName;
       mobTimer = _getOrRegisterMob(mobName);
       socket.mobName = mobName;
@@ -38,7 +35,6 @@ function _processMessage(
       break;
     }
     case "pause": {
-      console.log("-- PAUSING ---");
       mobTimer.pause();
       break;
     }
