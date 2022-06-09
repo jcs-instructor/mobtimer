@@ -1,3 +1,4 @@
+// todo: make consistent either all classes or modules (when all static)
 export class TimeUtil {
   
   static getNowInSeconds(): number {
