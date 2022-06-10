@@ -1,14 +1,17 @@
-**Practices to Try**:
-- **5/25/2022:** Each person gets approx. 1 hour to be the leader on what we work on
----
-
 **Practices to Focus On**:
+- **Full TDD w/explicit "Refactor" convo & impl. every time**
+- **Retro in middle (so can impl. immediately rather than wait a week)**
 - **Phrases**:
   - "Got it" (ELMO)
   - "Hold on" (Navigator wants floor)
 - **Remember to give credit to co-author**: 
 `Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com>` 
 `Co-authored-by: Joel Silberman <42779942+jcs-instructor@users.noreply.github.com>`
+
+---
+
+**Practices to Try**:
+- **5/25/2022:** Each person gets approx. 1 hour to be the leader on what we work on
 
 ---
 
