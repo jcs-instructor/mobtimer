@@ -90,4 +90,13 @@ describe("WebSocket Server", () => {
     await await socket.closeSocket();
     expect(socket.getLastJson().durationMinutes).toEqual(40);
   });
+
+  test("Start timer and elapse time sends message to all", async () => {
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
+    await socket.send(MobMessages.startMessage());
+    await socket.send(MobMessages.updateMessage(1 / 60));
+    await await socket.closeSocket();
+    expect(socket.getLastJson().status).toEqual(Status.Ready);
+  });
 });
