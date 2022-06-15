@@ -1,6 +1,9 @@
 import { Status } from "./status";
 import { TimeUtil } from "./timeUtils";
 
+function delaySeconds(seconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+}
 export class MobTimer {
   private _mobName = "";
   private _durationMinutes = 5;
