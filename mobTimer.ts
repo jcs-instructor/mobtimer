@@ -2,17 +2,16 @@ import { Status } from "./status";
 import { TimeUtil } from "./timeUtils";
 
 export class MobTimer {
-
   private _mobName = "";
   private _durationMinutes = 5;
-  private _whenStartedInSeconds: number;
+  private _whenStartedInSeconds = 0;
   private _status: Status = Status.Ready;
-  private _whenPausedInSeconds: number;
+  private _whenPausedInSeconds = 0;
   private _nowInSecondsFunc = TimeUtil.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
 
   constructor(mobName: string = "") {
-    this._mobName = mobName
+    this._mobName = mobName;
   }
   start() {
     this._status = Status.Running;
@@ -32,7 +31,7 @@ export class MobTimer {
     this._status = Status.Paused;
     this._whenPausedInSeconds = this._nowInSecondsFunc();
     this._previouslyAccumulatedElapsedSeconds +=
-      (this._whenPausedInSeconds - this._whenStartedInSeconds);
+      this._whenPausedInSeconds - this._whenStartedInSeconds;
   }
   public get state() {
     return {
@@ -66,7 +65,10 @@ export class MobTimer {
     } else if (this._status == Status.Paused) {
       return this._previouslyAccumulatedElapsedSeconds;
     } else {
-      return this._previouslyAccumulatedElapsedSeconds + (this._nowInSecondsFunc() - this._whenStartedInSeconds);
+      return (
+        this._previouslyAccumulatedElapsedSeconds +
+        (this._nowInSecondsFunc() - this._whenStartedInSeconds)
+      );
     }
   }
 
@@ -76,5 +78,4 @@ export class MobTimer {
   public set durationMinutes(duration: number) {
     this._durationMinutes = duration;
   }
-
 }

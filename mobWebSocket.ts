@@ -1,11 +1,11 @@
 import WebSocket from "ws";
 export interface WebSocketInterface extends WebSocket {}
 class MobWebSocket extends WebSocket implements WebSocketInterface {
-  constructor(url) {
+  constructor(url: string) {
     super(url);
   }
 
-  private _mobName: string;
+  private _mobName = "";
   public get mobName(): string {
     return this._mobName;
   }

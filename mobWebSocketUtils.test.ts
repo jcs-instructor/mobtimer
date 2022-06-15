@@ -4,11 +4,12 @@ import * as MobMessages from "./mobWebMessages";
 import { MobTimer } from "./mobTimer";
 import { Status } from "./status";
 import { openSocket } from "./testUtils";
+import * as http from "http";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
-  let server;
+  let server: http.Server;
 
   beforeAll(async () => {
     server = await startMobServer(port);
