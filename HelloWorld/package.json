@@ -13,9 +13,11 @@
     "yarn": "^1.22.18"
   },
   "scripts": {
-    "test": "jest --watch --verbose"
+    "test": "jest --watch --verbose",
+    "debug": "node --debug-brk --inspect ./node_modules/jest/bin/jest -i" 
   },
   "dependencies": {
+    "@types/ws": "^8.5.3",
     "async-lock": "^1.3.1",
     "jest-websocket-mock": "^2.3.0",
     "ws": "^8.6.0"

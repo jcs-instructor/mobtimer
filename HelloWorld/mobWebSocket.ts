@@ -1,29 +1,17 @@
-import { WebSocket } from 'ws';
-export class MobWebSocket {
+import WebSocket from "ws";
+export interface WebSocketInterface extends WebSocket {}
+class MobWebSocket extends WebSocket implements WebSocketInterface {
+  constructor(url) {
+    super(url);
+  }
 
-    joinMob(mobName: string) {
-        this._socket.send(JSON.stringify({ action: "join", mobName: mobName }));
-    }
-
-    private _socket: WebSocket;
-    constructor(socket: WebSocket) {
-        this._socket = socket;
-    }
-
-    // todo: change to loop (not recursion)
-    // todo: maybe rename to waitToClose
-    waitToClose() {
-        const socket = this._socket;
-        const thisInstance = this;
-        return new Promise<void>(function (resolve) {
-            setTimeout(function () {
-                socket.close();
-                if (socket.readyState === socket.CLOSED) {
-                    resolve();
-                } else {
-                    thisInstance.waitToClose().then(resolve);
-                }
-            }, 5);
-        });
-    };
+  private _mobName: string;
+  public get mobName(): string {
+    return this._mobName;
+  }
+  public set mobName(value: string) {
+    this._mobName = value;
+  }
 }
+
+export { MobWebSocket };
