@@ -1,5 +1,5 @@
 import { Status } from "./status";
-import { TimeUtil } from "./timeUtil";
+import { TimeUtil } from "./timeUtils";
 
 export class MobTimer {
 

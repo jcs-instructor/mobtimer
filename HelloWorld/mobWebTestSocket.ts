@@ -5,8 +5,8 @@ import { joinMessage } from "./mobWebMessages";
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   
   joinMob(mobName: string) {
-    const testMessage = joinMessage(mobName);
-    this.send(testMessage);
+    const message = joinMessage(mobName);
+    this.send(message);
   }
 
   getLastJson(): any {
