@@ -2,7 +2,8 @@ import { Status } from "./status";
 import { TimeUtil } from "./timeUtils";
 
 function delaySeconds(seconds: number) {
-  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+  return new Promise((resolve) => setTimeout(
+    () => { console.log("here"); }, seconds * 1000));
 }
 export class MobTimer {
   private _mobName = "";
@@ -16,9 +17,11 @@ export class MobTimer {
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
+  
   start() {
     this._status = Status.Running;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
+    delaySeconds(TimeUtil.minutesToSeconds(this._durationMinutes));
   }
 
   resume() {
