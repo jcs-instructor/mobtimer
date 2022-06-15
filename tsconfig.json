@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "outDir": "out",
-    "sourceMap": true
+    "sourceMap": true,
+    "strict": true
   }
 }

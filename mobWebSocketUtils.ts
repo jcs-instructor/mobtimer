@@ -5,7 +5,7 @@ import { MobTimer } from "./mobTimer";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
-function _getMob(mobName: string) {
+function _getMob(mobName: string): MobTimer | undefined {
   return _mobs.get(mobName);
 }
 
@@ -24,7 +24,7 @@ function _processMessage(
   wss: Server
 ) {
   let mobName: string;
-  let mobTimer: MobTimer;
+  let mobTimer: MobTimer | undefined;
 
   if (parsedMessage.action === "join") {
     mobName = parsedMessage.mobName;
@@ -33,6 +33,11 @@ function _processMessage(
     mobName = socket.mobName;
     mobTimer = _getMob(mobName);
   }
+
+  if (!mobTimer) {
+    return;
+  }
+
   switch (parsedMessage.action) {
     case "join": {
       socket.mobName = mobName;
@@ -78,6 +83,9 @@ export function createMobWebSocketServer(server: http.Server): void {
       const parsedMessage = JSON.parse(textMessage);
       mobName = JSON.parse(textMessage).mobName;
       let mobTimer = _processMessage(parsedMessage, webSocket, wss);
+      if (!mobTimer) {
+        return;
+      }
       let sendMessage = JSON.stringify(mobTimer.state);
       webSocket.send(sendMessage);
     });
