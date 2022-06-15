@@ -59,7 +59,7 @@ describe("WebSocket Server", () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
     await socket.send(MobMessages.startMessage());
-    await await socket.closeSocket();
+    await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Running);
   });
 
@@ -68,7 +68,7 @@ describe("WebSocket Server", () => {
     await socket.joinMob("awesome-team");
     await socket.send(MobMessages.startMessage());
     await socket.send(MobMessages.pauseMessage());
-    await await socket.closeSocket();
+    await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Paused);
   });
 
@@ -78,7 +78,7 @@ describe("WebSocket Server", () => {
     await socket.send(MobMessages.startMessage());
     await socket.send(MobMessages.pauseMessage());
     await socket.send(MobMessages.resumeMessage());
-    await await socket.closeSocket();
+    await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Resumed);
   });
 
@@ -87,7 +87,7 @@ describe("WebSocket Server", () => {
     await socket.joinMob("awesome-team");
     await socket.send(MobMessages.startMessage());
     await socket.send(MobMessages.updateMessage(40));
-    await await socket.closeSocket();
+    await socket.closeSocket();
     expect(socket.getLastJson().durationMinutes).toEqual(40);
   });
 
@@ -96,7 +96,14 @@ describe("WebSocket Server", () => {
     await socket.joinMob("awesome-team");
     await socket.send(MobMessages.startMessage());
     await socket.send(MobMessages.updateMessage(1 / 60));
-    await await socket.closeSocket();
+    await delaySeconds(1);
+    await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Ready);
   });
+
+  // todo: refactor - this is a duplicate from another test file (When we moved it to a separate file we got a 5000 ms timeout)
+  function delaySeconds(seconds: number) {
+    return new Promise( resolve => setTimeout(resolve, seconds*1000) );
+  }  
+
 });
