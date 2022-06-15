@@ -10,12 +10,12 @@ class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   }
 
   getLastJson(): any {
-    return JSON.parse(this.receivedMessages.at(-1));
+    return JSON.parse(this.receivedMessages.at(-1) || "");
   }
 
   receivedMessages: string[] = [];
 
-  constructor(url) {
+  constructor(url: string) {
     super(url);
     this.on("message", (data) => {
       this.receivedMessages.push(data.toString());
