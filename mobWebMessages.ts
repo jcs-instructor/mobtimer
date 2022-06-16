@@ -3,32 +3,34 @@ export interface MobTimerRequest {
 }
 
 export type JoinRequest = {
-  action: string;
+  action: "join";
   mobName: string;
 };
 
 export function joinMessage(mobName: string) {
-  return JSON.stringify({ action: "join", mobName });
+  return JSON.stringify({ action: "join", mobName } as JoinRequest);
 }
 
 export type UpdateRequest = {
-  action: string;
+  action: "update";
   value: { durationMinutes?: number };
 };
 
 export function updateMessage(durationMinutes: number) {
-  return JSON.stringify({ action: "update", value: { durationMinutes } });
+  return JSON.stringify({
+    action: "update",
+    value: { durationMinutes },
+  } as UpdateRequest);
 }
 
 export function pauseMessage() {
-  return JSON.stringify({ action: "pause" });
+  return JSON.stringify({ action: "pause" } as MobTimerRequest);
 }
 
 export function startMessage() {
-  return JSON.stringify({ action: "start" });
+  return JSON.stringify({ action: "start" } as MobTimerRequest);
 }
 
 export function resumeMessage() {
-  return JSON.stringify({ action: "resume" });
+  return JSON.stringify({ action: "resume" } as MobTimerRequest);
 }
-
