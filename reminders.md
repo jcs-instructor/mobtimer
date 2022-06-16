@@ -1,5 +1,7 @@
 **Practices to Focus On**:
-- **Full TDD w/explicit "Refactor" convo & impl. every time**
+- **Full TDD w/explicit "Refactor" convo & impl. every time, including:**
+  - No `any` types
+  - ... (add more as we go)
 - **Retro in middle (so can impl. immediately rather than wait a week)**
 - **Phrases**:
   - "Got it" (ELMO)
