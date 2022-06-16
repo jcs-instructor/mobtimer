@@ -88,7 +88,7 @@ function _processMessage(
   return mobTimer;
 }
 
-export function broadcast(wss: WebSocket.Server, mobName: string, message: string) { // todo: replace any with correct type
+export function broadcast(wss: WebSocket.Server, mobName: string, message: string) { 
   wss.clients.forEach((socket: any) => { // todo: replace any with correct type
     if (socket.mobName === mobName) {
       socket.send(message);
