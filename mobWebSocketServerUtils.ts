@@ -93,12 +93,12 @@ function _processRequest(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
 export function broadcast(
   wss: WebSocket.Server,
   mobName: string,
-  messageToClient: string
+  messageToClients: string
 ) {
   wss.clients.forEach((socketClient: WebSocket) => {
     const mobSocketClient = socketClient as MobWebSocket;
     if (mobSocketClient.mobName === mobName) {
-      mobSocketClient.send(messageToClient);
+      mobSocketClient.send(messageToClients);
     }
   });
 }
