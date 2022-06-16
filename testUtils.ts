@@ -1,5 +1,5 @@
 import { MobWebTestSocket } from "./mobWebTestSocket";
-import { port } from "./mobWebSocketUtils.test";
+import { port } from "./mobWebSocketServerUtils.test";
 import { WebSocketInterface } from "./mobWebSocket";
 
 export async function openSocket() {

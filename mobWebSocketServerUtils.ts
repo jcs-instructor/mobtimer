@@ -16,6 +16,7 @@ function delaySeconds(
     setTimeout(() => {
       if (mobTimer.status === Status.Ready) {
         //server. //server.sendReadyMessage();
+        // server.sendReadyMessage();
       }
 
       console.log("here");
@@ -67,10 +68,11 @@ function _processMessage(
     }
     case "start": {
       mobTimer.start();
-      delaySeconds(
-        TimeUtils.minutesToSeconds(mobTimer.durationMinutes),
-        mobTimer
-      );
+      // delaySeconds(
+      //   TimeUtils.minutesToSeconds(mobTimer.durationMinutes),
+      //   mobTimer,
+      //   wss
+      // );
       break;
     }
     case "pause": {
@@ -82,7 +84,16 @@ function _processMessage(
       break;
     }
   }
+
   return mobTimer;
+}
+
+export function broadcast(wss: WebSocket.Server, mobName: string, message: string) { // todo: replace any with correct type
+  wss.clients.forEach((socket: any) => { // todo: replace any with correct type
+    if (socket.mobName === mobName) {
+      socket.send(message);
+    }      
+  });
 }
 
 /**
@@ -107,7 +118,7 @@ export function createMobWebSocketServer(server: http.Server): any { // todo: ch
         return;
       }
       let response = JSON.stringify(mobTimer.state);
-      webSocket.send(response);
+      broadcast(wss, mobTimer.state.mobName, response); // todo consider moving mobName up a level
     });
   });
   return wss;
