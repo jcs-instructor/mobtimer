@@ -1,3 +1,11 @@
+import { Status } from "./status";
+
+export type MobTimerResponse = {
+  mobName: string;
+  status: Status;
+  durationMinutes: number;
+}
+
 export type MobTimerRequest = SimpleMobTimerRequest | JoinRequest | UpdateRequest;
 
 export type SimpleMobTimerRequest = {

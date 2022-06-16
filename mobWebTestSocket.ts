@@ -1,6 +1,6 @@
 import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 import { waitForSocketState } from "./testUtils";
-import { joinMessage, MobTimerRequest } from "./mobWebMessages";
+import { joinMessage, MobTimerRequest, MobTimerResponse } from "./mobWebMessages";
 import { MobTimer } from "./mobTimer";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
@@ -9,7 +9,7 @@ class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
     this.send(message);
   }
 
-  getLastJson() {
+  getLastJson(): MobTimerResponse {
     return JSON.parse(this.receivedMessages.at(-1) || "");
   }
 
