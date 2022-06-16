@@ -1,3 +1,4 @@
+import { MobTimerResponse } from "./mobWebMessages";
 import { Status } from "./status";
 import { TimeUtil } from "./timeUtils";
 
@@ -43,12 +44,13 @@ export class MobTimer {
     this._previouslyAccumulatedElapsedSeconds +=
       this._whenPausedInSeconds - this._whenStartedInSeconds;
   }
+
   public get state() {
     return {
       mobName: this._mobName,
       status: this._status,
       durationMinutes: this._durationMinutes,
-    };
+    } as MobTimerResponse;
   }
 
   public get status(): Status {

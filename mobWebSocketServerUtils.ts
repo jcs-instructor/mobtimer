@@ -108,7 +108,7 @@ export function broadcast(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-export function createMobWebSocketServer(server: http.Server): any {
+export function createMobWebSocketServer(server: http.Server): void {
   // todo: change to specific type... http.Server ???
   const wss = new WebSocket.Server({ server });
 
@@ -124,7 +124,6 @@ export function createMobWebSocketServer(server: http.Server): any {
       broadcast(wss, mobTimer.state.mobName, response); // todo consider moving mobName up a level
     });
   });
-  return wss;
 }
 
 function requestToString(request: WebSocket.RawData) {
