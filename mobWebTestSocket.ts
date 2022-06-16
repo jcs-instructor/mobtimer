@@ -6,20 +6,21 @@ import { MobTimer } from "./mobTimer";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   joinMob(mobName: string) {
-    const message = joinRequest(mobName);
-    this.send(message);
+    // todo: consider renaming request as messageFromClient and response as messageToClient
+    const request = joinRequest(mobName);
+    this.send(request);
   }
 
   getLastJson(): MobTimerResponse {
-    return JSON.parse(this.receivedMessages.at(-1) || "");
+    return JSON.parse(this.receivedResponses.at(-1) || "");
   }
 
-  receivedMessages: string[] = [];
+  receivedResponses: string[] = [];
 
   constructor(url: string) {
     super(url);
     this.on("message", (data) => {
-      this.receivedMessages.push(data.toString());
+      this.receivedResponses.push(data.toString());
     });
   }
 

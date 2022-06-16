@@ -1,6 +1,6 @@
 import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketServerUtils";
-import * as MobMessages from "./mobTimerRequests";
+import * as MobTimerRequests from "./mobTimerRequests";
 import { MobTimer } from "./mobTimer";
 import { Status } from "./status";
 import { openSocket } from "./testUtils";
@@ -44,7 +44,7 @@ describe("WebSocket Server", () => {
 
     const socket2 = await openSocket();
     await socket2.joinMob("good-team");
-    await socket2.send(MobMessages.updateRequest(17));
+    await socket2.send(MobTimerRequests.updateRequest(17));
 
     await socket.closeSocket();
     await socket2.closeSocket();
@@ -55,9 +55,8 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson().durationMinutes).toEqual(17);
   });
 
-  // todo finish refactoring after last red-green (i.e., see todos for 'any' variables etc.)
   // todo check other branch(es) for tests that might not have been copied into this branch
-  // todo rename message variables to request or response 
+  // todo: consider renaming request as messageFromClient and response as messageToClient
   // todo refactor mobWebSocketServerUtils into a class (probably)
   // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
@@ -66,7 +65,7 @@ describe("WebSocket Server", () => {
 
     const socket2 = await openSocket();
     await socket2.joinMob("awesome-team");
-    await socket2.send(MobMessages.updateRequest(17));
+    await socket2.send(MobTimerRequests.updateRequest(17));
 
     await socket.closeSocket();
     await socket2.closeSocket();
@@ -78,7 +77,7 @@ describe("WebSocket Server", () => {
   test("Start timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startRequest());
+    await socket.send(MobTimerRequests.startRequest());
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Running);
   });
@@ -86,8 +85,8 @@ describe("WebSocket Server", () => {
   test("Pause timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startRequest());
-    await socket.send(MobMessages.pauseRequest());
+    await socket.send(MobTimerRequests.startRequest());
+    await socket.send(MobTimerRequests.pauseRequest());
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Paused);
   });
@@ -95,9 +94,9 @@ describe("WebSocket Server", () => {
   test("Resume timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startRequest());
-    await socket.send(MobMessages.pauseRequest());
-    await socket.send(MobMessages.resumeRequest());
+    await socket.send(MobTimerRequests.startRequest());
+    await socket.send(MobTimerRequests.pauseRequest());
+    await socket.send(MobTimerRequests.resumeRequest());
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Resumed);
   });
@@ -105,8 +104,8 @@ describe("WebSocket Server", () => {
   test("Update timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startRequest());
-    await socket.send(MobMessages.updateRequest(40));
+    await socket.send(MobTimerRequests.startRequest());
+    await socket.send(MobTimerRequests.updateRequest(40));
     await socket.closeSocket();
     expect(socket.getLastJson().durationMinutes).toEqual(40);
   });
@@ -114,8 +113,8 @@ describe("WebSocket Server", () => {
   test.skip("Start timer and elapse time sends message to all", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startRequest());
-    await socket.send(MobMessages.updateRequest(1 / 60));
+    await socket.send(MobTimerRequests.startRequest());
+    await socket.send(MobTimerRequests.updateRequest(1 / 60));
     await delaySeconds(1.5);
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Ready);

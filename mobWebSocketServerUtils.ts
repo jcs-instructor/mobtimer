@@ -39,7 +39,7 @@ function _getOrRegisterMob(mobName: string) {
   return mobTimer;
 }
 
-function _processMessage(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
+function _processRequest(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
@@ -93,12 +93,12 @@ function _processMessage(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
 export function broadcast(
   wss: WebSocket.Server,
   mobName: string,
-  message: string
+  messageToClient: string
 ) {
-  wss.clients.forEach((socket: WebSocket) => {
-    const mobSocket = socket as MobWebSocket;
-    if (mobSocket.mobName === mobName) {
-      socket.send(message);
+  wss.clients.forEach((socketClient: WebSocket) => {
+    const mobSocketClient = socketClient as MobWebSocket;
+    if (mobSocketClient.mobName === mobName) {
+      mobSocketClient.send(messageToClient);
     }
   });
 }
@@ -116,7 +116,7 @@ export function createMobWebSocketServer(server: http.Server): void {
     webSocket.on("message", function (request) {
       let requestString: string = requestToString(request);
       const parsedRequest = JSON.parse(requestString) as MobTimerRequest;
-      let mobTimer = _processMessage(parsedRequest, webSocket);
+      let mobTimer = _processRequest(parsedRequest, webSocket);
       if (!mobTimer) {
         return;
       }
