@@ -4,7 +4,11 @@ import { MobWebSocket } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 import { TimeUtil as TimeUtils } from "./timeUtils";
 import { Status } from "./status";
-import { MobTimerRequest, JoinRequest, UpdateRequest } from "./mobTimerRequests";
+import {
+  MobTimerRequest,
+  JoinRequest,
+  UpdateRequest,
+} from "./mobTimerRequests";
 
 // to do - extract things related to _mobs or wss to a class in a separate file
 
@@ -109,7 +113,6 @@ export function broadcast(
  * @param server The http server from which to create the WebSocket server
  */
 export function createMobWebSocketServer(server: http.Server): void {
-  // todo: change to specific type... http.Server ???
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {

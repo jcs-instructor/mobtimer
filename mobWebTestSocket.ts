@@ -6,7 +6,6 @@ import { MobTimer } from "./mobTimer";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   joinMob(mobName: string) {
-    // todo: consider renaming request as messageFromClient and response as messageToClient
     const request = joinRequest(mobName);
     this.send(request);
   }
