@@ -6,8 +6,9 @@ import { TimeUtil as TimeUtils } from "./timeUtils";
 import { Status } from "./status";
 import { MobTimerRequest, JoinRequest, UpdateRequest } from "./mobWebMessages";
 
-const _mobs: Map<string, MobTimer> = new Map();
+// to do - extract things related to _mobs or wss to a class in a separate file
 
+const _mobs: Map<string, MobTimer> = new Map();
 function delaySeconds(
   seconds: number,
   mobTimer: MobTimer,
@@ -66,7 +67,8 @@ function _processMessage(
     case "update": {
       // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
       const updateRequest = parsedMessage as UpdateRequest;
-      mobTimer.durationMinutes = updateRequest.value.durationMinutes || mobTimer.durationMinutes;
+      mobTimer.durationMinutes =
+        updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;
     }
     case "start": {
@@ -96,9 +98,9 @@ export function broadcast(
   mobName: string,
   message: string
 ) {
-  wss.clients.forEach((socket: any) => {
-    // todo: replace any with correct type
-    if (socket.mobName === mobName) {
+  wss.clients.forEach((socket: WebSocket) => {
+    const mobSocket = socket as MobWebSocket;
+    if (mobSocket.mobName === mobName) {
       socket.send(message);
     }
   });
