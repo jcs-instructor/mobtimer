@@ -4,6 +4,7 @@ import { MobWebSocket } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 import { TimeUtil as TimeUtils } from "./timeUtils";
 import { Status } from "./status";
+import { MobTimerRequest, JoinRequest, UpdateRequest } from "./mobWebMessages";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
@@ -36,13 +37,6 @@ function _getOrRegisterMob(mobName: string) {
   }
   return mobTimer;
 }
-interface MobTimerRequest {
-  action: string;
-}
-type JoinRequest = {
-  action: string;
-  mobName: string;
-};
 
 function _processMessage(
   parsedMessage: MobTimerRequest | JoinRequest,
@@ -52,8 +46,8 @@ function _processMessage(
   let mobTimer: MobTimer | undefined;
 
   if (parsedMessage.action === "join") {
-    const joinMessage = parsedMessage as JoinRequest;
-    mobName = joinMessage.mobName;
+    const joinRequest = parsedMessage as JoinRequest;
+    mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterMob(mobName);
   } else {
     mobName = socket.mobName;
@@ -71,8 +65,8 @@ function _processMessage(
     }
     case "update": {
       // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
-      mobTimer.durationMinutes =
-        parsedMessage.value.durationMinutes || mobTimer.durationMinutes;
+      const updateRequest = parsedMessage as UpdateRequest;
+      mobTimer.durationMinutes = updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;
     }
     case "start": {
