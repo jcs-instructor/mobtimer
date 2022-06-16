@@ -15,7 +15,7 @@ function delaySeconds(
   return new Promise((resolve) =>
     setTimeout(() => {
       if (mobTimer.status === Status.Ready) {
-        server.sendReadyMessage();
+        // server.sendReadyMessage();
       }
 
       console.log("here");
@@ -71,7 +71,8 @@ function _processMessage(
       mobTimer.start();
       delaySeconds(
         TimeUtils.minutesToSeconds(mobTimer.durationMinutes),
-        mobTimer
+        mobTimer,
+        wss
       );
       break;
     }

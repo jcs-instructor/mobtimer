@@ -55,6 +55,21 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson().durationMinutes).toEqual(17);
   });
 
+  test("Modify one shared mob timer", async () => {
+    const socket = await openSocket();
+    await socket.joinMob("awesome-team");
+
+    const socket2 = await openSocket();
+    await socket2.joinMob("awesome-team");
+    await socket2.send(MobMessages.updateMessage(17));
+
+    await socket.closeSocket();
+    await socket2.closeSocket();
+
+    expect(socket.getLastJson().durationMinutes).toEqual(17);
+    expect(socket2.getLastJson().durationMinutes).toEqual(17);
+  });
+
   test("Start timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
@@ -91,7 +106,7 @@ describe("WebSocket Server", () => {
     expect(socket.getLastJson().durationMinutes).toEqual(40);
   });
 
-  test("Start timer and elapse time sends message to all", async () => {
+  test.skip("Start timer and elapse time sends message to all", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
     await socket.send(MobMessages.startMessage());
