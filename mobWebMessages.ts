@@ -1,5 +1,7 @@
-export interface MobTimerRequest {
-  action: string;
+export type MobTimerRequest = SimpleMobTimerRequest | JoinRequest | UpdateRequest;
+
+export type SimpleMobTimerRequest = {
+  action: "pause" | "start" | "resume";
 }
 
 export type JoinRequest = {
@@ -24,13 +26,13 @@ export function updateMessage(durationMinutes: number) {
 }
 
 export function pauseMessage() {
-  return JSON.stringify({ action: "pause" } as MobTimerRequest);
+  return JSON.stringify({ action: "pause" } as SimpleMobTimerRequest);
 }
 
 export function startMessage() {
-  return JSON.stringify({ action: "start" } as MobTimerRequest);
+  return JSON.stringify({ action: "start" } as SimpleMobTimerRequest);
 }
 
 export function resumeMessage() {
-  return JSON.stringify({ action: "resume" } as MobTimerRequest);
+  return JSON.stringify({ action: "resume" } as SimpleMobTimerRequest);
 }
