@@ -15,7 +15,7 @@ function delaySeconds(
   return new Promise((resolve) =>
     setTimeout(() => {
       if (mobTimer.status === Status.Ready) {
-        server.sendReadyMessage();
+        //server. //server.sendReadyMessage();
       }
 
       console.log("here");
@@ -38,9 +38,7 @@ function _getOrRegisterMob(mobName: string) {
 
 function _processMessage(
   parsedMessage: any,
-  socket: MobWebSocket,
-  wss: Server
-) {
+  socket: MobWebSocket) {
   let mobName: string;
   let mobTimer: MobTimer | undefined;
 
@@ -92,26 +90,27 @@ function _processMessage(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-export function createMobWebSocketServer(server: http.Server): void {
+export function createMobWebSocketServer(server: http.Server): any { // todo: change to specific type... http.Server ???
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
     webSocket.on("message", function (message) {
+      // Make sure message is a string
       let isString = typeof message == "string";
       let textMessage: string = (
         isString ? message : message.toString()
       ) as string;
-      let mobName: string;
+
       const parsedMessage = JSON.parse(textMessage);
-      mobName = JSON.parse(textMessage).mobName;
-      let mobTimer = _processMessage(parsedMessage, webSocket, wss);
+      let mobTimer = _processMessage(parsedMessage, webSocket);
       if (!mobTimer) {
         return;
       }
-      let sendMessage = JSON.stringify(mobTimer.state);
-      webSocket.send(sendMessage);
+      let response = JSON.stringify(mobTimer.state);
+      webSocket.send(response);
     });
   });
+  return wss;
 }
 
 /**

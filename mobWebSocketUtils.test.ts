@@ -55,6 +55,10 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson().durationMinutes).toEqual(17);
   });
 
+  // todo 1a. comment out failing test. 1b. rerun tests. 1c. test two sockets join same mob and one updates the mob; both sockets should receive response message. 
+  // todo 2. check other branch(es) for tests that might not have been copied into this branch
+  // todo 3. rename message variables to request or response 
+
   test("Start timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
