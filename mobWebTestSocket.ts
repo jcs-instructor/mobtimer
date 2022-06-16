@@ -1,15 +1,15 @@
 import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 import { waitForSocketState } from "./testUtils";
-import { joinMessage } from "./mobWebMessages";
+import { joinMessage, MobTimerRequest } from "./mobWebMessages";
+import { MobTimer } from "./mobTimer";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
-  
   joinMob(mobName: string) {
     const message = joinMessage(mobName);
     this.send(message);
   }
 
-  getLastJson(): any {
+  getLastJson() {
     return JSON.parse(this.receivedMessages.at(-1) || "");
   }
 
