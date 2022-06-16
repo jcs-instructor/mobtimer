@@ -39,15 +39,12 @@ function _getOrRegisterMob(mobName: string) {
   return mobTimer;
 }
 
-function _processMessage(
-  parsedMessage: MobTimerRequest | JoinRequest,
-  socket: MobWebSocket
-) {
+function _processMessage(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
-  if (parsedMessage.action === "join") {
-    const joinRequest = parsedMessage as JoinRequest;
+  if (parsedRequest.action === "join") {
+    const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterMob(mobName);
   } else {
@@ -59,14 +56,14 @@ function _processMessage(
     return;
   }
 
-  switch (parsedMessage.action) {
+  switch (parsedRequest.action) {
     case "join": {
       socket.mobName = mobName;
       break;
     }
     case "update": {
       // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
-      const updateRequest = parsedMessage as UpdateRequest;
+      const updateRequest = parsedRequest as UpdateRequest;
       mobTimer.durationMinutes =
         updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;
@@ -116,15 +113,10 @@ export function createMobWebSocketServer(server: http.Server): any {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
-    webSocket.on("message", function (message) {
-      // Make sure message is a string
-      let isString = typeof message == "string";
-      let textMessage: string = (
-        isString ? message : message.toString()
-      ) as string;
-
-      const parsedMessage = JSON.parse(textMessage);
-      let mobTimer = _processMessage(parsedMessage, webSocket);
+    webSocket.on("message", function (request) {
+      let requestString: string = requestToString(request);
+      const parsedRequest = JSON.parse(requestString) as MobTimerRequest;
+      let mobTimer = _processMessage(parsedRequest, webSocket);
       if (!mobTimer) {
         return;
       }
@@ -133,6 +125,14 @@ export function createMobWebSocketServer(server: http.Server): any {
     });
   });
   return wss;
+}
+
+function requestToString(request: WebSocket.RawData) {
+  let isString = typeof request == "string";
+  let requestString: string = (
+    isString ? request : request.toString()
+  ) as string;
+  return requestString;
 }
 
 /**
