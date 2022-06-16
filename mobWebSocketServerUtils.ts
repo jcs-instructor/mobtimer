@@ -36,20 +36,24 @@ function _getOrRegisterMob(mobName: string) {
   }
   return mobTimer;
 }
-interface IMobTimerRequest {
+interface MobTimerRequest {
   action: string;
-  mobName?: string;
-  value?: any;
 }
+type JoinRequest = {
+  action: string;
+  mobName: string;
+};
+
 function _processMessage(
-  parsedMessage: IMobTimerRequest,
+  parsedMessage: MobTimerRequest | JoinRequest,
   socket: MobWebSocket
 ) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
   if (parsedMessage.action === "join") {
-    mobName = parsedMessage.mobName;
+    const joinMessage = parsedMessage as JoinRequest;
+    mobName = joinMessage.mobName;
     mobTimer = _getOrRegisterMob(mobName);
   } else {
     mobName = socket.mobName;
