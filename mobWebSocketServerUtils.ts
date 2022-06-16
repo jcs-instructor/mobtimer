@@ -98,7 +98,6 @@ export function broadcast(
   mobName: string,
   message: string
 ) {
-  // todo: replace any with correct type
   wss.clients.forEach((socket: any) => {
     // todo: replace any with correct type
     if (socket.mobName === mobName) {

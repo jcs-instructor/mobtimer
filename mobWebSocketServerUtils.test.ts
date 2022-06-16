@@ -55,9 +55,11 @@ describe("WebSocket Server", () => {
     expect(socket2.getLastJson().durationMinutes).toEqual(17);
   });
 
-  // todo 1a. comment out failing test. 1b. rerun tests. 1c. test two sockets join same mob and one updates the mob; both sockets should receive response message. 
-  // todo 2. check other branch(es) for tests that might not have been copied into this branch
-  // todo 3. rename message variables to request or response 
+  // todo finish refactoring after last red-green (i.e., see todos for 'any' variables etc.)
+  // todo check other branch(es) for tests that might not have been copied into this branch
+  // todo rename message variables to request or response 
+  // todo refactor mobWebSocketServerUtils into a class (probably)
+  // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
