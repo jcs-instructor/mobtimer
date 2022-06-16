@@ -4,7 +4,7 @@ import { MobWebSocket } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 import { TimeUtil as TimeUtils } from "./timeUtils";
 import { Status } from "./status";
-import { MobTimerRequest, JoinRequest, UpdateRequest } from "./mobWebMessages";
+import { MobTimerRequest, JoinRequest, UpdateRequest } from "./mobTimerRequests";
 
 // to do - extract things related to _mobs or wss to a class in a separate file
 

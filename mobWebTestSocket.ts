@@ -1,11 +1,12 @@
 import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 import { waitForSocketState } from "./testUtils";
-import { joinMessage, MobTimerRequest, MobTimerResponse } from "./mobWebMessages";
+import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
+import { MobTimerResponse } from "./mobTimerResponse";
 import { MobTimer } from "./mobTimer";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   joinMob(mobName: string) {
-    const message = joinMessage(mobName);
+    const message = joinRequest(mobName);
     this.send(message);
   }
 

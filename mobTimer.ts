@@ -1,4 +1,4 @@
-import { MobTimerResponse } from "./mobWebMessages";
+import { MobTimerResponse } from "./mobTimerResponse";
 import { Status } from "./status";
 import { TimeUtil } from "./timeUtils";
 

@@ -1,10 +1,3 @@
-import { Status } from "./status";
-
-export type MobTimerResponse = {
-  mobName: string;
-  status: Status;
-  durationMinutes: number;
-}
 
 export type MobTimerRequest = SimpleMobTimerRequest | JoinRequest | UpdateRequest;
 
@@ -17,7 +10,7 @@ export type JoinRequest = {
   mobName: string;
 };
 
-export function joinMessage(mobName: string) {
+export function joinRequest(mobName: string) {
   return JSON.stringify({ action: "join", mobName } as JoinRequest);
 }
 
@@ -26,21 +19,21 @@ export type UpdateRequest = {
   value: { durationMinutes?: number };
 };
 
-export function updateMessage(durationMinutes: number) {
+export function updateRequest(durationMinutes: number) {
   return JSON.stringify({
     action: "update",
     value: { durationMinutes },
   } as UpdateRequest);
 }
 
-export function pauseMessage() {
+export function pauseRequest() {
   return JSON.stringify({ action: "pause" } as SimpleMobTimerRequest);
 }
 
-export function startMessage() {
+export function startRequest() {
   return JSON.stringify({ action: "start" } as SimpleMobTimerRequest);
 }
 
-export function resumeMessage() {
+export function resumeRequest() {
   return JSON.stringify({ action: "resume" } as SimpleMobTimerRequest);
 }

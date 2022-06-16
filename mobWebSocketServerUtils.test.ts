@@ -1,6 +1,6 @@
 import WebSocket from "ws";
 import { startMobServer } from "./mobWebSocketServerUtils";
-import * as MobMessages from "./mobWebMessages";
+import * as MobMessages from "./mobTimerRequests";
 import { MobTimer } from "./mobTimer";
 import { Status } from "./status";
 import { openSocket } from "./testUtils";
@@ -44,7 +44,7 @@ describe("WebSocket Server", () => {
 
     const socket2 = await openSocket();
     await socket2.joinMob("good-team");
-    await socket2.send(MobMessages.updateMessage(17));
+    await socket2.send(MobMessages.updateRequest(17));
 
     await socket.closeSocket();
     await socket2.closeSocket();
@@ -66,7 +66,7 @@ describe("WebSocket Server", () => {
 
     const socket2 = await openSocket();
     await socket2.joinMob("awesome-team");
-    await socket2.send(MobMessages.updateMessage(17));
+    await socket2.send(MobMessages.updateRequest(17));
 
     await socket.closeSocket();
     await socket2.closeSocket();
@@ -78,7 +78,7 @@ describe("WebSocket Server", () => {
   test("Start timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startMessage());
+    await socket.send(MobMessages.startRequest());
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Running);
   });
@@ -86,8 +86,8 @@ describe("WebSocket Server", () => {
   test("Pause timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startMessage());
-    await socket.send(MobMessages.pauseMessage());
+    await socket.send(MobMessages.startRequest());
+    await socket.send(MobMessages.pauseRequest());
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Paused);
   });
@@ -95,9 +95,9 @@ describe("WebSocket Server", () => {
   test("Resume timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startMessage());
-    await socket.send(MobMessages.pauseMessage());
-    await socket.send(MobMessages.resumeMessage());
+    await socket.send(MobMessages.startRequest());
+    await socket.send(MobMessages.pauseRequest());
+    await socket.send(MobMessages.resumeRequest());
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Resumed);
   });
@@ -105,8 +105,8 @@ describe("WebSocket Server", () => {
   test("Update timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startMessage());
-    await socket.send(MobMessages.updateMessage(40));
+    await socket.send(MobMessages.startRequest());
+    await socket.send(MobMessages.updateRequest(40));
     await socket.closeSocket();
     expect(socket.getLastJson().durationMinutes).toEqual(40);
   });
@@ -114,8 +114,8 @@ describe("WebSocket Server", () => {
   test.skip("Start timer and elapse time sends message to all", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobMessages.startMessage());
-    await socket.send(MobMessages.updateMessage(1 / 60));
+    await socket.send(MobMessages.startRequest());
+    await socket.send(MobMessages.updateRequest(1 / 60));
     await delaySeconds(1.5);
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Ready);
