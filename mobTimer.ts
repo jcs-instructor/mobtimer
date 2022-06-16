@@ -8,6 +8,7 @@ import { TimeUtil } from "./timeUtils";
 //     }, seconds * 1000)
 //   );
 // }
+
 export class MobTimer {
   private _mobName = "";
   private _durationMinutes = 5;

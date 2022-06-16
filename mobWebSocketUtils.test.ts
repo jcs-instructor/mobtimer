@@ -96,7 +96,7 @@ describe("WebSocket Server", () => {
     await socket.joinMob("awesome-team");
     await socket.send(MobMessages.startMessage());
     await socket.send(MobMessages.updateMessage(1 / 60));
-    await delaySeconds(1);
+    await delaySeconds(1.5);
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Ready);
   });
