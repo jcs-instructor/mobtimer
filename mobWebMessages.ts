@@ -14,7 +14,7 @@ export function startMessage() {
   return JSON.stringify({ action: "start" });
 }
 
-export function resumeMessage(): any {
+export function resumeMessage() {
   return JSON.stringify({ action: "resume" });
 }
 

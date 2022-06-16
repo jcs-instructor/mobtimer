@@ -36,11 +36,16 @@ function _getOrRegisterMob(mobName: string) {
   }
   return mobTimer;
 }
-
+interface IMobTimerRequest {
+  action: string;
+  mobName?: string;
+  value?: any;
+}
 function _processMessage(
-  parsedMessage: any,
-  socket: MobWebSocket) {
-  let mobName: string;
+  parsedMessage: IMobTimerRequest,
+  socket: MobWebSocket
+) {
+  let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
   if (parsedMessage.action === "join") {
@@ -88,11 +93,17 @@ function _processMessage(
   return mobTimer;
 }
 
-export function broadcast(wss: WebSocket.Server, mobName: string, message: string) { // todo: replace any with correct type
-  wss.clients.forEach((socket: any) => { // todo: replace any with correct type
+export function broadcast(
+  wss: WebSocket.Server,
+  mobName: string,
+  message: string
+) {
+  // todo: replace any with correct type
+  wss.clients.forEach((socket: any) => {
+    // todo: replace any with correct type
     if (socket.mobName === mobName) {
       socket.send(message);
-    }      
+    }
   });
 }
 
@@ -101,7 +112,8 @@ export function broadcast(wss: WebSocket.Server, mobName: string, message: strin
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-export function createMobWebSocketServer(server: http.Server): any { // todo: change to specific type... http.Server ???
+export function createMobWebSocketServer(server: http.Server): any {
+  // todo: change to specific type... http.Server ???
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
