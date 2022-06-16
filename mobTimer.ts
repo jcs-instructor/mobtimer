@@ -1,10 +1,13 @@
 import { Status } from "./status";
 import { TimeUtil } from "./timeUtils";
 
-function delaySeconds(seconds: number) {
-  return new Promise((resolve) => setTimeout(
-    () => { console.log("here"); }, seconds * 1000));
-}
+// function delaySeconds(seconds: number) {
+//   return new Promise((resolve) =>
+//     setTimeout(() => {
+//       console.log("here");
+//     }, seconds * 1000)
+//   );
+// }
 export class MobTimer {
   private _mobName = "";
   private _durationMinutes = 5;
@@ -17,11 +20,11 @@ export class MobTimer {
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
-  
+
   start() {
     this._status = Status.Running;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
-    delaySeconds(TimeUtil.minutesToSeconds(this._durationMinutes));
+    // delaySeconds(TimeUtil.minutesToSeconds(this._durationMinutes));
   }
 
   resume() {
@@ -48,6 +51,9 @@ export class MobTimer {
   }
 
   public get status(): Status {
+    if (this.secondsRemaining <= 0) {
+      this._status = Status.Ready;
+    }
     return this._status;
   }
 
