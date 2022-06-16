@@ -3,14 +3,21 @@ import WebSocket, { Server } from "ws";
 import { MobWebSocket } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 import { TimeUtil as TimeUtils } from "./timeUtils";
+import { Status } from "./status";
 
 const _mobs: Map<string, MobTimer> = new Map();
 
-function delaySeconds(seconds: number, mobTimer: MobTimer) {
+function delaySeconds(
+  seconds: number,
+  mobTimer: MobTimer,
+  server: http.Server
+) {
   return new Promise((resolve) =>
     setTimeout(() => {
-      // get the mob's status 
-      // if the mob status is ready, send a message to through the socket server
+      if (mobTimer.status === Status.Ready) {
+        server.sendReadyMessage();
+      }
+
       console.log("here");
     }, seconds * 1000)
   );
@@ -62,7 +69,10 @@ function _processMessage(
     }
     case "start": {
       mobTimer.start();
-      delaySeconds(TimeUtils.minutesToSeconds(mobTimer.durationMinutes), mobTimer);
+      delaySeconds(
+        TimeUtils.minutesToSeconds(mobTimer.durationMinutes),
+        mobTimer
+      );
       break;
     }
     case "pause": {
@@ -85,7 +95,7 @@ function _processMessage(
 export function createMobWebSocketServer(server: http.Server): void {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", function (webSocket: MobWebSocket) {    
+  wss.on("connection", function (webSocket: MobWebSocket) {
     webSocket.on("message", function (message) {
       let isString = typeof message == "string";
       let textMessage: string = (
