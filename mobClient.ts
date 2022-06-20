@@ -16,6 +16,21 @@ class MobClient extends MobWebSocket implements WebSocketInterface {
     this.send(request);
   }
 
+  start() {
+    const request = MobTimerRequests.startRequest();
+    this.send(request);
+  }
+
+  pause() {
+    const request = MobTimerRequests.pauseRequest();
+    this.send(request);
+  }
+
+  resume() {
+    const request = MobTimerRequests.resumeRequest();
+    this.send(request);
+  }
+
   getLastJson(): MobTimerResponse {
     return JSON.parse(this.receivedResponses.at(-1) || "");
   }

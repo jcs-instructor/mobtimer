@@ -76,7 +76,7 @@ describe("WebSocket Server", () => {
   test("Start timer", async () => {
     const client = await openSocket();
     await client.joinMob("awesome-team");
-    await client.send(MobTimerRequests.startRequest());
+    await client.start();
     await client.closeSocket();
     expect(client.getLastJson().status).toEqual(Status.Running);
   });
@@ -84,8 +84,8 @@ describe("WebSocket Server", () => {
   test("Pause timer", async () => {
     const client = await openSocket();
     await client.joinMob("awesome-team");
-    await client.send(MobTimerRequests.startRequest());
-    await client.send(MobTimerRequests.pauseRequest());
+    await client.start();
+    await client.pause();
     await client.closeSocket();
     expect(client.getLastJson().status).toEqual(Status.Paused);
   });
@@ -93,9 +93,9 @@ describe("WebSocket Server", () => {
   test("Resume timer", async () => {
     const client = await openSocket();
     await client.joinMob("awesome-team");
-    await client.send(MobTimerRequests.startRequest());
-    await client.send(MobTimerRequests.pauseRequest());
-    await client.send(MobTimerRequests.resumeRequest());
+    await client.start();
+    await client.pause();
+    await client.resume();
     await client.closeSocket();
     expect(client.getLastJson().status).toEqual(Status.Resumed);
   });
@@ -103,7 +103,7 @@ describe("WebSocket Server", () => {
   test("Update timer", async () => {
     const client = await openSocket();
     await client.joinMob("awesome-team");
-    await client.send(MobTimerRequests.startRequest());    
+    await client.start();    
     await client.update(40);
     await client.closeSocket();
     expect(client.getLastJson().durationMinutes).toEqual(40);
@@ -112,7 +112,7 @@ describe("WebSocket Server", () => {
   test.skip("Start timer and elapse time sends message to all", async () => {
     const client = await openSocket();
     await client.joinMob("awesome-team");
-    await client.send(MobTimerRequests.startRequest());
+    await client.start();
     await client.update(1 / 60);
     await delaySeconds(1.5);
     await client.closeSocket();
