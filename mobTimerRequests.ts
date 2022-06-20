@@ -1,6 +1,16 @@
 
-export type MobTimerRequest = 
+export type MobTimerRequest =
   JoinRequest | UpdateRequest | StartRequest | PauseRequest | ResumeRequest;
+
+export type JoinRequest = {
+  action: "join";
+  mobName: string;
+};
+
+export type UpdateRequest = {
+  action: "update";
+  value: { durationMinutes?: number };
+};
 
 export type StartRequest = {
   action: "start";
@@ -14,19 +24,9 @@ export type ResumeRequest = {
   action: "resume";
 }
 
-export type JoinRequest = {
-  action: "join";
-  mobName: string;
-};
-
 export function joinRequest(mobName: string) {
   return JSON.stringify({ action: "join", mobName } as JoinRequest);
 }
-
-export type UpdateRequest = {
-  action: "update";
-  value: { durationMinutes?: number };
-};
 
 export function updateRequest(durationMinutes: number) {
   return JSON.stringify({
