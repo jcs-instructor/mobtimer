@@ -1,9 +1,13 @@
 // todo: make consistent either all classes or modules (when all static)
-export class TimeUtil {
+export class TimeUtils {
+  
+  static secondsToMinutes(seconds: number): number {
+    return seconds / 60;
+  }
   
   static getNowInSeconds(): number {
     const currentMilliseconds = new Date().getTime();
-    return TimeUtil.millisecondsToSeconds(currentMilliseconds); 
+    return TimeUtils.millisecondsToSeconds(currentMilliseconds); 
   }
 
   static millisecondsToSeconds(milliseconds: number) {
@@ -15,8 +19,8 @@ export class TimeUtil {
   }
   
   static getTimeString(seconds: number): string {
-    return TimeUtil.getMinutesPart(seconds) + ":" + 
-           TimeUtil.getSecondsPart(seconds);
+    return TimeUtils.getMinutesPart(seconds) + ":" + 
+           TimeUtils.getSecondsPart(seconds);
   }
   
   static getMinutesPart(seconds: number): string {

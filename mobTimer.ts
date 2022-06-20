@@ -1,6 +1,6 @@
 import { MobTimerResponse } from "./mobTimerResponse";
 import { Status } from "./status";
-import { TimeUtil } from "./timeUtils";
+import { TimeUtils } from "./timeUtils";
 
 // function delaySeconds(seconds: number) {
 //   return new Promise((resolve) =>
@@ -16,7 +16,7 @@ export class MobTimer {
   private _whenStartedInSeconds = 0;
   private _status: Status = Status.Ready;
   private _whenPausedInSeconds = 0;
-  private _nowInSecondsFunc = TimeUtil.getNowInSeconds;
+  private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
 
   constructor(mobName: string = "") {
@@ -61,7 +61,7 @@ export class MobTimer {
   }
 
   public get secondsRemainingString(): string {
-    return TimeUtil.getTimeString(this.secondsRemaining);
+    return TimeUtils.getTimeString(this.secondsRemaining);
   }
 
   public get secondsRemaining(): number {
@@ -69,7 +69,7 @@ export class MobTimer {
     if (this._status == Status.Ready) {
       return 0;
     }
-    const durationSeconds = TimeUtil.minutesToSeconds(this._durationMinutes);
+    const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
     return durationSeconds - Math.round(elapsedSeconds);
   }

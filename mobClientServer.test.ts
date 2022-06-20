@@ -3,6 +3,7 @@ import { MobTimer } from "./mobTimer";
 import { Status } from "./status";
 import { openSocket } from "./testUtils";
 import * as http from "http";
+import { TimeUtils } from "./timeUtils";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -112,7 +113,7 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.joinMob("awesome-team");
     await client.start();
-    await client.update(1 / 60);
+    await client.update(TimeUtils.secondsToMinutes(1));
     await delaySeconds(1.5);
     await client.closeSocket();
     expect(client.getLastJson().status).toEqual(Status.Ready);
