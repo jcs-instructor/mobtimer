@@ -4,6 +4,7 @@
   - Refactor redundant code
   - Encapsulate & information hide
   - Consistent level of abstraction
+  - Consistent names & naming conventions (e.g., underscore for private fields, capitalization, etc.)
   - Avoid tech debt
   - ... (add more as we go)
 - **Retro in middle (so can impl. immediately rather than wait a week)**
