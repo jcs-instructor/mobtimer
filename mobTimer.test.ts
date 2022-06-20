@@ -1,6 +1,7 @@
 import { MobTimer } from './mobTimer'
 import { Status } from "./status";
 import { MockCurrentTime } from './mockCurrentTime'
+import { TimeUtils } from './timeUtils';
 
 test('Default duration is 5 minutes', () => {
   expect(new MobTimer().durationMinutes).toEqual(5);
@@ -119,5 +120,6 @@ function createMockCurrentTime(mobTimer: MobTimer) {
 }
 
 function delaySeconds(seconds: number) {
-  return new Promise( resolve => setTimeout(resolve, seconds*1000) );
+  return new Promise( 
+    resolve => setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds)));
 }

@@ -26,7 +26,7 @@ function delaySeconds(
       }
 
       console.log("here");
-    }, seconds * 1000)
+    }, TimeUtils.secondsToMilliseconds(seconds))
   );
 }
 

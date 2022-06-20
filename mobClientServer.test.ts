@@ -121,6 +121,6 @@ describe("WebSocket Server", () => {
 
   // todo: refactor - this is a duplicate from another test file (When we moved it to a separate file we got a 5000 ms timeout)
   function delaySeconds(seconds: number) {
-    return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+    return new Promise((resolve) => setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds)));
   }
 });

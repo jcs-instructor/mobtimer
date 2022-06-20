@@ -1,19 +1,22 @@
 // todo: make consistent either all classes or modules (when all static)
 export class TimeUtils {
-  
-  static secondsToMinutes(seconds: number): number {
-    return seconds / 60;
-  }
-  
+ 
   static getNowInSeconds(): number {
     const currentMilliseconds = new Date().getTime();
     return TimeUtils.millisecondsToSeconds(currentMilliseconds); 
   }
-
   static millisecondsToSeconds(milliseconds: number) {
     return milliseconds / 1000;
   }
+
+  static secondsToMilliseconds(seconds: number): number {
+    return seconds * 1000;
+  }
   
+  static secondsToMinutes(seconds: number): number {
+    return seconds / 60;
+  }
+
   static minutesToSeconds(minutes: number) : number {
     return minutes * 60;
   }
