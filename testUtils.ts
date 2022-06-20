@@ -1,5 +1,5 @@
 import { MobClient } from "./mobClient";
-import { port } from "./mobWebSocketServerUtils.test";
+import { port } from "./mobClientServer.test";
 import { WebSocketInterface } from "./mobWebSocket";
 
 export async function openSocket() {
