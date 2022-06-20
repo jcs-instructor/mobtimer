@@ -4,7 +4,7 @@ import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";
 import * as MobTimerRequests from "./mobTimerRequests";
 
-class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
+class MobClient extends MobWebSocket implements WebSocketInterface {
 
   joinMob(mobName: string) {
     const request = joinRequest(mobName);
@@ -36,4 +36,4 @@ class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
   
 }
 
-export { MobWebTestSocket };
+export { MobClient };

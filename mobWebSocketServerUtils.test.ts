@@ -1,4 +1,4 @@
-import WebSocket from "ws";
+import { MobClient } from "./mobClient";
 import { startMobServer } from "./mobWebSocketServerUtils";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { MobTimer } from "./mobTimer";
@@ -18,40 +18,40 @@ describe("WebSocket Server", () => {
   afterAll(() => server.close());
 
   test("Create mob", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
-    await socket.closeSocket();
-    expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
+    await client.closeSocket();
+    expect(client.getLastJson()).toEqual(new MobTimer("awesome-team").state);
   });
 
   test("Create 2 mobs", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
 
-    const socket2 = await openSocket();
-    await socket2.joinMob("good-team");
+    const client2 = await openSocket();
+    await client2.joinMob("good-team");
 
-    await socket.closeSocket();
-    await socket2.closeSocket();
+    await client.closeSocket();
+    await client2.closeSocket();
 
-    expect(socket.getLastJson()).toEqual(new MobTimer("awesome-team").state);
-    expect(socket2.getLastJson()).toEqual(new MobTimer("good-team").state);
+    expect(client.getLastJson()).toEqual(new MobTimer("awesome-team").state);
+    expect(client2.getLastJson()).toEqual(new MobTimer("good-team").state);
   });
 
   test("Modify one of two mob timers", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
 
-    const socket2 = await openSocket();
-    await socket2.joinMob("good-team");
-    await socket2.update(17);
-    await socket.closeSocket();
-    await socket2.closeSocket();
+    const client2 = await openSocket();
+    await client2.joinMob("good-team");
+    await client2.update(17);
+    await client.closeSocket();
+    await client2.closeSocket();
 
-    expect(socket.getLastJson().durationMinutes).toEqual(
+    expect(client.getLastJson().durationMinutes).toEqual(
       new MobTimer("awesome-team").state.durationMinutes
     );
-    expect(socket2.getLastJson().durationMinutes).toEqual(17);
+    expect(client2.getLastJson().durationMinutes).toEqual(17);
   });
 
   // todo check other branch(es) for tests that might not have been copied into this branch
@@ -59,64 +59,64 @@ describe("WebSocket Server", () => {
   // todo refactor mobWebSocketServerUtils into a class (probably)
   // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
 
-    const socket2 = await openSocket();
-    await socket2.joinMob("awesome-team");
-    await socket2.update(17);
+    const client2 = await openSocket();
+    await client2.joinMob("awesome-team");
+    await client2.update(17);
 
-    await socket.closeSocket();
-    await socket2.closeSocket();
+    await client.closeSocket();
+    await client2.closeSocket();
 
-    expect(socket.getLastJson().durationMinutes).toEqual(17);
-    expect(socket2.getLastJson().durationMinutes).toEqual(17);
+    expect(client.getLastJson().durationMinutes).toEqual(17);
+    expect(client2.getLastJson().durationMinutes).toEqual(17);
   });
 
   test("Start timer", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
-    await socket.send(MobTimerRequests.startRequest());
-    await socket.closeSocket();
-    expect(socket.getLastJson().status).toEqual(Status.Running);
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
+    await client.send(MobTimerRequests.startRequest());
+    await client.closeSocket();
+    expect(client.getLastJson().status).toEqual(Status.Running);
   });
 
   test("Pause timer", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
-    await socket.send(MobTimerRequests.startRequest());
-    await socket.send(MobTimerRequests.pauseRequest());
-    await socket.closeSocket();
-    expect(socket.getLastJson().status).toEqual(Status.Paused);
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
+    await client.send(MobTimerRequests.startRequest());
+    await client.send(MobTimerRequests.pauseRequest());
+    await client.closeSocket();
+    expect(client.getLastJson().status).toEqual(Status.Paused);
   });
 
   test("Resume timer", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
-    await socket.send(MobTimerRequests.startRequest());
-    await socket.send(MobTimerRequests.pauseRequest());
-    await socket.send(MobTimerRequests.resumeRequest());
-    await socket.closeSocket();
-    expect(socket.getLastJson().status).toEqual(Status.Resumed);
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
+    await client.send(MobTimerRequests.startRequest());
+    await client.send(MobTimerRequests.pauseRequest());
+    await client.send(MobTimerRequests.resumeRequest());
+    await client.closeSocket();
+    expect(client.getLastJson().status).toEqual(Status.Resumed);
   });
 
   test("Update timer", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
-    await socket.send(MobTimerRequests.startRequest());    
-    await socket.update(40);
-    await socket.closeSocket();
-    expect(socket.getLastJson().durationMinutes).toEqual(40);
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
+    await client.send(MobTimerRequests.startRequest());    
+    await client.update(40);
+    await client.closeSocket();
+    expect(client.getLastJson().durationMinutes).toEqual(40);
   });
 
   test.skip("Start timer and elapse time sends message to all", async () => {
-    const socket = await openSocket();
-    await socket.joinMob("awesome-team");
-    await socket.send(MobTimerRequests.startRequest());
-    await socket.update(1 / 60);
+    const client = await openSocket();
+    await client.joinMob("awesome-team");
+    await client.send(MobTimerRequests.startRequest());
+    await client.update(1 / 60);
     await delaySeconds(1.5);
-    await socket.closeSocket();
-    expect(socket.getLastJson().status).toEqual(Status.Ready);
+    await client.closeSocket();
+    expect(client.getLastJson().status).toEqual(Status.Ready);
   });
 
   // todo: refactor - this is a duplicate from another test file (When we moved it to a separate file we got a 5000 ms timeout)

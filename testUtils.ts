@@ -1,9 +1,9 @@
-import { MobWebTestSocket } from "./mobWebTestSocket";
+import { MobClient } from "./mobClient";
 import { port } from "./mobWebSocketServerUtils.test";
 import { WebSocketInterface } from "./mobWebSocket";
 
 export async function openSocket() {
-  const socket = new MobWebTestSocket(`ws://localhost:${port}`);
+  const socket = new MobClient(`ws://localhost:${port}`);
   await waitForSocketState(socket, socket.OPEN);
   return socket;
 }
