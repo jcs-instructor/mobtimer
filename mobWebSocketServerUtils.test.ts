@@ -44,8 +44,7 @@ describe("WebSocket Server", () => {
 
     const socket2 = await openSocket();
     await socket2.joinMob("good-team");
-    await socket2.send(MobTimerRequests.updateRequest(17));
-
+    await socket2.update(17);
     await socket.closeSocket();
     await socket2.closeSocket();
 
@@ -65,7 +64,7 @@ describe("WebSocket Server", () => {
 
     const socket2 = await openSocket();
     await socket2.joinMob("awesome-team");
-    await socket2.send(MobTimerRequests.updateRequest(17));
+    await socket2.update(17);
 
     await socket.closeSocket();
     await socket2.closeSocket();
@@ -104,8 +103,8 @@ describe("WebSocket Server", () => {
   test("Update timer", async () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
-    await socket.send(MobTimerRequests.startRequest());
-    await socket.send(MobTimerRequests.updateRequest(40));
+    await socket.send(MobTimerRequests.startRequest());    
+    await socket.update(40);
     await socket.closeSocket();
     expect(socket.getLastJson().durationMinutes).toEqual(40);
   });
@@ -114,7 +113,7 @@ describe("WebSocket Server", () => {
     const socket = await openSocket();
     await socket.joinMob("awesome-team");
     await socket.send(MobTimerRequests.startRequest());
-    await socket.send(MobTimerRequests.updateRequest(1 / 60));
+    await socket.update(1 / 60);
     await delaySeconds(1.5);
     await socket.closeSocket();
     expect(socket.getLastJson().status).toEqual(Status.Ready);

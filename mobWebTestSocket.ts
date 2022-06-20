@@ -2,11 +2,17 @@ import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
 import { waitForSocketState } from "./testUtils";
 import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";
-import { MobTimer } from "./mobTimer";
+import * as MobTimerRequests from "./mobTimerRequests";
 
 class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
+
   joinMob(mobName: string) {
     const request = joinRequest(mobName);
+    this.send(request);
+  }
+
+  update(durationMinutes: number) {
+    const request = MobTimerRequests.updateRequest(durationMinutes);
     this.send(request);
   }
 
@@ -27,6 +33,7 @@ class MobWebTestSocket extends MobWebSocket implements WebSocketInterface {
     this.close();
     await waitForSocketState(this, this.CLOSED);
   }
+  
 }
 
-export { MobWebTestSocket as MobWebTestSocket };
+export { MobWebTestSocket };
