@@ -43,6 +43,7 @@ describe("WebSocket Server", () => {
     const client2 = await openSocket();
     await client2.joinMob("good-team");
     await client2.update(17);
+    
     await client.closeSocket();
     await client2.closeSocket();
 

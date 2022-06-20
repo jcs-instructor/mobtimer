@@ -1,8 +1,17 @@
 
-export type MobTimerRequest = SimpleMobTimerRequest | JoinRequest | UpdateRequest;
+export type MobTimerRequest = 
+  JoinRequest | UpdateRequest | StartRequest | PauseRequest | ResumeRequest;
 
-export type SimpleMobTimerRequest = {
-  action: "pause" | "start" | "resume";
+export type StartRequest = {
+  action: "start";
+}
+
+export type PauseRequest = {
+  action: "pause";
+}
+
+export type ResumeRequest = {
+  action: "resume";
 }
 
 export type JoinRequest = {
@@ -26,14 +35,14 @@ export function updateRequest(durationMinutes: number) {
   } as UpdateRequest);
 }
 
-export function pauseRequest() {
-  return JSON.stringify({ action: "pause" } as SimpleMobTimerRequest);
+export function startRequest() {
+  return JSON.stringify({ action: "start" } as StartRequest);
 }
 
-export function startRequest() {
-  return JSON.stringify({ action: "start" } as SimpleMobTimerRequest);
+export function pauseRequest() {
+  return JSON.stringify({ action: "pause" } as PauseRequest);
 }
 
 export function resumeRequest() {
-  return JSON.stringify({ action: "resume" } as SimpleMobTimerRequest);
+  return JSON.stringify({ action: "resume" } as ResumeRequest);
 }
