@@ -8,48 +8,51 @@ import { TimeUtils } from "./timeUtils";
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
-  let server: http.Server;
+  
+  let _server: http.Server;
+  const _mobName1 = "awesome-team";
+  const _mobName2 = "good-team";
 
   beforeAll(async () => {
-    server = await startMobServer(port);
+    _server = await startMobServer(port);
   });
 
-  afterAll(() => server.close());
+  afterAll(() => _server.close());
 
   test("Create mob", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
     await client.closeSocket();
-    expect(client.getLastJson()).toEqual(new MobTimer("awesome-team").state);
+    expect(client.getLastJson()).toEqual(new MobTimer(_mobName1).state);
   });
 
   test("Create 2 mobs", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
 
     const client2 = await openSocket();
-    await client2.joinMob("good-team");
+    await client2.joinMob(_mobName2);
 
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.getLastJson()).toEqual(new MobTimer("awesome-team").state);
-    expect(client2.getLastJson()).toEqual(new MobTimer("good-team").state);
+    expect(client.getLastJson()).toEqual(new MobTimer(_mobName1).state);
+    expect(client2.getLastJson()).toEqual(new MobTimer(_mobName2).state);
   });
 
   test("Modify one of two mob timers", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
 
     const client2 = await openSocket();
-    await client2.joinMob("good-team");
+    await client2.joinMob(_mobName2);
     await client2.update(17);
     
     await client.closeSocket();
     await client2.closeSocket();
 
     expect(client.getLastJson().durationMinutes).toEqual(
-      new MobTimer("awesome-team").state.durationMinutes
+      new MobTimer(_mobName1).state.durationMinutes
     );
     expect(client2.getLastJson().durationMinutes).toEqual(17);
   });
@@ -60,10 +63,10 @@ describe("WebSocket Server", () => {
   // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
 
     const client2 = await openSocket();
-    await client2.joinMob("awesome-team");
+    await client2.joinMob(_mobName1);
     await client2.update(17);
 
     await client.closeSocket();
@@ -75,7 +78,7 @@ describe("WebSocket Server", () => {
 
   test("Start timer", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
     await client.start();
     await client.closeSocket();
     expect(client.getLastJson().status).toEqual(Status.Running);
@@ -83,7 +86,7 @@ describe("WebSocket Server", () => {
 
   test("Pause timer", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
     await client.start();
     await client.pause();
     await client.closeSocket();
@@ -92,7 +95,7 @@ describe("WebSocket Server", () => {
 
   test("Resume timer", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
     await client.start();
     await client.pause();
     await client.resume();
@@ -102,7 +105,7 @@ describe("WebSocket Server", () => {
 
   test("Update timer", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
     await client.start();    
     await client.update(40);
     await client.closeSocket();
@@ -111,7 +114,7 @@ describe("WebSocket Server", () => {
 
   test.skip("Start timer and elapse time sends message to all", async () => {
     const client = await openSocket();
-    await client.joinMob("awesome-team");
+    await client.joinMob(_mobName1);
     await client.start();
     await client.update(TimeUtils.secondsToMinutes(1));
     await delaySeconds(1.5);

@@ -5,6 +5,15 @@ import { MobTimerResponse } from "./mobTimerResponse";
 import * as MobTimerRequests from "./mobTimerRequests";
 
 class MobClient extends MobWebSocket implements WebSocketInterface {
+  
+  _receivedResponses: string[] = [];
+
+  constructor(url: string) {
+    super(url);
+    this.on("message", (data) => {
+      this._receivedResponses.push(data.toString());
+    });
+  }
 
   joinMob(mobName: string) {
     const request = joinRequest(mobName);
@@ -32,16 +41,7 @@ class MobClient extends MobWebSocket implements WebSocketInterface {
   }
 
   getLastJson(): MobTimerResponse {
-    return JSON.parse(this.receivedResponses.at(-1) || "");
-  }
-
-  receivedResponses: string[] = [];
-
-  constructor(url: string) {
-    super(url);
-    this.on("message", (data) => {
-      this.receivedResponses.push(data.toString());
-    });
+    return JSON.parse(this._receivedResponses.at(-1) || "");
   }
 
   async closeSocket() {
