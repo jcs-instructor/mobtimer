@@ -9,7 +9,7 @@
   - ... (add more as we go)
 - **Retro in middle (so can impl. immediately rather than wait a week)**
 - **Phrases**:
-  - "Got it" (ELMO)
+  - "Got it" (ELMO) [Joel-not sure if this is working that well... 6/29/22]
   - "Hold on" (Navigator wants floor)
 - **Remember to give credit to co-author**: 
 `Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com>` 
