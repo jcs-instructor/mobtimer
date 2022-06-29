@@ -40,7 +40,7 @@ class MobClient extends MobWebSocket implements WebSocketInterface {
     this.send(request);
   }
 
-  getLastJson(): MobTimerResponse {
+  public get lastResponse(): MobTimerResponse {
     return JSON.parse(this._receivedResponses.at(-1) || "");
   }
 

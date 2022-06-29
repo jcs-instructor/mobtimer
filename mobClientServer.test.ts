@@ -23,7 +23,7 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.closeSocket();
-    expect(client.getLastJson()).toEqual(new MobTimer(_mobName1).state);
+    expect(client.lastResponse).toEqual(new MobTimer(_mobName1).state);
   });
 
   test("Create 2 mobs", async () => {
@@ -36,8 +36,8 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.getLastJson()).toEqual(new MobTimer(_mobName1).state);
-    expect(client2.getLastJson()).toEqual(new MobTimer(_mobName2).state);
+    expect(client.lastResponse).toEqual(new MobTimer(_mobName1).state);
+    expect(client2.lastResponse).toEqual(new MobTimer(_mobName2).state);
   });
 
   test("Modify one of two mob timers", async () => {
@@ -51,10 +51,8 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.getLastJson().durationMinutes).toEqual(
-      new MobTimer(_mobName1).state.durationMinutes
-    );
-    expect(client2.getLastJson().durationMinutes).toEqual(17);
+    expect(client.lastResponse.durationMinutes).toEqual(new MobTimer(_mobName1).state.durationMinutes);
+    expect(client2.lastResponse.durationMinutes).toEqual(17);
   });
 
   // todo check other branch(es) for tests that might not have been copied into this branch
@@ -72,8 +70,8 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.getLastJson().durationMinutes).toEqual(17);
-    expect(client2.getLastJson().durationMinutes).toEqual(17);
+    expect(client.lastResponse.durationMinutes).toEqual(17);
+    expect(client2.lastResponse.durationMinutes).toEqual(17);
   });
 
   test("Start timer", async () => {
@@ -81,7 +79,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await client.closeSocket();
-    expect(client.getLastJson().status).toEqual(Status.Running);
+    expect(client.lastResponse.status).toEqual(Status.Running);
   });
 
   test("Pause timer", async () => {
@@ -90,7 +88,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await client.closeSocket();
-    expect(client.getLastJson().status).toEqual(Status.Paused);
+    expect(client.lastResponse.status).toEqual(Status.Paused);
   });
 
   test("Resume timer", async () => {
@@ -100,7 +98,7 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await client.closeSocket();
-    expect(client.getLastJson().status).toEqual(Status.Resumed);
+    expect(client.lastResponse.status).toEqual(Status.Resumed);
   });
 
   test("Update timer", async () => {
@@ -109,7 +107,7 @@ describe("WebSocket Server", () => {
     await client.start();    
     await client.update(40);
     await client.closeSocket();
-    expect(client.getLastJson().durationMinutes).toEqual(40);
+    expect(client.lastResponse.durationMinutes).toEqual(40);
   });
 
   test.skip("Start timer and elapse time sends message to all", async () => {
@@ -119,7 +117,7 @@ describe("WebSocket Server", () => {
     await client.update(TimeUtils.secondsToMinutes(1));
     await delaySeconds(1.5);
     await client.closeSocket();
-    expect(client.getLastJson().status).toEqual(Status.Ready);
+    expect(client.lastResponse.status).toEqual(Status.Ready);
   });
 
   // todo: refactor - this is a duplicate from another test file (When we moved it to a separate file we got a 5000 ms timeout)
