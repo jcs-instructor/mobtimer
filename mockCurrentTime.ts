@@ -1,4 +1,5 @@
 export class MockCurrentTime {
+  
   private _mockCurrentTimeSeconds = 0;
 
   public nowInSecondsFunc() {

@@ -94,7 +94,7 @@ function _processRequest(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
   return mobTimer;
 }
 
-export function broadcast(
+function broadcast(
   wss: WebSocket.Server,
   mobName: string,
   messageToClients: string
@@ -112,7 +112,7 @@ export function broadcast(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-export function createMobWebSocketServer(server: http.Server): void {
+function createMobWebSocketServer(server: http.Server): void {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {

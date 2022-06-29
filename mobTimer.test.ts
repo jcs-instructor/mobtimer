@@ -49,9 +49,9 @@ test('Get seconds remaining 1 second after start', () => {
   const mockCurrentTime = createMockCurrentTime(mobTimer);
   mobTimer.durationMinutes = 6; 
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(6*60);
+  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6));
   mockCurrentTime.delaySeconds(1); 
-  expect(mobTimer.secondsRemaining).toEqual(6*60 - 1);
+  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6) - 1);
 });
 
 test('Get time remaining string 1 second after start', () => {
@@ -67,9 +67,9 @@ test('Get seconds remaining 1 second after start (real)', async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6; 
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(6*60);
+  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6));
   await delaySeconds(1); 
-  expect(mobTimer.secondsRemaining).toEqual(6*60 - 1);
+  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6) - 1);
 });
 
 test('Pause timer', () => {
