@@ -142,6 +142,7 @@ function requestToString(request: WebSocket.RawData) {
  * @param port Port for the server to listen on
  * @returns The created server
  */
+// todo: make this file a class 'mobServer' and make this the constructor
 export function startMobServer(port: number): Promise<http.Server> {
   const server = http.createServer();
   createMobWebSocketServer(server);
