@@ -1,4 +1,4 @@
-import { startMobServer } from "../src/server/mobSocketServer";
+import { MobSocketServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
@@ -8,11 +8,14 @@ import { TimeUtils } from "../src/timeUtils";
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
-  let _server: http.Server;
+  let _server: MobSocketServer;
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
 
-  beforeAll(async () => (_server = await startMobServer(port)));
+  beforeAll(async () => {
+    _server = new MobSocketServer(port);
+    await _server.start();
+  });
 
   afterAll(() => _server.close());
 

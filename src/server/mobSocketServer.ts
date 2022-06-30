@@ -130,24 +130,28 @@ function requestToString(request: WebSocket.RawData) {
   return requestString;
 }
 
-/**
- * Creates and starts a WebSocket server from a simple http server for testing purposes.
- * @param port Port for the server to listen on
- * @returns The created server
- */
-// todo: make this file a class 'mobServer' and make this the constructor
-export function startMobServer(port: number): Promise<http.Server> {
-  const server = http.createServer();
-  createMobWebSocketServer(server);
-
-  return new Promise((resolve) => {
-    server.listen(port, () => resolve(server));
-  });
-}
-
 export class MobSocketServer {
-  private _promise: Promise<http.Server>;
+
+  private _port: number;
+  private _server?: http.Server;
+
   constructor(port: number) {
-    this._promise = startMobServer(port);
+    this._port = port;
+  }
+
+  async start() {
+    this._server = http.createServer();
+    createMobWebSocketServer(this._server);    
+    return new Promise((resolve) => {
+      if (this._server) {
+        this._server.listen(this._port, () => resolve(this._server));
+      } 
+    });
+  }
+
+  close() {
+    if (this._server) {
+      this._server.close();
+    }
   }
 }
