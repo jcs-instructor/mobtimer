@@ -4,14 +4,13 @@ import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";
 import * as MobTimerRequests from "./mobTimerRequests";
 
-interface WebSocketInterface extends WebSocket {}
+export interface WebSocketInterface extends WebSocket {}
 
 class MobSocketClient extends WebSocket implements WebSocketInterface {
-  
   _receivedResponses: string[] = [];
 
   constructor(url: string) {
-    super(url);    
+    super(url);
     this.on("message", (data) => {
       this._receivedResponses.push(data.toString());
     });
@@ -50,7 +49,6 @@ class MobSocketClient extends WebSocket implements WebSocketInterface {
     this.close();
     await waitForSocketState(this, this.CLOSED);
   }
-  
 }
 
 export { MobSocketClient };
