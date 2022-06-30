@@ -12,7 +12,9 @@ describe("WebSocket Server", () => {
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
 
-  beforeAll(async () => (_server = await startMobServer(port)));
+  beforeAll(async () => {
+    _server = await startMobServer(port);
+  });
 
   afterAll(() => _server.close());
 
@@ -56,7 +58,6 @@ describe("WebSocket Server", () => {
 
   // todo check other branch(es) for tests that might not have been copied into this branch
   // todo: consider renaming request as messageFromClient and response as messageToClient
-  // todo refactor mobWebSocketServerUtils into a class (probably)
   // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";

@@ -8,6 +8,16 @@ import {
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
+
+export async function startMobServer(port: number): Promise<http.Server> {
+  const server = http.createServer();
+  addListeners(server);
+  return new Promise((resolve) => {
+    server.listen(port, () => resolve(server));
+  });
+}
+
+// private class
 class MobWebSocket extends WebSocket {
   constructor(url: string) {
     super(url);
@@ -22,10 +32,8 @@ class MobWebSocket extends WebSocket {
   }
 }
 
-export { MobWebSocket };
-
-// to do - extract things related to _mobs or wss to a class in a separate file
-
+// todo: consider mapping to both mob timer and sockets associated with given mob name,
+// which could allow us to get rid of the private MobWebSocket class (?)
 const _mobs: Map<string, MobTimer> = new Map();
 
 function _getMob(mobName: string): MobTimer | undefined {
@@ -105,7 +113,7 @@ function broadcast(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function createMobWebSocketServer(server: http.Server): void {
+function addListeners(server: http.Server): void {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
@@ -128,19 +136,4 @@ function requestToString(request: WebSocket.RawData) {
     isString ? request : request.toString()
   ) as string;
   return requestString;
-}
-
-/**
- * Creates and starts a WebSocket server from a simple http server for testing purposes.
- * @param port Port for the server to listen on
- * @returns The created server
- */
-// todo: make this file a class 'mobServer' and make this the constructor
-export function startMobServer(port: number): Promise<http.Server> {
-  const server = http.createServer();
-  createMobWebSocketServer(server);
-
-  return new Promise((resolve) => {
-    server.listen(port, () => resolve(server));
-  });
 }
