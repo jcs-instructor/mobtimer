@@ -68,7 +68,7 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6));
-  await delaySeconds(1);
+  await TimeUtils.delaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6) - 1);
 });
 
@@ -117,10 +117,4 @@ function createMockCurrentTime(mobTimer: MobTimer) {
   const mockCurrentTime = new MockCurrentTime();
   mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
   return mockCurrentTime;
-}
-
-function delaySeconds(seconds: number) {
-  return new Promise((resolve) =>
-    setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds))
-  );
 }

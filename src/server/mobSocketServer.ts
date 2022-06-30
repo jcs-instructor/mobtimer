@@ -8,7 +8,6 @@ import {
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
-
 class MobWebSocket extends WebSocket {
   constructor(url: string) {
     super(url);
@@ -28,16 +27,6 @@ export { MobWebSocket };
 // to do - extract things related to _mobs or wss to a class in a separate file
 
 const _mobs: Map<string, MobTimer> = new Map();
-function delaySeconds(seconds: number, mobTimer: MobTimer) {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      if (mobTimer.status === Status.Ready) {
-        //server. //server.sendReadyMessage();
-        // server.sendReadyMessage();
-      }
-    }, TimeUtils.secondsToMilliseconds(seconds))
-  );
-}
 
 function _getMob(mobName: string): MobTimer | undefined {
   return _mobs.get(mobName);

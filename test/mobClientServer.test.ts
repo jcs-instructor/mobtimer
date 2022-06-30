@@ -116,15 +116,9 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await client.update(TimeUtils.secondsToMinutes(1));
-    await delaySeconds(1.5);
+    await TimeUtils.delaySeconds(1.5);
     await client.closeSocket();
     expect(client.lastResponse.status).toEqual(Status.Ready);
   });
 
-  // todo: refactor - this is a duplicate from another test file (When we moved it to a separate file we got a 5000 ms timeout)
-  function delaySeconds(seconds: number) {
-    return new Promise((resolve) =>
-      setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds))
-    );
-  }
 });

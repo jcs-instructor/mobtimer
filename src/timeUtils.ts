@@ -1,6 +1,12 @@
 // todo: make consistent either all classes or modules (when all static)
 export class TimeUtils {
  
+  static delaySeconds(seconds: number) {
+    return new Promise((resolve) =>
+      setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds))
+    );
+  }
+
   static getNowInSeconds(): number {
     const currentMilliseconds = new Date().getTime();
     return TimeUtils.millisecondsToSeconds(currentMilliseconds); 
@@ -34,6 +40,6 @@ export class TimeUtils {
   static getSecondsPart(seconds: number): string {
     const secondsPart = (seconds % 60);
     return secondsPart.toString().padStart(2, "0");
-  }
+  } 
 
 }
