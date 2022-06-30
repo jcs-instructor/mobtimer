@@ -8,6 +8,16 @@ import {
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
+
+export async function startMobServer(port: number): Promise<http.Server> {
+  const server = http.createServer();
+  addListeners(server);
+  return new Promise((resolve) => {
+    server.listen(port, () => resolve(server));
+  });
+}
+
+// private class
 class MobWebSocket extends WebSocket {
   constructor(url: string) {
     super(url);
@@ -22,10 +32,8 @@ class MobWebSocket extends WebSocket {
   }
 }
 
-export { MobWebSocket };
-
-// to do - extract things related to _mobs or wss to a class in a separate file
-
+// todo: consider mapping to both mob timer and sockets associated with given mob name,
+// which could allow us to get rid of the private MobWebSocket class (?)
 const _mobs: Map<string, MobTimer> = new Map();
 
 function _getMob(mobName: string): MobTimer | undefined {
@@ -128,26 +136,4 @@ function requestToString(request: WebSocket.RawData) {
     isString ? request : request.toString()
   ) as string;
   return requestString;
-}
-
-export class MobSocketServer {
-
-  private _port: number;
-  private _server: http.Server;
-
-  constructor(port: number) {
-    this._port = port;
-    this._server = http.createServer();
-  }
-
-  async start(): Promise<boolean> {
-    addListeners(this._server);
-    return new Promise((resolve) => {
-      this._server.listen(this._port, () => resolve(true));
-    });
-  }
-
-  close() {
-    this._server.close();
-  }
 }

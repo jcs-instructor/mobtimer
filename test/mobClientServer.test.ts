@@ -1,4 +1,4 @@
-import { MobSocketServer } from "../src/server/mobSocketServer";
+import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
@@ -8,13 +8,12 @@ import { TimeUtils } from "../src/timeUtils";
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
-  let _server: MobSocketServer;
+  let _server: http.Server;
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
 
   beforeAll(async () => {
-    _server = new MobSocketServer(port);
-    await _server.start();
+    _server = await startMobServer(port);
   });
 
   afterAll(() => _server.close());
@@ -59,7 +58,6 @@ describe("WebSocket Server", () => {
 
   // todo check other branch(es) for tests that might not have been copied into this branch
   // todo: consider renaming request as messageFromClient and response as messageToClient
-  // todo refactor mobWebSocketServerUtils into a class (probably)
   // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";
