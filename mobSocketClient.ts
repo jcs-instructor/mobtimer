@@ -1,15 +1,17 @@
-import { MobWebSocket, WebSocketInterface } from "./mobWebSocket";
+import WebSocket from "ws";
 import { waitForSocketState } from "./testUtils";
 import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";
 import * as MobTimerRequests from "./mobTimerRequests";
 
-class MobSocketClient extends MobWebSocket implements WebSocketInterface {
+interface WebSocketInterface extends WebSocket {}
+
+class MobSocketClient extends WebSocket implements WebSocketInterface {
   
   _receivedResponses: string[] = [];
 
   constructor(url: string) {
-    super(url);
+    super(url);    
     this.on("message", (data) => {
       this._receivedResponses.push(data.toString());
     });

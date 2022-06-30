@@ -1,6 +1,5 @@
 import * as http from "http";
 import WebSocket, { Server } from "ws";
-import { MobWebSocket } from "./mobWebSocket";
 import { MobTimer } from "./mobTimer";
 import { TimeUtils } from "./timeUtils";
 import { Status } from "./status";
@@ -9,6 +8,26 @@ import {
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
+
+
+export interface WebSocketInterface extends WebSocket {}
+
+class MobWebSocket extends WebSocket implements WebSocketInterface {
+  constructor(url: string) {
+    super(url);
+  }
+
+  private _mobName = "";
+  public get mobName(): string {
+    return this._mobName;
+  }
+  public set mobName(value: string) {
+    this._mobName = value;
+  }
+}
+
+export { MobWebSocket };
+
 
 // to do - extract things related to _mobs or wss to a class in a separate file
 
