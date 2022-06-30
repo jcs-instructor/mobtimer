@@ -133,25 +133,21 @@ function requestToString(request: WebSocket.RawData) {
 export class MobSocketServer {
 
   private _port: number;
-  private _server?: http.Server;
+  private _server: http.Server;
 
   constructor(port: number) {
     this._port = port;
+    this._server = http.createServer();
+    createMobWebSocketServer(this._server);
   }
 
-  async start() {
-    this._server = http.createServer();
-    createMobWebSocketServer(this._server);    
+  async start(): Promise<boolean> {
     return new Promise((resolve) => {
-      if (this._server) {
-        this._server.listen(this._port, () => resolve(this._server));
-      } 
+      this._server.listen(this._port, () => resolve(true));
     });
   }
 
   close() {
-    if (this._server) {
-      this._server.close();
-    }
+    this._server.close();
   }
 }
