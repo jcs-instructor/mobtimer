@@ -105,7 +105,7 @@ function broadcast(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function createMobWebSocketServer(server: http.Server): void {
+function addListeners(server: http.Server): void {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
@@ -138,10 +138,10 @@ export class MobSocketServer {
   constructor(port: number) {
     this._port = port;
     this._server = http.createServer();
-    createMobWebSocketServer(this._server);
   }
 
   async start(): Promise<boolean> {
+    addListeners(this._server);
     return new Promise((resolve) => {
       this._server.listen(this._port, () => resolve(true));
     });
