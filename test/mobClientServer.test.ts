@@ -1,19 +1,18 @@
-import { startMobServer } from "./mobSocketServer";
-import { MobTimer } from "./mobTimer";
-import { Status } from "./status";
+import { startMobServer } from "../src/server/mobSocketServer";
+import { MobTimer } from "../src/mobTimer";
+import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
 import * as http from "http";
-import { TimeUtils } from "./timeUtils";
+import { TimeUtils } from "../src/timeUtils";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
-  
   let _server: http.Server;
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
 
-  beforeAll(async () => _server = await startMobServer(port));
+  beforeAll(async () => (_server = await startMobServer(port)));
 
   afterAll(() => _server.close());
 
@@ -45,11 +44,13 @@ describe("WebSocket Server", () => {
     const client2 = await openSocket();
     await client2.joinMob(_mobName2);
     await client2.update(17);
-    
+
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.lastResponse.durationMinutes).toEqual(new MobTimer(_mobName1).state.durationMinutes);
+    expect(client.lastResponse.durationMinutes).toEqual(
+      new MobTimer(_mobName1).state.durationMinutes
+    );
     expect(client2.lastResponse.durationMinutes).toEqual(17);
   });
 
@@ -59,7 +60,7 @@ describe("WebSocket Server", () => {
   // todo remove .skip from skipped test - when ready to implement time elapsed functionality
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";
-    
+
     const client = await openSocket();
     await client.joinMob(mobNameForBothTeams);
 
@@ -104,7 +105,7 @@ describe("WebSocket Server", () => {
   test("Update timer", async () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
-    await client.start();    
+    await client.start();
     await client.update(40);
     await client.closeSocket();
     expect(client.lastResponse.durationMinutes).toEqual(40);
@@ -122,6 +123,8 @@ describe("WebSocket Server", () => {
 
   // todo: refactor - this is a duplicate from another test file (When we moved it to a separate file we got a 5000 ms timeout)
   function delaySeconds(seconds: number) {
-    return new Promise((resolve) => setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds)));
+    return new Promise((resolve) =>
+      setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds))
+    );
   }
 });

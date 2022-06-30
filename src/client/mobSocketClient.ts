@@ -1,8 +1,8 @@
 import WebSocket from "ws";
-import { waitForSocketState } from "./testUtils";
-import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
-import { MobTimerResponse } from "./mobTimerResponse";
-import * as MobTimerRequests from "./mobTimerRequests";
+import { waitForSocketState } from "../../test/testUtils";
+import { joinRequest, MobTimerRequest } from "../server/mobTimerRequests";
+import { MobTimerResponse } from "../server/mobTimerResponse";
+import * as MobTimerRequests from "../server/mobTimerRequests";
 
 export interface WebSocketInterface extends WebSocket {}
 

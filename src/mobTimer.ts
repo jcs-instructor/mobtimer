@@ -1,4 +1,4 @@
-import { MobTimerResponse } from "./mobTimerResponse";
+import { MobTimerResponse } from "./server/mobTimerResponse";
 import { Status } from "./status";
 import { TimeUtils } from "./timeUtils";
 

@@ -1,14 +1,13 @@
 import * as http from "http";
 import WebSocket, { Server } from "ws";
-import { MobTimer } from "./mobTimer";
-import { TimeUtils } from "./timeUtils";
-import { Status } from "./status";
+import { MobTimer } from "../mobTimer";
+import { TimeUtils } from "../timeUtils";
+import { Status } from "../status";
 import {
   MobTimerRequest,
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
-
 
 export interface WebSocketInterface extends WebSocket {}
 
@@ -28,23 +27,16 @@ class MobWebSocket extends WebSocket implements WebSocketInterface {
 
 export { MobWebSocket };
 
-
 // to do - extract things related to _mobs or wss to a class in a separate file
 
 const _mobs: Map<string, MobTimer> = new Map();
-function delaySeconds(
-  seconds: number,
-  mobTimer: MobTimer,
-  server: http.Server
-) {
+function delaySeconds(seconds: number, mobTimer: MobTimer) {
   return new Promise((resolve) =>
     setTimeout(() => {
       if (mobTimer.status === Status.Ready) {
         //server. //server.sendReadyMessage();
         // server.sendReadyMessage();
       }
-
-      console.log("here");
     }, TimeUtils.secondsToMilliseconds(seconds))
   );
 }
@@ -93,11 +85,6 @@ function _processRequest(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
     }
     case "start": {
       mobTimer.start();
-      // delaySeconds(
-      //   TimeUtils.minutesToSeconds(mobTimer.durationMinutes),
-      //   mobTimer,
-      //   wss
-      // );
       break;
     }
     case "pause": {
