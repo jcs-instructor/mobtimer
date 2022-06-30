@@ -1,7 +1,4 @@
-import {
-  WebSocketInterface,
-  MobSocketClient,
-} from "../src/client/mobSocketClient";
+import { MobSocketClient } from "../src/client/mobSocketClient";
 import { port } from "./mobClientServer.test";
 import { WebSocket } from "ws";
 

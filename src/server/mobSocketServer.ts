@@ -9,9 +9,7 @@ import {
   UpdateRequest,
 } from "./mobTimerRequests";
 
-export interface WebSocketInterface extends WebSocket {}
-
-class MobWebSocket extends WebSocket implements WebSocketInterface {
+class MobWebSocket extends WebSocket {
   constructor(url: string) {
     super(url);
   }
