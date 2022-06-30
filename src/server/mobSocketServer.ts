@@ -144,3 +144,10 @@ export function startMobServer(port: number): Promise<http.Server> {
     server.listen(port, () => resolve(server));
   });
 }
+
+export class MobSocketServer {
+  private _promise: Promise<http.Server>;
+  constructor(port: number) {
+    this._promise = startMobServer(port);
+  }
+}
