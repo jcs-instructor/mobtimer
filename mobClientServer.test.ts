@@ -1,4 +1,4 @@
-import { startMobServer } from "./mobServer";
+import { startMobServer } from "./mobSocketServer";
 import { MobTimer } from "./mobTimer";
 import { Status } from "./status";
 import { openSocket } from "./testUtils";

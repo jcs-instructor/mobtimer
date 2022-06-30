@@ -1,4 +1,4 @@
-import { MobClient } from "./mobClient";
+import { MobClient } from "./mobSocketClient";
 import { port } from "./mobClientServer.test";
 import { WebSocketInterface } from "./mobWebSocket";
 
