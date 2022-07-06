@@ -115,10 +115,11 @@ describe("WebSocket Server", () => {
   test("Start timer and elapse time sends message to all", async () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
+    await client.update(TimeUtils.secondsToMinutes(0.5));
     await client.start();
-    await client.update(TimeUtils.secondsToMinutes(1));
     await TimeUtils.delaySeconds(3);
     await client.closeSocket();
+    console.log("expecting", client.lastResponse);
     expect(client.lastResponse.status).toEqual(Status.Ready);
   });
 });

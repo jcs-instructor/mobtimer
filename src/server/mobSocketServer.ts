@@ -44,7 +44,7 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.whenExpired(() => broadcastState(wss, mobTimer));
+    mobTimer.whenExpired(() => broadcastWhenExpire(wss, mobTimer));
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
@@ -134,11 +134,20 @@ function addListeners(server: http.Server): void {
   });
 }
 
+// todo: this is a duplicate of broadcastState for debug logging - deduplicate this later
+function broadcastWhenExpire(
+  wss: WebSocket.Server<WebSocket.WebSocket>,
+  mobTimer: MobTimer
+) {
+  console.log("broadcasting", mobTimer.secondsRemaining, mobTimer.state);
+  let response = JSON.stringify(mobTimer.state);
+  broadcast(wss, mobTimer.state.mobName, response);
+}
+
 function broadcastState(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer
 ) {
-  console.log("broadcasting");
   let response = JSON.stringify(mobTimer.state);
   broadcast(wss, mobTimer.state.mobName, response);
 }

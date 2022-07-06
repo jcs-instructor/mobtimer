@@ -113,6 +113,15 @@ test("Get seconds remaining after running 1 second, paused 1 second, and resume 
   expect(mobTimer.secondsRemainingString).toEqual("05:56");
 });
 
+test("After time expires, state should be Ready", () => {
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
+  mobTimer.durationMinutes = 1;
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(61);
+  expect(mobTimer.status).toEqual(Status.Ready);
+});
+
 function createMockCurrentTime(mobTimer: MobTimer) {
   const mockCurrentTime = new MockCurrentTime();
   mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
