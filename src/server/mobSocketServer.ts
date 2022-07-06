@@ -44,6 +44,7 @@ function _getOrRegisterMob(mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
+    mobTimer.whenExpired(() => broadcast(wss, mobName, messageToClients));
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
