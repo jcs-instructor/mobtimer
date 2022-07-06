@@ -16,7 +16,7 @@ export class MobTimer {
   }
 
   whenExpired(func: () => void) {
-    setTimeout(func, TimeUtils.secondsToMilliseconds(1)); 
+    setTimeout(func, TimeUtils.secondsToMilliseconds(1));
   }
 
   start() {
@@ -44,8 +44,8 @@ export class MobTimer {
   public get state() {
     return {
       mobName: this._mobName,
-      status: this._status,
-      durationMinutes: this._durationMinutes,
+      status: this.status,
+      durationMinutes: this.durationMinutes,
     } as MobTimerResponse;
   }
 
