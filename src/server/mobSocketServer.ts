@@ -40,24 +40,28 @@ function _getMob(mobName: string): MobTimer | undefined {
   return _mobs.get(mobName);
 }
 
-function _getOrRegisterMob(mobName: string) {
+function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.whenExpired(() => broadcast(wss, mobName, messageToClients));
+    mobTimer.whenExpired(() => broadcast(wss, mobName, "expired"));
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
 }
 
-function _processRequest(parsedRequest: MobTimerRequest, socket: MobWebSocket) {
+function _processRequest(
+  wss: WebSocket.Server,
+  parsedRequest: MobTimerRequest,
+  socket: MobWebSocket
+) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
   if (parsedRequest.action === "join") {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
-    mobTimer = _getOrRegisterMob(mobName);
+    mobTimer = _getOrRegisterMob(wss, mobName);
   } else {
     mobName = socket.mobName;
     mobTimer = _getMob(mobName);
@@ -121,7 +125,7 @@ function addListeners(server: http.Server): void {
     webSocket.on("message", function (request) {
       let requestString: string = requestToString(request);
       const parsedRequest = JSON.parse(requestString) as MobTimerRequest;
-      let mobTimer = _processRequest(parsedRequest, webSocket);
+      let mobTimer = _processRequest(wss, parsedRequest, webSocket);
       if (!mobTimer) {
         return;
       }
