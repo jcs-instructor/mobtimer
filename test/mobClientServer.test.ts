@@ -112,7 +112,7 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.durationMinutes).toEqual(40);
   });
 
-  test.skip("Start timer and elapse time sends message to all", async () => {
+  test("Start timer and elapse time sends message to all", async () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.start();
@@ -121,5 +121,4 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     expect(client.lastResponse.status).toEqual(Status.Ready);
   });
-
 });

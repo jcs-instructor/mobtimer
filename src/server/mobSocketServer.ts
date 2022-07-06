@@ -44,7 +44,7 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.whenExpired(() => broadcast(wss, mobName, JSON.stringify({action: "expired"}))); //todo: pull out object/type
+    // mobTimer.whenExpired(() => broadcast(wss, mobName, JSON.stringify({action: "expired"}))); //todo: pull out object/type
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
