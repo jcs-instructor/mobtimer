@@ -15,6 +15,10 @@ export class MobTimer {
     this._mobName = mobName;
   }
 
+  whenExpired(func: () => void) {
+    setTimeout(func, TimeUtils.secondsToMilliseconds(1)); 
+  }
+
   start() {
     this._status = Status.Running;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
