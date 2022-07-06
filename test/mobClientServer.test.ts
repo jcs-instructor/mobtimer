@@ -117,7 +117,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await client.update(TimeUtils.secondsToMinutes(1));
-    await TimeUtils.delaySeconds(1.5);
+    await TimeUtils.delaySeconds(3);
     await client.closeSocket();
     expect(client.lastResponse.status).toEqual(Status.Ready);
   });

@@ -44,7 +44,7 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.whenExpired(() => broadcastState(mobTimer, wss));
+    mobTimer.whenExpired(() => broadcastState(wss, mobTimer));
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
@@ -129,15 +129,16 @@ function addListeners(server: http.Server): void {
       if (!mobTimer) {
         return;
       }
-      broadcastState(mobTimer, wss); // todo consider moving mobName up a level
+      broadcastState(wss, mobTimer); // todo consider moving mobName up a level
     });
   });
 }
 
 function broadcastState(
-  mobTimer: MobTimer,
-  wss: WebSocket.Server<WebSocket.WebSocket>
+  wss: WebSocket.Server<WebSocket.WebSocket>,
+  mobTimer: MobTimer
 ) {
+  console.log("broadcasting");
   let response = JSON.stringify(mobTimer.state);
   broadcast(wss, mobTimer.state.mobName, response);
 }
