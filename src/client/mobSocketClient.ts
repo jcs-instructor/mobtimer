@@ -14,7 +14,7 @@ class MobSocketClient extends WebSocket {
     });
   }
 
-  joinMob(mobName: string) {
+  joinMob(mobName: string) {    
     const request = joinRequest(mobName);
     this.send(request);
   }

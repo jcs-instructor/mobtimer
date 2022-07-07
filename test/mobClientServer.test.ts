@@ -1,4 +1,4 @@
-import { startMobServer } from "../src/server/mobSocketServer";
+import { resetMobs, startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
@@ -12,12 +12,12 @@ describe("WebSocket Server", () => {
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     _server = await startMobServer(port);
   });
 
-  afterAll(() => {
-    // todo: also need to remove all mobtimer instances from memory
+  afterEach(() => {
+    resetMobs();
     _server.close();
   });
 
@@ -117,12 +117,11 @@ describe("WebSocket Server", () => {
 
   test("Start timer and elapse time sends message to all", async () => {
     const client = await openSocket();
-    await client.joinMob("Elephants");
+    await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(0.5));
     await client.start();
     await TimeUtils.delaySeconds(3);
     await client.closeSocket();
-    console.log("expecting", client.lastResponse);
     expect(client.lastResponse.status).toEqual(Status.Ready);
   });
 });
