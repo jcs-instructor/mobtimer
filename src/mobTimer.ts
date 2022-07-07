@@ -75,10 +75,9 @@ export class MobTimer {
 
   public get secondsRemaining(): number {
     // When the timer is ready, show "0:00" for the time.
-    // todo: maybe check if !_everStarted then return 0
-    // if (this.status === Status.Ready) {
-    //   return 0;
-    // }
+    if (!this._everStarted) {
+      return 0;
+    }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
     return durationSeconds - Math.round(elapsedSeconds);
