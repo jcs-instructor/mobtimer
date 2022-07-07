@@ -44,7 +44,7 @@ class MobSocketClient extends WebSocket {
   }
 
   public get responses(): string[] {
-    return this._receivedResponses;
+    return this._receivedResponses; // todo clone
   }
 
   async closeSocket() {

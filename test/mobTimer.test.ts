@@ -67,9 +67,10 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6));
+  const numDigits = 1;
+  expect(mobTimer.secondsRemaining).toBeCloseTo(TimeUtils.minutesToSeconds(6), numDigits);
   await TimeUtils.delaySeconds(1);
-  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6) - 1);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(TimeUtils.minutesToSeconds(6) - 1, numDigits);
 });
 
 test("Pause timer", () => {

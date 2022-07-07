@@ -93,7 +93,7 @@ export class MobTimer {
     }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
-    const result = durationSeconds - Math.round(elapsedSeconds);
+    const result = durationSeconds - elapsedSeconds;
     return result < 0 ? 0 : result;
   }
 

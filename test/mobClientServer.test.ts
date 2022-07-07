@@ -122,9 +122,6 @@ describe("WebSocket Server", () => {
     await client.start();
     await TimeUtils.delaySeconds(3);
     await client.closeSocket();
-
-    console.log("xxxxxxxxxxxxxxxxx", client.responses);
-
     expect(client.lastResponse.secondsRemaining).toEqual(0);
     expect(client.lastResponse.status).toEqual(Status.Ready);
   });
