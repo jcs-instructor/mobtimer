@@ -18,7 +18,7 @@ export class MobTimer {
   }
 
   whenExpired(func: () => void) {
-    this._timer = setTimeout(func, TimeUtils.secondsToMilliseconds(1));
+    this._timer = setTimeout(func, this.secondsRemaining + 1);
   }
 
   start() {
