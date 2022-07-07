@@ -12,28 +12,36 @@ export class MobTimer {
   private _running = false;
   private _everStarted = false;
   private _timer: NodeJS.Timeout | undefined;
+  private _expireFunc = () => {};
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
 
-  whenExpired(func: () => void) {
-    this._timer = setTimeout(func, this.secondsRemaining + 1);
+  private setExpireTimeout() {
+    this._timer = setTimeout(this._expireFunc, this.secondsRemaining + 1);
   }
 
   start() {
+    this.setExpireTimeout();
     this._running = true;
     this._everStarted = true;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
+  // todo: maybe get rid of resume (just call start)
   resume() {
+    this.setExpireTimeout();
     this._running = true;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
   public set nowInSecondsFunc(func: () => number) {
     this._nowInSecondsFunc = func;
+  }
+
+  public set expireFunc(func: () => void) {
+    this._expireFunc = func;
   }
 
   pause() {
