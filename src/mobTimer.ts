@@ -6,7 +6,6 @@ export class MobTimer {
   private _mobName = "";
   private _durationMinutes = 5;
   private _whenStartedInSeconds = 0;
-  private _status = Status.Ready;
   private _whenPausedInSeconds = 0;
   private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
@@ -71,18 +70,16 @@ export class MobTimer {
 
   public get secondsRemaining(): number {
     // When the timer is ready, show "0:00" for the time.
-    if (this.status === Status.Ready) {
-      return 0;
-    }
+    // if (this.status === Status.Ready) {
+    //   return 0;
+    // }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
     return durationSeconds - Math.round(elapsedSeconds);
   }
 
   private calculateElapsedSeconds() {
-    if (this.status === Status.Ready) {
-      return 0;
-    } else if (this.status == Status.Paused) {
+    if (!this._running) {
       return this._previouslyAccumulatedElapsedSeconds;
     } else {
       return (
