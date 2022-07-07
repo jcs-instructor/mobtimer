@@ -21,13 +21,12 @@ export class MobTimer {
   }
 
   start() {
-    this._status = Status.Running;
+    this._running = true;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
-    // TimeUtils.delaySeconds(TimeUtil.minutesToSeconds(this._durationMinutes));
   }
 
   resume() {
-    this._status = Status.Resumed;
+    this._running = true;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
@@ -36,7 +35,7 @@ export class MobTimer {
   }
 
   pause() {
-    this._status = Status.Paused;
+    this._running = false;
     this._whenPausedInSeconds = this._nowInSecondsFunc();
     this._previouslyAccumulatedElapsedSeconds +=
       this._whenPausedInSeconds - this._whenStartedInSeconds;
@@ -51,8 +50,6 @@ export class MobTimer {
   }
 
   public get status(): Status {
-
-      
     // if (this._whenStartedInSeconds === 0) {
     //   return Status.Ready;
     // }
@@ -60,10 +57,12 @@ export class MobTimer {
     // If timer hasn't been started or has elapsed fully, then: READY
     if (this.secondsRemaining <= 0) {
       return Status.Ready;
-    } else if (this._running) {      
-      return Status.Running
+    } else if (this._running) {
+      return Status.Running;
+    } else if (this._previouslyAccumulatedElapsedSeconds > 0) {
+      return Status.Paused;
     }
-    return Status.Ready; // todo : maybe remove / temporary
+    return Status.Resumed;
   }
 
   public get secondsRemainingString(): string {
@@ -72,7 +71,7 @@ export class MobTimer {
 
   public get secondsRemaining(): number {
     // When the timer is ready, show "0:00" for the time.
-    if (this._status == Status.Ready) {
+    if (this.status === Status.Ready) {
       return 0;
     }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
@@ -81,9 +80,9 @@ export class MobTimer {
   }
 
   private calculateElapsedSeconds() {
-    if (this._status == Status.Ready) {
+    if (this.status === Status.Ready) {
       return 0;
-    } else if (this._status == Status.Paused) {
+    } else if (this.status == Status.Paused) {
       return this._previouslyAccumulatedElapsedSeconds;
     } else {
       return (
