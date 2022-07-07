@@ -36,6 +36,10 @@ class MobWebSocket extends WebSocket {
 // which could allow us to get rid of the private MobWebSocket class (?)
 const _mobs: Map<string, MobTimer> = new Map();
 
+export function resetMobs() {
+  _mobs.clear();
+}
+
 function _getMob(mobName: string): MobTimer | undefined {
   return _mobs.get(mobName);
 }
