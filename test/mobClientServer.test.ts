@@ -16,7 +16,10 @@ describe("WebSocket Server", () => {
     _server = await startMobServer(port);
   });
 
-  afterAll(() => _server.close());
+  afterAll(() => {
+    // todo: also need to remove all mobtimer instances from memory
+    _server.close();
+  });
 
   test("Create mob", async () => {
     const client = await openSocket();
@@ -114,7 +117,7 @@ describe("WebSocket Server", () => {
 
   test("Start timer and elapse time sends message to all", async () => {
     const client = await openSocket();
-    await client.joinMob(_mobName1);
+    await client.joinMob("Elephants");
     await client.update(TimeUtils.secondsToMinutes(0.5));
     await client.start();
     await TimeUtils.delaySeconds(3);

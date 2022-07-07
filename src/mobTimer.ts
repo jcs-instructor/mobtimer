@@ -11,13 +11,14 @@ export class MobTimer {
   private _previouslyAccumulatedElapsedSeconds = 0;
   private _running = false;
   private _everStarted = false;
+  private _timer: NodeJS.Timeout | undefined;
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
 
   whenExpired(func: () => void) {
-    setTimeout(func, TimeUtils.secondsToMilliseconds(1));
+    this._timer = setTimeout(func, TimeUtils.secondsToMilliseconds(1));
   }
 
   start() {
@@ -37,6 +38,7 @@ export class MobTimer {
 
   pause() {
     this._running = false;
+    if (this._timer) clearTimeout(this._timer);
     this._whenPausedInSeconds = this._nowInSecondsFunc();
     this._previouslyAccumulatedElapsedSeconds +=
       this._whenPausedInSeconds - this._whenStartedInSeconds;
