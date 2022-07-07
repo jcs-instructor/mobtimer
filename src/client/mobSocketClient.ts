@@ -14,7 +14,7 @@ class MobSocketClient extends WebSocket {
     });
   }
 
-  joinMob(mobName: string) {    
+  joinMob(mobName: string) {
     const request = joinRequest(mobName);
     this.send(request);
   }
@@ -41,6 +41,10 @@ class MobSocketClient extends WebSocket {
 
   public get lastResponse(): MobTimerResponse {
     return JSON.parse(this._receivedResponses.at(-1) || "");
+  }
+
+  public get responses(): string[] {
+    return this._receivedResponses;
   }
 
   async closeSocket() {
