@@ -19,7 +19,9 @@ export class MobTimer {
   }
 
   private setExpireTimeout() {
-    this._timer = setTimeout(this._expireFunc, this.secondsRemaining + 1);
+    // do we need to add time / fudge factor for rounding, e.g., 0.5 sec??????
+    const ms = TimeUtils.secondsToMilliseconds(this.secondsRemaining + 0.5);
+    this._timer = setTimeout(this._expireFunc, ms);
   }
 
   start() {
