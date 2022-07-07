@@ -51,15 +51,19 @@ export class MobTimer {
   }
 
   public get status(): Status {
+
+      
+    // if (this._whenStartedInSeconds === 0) {
+    //   return Status.Ready;
+    // }
+
+    // If timer hasn't been started or has elapsed fully, then: READY
     if (this.secondsRemaining <= 0) {
-      this._status = Status.Ready;
-    } else if (!this._running) {
-      if (
-        this.secondsRemaining >=
-        TimeUtils.minutesToSeconds(this.durationMinutes)
-      ) {
-      }
+      return Status.Ready;
+    } else if (this._running) {      
+      return Status.Running
     }
+    return Status.Ready; // todo : maybe remove / temporary
   }
 
   public get secondsRemainingString(): string {
