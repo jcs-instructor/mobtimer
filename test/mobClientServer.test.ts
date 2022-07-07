@@ -100,7 +100,7 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await client.closeSocket();
-    expect(client.lastResponse.status).toEqual(Status.Resumed);
+    expect(client.lastResponse.status).toEqual(Status.Running);
   });
 
   test("Update timer", async () => {

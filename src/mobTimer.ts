@@ -54,14 +54,18 @@ export class MobTimer {
     // }
 
     // If timer hasn't been started or has elapsed fully, then: READY
-    if (this.secondsRemaining <= 0) {
+    if (
+      this.secondsRemaining <= 0 ||
+      (!this._running &&
+        this.secondsRemaining >=
+          TimeUtils.minutesToSeconds(this.durationMinutes))
+    ) {
       return Status.Ready;
     } else if (this._running) {
       return Status.Running;
-    } else if (this._previouslyAccumulatedElapsedSeconds > 0) {
+    } else {
       return Status.Paused;
     }
-    return Status.Resumed;
   }
 
   public get secondsRemainingString(): string {
