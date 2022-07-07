@@ -56,11 +56,10 @@ export class MobTimer {
     // }
 
     // If timer hasn't been started or has elapsed fully, then: READY
-    if (this.secondsRemaining <= 0 || !this._everStarted)
+    if (this.secondsRemaining <= 0 || !this._everStarted) {
       // || (!this._running &&
       //   this.secondsRemaining >=
       //     TimeUtils.minutesToSeconds(this.durationMinutes))
-    {
       return Status.Ready;
     } else if (this._running) {
       return Status.Running;
@@ -80,7 +79,8 @@ export class MobTimer {
     }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
-    return durationSeconds - Math.round(elapsedSeconds);
+    const result = durationSeconds - Math.round(elapsedSeconds);
+    return result < 0 ? 0 : result;
   }
 
   private calculateElapsedSeconds() {
