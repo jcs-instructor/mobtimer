@@ -57,6 +57,7 @@ export class MobTimer {
       mobName: this._mobName,
       status: this.status,
       durationMinutes: this.durationMinutes,
+      secondsRemaining: this.secondsRemaining,
     } as MobTimerResponse;
   }
 
