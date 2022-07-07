@@ -6,10 +6,11 @@ export class MobTimer {
   private _mobName = "";
   private _durationMinutes = 5;
   private _whenStartedInSeconds = 0;
-  private _status: Status = Status.Ready;
+  private _status = Status.Ready;
   private _whenPausedInSeconds = 0;
   private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
+  private _running = false;
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
@@ -52,8 +53,13 @@ export class MobTimer {
   public get status(): Status {
     if (this.secondsRemaining <= 0) {
       this._status = Status.Ready;
+    } else if (!this._running) {
+      if (
+        this.secondsRemaining >=
+        TimeUtils.minutesToSeconds(this.durationMinutes)
+      ) {
+      }
     }
-    return this._status;
   }
 
   public get secondsRemainingString(): string {
