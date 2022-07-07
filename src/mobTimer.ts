@@ -10,6 +10,7 @@ export class MobTimer {
   private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
   private _running = false;
+  private _everStarted = false;
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
@@ -21,6 +22,7 @@ export class MobTimer {
 
   start() {
     this._running = true;
+    this._everStarted = true;
     this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
@@ -54,12 +56,10 @@ export class MobTimer {
     // }
 
     // If timer hasn't been started or has elapsed fully, then: READY
-    if (
-      this.secondsRemaining <= 0 
+    if (this.secondsRemaining <= 0 || !this._everStarted)
       // || (!this._running &&
       //   this.secondsRemaining >=
       //     TimeUtils.minutesToSeconds(this.durationMinutes))
-      ) 
     {
       return Status.Ready;
     } else if (this._running) {
@@ -75,6 +75,7 @@ export class MobTimer {
 
   public get secondsRemaining(): number {
     // When the timer is ready, show "0:00" for the time.
+    // todo: maybe check if !_everStarted then return 0
     // if (this.status === Status.Ready) {
     //   return 0;
     // }
