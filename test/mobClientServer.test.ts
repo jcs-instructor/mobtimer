@@ -16,9 +16,9 @@ describe("WebSocket Server", () => {
     _server = await startMobServer(port);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     resetMobs();
-    _server.close();
+    await _server.close();
   });
 
   test("Create mob", async () => {
