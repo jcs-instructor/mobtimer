@@ -120,7 +120,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(0.5));
     await client.start();
-    await TimeUtils.delaySeconds(3);
+    await TimeUtils.delaySeconds(1);
     await client.closeSocket();
     expect(client.lastResponse.secondsRemaining).toEqual(0);
     expect(client.lastResponse.status).toEqual(Status.Ready);
