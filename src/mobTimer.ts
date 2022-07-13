@@ -12,16 +12,31 @@ export class MobTimer {
   private _running = false;
   private _everStarted = false;
   private _timer: NodeJS.Timeout | undefined;
-  private _expireFunc = () => {};
+  private _interval: NodeJS.Timeout | undefined;
+  private _expireFunc = () => { };
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
 
   private setExpireTimeout() {
-    // do we need to add time / fudge factor for rounding, e.g., 0.5 sec??????
-    const ms = TimeUtils.secondsToMilliseconds(this.secondsRemaining + 0.5);
-    this._timer = setTimeout(this._expireFunc, ms);
+    // We will wait until very near when the timer should expire, and then very 
+    // frequently check to see if the timer has expired. This is to avoid
+    // the case where the timer expires before we have had time to check.
+    const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(this.secondsRemaining);
+    const intervalMilliseconds = 10;
+    const safetyMarginMilliseconds = intervalMilliseconds * 5;
+    this._timer = setTimeout(() => {
+      this._interval = setInterval(() => { this.checkReady(); }, intervalMilliseconds);
+    }, timeoutMilliseconds - safetyMarginMilliseconds);
+  }
+
+  checkReady() {
+    console.log(this.status);
+    if (this.status === Status.Ready) {
+      this._expireFunc();
+      if (this._interval) clearInterval(this._interval);
+    }
   }
 
   start() {
