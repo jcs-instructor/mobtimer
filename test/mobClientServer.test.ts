@@ -121,7 +121,7 @@ describe("WebSocket Server", () => {
     console.log(TimeUtils.getNowInSeconds() - nowInSeconds1);
     const client = await openSocket();
     await client.joinMob(_mobName1);
-    const durationSeconds = 2;
+    const durationSeconds = 0.2;
     const toleranceSeconds = 0.1;
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
