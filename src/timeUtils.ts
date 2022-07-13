@@ -29,7 +29,7 @@ export class TimeUtils {
   
   static getTimeString(seconds: number): string {
     return TimeUtils.getMinutesPart(seconds) + ":" + 
-           TimeUtils.getSecondsPart(seconds);
+           TimeUtils.getSecondsPart(Math.round(seconds));
   }
   
   static getMinutesPart(seconds: number): string {
