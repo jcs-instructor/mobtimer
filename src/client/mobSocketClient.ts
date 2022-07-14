@@ -5,7 +5,7 @@ import { MobTimerResponse } from "../server/mobTimerResponse";
 import * as MobTimerRequests from "../server/mobTimerRequests";
 
 class MobSocketClient extends WebSocket {
-  _receivedResponses: string[] = [];
+  private _receivedResponses: string[] = [];
 
   constructor(url: string) {
     super(url);
@@ -43,9 +43,8 @@ class MobSocketClient extends WebSocket {
     return JSON.parse(this._receivedResponses.at(-1) || "") as MobTimerResponse;
   }
 
-  // todo: clone / encapsulate and fix naming (_... for private only) (!)
   public get responses(): string[] {
-    return this._receivedResponses; 
+    return [...this._receivedResponses];
   }
 
   async closeSocket() {
