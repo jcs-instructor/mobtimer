@@ -25,7 +25,7 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.closeSocket();
-    expect(client.lastResponse).toEqual(new MobTimer(_mobName1).state);
+    expect(client.lastResponse.mobState).toEqual(new MobTimer(_mobName1).state);
   });
 
   test("Create 2 mobs", async () => {
@@ -38,8 +38,8 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.lastResponse).toEqual(new MobTimer(_mobName1).state);
-    expect(client2.lastResponse).toEqual(new MobTimer(_mobName2).state);
+    expect(client.lastResponse.mobState).toEqual(new MobTimer(_mobName1).state);
+    expect(client2.lastResponse.mobState).toEqual(new MobTimer(_mobName2).state);
   });
 
   test("Modify one of two mob timers", async () => {

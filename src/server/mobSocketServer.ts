@@ -143,7 +143,7 @@ function broadcastWhenExpire(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer
 ) {
-  let response = JSON.stringify(mobTimer.state);
+  let response = JSON.stringify({ mobState: mobTimer.state });
   broadcast(wss, mobTimer.state.mobName, response);
 }
 
@@ -151,7 +151,7 @@ function broadcastState(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer
 ) {
-  let response = JSON.stringify(mobTimer.state);
+  let response = JSON.stringify({ mobState: mobTimer.state });
   broadcast(wss, mobTimer.state.mobName, response);
 }
 
