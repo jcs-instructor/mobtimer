@@ -79,7 +79,7 @@ export class MobTimer {
       durationMinutes: this.durationMinutes,
       secondsRemaining: this.secondsRemaining,
       // timestamp: new Date().getTime(),
-    } as MobTimerResponse;
+    } as MobState;
   }
 
   public get status(): Status {

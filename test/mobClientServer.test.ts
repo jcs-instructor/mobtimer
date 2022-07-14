@@ -53,10 +53,10 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.lastResponse.durationMinutes).toEqual(
+    expect(client.lastResponse.mobState.durationMinutes).toEqual(
       new MobTimer(_mobName1).state.durationMinutes
     );
-    expect(client2.lastResponse.durationMinutes).toEqual(17);
+    expect(client2.lastResponse.mobState.durationMinutes).toEqual(17);
   });
 
   // todo check other branch(es) for tests that might not have been copied into this branch
@@ -75,8 +75,8 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     await client2.closeSocket();
 
-    expect(client.lastResponse.durationMinutes).toEqual(17);
-    expect(client2.lastResponse.durationMinutes).toEqual(17);
+    expect(client.lastResponse.mobState.durationMinutes).toEqual(17);
+    expect(client2.lastResponse.mobState.durationMinutes).toEqual(17);
   });
 
   test("Start timer", async () => {
@@ -84,7 +84,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await client.closeSocket();
-    expect(client.lastResponse.status).toEqual(Status.Running);
+    expect(client.lastResponse.mobState.status).toEqual(Status.Running);
   });
 
   test("Pause timer", async () => {
@@ -93,7 +93,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await client.closeSocket();
-    expect(client.lastResponse.status).toEqual(Status.Paused);
+    expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
   });
 
   test("Resume timer", async () => {
@@ -103,7 +103,7 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await client.closeSocket();
-    expect(client.lastResponse.status).toEqual(Status.Running);
+    expect(client.lastResponse.mobState.status).toEqual(Status.Running);
   });
 
   test("Update timer", async () => {
@@ -112,7 +112,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.update(40);
     await client.closeSocket();
-    expect(client.lastResponse.durationMinutes).toEqual(40);
+    expect(client.lastResponse.mobState.durationMinutes).toEqual(40);
   });
 
   test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
@@ -125,8 +125,8 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await client.closeSocket();
-      expect(client.lastResponse.secondsRemaining).toEqual(0);
-      expect(client.lastResponse.status).toEqual(Status.Ready);
+      expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
+      expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
     }
   );
 
@@ -141,11 +141,13 @@ describe("WebSocket Server", () => {
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
     await client.closeSocket();
     const numDigits = 1;
-    expect(client.lastResponse.secondsRemaining).toBeCloseTo(durationSeconds, numDigits);
-    expect(client.lastResponse.status).toEqual(Status.Paused);
+    expect(client.lastResponse.mobState.secondsRemaining).toBeCloseTo(
+      durationSeconds,
+      numDigits
+    );
+    expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
     expect(client._receivedResponses.length).toEqual(4); // join, update, start, pause
     // todo: rename or make public
     console.log(client._receivedResponses);
   });
-
 });

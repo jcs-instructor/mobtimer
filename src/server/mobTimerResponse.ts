@@ -1,10 +1,14 @@
 import { Status } from "../status";
 
-export type MobTimerResponse = {
+export type MobState = {
   mobName: string;
   status: Status;
   durationMinutes: number;
   secondsRemaining: number;
+};
+
+export type MobTimerResponse = {
+  mobState: MobState;
 };
 
 /*
