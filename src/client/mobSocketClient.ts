@@ -5,12 +5,12 @@ import { MobTimerResponse } from "../server/mobTimerResponse";
 import * as MobTimerRequests from "../server/mobTimerRequests";
 
 class MobSocketClient extends WebSocket {
-  private _receivedResponses: string[] = [];
+  private _responses: string[] = [];
 
   constructor(url: string) {
     super(url);
     this.on("message", (data) => {
-      this._receivedResponses.push(data.toString());
+      this._responses.push(data.toString());
     });
   }
 
@@ -40,11 +40,11 @@ class MobSocketClient extends WebSocket {
   }
 
   public get lastResponse(): MobTimerResponse {
-    return JSON.parse(this._receivedResponses.at(-1) || "") as MobTimerResponse;
+    return JSON.parse(this._responses.at(-1) || "") as MobTimerResponse;
   }
 
   public get responses(): string[] {
-    return [...this._receivedResponses];
+    return [...this._responses];
   }
 
   async closeSocket() {

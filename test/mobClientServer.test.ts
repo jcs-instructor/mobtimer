@@ -40,7 +40,9 @@ describe("WebSocket Server", () => {
     await client2.closeSocket();
 
     expect(client.lastResponse.mobState).toEqual(new MobTimer(_mobName1).state);
-    expect(client2.lastResponse.mobState).toEqual(new MobTimer(_mobName2).state);
+    expect(client2.lastResponse.mobState).toEqual(
+      new MobTimer(_mobName2).state
+    );
   });
 
   test("Modify one of two mob timers", async () => {
@@ -128,7 +130,7 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await client.closeSocket();
-      console.log(client._receivedResponses);
+      console.log(client.responses);
       expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
       expect(client.lastResponse.actionInfo.action).toEqual("expired");
       expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
@@ -151,6 +153,6 @@ describe("WebSocket Server", () => {
       numDigits
     );
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
-    expect(client._receivedResponses.length).toEqual(4); // join, update, start, pause
+    expect(client.responses.length).toEqual(4); // join, update, start, pause
   });
 });
