@@ -115,9 +115,9 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.durationMinutes).toEqual(40);
   });
 
-  it.each([
+  test.each([
     0.2,
-    TimeUtils.millisecondsToSeconds(1), 
+    TimeUtils.millisecondsToSeconds(1),
   ])
     ("Start timer with duration %p and elapse time sends message to all",
       (async (durationSeconds: number) => {
@@ -135,8 +135,23 @@ describe("WebSocket Server", () => {
         await client.closeSocket();
         expect(client.lastResponse.secondsRemaining).toEqual(0);
         expect(client.lastResponse.status).toEqual(Status.Ready);
-      }
-      )
-    );
+      }));
 
+  test("Pause... ", async () => {
+    const durationSeconds = 0.2;
+    const toleranceSeconds = 0.1;
+    const nowInSeconds1 = TimeUtils.getNowInSeconds();
+    setTimeout(() => {
+      console.log("Inside", TimeUtils.getNowInSeconds() - nowInSeconds1);
+    }, 0);
+    console.log(TimeUtils.getNowInSeconds() - nowInSeconds1);
+    const client = await openSocket();
+    await client.joinMob(_mobName1);
+    await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+    await client.start();
+    await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+    await client.closeSocket();
+    expect(client.lastResponse.secondsRemaining).toEqual(0);
+    expect(client.lastResponse.status).toEqual(Status.Ready);
+  })
 });
