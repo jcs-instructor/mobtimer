@@ -60,9 +60,7 @@ describe("WebSocket Server", () => {
     expect(client2.lastResponse.mobState.durationMinutes).toEqual(17);
   });
 
-  // todo check other branch(es) for tests that might not have been copied into this branch
-  // todo: consider renaming request as messageFromClient and response as messageToClient
-  // todo remove .skip from skipped test - when ready to implement time elapsed functionality
+  // todo check other branch(es) for tests that might not have been copied into this branch (!)
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";
 
@@ -130,7 +128,6 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await client.closeSocket();
-      // todo: rename _receivedResponses or make public
       console.log(client._receivedResponses);
       expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
       expect(client.lastResponse.actionInfo.action).toEqual("expired");

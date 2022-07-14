@@ -43,7 +43,7 @@ class MobSocketClient extends WebSocket {
     return JSON.parse(this._receivedResponses.at(-1) || "") as MobTimerResponse;
   }
 
-  // todo: clone / encapsulate
+  // todo: clone / encapsulate and fix naming (_... for private only) (!)
   public get responses(): string[] {
     return this._receivedResponses; 
   }
