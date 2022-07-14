@@ -3,6 +3,7 @@ import WebSocket, { Server } from "ws";
 import { MobTimer } from "../mobTimer";
 import { TimeUtils } from "../timeUtils";
 import { Status } from "../status";
+import { Action } from "./mobTimerResponse";
 import {
   MobTimerRequest,
   JoinRequest,
@@ -149,7 +150,7 @@ function broadcastWhenExpire(
 function broadcastImpl(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer,
-  action: string
+  action: Action
 ) {
   let response = JSON.stringify({
     actionInfo: { action: action },
@@ -161,7 +162,7 @@ function broadcastImpl(
 function broadcastResponse(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer,
-  action: string
+  action: Action
 ) {
   broadcastImpl(wss, mobTimer, action);
 }
