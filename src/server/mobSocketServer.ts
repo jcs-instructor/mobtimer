@@ -143,7 +143,11 @@ function broadcastWhenExpire(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer
 ) {
-  let response = JSON.stringify({ mobState: mobTimer.state });
+  const action = "expired";
+  let response = JSON.stringify({
+    actionInfo: action,
+    mobState: mobTimer.state,
+  });
   broadcast(wss, mobTimer.state.mobName, response);
 }
 

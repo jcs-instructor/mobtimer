@@ -8,6 +8,7 @@ export type MobState = {
 };
 
 export type MobTimerResponse = {
+  actionInfo: { action: "update" | "start" | "pause" | "resume" | "expired" };
   mobState: MobState;
 };
 
