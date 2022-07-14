@@ -40,7 +40,7 @@ class MobSocketClient extends WebSocket {
   }
 
   public get lastResponse(): MobTimerResponse {
-    return JSON.parse(this._receivedResponses.at(-1) || "");
+    return JSON.parse(this._receivedResponses.at(-1) || "") as MobTimerResponse;
   }
 
   // todo: clone / encapsulate

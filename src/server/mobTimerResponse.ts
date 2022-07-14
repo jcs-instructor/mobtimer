@@ -7,7 +7,7 @@ export type MobState = {
   secondsRemaining: number;
 };
 
-export type Action = "update" | "start" | "pause" | "resume" | "expired";
+export type Action = "join" | "update" | "start" | "pause" | "resume" | "expired";
 
 export type MobTimerResponse = {
   actionInfo: { action: Action };
