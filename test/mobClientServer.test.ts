@@ -146,6 +146,7 @@ describe("WebSocket Server", () => {
       numDigits
     );
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
+    expect(client.lastResponse.actionInfo.action).toEqual("expired");
     expect(client._receivedResponses.length).toEqual(4); // join, update, start, pause
     // todo: rename or make public
     console.log(client._receivedResponses);
