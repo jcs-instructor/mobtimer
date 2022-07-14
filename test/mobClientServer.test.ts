@@ -96,6 +96,7 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
+    expect(client.lastResponse.actionInfo.action).toEqual("pause");
   });
 
   test("Resume timer", async () => {
@@ -106,6 +107,7 @@ describe("WebSocket Server", () => {
     await client.resume();
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Running);
+    expect(client.lastResponse.actionInfo.action).toEqual("resume");
   });
 
   test("Update timer", async () => {
@@ -115,6 +117,7 @@ describe("WebSocket Server", () => {
     await client.update(40);
     await client.closeSocket();
     expect(client.lastResponse.mobState.durationMinutes).toEqual(40);
+    expect(client.lastResponse.actionInfo.action).toEqual("update");
   });
 
   test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
