@@ -49,7 +49,7 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.expireFunc = () => broadcastWhenExpire(wss, mobTimer as MobTimer);
+    mobTimer.expireFunc = () => broadcastToClients(wss, mobTimer as MobTimer, "expired");
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
@@ -134,20 +134,12 @@ function addMobListeners(server: http.Server): void {
       if (!mobTimer) {
         return;
       }
-      broadcastResponse(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
+      broadcastToClients(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
 }
 
-// todo: this is a duplicate of broadcastState for debug logging - deduplicate this later
-function broadcastWhenExpire(
-  wss: WebSocket.Server<WebSocket.WebSocket>,
-  mobTimer: MobTimer
-) {
-  broadcastImpl(wss, mobTimer, "expired");
-}
-
-function broadcastImpl(
+function broadcastToClients(
   wss: WebSocket.Server<WebSocket.WebSocket>,
   mobTimer: MobTimer,
   action: Action
@@ -157,14 +149,6 @@ function broadcastImpl(
     mobState: mobTimer.state,
   });
   broadcast(wss, mobTimer.state.mobName, response);
-}
-
-function broadcastResponse(
-  wss: WebSocket.Server<WebSocket.WebSocket>,
-  mobTimer: MobTimer,
-  action: Action
-) {
-  broadcastImpl(wss, mobTimer, action);
 }
 
 function requestToString(request: WebSocket.RawData) {
