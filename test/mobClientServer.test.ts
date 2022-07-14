@@ -125,7 +125,10 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await client.closeSocket();
+      // todo: rename _receivedResponses or make public
+      console.log(client._receivedResponses);
       expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
+      expect(client.lastResponse.actionInfo.action).toEqual("expired");
       expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
     }
   );
@@ -146,9 +149,6 @@ describe("WebSocket Server", () => {
       numDigits
     );
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
-    expect(client.lastResponse.actionInfo.action).toEqual("expired");
     expect(client._receivedResponses.length).toEqual(4); // join, update, start, pause
-    // todo: rename or make public
-    console.log(client._receivedResponses);
   });
 });

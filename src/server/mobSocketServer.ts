@@ -145,7 +145,7 @@ function broadcastWhenExpire(
 ) {
   const action = "expired";
   let response = JSON.stringify({
-    actionInfo: action,
+    actionInfo: {action: action},
     mobState: mobTimer.state,
   });
   broadcast(wss, mobTimer.state.mobName, response);
