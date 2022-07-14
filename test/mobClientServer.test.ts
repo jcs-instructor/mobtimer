@@ -119,7 +119,6 @@ describe("WebSocket Server", () => {
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
       const toleranceSeconds = 0.1;
-      const nowInSeconds1 = TimeUtils.getNowInSeconds();
       const client = await openSocket();
       await client.joinMob(_mobName1);
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
@@ -134,7 +133,6 @@ describe("WebSocket Server", () => {
   test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
     const durationSeconds = 1;
     const toleranceSeconds = 0.1;
-    const nowInSeconds1 = TimeUtils.getNowInSeconds();
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
@@ -143,10 +141,11 @@ describe("WebSocket Server", () => {
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
     await client.closeSocket();
     const numDigits = 1;
-    expect(client.lastResponse.secondsRemaining).toBeCloseTo(
-      durationSeconds,
-      1
-    );
+    expect(client.lastResponse.secondsRemaining).toBeCloseTo(durationSeconds, numDigits);
     expect(client.lastResponse.status).toEqual(Status.Paused);
+    expect(client._receivedResponses.length).toEqual(4); // join, update, start, pause
+    // todo: rename or make public
+    console.log(client._receivedResponses);
   });
+
 });
