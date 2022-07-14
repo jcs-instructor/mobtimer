@@ -26,6 +26,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.closeSocket();
     expect(client.lastResponse.mobState).toEqual(new MobTimer(_mobName1).state);
+    expect(client.lastResponse.actionInfo.action).toEqual("join");
   });
 
   test("Create 2 mobs", async () => {
@@ -85,6 +86,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Running);
+    expect(client.lastResponse.actionInfo.action).toEqual("start");
   });
 
   test("Pause timer", async () => {

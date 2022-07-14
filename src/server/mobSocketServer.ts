@@ -133,7 +133,7 @@ function addMobListeners(server: http.Server): void {
       if (!mobTimer) {
         return;
       }
-      broadcastResponse(wss, mobTimer); // todo consider moving mobName up a level
+      broadcastResponse(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
 }
@@ -160,9 +160,10 @@ function broadcastImpl(
 
 function broadcastResponse(
   wss: WebSocket.Server<WebSocket.WebSocket>,
-  mobTimer: MobTimer
+  mobTimer: MobTimer,
+  action: string
 ) {
-  broadcastImpl(wss, mobTimer, "update");
+  broadcastImpl(wss, mobTimer, action);
 }
 
 function requestToString(request: WebSocket.RawData) {
