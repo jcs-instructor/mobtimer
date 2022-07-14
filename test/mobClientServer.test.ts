@@ -115,14 +115,23 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.durationMinutes).toEqual(40);
   });
 
+  it.each([[[1, 41], 42]])(
+    "adds %p expecting %p",
+    (durationSeconds: number) => {
+      expect(calculator("+", numbers)).toEqual(result);
+    }
+  );
+
   test("Start timer and elapse time sends message to all", async () => {
+    const durationSeconds = 0.2;
+    const toleranceSeconds = 0.1;
     const nowInSeconds1 = TimeUtils.getNowInSeconds();
-    setTimeout(() => { console.log("Inside", TimeUtils.getNowInSeconds() - nowInSeconds1)}, 0);
+    setTimeout(() => {
+      console.log("Inside", TimeUtils.getNowInSeconds() - nowInSeconds1);
+    }, 0);
     console.log(TimeUtils.getNowInSeconds() - nowInSeconds1);
     const client = await openSocket();
     await client.joinMob(_mobName1);
-    const durationSeconds = 0.2;
-    const toleranceSeconds = 0.1;
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
