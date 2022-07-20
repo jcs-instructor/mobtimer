@@ -152,7 +152,9 @@ describe("WebSocket Server", () => {
       durationSeconds,
       numDigits
     );
+    expect(client.lastResponse.actionInfo.action).toEqual("pause");
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
     expect(client.responses.length).toEqual(4); // join, update, start, pause
   });
+
 });

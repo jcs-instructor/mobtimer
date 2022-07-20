@@ -7,7 +7,14 @@ export type MobState = {
   secondsRemaining: number;
 };
 
-export type Action = "join" | "update" | "start" | "pause" | "resume" | "expired";
+export enum Action {
+  Join = "join",
+  Update = "update",
+  Start = "start",
+  Pause = "pause",
+  Resume = "resume",
+  Expired = "expired",
+}
 
 export type MobTimerResponse = {
   actionInfo: { action: Action };

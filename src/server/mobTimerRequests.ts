@@ -1,3 +1,5 @@
+import { Action } from "./mobTimerResponse";
+
 export type MobTimerRequest =
   | JoinRequest
   | UpdateRequest
@@ -6,46 +8,46 @@ export type MobTimerRequest =
   | ResumeRequest;
 
 export type JoinRequest = {
-  action: "join";
+  action: Action.Join;
   mobName: string;
 };
 
 export type UpdateRequest = {
-  action: "update";
+  action: Action.Update;
   value: { durationMinutes?: number };
 };
 
 export type StartRequest = {
-  action: "start";
+  action: Action.Start;
 };
 
 export type PauseRequest = {
-  action: "pause";
+  action: Action.Pause;
 };
 
 export type ResumeRequest = {
-  action: "resume";
+  action: Action.Resume;
 };
 
 export function joinRequest(mobName: string) {
-  return JSON.stringify({ action: "join", mobName } as JoinRequest);
+  return JSON.stringify({ action: Action.Join, mobName } as JoinRequest);
 }
 
 export function updateRequest(durationMinutes: number) {
   return JSON.stringify({
-    action: "update",
+    action: Action.Update,
     value: { durationMinutes },
   } as UpdateRequest);
 }
 
 export function startRequest() {
-  return JSON.stringify({ action: "start" } as StartRequest);
+  return JSON.stringify({ action: Action.Start } as StartRequest);
 }
 
 export function pauseRequest() {
-  return JSON.stringify({ action: "pause" } as PauseRequest);
+  return JSON.stringify({ action: Action.Pause } as PauseRequest);
 }
 
 export function resumeRequest() {
-  return JSON.stringify({ action: "resume" } as ResumeRequest);
+  return JSON.stringify({ action: Action.Resume } as ResumeRequest);
 }
