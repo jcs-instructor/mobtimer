@@ -138,7 +138,20 @@ test("After time expires, seconds remaining should be 0", () => {
   expect(mobTimer.secondsRemainingString).toEqual("00:00");
 });
 
-// // test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
+test ("After time expires, elapse time raises specified event", async () => {
+  const mobTimer = new MobTimer();
+  let expired = false;
+  mobTimer.expireFunc = () => { expired = true; console.log("inside"); };
+  const durationSeconds = 0.2;
+  mobTimer.durationMinutes = TimeUtils.secondsToMinutes(durationSeconds);
+  mobTimer.start();
+  const toleranceSeconds = 0.1;
+  TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 0.5);
+  console.log("here");
+  expect(expired).toBe(true);
+});
+
+// test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
 //   "Start timer with duration %p and elapse time raises specified event,
 //   async (durationSeconds: number) => {
 // const mobTimer = new MobTimer();
@@ -154,6 +167,7 @@ test("After time expires, seconds remaining should be 0", () => {
 //     expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
 //   }
 // );
+
 function createMockCurrentTime(mobTimer: MobTimer) {
   const mockCurrentTime = new MockCurrentTime();
   mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
