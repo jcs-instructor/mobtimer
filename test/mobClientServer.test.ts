@@ -131,7 +131,6 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await client.closeSocket();
-      console.log(client.responses);
       expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
       expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
       expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
@@ -155,6 +154,34 @@ describe("WebSocket Server", () => {
     );
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Pause);
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
-    expect(client.responses.length).toEqual(4); // join, update, start, pause
   });
+
+  test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
+    const durationSeconds = 1;
+    const toleranceSeconds = 0.1;
+    const client = await openSocket();
+    await client.joinMob(_mobName1);
+    await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+    await client.start();
+    await client.pause();
+    await client.resume();
+    await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+    await client.closeSocket();
+    const numDigits = 1;
+    expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
+    expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
+  });  
+
+  test("Check got expected number of messages", async () => {
+    const client = await openSocket();
+    await client.joinMob(_mobName1);
+    await client.update(TimeUtils.secondsToMinutes(0.2));
+    await client.start();
+    await client.pause();
+    await client.resume();
+    await client.closeSocket();
+    const numDigits = 1;
+    expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
+  });  
 });
