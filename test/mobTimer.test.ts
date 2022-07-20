@@ -143,7 +143,6 @@ test("After time expires, elapse time raises specified event", async () => {
   let expired = false;
   mobTimer.expireFunc = () => {
     expired = true;
-    console.log("inside");
   };
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = TimeUtils.secondsToMinutes(durationSeconds);
@@ -152,23 +151,6 @@ test("After time expires, elapse time raises specified event", async () => {
   await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
   expect(expired).toBe(true);
 });
-
-// test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
-//   "Start timer with duration %p and elapse time raises specified event,
-//   async (durationSeconds: number) => {
-// const mobTimer = new MobTimer();
-//     const toleranceSeconds = 0.1;
-//     const client = await openSocket();
-//     await client.joinMob(_mobName1);
-//     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
-//     await client.start();
-//     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-//     await client.closeSocket();
-//     expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
-//     expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
-//     expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
-//   }
-// );
 
 function createMockCurrentTime(mobTimer: MobTimer) {
   const mockCurrentTime = new MockCurrentTime();
