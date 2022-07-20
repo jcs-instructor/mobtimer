@@ -1,20 +1,5 @@
-import { Status } from "../status";
-
-export type MobState = {
-  mobName: string;
-  status: Status;
-  durationMinutes: number;
-  secondsRemaining: number;
-};
-
-export enum Action {
-  Join = "join",
-  Update = "update",
-  Start = "start",
-  Pause = "pause",
-  Resume = "resume",
-  Expired = "expired",
-}
+import { Action } from "./action";
+import { MobState } from "./mobState";
 
 export type MobTimerResponse = {
   actionInfo: { action: Action };

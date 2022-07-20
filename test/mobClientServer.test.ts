@@ -4,6 +4,7 @@ import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
 import * as http from "http";
 import { TimeUtils } from "../src/timeUtils";
+import { Action } from "../src/server/action";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
@@ -26,7 +27,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.closeSocket();
     expect(client.lastResponse.mobState).toEqual(new MobTimer(_mobName1).state);
-    expect(client.lastResponse.actionInfo.action).toEqual("join");
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Join);
   });
 
   test("Create 2 mobs", async () => {
@@ -86,7 +87,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastResponse.actionInfo.action).toEqual("start");
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Start);
   });
 
   test("Pause timer", async () => {
@@ -96,7 +97,7 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
-    expect(client.lastResponse.actionInfo.action).toEqual("pause");
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Pause);
   });
 
   test("Resume timer", async () => {
@@ -107,7 +108,7 @@ describe("WebSocket Server", () => {
     await client.resume();
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastResponse.actionInfo.action).toEqual("resume");
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Resume);
   });
 
   test("Update timer", async () => {
@@ -132,7 +133,7 @@ describe("WebSocket Server", () => {
       await client.closeSocket();
       console.log(client.responses);
       expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
-      expect(client.lastResponse.actionInfo.action).toEqual("expired");
+      expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
       expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
     }
   );
@@ -152,9 +153,8 @@ describe("WebSocket Server", () => {
       durationSeconds,
       numDigits
     );
-    expect(client.lastResponse.actionInfo.action).toEqual("pause");
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Pause);
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
     expect(client.responses.length).toEqual(4); // join, update, start, pause
   });
-
 });

@@ -1,4 +1,4 @@
-import { Action } from "./mobTimerResponse";
+import { Action } from "./action";
 
 export type MobTimerRequest =
   | JoinRequest

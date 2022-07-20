@@ -3,7 +3,7 @@ import WebSocket, { Server } from "ws";
 import { MobTimer } from "../mobTimer";
 import { TimeUtils } from "../timeUtils";
 import { Status } from "../status";
-import { Action } from "./mobTimerResponse";
+import { Action } from "./action";
 import {
   MobTimerRequest,
   JoinRequest,
@@ -49,7 +49,8 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.expireFunc = () => broadcastToClients(wss, mobTimer as MobTimer, "expired");
+    mobTimer.expireFunc = () =>
+      broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
     _mobs.set(mobName, mobTimer);
   }
   return mobTimer;
@@ -63,7 +64,7 @@ function _processRequest(
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
-  if (parsedRequest.action === "join") {
+  if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterMob(wss, mobName);
@@ -77,7 +78,7 @@ function _processRequest(
   }
 
   switch (parsedRequest.action) {
-    case "join": {
+    case Action.Join: {
       socket.mobName = mobName;
       break;
     }
@@ -88,15 +89,15 @@ function _processRequest(
         updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;
     }
-    case "start": {
+    case Action.Start: {
       mobTimer.start();
       break;
     }
-    case "pause": {
+    case Action.Pause: {
       mobTimer.pause();
       break;
     }
-    case "resume": {
+    case Action.Resume: {
       mobTimer.resume();
       break;
     }
