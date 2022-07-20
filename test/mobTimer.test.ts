@@ -68,9 +68,15 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   const numDigits = 1;
-  expect(mobTimer.secondsRemaining).toBeCloseTo(TimeUtils.minutesToSeconds(6), numDigits);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(
+    TimeUtils.minutesToSeconds(6),
+    numDigits
+  );
   await TimeUtils.delaySeconds(1);
-  expect(mobTimer.secondsRemaining).toBeCloseTo(TimeUtils.minutesToSeconds(6) - 1, numDigits);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(
+    TimeUtils.minutesToSeconds(6) - 1,
+    numDigits
+  );
 });
 
 test("Pause timer", () => {
@@ -132,6 +138,22 @@ test("After time expires, seconds remaining should be 0", () => {
   expect(mobTimer.secondsRemainingString).toEqual("00:00");
 });
 
+// // test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
+//   "Start timer with duration %p and elapse time raises specified event,
+//   async (durationSeconds: number) => {
+// const mobTimer = new MobTimer();
+//     const toleranceSeconds = 0.1;
+//     const client = await openSocket();
+//     await client.joinMob(_mobName1);
+//     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+//     await client.start();
+//     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+//     await client.closeSocket();
+//     expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
+//     expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
+//     expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
+//   }
+// );
 function createMockCurrentTime(mobTimer: MobTimer) {
   const mockCurrentTime = new MockCurrentTime();
   mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
