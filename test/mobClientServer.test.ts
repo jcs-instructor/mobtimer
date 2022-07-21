@@ -184,4 +184,13 @@ describe("WebSocket Server", () => {
     const numDigits = 1;
     expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
   });  
+
+  test("Handle bad message", async () => {
+    const client = await openSocket();
+    await client.send("some-bad-garbage-not-a-real-request");
+    await client.joinMob(_mobName1);
+    await client.closeSocket();
+    expect(client.responses.length).toEqual(1); // join
+  });  
+
 });

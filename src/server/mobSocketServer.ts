@@ -130,7 +130,12 @@ function addMobListeners(server: http.Server): void {
   wss.on("connection", function (webSocket: MobWebSocket) {
     webSocket.on("message", function (request) {
       let requestString: string = requestToString(request);
-      const parsedRequest = JSON.parse(requestString) as MobTimerRequest;
+      let parsedRequest: MobTimerRequest;
+      try {
+         parsedRequest = JSON.parse(requestString) as MobTimerRequest;
+      } catch (e) {
+        return;
+      }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);
       if (!mobTimer) {
         return;
