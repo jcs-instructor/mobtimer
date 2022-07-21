@@ -51,7 +51,7 @@ export class MobTimer {
     this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
-  // todo: maybe get rid of resume (just call start) (!) 
+  // todo: maybe get rid of resume (just call start) (!)
   resume() {
     this.setExpireTimeout();
     this._running = true;
