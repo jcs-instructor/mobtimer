@@ -6,11 +6,11 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": "./",
-    "outDir": "./dist",
+    "outDir": "./dist/server",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
   },
   "include": [
-    "./src/server"
+    "./src"
   ]
 }
