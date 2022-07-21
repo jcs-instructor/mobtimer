@@ -190,7 +190,9 @@ describe("WebSocket Server", () => {
     await client.send("some-bad-garbage-not-a-real-request");
     await client.closeSocket();
     expect(client.responses.length).toEqual(1); // join
-    expect(client.lastResponse.actionInfo.action).toEqual(Action.InvalidRequestError);
+    expect(client.lastResponse.actionInfo.action).toEqual(
+      Action.InvalidRequestError
+    );
   });
 
   test("Handle bad message and subsequent request succeeds", async () => {
