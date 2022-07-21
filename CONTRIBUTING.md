@@ -19,7 +19,13 @@ https://mobtimer1234.herokuapp.com/
 git push heroku main
 ```
 
-## Test
+## Run Unit Tests
 ```
 yarn test
+```
+
+## Manually Test
+Sample message to send via Postman:
+```
+{ "action": "join", "mobName": "amazing-folks" }
 ```
