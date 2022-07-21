@@ -134,6 +134,10 @@ function addMobListeners(server: http.Server): void {
       try {
          parsedRequest = JSON.parse(requestString) as MobTimerRequest;
       } catch (e) {
+        const errorResponse = JSON.stringify({ 
+            actionInfo: { action: Action.InvalidRequestError },
+          });
+        webSocket.send(errorResponse);
         return;
       }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);

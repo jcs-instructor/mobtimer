@@ -5,4 +5,5 @@ export enum Action {
   Pause = "pause",
   Resume = "resume",
   Expired = "expired",
+  InvalidRequestError = "invalidRequestError",
 }
