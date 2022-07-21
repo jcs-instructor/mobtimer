@@ -6,7 +6,7 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": "./",
-    "outDir": "./dist/server",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
   },

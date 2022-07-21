@@ -1,14 +1,13 @@
 import * as http from "http";
 import WebSocket, { Server } from "ws";
 import { MobTimer } from "../mobTimer";
-import { TimeUtils } from "../timeUtils";
-import { Status } from "../status";
 import { Action } from "./action";
 import {
   MobTimerRequest,
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
+import express from 'express';
 
 export async function startMobServer(port: number): Promise<http.Server> {
   const server = http.createServer();
@@ -16,6 +15,29 @@ export async function startMobServer(port: number): Promise<http.Server> {
   return new Promise((resolve) => {
     server.listen(port, () => resolve(server));
   });
+}
+
+export function renderHomePage(port: number) {
+
+  console.log("asdlkfkadsfkj");
+
+  // const app = express();
+
+  // // View engine setup
+  // app.set('view engine', 'ejs');
+  
+  // // Without middleware
+  // app.get('/', function(req: any, res: any) {
+  
+  //   console.log(req);
+  
+  //   // Rendering home.ejs page
+  //   res.render('home');
+  // })
+  
+  // app.listen(port, function() {
+  //   console.log("Server listening on PORT", port);
+  // });
 }
 
 // private class
