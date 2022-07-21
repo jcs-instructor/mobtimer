@@ -1,0 +1,7 @@
+- Start with React todo example for managing todos. Todo data is fetched and stored to local storage.
+  - Find code
+  - Study code
+  - Create repo
+- Create a button that sends a join mob and a separate for start timer.
+- Change fetch to treat each message as a todo, so maintain a list of messages. Any time a message is received, it gets populated.
+- Add a compponent for displaying mob state.
