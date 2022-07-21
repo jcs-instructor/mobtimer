@@ -171,7 +171,7 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
     expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
-  });  
+  });
 
   test("Check got expected number of messages", async () => {
     const client = await openSocket();
@@ -183,14 +183,21 @@ describe("WebSocket Server", () => {
     await client.closeSocket();
     const numDigits = 1;
     expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
-  });  
+  });
 
-  test("Handle bad message", async () => {
+  test("Handle bad message and get good error message", async () => {
+    const client = await openSocket();
+    await client.send("some-bad-garbage-not-a-real-request");
+    await client.closeSocket();
+    expect(client.responses.length).toEqual(1); // join
+    // TODO: expect something: expect(client.lastResponse.error).toEqual("something");
+  });
+
+  test("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket();
     await client.send("some-bad-garbage-not-a-real-request");
     await client.joinMob(_mobName1);
     await client.closeSocket();
-    expect(client.responses.length).toEqual(1); // join
-  });  
-
+    expect(client.responses.length).toEqual(2); // join + error
+  });
 });
