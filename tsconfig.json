@@ -3,8 +3,14 @@
     "target": "es6",
     "esModuleInterop": true,
     "module": "commonjs",
-    "outDir": "out",
     "sourceMap": true,
-    "strict": true
-  }
+    "strict": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+  },
+  "include": [
+    "./src/server"
+  ]
 }
