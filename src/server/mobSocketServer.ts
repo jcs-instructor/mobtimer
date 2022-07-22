@@ -7,7 +7,7 @@ import {
   JoinRequest,
   UpdateRequest,
 } from "./mobTimerRequests";
-import express from 'express';
+import express from "express";
 
 export async function startMobServer(port: number): Promise<http.Server> {
   const server = http.createServer();
@@ -18,26 +18,24 @@ export async function startMobServer(port: number): Promise<http.Server> {
 }
 
 export function renderHomePage(port: number) {
-
   console.log("asdlkfkadsfkj");
 
-  // const app = express();
+  const app = express();
 
-  // // View engine setup
-  // app.set('view engine', 'ejs');
-  
-  // // Without middleware
-  // app.get('/', function(req: any, res: any) {
-  
-  //   console.log(req);
-  
-  //   // Rendering home.ejs page
-  //   res.render('home');
-  // })
-  
-  // app.listen(port, function() {
-  //   console.log("Server listening on PORT", port);
-  // });
+  // View engine setup
+  app.set("view engine", "ejs");
+
+  // Without middleware
+  app.get("/", function (req: any, res: any) {
+    console.log(req);
+
+    // Rendering home.ejs page
+    res.render("home");
+  });
+
+  app.listen(port, function () {
+    console.log("Server listening on PORT", port);
+  });
 }
 
 // private class
@@ -154,11 +152,11 @@ function addMobListeners(server: http.Server): void {
       let requestString: string = requestToString(request);
       let parsedRequest: MobTimerRequest;
       try {
-         parsedRequest = JSON.parse(requestString) as MobTimerRequest;
+        parsedRequest = JSON.parse(requestString) as MobTimerRequest;
       } catch (e) {
-        const errorResponse = JSON.stringify({ 
-            actionInfo: { action: Action.InvalidRequestError },
-          });
+        const errorResponse = JSON.stringify({
+          actionInfo: { action: Action.InvalidRequestError },
+        });
         webSocket.send(errorResponse);
         return;
       }
