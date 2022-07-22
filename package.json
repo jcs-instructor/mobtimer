@@ -1,5 +1,5 @@
 {
-  "main": "dist/src/server/index.js",
+  "main": "dist/server/index.js",
   "engines": {
     "node": "16.x"
   },

@@ -7,10 +7,15 @@
     "strict": true,
     "baseUrl": "./",
     "outDir": "./dist",
+    "rootDir": "./src",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
   },
   "include": [
     "./src"
-  ]
+  ],
+  "exclude": [
+    "./test",
+    "./src/client",
+  ],
 }
