@@ -18,8 +18,6 @@ export async function startMobServer(port: number): Promise<http.Server> {
 }
 
 export function renderHomePage(port: number) {
-  console.log("asdlkfkadsfkj");
-
   const app = express();
 
   // View engine setup
