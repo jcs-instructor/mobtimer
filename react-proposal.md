@@ -2,6 +2,8 @@
   - Find code
   - Study code
   - Create repo
-- Create a button that sends a join mob and a separate for start timer.
+- Create a button that sends a join mob and a separate button for start timer.
 - Change fetch to treat each received message as a todo, so maintain a list of messages. Any time a message is received, ToDo data gets populated with the message.  This is just for POC, might not need screen for long term.
 - Add a compponent for displaying mob state.
+- Make a UI mock up
+- Implement
