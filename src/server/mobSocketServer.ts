@@ -18,18 +18,12 @@ export async function startMobServer(port: number): Promise<http.Server> {
   });
 }
 
-// todo: get rid of this function and just use the following where this is called: addMobListeners(server);
-export async function startMobServer2(port: number, server: http.Server): Promise<http.Server> {
-  addMobListeners(server);
-  return server;
-}
-
 export function renderHomePage(port: number) {
   const app = express();
 
   // View engine setup
   // todo: wrong path - fix this
-  app.set("views", path.join(__dirname, "views")); 
+  app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "ejs");
 
   // Without middleware
@@ -44,7 +38,7 @@ export function renderHomePage(port: number) {
     console.log("Server listening on PORT", port);
   });
 
-  startMobServer2(port, server);
+  addMobListeners(server);
 }
 
 // private class
