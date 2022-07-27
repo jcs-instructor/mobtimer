@@ -29,3 +29,9 @@ Sample message to send via Postman:
 ```
 { "action": "join", "mobName": "amazing-folks" }
 ```
+
+## Start Web Server
+```
+cd src/server
+ts-node index
+```
