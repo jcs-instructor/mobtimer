@@ -8,6 +8,7 @@ import {
   UpdateRequest,
 } from "./mobTimerRequests";
 import express from "express";
+import * as path from "path";
 
 export async function startMobServer(port: number): Promise<http.Server> {
   const server = http.createServer();
@@ -17,6 +18,7 @@ export async function startMobServer(port: number): Promise<http.Server> {
   });
 }
 
+// todo: get rid of this function and just use the following where this is called: addMobListeners(server);
 export async function startMobServer2(port: number, server: http.Server): Promise<http.Server> {
   addMobListeners(server);
   return server;
@@ -26,6 +28,8 @@ export function renderHomePage(port: number) {
   const app = express();
 
   // View engine setup
+  // todo: wrong path - fix this
+  app.set("views", path.join(__dirname, "views")); 
   app.set("view engine", "ejs");
 
   // Without middleware
