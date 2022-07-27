@@ -22,8 +22,11 @@ export function renderHomePage(port: number) {
   const app = express();
 
   // View engine setup
-  app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "ejs");
+
+  // Folder configuration
+  app.use(express.static("public"));
+  app.set("views", path.join(__dirname, "views"));
 
   // Without middleware
   app.get("/", function (req: any, res: any) {
