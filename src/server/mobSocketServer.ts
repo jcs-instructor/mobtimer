@@ -22,7 +22,6 @@ export function renderHomePage(port: number) {
   const app = express();
 
   // View engine setup
-  // todo: wrong path - fix this
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "ejs");
 
