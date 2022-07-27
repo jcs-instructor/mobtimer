@@ -17,6 +17,11 @@ export async function startMobServer(port: number): Promise<http.Server> {
   });
 }
 
+export async function startMobServer2(port: number, server: http.Server): Promise<http.Server> {
+  addMobListeners(server);
+  return server;
+}
+
 export function renderHomePage(port: number) {
   const app = express();
 
@@ -31,9 +36,11 @@ export function renderHomePage(port: number) {
     res.render("home");
   });
 
-  app.listen(port, function () {
+  const server = app.listen(port, function () {
     console.log("Server listening on PORT", port);
   });
+
+  startMobServer2(port, server);
 }
 
 // private class
