@@ -51,11 +51,8 @@ export class MobTimer {
     this._whenStartedInSeconds = this._nowInSecondsFunc();
   }
 
-  // todo: maybe get rid of resume (just call start) (!)
   resume() {
-    this.setExpireTimeout();
-    this._running = true;
-    this._whenStartedInSeconds = this._nowInSecondsFunc();
+    this.start();
   }
 
   public set nowInSecondsFunc(func: () => number) {
