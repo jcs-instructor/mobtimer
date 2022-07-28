@@ -1,5 +1,5 @@
 import * as http from "http";
-import WebSocket, { Server } from "ws";
+import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
 import { Action } from "./action";
 import {
@@ -10,11 +10,11 @@ import {
 import express from "express";
 import * as path from "path";
 
-export async function startMobServer(port: number): Promise<http.Server> {
+export async function startMobServer(port: number): Promise<{ httpServer: http.Server, wss: WebSocket.Server }> {
   const server = http.createServer();
   const wss = addMobListeners(server);
   return new Promise((resolve) => {
-    server.listen(port, () => resolve(server));
+    server.listen(port, () => resolve({ httpServer: server, wss }));
   });
 }
 

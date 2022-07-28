@@ -3,13 +3,14 @@ import { MobTimer } from "../src/mobTimer";
 import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
 import * as http from "http";
+import WebSocket from "ws";
 import { TimeUtils } from "../src/timeUtils";
 import { Action } from "../src/server/action";
 
 export const port = 3000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
-  let _server: http.Server;
+  let _server: { httpServer: http.Server, wss: WebSocket.Server };
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
 
@@ -19,7 +20,9 @@ describe("WebSocket Server", () => {
 
   afterEach(async () => {
     resetMobs();
-    await _server.close();
+    // todo: Refactor to change return type for the startMobServer method to be a class with one exposed close method (so don't have to close both httpServer and wss separately from the consumer).
+    await _server.wss.close();
+    await _server.httpServer.close();
   });
 
   test("Create mob", async () => {
