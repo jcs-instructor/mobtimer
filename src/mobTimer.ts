@@ -14,6 +14,7 @@ export class MobTimer {
   private _timer: NodeJS.Timeout | undefined;
   private _interval: NodeJS.Timeout | undefined;
   private _expireFunc = () => {};
+  sockets: any;
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
