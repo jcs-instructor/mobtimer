@@ -1,7 +1,13 @@
 function msg() {
-    alert("Hi");
+  alert("Hi");
 }
 
+const ws = new WebSocket("ws://localhost:3000");
+
+ws.onopen = function (event) {
+  console.log("connected");
+  $(".mob-status").append("<p>Test</p>");
+};
 // function joinMob() {
 //     const client = await openSocket();
 //     await client.joinMob(_mobName1);
