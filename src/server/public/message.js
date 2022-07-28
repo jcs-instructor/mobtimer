@@ -1,4 +1,5 @@
-import {$,jQuery} from 'jquery'; //Error resolving module specifier “jquery”. Relative module specifiers must start with “./”, “../” or “/”.
+// import { $ } from "jquery"; //Error resolving module specifier “jquery”. Relative module specifiers must start with “./”, “../” or “/”.
+import $ from "../../../node_modules/jquery";
 
 export function msg() {
   alert("Hi");
