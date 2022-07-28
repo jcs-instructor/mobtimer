@@ -12,7 +12,7 @@ import * as path from "path";
 
 export async function startMobServer(port: number): Promise<http.Server> {
   const server = http.createServer();
-  addMobListeners(server);
+  const wss = addMobListeners(server);
   return new Promise((resolve) => {
     server.listen(port, () => resolve(server));
   });
@@ -149,7 +149,7 @@ function broadcast(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function addMobListeners(server: http.Server): void {
+function addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: MobWebSocket) {
@@ -172,6 +172,7 @@ function addMobListeners(server: http.Server): void {
       broadcastToClients(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
+  return wss;
 }
 
 function broadcastToClients(
