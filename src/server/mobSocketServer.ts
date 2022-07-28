@@ -45,7 +45,7 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-const _mobs: Map<string, { mobTimer: MobTimer; sockets: WebSocket[] }> =
+const _mobs: Map<string, { mobTimer: MobTimer; sockets: Set<WebSocket> }> =
   new Map();
 
 export function resetMobs() {
@@ -66,11 +66,9 @@ function _getOrRegisterMob(
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    _mobs.set(mobName, { mobTimer: mobTimer, sockets: [socket] });
-  } else {
-    // todo: push socket to sockets array of _mobs
-    _mobs.get(mobName).sockets.push(socket);
-  }
+    _mobs.set(mobName, { mobTimer: mobTimer, sockets: new Set() });
+  } 
+  _mobs.get(mobName)?.sockets.add(socket);
   return mobTimer;
 }
 
@@ -87,7 +85,7 @@ function _processRequest(
     mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterMob(wss, mobName, socket);
   } else {
-    mobName = socket.mobName;
+    mobName = socket.mobName; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = _getMob(mobName);
   }
 
@@ -146,7 +144,7 @@ function broadcast(
 function addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", function (webSocket: MobWebSocket) {
+  wss.on("connection", function (webSocket: WebSocket) {
     webSocket.on("message", function (request) {
       let requestString: string = requestToString(request);
       let parsedRequest: MobTimerRequest;
