@@ -1,4 +1,4 @@
-import $ from "../../../node_modules/jquery";
+//import $ from "../../../node_modules/jquery";
 
 export function msg() {
   alert("Hi");
@@ -7,8 +7,8 @@ export function msg() {
 const ws = new WebSocket("ws://localhost:3000");
 
 ws.onopen = function (event) {
-  console.log("We're connected!");
-  $(".mob-status").append("<p>Test</p>");
+  alert("We're connected!");
+  //$(".mob-status").append("<p>Test</p>");
 };
 
 // function joinMob() {
