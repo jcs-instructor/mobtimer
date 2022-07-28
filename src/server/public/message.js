@@ -1,4 +1,3 @@
-// import { $ } from "jquery"; //Error resolving module specifier “jquery”. Relative module specifiers must start with “./”, “../” or “/”.
 import $ from "../../../node_modules/jquery";
 
 export function msg() {
@@ -8,7 +7,7 @@ export function msg() {
 const ws = new WebSocket("ws://localhost:3000");
 
 ws.onopen = function (event) {
-  console.log("connected");
+  console.log("connected!");
   $(".mob-status").append("<p>Test</p>");
 };
 

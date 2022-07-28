@@ -7,6 +7,7 @@ cd [this repository name here]
 yarn
 yarn global add ts-node
 yarn global add heroku
+yarn global add nodemon
 heroku login
 git remote add heroku https://git.heroku.com/mobtimer1234.git 
 ```
