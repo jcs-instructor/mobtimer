@@ -1,4 +1,6 @@
-function msg() {
+import {$,jQuery} from 'jquery'; //Error resolving module specifier “jquery”. Relative module specifiers must start with “./”, “../” or “/”.
+
+export function msg() {
   alert("Hi");
 }
 
@@ -8,6 +10,7 @@ ws.onopen = function (event) {
   console.log("connected");
   $(".mob-status").append("<p>Test</p>");
 };
+
 // function joinMob() {
 //     const client = await openSocket();
 //     await client.joinMob(_mobName1);
