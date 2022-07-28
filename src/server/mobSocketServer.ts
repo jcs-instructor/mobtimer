@@ -60,14 +60,14 @@ class MobWebSocket extends WebSocket {
 
 // todo: consider mapping to both mob timer and sockets associated with given mob name,
 // which could allow us to get rid of the private MobWebSocket class (?)
-const _mobs: Map<string, MobTimer> = new Map();
+const _mobs: Map<string, {mobTimer: MobTimer}> = new Map();
 
 export function resetMobs() {
   _mobs.clear();
 }
 
 function _getMob(mobName: string): MobTimer | undefined {
-  return _mobs.get(mobName);
+  return _mobs.get(mobName)?.mobTimer;
 }
 
 function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
@@ -76,7 +76,7 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    _mobs.set(mobName, mobTimer);
+    _mobs.set(mobName, {mobTimer: mobTimer});
   }
   return mobTimer;
 }
