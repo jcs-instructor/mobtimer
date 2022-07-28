@@ -10,7 +10,9 @@ import {
 import express from "express";
 import * as path from "path";
 
-export async function startMobServer(port: number): Promise<{ httpServer: http.Server, wss: WebSocket.Server }> {
+export async function startMobServer(
+  port: number
+): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
   const server = http.createServer();
   const wss = addMobListeners(server);
   return new Promise((resolve) => {
@@ -43,24 +45,8 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-// private class
-class MobWebSocket extends WebSocket {
-  constructor(url: string) {
-    super(url);
-  }
-
-  private _mobName = "";
-  public get mobName(): string {
-    return this._mobName;
-  }
-  public set mobName(value: string) {
-    this._mobName = value;
-  }
-}
-
-// todo: consider mapping to both mob timer and sockets associated with given mob name,
-// which could allow us to get rid of the private MobWebSocket class (?)
-const _mobs: Map<string, {mobTimer: MobTimer}> = new Map();
+const _mobs: Map<string, { mobTimer: MobTimer; sockets: WebSocket[] }> =
+  new Map();
 
 export function resetMobs() {
   _mobs.clear();
@@ -70,13 +56,20 @@ function _getMob(mobName: string): MobTimer | undefined {
   return _mobs.get(mobName)?.mobTimer;
 }
 
-function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
+function _getOrRegisterMob(
+  wss: WebSocket.Server,
+  mobName: string,
+  socket: WebSocket
+) {
   let mobTimer = _getMob(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    _mobs.set(mobName, {mobTimer: mobTimer});
+    _mobs.set(mobName, { mobTimer: mobTimer, sockets: [socket] });
+  } else {
+    // todo: push socket to sockets array of _mobs
+    _mobs.get(mobName).sockets.push(socket);
   }
   return mobTimer;
 }
@@ -84,7 +77,7 @@ function _getOrRegisterMob(wss: WebSocket.Server, mobName: string) {
 function _processRequest(
   wss: WebSocket.Server,
   parsedRequest: MobTimerRequest,
-  socket: MobWebSocket
+  socket: WebSocket
 ) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
@@ -92,7 +85,7 @@ function _processRequest(
   if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
-    mobTimer = _getOrRegisterMob(wss, mobName);
+    mobTimer = _getOrRegisterMob(wss, mobName, socket);
   } else {
     mobName = socket.mobName;
     mobTimer = _getMob(mobName);
@@ -136,11 +129,12 @@ function broadcast(
   mobName: string,
   messageToClients: string
 ) {
-  wss.clients.forEach((socketClient: WebSocket) => {
-    const mobSocketClient = socketClient as MobWebSocket;
-    if (mobSocketClient.mobName === mobName) {
-      mobSocketClient.send(messageToClients);
-    }
+  const mob = _getMob(mobName);
+  if (!mob) {
+    return;
+  }
+  mob.sockets.forEach((socketClient: WebSocket) => {
+    socketClient.send(messageToClients);
   });
 }
 
