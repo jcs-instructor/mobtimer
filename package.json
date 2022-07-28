@@ -22,8 +22,7 @@
   },
   "scripts": {
     "start": "node .",
-    "launch": "cd ./src/server & ls & ls *.json & ts-node . & open http://localhost:3000",
-    "mytest": "cd src/server & pwd",
+    "launch": "echo todo: doesn't work & cd ./src/server & ls & ls *.json & ts-node . & open http://localhost:3000",
     "build": "tsc",
     "test": "jest --watch --verbose",
     "debug": "node --debug-brk --inspect ./node_modules/jest/bin/jest -i",

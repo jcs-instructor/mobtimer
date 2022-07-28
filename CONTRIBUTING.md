@@ -36,3 +36,8 @@ Sample message to send via Postman:
 cd src/server
 ts-node index
 ```
+or
+```
+cd src/server
+nodemon -e js,ts,ejs,htm,html index.ts
+```

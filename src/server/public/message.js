@@ -7,7 +7,7 @@ export function msg() {
 const ws = new WebSocket("ws://localhost:3000");
 
 ws.onopen = function (event) {
-  console.log("connected!");
+  console.log("We're connected!");
   $(".mob-status").append("<p>Test</p>");
 };
 
