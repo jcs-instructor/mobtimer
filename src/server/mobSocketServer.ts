@@ -47,6 +47,7 @@ export function renderHomePage(port: number) {
 
 const _mobs: Map<string, { mobTimer: MobTimer; sockets: Set<WebSocket> }> =
   new Map();
+const _sockets: Map<WebSocket, string> = new Map();
 
 export function resetMobs() {
   _mobs.clear();
@@ -67,7 +68,7 @@ function _getOrRegisterMob(
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
     _mobs.set(mobName, { mobTimer: mobTimer, sockets: new Set() });
-  } 
+  }
   _mobs.get(mobName)?.sockets.add(socket);
   return mobTimer;
 }
@@ -85,7 +86,7 @@ function _processRequest(
     mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterMob(wss, mobName, socket);
   } else {
-    mobName = socket.mobName; // socket.mobName no longer exists, so get the mob name from the socket another way
+    mobName = _sockets.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = _getMob(mobName);
   }
 
