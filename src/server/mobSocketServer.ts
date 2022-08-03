@@ -53,16 +53,22 @@ export function resetMobs() {
   _mobs.clear();
 }
 
-function _getMob(mobName: string): MobTimer | undefined {
+function _getMobTimer(mobName: string): MobTimer | undefined {
   return _mobs.get(mobName)?.mobTimer;
 }
 
-function _getOrRegisterMob(
+function _getSocketsForSingleMob(
+  socket: WebSocket
+): Set<WebSocket> | undefined {
+  return _sockets.get(socket);
+}
+
+function _getOrRegisterMobTimer(
   wss: WebSocket.Server,
   mobName: string,
   socket: WebSocket
 ) {
-  let mobTimer = _getMob(mobName);
+  let mobTimer = _getMobTimer(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
@@ -84,10 +90,10 @@ function _processRequest(
   if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
-    mobTimer = _getOrRegisterMob(wss, mobName, socket);
+    mobTimer = _getOrRegisterMobTimer(wss, mobName, socket);
   } else {
     mobName = _sockets.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
-    mobTimer = _getMob(mobName);
+    mobTimer = _getMobTimer(mobName);
   }
 
   if (!mobTimer) {
@@ -128,7 +134,7 @@ function broadcast(
   mobName: string,
   messageToClients: string
 ) {
-  const mob = _getMob(mobName);
+  const mob = _getMobTimer(mobName);
   if (!mob) {
     return;
   }
