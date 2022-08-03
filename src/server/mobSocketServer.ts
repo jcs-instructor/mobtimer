@@ -45,29 +45,24 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-const _mapOfMobNameToInfo: Map<
-  string,
-  { mobTimer: MobTimer; sockets: Set<WebSocket> }
-> = new Map();
+type Room = { mobTimer: MobTimer; sockets: Set<WebSocket> };
+
+const _mapOfMobNameToRoom: Map<string, Room> = new Map();
 const _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
 
-export function resetMobs() {
-  _mapOfMobNameToInfo.clear();
+export function resetRooms() {
+  _mapOfMobNameToRoom.clear();
 }
 
 function _getMobTimer(mobName: string): MobTimer | undefined {
-  return _mapOfMobNameToInfo.get(mobName)?.mobTimer;
+  return _mapOfMobNameToRoom.get(mobName)?.mobTimer;
 }
 
 function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
-  return _mapOfMobNameToInfo.get(mobName)?.sockets;
+  return _mapOfMobNameToRoom.get(mobName)?.sockets;
 }
 
-function _getMobName(socket: WebSocket): string | undefined {
-  return _mapOfSocketToMobName.get(socket);
-}
-
-function _getOrRegisterMobTimer(
+function _getOrRegisterRoom(
   wss: WebSocket.Server,
   mobName: string,
   socket: WebSocket
@@ -75,20 +70,21 @@ function _getOrRegisterMobTimer(
   let mobTimer = _getMobTimer(mobName);
   if (!mobTimer) {
     mobTimer = new MobTimer(mobName);
-    mobTimer.expireFunc = () => broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    mobTimer = _addToMapOfMobNameToInfo(mobTimer, mobName, wss, socket);    
+    mobTimer.expireFunc = () =>
+      broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
+    mobTimer = _addRoom(mobTimer, mobName, socket);
   } else {
     // todo: this is redundant somewhat with above sockets.add(socket)
-    _mapOfMobNameToInfo.get(mobName)?.sockets.add(socket); 
+    _mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
   }
   _mapOfSocketToMobName.set(socket, mobName);
   return mobTimer;
 }
 
-function _addToMapOfMobNameToInfo(mobTimer: MobTimer, mobName: string, wss: WebSocket.Server<WebSocket.WebSocket>, socket: WebSocket) {
+function _addRoom(mobTimer: MobTimer, mobName: string, socket: WebSocket) {
   const sockets = new Set<WebSocket>();
   sockets.add(socket);
-  _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets });
+  _mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets });
   return mobTimer;
 }
 
@@ -103,7 +99,7 @@ function _processRequest(
   if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
-    mobTimer = _getOrRegisterMobTimer(wss, mobName, socket);
+    mobTimer = _getOrRegisterRoom(wss, mobName, socket);
   } else {
     mobName = _mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = _getMobTimer(mobName);
@@ -142,10 +138,7 @@ function _processRequest(
   return mobTimer;
 }
 
-function broadcast(
-  mobName: string,
-  messageToClients: string
-) {
+function broadcast(mobName: string, messageToClients: string) {
   const sockets = _getSocketsForSingleMob(mobName);
   if (!sockets) {
     return;
