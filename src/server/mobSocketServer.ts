@@ -96,7 +96,7 @@ function _processRequest(
 
   switch (parsedRequest.action) {
     case Action.Join: {
-      socket.mobName = mobName;
+      _sockets.set(socket, mobName);
       break;
     }
     case "update": {
