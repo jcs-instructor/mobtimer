@@ -45,22 +45,24 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-const _mobs: Map<string, { mobTimer: MobTimer; sockets: Set<WebSocket> }> =
+const _mapOfMobNameToInfo: Map<string, { mobTimer: MobTimer; sockets: Set<WebSocket> }> =
   new Map();
-const _sockets: Map<WebSocket, string> = new Map();
+const _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
 
 export function resetMobs() {
-  _mobs.clear();
+  _mapOfMobNameToInfo.clear();
 }
 
 function _getMobTimer(mobName: string): MobTimer | undefined {
-  return _mobs.get(mobName)?.mobTimer;
+  return _mapOfMobNameToInfo.get(mobName)?.mobTimer;
 }
 
-function _getSocketsForSingleMob(
-  socket: WebSocket
-): Set<WebSocket> | undefined {
-  return _sockets.get(socket);
+function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {  
+  return _mapOfMobNameToInfo.get(mobName)?.sockets;
+}
+
+function _getMobName(socket: WebSocket) : string | undefined {
+  return _mapOfSocketToMobName.get(socket);
 }
 
 function _getOrRegisterMobTimer(
@@ -73,9 +75,9 @@ function _getOrRegisterMobTimer(
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    _mobs.set(mobName, { mobTimer: mobTimer, sockets: new Set() });
+    _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets: new Set() });
   }
-  _mobs.get(mobName)?.sockets.add(socket);
+  _mapOfMobNameToInfo.get(mobName)?.sockets.add(socket);
   return mobTimer;
 }
 
@@ -92,7 +94,7 @@ function _processRequest(
     mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterMobTimer(wss, mobName, socket);
   } else {
-    mobName = _sockets.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
+    mobName = _mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = _getMobTimer(mobName);
   }
 
@@ -102,7 +104,7 @@ function _processRequest(
 
   switch (parsedRequest.action) {
     case Action.Join: {
-      _sockets.set(socket, mobName);
+      _mapOfSocketToMobName.set(socket, mobName);
       break;
     }
     case "update": {
