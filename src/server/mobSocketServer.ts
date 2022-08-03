@@ -45,8 +45,10 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-const _mapOfMobNameToInfo: Map<string, { mobTimer: MobTimer; sockets: Set<WebSocket> }> =
-  new Map();
+const _mapOfMobNameToInfo: Map<
+  string,
+  { mobTimer: MobTimer; sockets: Set<WebSocket> }
+> = new Map();
 const _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
 
 export function resetMobs() {
@@ -57,11 +59,11 @@ function _getMobTimer(mobName: string): MobTimer | undefined {
   return _mapOfMobNameToInfo.get(mobName)?.mobTimer;
 }
 
-function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {  
+function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
   return _mapOfMobNameToInfo.get(mobName)?.sockets;
 }
 
-function _getMobName(socket: WebSocket) : string | undefined {
+function _getMobName(socket: WebSocket): string | undefined {
   return _mapOfSocketToMobName.get(socket);
 }
 
@@ -75,9 +77,12 @@ function _getOrRegisterMobTimer(
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets: new Set() });
+    const sockets = new Set<WebSocket>();
+    sockets.add(socket);
+    _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets });
+  } else {
+    _mapOfMobNameToInfo.get(mobName)?.sockets.add(socket);
   }
-  _mapOfMobNameToInfo.get(mobName)?.sockets.add(socket);
   return mobTimer;
 }
 
