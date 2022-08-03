@@ -143,7 +143,6 @@ function _processRequest(
 }
 
 function broadcast(
-  wss: WebSocket.Server,
   mobName: string,
   messageToClients: string
 ) {
@@ -196,7 +195,7 @@ function broadcastToClients(
     actionInfo: { action: action },
     mobState: mobTimer.state,
   });
-  broadcast(wss, mobTimer.state.mobName, response);
+  broadcast(mobTimer.state.mobName, response);
 }
 
 function requestToString(request: WebSocket.RawData) {
