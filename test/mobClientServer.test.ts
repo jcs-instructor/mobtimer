@@ -1,4 +1,4 @@
-import { resetMobs, startMobServer } from "../src/server/mobSocketServer";
+import { resetRooms, startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
@@ -19,7 +19,7 @@ describe("WebSocket Server", () => {
   });
 
   afterEach(async () => {
-    resetMobs();
+    resetRooms();
     // todo: Refactor to change return type for the startMobServer method to be a class with one exposed close method (so don't have to close both httpServer and wss separately from the consumer).
     await _server.wss.close();
     await _server.httpServer.close();
