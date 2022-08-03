@@ -72,19 +72,11 @@ function _getOrRegisterRoom(
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    mobTimer = _addRoom(mobTimer, mobName, socket);
-  } else {
-    // todo: this is redundant somewhat with above sockets.add(socket)
-    _mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
+    _mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
   }
-  _mapOfSocketToMobName.set(socket, mobName);
-  return mobTimer;
-}
+  _mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
 
-function _addRoom(mobTimer: MobTimer, mobName: string, socket: WebSocket) {
-  const sockets = new Set<WebSocket>();
-  sockets.add(socket);
-  _mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets });
+  _mapOfSocketToMobName.set(socket, mobName);
   return mobTimer;
 }
 
