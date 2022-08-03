@@ -52,6 +52,7 @@ const _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
 
 export function resetRooms() {
   _mapOfMobNameToRoom.clear();
+  _mapOfSocketToMobName.clear();
 }
 
 function _getMobTimer(mobName: string): MobTimer | undefined {
