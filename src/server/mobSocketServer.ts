@@ -74,15 +74,21 @@ function _getOrRegisterMobTimer(
 ) {
   let mobTimer = _getMobTimer(mobName);
   if (!mobTimer) {
-    mobTimer = new MobTimer(mobName);
-    mobTimer.expireFunc = () =>
-      broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    const sockets = new Set<WebSocket>();
-    sockets.add(socket);
-    _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets });
+    mobTimer = _addToMapOfMobNameToInfo(mobTimer, mobName, wss, socket);    
   } else {
-    _mapOfMobNameToInfo.get(mobName)?.sockets.add(socket);
+    // todo: this is redundant somewhat with above sockets.add(socket)
+    _mapOfMobNameToInfo.get(mobName)?.sockets.add(socket); 
   }
+  _mapOfSocketToMobName.set(socket, mobName);
+  return mobTimer;
+}
+
+function _addToMapOfMobNameToInfo(mobTimer: MobTimer | undefined, mobName: string, wss: WebSocket.Server<WebSocket.WebSocket>, socket: WebSocket) {
+  mobTimer = new MobTimer(mobName);
+  mobTimer.expireFunc = () => broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
+  const sockets = new Set<WebSocket>();
+  sockets.add(socket);
+  _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets });
   return mobTimer;
 }
 
@@ -141,11 +147,11 @@ function broadcast(
   mobName: string,
   messageToClients: string
 ) {
-  const mob = _getMobTimer(mobName);
-  if (!mob) {
+  const sockets = _getSocketsForSingleMob(mobName);
+  if (!sockets) {
     return;
   }
-  mob.sockets.forEach((socketClient: WebSocket) => {
+  sockets.forEach((socketClient: WebSocket) => {
     socketClient.send(messageToClients);
   });
 }
