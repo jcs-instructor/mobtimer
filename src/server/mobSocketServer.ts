@@ -74,6 +74,8 @@ function _getOrRegisterMobTimer(
 ) {
   let mobTimer = _getMobTimer(mobName);
   if (!mobTimer) {
+    mobTimer = new MobTimer(mobName);
+    mobTimer.expireFunc = () => broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
     mobTimer = _addToMapOfMobNameToInfo(mobTimer, mobName, wss, socket);    
   } else {
     // todo: this is redundant somewhat with above sockets.add(socket)
@@ -83,9 +85,7 @@ function _getOrRegisterMobTimer(
   return mobTimer;
 }
 
-function _addToMapOfMobNameToInfo(mobTimer: MobTimer | undefined, mobName: string, wss: WebSocket.Server<WebSocket.WebSocket>, socket: WebSocket) {
-  mobTimer = new MobTimer(mobName);
-  mobTimer.expireFunc = () => broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
+function _addToMapOfMobNameToInfo(mobTimer: MobTimer, mobName: string, wss: WebSocket.Server<WebSocket.WebSocket>, socket: WebSocket) {
   const sockets = new Set<WebSocket>();
   sockets.add(socket);
   _mapOfMobNameToInfo.set(mobName, { mobTimer: mobTimer, sockets });
