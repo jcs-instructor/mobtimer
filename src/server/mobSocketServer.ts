@@ -52,31 +52,6 @@ export function resetRooms() {
   RoomManager._mapOfSocketToMobName.clear();
 }
 
-// TODO: move to RoomManager
-function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
-  return RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets;
-}
-
-// TODO: move to RoomManager
-function _getOrRegisterRoom(
-  wss: WebSocket.Server,
-  mobName: string,
-  socket: WebSocket
-) {
-  let mobTimer = RoomManager._getMobTimer(mobName);
-  if (!mobTimer) {
-    // todo extract these three lines into a create room function
-    mobTimer = new MobTimer(mobName);
-    mobTimer.expireFunc = () =>
-      broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    RoomManager._mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
-  }
-  RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
-
-  RoomManager._mapOfSocketToMobName.set(socket, mobName);
-  return mobTimer;
-}
-
 function _processRequest(
   wss: WebSocket.Server,
   parsedRequest: MobTimerRequest,
@@ -88,7 +63,7 @@ function _processRequest(
   if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
-    mobTimer = _getOrRegisterRoom(wss, mobName, socket);
+    mobTimer = RoomManager._getOrRegisterRoom(wss, mobName, socket);
   } else {
     mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = RoomManager._getMobTimer(mobName);
@@ -127,15 +102,6 @@ function _processRequest(
   return mobTimer;
 }
 
-function broadcast(mobName: string, messageToClients: string) {
-  const sockets = _getSocketsForSingleMob(mobName);
-  if (!sockets) {
-    return;
-  }
-  sockets.forEach((socketClient: WebSocket) => {
-    socketClient.send(messageToClients);
-  });
-}
 
 /**
  * Creates a WebSocket server from a Node http server. The server must
@@ -162,22 +128,10 @@ function addMobListeners(server: http.Server): WebSocket.Server {
       if (!mobTimer) {
         return;
       }
-      broadcastToClients(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
+      RoomManager.broadcastToClients(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
   return wss;
-}
-
-function broadcastToClients(
-  wss: WebSocket.Server<WebSocket.WebSocket>,
-  mobTimer: MobTimer,
-  action: Action
-) {
-  let response = JSON.stringify({
-    actionInfo: { action: action },
-    mobState: mobTimer.state,
-  });
-  broadcast(mobTimer.state.mobName, response);
 }
 
 function requestToString(request: WebSocket.RawData) {
