@@ -53,11 +53,6 @@ export function resetRooms() {
 }
 
 // TODO: move to RoomManager
-function _getMobTimer(mobName: string): MobTimer | undefined {
-  return RoomManager._mapOfMobNameToRoom.get(mobName)?.mobTimer;
-}
-
-// TODO: move to RoomManager
 function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
   return RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets;
 }
@@ -68,7 +63,7 @@ function _getOrRegisterRoom(
   mobName: string,
   socket: WebSocket
 ) {
-  let mobTimer = _getMobTimer(mobName);
+  let mobTimer = RoomManager._getMobTimer(mobName);
   if (!mobTimer) {
     // todo extract these three lines into a create room function
     mobTimer = new MobTimer(mobName);
@@ -96,7 +91,7 @@ function _processRequest(
     mobTimer = _getOrRegisterRoom(wss, mobName, socket);
   } else {
     mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
-    mobTimer = _getMobTimer(mobName);
+    mobTimer = RoomManager._getMobTimer(mobName);
   }
 
   if (!mobTimer) {
