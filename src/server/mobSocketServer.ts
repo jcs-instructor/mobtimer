@@ -59,9 +59,7 @@ function _processRequest(
     mobName = joinRequest.mobName;
     mobTimer = RoomManager._getOrRegisterRoom(wss, mobName, socket);
   } else {
-    // todo: extract then move to class
-    mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
-    mobTimer = RoomManager._getMobTimer(mobName);
+    mobTimer = RoomManager._getMobTimerFromSocket(socket);
   }
 
   if (!mobTimer) {
@@ -70,7 +68,7 @@ function _processRequest(
 
   switch (parsedRequest.action) {
     case Action.Join: {
-      RoomManager._mapOfSocketToMobName.set(socket, mobName);
+      // todo: this is taken care of above; maybe it could be done here
       break;
     }
     case "update": {
