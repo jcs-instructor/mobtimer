@@ -4,7 +4,15 @@ import { MobTimer } from "../mobTimer";
 import { Action } from "./action";
 
 export class RoomManager {
-    constructor() { }
+    
+    /*
+    todo:
+    - Make private what can
+    - Move into this file: resetRooms and all other code referencing the maps (_mapOf...)
+    - Rename functions, including underscores removed/added as appropriate
+    - Review this file and mobSocketServer.ts - how do they look? anything else to move? rename?
+    - Decide whether this should be a module or class
+    */
 
     static _mapOfMobNameToRoom: Map<string, Room> = new Map();
     static _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
