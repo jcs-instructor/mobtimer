@@ -7,7 +7,6 @@ export class RoomManager {
   /*
     todo:
     - Review broadcast functions
-    - Review this file and mobSocketServer.ts - how do they look? anything else to move? rename?
     - Decide whether this should be a module or class
     */
 

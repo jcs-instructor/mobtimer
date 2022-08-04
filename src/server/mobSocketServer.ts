@@ -15,7 +15,7 @@ export async function startMobServer(
   port: number
 ): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
   const server = http.createServer();
-  const wss = addMobListeners(server);
+  const wss = _addMobListeners(server);
   return new Promise((resolve) => {
     server.listen(port, () => resolve({ httpServer: server, wss }));
   });
@@ -43,7 +43,7 @@ export function renderHomePage(port: number) {
     console.log("Server listening on PORT", port);
   });
 
-  addMobListeners(server);
+  _addMobListeners(server);
 }
 
 function _processRequest(
@@ -100,12 +100,12 @@ function _processRequest(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function addMobListeners(server: http.Server): WebSocket.Server {
+function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", function (webSocket: WebSocket) {
     webSocket.on("message", function (request) {
-      let requestString: string = requestToString(request);
+      let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequest;
       try {
         parsedRequest = JSON.parse(requestString) as MobTimerRequest;
@@ -126,7 +126,7 @@ function addMobListeners(server: http.Server): WebSocket.Server {
   return wss;
 }
 
-function requestToString(request: WebSocket.RawData) {
+function _requestToString(request: WebSocket.RawData) {
   let isString = typeof request == "string";
   let requestString: string = (
     isString ? request : request.toString()
