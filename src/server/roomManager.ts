@@ -14,8 +14,8 @@ export class RoomManager {
     - Decide whether this should be a module or class
     */
 
-    static _mapOfMobNameToRoom: Map<string, Room> = new Map();
-    static _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
+    private static _mapOfMobNameToRoom: Map<string, Room> = new Map();
+    private static _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
 
     static _getMobTimer(mobName: string): MobTimer | undefined {
         return RoomManager._mapOfMobNameToRoom.get(mobName)?.mobTimer;
@@ -65,6 +65,10 @@ export class RoomManager {
           socketClient.send(messageToClients);
         });
       }
-      
 
+      static resetRooms() {
+        RoomManager._mapOfMobNameToRoom.clear();
+        RoomManager._mapOfSocketToMobName.clear();
+      }
 }
+      

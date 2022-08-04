@@ -46,12 +46,6 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-// TODO: move to RoomManager
-export function resetRooms() {
-  RoomManager._mapOfMobNameToRoom.clear();
-  RoomManager._mapOfSocketToMobName.clear();
-}
-
 function _processRequest(
   wss: WebSocket.Server,
   parsedRequest: MobTimerRequest,
@@ -65,6 +59,7 @@ function _processRequest(
     mobName = joinRequest.mobName;
     mobTimer = RoomManager._getOrRegisterRoom(wss, mobName, socket);
   } else {
+    // todo: extract then move to class
     mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = RoomManager._getMobTimer(mobName);
   }
@@ -101,7 +96,6 @@ function _processRequest(
 
   return mobTimer;
 }
-
 
 /**
  * Creates a WebSocket server from a Node http server. The server must
