@@ -11,21 +11,28 @@ export class RoomManager {
     - Decide whether this should be a module or class
     */
 
-  private static _rooms: Map<string, Room> = new Map();
-  // todo: change value from MobTimer to Room if possible (and consider another object with pointer...?)
-  private static _mobTimers: Map<WebSocket, MobTimer> = new Map();
+  private static _roomsByMobName: Map<string, Room> = new Map();
+  private static _roomsBySocket: Map<WebSocket, Room> = new Map();
+
+  private static _getRoom(key: string | WebSocket) {
+    if (typeof key === "string") {
+      return RoomManager._roomsByMobName.get(key);
+    } else {
+      return RoomManager._roomsBySocket.get(key);
+    }
+  }
 
   static getMobTimer(mobName: string): MobTimer | undefined {
-    return RoomManager._rooms.get(mobName)?.mobTimer;
+    return RoomManager._roomsByMobName.get(mobName)?.mobTimer;
   }
 
   static getMobTimerFromSocket(socket: WebSocket) {
-    const mobTimer = RoomManager._mobTimers.get(socket);
+    const mobTimer = RoomManager._roomsBySocket.get(socket)?.mobTimer;
     return mobTimer;
   }
 
   static getSocketsForMob(mobName: string): Set<WebSocket> | undefined {
-    return RoomManager._rooms.get(mobName)?.sockets;
+    return RoomManager._roomsByMobName.get(mobName)?.sockets;
   }
 
   static getOrRegisterRoom(
@@ -34,7 +41,7 @@ export class RoomManager {
     mobName: string,
     socket: WebSocket
   ) {
-    let room = RoomManager._rooms.get(mobName);
+    let room = RoomManager._roomsByMobName.get(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
     } else {
@@ -44,9 +51,9 @@ export class RoomManager {
     return room.mobTimer;
   }
 
-  private static _joinRoom(room: Room, socket: WebSocket) {    
+  private static _joinRoom(room: Room, socket: WebSocket) {
     room.sockets.add(socket);
-    RoomManager._mobTimers.set(socket, room.mobTimer);
+    RoomManager._roomsBySocket.set(socket, room);
   }
 
   private static _createAndJoinRoom(mobName: string, socket: WebSocket) {
@@ -54,7 +61,7 @@ export class RoomManager {
     mobTimer.expireFunc = () =>
       RoomManager.broadcastToClients(mobTimer as MobTimer, Action.Expired);
     const room = { mobTimer, sockets: new Set<WebSocket>() };
-    RoomManager._rooms.set(mobName, room);
+    RoomManager._roomsByMobName.set(mobName, room);
     RoomManager._joinRoom(room, socket);
     return room;
   }
@@ -78,7 +85,7 @@ export class RoomManager {
   }
 
   static resetRooms() {
-    RoomManager._rooms.clear();
-    RoomManager._mobTimers.clear();
+    RoomManager._roomsByMobName.clear();
+    RoomManager._roomsBySocket.clear();
   }
 }
