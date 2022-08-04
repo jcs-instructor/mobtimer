@@ -47,22 +47,27 @@ export function renderHomePage(port: number) {
 
 type Room = { mobTimer: MobTimer; sockets: Set<WebSocket> };
 
+// TODO: move to RoomManager
 const _mapOfMobNameToRoom: Map<string, Room> = new Map();
 const _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
 
+// TODO: move to RoomManager
 export function resetRooms() {
   _mapOfMobNameToRoom.clear();
   _mapOfSocketToMobName.clear();
 }
 
+// TODO: move to RoomManager
 function _getMobTimer(mobName: string): MobTimer | undefined {
   return _mapOfMobNameToRoom.get(mobName)?.mobTimer;
 }
 
+// TODO: move to RoomManager
 function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
   return _mapOfMobNameToRoom.get(mobName)?.sockets;
 }
 
+// TODO: move to RoomManager
 function _getOrRegisterRoom(
   wss: WebSocket.Server,
   mobName: string,
