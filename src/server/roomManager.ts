@@ -7,34 +7,34 @@ export class RoomManager {
     
     /*
     todo:
-    - Make private what can: Review broadcast functions
-    - Rename functions, including underscores removed/added as appropriate
+    - Review broadcast functions
     - Review this file and mobSocketServer.ts - how do they look? anything else to move? rename?
+    - Some cases change mob to room, but not all.
     - Decide whether this should be a module or class
     */
 
     private static _rooms: Map<string, Room> = new Map();
     private static _mobTimers: Map<WebSocket, MobTimer> = new Map();
 
-    static _getMobTimer(mobName: string): MobTimer | undefined {
+    static getMobTimer(mobName: string): MobTimer | undefined {
         return RoomManager._rooms.get(mobName)?.mobTimer;
     }
 
-    static _getMobTimerFromSocket(socket: WebSocket) {
+    static getMobTimerFromSocket(socket: WebSocket) {
       const mobTimer = RoomManager._mobTimers.get(socket); 
       return mobTimer;
     }
     
-    static _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
+    static getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
         return RoomManager._rooms.get(mobName)?.sockets;
     }
 
-    static _getOrRegisterRoom(
+    static getOrRegisterRoom(
         wss: WebSocket.Server,
         mobName: string,
         socket: WebSocket
     ) {
-        let mobTimer = RoomManager._getMobTimer(mobName);
+        let mobTimer = RoomManager.getMobTimer(mobName);
         if (!mobTimer) {
             // todo extract these three lines into a create room function
             mobTimer = new MobTimer(mobName);
@@ -60,7 +60,7 @@ export class RoomManager {
       }
       
       static broadcast(mobName: string, messageToClients: string) {
-        const sockets = RoomManager._getSocketsForSingleMob(mobName);
+        const sockets = RoomManager.getSocketsForSingleMob(mobName);
         if (!sockets) {
           return;
         }

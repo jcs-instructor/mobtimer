@@ -57,9 +57,9 @@ function _processRequest(
   if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as JoinRequest;
     mobName = joinRequest.mobName;
-    mobTimer = RoomManager._getOrRegisterRoom(wss, mobName, socket);
+    mobTimer = RoomManager.getOrRegisterRoom(wss, mobName, socket);
   } else {
-    mobTimer = RoomManager._getMobTimerFromSocket(socket);
+    mobTimer = RoomManager.getMobTimerFromSocket(socket);
   }
 
   if (!mobTimer) {
