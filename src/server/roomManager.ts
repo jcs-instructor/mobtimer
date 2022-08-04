@@ -14,7 +14,7 @@ export class RoomManager {
   private static _roomsByMobName: Map<string, Room> = new Map();
   private static _roomsBySocket: Map<WebSocket, Room> = new Map();
 
-  private static _getRoom(key: string | WebSocket) {
+  private static _getRoom(key: string | WebSocket) : Room | undefined {
     if (typeof key === "string") {
       return RoomManager._roomsByMobName.get(key);
     } else {
@@ -23,16 +23,16 @@ export class RoomManager {
   }
 
   static getMobTimer(mobName: string): MobTimer | undefined {
-    return RoomManager._roomsByMobName.get(mobName)?.mobTimer;
+    return this._getRoom(mobName)?.mobTimer;
   }
 
   static getMobTimerFromSocket(socket: WebSocket) {
-    const mobTimer = RoomManager._roomsBySocket.get(socket)?.mobTimer;
+    const mobTimer = RoomManager._getRoom(socket)?.mobTimer;
     return mobTimer;
   }
 
   static getSocketsForMob(mobName: string): Set<WebSocket> | undefined {
-    return RoomManager._roomsByMobName.get(mobName)?.sockets;
+    return RoomManager._getRoom(mobName)?.sockets;
   }
 
   static getOrRegisterRoom(
@@ -41,7 +41,7 @@ export class RoomManager {
     mobName: string,
     socket: WebSocket
   ) {
-    let room = RoomManager._roomsByMobName.get(mobName);
+    let room = RoomManager._getRoom(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
     } else {
