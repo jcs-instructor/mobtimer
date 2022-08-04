@@ -28,29 +28,33 @@ export class RoomManager {
   }
 
   static getOrRegisterRoom(
+    // todo: remove unused param
     wss: WebSocket.Server,
     mobName: string,
     socket: WebSocket
   ) {
-    let mobTimer = RoomManager.getMobTimer(mobName);
-    if (!mobTimer) {
-      const room = RoomManager._createRoom(mobName, socket);
-      mobTimer = room.mobTimer;
+    let room = RoomManager._rooms.get(mobName);
+    if (room) {
+      RoomManager._joinRoom(room, socket);
+    } else {
+      room = RoomManager._createAndJoinRoom(mobName, socket);
     }
-    RoomManager._rooms.get(mobName)?.sockets.add(socket);
-    RoomManager._mobTimers.set(socket, mobTimer);
 
-    return mobTimer;
+    return room.mobTimer;
   }
 
-  private static _createRoom(mobName: string, socket: WebSocket) {
+  private static _joinRoom(room: Room, socket: WebSocket) {    
+    room.sockets.add(socket);
+    RoomManager._mobTimers.set(socket, room.mobTimer);
+  }
+
+  private static _createAndJoinRoom(mobName: string, socket: WebSocket) {
     const mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       RoomManager.broadcastToClients(mobTimer as MobTimer, Action.Expired);
-    const sockets = new Set<WebSocket>();
-    sockets.add(socket);
-    const room = { mobTimer, sockets };
+    const room = { mobTimer, sockets: new Set<WebSocket>() };
     RoomManager._rooms.set(mobName, room);
+    RoomManager._joinRoom(room, socket);
     return room;
   }
 
