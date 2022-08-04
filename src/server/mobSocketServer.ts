@@ -9,6 +9,7 @@ import {
 } from "./mobTimerRequests";
 import express from "express";
 import * as path from "path";
+import { RoomManager } from "./roomManager";
 
 export async function startMobServer(
   port: number
@@ -45,26 +46,20 @@ export function renderHomePage(port: number) {
   addMobListeners(server);
 }
 
-type Room = { mobTimer: MobTimer; sockets: Set<WebSocket> };
-
-// TODO: move to RoomManager
-const _mapOfMobNameToRoom: Map<string, Room> = new Map();
-const _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
-
 // TODO: move to RoomManager
 export function resetRooms() {
-  _mapOfMobNameToRoom.clear();
-  _mapOfSocketToMobName.clear();
+  RoomManager._mapOfMobNameToRoom.clear();
+  RoomManager._mapOfSocketToMobName.clear();
 }
 
 // TODO: move to RoomManager
 function _getMobTimer(mobName: string): MobTimer | undefined {
-  return _mapOfMobNameToRoom.get(mobName)?.mobTimer;
+  return RoomManager._mapOfMobNameToRoom.get(mobName)?.mobTimer;
 }
 
 // TODO: move to RoomManager
 function _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
-  return _mapOfMobNameToRoom.get(mobName)?.sockets;
+  return RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets;
 }
 
 // TODO: move to RoomManager
@@ -79,11 +74,11 @@ function _getOrRegisterRoom(
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
-    _mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
+    RoomManager._mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
   }
-  _mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
+  RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
 
-  _mapOfSocketToMobName.set(socket, mobName);
+  RoomManager._mapOfSocketToMobName.set(socket, mobName);
   return mobTimer;
 }
 
@@ -100,7 +95,7 @@ function _processRequest(
     mobName = joinRequest.mobName;
     mobTimer = _getOrRegisterRoom(wss, mobName, socket);
   } else {
-    mobName = _mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
+    mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
     mobTimer = _getMobTimer(mobName);
   }
 
@@ -110,7 +105,7 @@ function _processRequest(
 
   switch (parsedRequest.action) {
     case Action.Join: {
-      _mapOfSocketToMobName.set(socket, mobName);
+      RoomManager._mapOfSocketToMobName.set(socket, mobName);
       break;
     }
     case "update": {
