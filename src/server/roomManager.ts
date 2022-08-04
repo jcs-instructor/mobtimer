@@ -70,10 +70,10 @@ export class RoomManager {
       actionInfo: { action: action },
       mobState: mobTimer.state,
     });
-    RoomManager.broadcast(mobTimer.state.mobName, response);
+    RoomManager._broadcast(mobTimer.state.mobName, response);
   }
 
-  static broadcast(mobName: string, messageToClients: string) {
+  private static _broadcast(mobName: string, messageToClients: string) {
     const sockets = RoomManager.getSocketsForMob(mobName);
     if (!sockets) {
       return;
