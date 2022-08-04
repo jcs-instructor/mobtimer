@@ -13,21 +13,20 @@ export class RoomManager {
     - Decide whether this should be a module or class
     */
 
-    private static _mapOfMobNameToRoom: Map<string, Room> = new Map();
-    private static _mapOfSocketToMobName: Map<WebSocket, string> = new Map();
+    private static _rooms: Map<string, Room> = new Map();
+    private static _mobTimers: Map<WebSocket, MobTimer> = new Map();
 
     static _getMobTimer(mobName: string): MobTimer | undefined {
-        return RoomManager._mapOfMobNameToRoom.get(mobName)?.mobTimer;
+        return RoomManager._rooms.get(mobName)?.mobTimer;
     }
 
     static _getMobTimerFromSocket(socket: WebSocket) {
-      const mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; 
-      const mobTimer = RoomManager._getMobTimer(mobName);
+      const mobTimer = RoomManager._mobTimers.get(socket); 
       return mobTimer;
     }
     
     static _getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
-        return RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets;
+        return RoomManager._rooms.get(mobName)?.sockets;
     }
 
     static _getOrRegisterRoom(
@@ -41,10 +40,10 @@ export class RoomManager {
             mobTimer = new MobTimer(mobName);
             mobTimer.expireFunc = () =>
                 RoomManager.broadcastToClients(mobTimer as MobTimer, Action.Expired);
-            RoomManager._mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
+            RoomManager._rooms.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
         }
-        RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
-        RoomManager._mapOfSocketToMobName.set(socket, mobName);
+        RoomManager._rooms.get(mobName)?.sockets.add(socket);
+        RoomManager._mobTimers.set(socket, mobTimer);
 
         return mobTimer;
     }
@@ -71,8 +70,8 @@ export class RoomManager {
       }
 
       static resetRooms() {
-        RoomManager._mapOfMobNameToRoom.clear();
-        RoomManager._mapOfSocketToMobName.clear();
+        RoomManager._rooms.clear();
+        RoomManager._mobTimers.clear();
       }
 }
       
