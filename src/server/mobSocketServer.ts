@@ -70,6 +70,7 @@ function _getOrRegisterRoom(
 ) {
   let mobTimer = _getMobTimer(mobName);
   if (!mobTimer) {
+    // todo extract these three lines into a create room function
     mobTimer = new MobTimer(mobName);
     mobTimer.expireFunc = () =>
       broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
