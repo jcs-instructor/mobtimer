@@ -9,7 +9,6 @@ export class RoomManager {
     todo:
     - Review broadcast functions
     - Review this file and mobSocketServer.ts - how do they look? anything else to move? rename?
-    - Some cases change mob to room, but not all.
     - Decide whether this should be a module or class
     */
 
@@ -25,7 +24,7 @@ export class RoomManager {
       return mobTimer;
     }
     
-    static getSocketsForSingleMob(mobName: string): Set<WebSocket> | undefined {
+    static getSocketsForMob(mobName: string): Set<WebSocket> | undefined {
         return RoomManager._rooms.get(mobName)?.sockets;
     }
 
@@ -36,11 +35,8 @@ export class RoomManager {
     ) {
         let mobTimer = RoomManager.getMobTimer(mobName);
         if (!mobTimer) {
-            // todo extract these three lines into a create room function
-            mobTimer = new MobTimer(mobName);
-            mobTimer.expireFunc = () =>
-                RoomManager.broadcastToClients(mobTimer as MobTimer, Action.Expired);
-            RoomManager._rooms.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
+            RoomManager._createRoom(mobName);
+            mobTimer = RoomManager.getMobTimer(mobName) as MobTimer;
         }
         RoomManager._rooms.get(mobName)?.sockets.add(socket);
         RoomManager._mobTimers.set(socket, mobTimer);
@@ -48,6 +44,12 @@ export class RoomManager {
         return mobTimer;
     }
     
+  private static _createRoom(mobName: string) {
+    const mobTimer = new MobTimer(mobName);
+    mobTimer.expireFunc = () => RoomManager.broadcastToClients(mobTimer as MobTimer, Action.Expired);
+    RoomManager._rooms.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
+  }
+
     static broadcastToClients(
         mobTimer: MobTimer,
         action: Action
@@ -60,7 +62,7 @@ export class RoomManager {
       }
       
       static broadcast(mobName: string, messageToClients: string) {
-        const sockets = RoomManager.getSocketsForSingleMob(mobName);
+        const sockets = RoomManager.getSocketsForMob(mobName);
         if (!sockets) {
           return;
         }
