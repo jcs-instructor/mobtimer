@@ -12,6 +12,7 @@ export class RoomManager {
     */
 
   private static _rooms: Map<string, Room> = new Map();
+  // todo: change value from MobTimer to Room if possible (and consider another object with pointer...?)
   private static _mobTimers: Map<WebSocket, MobTimer> = new Map();
 
   static getMobTimer(mobName: string): MobTimer | undefined {
