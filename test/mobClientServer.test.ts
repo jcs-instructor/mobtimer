@@ -1,4 +1,4 @@
-import { resetRooms, startMobServer } from "../src/server/mobSocketServer";
+import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status } from "../src/status";
 import { openSocket } from "./testUtils";
@@ -68,6 +68,8 @@ describe("WebSocket Server", () => {
   });
 
   // todo check other branch(es) for tests that might not have been copied into this branch (!)
+
+  // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";
 
@@ -82,7 +84,10 @@ describe("WebSocket Server", () => {
     await client2.closeSocket();
 
     expect(client.lastResponse.mobState.durationMinutes).toEqual(17);
-    expect(client2.lastResponse.mobState.durationMinutes).toEqual(17);
+    expect(client2.lastResponse.mobState.durationMinutes).toEqual(17); 
+
+    expect(client.responses.length).toEqual(3); // join, join, update
+    expect(client2.responses.length).toEqual(2); // join, update
   });
 
   test("Start timer", async () => {
