@@ -7,7 +7,7 @@ export class RoomManager {
     
     /*
     todo:
-    - Make private what can
+    - Make private what can: Review broadcast functions
     - Rename functions, including underscores removed/added as appropriate
     - Review this file and mobSocketServer.ts - how do they look? anything else to move? rename?
     - Decide whether this should be a module or class
@@ -21,7 +21,7 @@ export class RoomManager {
     }
 
     static _getMobTimerFromSocket(socket: WebSocket) {
-      const mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; // socket.mobName no longer exists, so get the mob name from the socket another way
+      const mobName = RoomManager._mapOfSocketToMobName.get(socket) || ""; 
       const mobTimer = RoomManager._getMobTimer(mobName);
       return mobTimer;
     }
@@ -40,7 +40,7 @@ export class RoomManager {
             // todo extract these three lines into a create room function
             mobTimer = new MobTimer(mobName);
             mobTimer.expireFunc = () =>
-                RoomManager.broadcastToClients(wss, mobTimer as MobTimer, Action.Expired);
+                RoomManager.broadcastToClients(mobTimer as MobTimer, Action.Expired);
             RoomManager._mapOfMobNameToRoom.set(mobName, { mobTimer: mobTimer, sockets: new Set<WebSocket> });
         }
         RoomManager._mapOfMobNameToRoom.get(mobName)?.sockets.add(socket);
@@ -50,7 +50,6 @@ export class RoomManager {
     }
     
     static broadcastToClients(
-        wss: WebSocket.Server<WebSocket.WebSocket>,
         mobTimer: MobTimer,
         action: Action
       ) {

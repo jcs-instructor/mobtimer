@@ -120,7 +120,7 @@ function addMobListeners(server: http.Server): WebSocket.Server {
       if (!mobTimer) {
         return;
       }
-      RoomManager.broadcastToClients(wss, mobTimer, parsedRequest.action); // todo consider moving mobName up a level
+      RoomManager.broadcastToClients(mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
   return wss;
