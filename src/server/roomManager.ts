@@ -35,8 +35,6 @@ export class RoomManager {
   }
 
   static getOrRegisterRoom(
-    // todo: remove unused param
-    wss: WebSocket.Server,
     mobName: string,
     socket: WebSocket
   ) {
