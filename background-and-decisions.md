@@ -1,0 +1,5 @@
+- Decision: Split Repos before deploy.
+  - It’s simplest to start with everything in the same repo, but later we should split them because:
+    - It’s easier to deploy
+    - Common pattern (maybe best practice)
+    - You can pick the app you deploy (e.g., Heroku for backend; may use something else for frontend)
