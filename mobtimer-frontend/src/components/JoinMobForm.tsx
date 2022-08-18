@@ -3,13 +3,13 @@ import React from 'react'
 type FormParameters = {
     mobName: string;
     setMobName: (mobName: string) => void;
-    joinMob: (event: React.FormEvent<HTMLFormElement>) => void;
+    submitJoinMobRequest: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const JoinMob = ({ mobName, setMobName, joinMob }: FormParameters) => {
+const JoinMobForm = ({ mobName, setMobName, submitJoinMobRequest }: FormParameters) => {
 
     return (
-        <form onSubmit={joinMob}>
+        <form onSubmit={submitJoinMobRequest}>
             <input
                 value={mobName}
                 onChange={(e) => setMobName(e.target.value)}
@@ -21,4 +21,4 @@ const JoinMob = ({ mobName, setMobName, joinMob }: FormParameters) => {
     )
 }
 
-export default JoinMob
+export default JoinMobForm
