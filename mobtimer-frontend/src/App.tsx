@@ -1,48 +1,27 @@
-import React, { Component } from 'react';
-import './App.css'
+import React, { useState } from 'react';
 import JoinMob from './components/JoinMob';
 import JoinMobHeading from './components/JoinMobHeading';
 
-// todo: Extend HTMLFormElement
-export type JoinMobEvent = {
-  preventDefault: () => void;
-  target: {
-    elements: {
-      mobname: {
-        value: string;
-      };
-    };
-  };
+
+import './App.css';
+
+const App = () => {
+  const [mobName, setMobName] = useState('');
+
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    // Preventing the page from reloading
+    event.preventDefault();
+
+    // Do something 
+    alert(mobName);
+  }
+
+  return (
+    <div>
+        <JoinMobHeading />
+        <JoinMob submitForm={submitForm} setMobName={setMobName} />
+    </div>
+  );
 };
 
-class App extends Component {
-
-  state = {
-    users: [],
-    loading: ''
-  };
-
-  handleRequest = (event: JoinMobEvent) => {
-
-    event.preventDefault();
-    const mobName = event.target.elements.mobname.value;
-    this.setState({ loading: "loading...." });
-
-    if (mobName) {
-      alert(`You entered ${mobName}`);
-    } else {
-      alert("Please Enter a Mob Name");
-    }
-  }
-
-  render() {
-    return (
-      <div className="app">
-        <JoinMobHeading />
-        <JoinMob handleRequest={this.handleRequest} />
-      </div>
-    )
-  }
-}
-
-export default App
+export default App;

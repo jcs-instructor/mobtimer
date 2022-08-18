@@ -1,19 +1,24 @@
+import { type } from '@testing-library/user-event/dist/type';
 import React from 'react'
-import { JoinMobEvent } from '../App'
 
 type FormParameters = {
-    handleRequest: (event: JoinMobEvent) => void; 
+    submitForm: (event: React.FormEvent<HTMLFormElement>) => void;
+    setMobName: (mobName: string) => void;
+    mobName: string;
 }
 
-const JoinMob = ({ handleRequest }: FormParameters) => {
+const JoinMob = ({ submitForm, setMobName, mobName }: FormParameters) => {
 
     return (
-        <div onSubmit={handleRequest}>
-            <form>
-                <input type="text" name="mobname" placeholder="Enter Mob Name" autoComplete="off"/>
-                <button>Submit</button>    
-            </form>
-        </div>
+        <form onSubmit={submitForm}>
+            <input
+                value={mobName}
+                onChange={(e) => setMobName(e.target.value)}
+                type="text"
+                placeholder="Enter a Mob Name"
+            />
+            <button type="submit">Submit</button>
+        </form>
     )
 }
 
