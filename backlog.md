@@ -1,7 +1,6 @@
 ## Timer - Minimum Deployable Features
-
-- [ ] Resume with
-  - [ ] making App.js into App.tsx
+- [X] making App.js into App.tsx
+- [ ] Resume with:
   - [ ] .skip failing UI test (already in backlog to deal with it later)
 - [ ] Start mob
   - [ ] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
