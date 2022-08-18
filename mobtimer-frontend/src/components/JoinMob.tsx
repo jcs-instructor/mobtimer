@@ -1,16 +1,15 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react'
 
 type FormParameters = {
-    submitForm: (event: React.FormEvent<HTMLFormElement>) => void;
-    setMobName: (mobName: string) => void;
     mobName: string;
+    setMobName: (mobName: string) => void;
+    joinMob: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const JoinMob = ({ submitForm, setMobName, mobName }: FormParameters) => {
+const JoinMob = ({ mobName, setMobName, joinMob }: FormParameters) => {
 
     return (
-        <form onSubmit={submitForm}>
+        <form onSubmit={joinMob}>
             <input
                 value={mobName}
                 onChange={(e) => setMobName(e.target.value)}
