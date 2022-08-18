@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import JoinMob from './components/JoinMob';
+import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
 
 
@@ -8,7 +8,7 @@ import './App.css';
 const App = () => {
   const [mobName, setMobName] = useState('');
 
-  const joinMob = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitJoinMobRequest = (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
 
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div>
       <JoinMobHeading />
-      <JoinMob mobName={mobName} setMobName={setMobName} joinMob={joinMob} />
+      <JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />
     </div>
   );
 };
