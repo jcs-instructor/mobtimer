@@ -3,6 +3,18 @@ import './App.css'
 import JoinMob from './components/JoinMob';
 import JoinMobHeading from './components/JoinMobHeading';
 
+// todo: Extend HTMLFormElement
+export type JoinMobEvent = {
+  preventDefault: () => void;
+  target: {
+    elements: {
+      mobname: {
+        value: string;
+      };
+    };
+  };
+};
+
 class App extends Component {
 
   state = {
@@ -10,10 +22,10 @@ class App extends Component {
     loading: ''
   };
 
-  handleRequest = (e) => {
+  handleRequest = (event: JoinMobEvent) => {
 
-    e.preventDefault();
-    const mobName = e.target.elements.mobname.value;
+    event.preventDefault();
+    const mobName = event.target.elements.mobname.value;
     this.setState({ loading: "loading...." });
 
     if (mobName) {

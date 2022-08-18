@@ -1,7 +1,8 @@
 import React from 'react'
+import { JoinMobEvent } from '../App'
 
 type FormParameters = {
-    handleRequest: () => void; 
+    handleRequest: (event: JoinMobEvent) => void; 
 }
 
 const JoinMob = ({ handleRequest }: FormParameters) => {
