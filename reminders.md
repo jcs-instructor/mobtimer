@@ -1,4 +1,7 @@
 **Practices to Focus On**:
+- **Strict navigator style**
+- **If confused as driver, ask questions rather than suggesting alternatives**
+
 - **Full TDD w/explicit "Refactor" convo & impl. every time, including:**
   - No `any` types
   - Refactor redundant code
