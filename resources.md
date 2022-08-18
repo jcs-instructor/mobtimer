@@ -1,6 +1,10 @@
 ## Current Links
 
-- Timer: see https://github.com/NasserAmbari/CountdownTimer/blob/master/src/App.jsx but this is copyrighted
+- Timer:
+  - https://github.com/NasserAmbari/CountdownTimer/blob/master/src/App.jsx no license, so copyrighted
+  - https://github.com/lyraddigital/react-useeffect-countdown-timer no license
+- Submit form:
+  - https://github.com/Soumitatechnical/React-GithubUserFind-App/blob/main/src/components/Form.js No license
 
 ## React and React Hook Tutorials
 
