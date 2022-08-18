@@ -5,6 +5,7 @@
   - https://github.com/lyraddigital/react-useeffect-countdown-timer no license
 - Submitting a form:
   - https://github.com/Soumitatechnical/React-GithubUserFind-App/blob/main/src/components/Form.js No license
+  - https://www.kindacode.com/article/react-typescript-handling-form-onsubmit-event/
 
 ## React and React Hook Tutorials
 
