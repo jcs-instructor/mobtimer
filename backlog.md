@@ -1,4 +1,7 @@
 ## Timer - Minimum Deployable Features
+- [ ] Resume with 
+    - [ ] making App.js into App.tsx
+    - [ ] .skip failing UI test (already in backlog to deal with it later)
 - [ ] Start mob 
   - [ ] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field) 
   - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
@@ -25,6 +28,7 @@
 - [ ] Settings: Sound, Notifications
 
 ## Other Technical
+- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.)
 - [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html 
 - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
 - [ ] Set tsc options: target es2015 or later
