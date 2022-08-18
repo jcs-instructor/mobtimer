@@ -1,23 +1,37 @@
-- [ ] Make this directory into repository
-- [ ] Hello World React App
+## Timer - Minimum Deployable Features
+- [ ] Start mob 
+  - [ ] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field) 
+  - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
+- [ ] Developer setup
+  - [ ] Create a start script (so don't have to cd every time)
+  - [ ] Document mobtimer-frontend dev setup
+- [ ] Create a timer 
+  - [ ] UI - see Example React Source Code in resources.md) 
+  - [ ] Hook up timer to websocket server 
+  - [ ] Cancel 
+  - [ ] UI - Start 
+  - [ ] UI - Pause 
+  - [ ] UI - Restart
 
-### Timer
+## Split Repos and Deploy
+- [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
+- [ ] Deploy
 
-- [ ] Create a start script (so don't have to cd every time)
-- [ ] Start mob - [ ] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field) - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
-- [ ] Create a timer - [ ] UI - see Example React Source Code in resources.md) - [ ] Hook up timer to websocket server - [ ] Cancel - [ ] UI - Start - [ ] UI - Pause - [ ] UI - Restart
-
-## Features
+## Timer - Minimum Features for Ethan & Joel to Use Instead of MobTi.me
+- [ ] ...
+## Other Features
 
 - [ ] Mobbers, Roles, Rotate
 - [ ] Settings: Sound, Notifications
 
-## Technical
-
-- [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
+## Other Technical
+- [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html 
 - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
 - [ ] Set tsc options: target es2015 or later
-- [ ] Backend - [ ] Handle Bad Json Gracefully on Client (JSON.parse …) - [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest - [ ] Maybe add timestamp to MobTimerResponse.actionInfo
+- [ ] Backend 
+  - [ ] Handle Bad Json Gracefully on Client (JSON.parse …) 
+  - [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest 
+  - [ ] Maybe add timestamp to MobTimerResponse.actionInfo
 - [ ] Persistence -
   - [ ] Timeout: Should mobs be deleted on timeout (after period of inactivity)?
   - [ ] Persist Mobs in case server is reset, etc. (e.g., in DB or other physical storage)

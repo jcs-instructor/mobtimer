@@ -1,9 +1,9 @@
-## Current Links
+## Code Examples
 
-- Timer:
+- Timers:
   - https://github.com/NasserAmbari/CountdownTimer/blob/master/src/App.jsx no license, so copyrighted
   - https://github.com/lyraddigital/react-useeffect-countdown-timer no license
-- Submit form:
+- Submitting a form:
   - https://github.com/Soumitatechnical/React-GithubUserFind-App/blob/main/src/components/Form.js No license
 
 ## React and React Hook Tutorials
