@@ -8,12 +8,21 @@ import './App.css';
 const App = () => {
   const [mobName, setMobName] = useState('');
 
-  const submitJoinMobRequest = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
 
-    // Do something 
+    // Join mob
     alert(mobName);
+    const port = 9001;
+    const client = new WebSocket(`ws://localhost:${port}`);
+    //const client = await openSocket();
+    await client.joinMob(mobName);
+  }
+  
+  const joinMob = (mobName: string) => {
+    const request = joinRequest(mobName);
+    this.send(request);
   }
 
   return (
