@@ -6,8 +6,7 @@
 
 - [x] making App.js into App.tsx
 - [x] create CONTRIBUTING.md for frontend
-- [ ] Resume with:
-  - [ ] .skip failing UI test (already in backlog to deal with it later)
+- [x] .skip failing UI test (already in backlog to deal with it later)
 - [ ] Start mob
   - [ ] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
   - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
