@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-
+import { MobSocketClient } from '../../mobtimer-backend/src/client/MobSocketClient';
 
 import './App.css';
 
@@ -16,15 +16,9 @@ const App = () => {
     alert(mobName);
     const port = 9001;
     const client = new MobSocketClient(`ws://localhost:${port}`);
-    //const client = await openSocket();
-    await client.joinMob(mobName);
+    client.joinMob(mobName);
   }
-
-  const joinMob = (mobName: string) => {
-    const request = joinRequest(mobName);
-    this.send(request);
-  }
-
+  
   return (
     <div>
       <JoinMobHeading />

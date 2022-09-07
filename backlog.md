@@ -10,6 +10,7 @@
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
   - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
+        - symlink...
 - [ ] Developer setup
   - [ ] Create a start script (so don't have to cd every time)
   - [ ] Document mobtimer-frontend dev setup

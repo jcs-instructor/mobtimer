@@ -38,6 +38,7 @@ ts-node index
 ```
 or
 ```
+cd mobtimer-backend
 cd src/server
 nodemon -e js,ts,ejs,htm,html index.ts
 ```

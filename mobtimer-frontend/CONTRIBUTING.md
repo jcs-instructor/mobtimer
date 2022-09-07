@@ -10,4 +10,10 @@ yarn
 
 ## Run
 
-`yarn start`
+Start backend
+
+From the Terminal: 
+```
+cd mobtimer-frontend
+yarn start
+```
