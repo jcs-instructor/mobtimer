@@ -11,6 +11,9 @@
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
   - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
         - symlink...
+- [ ] Make default port different for frontend & backend
+- [ ] Make ports configurable (on frontend & backend)
+- [ ] Make WebSocketServer url configurable (frontend)
 - [ ] Developer setup
   - [ ] Create a start script (so don't have to cd every time)
   - [ ] Document mobtimer-frontend dev setup
