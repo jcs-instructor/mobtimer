@@ -15,11 +15,11 @@ const App = () => {
     // Join mob
     alert(mobName);
     const port = 9001;
-    const client = new WebSocket(`ws://localhost:${port}`);
+    const client = new MobSocketClient(`ws://localhost:${port}`);
     //const client = await openSocket();
     await client.joinMob(mobName);
   }
-  
+
   const joinMob = (mobName: string) => {
     const request = joinRequest(mobName);
     this.send(request);
