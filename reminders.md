@@ -10,7 +10,7 @@
   - Consistent names & naming conventions (e.g., underscore for private fields, capitalization, etc.)
   - Avoid tech debt
   - ... (add more as we go)
-- **Retro in middle (so can impl. immediately rather than wait a week)**
+- **Retro at end of each 2-hour session (so can impl. immediately rather than wait a week)**
 - **Phrases**:
   - "Got it" (ELMO) [Joel-not sure if this is working that well... 6/29/22]
   - "Hold on" (Navigator wants floor)

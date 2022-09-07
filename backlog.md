@@ -3,6 +3,7 @@
 - [] Note: See also [Reminders](./reminders.md) 
 ## Timer - Minimum Deployable Features
 - [X] making App.js into App.tsx
+- [ ] create CONTRIBUTING-FRONTEND.md
 - [ ] Resume with:
   - [ ] .skip failing UI test (already in backlog to deal with it later)
 - [ ] Start mob
