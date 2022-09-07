@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-import { MobSocketClient } from '../../mobtimer-backend/src/client/MobSocketClient';
+import { MobSocketClient } from './mobtimer-backend/src/client/MobSocketClient';
 
 import './App.css';
 
@@ -18,7 +18,7 @@ const App = () => {
     const client = new MobSocketClient(`ws://localhost:${port}`);
     client.joinMob(mobName);
   }
-  
+
   return (
     <div>
       <JoinMobHeading />
