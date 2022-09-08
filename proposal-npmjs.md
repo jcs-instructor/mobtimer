@@ -5,7 +5,8 @@ Phase 1 = symlink:
 
 Phase 2
 
-- Remove symlink
+yar- Remove symlink
+
 - Get frontend working
 - Move mobtimer-backend/src/client to mobtimer-api
 - Move any dependent files
