@@ -5,6 +5,11 @@ Phase 1 = symlink:
 
 Phase 2
 
-- Move mobtimer-backend/src/client dependencies on mobtimer-backend/src into mobtimer-backend/src
-- create a npmjs module from mobtimer-backend that you can install with yarn
+- Remove symlink
+- Get frontend working
+- Move mobtimer-backend/src/client to mobtimer-api
+- Move any dependent files
+- Move src files to src dir
+- Create a package.json
+- create a npmjs module from mobtimer-client that you can install with yarn
 - Change import from src/client/xxx to import from <package name>
