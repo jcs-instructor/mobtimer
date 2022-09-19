@@ -10,17 +10,17 @@ Try This:
 - add package to mobtimer-backend and test
 - create repository mobtimer-api
   - push repository mobtimer into mobtimer-api
-  - clone mobtimer-api and remove all directories except mobtimer-api
+  - clone mobtimer-api locally
+  - remove all files at root level
+  - remove all directories at root level except mobtimer-api
   - move all files in mobtimer-api up a level
   - move src folder and any other folders up a level
 - repeat for mobtimer-frontend
   - now you can start using in mobtimer-frontend
-- create a new repo mobtimer
-  - set up git for new repo
-  - copy all files from mobtimer root dir to the repo
-- rename mobtimer repo to mobtimer-backend
-  - delete all files from root dir of mobtimer
-  - move all files in mobtimer-backend up a level
+- repeat for mobtimer-backend
+- modify mobtimer to be a master repo
+  - remove mobtimer-api, mobtimer-frontend, and mobtimer-backend
+  - create submodules for these repos
 
 Note: The following didn't work when we tried it:
 
