@@ -2,9 +2,23 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "backend",
+			"label": "backend start",
 			"type": "shell",
-			"command": "cd mobtimer-backend && tsc --watch && bash",
+			"command": "./start-backend.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "frontend start",
+			"type": "shell",
+			"command": "./start-frontend.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -50,9 +64,8 @@
 				"panel": "new"
 			},
 			"dependsOn": [
-				"tsc",
-				"jest",
-				"shell"
+				"backend start",
+				"frontend start"
 			],
 			"problemMatcher": []
 		},
