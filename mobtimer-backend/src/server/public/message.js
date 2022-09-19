@@ -1,6 +1,7 @@
 //import $ from "../../../node_modules/jquery";
 
-const ws = new WebSocket("ws://localhost:3000");
+// todo: make URL configurable
+const ws = new WebSocket("ws://localhost:4000");
 
 ws.onopen = function (event) {
   alert("Web socket is connected!");

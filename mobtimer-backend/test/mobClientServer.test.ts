@@ -8,7 +8,7 @@ import { TimeUtils } from "../src/timeUtils";
 import { Action } from "../src/server/action";
 import { RoomManager } from "../src/server/roomManager";
 
-export const port = 3000 + Number(process.env.JEST_WORKER_ID);
+export const port = 4000 + Number(process.env.JEST_WORKER_ID);
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -84,7 +84,7 @@ describe("WebSocket Server", () => {
     await client2.closeSocket();
 
     expect(client.lastResponse.mobState.durationMinutes).toEqual(17);
-    expect(client2.lastResponse.mobState.durationMinutes).toEqual(17); 
+    expect(client2.lastResponse.mobState.durationMinutes).toEqual(17);
 
     expect(client.responses.length).toEqual(3); // join, join, update
     expect(client2.responses.length).toEqual(2); // join, update
