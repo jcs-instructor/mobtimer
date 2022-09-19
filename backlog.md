@@ -9,8 +9,8 @@
 - [x] .skip failing UI test (already in backlog to deal with it later)
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
-  - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
-        - symlink...
+  - [ ] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
+  - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one        
 - [ ] Make default port different for frontend & backend
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
