@@ -2,6 +2,24 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "runBoth",
+			"type": "shell",
+			"command": "echo started front and back ends",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"backend start",
+				"frontend start"
+			],
+			"problemMatcher": []
+		},
+		{
 			"label": "backend start",
 			"type": "shell",
 			"command": "./start-backend.sh",
@@ -28,83 +46,17 @@
 				"panel": "new"
 			},
 			"problemMatcher": []
-		},
-		{
-			"label": "jest",
-			"type": "shell",
-			"command": "cd HelloWorld && yarn test --watch --verbose && bash",
-			"group": "test",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
+		},		
 		{
 			"label": "shell",
 			"type": "shell",
-			"command": "cd HelloWorld && bash",
-			"group": "test",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "runBoth",
-			"type": "shell",
-			"command": "echo here",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"dependsOn": [
-				"backend start",
-				"frontend start"
-			],
-			"problemMatcher": []
-		},
-		{
-			"type": "shell",
-			"command": "cd HelloWorld && yarn test --watch && bash",
-			"group": {
-				"kind": "test",
-				"isDefault": true
-			},
-			"problemMatcher": [],
-			"label": "jest2",
-			"detail": "tsc && jest out/*.test.js"
-		},
-		{
-			"label": "shell2",
-			"type": "shell",
-			"command": "cd HelloWorld && bash",
-			"group": "test",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "run test and terminal",
-			"type": "shell",
-			"command": "echo here",
+			"command": "bash",
 			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
 			},
-			"dependsOn": [
-				"jest2",
-				"shell2"
-			],
 			"problemMatcher": []
-		}
+		},		
 	]
 }
