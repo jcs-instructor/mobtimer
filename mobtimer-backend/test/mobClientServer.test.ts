@@ -1,11 +1,8 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
-import { Status } from "../src/status";
-import { openSocket } from "./testUtils";
+import { Status, openSocket, TimeUtils, Action } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
-import { TimeUtils } from "../src/timeUtils";
-import { Action } from "../../mobtimer-api/src/action";
 import { RoomManager } from "../src/server/roomManager";
 
 export const port = 4000 + Number(process.env.JEST_WORKER_ID);

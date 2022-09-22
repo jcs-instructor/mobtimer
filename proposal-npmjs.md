@@ -71,5 +71,5 @@ symlink:
 - import xxx from '../mobtimer-backend/src/client
 
 
-- [ ] (Joel) npm add owner ethanstrominger mobtimer-api
+- [X] (Joel) npm owner add ethanstrominger mobtimer-api
 - [X] cleanup: remove unneeded dependencies in mobtimer-api/package.json
