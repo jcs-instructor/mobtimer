@@ -13,8 +13,8 @@
     "removeComments": true,
   },
   "include": [
-    "./src"
-, "../mobtimer-api/src/mobState.ts", "../mobtimer-api/src/action.ts"  ],
+    "./src", 
+  ],
   "exclude": [
     "./test",
     "./src/client",

@@ -24,11 +24,12 @@ Try This:
       - [X]     inspect package.json
       - [X]     commit
  
-      - [ ] yarn build
-      - [ ] npm link
-      - [ ] cd ../mobtimer-backend
-      - [ ] rm -rf node_modules
-      - [ ] npm link mobtimer-api
+      - [X] yarn build
+      - [X] npm link
+      - [X] cd ../mobtimer-backend
+      - [X] rm -rf node_modules
+      - [ ] yarn
+      - [X] npm link mobtimer-api
 
       - [ ]     fix imports
 

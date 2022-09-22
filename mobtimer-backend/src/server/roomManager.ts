@@ -1,7 +1,7 @@
 import { Room } from "./room";
 import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
-import { Action } from "../../../mobtimer-api/src/action";
+import { Action } from "mobtimer-api";
 
 export class RoomManager {
   /*

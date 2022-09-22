@@ -1,6 +1,4 @@
-import { MobState } from "mobtimer-api/src/mobState";
-import { Status } from "mobtimer-api/src/status";
-import { TimeUtils } from "mobtimer-api/src/timeUtils";
+import { MobState, Status, TimeUtils } from "mobtimer-api";
 
 export class MobTimer {
   private _mobName = "";
