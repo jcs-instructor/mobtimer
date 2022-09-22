@@ -21,8 +21,8 @@ Try This:
  
       - [X] yarn add ws
  
-      - [ ]     inspect package.json
-      - [ ]     commit
+      - [X]     inspect package.json
+      - [X]     commit
  
       - [ ] yarn build
       - [ ] npm link
