@@ -1,5 +1,10 @@
 **Practices to Focus On**:
 
+- Snack for Ethan
+- Always look at reminders & have 1 or 2 things to focus on (at least)
+
+**Other Practices**:
+
 - **Strict navigator style**
 - **If confused as driver, ask questions rather than suggesting alternatives**
 - **Consider working in parallel**
