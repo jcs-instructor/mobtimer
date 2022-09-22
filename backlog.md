@@ -7,9 +7,10 @@
 - [x] making App.js into App.tsx
 - [x] create CONTRIBUTING.md for frontend
 - [x] .skip failing UI test (already in backlog to deal with it later)
+- [ ] Fix this: start shell files don't launch the ui in a browser window currently
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
-  - [ ] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
+  - [X] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
   - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one        
 - [ ] Make default port different for frontend & backend
 - [ ] Make ports configurable (on frontend & backend)
@@ -20,7 +21,7 @@
 - [ ] Create a timer
   - [ ] UI - see Example React Source Code in resources.md)
   - [ ] Hook up timer to websocket server
-  - [ ] Consider using existing backend code by packing into npmjs package or submodule and splitting into 3 repositories. See background and decisons. - 3 repositories? (1) server socket code and (2) frontend which both use (3) client socket code. Server socket code uses client socket code only for tests.
+  - [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
   - [ ] Cancel
   - [ ] UI - Start
   - [ ] UI - Pause
