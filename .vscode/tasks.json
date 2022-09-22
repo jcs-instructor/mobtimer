@@ -5,6 +5,9 @@
 			"label": "runBoth",
 			"type": "shell",
 			"command": "open localhost:3000",
+			"windows": {
+				"command": "start firefox localhost:3000"
+			},
 			"group": {
 				"kind": "build",
 				"isDefault": true

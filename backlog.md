@@ -50,6 +50,7 @@
 
 ## Other Technical
 
+- [ ] In tasks.json, unharcode firefox browser (there may be a windows way of specifying 'default browser exe'...?)
 - [ ] Prevent mobtimer-api package from including src
 - [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html
 - [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html
