@@ -1,8 +1,8 @@
 import * as http from "http";
 import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
-import { Action } from "mobtimer-api";
 import {
+  Action,
   MobTimerRequest,
   JoinRequest,
   UpdateRequest,
