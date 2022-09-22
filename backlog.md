@@ -7,13 +7,13 @@
 - [x] making App.js into App.tsx
 - [x] create CONTRIBUTING.md for frontend
 - [x] .skip failing UI test (already in backlog to deal with it later)
-- [X] Merge from npmjs branch to main
-- [X] package mobtimer-api (see proposal-npmjs.md)
-- [ ] Fix this: start shell files don't launch the ui in a browser window currently
+- [x] Merge from npmjs branch to main
+- [x] package mobtimer-api (see proposal-npmjs.md)
+- [x] Fix this: start shell files don't launch the ui in a browser window currently
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
-  - [X] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
-  - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one        
+  - [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
+  - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
 - [ ] Make default port different for frontend & backend
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
@@ -51,7 +51,7 @@
 ## Other Technical
 
 - [ ] Prevent mobtimer-api package from including src
-- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html 
+- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html
 - [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html
 - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
 - [ ] Set tsc options: target es2015 or later
@@ -66,4 +66,3 @@
 - [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
 - [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of string concatenation, e.g., `${minutesPart}:${secondsPart}`;
 - [ ] Figure out way to reduce spurious failing tests (in Jest)
-

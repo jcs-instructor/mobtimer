@@ -4,7 +4,7 @@
 		{
 			"label": "runBoth",
 			"type": "shell",
-			"command": "echo started front and back ends",
+			"command": "open localhost:3000",
 			"group": {
 				"kind": "build",
 				"isDefault": true
