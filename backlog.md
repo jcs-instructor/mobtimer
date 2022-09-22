@@ -7,6 +7,7 @@
 - [x] making App.js into App.tsx
 - [x] create CONTRIBUTING.md for frontend
 - [x] .skip failing UI test (already in backlog to deal with it later)
+- [ ] Merge from npmjs branch to main
 - [ ] Fix this: start shell files don't launch the ui in a browser window currently
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
