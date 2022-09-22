@@ -1,12 +1,12 @@
 import * as http from "http";
 import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
-import { Action } from "../../../mobtimer-api/src/action";
+import { Action } from "mobtimer-api";
 import {
   MobTimerRequest,
   JoinRequest,
   UpdateRequest,
-} from "./mobTimerRequests";
+} from "mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
