@@ -8,15 +8,15 @@ Try This:
       - [X] cd mobtimer-api
       - [X] rm -rf node_modules
       - [X] cp ../mobtimer-backend/tsconfig.json .
-      - [ ] npm init
+      - [X] npm init
  
-      - [ ]     commit
-      - [ ]     create mobtimer-api/index.ts file that imports and exports everything
-      - [ ]     add main: dist/index.js to package.json
-      - [ ]     add scripts: { build: tsc } to package.json
-      - [ ]     modify tsconfig.js to complile types (d.ts)
-      - [ ]     add dist to .gitignore
-      - [ ]     create empty .npmignore
+      - [X]     commit
+      - [X]     create mobtimer-api/src/index.ts file that imports and exports everything
+      - [X]     add main: dist/index.js to package.json
+      - [X]     add scripts: { build: tsc } to package.json
+      - [X]     modify tsconfig.js to complile types (d.ts)
+      - [X]     add dist to .gitignore
+      - [X]     create empty .npmignore
       - [ ]     commit
  
       - [ ] yarn add ws

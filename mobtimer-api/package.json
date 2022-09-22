@@ -2,7 +2,7 @@
   "name": "mobtimer-api",
   "version": "1.0.1",
   "description": "Mobtimer api",
-  "main": "index.js",
+  "main": "dist/index.js",
   "dependencies": {
     "abab": "^2.0.6",
     "abbrev": "^1.1.1",
@@ -354,7 +354,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "author": "Joel Silberman and Ethan Strominger",
   "license": "MIT",
