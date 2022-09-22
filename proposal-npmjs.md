@@ -17,9 +17,9 @@ Try This:
       - [X]     modify tsconfig.js to complile types (d.ts)
       - [X]     add dist to .gitignore
       - [X]     create empty .npmignore
-      - [ ]     commit
+      - [X]     commit
  
-      - [ ] yarn add ws
+      - [X] yarn add ws
  
       - [ ]     inspect package.json
       - [ ]     commit
@@ -71,4 +71,4 @@ symlink:
 
 
 - [ ] (Joel) npm add owner ethanstrominger mobtimer-api
-- [ ] cleanup: remove unneeded dependencies in mobtimer-api/package.json
+- [X] cleanup: remove unneeded dependencies in mobtimer-api/package.json
