@@ -37,10 +37,10 @@ Try This:
 
       - [X]     fix issues
 
-      - [ ] cd ../mobtimer-api
-      - [ ] npm package
+      - [X] cd ../mobtimer-api
+      - [X] npm pack
 
-      - [ ]     inspect package
+      - [X]     inspect package
 
 
 - [X] (Joel) npm owner add ethanstrominger mobtimer-api

@@ -7,7 +7,8 @@
 - [x] making App.js into App.tsx
 - [x] create CONTRIBUTING.md for frontend
 - [x] .skip failing UI test (already in backlog to deal with it later)
-- [ ] Merge from npmjs branch to main
+- [X] Merge from npmjs branch to main
+- [X] package mobtimer-api (see proposal-npmjs.md)
 - [ ] Fix this: start shell files don't launch the ui in a browser window currently
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
@@ -49,6 +50,7 @@
 
 ## Other Technical
 
+- [ ] Prevent mobtimer-api package from including src
 - [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html 
 - [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html
 - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
