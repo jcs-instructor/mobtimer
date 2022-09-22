@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "strict": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+  },
+  "include": [
+    "./src"
+, "../mobtimer-api/src/mobState.ts", "../mobtimer-api/src/action.ts"  ],
+  "exclude": [
+    "./test",
+    "./src/client",
+  ],
+}

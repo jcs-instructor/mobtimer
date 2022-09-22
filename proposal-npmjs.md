@@ -1,46 +1,47 @@
 Try This:
 
-- Get frontend working
-- Move mobtimer-backend/src/client to mobtimer-api
-- Move any dependent files from mobtimer-backend/src to mobtimer-api
-- Move src files to src dir
-- prepare for packaging
-  (Joel) npm add owner ethanstrominger mobtimer-api
-  cd mobtimer-api
-  rm -rf node_modules
-  cp ../mobtimer-frontend/tsconfig.json .
-  npm init
+- [X] Get frontend working
+- [X] Move mobtimer-backend/src/client to mobtimer-api
+- [X] Move any dependent files from mobtimer-backend/src to mobtimer-api
+- [X] Move src files to src dir
+- Prepare for packaging:      
+      - [X] cd mobtimer-api
+      - [X] rm -rf node_modules
+      - [X] cp ../mobtimer-backend/tsconfig.json .
+      - [ ] npm init
+ 
+      - [ ]     commit
+      - [ ]     create mobtimer-api/index.ts file that imports and exports everything
+      - [ ]     add main: dist/index.js to package.json
+      - [ ]     add scripts: { build: tsc } to package.json
+      - [ ]     modify tsconfig.js to complile types (d.ts)
+      - [ ]     add dist to .gitignore
+      - [ ]     create empty .npmignore
+      - [ ]     commit
+ 
+      - [ ] yarn add ws
+ 
+      - [ ]     inspect package.json
+      - [ ]     commit
+ 
+      - [ ] yarn build
+      - [ ] npm link
+      - [ ] cd ../mobtimer-backend
+      - [ ] rm -rf node_modules
+      - [ ] npm link mobtimer-api
 
-      commit
-      create mobtimer-api/index.ts file that imports and exports everything
-      add main: dist/index.js to package.json
-      add scripts: { build: tsc } to package.json
-      modify tsconfig.js to complile types (d.ts)
-      add dist to .gitignore
-      create empty .npmignore
-      commit
+      - [ ]     fix imports
 
-  yarn add ws
+      - [ ] npm test
 
-      inspect package.json
-      commit
+      - [ ]     fix issues
 
-  yarn build
-  npm link
-  cd ../mobtimer-backend
-  rm -rf node_modules
-  npm link mobtimer-api
+      - [ ] cd ../mobtimer-api
+      - [ ] npm package
 
-      fix imports
+      - [ ]     inspect package
 
-  npm test
-
-      fix issues
-
-  cd ../mobtimer-api
-  npm package
-
-      inspect package
+-----------------
 
 - create a npmjs module from mobtimer-client that you can install with yarn
 - add index.ts which imports and exports all files
@@ -67,3 +68,7 @@ symlink:
 
 - Create virtual dir mobtimer-frontend/mobtimer-backend to point to mobtimer-backend/
 - import xxx from '../mobtimer-backend/src/client
+
+
+- [ ] (Joel) npm add owner ethanstrominger mobtimer-api
+- [ ] cleanup: remove unneeded dependencies in mobtimer-api/package.json
