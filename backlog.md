@@ -49,7 +49,7 @@
 
 ## Other Technical
 
-- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.)
+- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html 
 - [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html
 - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
 - [ ] Set tsc options: target es2015 or later
@@ -63,3 +63,5 @@
 - [ ] Maybe: Try decorators - https://www.typescriptlang.org/docs/handbook/decorators.html
 - [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
 - [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of string concatenation, e.g., `${minutesPart}:${secondsPart}`;
+- [ ] Figure out way to reduce spurious failing tests (in Jest)
+

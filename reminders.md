@@ -39,3 +39,11 @@
 - **Avoid rabbit holes**: When exploring and mob timer elapses, reevaluate if going down a productive path
 - **Scribe**: If desired, in retro, request that talker and scribe should be separate people
 - **Commit frequently on feature branch**
+
+**Cool Things to Use**:
+- Outline feature in VS Code
+
+**Appendix**:
+- Consider other approaches to 100% pairing
+- Consider time limits on tasks we’re working on
+- Use Zoom chat (or write on paper) when we have ideas we want to get out of our head but don't necessarily need to be discussed right then.

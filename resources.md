@@ -34,6 +34,9 @@ reactJS.org has an excellent tutorial that uses class, but most of it is also re
 [9. Forms](https://reactjs.org/docs/forms.html)
 [11. Composition vs Inheritance](https://reactjs.org/docs/composition-vs-inheritance.html)
 
+(Note: As of Sept. 2022, Joel Resume Here: https://reactjs.org/docs/conditional-rendering.html#preventing-component-from-rendering 
+)
+
 ## Other
 
 - Fast git handover with mob: https://mob.sh/
