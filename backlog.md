@@ -9,11 +9,12 @@
 - [x] .skip failing UI test (already in backlog to deal with it later)
 - [x] Merge from npmjs branch to main
 - [x] package mobtimer-api (see proposal-npmjs.md)
-- [x] Fix this: start shell files don't launch the ui in a browser window currently
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
   - [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
   - [ ] Join a mob from the above screen. Result: Message connected is displayed after connecting and whether you are the first one
+- [ ] Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
+      (CONSIDER MOVING THIS TO TECHNICAL IF NOT IMMEDIATE PRIORITY)
 - [ ] Make default port different for frontend & backend
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
@@ -50,7 +51,6 @@
 
 ## Other Technical
 
-- [ ] In tasks.json, unharcode firefox browser (there may be a windows way of specifying 'default browser exe'...?)
 - [ ] Prevent mobtimer-api package from including src
 - [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html
 - [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html

@@ -4,10 +4,7 @@
 		{
 			"label": "runBoth",
 			"type": "shell",
-			"command": "open localhost:3000",
-			"windows": {
-				"command": "start firefox localhost:3000"
-			},
+			"command": "echo running front and back ends",			
 			"group": {
 				"kind": "build",
 				"isDefault": true
