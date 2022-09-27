@@ -1,17 +1,17 @@
-import { W3CWebSocket } from "websocket";
+import { IMessageEvent, w3cwebsocket as W3CWebSocket } from "websocket";
 import { waitForSocketState } from "./testUtils";
 import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";
 import * as MobTimerRequests from "./mobTimerRequests";
 
-class MobSocketClient extends WebSocket {
+class MobSocketClient extends W3CWebSocket {
   private _responses: string[] = [];
 
   constructor(url: string) {
     super(url);
-    this.on("message", (data) => {
-      this._responses.push(data.toString());
-    });
+    this.onmessage = (message) => {
+      this._responses.push(message.toString());
+    };
   }
 
   joinMob(mobName: string) {
