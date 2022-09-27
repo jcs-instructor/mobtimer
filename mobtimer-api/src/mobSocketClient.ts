@@ -1,4 +1,4 @@
-import { IMessageEvent, w3cwebsocket as W3CWebSocket } from "websocket";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { waitForSocketState } from "./testUtils";
 import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";

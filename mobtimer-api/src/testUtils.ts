@@ -1,7 +1,7 @@
 // todo: this file is called "testUtils" but if used for non-test code also, reconsider name
 
 import { MobSocketClient } from "./mobSocketClient";
-import { WebSocket } from "ws";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 // todo: reconsider using JEST_WORKER_ID in production code; this is a duplicate of the port in mobClientServer.test.ts
 const port = 4000 + Number(process.env.JEST_WORKER_ID);
@@ -19,7 +19,7 @@ export async function openSocket() {
  */
 
 export function waitForSocketState(
-  socket: WebSocket,
+  socket: W3CWebSocket,
   state: number
 ): Promise<void> {
   return new Promise(function (resolve) {
