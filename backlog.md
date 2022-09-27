@@ -12,10 +12,11 @@
 - [ ] Start mob
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
   - [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
+  - [ ] See [proposal for web socket client](.\proposal-websocketclient.md)
+      - Or Overcome zlib compilation error. Maybe:
+        - Google zlib errors with react
+        - Or use a different web socket library that works well with react  
   - [ ] When user joins a mob from the UI, show message "connected" (IN PROGRESS WITH ERROR - SEE BELOW) 
-        - [ ] Overcome zlib compilation error. Maybe:
-            - Google zlib errors with react
-            - Or use a different web socket library that works well with react  
 - [ ] Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
       (CONSIDER MOVING THIS TO TECHNICAL IF NOT IMMEDIATE PRIORITY)
 - [ ] Make default port different for frontend & backend
