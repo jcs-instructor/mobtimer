@@ -23,10 +23,9 @@
         [ ] Run test
         [ ] Copy same files to frontEnd
         [ ] Test can connect to mob
-        [ ] Switch back to using ws
+  - [ ] Switch back to using ws
         [ ] Change frontend code to use ws
         [ ] If that works, copy code to backend
-  - [ ]
   - [ ] When user joins a mob from the UI, show message "connected" (IN PROGRESS WITH ERROR - SEE BELOW)
 - [ ] Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
       (CONSIDER MOVING THIS TO TECHNICAL IF NOT IMMEDIATE PRIORITY)
