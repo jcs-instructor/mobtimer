@@ -1,4 +1,3 @@
-import fs from "fs";
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, openSocket, TimeUtils, Action } from "mobtimer-api";
@@ -25,7 +24,6 @@ describe("WebSocket Server", () => {
   });
 
   test("Create mob", async () => {
-    fs.writeFileSync("test.txt", "test");
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.closeSocket();
