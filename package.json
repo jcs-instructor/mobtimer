@@ -36,6 +36,7 @@
     "create-react-app": "^5.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "fs": "^0.0.1-security",
     "jest-websocket-mock": "^2.3.0",
     "jquery": "^3.6.0",
     "nodemon": "^2.0.19",
