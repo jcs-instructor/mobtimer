@@ -1,6 +1,6 @@
 Web Socket Client proposal
 
-[ ] Do this first: revert back to using "ws" library and refactoring: Decrease profile of 3rd party web socket class (keep references entirely within one file if possible; maybe use interfaces, etc.; both on client and server)
+[ ] Revert & Refator: Do this first: revert back to using "ws" library and refactoring: Decrease profile of 3rd party web socket class (keep references entirely within one file if possible; maybe use interfaces, etc.; both on client and server)
 - open()
 - close()
 - readystate
