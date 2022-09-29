@@ -1,5 +1,11 @@
 Web Socket Client proposal
 
+[ ] Tests are failing: 
+    - 1 hr. - try to debug why; probably do this on 'revise' branch and double-check no references to w3cwebsocket
+    - Consider order of doing things, e.g., not having api as a separate module
+[ ] Consider using a proxy to the websocket (maybe see: https://stackoverflow.com/questions/23686379/how-to-make-websockets-to-go-through-a-proxy-in-node-js)
+[ ] Gated checkin - don't allow checkin if tests are failing
+
 [ ] Revert & Refator: Do this first: revert back to using "ws" library and refactoring: Decrease profile of 3rd party web socket class (keep references entirely within one file if possible; maybe use interfaces, etc.; both on client and server)
 - open()
 - close()
