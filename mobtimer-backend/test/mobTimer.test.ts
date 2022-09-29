@@ -3,7 +3,7 @@ import { Status, TimeUtils } from "mobtimer-api";
 import { MockCurrentTime } from "./mockCurrentTime";
 
 test("Default duration is 5 minutes", () => {
-  expect(new MobTimer().durationMinutes).toEqual(5);
+  expect(new MobTimer().durationMinutes).toEqual(6);
 });
 
 test("Set duration to 3.5 minutes", () => {
