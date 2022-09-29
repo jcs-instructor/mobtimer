@@ -2,11 +2,9 @@ import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils } from "mobtimer-api";
 import { MockCurrentTime } from "./mockCurrentTime";
 
-test("Default duration is 5 minutes", () => {
-  expect(new MobTimer().durationMinutes).toEqual(5);
-});
+test("Test that is not skipped", () => {});
 
-test.skip("Set duration to 3.5 minutes", () => {
+test("Set duration to 3.5 minutes", () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 3.5;
   expect(mobTimer.durationMinutes).toEqual(3.5);
