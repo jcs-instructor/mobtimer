@@ -1,8 +1,8 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { waitForSocketState } from "./testUtils";
-import { joinRequest, MobTimerRequest } from "./mobTimerRequests";
-import { MobTimerResponse } from "./mobTimerResponse";
-import * as MobTimerRequests from "./mobTimerRequests";
+import { joinRequest, MobTimerRequest } from "mobtimer-api";
+import { MobTimerResponse } from "mobtimer-api";
+import * as MobTimerRequests from "mobtimer-api";
 
 class MobSocketClient extends W3CWebSocket {
   private _responses: string[] = [];

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-import { MobSocketClient } from 'mobtimer-api';
+import { MobSocketClient } from './mobSocketClient';
 
 import './App.css';
 
