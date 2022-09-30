@@ -1,5 +1,5 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { waitForSocketState } from "./testUtils";
+// import { waitForSocketState } from "./testUtils";
 import { joinRequest, MobTimerRequest } from "mobtimer-api";
 import { MobTimerResponse } from "mobtimer-api";
 import * as MobTimerRequests from "mobtimer-api";
@@ -49,7 +49,7 @@ class MobSocketClient extends W3CWebSocket {
 
   async closeSocket() {
     this.close();
-    await waitForSocketState(this, this.CLOSED);
+    // await waitForSocketState(this, this.CLOSED);
   }
 }
 
