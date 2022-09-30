@@ -16,11 +16,7 @@
         [ ] Or Overcome zlib compilation error. Maybe:
         [x] Google zlib errors with react
         [x] Or use a different web socket library that works well with react
-        [ ] Move websocket code to backend and frontend
-        [ ] Copy webSocketClient.tsx and utils.tsx to backend
-        [ ] Remove these files from api
-        [ ] Switch references
-        [ ] Run test
+        [ ] Review changes made in wip
         [ ] Copy same files to frontEnd
         [ ] Test can connect to mob
   - [ ] Switch back to using ws
