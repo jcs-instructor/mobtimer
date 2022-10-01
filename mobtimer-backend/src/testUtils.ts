@@ -7,7 +7,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 const port = 4000 + Number(process.env.JEST_WORKER_ID);
 
 export async function openSocket() {
-  const socket = new MobSocketClient(`ws://localhost:${port}`);
+  const socket = new MobSocketClient(`ws://localhost:${port}`).webSocket;
   await waitForSocketState(socket, socket.OPEN);
   return socket;
 }
