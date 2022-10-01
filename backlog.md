@@ -17,9 +17,10 @@
         [x] Google zlib errors with react
         [x] Or use a different web socket library that works well with react
         [ ] Review changes made in wip
-        [ ] Copy same files to frontEnd
         [ ] Test can connect to mob
+        [ ] Review depenencies vs devDependencies
   - [ ] Switch back to using ws
+        [ ] Refactor mobtimer-client to use a created interface and pass in client when calling
         [ ] Change frontend code to use ws
         [ ] If that works, copy code to backend
   - [ ] When user joins a mob from the UI, show message "connected" (IN PROGRESS WITH ERROR - SEE BELOW)
