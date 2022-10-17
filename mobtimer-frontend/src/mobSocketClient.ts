@@ -1,8 +1,8 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-// import { waitForSocketState } from "./testUtils";
+import { waitForSocketState } from "./testUtils";
 import { joinRequest } from "mobtimer-api";
-// import { MobTimerResponse } from "mobtimer-api";
-// import * as MobTimerRequests from "mobtimer-api";
+import { MobTimerResponse } from "mobtimer-api";
+import * as MobTimerRequests from "mobtimer-api";
 
 class MobSocketClient {
   private _responses: string[] = [];
@@ -21,38 +21,38 @@ class MobSocketClient {
     this.webSocket.send(request);
   }
 
-  //   update(durationMinutes: number) {
-  //     const request = MobTimerRequests.updateRequest(durationMinutes);
-  //     this.send(request);
-  //   }
+  update(durationMinutes: number) {
+    const request = MobTimerRequests.updateRequest(durationMinutes);
+    this.webSocket.send(request);
+  }
 
-  //   start() {
-  //     const request = MobTimerRequests.startRequest();
-  //     this.send(request);
-  //   }
+  start() {
+    const request = MobTimerRequests.startRequest();
+    this.webSocket.send(request);
+  }
 
-  //   pause() {
-  //     const request = MobTimerRequests.pauseRequest();
-  //     this.send(request);
-  //   }
+  pause() {
+    const request = MobTimerRequests.pauseRequest();
+    this.webSocket.send(request);
+  }
 
-  //   resume() {
-  //     const request = MobTimerRequests.resumeRequest();
-  //     this.send(request);
-  //   }
+  resume() {
+    const request = MobTimerRequests.resumeRequest();
+    this.webSocket.send(request);
+  }
 
-  //   public get lastResponse(): MobTimerResponse {
-  //     return JSON.parse(this._responses.at(-1) || "") as MobTimerResponse;
-  //   }
+  public get lastResponse(): MobTimerResponse {
+    return JSON.parse(this._responses.at(-1) || "") as MobTimerResponse;
+  }
 
-  //   public get responses(): string[] {
-  //     return [...this._responses];
-  //   }
+  public get responses(): string[] {
+    return [...this._responses];
+  }
 
-  //   async closeSocket() {
-  //     this.close();
-  //     await waitForSocketState(this, this.CLOSED);
-  //   }
+  async closeSocket() {
+    this.webSocket.close();
+    await waitForSocketState(this.webSocket, this.webSocket.CLOSED);
+  }
 }
 
 export { MobSocketClient };
