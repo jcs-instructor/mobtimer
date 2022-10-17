@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-import { MobSocketClient2 } from './mobSocketClient2';
+import { MobSocketClient } from './mobSocketClient';
 
 import './App.css';
 import { waitForSocketState } from './testUtils';
@@ -16,7 +16,7 @@ const App = () => {
     // Join mob
     alert(mobName);
     const port = 4000;
-    const client = new MobSocketClient2(`ws://localhost:${port}`);
+    const client = new MobSocketClient(`ws://localhost:${port}`);
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob("some-mob-name");
     // client.joinMob(mobName);
