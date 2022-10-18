@@ -7,8 +7,8 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 const port = 4000 + Number(process.env.JEST_WORKER_ID);
 
 export async function openSocket() {
-  const socket = new MobSocketClient(`ws://localhost:${port}`).webSocket;
-  await waitForSocketState(socket, socket.OPEN);
+  const socket = new MobSocketClient(`ws://localhost:${port}`);
+  await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
   return socket;
 }
 
@@ -29,6 +29,22 @@ export function waitForSocketState(
       } else {
         waitForSocketState(socket, state).then(resolve);
       }
+    });
+  });
+}
+
+export function waitForMessage(
+  socket: MobSocketClient,
+  id: string
+): Promise<any> {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      socket.responses.forEach((response) => {
+        if (JSON.parse(response).id === id) {
+          resolve(response);
+        }
+      }, 10);
+      waitForMessage(socket, id).then(resolve);
     });
   });
 }

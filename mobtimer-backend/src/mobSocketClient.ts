@@ -11,37 +11,44 @@ class MobSocketClient {
   constructor(url: string) {
     this.webSocket = new W3CWebSocket(url);
     this.webSocket.onmessage = (message) => {
-      console.log("message woo hoo", message);
-      this._responses.push(message.toString());
+      console.log("message woo hoo", message.data as string);
+      this._responses.push(message.data as string);
     };
   }
 
   joinMob(mobName: string) {
+    console.log("join mob", mobName);
     const request = joinRequest(mobName);
     this.webSocket.send(request);
+    return request;
   }
 
   update(durationMinutes: number) {
     const request = MobTimerRequests.updateRequest(durationMinutes);
     this.webSocket.send(request);
+    return request;
   }
 
   start() {
     const request = MobTimerRequests.startRequest();
     this.webSocket.send(request);
+    return request;
   }
 
   pause() {
     const request = MobTimerRequests.pauseRequest();
     this.webSocket.send(request);
+    return request;
   }
 
   resume() {
     const request = MobTimerRequests.resumeRequest();
     this.webSocket.send(request);
+    return request;
   }
 
   public get lastResponse(): MobTimerResponse {
+    console.log("last response", this._responses.at(-1));
     return JSON.parse(this._responses.at(-1) || "") as MobTimerResponse;
   }
 

@@ -138,7 +138,7 @@ test("After time expires, seconds remaining should be 0", () => {
 test("After time expires, elapse time raises specified event", async () => {
   const mobTimer = new MobTimer();
   let expired = false;
-  mobTimer.expireFunc = () => {
+  mobTimer.timerExpireFunc = () => {
     expired = true;
   };
   const durationSeconds = 0.2;

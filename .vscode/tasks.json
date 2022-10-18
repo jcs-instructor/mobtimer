@@ -2,9 +2,9 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "runBoth",
+			"label": "startAll",
 			"type": "shell",
-			"command": "echo running front and back ends",			
+			"command": "echo running front and back ends",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -15,7 +15,8 @@
 			},
 			"dependsOn": [
 				"backend start",
-				"frontend start"
+				"frontend start",
+				"api start"
 			],
 			"problemMatcher": []
 		},
@@ -46,17 +47,20 @@
 				"panel": "new"
 			},
 			"problemMatcher": []
-		},		
+		},
 		{
-			"label": "shell",
+			"label": "api start",
 			"type": "shell",
-			"command": "bash",
-			"group": "build",
+			"command": "./start-api.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
 			},
 			"problemMatcher": []
-		},		
+		},
 	]
 }
