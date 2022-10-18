@@ -9,21 +9,31 @@
 - [x] .skip failing UI test (already in backlog to deal with it later)
 - [x] Merge from npmjs branch to main
 - [x] package mobtimer-api (see proposal-npmjs.md)
+
+- [x] gated checkin - don't allow checkin if tests are failing
+- [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
+- [x] Overcome zlib compilation error
+
+  - [x] downgrade to React 4 (works)
+  - [x] upgrade to React 5
+  - [x] Moved dependencies to devDependencies
+  - [x] Duplicate testUtils.ts and WebSocketClient to front and backend
+  - [x] Remove all npm packages from api
+  - [x] Componentize webSocket in mobWebSocketClient
+  - [x] Change to wc3websocket
+  - [x] Add id to messages and wait for specific id in addition to waiting for close
+  - [x] Added console.log after joining
+        **- [ ] Review above**
+
 - [ ] Start mob
+
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
-  - [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
-  - [ ] See [proposal for web socket client](.\proposal-websocketclient.md)
-        [ ] Or Overcome zlib compilation error. Maybe:
+  - [ ] See [proposal for web socket client](./proposal-websocketclient.md)
         [x] Google zlib errors with react
         [x] Or use a different web socket library that works well with react
-        [ ] Review changes made in wip
-        [ ] Test can connect to mob
-        [ ] Review depenencies vs devDependencies
-  - [ ] Switch back to using ws
-        [ ] Refactor mobtimer-client to use a created interface and pass in client when calling
-        [ ] Change frontend code to use ws
-        [ ] If that works, copy code to backend
+        [x] Test can connect to mob
   - [ ] When user joins a mob from the UI, show message "connected" (IN PROGRESS WITH ERROR - SEE BELOW)
+
 - [ ] Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
       (CONSIDER MOVING THIS TO TECHNICAL IF NOT IMMEDIATE PRIORITY)
 - [ ] Make default port different for frontend & backend

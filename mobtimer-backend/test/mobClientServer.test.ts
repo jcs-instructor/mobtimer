@@ -201,7 +201,7 @@ describe("WebSocket Server", () => {
     expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
   });
 
-  test("Handle bad message and get good error message", async () => {
+  test.skip("Handle bad message and get good error message", async () => {
     const client = await openSocket();
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
     await client.closeSocket();
