@@ -23,7 +23,17 @@
   - [x] Change to wc3websocket
   - [x] Add id to messages and wait for specific id in addition to waiting for close
   - [x] Added console.log after joining
-        **- [ ] Review above**
+  - **[ ] Review above**
+  - [ ] Fix two tests marked as skip
+    - [ ] Consider other options for getting last message (write to file, send last message and check for it)
+  - [ ] inspect other two mob tests
+  - [ ] review [proposal.md](./proposal-message-structure.md)
+  - [ ] move husky check for testing to push to make quicker
+  - [ ] demo no-verify
+  - [ ] demo runAll task
+  - [ ] refactor: deduplicate testUtils.ts, mobClientSocket.ts
+    - [ ] leae socket implementationduplicated, further componenentize socket?
+    - [ ] relook at how onMessage is implemented and only do for backend
 
 - [ ] Start mob
 
