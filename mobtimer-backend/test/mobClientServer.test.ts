@@ -211,7 +211,7 @@ describe("WebSocket Server", () => {
     );
   });
 
-  test("Handle bad message and subsequent request succeeds", async () => {
+  test.skip("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket();
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
     const request = await client.joinMob(_mobName1);
