@@ -32,7 +32,7 @@
   - [ ] demo no-verify
   - [ ] demo runAll task
   - [ ] refactor: deduplicate testUtils.ts, mobClientSocket.ts
-    - [ ] leae socket implementationduplicated, further componenentize socket?
+    - [ ] leave socket implementationduplicated, further componenentize socket?
     - [ ] relook at how onMessage is implemented and only do for backend
 
 - [ ] Start mob
@@ -42,7 +42,13 @@
         [x] Google zlib errors with react
         [x] Or use a different web socket library that works well with react
         [x] Test can connect to mob
-  - [ ] When user joins a mob from the UI, show message "connected" (IN PROGRESS WITH ERROR - SEE BELOW)
+  - [ ] When user joins a mob from the UI, show message "connected"
+
+- [ ] **Discuss HyperApp, ferp, mrbarry VS React**
+
+  - [ ] Pros and Cons
+  - [ ] HyperApp, ferp tutorials?
+  - [ ] Reduce mrbarry code
 
 - [ ] Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
       (CONSIDER MOVING THIS TO TECHNICAL IF NOT IMMEDIATE PRIORITY)
