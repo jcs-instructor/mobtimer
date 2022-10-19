@@ -4,12 +4,20 @@ import { joinRequest } from "mobtimer-api";
 import { MobTimerResponse } from "mobtimer-api";
 import * as MobTimerRequests from "mobtimer-api";
 
+type webSocketType = {
+  onmessage: (message: { data: string }) => void;
+  close: () => void;
+  CLOSED: number;
+  OPEN: number;
+  readyState: number;
+  send: (message: string) => void;
+};
 class MobSocketClient {
   private _responses: string[] = [];
-  webSocket: W3CWebSocket = new W3CWebSocket("ws://localhost:0000");
+  webSocket: webSocketType;
 
-  constructor(url: string) {
-    this.webSocket = new W3CWebSocket(url);
+  constructor(webSocket: webSocketType) {
+    this.webSocket = webSocket;
     this.webSocket.onmessage = (message) => {
       console.log("message woo hoo", message.data as string);
       this._responses.push(message.data as string);
