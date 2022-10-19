@@ -13,7 +13,7 @@ export class RoomManager {
   private static _roomsByMobName: Map<string, Room> = new Map();
   private static _roomsBySocket: Map<WebSocket, Room> = new Map();
 
-  private static _getRoom(key: string | WebSocket) : Room | undefined {
+  private static _getRoom(key: string | WebSocket): Room | undefined {
     if (typeof key === "string") {
       return RoomManager._roomsByMobName.get(key);
     } else {
@@ -34,10 +34,7 @@ export class RoomManager {
     return RoomManager._getRoom(mobName)?.sockets;
   }
 
-  static getOrRegisterRoom(
-    mobName: string,
-    socket: WebSocket
-  ) {
+  static getOrRegisterRoom(mobName: string, socket: WebSocket) {
     let room = RoomManager._getRoom(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
@@ -55,8 +52,13 @@ export class RoomManager {
 
   private static _createAndJoinRoom(mobName: string, socket: WebSocket) {
     const mobTimer = new MobTimer(mobName);
-    mobTimer.expireFunc = () =>
-      RoomManager.broadcastToMob(mobTimer as MobTimer, Action.Expired);
+    // todo: rename timerExpireFunc
+    mobTimer.timerExpireFunc = () =>
+      RoomManager.broadcastToMob(
+        "dummy", // todo: define id
+        mobTimer as MobTimer,
+        Action.Expired
+      );
     const room = { mobTimer, sockets: new Set<WebSocket>() };
     RoomManager._roomsByMobName.set(mobName, room);
     RoomManager._joinRoom(room, socket);
@@ -64,8 +66,9 @@ export class RoomManager {
   }
 
   // todo: consider if this really belongs here; it's pretty different from the other methods
-  static broadcastToMob(mobTimer: MobTimer, action: Action) {
+  static broadcastToMob(id: string, mobTimer: MobTimer, action: Action) {
     const mobTimerResponse = {
+      id,
       actionInfo: { action: action },
       mobState: mobTimer.state,
     };
@@ -75,7 +78,10 @@ export class RoomManager {
   }
 
   // todo: consider changing sockets parameter to room (from which the sockets can be retrieved), or if making totally generic (something else)
-  private static _broadcast(sockets: Set<WebSocket> | undefined, message: string) {    
+  private static _broadcast(
+    sockets: Set<WebSocket> | undefined,
+    message: string
+  ) {
     if (!sockets) {
       return;
     }

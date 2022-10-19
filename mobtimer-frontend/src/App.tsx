@@ -4,6 +4,7 @@ import JoinMobHeading from './components/JoinMobHeading';
 import { MobSocketClient } from './mobSocketClient';
 
 import './App.css';
+import { waitForSocketState } from './testUtils';
 
 const App = () => {
   const [mobName, setMobName] = useState('');
@@ -16,7 +17,9 @@ const App = () => {
     alert(mobName);
     const port = 4000;
     const client = new MobSocketClient(`ws://localhost:${port}`);
-    client.joinMob(mobName);
+    await waitForSocketState(client.webSocket, WebSocket.OPEN);
+    client.joinMob("some-mob-name");
+    // client.joinMob(mobName);
   }
 
   return (

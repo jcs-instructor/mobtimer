@@ -9,24 +9,53 @@
 - [x] .skip failing UI test (already in backlog to deal with it later)
 - [x] Merge from npmjs branch to main
 - [x] package mobtimer-api (see proposal-npmjs.md)
+- [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
+
+- [ ] **WIP**
+
+  - [x] gated checkin - don't allow checkin if tests are failing
+  - [x] Overcome zlib compilation error
+    - [x] downgrade to React 4 (works)
+    - [x] upgrade to React 5
+    - [x] Reorganize/refactor API (backend first)
+      - [x] Duplicate testUtils.ts and WebSocketClient to backend, remove from API (fix frontend later)
+      - [x] Moved dependencies to devDependencies
+      - [x] Remove all npm packages from api
+      - [x] Componentize webSocket in mobWebSocketClient
+      - [x] Add id to messages and wait for specific id in addition to waiting for close
+      - get tests to work
+      - [x] change to wc3websocket (more fragile, so will make sturdier)
+      - [x] move all code from testUtils and webSocketClient that does not use npm package to api
+    - [x] Get frontend to work
+      - [x] Add console.log after joining
+    - [ ] **Review above**
+    - [ ] Fix two tests marked as skip
+      - [ ] Consider other options for getting last message (write to file, send last message and check for it)
+    - [ ] inspect other two mob tests
+    - [ ] review [proposal.md](./proposal-message-structure.md)
+    - [ ] move husky check for testing to push to make quicker
+    - [ ] demo no-verify
+    - [ ] demo runAll task
+    - [ ] refactor: deduplicate testUtils.ts, mobClientSocket.ts
+      - [ ] leave socket implementationduplicated, further componenentize socket?
+      - [ ] refactor: relook at how onMessage is implemented and only do for backend
+      - [ ] refactor: review past proposals to cleanup
+
 - [ ] Start mob
+
   - [x] UI - Create a form for starting a mob. Result: acknowledge button is pressed and value of field)
-  - [x] Make a package to share code between back and front ends (See proposal-npmjs.md for more details)
-  - [ ] See [proposal for web socket client](.\proposal-websocketclient.md)
-        [ ] Or Overcome zlib compilation error. Maybe:
+  - [ ] See [proposal for web socket client](./proposal-websocketclient.md)
         [x] Google zlib errors with react
         [x] Or use a different web socket library that works well with react
-        [ ] Move websocket code to backend and frontend
-        [ ] Copy webSocketClient.tsx and utils.tsx to backend
-        [ ] Remove these files from api
-        [ ] Switch references
-        [ ] Run test
-        [ ] Copy same files to frontEnd
-        [ ] Test can connect to mob
-  - [ ] Switch back to using ws
-        [ ] Change frontend code to use ws
-        [ ] If that works, copy code to backend
-  - [ ] When user joins a mob from the UI, show message "connected" (IN PROGRESS WITH ERROR - SEE BELOW)
+        [x] Test can connect to mob
+  - [ ] When user joins a mob from the UI, show message "connected"
+
+- [ ] **Discuss HyperApp, ferp, mrbarry VS React**
+
+  - [ ] Pros and Cons
+  - [ ] HyperApp, ferp tutorials?
+  - [ ] Reduce mrbarry code
+
 - [ ] Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
       (CONSIDER MOVING THIS TO TECHNICAL IF NOT IMMEDIATE PRIORITY)
 - [ ] Make default port different for frontend & backend

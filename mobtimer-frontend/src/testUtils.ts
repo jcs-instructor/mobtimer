@@ -8,7 +8,7 @@ const port = 4000 + Number(process.env.JEST_WORKER_ID);
 
 export async function openSocket() {
   const socket = new MobSocketClient(`ws://localhost:${port}`);
-  await waitForSocketState(socket, socket.OPEN);
+  await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
   return socket;
 }
 

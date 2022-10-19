@@ -11,7 +11,7 @@ export class MobTimer {
   private _everStarted = false;
   private _timer: NodeJS.Timeout | undefined;
   private _interval: NodeJS.Timeout | undefined;
-  private _expireFunc = () => {};
+  private _timerExpireFunc = () => {};
   sockets: any;
 
   constructor(mobName: string = "") {
@@ -38,7 +38,7 @@ export class MobTimer {
 
   checkReady() {
     if (this.status === Status.Ready) {
-      this._expireFunc();
+      this._timerExpireFunc();
       if (this._interval) clearInterval(this._interval);
     }
   }
@@ -58,8 +58,8 @@ export class MobTimer {
     this._nowInSecondsFunc = func;
   }
 
-  public set expireFunc(func: () => void) {
-    this._expireFunc = func;
+  public set timerExpireFunc(func: () => void) {
+    this._timerExpireFunc = func;
   }
 
   pause() {

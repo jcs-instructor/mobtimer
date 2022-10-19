@@ -4,14 +4,17 @@
   "description": "Mobtimer api",
   "main": "dist/index.js",
   "dependencies": {
-    "tsc": "^2.0.4",
-    "typescript": "^4.8.3",
-    "websocket": "^1.0.34"
+    "@types/uuidv4": "^5.0.0",
+    "uuid": "^9.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "typescript": "^4.8.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "build:watch": "tsc -w"
   },
   "author": "Joel Silberman and Ethan Strominger",
   "license": "MIT",
