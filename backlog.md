@@ -33,7 +33,8 @@
   - [ ] demo runAll task
   - [ ] refactor: deduplicate testUtils.ts, mobClientSocket.ts
     - [ ] leave socket implementationduplicated, further componenentize socket?
-    - [ ] relook at how onMessage is implemented and only do for backend
+    - [ ] refactor: relook at how onMessage is implemented and only do for backend
+    - [ ] refactor: review past proposals to cleanup
 
 - [ ] Start mob
 
