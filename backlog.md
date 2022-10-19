@@ -28,11 +28,12 @@
       - [x] move all code from testUtils and webSocketClient that does not use npm package to api
     - [x] Get frontend to work
       - [x] Add console.log after joining
-    - [ ] **Review above**
+    - [X] **Review above**
+    - [ ] See [proposal-refactor.md](./proposal-refactor.md)
     - [ ] Fix two tests marked as skip
       - [ ] Consider other options for getting last message (write to file, send last message and check for it)
     - [ ] inspect other two mob tests
-    - [ ] review [proposal.md](./proposal-message-structure.md)
+    - [ ] review [proposal-message-structure.md](./proposal-message-structure.md)
     - [ ] move husky check for testing to push to make quicker
     - [ ] demo no-verify
     - [ ] demo runAll task
