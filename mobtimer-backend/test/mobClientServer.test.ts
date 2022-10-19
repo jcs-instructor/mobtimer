@@ -38,8 +38,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Create mob", async () => {
-    const socket = new w3cwebsocket(`ws://localhost:${port}`);
-    const client = await openSocket(socket);
+    const client = await openSocket();
     const request = await client.joinMob(_mobName1);
     await waitForMessage(client, JSON.parse(request).id);
     await client.closeSocket();
