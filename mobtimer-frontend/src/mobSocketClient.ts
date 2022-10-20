@@ -11,7 +11,6 @@ class MobSocketClient {
   constructor(url: string) {
     this.webSocket = new W3CWebSocket(url);
     this.webSocket.onmessage = (message) => {
-      console.log("message woo hoo", message.data);
       this._responses.push(message.toString());
     };
   }

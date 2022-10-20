@@ -18,14 +18,12 @@ class MobSocketClient {
 
   constructor(webSocket: webSocketType) {
     this.webSocket = webSocket;
-    this.webSocket.onmessage = (message) => {
-      console.log("message woo hoo", message.data as string);
+    this.webSocket.onmessage = (message) => {      
       this._responses.push(message.data as string);
     };
   }
 
   joinMob(mobName: string) {
-    console.log("join mob", mobName);
     const request = joinRequest(mobName);
     this.webSocket.send(request);
     return request;
@@ -56,7 +54,6 @@ class MobSocketClient {
   }
 
   public get lastResponse(): MobTimerResponse {
-    console.log("last response", this._responses.at(-1));
     return JSON.parse(this._responses.at(-1) || "") as MobTimerResponse;
   }
 

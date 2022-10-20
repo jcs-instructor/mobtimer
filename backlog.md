@@ -29,6 +29,7 @@
     - [x] Get frontend to work
       - [x] Add console.log after joining
     - [X] **Review above**
+    - [ ] Consider creating utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
     - [ ] See [proposal-refactor.md](./proposal-refactor.md)
     - [ ] Fix two tests marked as skip
       - [ ] Consider other options for getting last message (write to file, send last message and check for it)
