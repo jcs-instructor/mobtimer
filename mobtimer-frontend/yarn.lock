@@ -6139,6 +6139,13 @@
   dependencies:
     "minimist" "^1.2.6"
 
+"mobtimer-api@file:../mobtimer-api":
+  "resolved" "file:../mobtimer-api"
+  "version" "1.0.1"
+  dependencies:
+    "@types/uuidv4" "^5.0.0"
+    "uuid" "^9.0.0"
+
 "ms@^2.1.1", "ms@2.1.2":
   "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
