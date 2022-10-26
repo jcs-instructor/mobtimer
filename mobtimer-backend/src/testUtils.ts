@@ -16,13 +16,14 @@ export function waitForSocketState(
   state: number
 ): Promise<void> {
   return new Promise(function (resolve) {
-    setTimeout(function () {
+    const timeout = setTimeout(function () {
       if (socket.readyState === state) {
         resolve();
       } else {
         waitForSocketState(socket, state).then(resolve);
       }
     });
+    timeout.unref();
   });
 }
 
@@ -31,7 +32,7 @@ export function waitForMessage(
   id: string
 ): Promise<any> {
   return new Promise(function (resolve) {
-    setTimeout(function () {
+    const timeout = setTimeout(function () {
       socket.responses.forEach((response) => {
         if (JSON.parse(response).id === id) {
           resolve(response);
@@ -39,5 +40,6 @@ export function waitForMessage(
       }, 10);
       waitForMessage(socket, id).then(resolve);
     });
+    timeout.unref();
   });
 }

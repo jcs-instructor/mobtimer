@@ -118,10 +118,12 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     const request = await client.pause();
+    console.log("debug request", request);
     await waitForMessage(client, JSON.parse(request).id);
-    await client.closeSocket();
+    console.log("debug responses", client.responses);
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Pause);
+    await client.closeSocket();
   });
 
   test("Resume timer", async () => {

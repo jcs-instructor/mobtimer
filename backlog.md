@@ -4,7 +4,9 @@
 
 ## Timer - Minimum Deployable Features
 
-- [ ] demo runAll task
+- [X] demo runAll task
+- [ ] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
+- [ ] Consider creating utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
 - [ ] see [proposal-refactor.md](./proposal-refactor.md)
 - [ ] refactor
 

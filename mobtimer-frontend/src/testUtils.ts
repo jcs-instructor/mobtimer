@@ -23,12 +23,13 @@ export function waitForSocketState(
   state: number
 ): Promise<void> {
   return new Promise(function (resolve) {
-    setTimeout(function () {
+    const timeout = setTimeout(function () {
       if (socket.readyState === state) {
         resolve();
       } else {
         waitForSocketState(socket, state).then(resolve);
       }
     });
+    timeout.unref();
   });
 }
