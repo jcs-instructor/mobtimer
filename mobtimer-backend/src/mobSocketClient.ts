@@ -12,7 +12,7 @@ class MobSocketClient {
   constructor(webSocket: WebSocketType) {
     this.webSocket = webSocket;
     this.webSocket.onmessage = (message) => {
-      this._responses.push(message.data as string);
+      this._responses.push(message.data);
     };
   }
 
