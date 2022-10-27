@@ -1,5 +1,6 @@
 **Practices to Focus On**:
 
+- When entering commands from Terminal, write script first (so have a record of steps needed / makes environment changes repeatable)
 - Snack for Ethan
 - Always look at reminders & have 1 or 2 things to focus on (at least)
 

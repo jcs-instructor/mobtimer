@@ -5,6 +5,8 @@
 ## Timer - Minimum Deployable Features
 
 - [X] demo runAll task
+- [ ] Investigate Eclipse, Intellij, & Visual Studio
+  - [ ] Review prior retros for generic lessons re. languages/environments/etc.
 - [ ] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
 - [ ] Consider creating utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
 - [ ] see [proposal-refactor.md](./proposal-refactor.md)
