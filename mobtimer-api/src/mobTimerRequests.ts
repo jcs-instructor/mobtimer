@@ -8,7 +8,7 @@ export type MobTimerRequest =
   | PauseRequest
   | ResumeRequest;
 
-function getUuid(): string {
+export function getUuid(): string {
   return uuidv4();
 };
 

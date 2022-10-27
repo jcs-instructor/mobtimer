@@ -8,12 +8,12 @@ cd [this repository name here]
 yarn
 ```
 
-## Run
+## Start Frontend Server
 
-Start backend
+If running from a single repository, see CONTRIBUTING.md in the top level directory to start all components (frontend server, backend server, and api build)
 
-From the Terminal: 
+To start the Frontend Server only, from the Terminal:
 ```
 cd mobtimer-frontend
-yarn start
+./start.sh
 ```

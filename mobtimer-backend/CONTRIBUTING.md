@@ -42,18 +42,12 @@ Sample message to send via Postman:
 { "action": "join", "mobName": "amazing-folks" }
 ```
 
-## Start Web Server
+## Start Backend Server
 
+If running from a single repository, see CONTRIBUTING.md in the top level directory to start all components (frontend server, backend server, and api build)
+
+To start the Backend Server only, from the Terminal:
 ```
 cd mobtimer-backend
-cd src/server
-ts-node index
-```
-
-or
-
-```
-cd mobtimer-backend
-cd src/server
-nodemon -e js,ts,ejs,htm,html index.ts
+./start.sh
 ```
