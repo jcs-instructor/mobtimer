@@ -3,22 +3,15 @@ import { waitForSocketState } from "./testUtils";
 import { joinRequest } from "mobtimer-api";
 import { MobTimerResponse } from "mobtimer-api";
 import * as MobTimerRequests from "mobtimer-api";
+import { WebSocketType } from "./webSocketType";
 
-type webSocketType = {
-  onmessage: (message: { data: string }) => void;
-  close: () => void;
-  CLOSED: number;
-  OPEN: number;
-  readyState: number;
-  send: (message: string) => void;
-};
 class MobSocketClient {
   private _responses: string[] = [];
-  webSocket: webSocketType;
+  webSocket: WebSocketType;
 
-  constructor(webSocket: webSocketType) {
+  constructor(webSocket: WebSocketType) {
     this.webSocket = webSocket;
-    this.webSocket.onmessage = (message) => {      
+    this.webSocket.onmessage = (message) => {
       this._responses.push(message.data as string);
     };
   }
