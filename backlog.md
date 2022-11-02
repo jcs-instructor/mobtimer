@@ -7,13 +7,13 @@
 - [X] demo runAll task
 - [X] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
 - [ ] Refactoring:
-  - [ ] Create utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
-  - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
   - [ ] mobclientserver.test.ts: use 'echo' action
+  - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
   - [ ] modify all tests to same method
     - [ ] Fix two tests marked as skip
   - [ ] move testUtils.ts, mobClientSocket.ts back to mobtimer-api
   - [ ] move onMessage from mobSocketClient to be independently added
+  - [ ] Create utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
 - [ ] Investigate Eclipse, Intellij, & Visual Studio
   - [ ] Review prior retros for generic lessons re. languages/environments/etc.
 
