@@ -1,11 +1,11 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { waitForSocketState } from "./testUtils";
-import { joinRequest } from "mobtimer-api";
 import { MobTimerResponse } from "mobtimer-api";
 import * as MobTimerRequests from "mobtimer-api";
 import { WebSocketType } from "./webSocketType";
 
 class MobSocketClient {
+  
   private _responses: string[] = [];
   webSocket: WebSocketType;
 
@@ -15,9 +15,15 @@ class MobSocketClient {
       this._responses.push(message.data);
     };
   }
+  
+  echo() {
+    const request = MobTimerRequests.echoRequest();
+    this.webSocket.send(request);
+    return request;
+  }
 
   joinMob(mobName: string) {
-    const request = joinRequest(mobName);
+    const request = MobTimerRequests.joinRequest(mobName);
     this.webSocket.send(request);
     return request;
   }

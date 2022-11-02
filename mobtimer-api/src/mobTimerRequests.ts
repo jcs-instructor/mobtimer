@@ -2,7 +2,8 @@ import { Action } from "./action";
 import { v4 as uuidv4 } from "uuid";
 
 export type MobTimerRequest =
-    JoinRequest
+    EchoRequest
+  | JoinRequest
   | UpdateRequest
   | StartRequest
   | PauseRequest
@@ -10,6 +11,11 @@ export type MobTimerRequest =
 
 export function getUuid(): string {
   return uuidv4();
+};
+
+export type EchoRequest = {
+  id: string;
+  action: Action.Echo;
 };
 
 export type JoinRequest = {
@@ -38,6 +44,10 @@ export type ResumeRequest = {
   id: string;
   action: Action.Resume;
 };
+
+export function echoRequest() {
+  return JSON.stringify({ action: Action.Echo } as EchoRequest);
+}
 
 export function joinRequest(mobName: string) {
   return JSON.stringify({ action: Action.Join, mobName } as JoinRequest);

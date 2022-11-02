@@ -67,6 +67,10 @@ function _processRequest(
   }
 
   switch (parsedRequest.action) {
+    case Action.Echo: {
+      break;
+    }
+    
     case Action.Join: {
       // todo: this is taken care of above; maybe it could be done here
       break;

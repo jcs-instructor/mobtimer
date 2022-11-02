@@ -7,7 +7,8 @@
 - [X] demo runAll task
 - [X] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
 - [ ] Refactoring:
-  - [ ] mobclientserver.test.ts: use 'echo' action
+  - [ ] mobclientserver.test.ts: use 'echo' action - see  [proposal-echo.md](./proposal-echo.md) - On Branch: "EchoRequest"
+        - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
   - [ ] modify all tests to same method
     - [ ] Fix two tests marked as skip
