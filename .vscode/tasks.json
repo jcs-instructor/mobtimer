@@ -14,6 +14,7 @@
 				"panel": "new"
 			},
 			"dependsOn": [
+				"symbolic link",
 				"backend start",
 				"frontend start",
 				"api start"
@@ -24,6 +25,20 @@
 			"label": "backend start",
 			"type": "shell",
 			"command": "./start-backend.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "symbolic link",
+			"type": "shell",
+			"command": "./link-mobtimer-api.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
