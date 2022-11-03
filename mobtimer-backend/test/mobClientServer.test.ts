@@ -210,6 +210,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await client.resume();
+    await client.echo();
     await waitForLastResponse(client); // todo: make this more clear why we're doing this 
     await client.closeSocket();
     expect(client.responses.length).toEqual(6); // join, update, start, pause, resume, echo

@@ -29,7 +29,6 @@ export function waitForSocketState(
 }
 
 export async function waitForLastResponse(socket: MobSocketClient): Promise<any> {
-  await socket.echo();
   return new Promise(function (resolve) {
     const timeout = setTimeout(function () {
       socket.responses.forEach((response) => {
