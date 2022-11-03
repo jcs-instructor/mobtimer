@@ -28,7 +28,12 @@ export function waitForSocketState(
   });
 }
 
-export async function waitForLastResponse(
+export async function waitForLastResponse(client: MobSocketClient) {
+  await client.sendEchoRequest();
+  await waitForEcho(client);
+}
+
+async function waitForEcho(
   socket: MobSocketClient
 ): Promise<void> {
   return new Promise(function (resolve) {
@@ -36,7 +41,7 @@ export async function waitForLastResponse(
       if (socket.echoReceived) {
         resolve();
       }
-      waitForLastResponse(socket).then(resolve);
+      waitForEcho(socket).then(resolve);
     }, 10);
     timeout.unref();
   });
