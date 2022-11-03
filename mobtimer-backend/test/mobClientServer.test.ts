@@ -1,7 +1,7 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
-import { waitForSocketState } from "../src/testUtils";
+import { waitForEchoResponse, waitForSocketState } from "../src/testUtils";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
@@ -209,15 +209,24 @@ describe("WebSocket Server", () => {
     await client.update(TimeUtils.secondsToMinutes(0.2));
     await client.start();
     await client.pause();
-    const request = await client.resume();
-    await waitForMessage(client, JSON.parse(request).id);
+    await client.resume();
+    await client.echo();
+    await waitForEchoResponse(client); // todo: make this more clear why we're doing this 
     await client.closeSocket();
-    expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
+    expect(client.responses.length).toEqual(6); // join, update, start, pause, resume, echo
+  });
+
+  test("Echo request and response", async () => {
+    const client = await openSocket();
+    await client.echo();
+    await waitForEchoResponse(client);
+    await client.closeSocket();
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Echo);
   });
 
   test.skip("Handle bad message and get good error message", async () => {
     const client = await openSocket();
-    await client.webSocketServer.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.send("some-bad-garbage-not-a-real-request");
     await client.closeSocket();
     expect(client.responses.length).toEqual(1); // join
     expect(client.lastResponse.actionInfo.action).toEqual(
@@ -227,7 +236,7 @@ describe("WebSocket Server", () => {
 
   test.skip("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket();
-    await client.webSocketServer.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.send("some-bad-garbage-not-a-real-request");
     const request = await client.joinMob(_mobName1);
     await waitForMessage(client, JSON.parse(request).id);
     await client.closeSocket();

@@ -67,6 +67,10 @@ function _processRequest(
   }
 
   switch (parsedRequest.action) {
+    case Action.Echo: {
+      break;
+    }
+
     case Action.Join: {
       // todo: this is taken care of above; maybe it could be done here
       break;
@@ -114,6 +118,13 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
           actionInfo: { action: Action.InvalidRequestError },
         });
         webSocket.send(errorResponse);
+        return;
+      }
+      if (parsedRequest.action === Action.Echo) {
+        const echoResponse = JSON.stringify({
+          actionInfo: { action: Action.Echo },
+        });
+        webSocket.send(echoResponse);
         return;
       }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);

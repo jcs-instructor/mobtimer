@@ -15,6 +15,11 @@ class MobSocketClient {
     };
   }
 
+  echo() {
+    const request = MobTimerRequests.echoRequest();
+    this.webSocket.send(request);
+  }
+
   joinMob(mobName: string) {
     const request = joinRequest(mobName);
     this.webSocket.send(request);

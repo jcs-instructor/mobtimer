@@ -1,5 +1,7 @@
 **Practices to Focus On**:
 
+- List accomplishments in retros
+- Rotate who facilitates session startups & retros
 - When entering commands from Terminal, write script first (so have a record of steps needed / makes environment changes repeatable)
 - Snack for Ethan
 - Always look at reminders & have 1 or 2 things to focus on (at least)
@@ -47,9 +49,11 @@
 - **Commit frequently on feature branch**
 
 **Cool Things to Use**:
+
 - Outline feature in VS Code
 
 **Appendix**:
+
 - Consider other approaches to 100% pairing
 - Consider time limits on tasks we’re working on
 - Use Zoom chat (or write on paper) when we have ideas we want to get out of our head but don't necessarily need to be discussed right then.

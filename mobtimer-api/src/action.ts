@@ -1,4 +1,5 @@
 export enum Action {
+  Echo = "echo",
   Join = "join",
   Update = "update",
   Start = "start",
