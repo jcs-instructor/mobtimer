@@ -203,6 +203,19 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
   });
 
+  test("Check got expected number of messages", async () => {
+    const client = await openSocket();
+    await client.joinMob(_mobName1);
+    await client.update(TimeUtils.secondsToMinutes(0.2));
+    await client.start();
+    await client.pause();
+    await client.resume();
+    await client.echo();
+    await waitForEchoResponse(client); // todo: make this more clear why we're doing this 
+    await client.closeSocket();
+    expect(client.responses.length).toEqual(6); // join, update, start, pause, resume, echo
+  });
+
   test("Echo request and response", async () => {
     const client = await openSocket();
     await client.echo();
@@ -213,7 +226,7 @@ describe("WebSocket Server", () => {
 
   test.skip("Handle bad message and get good error message", async () => {
     const client = await openSocket();
-    await client.webSocketServer.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.send("some-bad-garbage-not-a-real-request");
     await client.closeSocket();
     expect(client.responses.length).toEqual(1); // join
     expect(client.lastResponse.actionInfo.action).toEqual(
@@ -223,7 +236,7 @@ describe("WebSocket Server", () => {
 
   test.skip("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket();
-    await client.webSocketServer.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.send("some-bad-garbage-not-a-real-request");
     const request = await client.joinMob(_mobName1);
     await waitForMessage(client, JSON.parse(request).id);
     await client.closeSocket();
