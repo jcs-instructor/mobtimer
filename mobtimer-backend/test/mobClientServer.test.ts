@@ -211,9 +211,9 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await client.sendEchoRequest();
-    await waitForLastResponse(client); // todo: make this more clear why we're doing this 
+    await waitForLastResponse(client); // todo: make this more clear why we're doing this
     await client.closeSocket();
-    expect(client.responses.length).toEqual(6); // join, update, start, pause, resume, echo
+    expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
   });
 
   test("Echo request and response", async () => {
@@ -221,7 +221,7 @@ describe("WebSocket Server", () => {
     await client.sendEchoRequest();
     await waitForLastResponse(client);
     await client.closeSocket();
-    expect(client.lastResponse.actionInfo.action).toEqual(Action.Echo);
+    expect(client.echoReceived).toEqual(true);
   });
 
   test.skip("Handle bad message and get good error message", async () => {

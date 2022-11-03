@@ -5,7 +5,6 @@ import * as MobTimerRequests from "mobtimer-api";
 import { WebSocketType } from "./webSocketType";
 
 class MobSocketClient {
-   
   private _responses: string[] = [];
   private _echoReceived: boolean = false;
   webSocket: WebSocketType;
@@ -16,13 +15,12 @@ class MobSocketClient {
       const responseObject = convertToMobTimerResponse(message.data);
       if (responseObject.actionInfo.action === MobTimerRequests.Action.Echo) {
         this._echoReceived = true;
-      }
-      else {
+      } else {
         this._responses.push(message.data);
       }
     };
   }
-  
+
   sendEchoRequest() {
     const request = MobTimerRequests.echoRequest();
     this.webSocket.send(request);
@@ -67,10 +65,8 @@ class MobSocketClient {
     return [...this._responses];
   }
 
-  deleteEchoResponse() {
-    this._responses.forEach((response, index) => { 
-      // todo: if (response === ...) 
-    });
+  public get echoReceived(): boolean {
+    return this._echoReceived;
   }
 
   async closeSocket() {

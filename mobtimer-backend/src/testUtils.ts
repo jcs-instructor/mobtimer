@@ -28,24 +28,21 @@ export function waitForSocketState(
   });
 }
 
-export async function waitForLastResponse(socket: MobSocketClient): Promise<any> {
+export async function waitForLastResponse(
+  socket: MobSocketClient
+): Promise<void> {
   return new Promise(function (resolve) {
     const timeout = setTimeout(function () {
-      socket.responses.forEach((response) => {
-        const responseObject = convertToMobTimerResponse(response);
-        if (responseObject.actionInfo.action === Action.Echo) {
-          // todo: get rid of the delete function and use the echoReceived instead (expose as public property)...
-          socket.deleteEchoResponse();
-          resolve(response);
-        }
-      }, 10);
+      if (socket.echoReceived) {
+        resolve();
+      }
       waitForLastResponse(socket).then(resolve);
-    });
+    }, 10);
     timeout.unref();
   });
 }
 
-export function convertToMobTimerResponse(response: string) : MobTimerResponse {
+export function convertToMobTimerResponse(response: string): MobTimerResponse {
   return JSON.parse(response) as MobTimerResponse;
 }
 
