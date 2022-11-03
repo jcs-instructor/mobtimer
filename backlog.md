@@ -4,12 +4,10 @@
 
 ## Timer - Minimum Deployable Features
 
-- [X] demo runAll task
-- [X] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
+- [x] demo runAll task
+- [x] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
 - [ ] Refactoring:
-  - [ ] mobclientserver.test.ts: use 'echo' action - see  [proposal-echo.md](./proposal-echo.md) - On Branch: "EchoRequest"
-        - [ ] ***** AFTER LUNCH ON 11/3/22: SEE TODO COMMENT IN ECHO TEST AND MERGE BRANCH ONTO MAIN - ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE) ****
-        - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type
+  - [ ] mobclientserver.test.ts: use 'echo' action - see [proposal-echo.md](./proposal-echo.md) - On Branch: "EchoRequest" - [ ] **\*** AFTER LUNCH ON 11/3/22: SEE TODO COMMENT IN ECHO TEST AND MERGE BRANCH ONTO MAIN - ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE) \*\*\*\* - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type - [ ] Combine two echo lines from test into one - [ ] Remove id and use echo instead
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
   - [ ] modify all tests to same method
     - [ ] Fix two tests marked as skip
@@ -17,6 +15,7 @@
   - [ ] move onMessage from mobSocketClient to be independently added
   - [ ] Create utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
 - [ ] Investigate Eclipse, Intellij, & Visual Studio
+
   - [ ] Review prior retros for generic lessons re. languages/environments/etc.
 
 - [ ] **Start mob**
