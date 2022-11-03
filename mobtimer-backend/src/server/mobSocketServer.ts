@@ -70,7 +70,7 @@ function _processRequest(
     case Action.Echo: {
       break;
     }
-    
+
     case Action.Join: {
       // todo: this is taken care of above; maybe it could be done here
       break;
@@ -121,9 +121,11 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         return;
       }
       if (parsedRequest.action === Action.Echo) {
-        // get mob name for socket
-        // const sockets = RoomManager.getSocketsForMob(mobName);
-        // RoomManager._broadcast(sockets, message);
+        const echoResponse = JSON.stringify({
+          actionInfo: { action: Action.Echo },
+        });
+        webSocket.send(echoResponse);
+        return;
       }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);
       if (!mobTimer) {

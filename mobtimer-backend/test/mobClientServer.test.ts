@@ -203,18 +203,12 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.mobState.status).toEqual(Status.Ready);
   });
 
-  test("Check got expected number of messages", async () => {
+  test("Echo request and response", async () => {
     const client = await openSocket();
-    await client.joinMob(_mobName1);
-    await client.update(TimeUtils.secondsToMinutes(0.2));
-    await client.start();
-    await client.pause();
-    await client.resume();
     await client.echo();
-    // await waitForMessage(client, JSON.parse(request).id);
     await waitForEchoResponse(client);
     await client.closeSocket();
-    expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
+    expect(client.lastResponse.actionInfo.action).toEqual(Action.Echo);
   });
 
   test.skip("Handle bad message and get good error message", async () => {
