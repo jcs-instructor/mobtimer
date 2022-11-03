@@ -120,6 +120,11 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         webSocket.send(errorResponse);
         return;
       }
+      if (parsedRequest.action === Action.Echo) {
+        // get mob name for socket
+        // const sockets = RoomManager.getSocketsForMob(mobName);
+        // RoomManager._broadcast(sockets, message);
+      }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);
       if (!mobTimer) {
         return;
