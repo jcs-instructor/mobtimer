@@ -32,7 +32,7 @@ export function waitForEchoResponse(socket: MobSocketClient): Promise<any> {
   return new Promise(function (resolve) {
     const timeout = setTimeout(function () {
       socket.responses.forEach((response) => {
-        const responseObject : MobTimerResponse = JSON.parse(response);
+        const responseObject = convertToMobTimerResponse(response);
         if (responseObject.actionInfo.action === Action.Echo) {
           resolve(response);
         }
@@ -41,6 +41,10 @@ export function waitForEchoResponse(socket: MobSocketClient): Promise<any> {
     });
     timeout.unref();
   });
+}
+
+function convertToMobTimerResponse(response: string) : MobTimerResponse {
+  return JSON.parse(response) as MobTimerResponse;
 }
 
 // TODO: remove if not needed
