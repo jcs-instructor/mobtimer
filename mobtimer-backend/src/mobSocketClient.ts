@@ -1,5 +1,5 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { waitForSocketState } from "./testUtils";
+import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
 import { MobTimerResponse } from "mobtimer-api";
 import * as MobTimerRequests from "mobtimer-api";
 import { WebSocketType } from "./webSocketType";
@@ -7,16 +7,23 @@ import { WebSocketType } from "./webSocketType";
 class MobSocketClient {
    
   private _responses: string[] = [];
+  private _echoReceived: boolean = false;
   webSocket: WebSocketType;
 
   constructor(webSocket: WebSocketType) {
     this.webSocket = webSocket;
     this.webSocket.onmessage = (message) => {
-      this._responses.push(message.data);
+      const responseObject = convertToMobTimerResponse(message.data);
+      if (responseObject.actionInfo.action === MobTimerRequests.Action.Echo) {
+        this._echoReceived = true;
+      }
+      else {
+        this._responses.push(message.data);
+      }
     };
   }
   
-  echo() {
+  sendEchoRequest() {
     const request = MobTimerRequests.echoRequest();
     this.webSocket.send(request);
     return request;

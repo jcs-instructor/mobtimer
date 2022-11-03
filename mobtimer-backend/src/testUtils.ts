@@ -44,7 +44,7 @@ export async function waitForLastResponse(socket: MobSocketClient): Promise<any>
   });
 }
 
-function convertToMobTimerResponse(response: string) : MobTimerResponse {
+export function convertToMobTimerResponse(response: string) : MobTimerResponse {
   return JSON.parse(response) as MobTimerResponse;
 }
 
