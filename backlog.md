@@ -6,11 +6,13 @@
 
 - [x] demo runAll task
 - [x] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
+- [ ] Discuss Ethan's keyboard
+- [ ] Look at where we have timeouts and intervals and change code blocks to function
 - [ ] Refactoring:
-  - [ ] WIP: mobclientserver.test.ts: use 'echo' action - see [proposal-echo.md](./proposal-echo.md) 
-  - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)  
-  - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type 
-  - [ ] Combine two echo lines from test into one 
+  - [ ] WIP: mobclientserver.test.ts: use 'echo' action - see [proposal-echo.md](./proposal-echo.md)
+  - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
+  - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type
+  - [ ] Combine two echo lines from test into one
   - [ ] Remove id and use echo instead
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
   - [ ] modify all tests to same method
