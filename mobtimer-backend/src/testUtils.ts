@@ -28,9 +28,9 @@ export function waitForSocketState(
   });
 }
 
-export async function waitForLastResponse(client: MobSocketClient) {
-  await client.sendEchoRequest();
-  await waitForEcho(client);
+export async function waitForLastResponse(socket: MobSocketClient) {
+  await socket.sendEchoRequest();
+  await waitForEcho(socket);
 }
 
 async function waitForEcho(
