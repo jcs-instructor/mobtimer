@@ -1,5 +1,6 @@
 // todo: this file is called "testUtils" but if used for non-test code also, reconsider name
 
+import { Action } from "mobtimer-api";
 import { MobSocketClient } from "./mobSocketClient";
 
 // todo: reconsider using JEST_WORKER_ID in production code; this is a duplicate of the port in mobClientServer.test.ts
@@ -27,6 +28,21 @@ export function waitForSocketState(
   });
 }
 
+export function waitForEchoResponse(socket: MobSocketClient): Promise<any> {
+  return new Promise(function (resolve) {
+    const timeout = setTimeout(function () {
+      socket.responses.forEach((response) => {
+        if (JSON.parse(response).action === Action.Echo) {
+          resolve(response);
+        }
+      }, 10);
+      waitForEchoResponse(socket).then(resolve);
+    });
+    timeout.unref();
+  });
+}
+
+// TODO: remove if not needed
 export function waitForMessage(
   socket: MobSocketClient,
   id: string

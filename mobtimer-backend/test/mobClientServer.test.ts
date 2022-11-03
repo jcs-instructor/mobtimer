@@ -1,7 +1,7 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
-import { waitForSocketState } from "../src/testUtils";
+import { waitForEchoResponse, waitForSocketState } from "../src/testUtils";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
@@ -211,7 +211,8 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await client.echo();
-    await waitForMessage(client, JSON.parse(request).id);
+    // await waitForMessage(client, JSON.parse(request).id);
+    await waitForEchoResponse(client);
     await client.closeSocket();
     expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
   });

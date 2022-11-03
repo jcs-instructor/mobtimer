@@ -49,9 +49,11 @@
 - **Commit frequently on feature branch**
 
 **Cool Things to Use**:
+
 - Outline feature in VS Code
 
 **Appendix**:
+
 - Consider other approaches to 100% pairing
 - Consider time limits on tasks we’re working on
 - Use Zoom chat (or write on paper) when we have ideas we want to get out of our head but don't necessarily need to be discussed right then.
