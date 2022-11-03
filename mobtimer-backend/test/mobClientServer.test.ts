@@ -1,7 +1,7 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
-import { waitForEchoResponse, waitForSocketState } from "../src/testUtils";
+import { waitForLastResponse, waitForSocketState } from "../src/testUtils";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
@@ -210,8 +210,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await client.resume();
-    await client.echo();
-    await waitForEchoResponse(client); // todo: make this more clear why we're doing this 
+    await waitForLastResponse(client); // todo: make this more clear why we're doing this 
     await client.closeSocket();
     expect(client.responses.length).toEqual(6); // join, update, start, pause, resume, echo
   });
@@ -219,7 +218,7 @@ describe("WebSocket Server", () => {
   test("Echo request and response", async () => {
     const client = await openSocket();
     await client.echo();
-    await waitForEchoResponse(client);
+    await waitForLastResponse(client);
     await client.closeSocket();
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Echo);
   });

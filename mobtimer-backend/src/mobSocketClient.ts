@@ -5,7 +5,7 @@ import * as MobTimerRequests from "mobtimer-api";
 import { WebSocketType } from "./webSocketType";
 
 class MobSocketClient {
-  
+   
   private _responses: string[] = [];
   webSocket: WebSocketType;
 
@@ -58,6 +58,12 @@ class MobSocketClient {
 
   public get responses(): string[] {
     return [...this._responses];
+  }
+
+  deleteEchoResponse() {
+    this._responses.forEach((response, index) => { 
+      // todo: if (response === ...) 
+    });
   }
 
   async closeSocket() {

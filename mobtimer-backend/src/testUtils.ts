@@ -28,16 +28,18 @@ export function waitForSocketState(
   });
 }
 
-export function waitForEchoResponse(socket: MobSocketClient): Promise<any> {
+export async function waitForLastResponse(socket: MobSocketClient): Promise<any> {
+  await socket.echo();
   return new Promise(function (resolve) {
     const timeout = setTimeout(function () {
       socket.responses.forEach((response) => {
         const responseObject = convertToMobTimerResponse(response);
         if (responseObject.actionInfo.action === Action.Echo) {
+          socket.deleteEchoResponse();
           resolve(response);
         }
       }, 10);
-      waitForEchoResponse(socket).then(resolve);
+      waitForLastResponse(socket).then(resolve);
     });
     timeout.unref();
   });
