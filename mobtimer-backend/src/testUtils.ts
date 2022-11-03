@@ -34,6 +34,7 @@ export async function waitForLastResponse(socket: MobSocketClient): Promise<any>
       socket.responses.forEach((response) => {
         const responseObject = convertToMobTimerResponse(response);
         if (responseObject.actionInfo.action === Action.Echo) {
+          // todo: get rid of the delete function and use the echoReceived instead (expose as public property)...
           socket.deleteEchoResponse();
           resolve(response);
         }
