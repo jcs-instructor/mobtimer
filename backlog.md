@@ -14,7 +14,6 @@
   - [ ] WIP: mobclientserver.test.ts: use 'echo' action - see [proposal-echo.md](./proposal-echo.md)
     - [x] Combine two echo lines from test into one
     - [x] Remove id from tests
-          //start here
     - [ ] Remove id from model
     - [ ] Look at where we have timeouts and intervals and change code blocks to function
     - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)

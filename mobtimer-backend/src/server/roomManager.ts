@@ -55,7 +55,6 @@ export class RoomManager {
     // todo: rename timerExpireFunc
     mobTimer.timerExpireFunc = () =>
       RoomManager.broadcastToMob(
-        "dummy", // todo: define id
         mobTimer as MobTimer,
         Action.Expired
       );
@@ -66,9 +65,8 @@ export class RoomManager {
   }
 
   // todo: consider if this really belongs here; it's pretty different from the other methods
-  static broadcastToMob(id: string, mobTimer: MobTimer, action: Action) {
+  static broadcastToMob(mobTimer: MobTimer, action: Action) {
     const mobTimerResponse = {
-      id,
       actionInfo: { action: action },
       mobState: mobTimer.state,
     };

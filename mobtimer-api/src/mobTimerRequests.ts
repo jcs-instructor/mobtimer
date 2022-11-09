@@ -9,39 +9,29 @@ export type MobTimerRequest =
   | PauseRequest
   | ResumeRequest;
 
-export function getUuid(): string {
-  return uuidv4();
-};
-
 export type EchoRequest = {
-  id: string;
   action: Action.Echo;
 };
 
-export type JoinRequest = {
-  id: string;
+export type JoinRequest = {  
   action: Action.Join;
   mobName: string;
 };
 
 export type UpdateRequest = {
-  id: string;
   action: Action.Update;
   value: { durationMinutes?: number };
 };
 
 export type StartRequest = {
-  id: string;
   action: Action.Start;
 };
 
 export type PauseRequest = {
-  id: string;
   action: Action.Pause;
 };
 
 export type ResumeRequest = {
-  id: string;
   action: Action.Resume;
 };
 
@@ -55,7 +45,6 @@ export function joinRequest(mobName: string) {
 
 export function updateRequest(durationMinutes: number) {
   return JSON.stringify({
-    id: getUuid(), 
     action: Action.Update,
     value: { durationMinutes },
   } as UpdateRequest);
@@ -63,21 +52,18 @@ export function updateRequest(durationMinutes: number) {
 
 export function startRequest() {
   return JSON.stringify({
-    id: getUuid(),
     action: Action.Start,
   } as StartRequest);
 }
 
 export function pauseRequest() {
   return JSON.stringify({
-    id: getUuid(),
     action: Action.Pause,
   } as PauseRequest);
 }
 
 export function resumeRequest() {
   return JSON.stringify({
-    id: getUuid(),
     action: Action.Resume,
   } as ResumeRequest);
 }

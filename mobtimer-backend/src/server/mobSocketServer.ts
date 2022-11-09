@@ -132,7 +132,6 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         return;
       }
       RoomManager.broadcastToMob(
-        parsedRequest.id,
         mobTimer,
         parsedRequest.action
       ); // todo consider moving mobName up a level
