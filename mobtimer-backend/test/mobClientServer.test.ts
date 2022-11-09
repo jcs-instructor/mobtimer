@@ -3,13 +3,11 @@ import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import {
   waitForLastResponse,
-  waitForEcho,
   waitForSocketState,
 } from "../src/testUtils";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { waitForMessage } from "../src/testUtils";
 import { w3cwebsocket } from "websocket";
 import { MobSocketClient } from "../src/mobSocketClient";
 
@@ -43,8 +41,8 @@ describe("WebSocket Server", () => {
 
   test("Create mob", async () => {
     const client = await openSocket();
-    const request = await client.joinMob(_mobName1);
-    await waitForMessage(client, JSON.parse(request).id);
+    await client.joinMob(_mobName1);
+    await waitForLastResponse(client);
     await client.closeSocket();
     expect(client.lastResponse.mobState).toEqual(new MobTimer(_mobName1).state);
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Join);
@@ -165,7 +163,6 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.actionInfo.action).toEqual("update");
   });
 
-  // start here
   test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
@@ -175,6 +172,7 @@ describe("WebSocket Server", () => {
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+      await waitForLastResponse(client);
       await client.closeSocket();
       expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
       expect(client.lastResponse.actionInfo.action).toEqual(Action.Expired);
@@ -191,6 +189,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+    await waitForLastResponse(client);
     await client.closeSocket();
     const numDigits = 1;
     expect(client.lastResponse.mobState.secondsRemaining).toBeCloseTo(
@@ -211,6 +210,7 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+    await waitForLastResponse(client);
     await client.closeSocket();
     const numDigits = 1;
     expect(client.lastResponse.mobState.secondsRemaining).toEqual(0);
@@ -251,8 +251,8 @@ describe("WebSocket Server", () => {
   test.skip("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket();
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
-    const request = await client.joinMob(_mobName1);
-    await waitForMessage(client, JSON.parse(request).id);
+    await client.joinMob(_mobName1);
+    await waitForLastResponse(client);
     await client.closeSocket();
     expect(client.responses.length).toEqual(2); // join + error
   });
