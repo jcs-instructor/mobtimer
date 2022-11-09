@@ -1,7 +1,11 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
-import { waitForLastResponse, waitForEcho, waitForSocketState } from "../src/testUtils";
+import {
+  waitForLastResponse,
+  waitForEcho,
+  waitForSocketState,
+} from "../src/testUtils";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
@@ -53,6 +57,9 @@ describe("WebSocket Server", () => {
     const client2 = await openSocket();
     await client2.joinMob(_mobName2);
 
+    await waitForLastResponse(client);
+    await waitForLastResponse(client2);
+
     await client.closeSocket();
     await client2.closeSocket();
 
@@ -69,6 +76,8 @@ describe("WebSocket Server", () => {
     const client2 = await openSocket();
     await client2.joinMob(_mobName2);
     await client2.update(17);
+    await waitForLastResponse(client);
+    await waitForLastResponse(client2);
 
     await client.closeSocket();
     await client2.closeSocket();
@@ -90,8 +99,10 @@ describe("WebSocket Server", () => {
 
     const client2 = await openSocket();
     await client2.joinMob(mobNameForBothTeams);
-    const request = await client2.update(17);
-    await waitForMessage(client2, JSON.parse(request).id);
+    await client2.update(17);
+
+    await waitForLastResponse(client);
+    await waitForLastResponse(client2);
 
     await client.closeSocket();
     await client2.closeSocket();
@@ -106,8 +117,10 @@ describe("WebSocket Server", () => {
   test("Start timer", async () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
-    const request = await client.start();
-    await waitForMessage(client, JSON.parse(request).id);
+    await client.start();
+
+    await waitForLastResponse(client);
+
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Running);
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Start);
@@ -117,10 +130,9 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.start();
-    const request = await client.pause();
-    console.log("debug request", request);
-    await waitForMessage(client, JSON.parse(request).id);
-    console.log("debug responses", client.responses);
+    await client.pause();
+    await waitForLastResponse(client);
+
     expect(client.lastResponse.mobState.status).toEqual(Status.Paused);
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Pause);
     await client.closeSocket();
@@ -131,8 +143,9 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await client.pause();
-    const request = await client.resume();
-    await waitForMessage(client, JSON.parse(request).id);
+    await client.resume();
+    await waitForLastResponse(client);
+
     await client.closeSocket();
     expect(client.lastResponse.mobState.status).toEqual(Status.Running);
     expect(client.lastResponse.actionInfo.action).toEqual(Action.Resume);
@@ -142,8 +155,9 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await client.start();
-    const request = await client.update(40);
-    await waitForMessage(client, JSON.parse(request).id);
+    await client.update(40);
+    await waitForLastResponse(client);
+
     await client.closeSocket();
 
     expect(client.lastResponse.mobState.durationMinutes).toEqual(40);
@@ -151,6 +165,7 @@ describe("WebSocket Server", () => {
     expect(client.lastResponse.actionInfo.action).toEqual("update");
   });
 
+  // start here
   test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
@@ -210,7 +225,7 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await client.resume();
-    await waitForLastResponse(client); 
+    await waitForLastResponse(client);
     await client.closeSocket();
     expect(client.responses.length).toEqual(5); // join, update, start, pause, resume
   });
@@ -225,6 +240,7 @@ describe("WebSocket Server", () => {
   test.skip("Handle bad message and get good error message", async () => {
     const client = await openSocket();
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
+    await waitForLastResponse(client);
     await client.closeSocket();
     expect(client.responses.length).toEqual(1); // join
     expect(client.lastResponse.actionInfo.action).toEqual(
@@ -241,4 +257,3 @@ describe("WebSocket Server", () => {
     expect(client.responses.length).toEqual(2); // join + error
   });
 });
-

@@ -6,11 +6,13 @@
 
 - [x] demo runAll task
 - [x] Request/response ids aren't working - maybe a problem with function getUuid(): string { return uuidv4(); };
-- [ ] Migrate Agenda and Reminders on Google Docs to md file
-- [ ] Discuss Ethan's keyboard
+      Someday
+  - [ ] Migrate Agenda and Reminders on Google Docs to md file
+  - [ ] Discuss Ethan's keyboard
+        Next
 - [ ] Refactoring:
   - [ ] WIP: mobclientserver.test.ts: use 'echo' action - see [proposal-echo.md](./proposal-echo.md)
-    - [ ] Combine two echo lines from test into one
+    - [x] Combine two echo lines from test into one
     - [ ] Remove id and use echo instead
     - [ ] Look at where we have timeouts and intervals and change code blocks to function
     - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
