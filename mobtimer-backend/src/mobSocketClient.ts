@@ -24,37 +24,31 @@ class MobSocketClient {
   sendEchoRequest() {
     const request = MobTimerRequests.echoRequest();
     this.webSocket.send(request);
-    return request;
   }
 
   joinMob(mobName: string) {
     const request = MobTimerRequests.joinRequest(mobName);
     this.webSocket.send(request);
-    return request;
   }
 
   update(durationMinutes: number) {
     const request = MobTimerRequests.updateRequest(durationMinutes);
     this.webSocket.send(request);
-    return request;
   }
 
   start() {
     const request = MobTimerRequests.startRequest();
     this.webSocket.send(request);
-    return request;
   }
 
   pause() {
     const request = MobTimerRequests.pauseRequest();
-    this.webSocket.send(request);
-    return request;
+    this.webSocket.send(request);    
   }
 
   resume() {
     const request = MobTimerRequests.resumeRequest();
     this.webSocket.send(request);
-    return request;
   }
 
   public get lastResponse(): MobTimerResponse {
