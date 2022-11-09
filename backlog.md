@@ -17,13 +17,15 @@
     - [x] Remove id from model
     - [x] Fix two tests marked as skip
   - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type
-    - [ ] Add Cancel (timer) function  - [ ] Look at where we have timeouts and intervals and change code blocks to function
+    - [ ] Add Cancel (timer) function      
   - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT
         FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
   - [ ] move testUtils.ts, mobClientSocket.ts back to mobtimer-api
   - [ ] move onMessage from mobSocketClient to be independently added
+  - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in wrong place - hard to see)
   - [ ] Create utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
+
 - [ ] Investigate Eclipse, Intellij, & Visual Studio
 
   - [ ] Review prior retros for generic lessons re. languages/environments/etc.
