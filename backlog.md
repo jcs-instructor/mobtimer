@@ -16,8 +16,9 @@
     - [x] Remove id from tests
     - [x] Remove id from model
     - [x] Fix two tests marked as skip
-  - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type
-    - [ ] Add Cancel (timer) function      
+  - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
+        (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making 
+        a change, try adding a new feature, e.g., Add Cancel (timer) function      
   - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT
         FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
