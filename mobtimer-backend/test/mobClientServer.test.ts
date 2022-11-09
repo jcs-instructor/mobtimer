@@ -240,8 +240,8 @@ describe("WebSocket Server", () => {
   test("Handle bad message and get good error message", async () => {
     const client = await openSocket();
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
-    await waitForLastResponse(client);
-    await client.closeSocket();
+    // todo: use next line elsewhere in tests to replace 2 lines
+    await waitAndClose(client);
     expect(client.responses.length).toEqual(1); // join
     expect(client.lastResponse.actionInfo.action).toEqual(
       Action.InvalidRequestError
@@ -257,3 +257,9 @@ describe("WebSocket Server", () => {
     expect(client.responses.length).toEqual(2); // join + error
   });
 });
+
+async function waitAndClose(client: MobSocketClient) {
+  await waitForLastResponse(client);
+  await client.closeSocket();
+}
+
