@@ -25,7 +25,8 @@
   // resume here - and AFTER THIS ITEM, consider waiting on further refactoring !!!!!!!!!!!!!!
   - [ ] WIP: Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
       - [x] ErrorResponse
-      - [ ] EchoResponse
+      - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
+      - [x] SuccessfulResponse (contains mobState and is used for mob)
       - [ ] Any others (see MobTimerResponses types)
   - [ ] Something functional... ____ (not refactoring if at all reasonable)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass

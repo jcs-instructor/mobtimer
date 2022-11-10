@@ -1,5 +1,5 @@
 import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
-import { MobTimerResponse } from "./mobTimerResponse";
+import { SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
@@ -49,8 +49,8 @@ class MobSocketClient {
     this.webSocket.send(JSON.stringify(request));
   }
 
-  public get lastResponse(): MobTimerResponse {
-    return JSON.parse(this._responses.at(-1) || "") as MobTimerResponse;
+  public get lastResponse(): SuccessfulResponse {
+    return JSON.parse(this._responses.at(-1) || "") as SuccessfulResponse;
   }
 
   public get responses(): string[] {

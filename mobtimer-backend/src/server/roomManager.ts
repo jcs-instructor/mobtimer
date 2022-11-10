@@ -2,6 +2,7 @@ import { Room } from "./room";
 import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
 import { Action } from "mobtimer-api";
+import { SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
 
 export class RoomManager {
   /*
@@ -69,7 +70,7 @@ export class RoomManager {
     const mobTimerResponse = {
       actionInfo: { action: action },
       mobState: mobTimer.state,
-    };
+    } as SuccessfulResponse;
     let message = JSON.stringify(mobTimerResponse);
     const sockets = RoomManager.getSocketsForMob(mobTimer.state.mobName);
     RoomManager._broadcast(sockets, message);

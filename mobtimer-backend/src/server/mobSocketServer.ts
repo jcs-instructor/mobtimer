@@ -116,10 +116,8 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         return;
       }
       if (parsedRequest.action === Action.Echo) {
-        const echoResponse = JSON.stringify({
-          actionInfo: { action: Action.Echo },
-        });
-        webSocket.send(echoResponse);
+        const echoResponse = {actionInfo: { action: Action.Echo }} as MobTimerResponses.EchoResponse;
+        _sendJSON(webSocket, echoResponse);
         return;
       }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);
@@ -132,10 +130,7 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
   return wss;
 }
 
-function _sendJSON(
-  webSocket: WebSocket,
-  request: MobTimerResponses.MobTimerResponse
-) {
+function _sendJSON(webSocket: WebSocket, request: MobTimerResponses.MobTimerResponse) {
   webSocket.send(JSON.stringify(request));
 }
 
