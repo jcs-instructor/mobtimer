@@ -27,7 +27,7 @@
       - [x] ErrorResponse
       - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
       - [x] SuccessfulResponse (contains mobState and is used for mob)
-      - [ ] Any others (see MobTimerResponses types)
+      - [ ] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
   - [ ] Something functional... ____ (not refactoring if at all reasonable)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
     - [ ] Consider gated checkin testing with push instead of commit
