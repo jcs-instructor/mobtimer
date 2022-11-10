@@ -7,12 +7,8 @@ import { MobTimerRequest } from "./mobTimerRequests";
 import * as mobTimerRequests from "./mobTimerRequests";
 import { MobSocketClient } from "./mobSocketClient";
 import { waitForLastResponse, waitForSocketState } from "./testUtils";
-// todo: remove these 2 direct items:
-import { JoinRequest,  UpdateRequest, } from "./mobTimerRequests";
 
 export {
-  JoinRequest,  
-  UpdateRequest,
   waitForLastResponse, 
   waitForSocketState,
   MobSocketClient,
