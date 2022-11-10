@@ -18,7 +18,7 @@
     - [x] Remove id from model
     - [x] Fix two tests marked as skip
   - [x] merge back onto main branch (from move-files-to-api)
-  - [ ] Get rid of functions for each request that have json.stringify, and make a helper function that does json.stringify + socket.send together
+  - [x] Get rid of functions for each request that have json.stringify, and make a helper function that does json.stringify + socket.send together
   - [ ] Make errors in startAll tasks and errors in VSCode more obviously visible 
   - [ ] Add a test for startMobServer function
   - [ ] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
