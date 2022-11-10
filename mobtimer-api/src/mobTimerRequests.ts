@@ -33,14 +33,3 @@ export type PauseRequest = {
 export type ResumeRequest = {
   action: Action.Resume;
 };
-
-export function joinRequest(mobName: string) {
-  return JSON.stringify({ action: Action.Join, mobName } as JoinRequest);
-}
-
-export function updateRequest(durationMinutes: number) {
-  return JSON.stringify({
-    action: Action.Update,
-    value: { durationMinutes },
-  } as UpdateRequest);
-}
