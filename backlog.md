@@ -22,11 +22,12 @@
   - [x] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
         (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making
         a change, try adding a new feature, e.g., Add Cancel (timer) function - [x] In index.ts - [x] In mobTimerRequests - [x] Other (if applicable, e.g., mobSocketClient)
-  // resume here
+  // resume here - and AFTER THIS ITEM, consider waiting on further refactoring !!!!!!!!!!!!!!
   - [ ] WIP: Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
       - [x] ErrorResponse
       - [ ] EchoResponse
       - [ ] Any others (see MobTimerResponses types)
+  - [ ] Something functional... ____ (not refactoring if at all reasonable)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
     - [ ] Consider gated checkin testing with push instead of commit
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
