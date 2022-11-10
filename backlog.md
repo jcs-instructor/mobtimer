@@ -17,7 +17,6 @@
     - [x] Remove id from tests
     - [x] Remove id from model
     - [x] Fix two tests marked as skip
-  - [ ] // todo: next: rename as MobTimerRequests (capitalize)
   - [ ] merge back onto main branch (from move-files-to-api)
   - [ ] Get rid of functions for each request that have json.stringify, and make a helper function that does json.stringify + socket.send together
   - [ ] Make errors in startAll tasks and errors in VSCode more obviously visible 
