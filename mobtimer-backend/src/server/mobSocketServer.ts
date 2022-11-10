@@ -3,7 +3,7 @@ import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
 import {
   Action,
-  mobTimerRequests
+  MobTimerRequests
 } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
@@ -46,14 +46,14 @@ export function renderHomePage(port: number) {
 
 function _processRequest(
   wss: WebSocket.Server,
-  parsedRequest: mobTimerRequests.MobTimerRequest,
+  parsedRequest: MobTimerRequests.MobTimerRequest,
   socket: WebSocket
 ) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
 
   if (parsedRequest.action === Action.Join) {
-    const joinRequest = parsedRequest as mobTimerRequests.JoinRequest;
+    const joinRequest = parsedRequest as MobTimerRequests.JoinRequest;
     mobName = joinRequest.mobName;
     mobTimer = RoomManager.getOrRegisterRoom(mobName, socket);
   } else {
@@ -75,7 +75,7 @@ function _processRequest(
     }
     case "update": {
       // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
-      const updateRequest = parsedRequest as mobTimerRequests.UpdateRequest;
+      const updateRequest = parsedRequest as MobTimerRequests.UpdateRequest;
       mobTimer.durationMinutes =
         updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;
@@ -108,9 +108,9 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
   wss.on("connection", function (webSocket: WebSocket) {
     webSocket.on("message", function (request) {
       let requestString: string = _requestToString(request);
-      let parsedRequest: mobTimerRequests.MobTimerRequest;
+      let parsedRequest: MobTimerRequests.MobTimerRequest;
       try {
-        parsedRequest = JSON.parse(requestString) as mobTimerRequests.MobTimerRequest;
+        parsedRequest = JSON.parse(requestString) as MobTimerRequests.MobTimerRequest;
       } catch (e) {
         const errorResponse = JSON.stringify({
           actionInfo: { action: Action.InvalidRequestError },
