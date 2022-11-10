@@ -2,6 +2,7 @@ import { Action } from "./action";
 import { Status } from "./status";
 import { MobState } from "./mobState";
 import { TimeUtils } from "./timeUtils";
+// todo: next: rename as MobTimerRequests (capitalize)
 import * as mobTimerRequests from "./mobTimerRequests";
 import { MobTimerResponse } from "./mobTimerResponse";
 import { MobSocketClient } from "./mobSocketClient";

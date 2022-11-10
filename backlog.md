@@ -17,6 +17,8 @@
     - [x] Remove id from tests
     - [x] Remove id from model
     - [x] Fix two tests marked as skip
+  - [ ] // todo: next: rename as MobTimerRequests (capitalize)
+  - [ ] merge back onto main branch (from move-files-to-api)
   - [ ] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
         (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making
         a change, try adding a new feature, e.g., Add Cancel (timer) function
