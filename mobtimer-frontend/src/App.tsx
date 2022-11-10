@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-import { MobSocketClient } from './mobSocketClient';
-
+import { MobSocketClient } from 'mobtimer-api';
+import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
-import { waitForSocketState } from './testUtils';
+// todo: here and elsewhere - do ... as W3CWebSocket 
+import { w3cwebsocket } from 'websocket'; 
 
 const App = () => {
   const [mobName, setMobName] = useState('');
@@ -16,7 +17,8 @@ const App = () => {
     // Join mob
     alert(mobName);
     const port = 4000;
-    const client = new MobSocketClient(`ws://localhost:${port}`);
+    const socket = new w3cwebsocket(`ws://localhost:${port}`);
+    const client = new MobSocketClient(socket);
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob("some-mob-name");
     // client.joinMob(mobName);
