@@ -17,9 +17,12 @@
     - [x] Remove id from tests
     - [x] Remove id from model
     - [x] Fix two tests marked as skip
-  - [ ] Consider ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
+  - [ ] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
         (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making
         a change, try adding a new feature, e.g., Add Cancel (timer) function
+          - [x] In index.ts 
+          - [ ] In mobTimerRequests
+          - [ ] Other (if applicable)
   - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT
         FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass

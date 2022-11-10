@@ -3,39 +3,15 @@ import { Status } from "./status";
 import { MobState } from "./mobState";
 import { TimeUtils } from "./timeUtils";
 import { MobTimerResponse } from "./mobTimerResponse";
-import {
-  MobTimerRequest,
-  EchoRequest,
-  JoinRequest,
-  UpdateRequest,
-  StartRequest,
-  PauseRequest,
-  ResumeRequest,
-  echoRequest,
-  joinRequest,
-  updateRequest,
-  startRequest,
-  pauseRequest,
-  resumeRequest,
-} from "./mobTimerRequests";
+import { MobTimerRequest } from "./mobTimerRequests";
+import * as mobTimerRequests from "./mobTimerRequests";
 
 export {
+  mobTimerRequests,
   Action,
   Status,
   MobState,
   TimeUtils,
   MobTimerResponse,
   MobTimerRequest,
-  EchoRequest,
-  JoinRequest,
-  UpdateRequest,
-  StartRequest,
-  PauseRequest,
-  ResumeRequest,
-  echoRequest,
-  joinRequest,
-  updateRequest,
-  startRequest,
-  pauseRequest,
-  resumeRequest,
 };

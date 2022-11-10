@@ -2,7 +2,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { waitForSocketState } from "./testUtils";
 import { joinRequest } from "mobtimer-api";
 import { MobTimerResponse } from "mobtimer-api";
-import * as MobTimerRequests from "mobtimer-api";
+import { mobTimerRequests } from "mobtimer-api";
 
 class MobSocketClient {
   private _responses: string[] = [];
@@ -16,7 +16,7 @@ class MobSocketClient {
   }
 
   echo() {
-    const request = MobTimerRequests.echoRequest();
+    const request = mobTimerRequests.echoRequest();
     this.webSocket.send(request);
   }
 
@@ -26,22 +26,22 @@ class MobSocketClient {
   }
 
   update(durationMinutes: number) {
-    const request = MobTimerRequests.updateRequest(durationMinutes);
+    const request = mobTimerRequests.updateRequest(durationMinutes);
     this.webSocket.send(request);
   }
 
   start() {
-    const request = MobTimerRequests.startRequest();
+    const request = mobTimerRequests.startRequest();
     this.webSocket.send(request);
   }
 
   pause() {
-    const request = MobTimerRequests.pauseRequest();
+    const request = mobTimerRequests.pauseRequest();
     this.webSocket.send(request);
   }
 
   resume() {
-    const request = MobTimerRequests.resumeRequest();
+    const request = mobTimerRequests.resumeRequest();
     this.webSocket.send(request);
   }
 
