@@ -2,9 +2,8 @@ import { Action } from "./action";
 import { Status } from "./status";
 import { MobState } from "./mobState";
 import { TimeUtils } from "./timeUtils";
-// todo: next: rename as MobTimerRequests (capitalize)
 import * as MobTimerRequests from "./mobTimerRequests";
-import { MobTimerResponse } from "./mobTimerResponse";
+import * as MobTimerResponses  from "./mobTimerResponse";
 import { MobSocketClient } from "./mobSocketClient";
 import { waitForLastResponse, waitForSocketState } from "./testUtils";
 
@@ -13,7 +12,7 @@ export {
   waitForSocketState,
   MobSocketClient,
   MobTimerRequests,
-  MobTimerResponse,
+  MobTimerResponses,
   Action,
   Status,
   MobState,

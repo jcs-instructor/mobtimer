@@ -1,7 +1,7 @@
 import * as http from "http";
 import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
-import { Action, MobTimerRequests } from "mobtimer-api";
+import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
@@ -111,10 +111,8 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
           requestString
         ) as MobTimerRequests.MobTimerRequest;
       } catch (e) {
-        const errorResponse = JSON.stringify({
-          actionInfo: { action: Action.InvalidRequestError },
-        });
-        webSocket.send(errorResponse);
+        const errorResponse = { actionInfo: { action: Action.InvalidRequestError }} as MobTimerResponses.ErrorResponse;
+        _sendJSON(webSocket, errorResponse);
         return;
       }
       if (parsedRequest.action === Action.Echo) {
@@ -136,7 +134,7 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
 
 function _sendJSON(
   webSocket: WebSocket,
-  request: MobTimerRequests.MobTimerRequest
+  request: MobTimerResponses.MobTimerResponse
 ) {
   webSocket.send(JSON.stringify(request));
 }
