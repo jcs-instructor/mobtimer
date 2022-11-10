@@ -1,10 +1,7 @@
 import * as http from "http";
 import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
-import {
-  Action,
-  MobTimerRequests
-} from "mobtimer-api";
+import { Action, MobTimerRequests } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
@@ -110,7 +107,9 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
       let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequests.MobTimerRequest;
       try {
-        parsedRequest = JSON.parse(requestString) as MobTimerRequests.MobTimerRequest;
+        parsedRequest = JSON.parse(
+          requestString
+        ) as MobTimerRequests.MobTimerRequest;
       } catch (e) {
         const errorResponse = JSON.stringify({
           actionInfo: { action: Action.InvalidRequestError },
@@ -129,13 +128,17 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
       if (!mobTimer) {
         return;
       }
-      RoomManager.broadcastToMob(
-        mobTimer,
-        parsedRequest.action
-      ); // todo consider moving mobName up a level
+      RoomManager.broadcastToMob(mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
   return wss;
+}
+
+function _sendJSON(
+  webSocket: WebSocket,
+  request: MobTimerRequests.MobTimerRequest
+) {
+  webSocket.send(JSON.stringify(request));
 }
 
 function _requestToString(request: WebSocket.RawData) {

@@ -21,16 +21,13 @@
   - [x] Get rid of functions for each request that have json.stringify, and make a helper function that does json.stringify + socket.send together
   - [x] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
         (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making
-        a change, try adding a new feature, e.g., Add Cancel (timer) function
-          - [x] In index.ts 
-          - [x] In mobTimerRequests
-          - [x] Other (if applicable, e.g., mobSocketClient)
+        a change, try adding a new feature, e.g., Add Cancel (timer) function - [x] In index.ts - [x] In mobTimerRequests - [x] Other (if applicable, e.g., mobSocketClient)
   - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT
         FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
     - [ ] Consider gated checkin testing with push instead of commit
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
-  - [ ] move testUtils.ts, mobClientSocket.ts back to mobtimer-api
+  - [x] move testUtils.ts, mobClientSocket.ts back to mobtimer-api
   - [ ] move onMessage from mobSocketClient to be independently added
   - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in wrong place - hard to see)
   - [ ] Create utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
