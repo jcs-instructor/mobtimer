@@ -1,7 +1,8 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
 import { MobTimerResponse } from "mobtimer-api";
-import * as MobTimerRequests from "mobtimer-api";
+import { Action } from "mobtimer-api";
+import { mobTimerRequests } from "mobtimer-api";
 import { WebSocketType } from "./webSocketType";
 
 class MobSocketClient {
@@ -13,7 +14,7 @@ class MobSocketClient {
     this.webSocket = webSocket;
     this.webSocket.onmessage = (message) => {
       const responseObject = convertToMobTimerResponse(message.data);
-      if (responseObject.actionInfo.action === MobTimerRequests.Action.Echo) {
+      if (responseObject.actionInfo.action === Action.Echo) {
         this._echoReceived = true;
       } else {
         this._responses.push(message.data);
@@ -22,32 +23,32 @@ class MobSocketClient {
   }
 
   sendEchoRequest() {
-    const request = MobTimerRequests.echoRequest();
+    const request = mobTimerRequests.echoRequest();
     this.webSocket.send(request);
   }
 
   joinMob(mobName: string) {
-    const request = MobTimerRequests.joinRequest(mobName);
+    const request = mobTimerRequests.joinRequest(mobName);
     this.webSocket.send(request);
   }
 
   update(durationMinutes: number) {
-    const request = MobTimerRequests.updateRequest(durationMinutes);
+    const request = mobTimerRequests.updateRequest(durationMinutes);
     this.webSocket.send(request);
   }
 
   start() {
-    const request = MobTimerRequests.startRequest();
+    const request = mobTimerRequests.startRequest();
     this.webSocket.send(request);
   }
 
   pause() {
-    const request = MobTimerRequests.pauseRequest();
+    const request = mobTimerRequests.pauseRequest();
     this.webSocket.send(request);    
   }
 
   resume() {
-    const request = MobTimerRequests.resumeRequest();
+    const request = mobTimerRequests.resumeRequest();
     this.webSocket.send(request);
   }
 
