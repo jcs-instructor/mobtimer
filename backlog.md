@@ -19,14 +19,12 @@
     - [x] Fix two tests marked as skip
   - [x] merge back onto main branch (from move-files-to-api)
   - [x] Get rid of functions for each request that have json.stringify, and make a helper function that does json.stringify + socket.send together
-  - [ ] Make errors in startAll tasks and errors in VSCode more obviously visible 
-  - [ ] Add a test for startMobServer function
-  - [ ] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
+  - [x] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
         (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making
         a change, try adding a new feature, e.g., Add Cancel (timer) function
           - [x] In index.ts 
-          - [ ] In mobTimerRequests
-          - [ ] Other (if applicable)
+          - [x] In mobTimerRequests
+          - [x] Other (if applicable, e.g., mobSocketClient)
   - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT
         FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
