@@ -1,12 +1,12 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
-import { waitForLastResponse, waitForSocketState } from "../src/testUtils";
+import { waitForLastResponse, waitForSocketState } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { w3cwebsocket } from "websocket";
-import { MobSocketClient } from "../src/mobSocketClient";
+import { MobSocketClient } from "mobtimer-api";
 
 export const port = 4000 + Number(process.env.JEST_WORKER_ID);
 

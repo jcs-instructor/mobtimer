@@ -4,8 +4,7 @@ import { MobTimer } from "../mobTimer";
 import {
   Action,
   MobTimerRequest,
-  JoinRequest,
-  UpdateRequest,
+  mobTimerRequests
 } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
@@ -55,7 +54,7 @@ function _processRequest(
   let mobTimer: MobTimer | undefined;
 
   if (parsedRequest.action === Action.Join) {
-    const joinRequest = parsedRequest as JoinRequest;
+    const joinRequest = parsedRequest as mobTimerRequests.JoinRequest;
     mobName = joinRequest.mobName;
     mobTimer = RoomManager.getOrRegisterRoom(mobName, socket);
   } else {
@@ -77,7 +76,7 @@ function _processRequest(
     }
     case "update": {
       // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
-      const updateRequest = parsedRequest as UpdateRequest;
+      const updateRequest = parsedRequest as mobTimerRequests.UpdateRequest;
       mobTimer.durationMinutes =
         updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;

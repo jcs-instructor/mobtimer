@@ -1,6 +1,6 @@
 // todo: this file is called "testUtils" but if used for non-test code also, reconsider name
 
-import { MobTimerResponse } from "mobtimer-api";
+import { MobTimerResponse } from "./mobTimerResponse";
 import { MobSocketClient } from "./mobSocketClient";
 
 // todo: reconsider using JEST_WORKER_ID in production code; this is a duplicate of the port in mobClientServer.test.ts

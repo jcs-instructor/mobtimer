@@ -1,8 +1,8 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
-import { MobTimerResponse } from "mobtimer-api";
-import { Action } from "mobtimer-api";
-import { mobTimerRequests } from "mobtimer-api";
+import { convertToMobTimerResponse, waitForSocketState } from "../../mobtimer-backend/src/testUtils";
+import { MobTimerResponse } from "./mobTimerResponse";
+import { Action } from "./action";
+import * as mobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 
 class MobSocketClient {
