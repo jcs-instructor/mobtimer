@@ -5,13 +5,13 @@ import { waitForLastResponse, waitForSocketState } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { w3cwebsocket } from "websocket";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "mobtimer-api";
 
 export const port = 4000 + Number(process.env.JEST_WORKER_ID);
 
 async function openSocket() {
-  const socket = new w3cwebsocket(`ws://localhost:${port}`);
+  const socket = new W3CWebSocket(`ws://localhost:${port}`);
   const mobSocketClient = new MobSocketClient(socket);
   await waitForSocketState(
     mobSocketClient.webSocket,

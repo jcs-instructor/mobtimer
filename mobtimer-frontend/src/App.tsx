@@ -4,8 +4,7 @@ import JoinMobHeading from './components/JoinMobHeading';
 import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
-// todo: here and elsewhere - do ... as W3CWebSocket 
-import { w3cwebsocket } from 'websocket'; 
+import { w3cwebsocket as W3CWebSocket } from 'websocket'; 
 
 const App = () => {
   const [mobName, setMobName] = useState('');
@@ -17,7 +16,7 @@ const App = () => {
     // Join mob
     alert(mobName);
     const port = 4000;
-    const socket = new w3cwebsocket(`ws://localhost:${port}`);
+    const socket = new W3CWebSocket(`ws://localhost:${port}`);
     const client = new MobSocketClient(socket);
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob("some-mob-name");

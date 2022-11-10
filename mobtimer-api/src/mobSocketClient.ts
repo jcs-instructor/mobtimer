@@ -1,4 +1,3 @@
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
 import { MobTimerResponse } from "./mobTimerResponse";
 import { Action } from "./action";
