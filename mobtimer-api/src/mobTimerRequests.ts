@@ -62,7 +62,5 @@ export function pauseRequest() {
 }
 
 export function resumeRequest() {
-  return JSON.stringify({
-    action: Action.Resume,
-  } as ResumeRequest);
+  return {    action: Action.Resume,  } as ResumeRequest;
 }

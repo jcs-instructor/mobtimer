@@ -48,7 +48,11 @@ class MobSocketClient {
 
   resume() {
     const request = MobTimerRequests.resumeRequest();
-    this.webSocket.send(request);
+    this.sendJSON(request);
+  }
+
+  private sendJSON(request: MobTimerRequests.ResumeRequest) {
+    this.webSocket.send(JSON.stringify(request));
   }
 
   public get lastResponse(): MobTimerResponse {
