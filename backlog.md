@@ -20,6 +20,7 @@
   - [ ] // todo: next: rename as MobTimerRequests (capitalize)
   - [ ] merge back onto main branch (from move-files-to-api)
   - [ ] Get rid of functions for each request that have json.stringify, and make a helper function that does json.stringify + socket.send together
+  - [ ] Make errors in startAll tasks and errors in VSCode more obviously visible
   - [ ] Consider more ways to reduce number of places have to make a change when add a new request/response type. Consider proxy generation.
         (We currently have a lot of code to insure strong typing, but proxy generation could remove one or two steps, possibly.) If making
         a change, try adding a new feature, e.g., Add Cancel (timer) function
