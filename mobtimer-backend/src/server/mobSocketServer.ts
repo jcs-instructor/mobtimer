@@ -3,7 +3,6 @@ import WebSocket from "ws";
 import { MobTimer } from "../mobTimer";
 import {
   Action,
-  MobTimerRequest,
   mobTimerRequests
 } from "mobtimer-api";
 import express from "express";
@@ -47,7 +46,7 @@ export function renderHomePage(port: number) {
 
 function _processRequest(
   wss: WebSocket.Server,
-  parsedRequest: MobTimerRequest,
+  parsedRequest: mobTimerRequests.MobTimerRequest,
   socket: WebSocket
 ) {
   let mobName: string | undefined;
@@ -109,9 +108,9 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
   wss.on("connection", function (webSocket: WebSocket) {
     webSocket.on("message", function (request) {
       let requestString: string = _requestToString(request);
-      let parsedRequest: MobTimerRequest;
+      let parsedRequest: mobTimerRequests.MobTimerRequest;
       try {
-        parsedRequest = JSON.parse(requestString) as MobTimerRequest;
+        parsedRequest = JSON.parse(requestString) as mobTimerRequests.MobTimerRequest;
       } catch (e) {
         const errorResponse = JSON.stringify({
           actionInfo: { action: Action.InvalidRequestError },
