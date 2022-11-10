@@ -22,8 +22,7 @@ class MobSocketClient {
   }
 
   sendEchoRequest() {
-    const request = MobTimerRequests.echoRequest();
-    this.webSocket.send(request);
+    this.sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
   }
 
   joinMob(mobName: string) {
@@ -37,21 +36,18 @@ class MobSocketClient {
   }
 
   start() {
-    const request = MobTimerRequests.startRequest();
-    this.webSocket.send(request);
+    this.sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
   }
 
   pause() {
-    const request = MobTimerRequests.pauseRequest();
-    this.webSocket.send(request);    
+    this.sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
   }
 
   resume() {
-    const request = MobTimerRequests.resumeRequest();
-    this.sendJSON(request);
+    this.sendJSON({ action: Action.Resume } as MobTimerRequests.ResumeRequest);
   }
 
-  private sendJSON(request: MobTimerRequests.ResumeRequest) {
+  private sendJSON(request: MobTimerRequests.MobTimerRequest) {
     this.webSocket.send(JSON.stringify(request));
   }
 

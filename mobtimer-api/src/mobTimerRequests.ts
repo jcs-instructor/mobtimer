@@ -1,7 +1,7 @@
 import { Action } from "./action";
 
 export type MobTimerRequest =
-    EchoRequest
+  | EchoRequest
   | JoinRequest
   | UpdateRequest
   | StartRequest
@@ -12,7 +12,7 @@ export type EchoRequest = {
   action: Action.Echo;
 };
 
-export type JoinRequest = {  
+export type JoinRequest = {
   action: Action.Join;
   mobName: string;
 };
@@ -34,10 +34,6 @@ export type ResumeRequest = {
   action: Action.Resume;
 };
 
-export function echoRequest() {
-  return JSON.stringify({ action: Action.Echo } as EchoRequest);
-}
-
 export function joinRequest(mobName: string) {
   return JSON.stringify({ action: Action.Join, mobName } as JoinRequest);
 }
@@ -47,20 +43,4 @@ export function updateRequest(durationMinutes: number) {
     action: Action.Update,
     value: { durationMinutes },
   } as UpdateRequest);
-}
-
-export function startRequest() {
-  return JSON.stringify({
-    action: Action.Start,
-  } as StartRequest);
-}
-
-export function pauseRequest() {
-  return JSON.stringify({
-    action: Action.Pause,
-  } as PauseRequest);
-}
-
-export function resumeRequest() {
-  return {    action: Action.Resume,  } as ResumeRequest;
 }
