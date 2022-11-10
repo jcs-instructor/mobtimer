@@ -25,8 +25,7 @@
           - [x] In index.ts 
           - [x] In mobTimerRequests
           - [x] Other (if applicable, e.g., mobSocketClient)
-  - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT
-        FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
+  - [ ] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
   - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
     - [ ] Consider gated checkin testing with push instead of commit
   - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
