@@ -1,3 +1,25 @@
+**Start of Session**
+Joel:
+
+- Start TTS meeting timer
+- Enable participant screen sharing in Zoom
+
+Joel & Ethan:
+
+- Open web timer https://mobti.me/arrested-egg
+  - turn on Sounds
+  - optional: Browser notifications
+- Open VS Code
+  - git pull
+  - run startAll task
+  - verify tests are working
+  - synchronize extension timer (stop, start, stop)
+
+Ethan:
+
+- Snack
+- Glasses
+
 **Practices to Focus On**:
 
 - List accomplishments in retros
