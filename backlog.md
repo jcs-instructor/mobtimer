@@ -6,17 +6,19 @@
 
      Someday
 
-- [ ] Migrate Agenda and Reminders on Google Docs to md file
+- [x] Migrate Agenda and Reminders on Google Docs to md file
 - [ ] Discuss Ethan's keyboard
-      Next
 
-  // resume here - and AFTER THIS ITEM, consider waiting on further refactoring !!!!!!!!!!!!!!
+Next
 
-  - [ ] WIP: Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
-    - [x] ErrorResponse
-    - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
-    - [x] SuccessfulResponse (contains mobState and is used for mob)
-    - [ ] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
+// resume here - and AFTER THIS ITEM, consider waiting on further refactoring !!!!!!!!!!!!!!
+
+- [ ] WIP: Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
+
+  - [x] ErrorResponse
+  - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
+  - [x] SuccessfulResponse (contains mobState and is used for mob)
+  - [ ] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
 
 - [ ] ?? Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
 - [x?] **Start mob**
