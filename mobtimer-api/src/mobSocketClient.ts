@@ -13,11 +13,20 @@ class MobSocketClient {
     this.webSocket = webSocket;
     this.webSocket.onmessage = (message) => {
       const responseObject = convertToMobTimerResponse(message.data);
-      if (responseObject.actionInfo.action === Action.Echo) {
-        this._echoReceived = true;
-      } else {
-        // todo: put errorResponses somewhere else (not in successfulResponses); maybe errorReceived boolean?
-        this._successfulResponses.push(message.data);
+      switch (responseObject.actionInfo.action) {
+        case Action.Echo: {
+          this._echoReceived = true;
+          break;
+        }
+        case Action.InvalidRequestError: {
+          // todo: put errorResponses somewhere; maybe in an errorReceived boolean?
+          this._successfulResponses.push(message.data);
+          break;
+        }
+        default: {        
+          this._successfulResponses.push(message.data);
+          break;
+        }
       }
     };
   }
