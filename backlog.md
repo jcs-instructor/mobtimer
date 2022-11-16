@@ -22,11 +22,11 @@ Next
 - [x] Join mob
 - [x] Discuss HyperApp, ferp, mrbarry VS React
 
-- [ ] Read up on useState in React
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Start
   - [ ] Pause
   - [ ] Resume
+  - [ ] Read up on useState in React
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)
