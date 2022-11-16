@@ -17,7 +17,8 @@ Next
   - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
   - [x] SuccessfulResponse (contains mobState and is used for mob)
   - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
-  - [ ] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
+  - [x] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
+  - [ ] Review after-hours changes: Joel removed errorResponses from successfulResponses and created errorReceived boolean (similar to echoReceived boolean)
 
 - [x] Join mob
 - [x] Discuss HyperApp, ferp, mrbarry VS React

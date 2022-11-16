@@ -7,6 +7,7 @@ import { WebSocketType } from "./webSocketType";
 class MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
+  private _errorReceived: boolean = false;
   webSocket: WebSocketType;
 
   constructor(webSocket: WebSocketType) {
@@ -20,7 +21,7 @@ class MobSocketClient {
         }
         case Action.InvalidRequestError: {
           // todo: put errorResponses somewhere; maybe in an errorReceived boolean?
-          this._successfulResponses.push(message.data);
+          this._errorReceived = true;
           break;
         }
         default: {        
@@ -70,6 +71,11 @@ class MobSocketClient {
   public get echoReceived(): boolean {
     return this._echoReceived;
   }
+
+  public get errorReceived(): boolean {
+    return this._errorReceived;
+  }
+
 
   async closeSocket() {
     this.webSocket.close();

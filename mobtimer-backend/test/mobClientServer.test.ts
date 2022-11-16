@@ -219,10 +219,8 @@ describe("WebSocket Server", () => {
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
     // todo: use next line elsewhere in tests to replace 2 lines
     await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(1); // join
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
-      Action.InvalidRequestError
-    );
+    expect(client.successfulResponses.length).toEqual(0); 
+    expect(client.errorReceived).toEqual(true);
   });
 
   test("Handle bad message and subsequent request succeeds", async () => {
@@ -230,7 +228,8 @@ describe("WebSocket Server", () => {
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
     await client.joinMob(_mobName1);
     await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(2); // join + error
+    expect(client.successfulResponses.length).toEqual(1); // join 
+    expect(client.errorReceived).toEqual(true);
   });
 });
 
