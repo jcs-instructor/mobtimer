@@ -19,14 +19,22 @@ Next
   - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
   - [ ] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
 
-- [x] **Join mob**
-- [ ] Something functional... \_\_\_\_ (not refactoring if at all reasonable)
+- [x] Join mob
+- [x] Discuss HyperApp, ferp, mrbarry VS React
 
-- [ ] **Discuss HyperApp, ferp, mrbarry VS React**
-
-  - [ ] [Pros and Cons](./pros-and-cons.md)
+- [ ] Read up on useState in React
+- [ ] UI features (without styling) for all server-exposed methods - using React:
+  - [ ] Start
+  - [ ] Pause
+  - [ ] Resume
+  - [ ] Display time 
+  - [ ] Display state: ready, running, paused
+  - [ ] Update (min. remaining)
+- [ ] UI features (without styling) for all server-exposed methods - using Hyperapp  
+  - [ ] Implement
   - [ ] HyperApp, ferp tutorials?
-  - [ ] Reduce mrbarry code??? Reuse mrbarry code
+  - [ ] Reduce mrbarry code??? Reuse mrbarry code?
+- [ ] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
 
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)

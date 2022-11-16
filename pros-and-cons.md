@@ -1,4 +1,4 @@
-Hyperapp (UI)
+**Hyperapp (UI)**
 
 Pros:
 
@@ -8,7 +8,7 @@ Pros:
 - new technology neither familiar with, so good learning app
 - Can reuse mrbarry code
 
-ferp (Reactive state management)
+**ferp (Reactive state management)**
 
 Pros:
 
@@ -17,7 +17,7 @@ Pros:
   - easier to learn basic principles
 - mrbarry uses it, so more likely to get collaboration
 
-React (UI and Reactive state management)
+**React (UI and Reactive state management)**
 
 Pros:
 
