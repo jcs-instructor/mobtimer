@@ -17,9 +17,9 @@ Next
   - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
   - [x] SuccessfulResponse (contains mobState and is used for mob)
   - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
+  - [ ] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
 
-- [ ] ?? Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
-- [x?] **Start mob**
+- [ ] **Start mob**
 - [ ] Something functional... \_\_\_\_ (not refactoring if at all reasonable)
 
 - [ ] **Discuss HyperApp, ferp, mrbarry VS React**
