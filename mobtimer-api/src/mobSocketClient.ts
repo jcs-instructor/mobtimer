@@ -5,7 +5,7 @@ import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 
 class MobSocketClient {
-  private _responses: string[] = [];
+  private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   webSocket: WebSocketType;
 
@@ -16,7 +16,8 @@ class MobSocketClient {
       if (responseObject.actionInfo.action === Action.Echo) {
         this._echoReceived = true;
       } else {
-        this._responses.push(message.data);
+        // todo: put errorResponses somewhere else (not in successfulResponses); maybe errorReceived boolean?
+        this._successfulResponses.push(message.data);
       }
     };
   }
@@ -49,12 +50,12 @@ class MobSocketClient {
     this.webSocket.send(JSON.stringify(request));
   }
 
-  public get lastResponse(): SuccessfulResponse {
-    return JSON.parse(this._responses.at(-1) || "") as SuccessfulResponse;
+  public get lastSuccessfulResponse(): SuccessfulResponse {
+    return JSON.parse(this._successfulResponses.at(-1) || "") as SuccessfulResponse;
   }
 
-  public get responses(): string[] {
-    return [...this._responses];
+  public get successfulResponses(): string[] {
+    return [...this._successfulResponses];
   }
 
   public get echoReceived(): boolean {

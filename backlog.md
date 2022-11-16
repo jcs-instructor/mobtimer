@@ -4,10 +4,8 @@
 
 ## Timer - Minimum Deployable Features
 
-     Someday
-
 - [x] Migrate Agenda and Reminders on Google Docs to md file
-- [ ] Discuss Ethan's keyboard
+- [x] Discuss/fix Ethan's keyboard
 
 Next
 
@@ -18,7 +16,7 @@ Next
   - [x] ErrorResponse
   - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
   - [x] SuccessfulResponse (contains mobState and is used for mob)
-  - [ ] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
+  - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
 
 - [ ] ?? Windows Shell Files: Fix this: start shell files don't work in Windows (temporary workaround: manually open ./start-backend.sh and ./start-frontend)
 - [x?] **Start mob**
