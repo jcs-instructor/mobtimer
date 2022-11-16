@@ -19,7 +19,7 @@ Next
   - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
   - [ ] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
 
-- [ ] **Start mob**
+- [x] **Join mob**
 - [ ] Something functional... \_\_\_\_ (not refactoring if at all reasonable)
 
 - [ ] **Discuss HyperApp, ferp, mrbarry VS React**

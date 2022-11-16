@@ -18,9 +18,12 @@ const App = () => {
     const port = 4000;
     const socket = new W3CWebSocket(`ws://localhost:${port}`);
     const client = new MobSocketClient(socket);
+    client.webSocket.onmessage = (message) => {
+      // todo: replace logging with actual changes in UI
+      console.log("join", message);
+    };    
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
-    client.joinMob("some-mob-name");
-    // client.joinMob(mobName);
+    client.joinMob(mobName);
   }
 
   return (
