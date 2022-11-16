@@ -27,6 +27,7 @@ Next
   - [ ] Pause
   - [ ] Resume
   - [ ] Read up on useState in React
+
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)
