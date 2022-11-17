@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-import { MobSocketClient } from 'mobtimer-api';
+import { MobSocketClient, Status } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
@@ -24,7 +24,9 @@ const App = () => {
     client.webSocket.onmessage = (message) => {
       // todo: replace logging with actual changes in UI
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
-      console.log(response, response.mobState.status);
+      if (response.mobState.status === Status.Running) {
+        setLabel("Pause");
+      };
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
