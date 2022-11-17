@@ -1,6 +1,6 @@
 # Backlog
 
-- [] Note: See also [Reminders](./reminders.md)
+See also: [Reminders](./reminders.md)
 
 ## Timer - Minimum Deployable Features
 
@@ -25,8 +25,7 @@ Next
       - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Start
-  - [ ] WIP/between sessions: Ethan is changing the config so that when the api changes, the frontend and backend will automatically get the changes
-  - [ ] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
+  - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Pause (wip)
