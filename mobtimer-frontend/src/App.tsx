@@ -8,9 +8,11 @@ import ActionButton from './components/ActionButton';
 import { createController } from './createController';
 
 const App = () => {
+  let client: MobSocketClient;
+  const x = () => { };
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('Start');
-  let client: MobSocketClient;
+  const [nextAction, setNextAction] = useState(x);
   // todo: unhardcode port
   const port = 4000;
   const url = `ws://localhost:${port}`;
@@ -22,7 +24,7 @@ const App = () => {
     // Join mob
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
-      createController(message, setLabel);
+      createController(message, setLabel, setNextAction, client);
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
@@ -31,7 +33,8 @@ const App = () => {
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
-    client.start();
+    nextAction();
+    //const x: () => void = client.resume;
   }
 
 
