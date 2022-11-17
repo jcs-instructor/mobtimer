@@ -8,6 +8,8 @@ class MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
+  
+  // todo: wrap in a property getter
   webSocket: WebSocketType;
 
   constructor(webSocket: WebSocketType) {

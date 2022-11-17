@@ -10,6 +10,7 @@ import { MobSocketClient } from "mobtimer-api";
 
 export const port = 4000 + Number(process.env.JEST_WORKER_ID);
 
+// todo: maybe move this function up into the mobSocketClient class (to reduce burden on consumers)
 async function openSocket() {
   const socket = new W3CWebSocket(`ws://localhost:${port}`);
   const mobSocketClient = new MobSocketClient(socket);

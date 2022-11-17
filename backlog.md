@@ -7,28 +7,27 @@
 - [x] Migrate Agenda and Reminders on Google Docs to md file
 - [x] Discuss/fix Ethan's keyboard
 
-Next
-
-// resume here - and AFTER THIS ITEM, consider waiting on further refactoring !!!!!!!!!!!!!!
-
-- [ ] WIP: Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
+- [x] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
 
   - [x] ErrorResponse
   - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
   - [x] SuccessfulResponse (contains mobState and is used for mob)
   - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
   - [x] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
-  - [ ] Review after-hours changes: Joel removed errorResponses from successfulResponses and created errorReceived boolean (similar to echoReceived boolean)
+  - [x] Review after-hours changes: Joel removed errorResponses from successfulResponses and created errorReceived boolean (similar to echoReceived boolean)
 
 - [x] Join mob
 - [x] Discuss HyperApp, ferp, mrbarry VS React
 
+Next
+
+- [ ] Joel: after hours: 
+      - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Start
+  - [ ] Read up on useState in React
   - [ ] Pause
   - [ ] Resume
-  - [ ] Read up on useState in React
-
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)
