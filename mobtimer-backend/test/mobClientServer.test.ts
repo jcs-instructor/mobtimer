@@ -5,21 +5,7 @@ import { waitForLastResponse, waitForSocketState } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "mobtimer-api";
-
-export const port = 4000 + Number(process.env.JEST_WORKER_ID);
-
-// todo: maybe move this function up into the mobSocketClient class (to reduce burden on consumers)
-async function openSocket() {
-  const socket = new W3CWebSocket(`ws://localhost:${port}`);
-  const mobSocketClient = new MobSocketClient(socket);
-  await waitForSocketState(
-    mobSocketClient.webSocket,
-    mobSocketClient.webSocket.OPEN
-  );
-  return mobSocketClient;
-}
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -27,7 +13,10 @@ describe("WebSocket Server", () => {
   const _mobName2 = "good-team";
 
   beforeEach(async () => {
-    _server = await startMobServer(port);
+    const port = 4000 + Number(process.env.JEST_WORKER_ID);
+    const url = `ws://localhost:${port}`;
+
+    _server = await startMobServer(url);
   });
 
   afterEach(async () => {
@@ -41,8 +30,12 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.joinMob(_mobName1);
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState).toEqual(new MobTimer(_mobName1).state);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
+    expect(client.lastSuccessfulResponse.mobState).toEqual(
+      new MobTimer(_mobName1).state
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Join
+    );
   });
 
   test("Create 2 mobs", async () => {
@@ -55,7 +48,9 @@ describe("WebSocket Server", () => {
     await cleanUp(client);
     await cleanUp(client2);
 
-    expect(client.lastSuccessfulResponse.mobState).toEqual(new MobTimer(_mobName1).state);
+    expect(client.lastSuccessfulResponse.mobState).toEqual(
+      new MobTimer(_mobName1).state
+    );
     expect(client2.lastSuccessfulResponse.mobState).toEqual(
       new MobTimer(_mobName2).state
     );
@@ -107,8 +102,12 @@ describe("WebSocket Server", () => {
 
     await cleanUp(client);
 
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Start);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Start
+    );
   });
 
   test("Pause timer", async () => {
@@ -118,8 +117,12 @@ describe("WebSocket Server", () => {
     await client.pause();
     await cleanUp(client);
 
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Paused);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Pause);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Paused
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Pause
+    );
   });
 
   test("Resume timer", async () => {
@@ -130,8 +133,12 @@ describe("WebSocket Server", () => {
     await client.resume();
     await cleanUp(client);
 
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Resume);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Resume
+    );
   });
 
   test("Update timer", async () => {
@@ -156,9 +163,15 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await cleanUp(client);
-      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(0);
-      expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Expired);
-      expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Ready);
+      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(
+        0
+      );
+      expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+        Action.Expired
+      );
+      expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+        Status.Ready
+      );
     }
   );
 
@@ -177,8 +190,12 @@ describe("WebSocket Server", () => {
       durationSeconds,
       numDigits
     );
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Pause);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Paused);
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Pause
+    );
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Paused
+    );
   });
 
   test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
@@ -194,7 +211,9 @@ describe("WebSocket Server", () => {
     await cleanUp(client);
     const numDigits = 1;
     expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(0);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Expired);
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Expired
+    );
     expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Ready);
   });
 
@@ -219,7 +238,7 @@ describe("WebSocket Server", () => {
     const client = await openSocket();
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
     await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(0); 
+    expect(client.successfulResponses.length).toEqual(0);
     expect(client.errorReceived).toEqual(true);
   });
 
@@ -228,7 +247,7 @@ describe("WebSocket Server", () => {
     await client.webSocket.send("some-bad-garbage-not-a-real-request");
     await client.joinMob(_mobName1);
     await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(1); // join 
+    expect(client.successfulResponses.length).toEqual(1); // join
     expect(client.errorReceived).toEqual(true);
   });
 });

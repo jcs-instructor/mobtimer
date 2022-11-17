@@ -3,12 +3,13 @@ import { SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 class MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-  
+
   // todo: wrap in a property getter
   webSocket: WebSocketType;
 
@@ -25,7 +26,7 @@ class MobSocketClient {
           this._errorReceived = true;
           break;
         }
-        default: {        
+        default: {
           this._successfulResponses.push(message.data);
           break;
         }
@@ -33,16 +34,33 @@ class MobSocketClient {
     };
   }
 
+  // todo: maybe move this function up into the mobSocketClient class (to reduce burden on consumers)
+  static async openSocket(url: string): Promise<MobSocketClient> {
+    const socket = new W3CWebSocket(url);
+    const mobSocketClient = new MobSocketClient(socket);
+    await waitForSocketState(
+      mobSocketClient.webSocket,
+      mobSocketClient.webSocket.OPEN
+    );
+    return mobSocketClient;
+  }
+
   sendEchoRequest() {
     this._sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
   }
 
   joinMob(mobName: string) {
-    this._sendJSON({ action: Action.Join, mobName } as MobTimerRequests.JoinRequest);
+    this._sendJSON({
+      action: Action.Join,
+      mobName,
+    } as MobTimerRequests.JoinRequest);
   }
 
   update(durationMinutes: number) {
-    this._sendJSON({ action: Action.Update, value: { durationMinutes } } as MobTimerRequests.UpdateRequest);
+    this._sendJSON({
+      action: Action.Update,
+      value: { durationMinutes },
+    } as MobTimerRequests.UpdateRequest);
   }
 
   start() {
@@ -62,7 +80,9 @@ class MobSocketClient {
   }
 
   public get lastSuccessfulResponse(): SuccessfulResponse {
-    return JSON.parse(this._successfulResponses.at(-1) || "") as SuccessfulResponse;
+    return JSON.parse(
+      this._successfulResponses.at(-1) || ""
+    ) as SuccessfulResponse;
   }
 
   public get successfulResponses(): string[] {
@@ -76,7 +96,6 @@ class MobSocketClient {
   public get errorReceived(): boolean {
     return this._errorReceived;
   }
-
 
   async closeSocket() {
     this.webSocket.close();
