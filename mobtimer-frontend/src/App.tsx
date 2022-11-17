@@ -5,9 +5,11 @@ import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import { w3cwebsocket as W3CWebSocket } from 'websocket'; 
+import ActionButton from './components/ActionButton';
 
 const App = () => {
   const [mobName, setMobName] = useState('');
+  let client: MobSocketClient;
 
   const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
@@ -17,7 +19,7 @@ const App = () => {
     alert(mobName);
     const port = 4000;
     const socket = new W3CWebSocket(`ws://localhost:${port}`);
-    const client = new MobSocketClient(socket);
+    client = new MobSocketClient(socket);
     client.webSocket.onmessage = (message) => {
       // todo: replace logging with actual changes in UI
       console.log("join", message);
@@ -26,10 +28,18 @@ const App = () => {
     client.joinMob(mobName);
   }
 
+  const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
+    // Preventing the page from reloading
+    event.preventDefault();
+    client.start();
+  }
+
+
   return (
     <div>
       <JoinMobHeading />
       <JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />
+      <ActionButton submitAction={submitAction} />
     </div>
   );
 };
