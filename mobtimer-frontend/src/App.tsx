@@ -5,9 +5,11 @@ import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
+import { MobTimerResponses } from 'mobtimer-api';
 
 const App = () => {
   const [mobName, setMobName] = useState('');
+  const [label, setLabel] = useState('Start2');
   let client: MobSocketClient;
   // todo: unhardcode port
   const port = 4000;
@@ -21,8 +23,8 @@ const App = () => {
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
       // todo: replace logging with actual changes in UI
-      console.log(message);
-
+      const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
+      console.log(response, response.mobState.status);
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
@@ -39,7 +41,7 @@ const App = () => {
     <div>
       <JoinMobHeading />
       <JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />
-      <ActionButton submitAction={submitAction} />
+      <ActionButton label={label} submitAction={submitAction} />
     </div>
   );
 };

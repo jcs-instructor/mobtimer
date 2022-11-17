@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 type FormParameters = {
-    submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
     label: string;
+    //setLabel: (mobName: string) => void;
+    submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const ActionButton = ({ submitAction, label }: FormParameters) => {
+const ActionButton = ({ label, submitAction }: FormParameters) => {
 
     return (
         <form onSubmit={submitAction}>
