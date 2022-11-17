@@ -20,7 +20,6 @@ class MobSocketClient {
           break;
         }
         case Action.InvalidRequestError: {
-          // todo: put errorResponses somewhere; maybe in an errorReceived boolean?
           this._errorReceived = true;
           break;
         }
