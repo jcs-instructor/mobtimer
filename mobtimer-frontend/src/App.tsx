@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import JoinMobForm from './components/JoinMobForm';
 import JoinMobHeading from './components/JoinMobHeading';
-import { MobSocketClient, Status } from 'mobtimer-api';
+import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
-import { MobTimerResponses } from 'mobtimer-api';
+import { createController } from './createController';
 
 const App = () => {
   const [mobName, setMobName] = useState('');
@@ -22,20 +22,7 @@ const App = () => {
     // Join mob
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
-      const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
-      switch (response.mobState.status) {
-        case Status.Running: {
-          setLabel("Pause");
-          break;
-        }
-        case Status.Paused: {
-          setLabel("Resume");
-          break;
-        }
-        case Status.Ready: {
-          setLabel("Start");
-        }
-      };
+      createController(message, setLabel);
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
@@ -58,3 +45,5 @@ const App = () => {
 };
 
 export default App;
+
+

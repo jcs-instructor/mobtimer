@@ -26,13 +26,15 @@ Next
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Start
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
-  - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Pause (wip)
   - [ ] Resume (wip)
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)
+  - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
+    - [x] Messages sent to all browsers in same mob
+    - [ ] Messages not sent to all browsers in different mobs
 - [ ] UI features (without styling) for all server-exposed methods - using Hyperapp  
   - [ ] Implement
   - [ ] HyperApp, ferp tutorials?
