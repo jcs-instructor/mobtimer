@@ -10,16 +10,16 @@ import ActionButton from './components/ActionButton';
 const App = () => {
   const [mobName, setMobName] = useState('');
   let client: MobSocketClient;
+  // todo: unhardcode port
+  const port = 4000;
+  const url = `ws://localhost:${port}`;
 
   const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
 
     // Join mob
-    // todo: unhardcode port
-    const port = 4000;
-    const socket = new W3CWebSocket(`ws://localhost:${port}`);
-    client = new MobSocketClient(socket);
+    client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
       // todo: replace logging with actual changes in UI
       console.log(message);
