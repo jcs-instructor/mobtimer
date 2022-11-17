@@ -13,8 +13,8 @@ const App = () => {
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('Start');
   const [status, setStatus] = useState(Status.Ready);
-  // const [client, setClient] = useState({} as MobSocketClient);
-  let client: MobSocketClient;
+  const [client, setClient] = useState({} as MobSocketClient);
+  //let client: MobSocketClient;
   // todo: unhardcode port
   const port = 4000;
   const url = `ws://localhost:${port}`;
@@ -24,7 +24,7 @@ const App = () => {
     event.preventDefault();
 
     // Join mob
-    client = await MobSocketClient.openSocket(url);
+    setClient(await MobSocketClient.openSocket(url));
     client.webSocket.onmessage = (message) => {
       // createController(message, setLabel, nextAction, client);
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
