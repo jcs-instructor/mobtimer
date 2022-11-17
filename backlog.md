@@ -27,6 +27,7 @@ Next
   - [x] Start
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
   - [ ] WIP: Pause & Resume
+  - [ ] Disable ActionButton until mob is joined
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
