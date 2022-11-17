@@ -2,13 +2,14 @@ import React from 'react'
 
 type FormParameters = {
     submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
+    label: string;
 }
 
-const ActionButton = ({ submitAction: submitAction }: FormParameters) => {
+const ActionButton = ({ submitAction, label }: FormParameters) => {
 
     return (
         <form onSubmit={submitAction}>
-            <button type="submit">Start</button>
+            <button type="submit">{label}</button>
         </form>
     )
 }

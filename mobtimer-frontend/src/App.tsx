@@ -4,7 +4,6 @@ import JoinMobHeading from './components/JoinMobHeading';
 import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
-import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import ActionButton from './components/ActionButton';
 
 const App = () => {
@@ -23,6 +22,7 @@ const App = () => {
     client.webSocket.onmessage = (message) => {
       // todo: replace logging with actual changes in UI
       console.log(message);
+
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
