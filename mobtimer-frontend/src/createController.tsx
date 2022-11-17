@@ -7,17 +7,17 @@ export function createController(message: { data: string; }, setLabel: React.Dis
   switch (response.mobState.status) {
     case Status.Running: {
       setLabel("Pause");
-      nextAction = client.pause;
+      // nextAction = client.pause;
       break;
     }
     case Status.Paused: {
       setLabel("Resume");
-      nextAction = client.resume;
+      // nextAction = client.resume;
       break;
     }
     case Status.Ready: {
       setLabel("Start");
-      nextAction = client.start;
+      // nextAction = client.start;
     }
   };
 }

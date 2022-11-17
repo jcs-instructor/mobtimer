@@ -6,10 +6,12 @@ import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
 import { createController } from './createController';
+import { MobTimerResponses } from 'mobtimer-api';
+import { Status } from 'mobtimer-api';
 
 const App = () => {
   let client: MobSocketClient;
-  const nextAction = () => { };
+  let nextAction = () => { };
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('Start');
   // todo: unhardcode port
@@ -24,6 +26,24 @@ const App = () => {
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
       createController(message, setLabel, nextAction, client);
+      const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
+      switch (response.mobState.status) {
+        case Status.Running: {
+          setLabel("Pause");
+          nextAction = () => client.pause;
+          break;
+        }
+        case Status.Paused: {
+          setLabel("Resume");
+          nextAction = () => client.resume;
+          break;
+        }
+        case Status.Ready: {
+          setLabel("Start");
+          nextAction = () => client.start();
+        }
+      };
+
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
