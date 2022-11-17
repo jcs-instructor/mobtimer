@@ -26,9 +26,8 @@ Next
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Start
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
+  - [ ] WIP: Pause & Resume
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] Pause (wip)
-  - [ ] Resume (wip)
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)
