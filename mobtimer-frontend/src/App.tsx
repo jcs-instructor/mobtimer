@@ -9,10 +9,9 @@ import { createController } from './createController';
 
 const App = () => {
   let client: MobSocketClient;
-  const x = () => { };
+  const nextAction = () => { };
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('Start');
-  const [nextAction, setNextAction] = useState(x);
   // todo: unhardcode port
   const port = 4000;
   const url = `ws://localhost:${port}`;
@@ -24,7 +23,7 @@ const App = () => {
     // Join mob
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
-      createController(message, setLabel, setNextAction, client);
+      createController(message, setLabel, nextAction, client);
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
