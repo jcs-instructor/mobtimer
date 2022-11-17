@@ -27,6 +27,7 @@ Next
   - [x] Start
   - [ ] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
+  - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Pause (wip)
   - [ ] Resume (wip)
   - [ ] Display time 
