@@ -24,10 +24,11 @@ Next
 - [ ] Joel: after hours: 
       - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [ ] Start
-  - [ ] Read up on useState in React
-  - [ ] Pause
-  - [ ] Resume
+  - [x] Start
+  - [ ] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
+  - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
+  - [ ] Pause (wip)
+  - [ ] Resume (wip)
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)

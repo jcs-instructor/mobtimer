@@ -20,6 +20,9 @@ Ethan:
 - Snack
 - Glasses
 
+**Warning**:
+- Make sure to run tests manually frequently! (since we turned off gated checkins and are making ui changes)
+
 **Practices to Focus On**:
 
 - List accomplishments in retros
