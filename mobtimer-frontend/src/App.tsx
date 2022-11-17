@@ -5,15 +5,16 @@ import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
-import { createController } from './createController';
+// import { createController } from './createController';
 import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 
 const App = () => {
-  let client: MobSocketClient;
-  let nextAction = () => { };
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('Start');
+  const [status, setStatus] = useState(Status.Ready);
+  // const [client, setClient] = useState({} as MobSocketClient);
+  let client: MobSocketClient;
   // todo: unhardcode port
   const port = 4000;
   const url = `ws://localhost:${port}`;
@@ -25,24 +26,23 @@ const App = () => {
     // Join mob
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
-      createController(message, setLabel, nextAction, client);
+      // createController(message, setLabel, nextAction, client);
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
+      console.log('status', response.mobState.status, response);
       switch (response.mobState.status) {
         case Status.Running: {
           setLabel("Pause");
-          nextAction = () => client.pause;
           break;
         }
         case Status.Paused: {
           setLabel("Resume");
-          nextAction = () => client.resume;
           break;
         }
         case Status.Ready: {
           setLabel("Start");
-          nextAction = () => client.start();
         }
       };
+      setStatus(response.mobState.status);
 
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
@@ -52,8 +52,19 @@ const App = () => {
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
-    nextAction();
-    //const x: () => void = client.resume;
+    switch (status) {
+      case Status.Running: {
+        client.pause()
+        break;
+      }
+      case Status.Paused: {
+        client.resume();
+        break;
+      }
+      case Status.Ready: {
+        client.start();
+      }
+    };
   }
 
 
