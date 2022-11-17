@@ -9,7 +9,7 @@ import { MobTimerResponses } from 'mobtimer-api';
 
 const App = () => {
   const [mobName, setMobName] = useState('');
-  const [label, setLabel] = useState('Start2');
+  const [label, setLabel] = useState('Start');
   let client: MobSocketClient;
   // todo: unhardcode port
   const port = 4000;
@@ -22,10 +22,19 @@ const App = () => {
     // Join mob
     client = await MobSocketClient.openSocket(url);
     client.webSocket.onmessage = (message) => {
-      // todo: replace logging with actual changes in UI
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
-      if (response.mobState.status === Status.Running) {
-        setLabel("Pause");
+      switch (response.mobState.status) {
+        case Status.Running: {
+          setLabel("Pause");
+          break;
+        }
+        case Status.Paused: {
+          setLabel("Resume");
+          break;
+        }
+        case Status.Ready: {
+          setLabel("Start");
+        }
       };
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);

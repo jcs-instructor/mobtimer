@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 type FormParameters = {
     label: string;
-    //setLabel: (mobName: string) => void;
     submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
