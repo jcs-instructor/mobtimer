@@ -12,6 +12,11 @@ import { Status } from 'mobtimer-api';
 const port = 4000;
 const url = `ws://localhost:${port}`;
 const client = MobSocketClient.openSocketSync(url);
+const actions = {
+  [Status.Running]: { label: 'Pause', function: () => client.pause() },
+  [Status.Paused]: { label: 'Resume', function: () => client.resume() },
+  [Status.Ready]: { label: 'Start', function: () => client.start() },
+}
 
 const App = () => {
   const [mobName, setMobName] = useState('');
@@ -30,21 +35,8 @@ const App = () => {
       // createController(message, setLabel, nextAction, client);
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       console.log('status', response.mobState.status, response);
-      switch (response.mobState.status) {
-        case Status.Running: {
-          setLabel("Pause");
-          break;
-        }
-        case Status.Paused: {
-          setLabel("Resume");
-          break;
-        }
-        case Status.Ready: {
-          setLabel("Start");
-        }
-      };
+      setLabel(actions[response.mobState.status].label);
       setStatus(response.mobState.status);
-
     };
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
@@ -54,19 +46,7 @@ const App = () => {
     // Preventing the page from reloading
     event.preventDefault();
     console.log('submitAction', client);
-    switch (status) {
-      case Status.Running: {
-        client.pause()
-        break;
-      }
-      case Status.Paused: {
-        client.resume();
-        break;
-      }
-      case Status.Ready: {
-        client.start();
-      }
-    };
+    actions[status].function();
   }
 
 
