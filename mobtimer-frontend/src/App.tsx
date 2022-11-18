@@ -8,23 +8,24 @@ import ActionButton from './components/ActionButton';
 // import { createController } from './createController';
 import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
+// todo: unhardcode port
+const port = 4000;
+const url = `ws://localhost:${port}`;
+const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('Start');
   const [status, setStatus] = useState(Status.Ready);
-  const [client, setClient] = useState({} as MobSocketClient);
-  //let client: MobSocketClient;
-  // todo: unhardcode port
-  const port = 4000;
-  const url = `ws://localhost:${port}`;
+  // const [client, setClient] = useState({} as MobSocketClient);
+
 
   const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
 
     // Join mob
-    setClient(await MobSocketClient.openSocket(url));
+    console.log('joined', client);
     client.webSocket.onmessage = (message) => {
       // createController(message, setLabel, nextAction, client);
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
@@ -52,6 +53,7 @@ const App = () => {
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
+    console.log('submitAction', client);
     switch (status) {
       case Status.Running: {
         client.pause()

@@ -34,6 +34,12 @@ class MobSocketClient {
     };
   }
 
+  static openSocketSync(url: string): MobSocketClient {
+    const socket = new W3CWebSocket(url);
+    const mobSocketClient = new MobSocketClient(socket);
+    return mobSocketClient;
+  }
+
   // todo: maybe move this function up into the mobSocketClient class (to reduce burden on consumers)
   static async openSocket(url: string): Promise<MobSocketClient> {
     const socket = new W3CWebSocket(url);
