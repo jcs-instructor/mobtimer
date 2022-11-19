@@ -40,21 +40,8 @@ const App = () => {
     // Preventing the page from reloading
     event.preventDefault();
     console.log('submitAction', client);
-    switch (status) {
-      case Status.Running: {
-        client.pause()
-        break;
-      }
-      case Status.Paused: {
-        client.resume();
-        break;
-      }
-      case Status.Ready: {
-        client.start();
-      }
-    };
+    client.toggle()
   }
-
 
   return (
     <div>
