@@ -30,6 +30,7 @@ Next
   - [ ] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
   - [ ] Disable ActionButton until mob is joined
+  - [ ] Modify ActionButton when time elapses
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Display time 
   - [ ] Display state: ready, running, paused
@@ -42,6 +43,9 @@ Next
   - [ ] HyperApp, ferp tutorials?
   - [ ] Reduce mrbarry code??? Reuse mrbarry code?
 - [ ] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
+- [ ] Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
+      then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
+      of time (from duration minutes)
 
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)

@@ -155,6 +155,22 @@ test("After time expires, state should be Ready", () => {
   expect(mobTimer.status).toEqual(Status.Ready);
 });
 
+test("After time expires and timer is started, time remaining should be full amount of time", () => {
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
+  mobTimer.durationMinutes = 1;
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(1);
+  expect(mobTimer.secondsRemaining).toEqual(59);
+  mockCurrentTime.delaySeconds(61);
+  expect(mobTimer.secondsRemaining).toEqual(0);
+  mobTimer.start();
+  expect(mobTimer.secondsRemaining).toEqual(60);
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(1);
+  expect(mobTimer.secondsRemaining).toEqual(59);
+});
+
 test("After time expires, seconds remaining should be 0", () => {
   const mobTimer = new MobTimer();
   const mockCurrentTime = createMockCurrentTime(mobTimer);
