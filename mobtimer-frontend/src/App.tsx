@@ -5,9 +5,10 @@ import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
-// import { createController } from './createController';
 import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
+import * as Controller from './controller';
+
 // todo: unhardcode port
 const port = 4000;
 const url = `ws://localhost:${port}`;
@@ -15,39 +16,24 @@ const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
   const [mobName, setMobName] = useState('');
-  const [label, setLabel] = useState('Start');
+  const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
-  // const [client, setClient] = useState({} as MobSocketClient);
-
 
   const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
-
-    // Join mob
-    console.log('joined', client);
     client.webSocket.onmessage = (message) => {
-      // createController(message, setLabel, nextAction, client);
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
-      console.log('status', response.mobState.status, response);
-      switch (response.mobState.status) {
-        case Status.Running: {
-          setLabel("Pause");
-          break;
-        }
-        case Status.Paused: {
-          setLabel("Resume");
-          break;
-        }
-        case Status.Ready: {
-          setLabel("Start");
-        }
-      };
-      setStatus(response.mobState.status);
-
+      console.log('status', response.mobState.status, response.mobState.secondsRemaining, response);
+      const status = Controller.getStatus(response);
+      setStatus(status);
+      const label = Controller.getActionButtonLabel(status);
+      setLabel(label);
     };
+
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
+    console.log('joined mob', mobName, client);
   }
 
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -80,5 +66,4 @@ const App = () => {
 };
 
 export default App;
-
 

@@ -21,7 +21,6 @@ export function waitForSocketState(
         waitForSocketState(socket, state).then(resolve);
       }
     });
-    console.log("at end of testUtils.waitForSocketState")
     // todo: timeout.unref() fails when running from frontend; why?
     // timeout.unref();
   });
