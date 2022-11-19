@@ -9,34 +9,31 @@ class MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-
   private _webSocket: WebSocketType;
-  public get webSocket(): WebSocketType {
-    return this._webSocket;
-  }
-  public set webSocket(value: WebSocketType) {
-    this._webSocket = value;
-  }
 
   constructor(webSocket: WebSocketType) {
     this._webSocket = webSocket;
     this._webSocket.onmessage = (message) => {
-      const responseObject = convertToMobTimerResponse(message.data);
-      switch (responseObject.actionInfo.action) {
-        case Action.Echo: {
-          this._echoReceived = true;
-          break;
-        }
-        case Action.InvalidRequestError: {
-          this._errorReceived = true;
-          break;
-        }
-        default: {
-          this._successfulResponses.push(message.data);
-          break;
-        }
-      }
+      this.createListener(message);
     };
+  }
+
+  private createListener(message: { data: string; }) {
+    const responseObject = convertToMobTimerResponse(message.data);
+    switch (responseObject.actionInfo.action) {
+      case Action.Echo: {
+        this._echoReceived = true;
+        break;
+      }
+      case Action.InvalidRequestError: {
+        this._errorReceived = true;
+        break;
+      }
+      default: {
+        this._successfulResponses.push(message.data);
+        break;
+      }
+    }
   }
 
   static openSocketSync(url: string): MobSocketClient {
@@ -60,17 +57,11 @@ class MobSocketClient {
   }
 
   joinMob(mobName: string) {
-    this._sendJSON({
-      action: Action.Join,
-      mobName,
-    } as MobTimerRequests.JoinRequest);
+    this._sendJSON({ action: Action.Join, mobName } as MobTimerRequests.JoinRequest);
   }
 
   update(durationMinutes: number) {
-    this._sendJSON({
-      action: Action.Update,
-      value: { durationMinutes },
-    } as MobTimerRequests.UpdateRequest);
+    this._sendJSON({ action: Action.Update, value: { durationMinutes } } as MobTimerRequests.UpdateRequest);
   }
 
   start() {
@@ -103,6 +94,10 @@ class MobSocketClient {
 
   public get errorReceived(): boolean {
     return this._errorReceived;
+  }
+
+  public get webSocket(): WebSocketType {
+    return this._webSocket;
   }
 
   async closeSocket() {
