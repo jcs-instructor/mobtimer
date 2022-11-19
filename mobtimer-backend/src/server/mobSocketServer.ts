@@ -77,6 +77,10 @@ function _processRequest(
         updateRequest.value.durationMinutes || mobTimer.durationMinutes;
       break;
     }
+    case Action.Toggle: {
+      mobTimer.toggle();
+      break;
+    }
     case Action.Start: {
       mobTimer.start();
       break;

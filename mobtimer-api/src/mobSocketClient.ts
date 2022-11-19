@@ -64,6 +64,10 @@ class MobSocketClient {
     this._sendJSON({ action: Action.Update, value: { durationMinutes } } as MobTimerRequests.UpdateRequest);
   }
 
+  toggle() {
+    this._sendJSON({ action: Action.Toggle } as MobTimerRequests.ToggleRequest);
+  }
+
   start() {
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
   }
