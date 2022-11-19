@@ -10,12 +10,17 @@ class MobSocketClient {
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
 
-  // todo: wrap in a property getter
-  webSocket: WebSocketType;
+  private _webSocket: WebSocketType;
+  public get webSocket(): WebSocketType {
+    return this._webSocket;
+  }
+  public set webSocket(value: WebSocketType) {
+    this._webSocket = value;
+  }
 
   constructor(webSocket: WebSocketType) {
-    this.webSocket = webSocket;
-    this.webSocket.onmessage = (message) => {
+    this._webSocket = webSocket;
+    this._webSocket.onmessage = (message) => {
       const responseObject = convertToMobTimerResponse(message.data);
       switch (responseObject.actionInfo.action) {
         case Action.Echo: {
@@ -40,7 +45,6 @@ class MobSocketClient {
     return mobSocketClient;
   }
 
-  // todo: maybe move this function up into the mobSocketClient class (to reduce burden on consumers)
   static async openSocket(url: string): Promise<MobSocketClient> {
     const socket = new W3CWebSocket(url);
     const mobSocketClient = new MobSocketClient(socket);
@@ -82,13 +86,11 @@ class MobSocketClient {
   }
 
   private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
-    this.webSocket.send(JSON.stringify(request));
+    this._webSocket.send(JSON.stringify(request));
   }
 
   public get lastSuccessfulResponse(): SuccessfulResponse {
-    return JSON.parse(
-      this._successfulResponses.at(-1) || ""
-    ) as SuccessfulResponse;
+    return JSON.parse(this._successfulResponses.at(-1) || "") as SuccessfulResponse;
   }
 
   public get successfulResponses(): string[] {
