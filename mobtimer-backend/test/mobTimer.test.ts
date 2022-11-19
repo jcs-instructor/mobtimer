@@ -15,9 +15,15 @@ test("Initial status - timer is Ready", () => {
   expect(mobTimer.status).toEqual(Status.Ready);
 });
 
-test("Start timer", () => {
+test("Start timer directly", () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
+  expect(mobTimer.status).toEqual(Status.Running);
+});
+
+test("Start timer using toggle", () => {
+  const mobTimer = new MobTimer();
+  mobTimer.toggle();
   expect(mobTimer.status).toEqual(Status.Running);
 });
 
@@ -76,11 +82,34 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   );
 });
 
-test("Pause timer", () => {
+test("Pause timer directly", () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
   mobTimer.pause();
   expect(mobTimer.status).toEqual(Status.Paused);
+});
+
+test("Pause timer using toggle", () => {
+  const mobTimer = new MobTimer();
+  mobTimer.start();
+  mobTimer.toggle();
+  expect(mobTimer.status).toEqual(Status.Paused);
+});
+
+test("Resume timer directly", () => {
+  const mobTimer = new MobTimer();
+  mobTimer.start();
+  mobTimer.pause();
+  mobTimer.resume();
+  expect(mobTimer.status).toEqual(Status.Running);
+});
+
+test("Resume timer using toggle", () => {
+  const mobTimer = new MobTimer();
+  mobTimer.start();
+  mobTimer.pause();
+  mobTimer.toggle();
+  expect(mobTimer.status).toEqual(Status.Running);
 });
 
 test("Get seconds remaining after 1 second pause", () => {
