@@ -24,6 +24,7 @@ const App = () => {
     event.preventDefault();
     client.webSocket.onmessage = (message) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
+      // todo: handle if response is not successful
       console.log('status', response.mobState.status, response.mobState.secondsRemaining, response);
       const status = Controller.getStatus(response);
       setStatus(status);
