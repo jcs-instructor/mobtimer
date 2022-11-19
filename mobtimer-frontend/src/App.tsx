@@ -40,7 +40,7 @@ const App = () => {
     // Preventing the page from reloading
     event.preventDefault();
     console.log('submitAction', client);
-    client.toggle()
+    client.toggle();
   }
 
   return (
