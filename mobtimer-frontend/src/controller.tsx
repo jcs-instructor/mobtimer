@@ -10,22 +10,12 @@ import { MobTimerResponses } from 'mobtimer-api';
 // }
 
 export function getActionButtonLabel(status: Status) {
-  let label: string;
   switch (status) {
-    case Status.Running: {
-      label = "⏸️ Pause";
-      break;
-    }
-    case Status.Paused: {
-      label = "▶️ Resume";
-      break;
-    }
-    case Status.Ready: {
-      label = "▶️ Start";
-      break;
-    }
+    case Status.Running: { return "⏸️ Pause"; }
+    case Status.Paused:  { return "▶️ Resume"; }
+    case Status.Ready:   { return "▶️ Start"; }    
+    default: { return ""; } // todo: maybe handle invalid status differently
   };
-  return label;
 }
 
 export function getStatus(response: MobTimerResponses.SuccessfulResponse) {
