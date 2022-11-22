@@ -18,7 +18,7 @@ class MobSocketClient {
     };
   }
 
-  private createListener(message: { data: string; }) {
+  private createListener(message: { data: string }) {
     const responseObject = convertToMobTimerResponse(message.data);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
@@ -30,6 +30,7 @@ class MobSocketClient {
         break;
       }
       default: {
+        console.log("pushing message.data", message.data);
         this._successfulResponses.push(message.data);
         break;
       }
@@ -57,14 +58,33 @@ class MobSocketClient {
   }
 
   joinMob(mobName: string) {
-    this._sendJSON({ action: Action.Join, mobName } as MobTimerRequests.JoinRequest);
+    this._sendJSON({
+      action: Action.Join,
+      mobName,
+    } as MobTimerRequests.JoinRequest);
   }
 
   update(durationMinutes: number) {
-    this._sendJSON({ action: Action.Update, value: { durationMinutes } } as MobTimerRequests.UpdateRequest);
+    this._sendJSON({
+      action: Action.Update,
+      value: { durationMinutes },
+    } as MobTimerRequests.UpdateRequest);
   }
 
   toggle() {
+    console.log("toggle function");
+    if (this._successfulResponses.length > 0) {
+      console.log(
+        "toggle function",
+        this.lastSuccessfulResponse.mobState.status
+      );
+    } else {
+      console.log(
+        "toggle function",
+        "no response 2",
+        this._successfulResponses
+      );
+    }
     this._sendJSON({ action: Action.Toggle } as MobTimerRequests.ToggleRequest);
   }
 
@@ -85,7 +105,9 @@ class MobSocketClient {
   }
 
   public get lastSuccessfulResponse(): SuccessfulResponse {
-    return JSON.parse(this._successfulResponses.at(-1) || "") as SuccessfulResponse;
+    return JSON.parse(
+      this._successfulResponses.at(-1) || ""
+    ) as SuccessfulResponse;
   }
 
   public get successfulResponses(): string[] {

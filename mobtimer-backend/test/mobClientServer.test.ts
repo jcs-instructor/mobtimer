@@ -73,11 +73,14 @@ describe("WebSocket Server", () => {
 
   test("Two mob timers both start", async () => {
     const client = await MobSocketClient.openSocket(url);
-    await client.joinMob(_mobName1);
-    await client.toggle();
 
+    await client.joinMob(_mobName1);
+    await waitForLastResponse(client);
     const client2 = await MobSocketClient.openSocket(url);
+    console.log("client 2");
     await client2.joinMob(_mobName1);
+    await waitForLastResponse(client2);
+    client.toggle();
     await client2.toggle();
 
     await cleanUp(client);
