@@ -77,7 +77,7 @@ describe("WebSocket Server", () => {
     await client.toggle();
 
     const client2 = await MobSocketClient.openSocket(url);
-    await client2.joinMob(_mobName2);
+    await client2.joinMob(_mobName1);
     await client2.toggle();
 
     await cleanUp(client);
