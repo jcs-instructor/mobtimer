@@ -2,6 +2,24 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "setup",
+			"type": "shell",
+			"command": "echo Set up complete",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"symbolic link",
+				"api compile"
+			],
+			"problemMatcher": []
+		},
+		{
 			"label": "startAll",
 			"type": "shell",
 			"command": "echo running front and back ends",
@@ -14,10 +32,9 @@
 				"panel": "new"
 			},
 			"dependsOn": [
-				"symbolic link",
-				"backend start",
 				"frontend start",
-				"api start"
+				"backend start",
+				"api watch"
 			],
 			"problemMatcher": []
 		},
@@ -64,9 +81,23 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "api start",
+			"label": "api watch",
 			"type": "shell",
 			"command": "./start-api.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "api compile",
+			"type": "shell",
+			"command": "./start-api-no-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true

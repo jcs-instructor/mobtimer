@@ -71,6 +71,23 @@ describe("WebSocket Server", () => {
     expect(client2.lastSuccessfulResponse.mobState.durationMinutes).toEqual(17);
   });
 
+  test("Two mob timers both start", async () => {
+    const client = await MobSocketClient.openSocket(url);
+    await client.joinMob(_mobName1);
+    await client.toggle();
+
+    const client2 = await MobSocketClient.openSocket(url);
+    await client2.joinMob(_mobName2);
+    await client2.toggle();
+
+    await cleanUp(client);
+    await cleanUp(client2);
+
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+  });
+
   // todo check other branch(es) for tests that might not have been copied into this branch (!)
 
   // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
@@ -99,8 +116,12 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Start);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Start
+    );
   });
 
   test("Start timer using toggle", async () => {
@@ -108,8 +129,12 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.toggle();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Toggle);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Toggle
+    );
   });
 
   test("Pause timer directly", async () => {
@@ -118,8 +143,12 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Paused);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Pause);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Paused
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Pause
+    );
   });
 
   test("Pause timer using toggle", async () => {
@@ -128,8 +157,12 @@ describe("WebSocket Server", () => {
     await client.start();
     await client.toggle();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Paused);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Toggle);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Paused
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Toggle
+    );
   });
 
   test("Resume timer directly", async () => {
@@ -139,8 +172,12 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.resume();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Resume);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Resume
+    );
   });
 
   test("Resume timer using toggle", async () => {
@@ -150,8 +187,12 @@ describe("WebSocket Server", () => {
     await client.pause();
     await client.toggle();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Toggle);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Toggle
+    );
   });
 
   test("Update timer", async () => {
@@ -176,9 +217,15 @@ describe("WebSocket Server", () => {
       await client.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await cleanUp(client);
-      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(0);
-      expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Expired);
-      expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Ready);
+      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(
+        0
+      );
+      expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+        Action.Expired
+      );
+      expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+        Status.Ready
+      );
     }
   );
 
@@ -193,9 +240,16 @@ describe("WebSocket Server", () => {
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
     await cleanUp(client);
     const numDigits = 1;
-    expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toBeCloseTo(durationSeconds, numDigits);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Pause);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Paused);
+    expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toBeCloseTo(
+      durationSeconds,
+      numDigits
+    );
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Pause
+    );
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Paused
+    );
   });
 
   test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
@@ -211,7 +265,9 @@ describe("WebSocket Server", () => {
     await cleanUp(client);
     const numDigits = 1;
     expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(0);
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Expired);
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Expired
+    );
     expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Ready);
   });
 
