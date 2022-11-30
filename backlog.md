@@ -27,6 +27,7 @@ Next
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
   - [x] Pause & Resume
   - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
+  - [ ] WIP: Review Hyperapp; try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
   - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
   - [ ] Disable ActionButton until mob is joined
