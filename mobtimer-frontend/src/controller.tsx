@@ -2,14 +2,6 @@ import { Status } from 'mobtimer-api';
 import { MobTimerResponses } from 'mobtimer-api';
 import { MobSocketClient } from 'mobtimer-api';
 
-// functions to connect the model (business logic) and view (UI)
-
-// const actions = {
-//   [Status.Running]: { label: 'Pause', function: () => client.pause() },
-//   [Status.Paused]: { label: 'Resume', function: () => client.resume() },
-//   [Status.Ready]: { label: 'Start', function: () => client.start() },
-// }
-
 export function getActionButtonLabel(status: Status) {
   switch (status) {
     case Status.Running: { return "⏸️ Pause"; }
@@ -24,12 +16,11 @@ export function getStatus(response: MobTimerResponses.SuccessfulResponse) {
 }
 
 export function toggle(client: MobSocketClient, status: Status) {
-  const actions = {
-    [Status.Running]: { function: () => client.pause() },
-    [Status.Paused]: { function: () => client.resume() },
-    [Status.Ready]: { function: () => client.start() },
+  switch (status) {
+    case Status.Running: { client.pause(); break; }
+    case Status.Paused: { client.resume(); break; }
+    case Status.Ready: { client.start(); break; }
   }
-  actions[status].function();
 }
 
 

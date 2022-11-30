@@ -21,25 +21,24 @@ See also: [Reminders](./reminders.md)
 
 Next
 
-- [ ] Joel: after hours: 
-      - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
+- [ ] Joel: after hours: - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Start
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
   - [x] Pause & Resume
-  - [ ] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
-  - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient 
+  - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
+  - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
   - [ ] Disable ActionButton until mob is joined
   - [ ] Modify ActionButton when time elapses
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] Display time 
+  - [ ] Display time
   - [ ] Display state: ready, running, paused
   - [ ] Update (min. remaining)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
-- [ ] UI features (without styling) for all server-exposed methods - using Hyperapp  
+- [ ] UI features (without styling) for all server-exposed methods - using Hyperapp
   - [ ] Implement
   - [ ] HyperApp, ferp tutorials?
   - [ ] Reduce mrbarry code??? Reuse mrbarry code?
