@@ -41,7 +41,16 @@ const App = () => {
     // Preventing the page from reloading
     event.preventDefault();
     console.log('submitAction', client);
-    client.toggle();
+    toggle();
+  }
+
+  const toggle = () => {
+    const actions = {
+      [Status.Running]: { function: () => client.pause() },
+      [Status.Paused]: { function: () => client.resume() },
+      [Status.Ready]: { function: () => client.start() },
+    }
+    actions[status].function();
   }
 
   return (

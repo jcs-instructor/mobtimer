@@ -71,26 +71,6 @@ describe("WebSocket Server", () => {
     expect(client2.lastSuccessfulResponse.mobState.durationMinutes).toEqual(17);
   });
 
-  test("Two mob timers both start", async () => {
-    const client = await MobSocketClient.openSocket(url);
-
-    await client.joinMob(_mobName1);
-    await waitForLastResponse(client);
-    const client2 = await MobSocketClient.openSocket(url);
-    console.log("client 2");
-    await client2.joinMob(_mobName1);
-    await waitForLastResponse(client2);
-    client.toggle();
-    await client2.toggle();
-
-    await cleanUp(client);
-    await cleanUp(client2);
-
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
-      Status.Running
-    );
-  });
-
   // todo check other branch(es) for tests that might not have been copied into this branch (!)
 
   // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
@@ -114,7 +94,7 @@ describe("WebSocket Server", () => {
     expect(client2.successfulResponses.length).toEqual(2); // join, update
   });
 
-  test("Start timer directly", async () => {
+  test("Start timer", async () => {
     const client = await MobSocketClient.openSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
@@ -127,20 +107,7 @@ describe("WebSocket Server", () => {
     );
   });
 
-  test("Start timer using toggle", async () => {
-    const client = await MobSocketClient.openSocket(url);
-    await client.joinMob(_mobName1);
-    await client.toggle();
-    await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
-      Status.Running
-    );
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
-      Action.Toggle
-    );
-  });
-
-  test("Pause timer directly", async () => {
+  test("Pause timer", async () => {
     const client = await MobSocketClient.openSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
@@ -154,21 +121,7 @@ describe("WebSocket Server", () => {
     );
   });
 
-  test("Pause timer using toggle", async () => {
-    const client = await MobSocketClient.openSocket(url);
-    await client.joinMob(_mobName1);
-    await client.start();
-    await client.toggle();
-    await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
-      Status.Paused
-    );
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
-      Action.Toggle
-    );
-  });
-
-  test("Resume timer directly", async () => {
+  test("Resume timer", async () => {
     const client = await MobSocketClient.openSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
@@ -180,21 +133,6 @@ describe("WebSocket Server", () => {
     );
     expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
       Action.Resume
-    );
-  });
-
-  test("Resume timer using toggle", async () => {
-    const client = await MobSocketClient.openSocket(url);
-    await client.joinMob(_mobName1);
-    await client.start();
-    await client.pause();
-    await client.toggle();
-    await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
-      Status.Running
-    );
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
-      Action.Toggle
     );
   });
 

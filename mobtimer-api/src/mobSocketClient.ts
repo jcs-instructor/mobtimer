@@ -71,23 +71,6 @@ class MobSocketClient {
     } as MobTimerRequests.UpdateRequest);
   }
 
-  toggle() {
-    console.log("toggle function");
-    if (this._successfulResponses.length > 0) {
-      console.log(
-        "toggle function",
-        this.lastSuccessfulResponse.mobState.status
-      );
-    } else {
-      console.log(
-        "toggle function",
-        "no response 2",
-        this._successfulResponses
-      );
-    }
-    this._sendJSON({ action: Action.Toggle } as MobTimerRequests.ToggleRequest);
-  }
-
   start() {
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
   }

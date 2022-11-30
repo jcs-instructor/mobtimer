@@ -43,15 +43,6 @@ export class MobTimer {
     }
   }
 
-  toggle() {
-    const actions = {
-      [Status.Running]: { function: () => this.pause() },
-      [Status.Paused]: { function: () => this.resume() },
-      [Status.Ready]: { function: () => this.start() },
-    }
-    actions[this.status].function();
-  }
-
   start() {
     this.setExpireTimeout();
     this._running = true;
