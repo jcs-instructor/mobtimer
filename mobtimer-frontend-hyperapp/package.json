@@ -1,0 +1,9 @@
+{
+  "name": "mobtimer-frontend-hyperapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "hyperapp": "^2.0.22"
+  }
+}
