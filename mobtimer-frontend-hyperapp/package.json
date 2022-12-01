@@ -15,8 +15,7 @@
     "build": "parcel build src/index.html --public-url ./"
   },
   "dependencies": {
-    "hyperapp": "1.2.9",
-    "mobtimer-api": "^1.0.1"
+    "hyperapp": "1.2.9"
   },
   "devDependencies": {
     "@babel/core": "7.1.0",
