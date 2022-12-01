@@ -21,6 +21,7 @@ Ethan:
 - Glasses
 
 **Warning**:
+
 - Make sure to run tests manually frequently! (since we turned off gated checkins and are making ui changes)
 
 **Practices to Focus On**:
@@ -43,6 +44,7 @@ Ethan:
   - Consistent level of abstraction
   - Consistent names & naming conventions (e.g., underscore for private fields, capitalization, etc.)
   - Avoid tech debt
+  - If no state (i.e, only one instance) use function, not class
   - ... (add more as we go)
 - **Retro at end of each 2-hour session (so can impl. immediately rather than wait a week)**
 - **Phrases**:
