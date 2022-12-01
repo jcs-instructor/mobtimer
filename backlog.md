@@ -21,7 +21,9 @@ See also: [Reminders](./reminders.md)
 
 Next
 
-- [ ] Joel: after hours: - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
+- [ ] Rename testUtils to clientUtils or just combine (probably the latter)
+- [ ] Ethan after hours: 2nd crack on start scripts, think about class vs function
+- [x] Consider rule for when use class versus function.
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Start
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
@@ -89,6 +91,7 @@ Next
 
 ## Refactoring
 
+- [ ] Convert timeUtils to function, look for others
 - [ ] \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
 - [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
 - [ ] move onMessage from mobSocketClient to be independently added
