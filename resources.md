@@ -1,3 +1,14 @@
+## Hyperapp
+
+- [Article on parcel vs rollup vs webpack](https://betterprogramming.pub/the-battle-of-bundlers-6333a4e3eda9)
+- [Barebones code for parcel](https://github.com/osdevisnot/hyperapp-parcel)
+- [zaceno hyperapp tutorial with code](https://zaceno.github.io/codealong-hyperapp/) Set of videos for different concepts and includes code. Some code in codepen, but has a section on how to do from dev with a zip of all the code.
+
+## Misc
+
+- [Jest Tutorial](https://jestjs.io/docs)
+- [Microsoft TS Tutorial](https://code.visualstudio.com/docs/typescript/typescript-tutorial)
+
 ## Code Examples
 
 - Timers:

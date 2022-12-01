@@ -1,9 +1,28 @@
 {
-  "name": "mobtimer-frontend-hyperapp",
+  "name": "hyperapp-parcel",
   "version": "1.0.0",
+  "description": "HyperApp Parcel Starter",
   "main": "index.js",
+  "repository": "https://github.com/osdevisnot/hyperapp-parcel.git",
+  "author": "osdevisnot <osdevisnot@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "setup": "git clean -fdX",
+    "postsetup": "npm install",
+    "prestart": "del dist .cache",
+    "start": "parcel src/index.html",
+    "prebuild": "npm run setup",
+    "build": "parcel build src/index.html --public-url ./"
+  },
   "dependencies": {
-    "hyperapp": "^2.0.22"
+    "hyperapp": "1.2.9"
+  },
+  "devDependencies": {
+    "@babel/core": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "autoprefixer": "9.1.5",
+    "del-cli": "1.1.0",
+    "parcel-bundler": "1.10.1"
   }
 }
