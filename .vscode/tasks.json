@@ -33,6 +33,7 @@
 			},
 			"dependsOn": [
 				"frontend start",
+				"hyperapp frontend start",
 				"backend start",
 				"api watch"
 			],
@@ -70,6 +71,20 @@
 			"label": "frontend start",
 			"type": "shell",
 			"command": "./start-frontend.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "hyperapp frontend start",
+			"type": "shell",
+			"command": "./start-frontend-hyperapp.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
