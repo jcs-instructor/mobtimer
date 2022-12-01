@@ -32,7 +32,9 @@ Next
   - [x] Hyperapp - try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
   - [x] Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
   - [ ] Implement Hyperapp front end basic features:
-        - [ ] WIP: start socket (import mob client, etc.) - CURRENTLY HAVE RUNTIME ERROR IN CONSOLE
+        - [ ] WIP: start socket (import mob client, etc.) 
+          - [ ] CURRENTLY HAVE RUNTIME ERROR IN CONSOLE (might changing the .js file to .ts and configuring TypeScript fix this?)
+          - [ ] Need to configure mobtimer-frontend-hyperapp to work with TypeScript and change index.js to index.ts
         - [ ] Join
         - [ ] Start
         - [ ] Pause
