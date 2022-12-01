@@ -37,6 +37,7 @@ Next
         - [ ] Start
         - [ ] Pause
         - [ ] Resume
+  - [ ] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
   - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
   - [ ] Disable ActionButton until mob is joined

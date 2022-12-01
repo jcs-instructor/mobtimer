@@ -2,7 +2,7 @@ import "./index.css";
 import { h, app } from "hyperapp";
 // import JoinMobForm from "./components/JoinMobForm";
 // import JoinMobHeading from "./components/JoinMobHeading";
-// import { MobSocketClient } from "mobtimer-api";
+import { MobSocketClient } from "mobtimer-api";
 // import { waitForSocketState } from "mobtimer-api";
 // import ActionButton from "./components/ActionButton";
 // import { MobTimerResponses } from "mobtimer-api";
@@ -10,9 +10,9 @@ import { h, app } from "hyperapp";
 // import * as Controller from "./controller";
 
 // todo: unhardcode port
-const port = 4001;
+const port = 4000;
 const url = `ws://localhost:${port}`;
-// const client = MobSocketClient.openSocketSync(url);
+const client = MobSocketClient.openSocketSync(url);
 
 const state = {
   count: 0,

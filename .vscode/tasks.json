@@ -32,7 +32,6 @@
 				"panel": "new"
 			},
 			"dependsOn": [
-				"frontend start",
 				"hyperapp frontend start",
 				"backend start",
 				"api watch"
