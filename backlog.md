@@ -30,7 +30,12 @@ Next
   - [x] Pause & Resume
   - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
   - [x] Hyperapp - try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
-  - [ ] WIP Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
+  - [x] Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
+  - [ ] Implement Hyperapp front end basic features:
+        - [ ] Join
+        - [ ] Start
+        - [ ] Pause
+        - [ ] Resume
   - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
   - [ ] Disable ActionButton until mob is joined
@@ -44,7 +49,6 @@ Next
     - [ ] Messages not sent to all browsers in different mobs
 - [ ] UI features (without styling) for all server-exposed methods - using Hyperapp
   - [ ] Implement
-  - [ ] HyperApp, ferp tutorials?
   - [ ] Reduce mrbarry code??? Reuse mrbarry code?
 - [ ] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
 - [ ] Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
