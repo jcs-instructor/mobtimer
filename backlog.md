@@ -22,7 +22,9 @@ See also: [Reminders](./reminders.md)
 Next
 
 - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
-- [ ] Ethan after hours: 2nd crack on start scripts, think about class vs function
+- [ ] Ethan after hours: 
+  - [ ] 2nd crack on start scripts, think about class vs function
+  - [ ] In tasks.json, reorder tasks by order of execution
 - [x] Consider rule for when use class versus function.
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Start
