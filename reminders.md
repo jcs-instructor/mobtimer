@@ -20,6 +20,12 @@ Ethan:
 - Snack
 - Glasses
 
+**Facilitator**:
+12/7 - Joel
+12/14 - Ethan
+12/21 - Joel
+...
+
 **Warning**:
 
 - Make sure to run tests manually frequently! (since we turned off gated checkins and are making ui changes)

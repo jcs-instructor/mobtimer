@@ -9,7 +9,7 @@
   "scripts": {
     "setup": "git clean -fdX",
     "postsetup": "npm install",
-    "prestart": "del dist .cache",
+    "prestart": "del dist .cache /F /Q",
     "start": "parcel src/index.html",
     "prebuild": "npm run setup",
     "build": "parcel build src/index.html --public-url ./"
