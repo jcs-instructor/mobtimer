@@ -41,6 +41,8 @@ Next
           - [ ] Change index.js to index.ts
           - [ ] Use TS specific syntax in index.ts
           - [ ] Find out if really need @types/express
+          - [ ] Contribute back to community - how to make a simple project with Hyperapp and TypeScript
+          - [ ] Come up with a procedure (doc and/or script and/or version) for when we need to update node_modules - to relink mobtimer-api
         - [ ] Join
         - [ ] Start
         - [ ] Pause
