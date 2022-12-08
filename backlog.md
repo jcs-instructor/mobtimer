@@ -37,7 +37,7 @@ Next
         - [x] Open socket (import mob client, etc.) 
         - [ ] Configure mobtimer-frontend-hyperapp to work with TypeScript and change index.js to index.ts
           - [x] Configure
-          - [ ] Remove hello.ts
+          - [x] Remove hello.ts
           - [ ] Change index.js to index.ts
           - [ ] Use TS specific syntax in index.ts
           - [ ] Find out if really need @types/express
