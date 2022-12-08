@@ -33,20 +33,11 @@ Next
   - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
   - [x] Hyperapp - try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
   - [x] Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
-  - [ ] Implement Hyperapp front end basic features:
+  - [x] Aborted: Implement Hyperapp front end basic features:
         - [x] Open socket (import mob client, etc.) 
-        - [ ] Configure mobtimer-frontend-hyperapp to work with TypeScript and change index.js to index.ts
-          - [x] Configure
-          - [x] Remove hello.ts
-          - [ ] Change index.js to index.ts
-          - [ ] Use TS specific syntax in index.ts
-          - [ ] Find out if really need @types/express
-          - [ ] Contribute back to community - how to make a simple project with Hyperapp and TypeScript
-          - [ ] Come up with a procedure (doc and/or script and/or version) for when we need to update node_modules - to relink mobtimer-api
-        - [ ] Join
-        - [ ] Start
-        - [ ] Pause
-        - [ ] Resume
+        - [x] Configure
+        - [x] Remove hello.ts
+  - [ ] Remove Hyperapp
   - [ ] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
   - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
