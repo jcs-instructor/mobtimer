@@ -11,14 +11,16 @@ class MobSocketClient {
   private _errorReceived: boolean = false;
   private _webSocket: WebSocketType;
 
-  constructor(webSocket: WebSocketType) {
+  constructor(webSocket: WebSocketType, trackMessages: boolean = true) {
     this._webSocket = webSocket;
     this._webSocket.onmessage = (message) => {
-      this.createListener(message);
+      if (trackMessages) {
+        this.trackMessage(message);
+      }
     };
   }
 
-  private createListener(message: { data: string }) {
+  private trackMessage(message: { data: string }) {
     const responseObject = convertToMobTimerResponse(message.data);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
