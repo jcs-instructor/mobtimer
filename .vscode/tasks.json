@@ -34,14 +34,15 @@
 			"dependsOn": [
 				"frontend start",
 				"backend start",
-				"api watch"
+				"api compile watch",
+				"api link watch"
 			],
 			"problemMatcher": []
 		},
 		{
 			"label": "backend start",
 			"type": "shell",
-			"command": "./start-backend.sh",
+			"command": "./scripts/start-backend.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -55,7 +56,7 @@
 		{
 			"label": "symbolic link",
 			"type": "shell",
-			"command": "./link-mobtimer-api.sh",
+			"command": "./scripts/link-mobtimer-api.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -69,7 +70,7 @@
 		{
 			"label": "frontend start",
 			"type": "shell",
-			"command": "./start-frontend.sh",
+			"command": "./scripts/start-frontend.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -81,9 +82,9 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "api watch",
+			"label": "api compile watch",
 			"type": "shell",
-			"command": "./start-api.sh",
+			"command": "./scripts/start-mobtimer-api.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -94,10 +95,25 @@
 			},
 			"problemMatcher": []
 		},
+		{
+			"label": "api link watch",
+			"type": "shell",
+			"command": "./scripts/link-mobtimer-api-watch.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+
 		{
 			"label": "api compile",
 			"type": "shell",
-			"command": "./start-api-no-watch.sh",
+			"command": "./scripts/start-api-no-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true

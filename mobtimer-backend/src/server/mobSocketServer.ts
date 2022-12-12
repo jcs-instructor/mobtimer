@@ -9,6 +9,7 @@ import { RoomManager } from "./roomManager";
 export async function startMobServer(
   port: number
 ): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
+  console.log("text");
   const server = http.createServer();
   const wss = _addMobListeners(server);
   return new Promise((resolve) => {
@@ -35,7 +36,8 @@ export function renderHomePage(port: number) {
   });
 
   const server = app.listen(port, function () {
-    console.log("Server listening on PORT", port);
+    const time = new Date().toLocaleTimeString();
+    console.log(`[${time}] Server listening on PORT ${port}`);
   });
 
   _addMobListeners(server);
@@ -111,12 +113,16 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
           requestString
         ) as MobTimerRequests.MobTimerRequest;
       } catch (e) {
-        const errorResponse = { actionInfo: { action: Action.InvalidRequestError }} as MobTimerResponses.ErrorResponse;
+        const errorResponse = {
+          actionInfo: { action: Action.InvalidRequestError },
+        } as MobTimerResponses.ErrorResponse;
         _sendJSON(webSocket, errorResponse);
         return;
       }
       if (parsedRequest.action === Action.Echo) {
-        const echoResponse = {actionInfo: { action: Action.Echo }} as MobTimerResponses.EchoResponse;
+        const echoResponse = {
+          actionInfo: { action: Action.Echo },
+        } as MobTimerResponses.EchoResponse;
         _sendJSON(webSocket, echoResponse);
         return;
       }
@@ -130,7 +136,10 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
   return wss;
 }
 
-function _sendJSON(webSocket: WebSocket, request: MobTimerResponses.MobTimerResponse) {
+function _sendJSON(
+  webSocket: WebSocket,
+  request: MobTimerResponses.MobTimerResponse
+) {
   webSocket.send(JSON.stringify(request));
 }
 

@@ -1,2 +1,2 @@
 cd src/server
-ts-node index
+nodemon  --watch "*.*" --watch "../*.*" --watch "../../node_modules/mobtimer-api/*.*" index.ts

@@ -15,6 +15,7 @@ export class MobTimer {
   sockets: any;
 
   constructor(mobName: string = "") {
+    console.log("MobTimer constructor2");
     this._mobName = mobName;
   }
 

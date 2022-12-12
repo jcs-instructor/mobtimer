@@ -7,4 +7,5 @@ export enum Action {
   Resume = "resume",
   Expired = "expired",
   InvalidRequestError = "invalidRequestError",
+  Debug = "debug34",
 }
