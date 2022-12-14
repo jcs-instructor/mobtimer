@@ -39,7 +39,7 @@ Next
         - [x] Remove hello.ts
   - [x] Remove Hyperapp
   - [x] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
-  - [ ] WIP: Implement trackMessages boolean in mob socket client. 
+  - [x] Implement trackMessages boolean in mob socket client (so that the client can turn on/off storing messages from the server). 
   - [ ] WIP: Make scripts more stable (by using copy vs. link - and/or order of things; currently startAll works the 2nd time after a change to a ts file in mobtimer-api when using cp - might be same with link - Ethan to look into this)
   - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)

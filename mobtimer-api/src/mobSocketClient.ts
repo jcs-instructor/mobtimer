@@ -11,7 +11,7 @@ class MobSocketClient {
   private _errorReceived: boolean = false;
   private _webSocket: WebSocketType;
 
-  constructor(webSocket: WebSocketType, trackMessages: boolean = true) {
+  constructor(webSocket: WebSocketType, trackMessages: boolean = false) {
     this._webSocket = webSocket;
     this._webSocket.onmessage = (message) => {
       if (trackMessages) {
@@ -39,15 +39,15 @@ class MobSocketClient {
     }
   }
 
-  static openSocketSync(url: string): MobSocketClient {
+  static openSocketSync(url: string, trackMessages: boolean = false): MobSocketClient {
     const socket = new W3CWebSocket(url);
-    const mobSocketClient = new MobSocketClient(socket);
+    const mobSocketClient = new MobSocketClient(socket, trackMessages);
     return mobSocketClient;
   }
 
-  static async openSocket(url: string): Promise<MobSocketClient> {
+  static async openSocket(url: string, trackMessages: boolean = false): Promise<MobSocketClient> {
     const socket = new W3CWebSocket(url);
-    const mobSocketClient = new MobSocketClient(socket);
+    const mobSocketClient = new MobSocketClient(socket, trackMessages);
     await waitForSocketState(
       mobSocketClient.webSocket,
       mobSocketClient.webSocket.OPEN
