@@ -21,8 +21,8 @@ See also: [Reminders](./reminders.md)
 
 Next
 
-- [ ] Rename testUtils to clientUtils or just combine (probably the latter)
-- [ ] Ethan after hours:
+- [ ] Low priority. Rename testUtils to clientUtils or just combine (probably the latter)
+- [ ] Low priority. Ethan after hours:
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
 - [x] Consider rule for when use class versus function.
@@ -38,36 +38,33 @@ Next
   - [x] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
   - [x] Implement trackMessages boolean in mob socket client (so that the client can turn on/off storing messages from the server).
   - [x] Make scripts more stable (by using copy vs. link - and/or order of things; currently startAll works the 2nd time after a change to a ts file in mobtimer-api when using cp - might be same with link - Ethan to look into this)
-  - [ ] Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
-  - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
-  - [ ] Disable ActionButton until mob is joined
-  - [ ] Modify ActionButton when time elapses
+  - [x] Display state: ready, running, paused
+  - [x] UI features (without styling) for all server-exposed methods - using Hyperapp
+- [x] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
+- [ ] Refactor. Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
+  - [ ] - Put action button on separate page that is shown after you join mob
+  - [ ] - Modify ActionButton when time elapses
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] Display time
-  - [ ] Display state: ready, running, paused
-  - [ ] Update (min. remaining)
+  - [ ] - Display time
+  - [ ] - Update (min. remaining)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
-- [ ] UI features (without styling) for all server-exposed methods - using Hyperapp
-  - [ ] Implement
-  - [ ] Reduce mrbarry code??? Reuse mrbarry code?
-- [ ] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
 - [ ] Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
       then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
       of time (from duration minutes)
 
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
-- [ ] Create a timer
-  - [ ] UI - see Example React Source Code in resources.md)
-  - [ ] Hook up timer to websocket server
-  - [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
-  - [ ] Cancel
-  - [ ] UI - Start
-  - [ ] UI - Pause
-  - [ ] UI - Restart
-- [ ] Deploy (as single repo)
+- [ ] - Create a timer
+  * [ ] UI - see Example React Source Code in resources.md)
+  * [ ] Hook up timer to websocket server
+  * [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
+  * [ ] Cancel
+  * [ ] UI - Start
+  * [ ] UI - Pause
+  * [ ] UI - Restart
+- - [ ] Deploy (as single repo)
 
 ## Split Repos and Deploy
 
@@ -87,7 +84,7 @@ Next
 - [ ] Lists
   - [ ] Chat messages
 - [ ] Make tabs into sizeable windows
-- [ ] Raise hand
+- [ ] Raise hand and chat
 - [ ] Incorporate with vscode
 
 ## Other Features
