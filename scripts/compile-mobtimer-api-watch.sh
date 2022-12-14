@@ -1,2 +1,2 @@
 cd mobtimer-api
-./start.sh
+./compile-watch.sh
