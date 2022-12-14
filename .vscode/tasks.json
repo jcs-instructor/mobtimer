@@ -14,17 +14,17 @@
 				"panel": "new"
 			},
 			"dependsOn": [
-				"frontend start",
-				"backend start",
+				"frontend start watch",
+				"backend start watch",
 				"api compile watch",
 				"api symlink watch"
 			],
 			"problemMatcher": []
 		},
 		{
-			"label": "backend start",
+			"label": "backend start watch",
 			"type": "shell",
-			"command": "./scripts/start-backend.sh",
+			"command": "./scripts/start-backend-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -36,9 +36,9 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "frontend start",
+			"label": "frontend start watch",
 			"type": "shell",
-			"command": "./scripts/start-frontend.sh",
+			"command": "./scripts/start-frontend-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -52,7 +52,7 @@
 		{
 			"label": "api compile watch",
 			"type": "shell",
-			"command": "./scripts/start-mobtimer-api.sh",
+			"command": "./scripts/compile-mobtimer-api-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
