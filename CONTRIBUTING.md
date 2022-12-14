@@ -25,6 +25,7 @@ In VS Code,
 All these scripts are contained in the scripts directory and should be executed
 from the root directory:
 
+- symlink-ls.sh - displays index.\* in linked directories and in mobtimer-api
 - symlink-mobtimer-api-backend.sh - creates symbolic link in mobtimer-backend/node_modules/mobtimer-api. Called by start-frontend.sh (which is called from tasks.json)
 - symlink-mobtimer-api-frontend.sh - creates symbolic link in mobtimer-backend/node_modules/mobtimer-api. Called by start-backend.sh (which is called from tasks.json)
 - symlink-mobtimer-api-watch.sh - calls symlink-mobtimer-api and waits for changes in source dir to relink. Called from tasks.json
