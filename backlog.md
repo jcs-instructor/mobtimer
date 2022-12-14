@@ -22,7 +22,7 @@ See also: [Reminders](./reminders.md)
 Next
 
 - [ ] Rename testUtils to clientUtils or just combine (probably the latter)
-- [ ] Ethan after hours: 
+- [ ] Ethan after hours:
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
 - [x] Consider rule for when use class versus function.
@@ -33,15 +33,13 @@ Next
   - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
   - [x] Hyperapp - try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
   - [x] Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
-  - [x] Aborted: Implement Hyperapp front end basic features:
-        - [x] Open socket (import mob client, etc.) 
-        - [x] Configure
-        - [x] Remove hello.ts
+  - [x] Aborted: Implement Hyperapp front end basic features: - [x] Open socket (import mob client, etc.) - [x] Configure - [x] Remove hello.ts
   - [x] Remove Hyperapp
   - [x] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
-  - [x] Implement trackMessages boolean in mob socket client (so that the client can turn on/off storing messages from the server). 
-  - [ ] WIP: Make scripts more stable (by using copy vs. link - and/or order of things; currently startAll works the 2nd time after a change to a ts file in mobtimer-api when using cp - might be same with link - Ethan to look into this)
-  - [ ] Discuss: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
+  - [x] Implement trackMessages boolean in mob socket client (so that the client can turn on/off storing messages from the server).
+  - [x] Make scripts more stable (by using copy vs. link - and/or order of things; currently startAll works the 2nd time after a change to a ts file in mobtimer-api when using cp - might be same with link - Ethan to look into this)
+  - [ ] Unit test for trackMessages is false and try to retrieve message (lastResponse, etc)
+  - [ ] Investigate: client.webSocket.onmessage in App.tsx overrides the webSocket.onmessage created in mobSocketClient
   - [ ] Disable Submit Button (to join mob) until mobName is entered in the textbox (or if easier, just give an alert message)
   - [ ] Disable ActionButton until mob is joined
   - [ ] Modify ActionButton when time elapses
