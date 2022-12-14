@@ -17,7 +17,7 @@ while : ; do
     new=$(ls -ltr mobtimer-api/dist) 
 
     # this is where the magic should happen
-    [[ "$old" != "$new" ]] && ./scripts/link-mobtimer-api.sh
+    [[ "$old" != "$new" ]] && ./scripts/symlink-mobtimer-api.sh
 
     # save for next round
     old=$new
