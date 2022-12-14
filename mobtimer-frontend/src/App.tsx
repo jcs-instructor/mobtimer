@@ -8,6 +8,8 @@ import ActionButton from './components/ActionButton';
 import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
+import logo from './logo.svg';
+
 
 // todo: unhardcode port
 const port = 4000;
@@ -46,6 +48,7 @@ const App = () => {
 
   return (
     <div>
+      <img src={logo} className="App-logo" alt="logo" />
       <JoinMobHeading />
       <JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />
       <ActionButton label={label} submitAction={submitAction} />

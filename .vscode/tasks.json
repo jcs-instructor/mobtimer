@@ -56,7 +56,7 @@
 		{
 			"label": "symbolic link",
 			"type": "shell",
-			"command": "./scripts/link-mobtimer-api.sh",
+			"command": "./scripts/symlink-mobtimer-api.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -98,7 +98,7 @@
 		{
 			"label": "api link watch",
 			"type": "shell",
-			"command": "./scripts/link-mobtimer-api-watch.sh",
+			"command": "./scripts/symlink-mobtimer-api-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
