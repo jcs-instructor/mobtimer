@@ -13,8 +13,8 @@ Refactor/Improve Later
 
 Next
 
+- [ ] Automate index.ts using create-index-ts
 - [ ] Investigate regeneration of d.ts files
-- [ ] See if index.ts can be automated. (Alternative: maybe can use \* for imports/exports in index.ts - more verbose, but maybe OK/better)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)

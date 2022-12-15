@@ -1,7 +1,9 @@
-- Create route for /hello that goes to screen with hello
-- Create route for / that goes to the current landing page (Welcome to Amazing Timer)
-- Create Room page that has just the Start/Pause button
-- Change hello to go to that page
-- When submit button, history.push(/:id)
-- Create route for /:id
-- If enter URL directly, have Room page read the variable and joins mob, then remove code from submit button that joins mob
+React Router
+
+- [ ] Create route for /hello that goes to screen with hello
+- [ ] Create route for / that goes to the current landing page (Welcome to Amazing Timer)
+- [ ] Create Room page that has just the Start/Pause button
+- [ ] Change hello to go to that page
+- [ ] When submit button, history.push(/:id)
+- [ ] Create route for /:id
+- [ ] If enter URL directly, have Room page read the variable and joins mob, then remove code from submit button that joins mob

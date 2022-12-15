@@ -24,7 +24,7 @@ const App = () => {
   const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
-    client.webSocket.onmessage = (message) => {
+    client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
       console.log('status', response.mobState.status, response.mobState.secondsRemaining, response);
