@@ -20,6 +20,10 @@ Ethan:
 - Snack
 - Glasses
 
+**End of Session**
+
+- Retro: https://docs.google.com/document/d/1EKo20gHXQsAFqiAw56kNISPx170u0RLXiXBNqulV4Rg/edit#
+
 **Facilitator**:
 12/7 - Joel
 12/14 - Ethan
