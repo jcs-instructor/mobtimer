@@ -12,15 +12,15 @@ class MobSocketClient {
     this._webSocket = webSocket;
   }
 
-  static openSocketSync(url: string, trackMessages: boolean = false): MobSocketClient {
+  static openSocketSync(url: string): MobSocketClient {
     const socket = new W3CWebSocket(url);
-    const mobSocketClient = new MobSocketClient(socket, trackMessages);
+    const mobSocketClient = new MobSocketClient(socket);
     return mobSocketClient;
   }
 
-  static async openSocket(url: string, trackMessages: boolean = false): Promise<MobSocketClient> {
+  static async openSocket(url: string): Promise<MobSocketClient> {
     const socket = new W3CWebSocket(url);
-    const mobSocketClient = new MobSocketClient(socket, trackMessages);
+    const mobSocketClient = new MobSocketClient(socket);
     await waitForSocketState(
       mobSocketClient.webSocket,
       mobSocketClient.webSocket.OPEN

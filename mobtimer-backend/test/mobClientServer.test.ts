@@ -5,7 +5,7 @@ import { waitForLastResponse, waitForSocketState } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { MobSocketClient } from "mobtimer-api";
+import { MobSocketTestClient } from "mobtimer-api";
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -248,7 +248,7 @@ describe("WebSocket Server", () => {
 });
 
 async function openSocket(url: string) {
-  return await MobSocketClient.openSocket(url, true);
+  return await MobSocketTestClient.openSocket(url);
 }
 
 async function cleanUp(client: MobSocketClient) {
