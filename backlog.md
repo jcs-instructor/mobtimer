@@ -4,44 +4,18 @@ See also: [Reminders](./reminders.md)
 
 ## Timer - Minimum Deployable Features
 
-- [x] Migrate Agenda and Reminders on Google Docs to md file
-- [x] Discuss/fix Ethan's keyboard
-
-- [x] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
-
-  - [x] ErrorResponse
-  - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
-  - [x] SuccessfulResponse (contains mobState and is used for mob)
-  - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
-  - [x] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
-  - [x] Review after-hours changes: Joel removed errorResponses from successfulResponses and created errorReceived boolean (similar to echoReceived boolean)
-
-- [x] Join mob
-- [x] Discuss HyperApp, ferp, mrbarry VS React
-
-Next
+Refactor/Improve Later
 
 - [ ] Low priority. Rename testUtils to clientUtils or just combine (probably the latter)
 - [ ] Low priority. Ethan after hours:
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
-- [x] Consider rule for when use class versus function.
-- [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [x] Start
-  - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
-  - [x] Pause & Resume
-  - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
-  - [x] Hyperapp - try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
-  - [x] Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
-  - [x] Aborted: Implement Hyperapp front end basic features: - [x] Open socket (import mob client, etc.) - [x] Configure - [x] Remove hello.ts
-  - [x] Remove Hyperapp
-  - [x] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
-  - [x] Implement trackMessages boolean in mob socket client (so that the client can turn on/off storing messages from the server).
-  - [x] Make scripts more stable (by using copy vs. link - and/or order of things; currently startAll works the 2nd time after a change to a ts file in mobtimer-api when using cp - might be same with link - Ethan to look into this)
-  - [x] Display state: ready, running, paused
-  - [x] UI features (without styling) for all server-exposed methods - using Hyperapp
-- [x] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
+
+Next
+
 - [ ] Refactor. Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
+
+- [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] - Put action button on separate page that is shown after you join mob
   - [ ] - Modify ActionButton when time elapses
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
@@ -127,6 +101,39 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed
+
+2022-12-15 (completed before this date)
+
+- UI features in React:
+  - [x] Start
+  - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
+  - [x] Pause & Resume
+  - [x] Review after hours changes, e.g., added mobTimer.toggle() functionality (in all layers)
+  - [x] Hyperapp - try in CodePen (see bottom of our Google doc for what we did: https://docs.google.com/document/d/1gzzswKnbKsBagzEYMWYW2beelGWjuQzlxRzXQ8OcZhU/edit#)
+  - [x] Continue with Hyperapp tutorial (implementing in mobtimer-frontend-hyperapp)
+  - [x] Aborted: Implement Hyperapp front end basic features: - [x] Open socket (import mob client, etc.) - [x] Configure - [x] Remove hello.ts
+  - [x] Remove Hyperapp
+  - [x] WARNING: If keeping React Frontend, need to add back "frontend start" as a dependency in startAll !!!!
+  - [x] Implement trackMessages boolean in mob socket client (so that the client can turn on/off storing messages from the server).
+  - [x] Make scripts more stable (by using copy vs. link - and/or order of things; currently startAll works the 2nd time after a change to a ts file in mobtimer-api when using cp - might be same with link - Ethan to look into this)
+  - [x] Display state: ready, running, paused
+  - [x] UI features (without styling) for all server-exposed methods - using Hyperapp
+
+- [x] Decide on HyperApp, ferp, mrbarry vs. React [Pros and Cons](./pros-and-cons.md)
+- [x] Migrate Agenda and Reminders on Google Docs to md file
+- [x] Discuss/fix Ethan's keyboard
+
+- [x] Strong Types: ALSO ADD STRONG TYPES FOR ERROR RESPONSE AND ECHO RESPONSE (use sendJSON function, etc.) IN MOB SOCKET SERVER (SIMILAR TO WHAT WE DID IN OUR WAIT FOR ECHO RESPONSE FUNCTION - EVERYWHERE WITH JSON.PARSE USE EXPLICIT TYPE)
+
+  - [x] ErrorResponse
+  - [x] EchoResponse (Note: Joel finished this after time ran out at 5:30 on Thurs. 11/10/22)
+  - [x] SuccessfulResponse (contains mobState and is used for mob)
+  - [x] Review after-hours changes (EchoResponse & SuccessfulResponse) with Ethan if he wants to
+  - [x] Joel: remove errorResponses from successfulResponses (or if it makes sense, something else)
+  - [x] Review after-hours changes: Joel removed errorResponses from successfulResponses and created errorReceived boolean (similar to echoReceived boolean)
+
+- [x] Join mob
+- [x] Discuss HyperApp, ferp, mrbarry VS React
 
 2022-11-10
 
