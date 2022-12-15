@@ -9,14 +9,14 @@ type FormParameters = {
 const JoinMobForm = ({ mobName, setMobName, submitJoinMobRequest }: FormParameters) => {
 
     return (
-        <form onSubmit={submitJoinMobRequest}>
+        <form>
             <input
                 value={mobName}
                 onChange={(e) => setMobName(e.target.value)}
                 type="text"
                 placeholder="Enter a Mob Name"
             />
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={() => submitJoinMobRequest}>Submit</button>
         </form>
     )
 }
