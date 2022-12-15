@@ -14,7 +14,7 @@ import logo from './logo.svg';
 // todo: unhardcode port
 const port = 4000;
 const url = `ws://localhost:${port}`;
-const client = MobSocketClient.openSocketSync(url, false);
+const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
   const [mobName, setMobName] = useState('');
