@@ -12,6 +12,7 @@ import ActionButton from './components/ActionButton';
 import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
+import JoinMobForm from './components/JoinMobForm';
 import logo from './logo.svg';
 
 // todo: unhardcode port
@@ -23,27 +24,7 @@ const App = () => {
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
-  const navigate = useNavigate();
-
-  type FormParameters = {
-    mobName: string;
-    setMobName: (mobName: string) => void;
-    submitJoinMobRequest: (event: React.FormEvent<HTMLFormElement>) => void;
-  }
-
-  const JoinMobForm = ({ mobName, setMobName, submitJoinMobRequest }: FormParameters) => {
-    return (
-      <form>
-        <input
-          value={mobName}
-          onChange={(e) => setMobName(e.target.value)}
-          type="text"
-          placeholder="Enter a Mob Name"
-        />
-        <button type="submit" onClick={() => submitJoinMobRequest}>Submit</button>
-      </form>
-    )
-  }
+  // const navigate = useNavigate();
 
   const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
@@ -64,7 +45,7 @@ const App = () => {
     client.joinMob(mobName);
     console.log('joined mob', mobName, client);
 
-    navigate('/home');
+    // navigate('/home');
   }
 
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
