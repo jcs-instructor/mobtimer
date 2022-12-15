@@ -13,17 +13,15 @@ Refactor/Improve Later
 
 Next
 
-- [x] Refactor. Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
-
 - [ ] Investigate regeneration of d.ts files
 - [ ] See if index.ts can be automated. (Alternative: maybe can use * for imports/exports in index.ts - more verbose, but maybe OK/better)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [ ] - Put action button on separate page that is shown after you join mob
-  - [ ] - Modify ActionButton when time elapses
+  - [ ] Put action button on separate page that is shown after you join mob
+  - [ ] Modify ActionButton when time elapses
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] - Display time
-  - [ ] - Update (min. remaining)
+  - [ ] Display time
+  - [ ] Update (min. remaining)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
@@ -33,7 +31,7 @@ Next
 
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
-- [ ] - Create a timer
+- [ ] Create a timer
   * [ ] UI - see Example React Source Code in resources.md)
   * [ ] Hook up timer to websocket server
   * [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
@@ -104,6 +102,10 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed
+
+2022-12-15
+
+- [x] Refactor. Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
 
 2022-12-15 (completed before this date)
 
