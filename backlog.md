@@ -14,10 +14,10 @@ Refactor/Improve Later
 Next
 
 - [ ] Investigate regeneration of d.ts files
-- [ ] See if index.ts can be automated. (Alternative: maybe can use * for imports/exports in index.ts - more verbose, but maybe OK/better)
+- [ ] See if index.ts can be automated. (Alternative: maybe can use \* for imports/exports in index.ts - more verbose, but maybe OK/better)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [ ] Put action button on separate page that is shown after you join mob
+  - [ ] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
   - [ ] Modify ActionButton when time elapses
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Display time
@@ -32,13 +32,13 @@ Next
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
 - [ ] Create a timer
-  * [ ] UI - see Example React Source Code in resources.md)
-  * [ ] Hook up timer to websocket server
-  * [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
-  * [ ] Cancel
-  * [ ] UI - Start
-  * [ ] UI - Pause
-  * [ ] UI - Restart
+  - [ ] UI - see Example React Source Code in resources.md)
+  - [ ] Hook up timer to websocket server
+  - [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
+  - [ ] Cancel
+  - [ ] UI - Start
+  - [ ] UI - Pause
+  - [ ] UI - Restart
 - - [ ] Deploy (as single repo)
 
 ## Split Repos and Deploy
@@ -110,6 +110,7 @@ Next
 2022-12-15 (completed before this date)
 
 - UI features in React:
+
   - [x] Start
   - [x] Read up on useState in React - e.g., why don't we need setLabel in ActionButton.tsx?
   - [x] Pause & Resume
