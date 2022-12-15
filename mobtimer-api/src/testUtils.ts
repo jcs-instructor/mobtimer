@@ -1,6 +1,5 @@
 // todo: this file is called "testUtils" but if used for non-test code also, reconsider name
 
-import { MobTimerResponse } from "./mobTimerResponse";
 import { MobSocketTestClient } from "./mobSocketTestClient";
 
 /**
@@ -41,8 +40,4 @@ async function waitForEcho(socket: MobSocketTestClient): Promise<void> {
     }, 10);
     timeout.unref();
   });
-}
-
-export function convertToMobTimerResponse(response: string): MobTimerResponse {
-  return JSON.parse(response) as MobTimerResponse;
 }

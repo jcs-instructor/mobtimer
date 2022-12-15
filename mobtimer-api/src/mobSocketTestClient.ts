@@ -1,5 +1,5 @@
-import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
-import { SuccessfulResponse } from "./mobTimerResponse";
+import { waitForSocketState } from "./testUtils";
+import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
@@ -18,7 +18,7 @@ class MobSocketTestClient extends MobSocketClient {
   }
 
   private trackMessage(message: { data: string }) {
-    const responseObject = convertToMobTimerResponse(message.data);
+    const responseObject = this.convertToMobTimerResponse(message.data);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -34,6 +34,10 @@ class MobSocketTestClient extends MobSocketClient {
         break;
       }
     }
+  }
+
+  private convertToMobTimerResponse(response: string): MobTimerResponse {
+    return JSON.parse(response) as MobTimerResponse;
   }
 
   static openSocketSync(url: string): MobSocketTestClient {
