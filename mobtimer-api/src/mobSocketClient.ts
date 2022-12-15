@@ -6,37 +6,10 @@ import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 class MobSocketClient {
-  private _successfulResponses: string[] = [];
-  private _echoReceived: boolean = false;
-  private _errorReceived: boolean = false;
   private _webSocket: WebSocketType;
 
-  constructor(webSocket: WebSocketType, trackMessages: boolean = false) {
+  constructor(webSocket: WebSocketType) {
     this._webSocket = webSocket;
-    this._webSocket.onmessage = (message) => {
-      if (trackMessages) {
-        this.trackMessage(message);
-      }
-    };
-  }
-
-  private trackMessage(message: { data: string }) {
-    const responseObject = convertToMobTimerResponse(message.data);
-    switch (responseObject.actionInfo.action) {
-      case Action.Echo: {
-        this._echoReceived = true;
-        break;
-      }
-      case Action.InvalidRequestError: {
-        this._errorReceived = true;
-        break;
-      }
-      default: {
-        console.log("pushing message.data", message.data);
-        this._successfulResponses.push(message.data);
-        break;
-      }
-    }
   }
 
   static openSocketSync(url: string, trackMessages: boolean = false): MobSocketClient {
@@ -87,24 +60,6 @@ class MobSocketClient {
 
   private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
     this._webSocket.send(JSON.stringify(request));
-  }
-
-  public get lastSuccessfulResponse(): SuccessfulResponse {
-    return JSON.parse(
-      this._successfulResponses.at(-1) || ""
-    ) as SuccessfulResponse;
-  }
-
-  public get successfulResponses(): string[] {
-    return [...this._successfulResponses];
-  }
-
-  public get echoReceived(): boolean {
-    return this._echoReceived;
-  }
-
-  public get errorReceived(): boolean {
-    return this._errorReceived;
   }
 
   public get webSocket(): WebSocketType {
