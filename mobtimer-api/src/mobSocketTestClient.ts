@@ -4,7 +4,7 @@ import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { MobSocketClient } from "mobtimer-api";
+import { MobSocketClient } from "./mobSocketClient";
 
 class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];

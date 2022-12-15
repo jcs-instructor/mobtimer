@@ -1,7 +1,7 @@
 // todo: this file is called "testUtils" but if used for non-test code also, reconsider name
 
 import { MobTimerResponse } from "./mobTimerResponse";
-import { MobSocketClient } from "./mobSocketClient";
+import { MobSocketTestClient } from "./mobSocketTestClient";
 
 /**
  * Forces a process to wait until the socket's `readyState` becomes the specified value.
@@ -26,14 +26,12 @@ export function waitForSocketState(
   });
 }
 
-export async function waitForLastResponse(socket: MobSocketClient) {
+export async function waitForLastResponse(socket: MobSocketTestClient) {
   await socket.sendEchoRequest();
   await waitForEcho(socket);
 }
 
-async function waitForEcho(
-  socket: MobSocketClient
-): Promise<void> {
+async function waitForEcho(socket: MobSocketTestClient): Promise<void> {
   return new Promise(function (resolve) {
     const timeout = setTimeout(function () {
       if (socket.echoReceived) {
@@ -48,4 +46,3 @@ async function waitForEcho(
 export function convertToMobTimerResponse(response: string): MobTimerResponse {
   return JSON.parse(response) as MobTimerResponse;
 }
-
