@@ -251,7 +251,7 @@ async function openSocket(url: string) {
   return await MobSocketTestClient.openSocket(url);
 }
 
-async function cleanUp(client: MobSocketClient) {
+async function cleanUp(client: MobSocketTestClient) {
   await waitForLastResponse(client);
   await client.closeSocket();
 }

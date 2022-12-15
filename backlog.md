@@ -13,7 +13,10 @@ Refactor/Improve Later
 
 Next
 
-- [ ] Refactor. Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
+- [x] Refactor. Extend MobSocketTestClient from MobSocketClient, remove boolean for tracking, move onMessage and related code (lastResponse etc) from MobSocketClient to MobSocketTestClient
+
+- [ ] Investigate regeneration of d.ts files
+- [ ] See if index.ts can be automated. (Alternative: maybe can use * for imports/exports in index.ts - more verbose, but maybe OK/better)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] - Put action button on separate page that is shown after you join mob

@@ -1,5 +1,4 @@
-import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
-import { SuccessfulResponse } from "./mobTimerResponse";
+import { waitForSocketState } from "./testUtils";
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";

@@ -1,7 +1,6 @@
 import { convertToMobTimerResponse, waitForSocketState } from "./testUtils";
 import { SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
@@ -35,6 +34,22 @@ class MobSocketTestClient extends MobSocketClient {
         break;
       }
     }
+  }
+
+  static openSocketSync(url: string): MobSocketTestClient {
+    const socket = new W3CWebSocket(url);
+    const mobSocketTestClient = new MobSocketTestClient(socket);
+    return mobSocketTestClient;
+  }
+
+  static async openSocket(url: string): Promise<MobSocketTestClient> {
+    const socket = new W3CWebSocket(url);
+    const mobSocketTestClient = new MobSocketTestClient(socket);
+    await waitForSocketState(
+      mobSocketTestClient.webSocket,
+      mobSocketTestClient.webSocket.OPEN
+    );
+    return mobSocketTestClient;
   }
 
   public get lastSuccessfulResponse(): SuccessfulResponse {
