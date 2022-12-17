@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
@@ -38,9 +34,7 @@ const App = () => {
 
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
-    console.log('joined mob', mobName, client);
-
-    // navigate('/home');
+    console.log('joined mob', mobName, client);    
   }
 
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
