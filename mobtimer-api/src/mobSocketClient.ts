@@ -50,6 +50,10 @@ class MobSocketClient {
     });
   }
 
+  public waitForSocketState(state: number): Promise<void> {
+    return MobSocketClient.waitForSocketState(this._webSocket, state);
+  }
+
   sendEchoRequest() {
     this._sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
   }
@@ -90,7 +94,7 @@ class MobSocketClient {
 
   async closeSocket() {
     this.webSocket.close();
-    await MobSocketClient.waitForSocketState(this.webSocket, this.webSocket.CLOSED);
+    await this.waitForSocketState(this.webSocket.CLOSED);
   }
 }
 

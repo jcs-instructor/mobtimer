@@ -50,10 +50,7 @@ class MobSocketTestClient extends MobSocketClient {
   static async openSocket(url: string): Promise<MobSocketTestClient> {
     const socket = new W3CWebSocket(url);
     const mobSocketTestClient = new MobSocketTestClient(socket);
-    await MobSocketClient.waitForSocketState(
-      mobSocketTestClient.webSocket,
-      mobSocketTestClient.webSocket.OPEN
-    );
+    await mobSocketTestClient.waitForSocketState(mobSocketTestClient.webSocket.OPEN);
     return mobSocketTestClient;
   }
 

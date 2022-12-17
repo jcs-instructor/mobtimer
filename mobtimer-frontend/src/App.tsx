@@ -31,7 +31,7 @@ const App = () => {
       setLabel(label);
     };
 
-    await MobSocketClient.waitForSocketState(client.webSocket, WebSocket.OPEN);
+    await client.waitForSocketState(WebSocket.OPEN);
     client.joinMob(mobName);
     console.log('joined mob', mobName, client);    
   }
