@@ -1,15 +1,23 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 type FormParameters = {
     mobName: string;
     setMobName: (mobName: string) => void;
-    submitJoinMobRequest: (event: React.FormEvent<HTMLFormElement>) => void;
+    submitJoinMobRequest: () => void;
 }
 
 const JoinMobForm = ({ mobName, setMobName, submitJoinMobRequest }: FormParameters) => {
+    const navigate = useNavigate();
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        submitJoinMobRequest();
+        navigate(`/${mobName}`);
+    }
 
     return (
-        <form onSubmit={submitJoinMobRequest}>
+        <form onSubmit={(event) => onSubmit(event)}>
             <input
                 value={mobName}
                 onChange={(e) => setMobName(e.target.value)}

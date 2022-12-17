@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter as Router,
-  Routes,
+  BrowserRouter,
   Route,
-  Link
+  Routes,
 } from "react-router-dom";
-import JoinMobForm from './components/JoinMobForm';
-import JoinMobHeading from './components/JoinMobHeading';
 import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
@@ -14,8 +11,8 @@ import ActionButton from './components/ActionButton';
 import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
+import JoinMobForm from './components/JoinMobForm';
 import logo from './logo.svg';
-
 
 // todo: unhardcode port
 const port = 4000;
@@ -23,13 +20,12 @@ const url = `ws://localhost:${port}`;
 const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
+
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
 
-  const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Preventing the page from reloading
-    event.preventDefault();
+  const submitJoinMobRequest = async () => {
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
@@ -43,24 +39,23 @@ const App = () => {
     await waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
     console.log('joined mob', mobName, client);
+
+    // navigate('/home');
   }
 
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Preventing the page from reloading
+    // Requred when using onSubmit to prevent the page from reloading page
+    // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    console.log('submitAction', client);
     Controller.toggle(client, status);
   }
 
-  return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <JoinMobHeading />
-      <JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />
-      <ActionButton label={label} submitAction={submitAction} />
-    </div>
-  );
-};
+  return <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobName" element={<ActionButton label={label} submitAction={submitAction} />} />
+    </Routes>
+  </BrowserRouter>;
+}
 
 export default App;
-
