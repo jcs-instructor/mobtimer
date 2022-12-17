@@ -6,6 +6,9 @@ React Router
 - [x] When submit button, navigate(/:id)
 - [x] Create route for /:id
 - [x] Read mobName parameter and display in ActionButton
+- [ ] Support joining multiple mobs from UI. 
+      - Currently after joining a mob on the home page, if you try to join another mob, you get to a page with a non-working action button. 
+      - Also, even if you just join one mob, such as 'abc1' and then try to go back to the home page, if you go back to the /abc1 page, the action button doesn't work correctly.
 - [ ] Create new component MobTimer.tsx which includes ActionButton and displays mobName.
   - [ ] Route to MobTimer instead of MobTimer
 - [ ] Refactoring:
