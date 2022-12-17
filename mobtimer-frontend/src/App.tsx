@@ -21,20 +21,6 @@ const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
 
-  // element={<Component/>}
-  return (
-    <>
-      <BrowserRouter>
-        {MainRoutes()}
-      </BrowserRouter>
-    </>
-  );
-
-};
-
-export default App;
-
-function MainRoutes() {
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
@@ -58,15 +44,18 @@ function MainRoutes() {
   }
 
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Preventing the page from reloading
+    // Requred when using onSubmit to prevent the page from reloading page
+    // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    console.log('submitAction', client);
     Controller.toggle(client, status);
   }
 
-  return <Routes>
-    <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
-    <Route path="/:mobName" element={<ActionButton label={label} submitAction={submitAction} />} />
-  </Routes>;
+  return <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobName" element={<ActionButton label={label} submitAction={submitAction} />} />
+    </Routes>
+  </BrowserRouter>;
 }
 
+export default App;
