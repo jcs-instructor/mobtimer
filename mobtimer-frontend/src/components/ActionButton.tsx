@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 type FormParameters = {
     label: string;
@@ -6,11 +7,15 @@ type FormParameters = {
 }
 
 const ActionButton = ({ label, submitAction }: FormParameters) => {
+    const { mobName } = useParams();
 
     return (
-        <form onSubmit={submitAction}>
-            <button type="submit">{label}</button>
-        </form>
+        <>
+            <p>{mobName}</p>
+            <form onSubmit={submitAction}>
+                <button type="submit">{label}</button>
+            </form>
+        </>
     )
 }
 
