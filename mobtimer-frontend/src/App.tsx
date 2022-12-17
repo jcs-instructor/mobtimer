@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  useNavigate
 } from "react-router-dom";
 import { MobSocketClient } from 'mobtimer-api';
 import { waitForSocketState } from 'mobtimer-api';
@@ -21,16 +20,26 @@ const url = `ws://localhost:${port}`;
 const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
+
+  // element={<Component/>}
+  return (
+    <>
+      <BrowserRouter>
+        {MainRoutes()}
+      </BrowserRouter>
+    </>
+  );
+
+};
+
+export default App;
+
+function MainRoutes() {
   const [mobName, setMobName] = useState('');
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
-  // const navigate = useNavigate();
 
-  const submitJoinMobRequest = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Preventing the page from reloading
-    event.preventDefault();
-
-    // Listener
+  const submitJoinMobRequest = async () => {
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
@@ -55,28 +64,9 @@ const App = () => {
     Controller.toggle(client, status);
   }
 
-  // return (
-  //   <div>
-  //     <img src={logo} className="App-logo" alt="logo" />
-  //     <JoinMobHeading />
-  //     <JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />
-  //     <ActionButton label={label} submitAction={submitAction} />
-  //   </div>
-  // );
-
-  // element={<Component/>}
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
-          <Route path="/:mobName" element={<ActionButton label={label} submitAction={submitAction} />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
-
-};
-
-export default App;
+  return <Routes>
+    <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
+    <Route path="/:mobName" element={<ActionButton label={label} submitAction={submitAction} />} />
+  </Routes>;
+}
 
