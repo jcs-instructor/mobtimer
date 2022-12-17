@@ -1,4 +1,3 @@
-import { waitForSocketState } from "./testUtils";
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
 import { WebSocketType } from "./webSocketType";
@@ -9,10 +8,12 @@ class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
+  private _socket: WebSocketType;
 
   constructor(webSocket: WebSocketType) {
     super(webSocket);
-    webSocket.onmessage = (message) => {
+    this._socket = webSocket;
+    this._socket.onmessage = (message) => {
       this.trackMessage(message);
     };
   }
@@ -49,11 +50,29 @@ class MobSocketTestClient extends MobSocketClient {
   static async openSocket(url: string): Promise<MobSocketTestClient> {
     const socket = new W3CWebSocket(url);
     const mobSocketTestClient = new MobSocketTestClient(socket);
-    await waitForSocketState(
+    await MobSocketClient.waitForSocketState(
       mobSocketTestClient.webSocket,
       mobSocketTestClient.webSocket.OPEN
     );
     return mobSocketTestClient;
+  }
+
+  public async waitForLastResponse() {
+    await super.sendEchoRequest();
+    await this.waitForEcho();
+  }
+  
+  async waitForEcho(): Promise<void> {
+    const client = this;
+    return new Promise(function (resolve) {
+      const timeout = setTimeout(function () {
+        if (client.echoReceived) {
+          resolve();
+        }
+        client.waitForEcho().then(resolve);
+      }, 10);
+      timeout.unref();
+    });
   }
 
   public get lastSuccessfulResponse(): SuccessfulResponse {

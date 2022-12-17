@@ -6,7 +6,7 @@ See also: [Reminders](./reminders.md)
 
 Refactor/Improve Later
 
-- [ ] Low priority. Rename testUtils to clientUtils or just combine (probably the latter)
+- [x] Delete testUtils.ts, migrating functions to appropriate files: mobSocketClient and mobSocketTestClient
 - [ ] Low priority. Ethan after hours:
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution

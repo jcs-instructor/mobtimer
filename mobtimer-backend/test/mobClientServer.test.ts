@@ -1,7 +1,6 @@
 import { startMobServer } from "../src/server/mobSocketServer";
 import { MobTimer } from "../src/mobTimer";
 import { Status, TimeUtils, Action } from "mobtimer-api";
-import { waitForLastResponse, waitForSocketState } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
@@ -252,6 +251,6 @@ async function openSocket(url: string) {
 }
 
 async function cleanUp(client: MobSocketTestClient) {
-  await waitForLastResponse(client);
+  await client.waitForLastResponse();
   await client.closeSocket();
 }

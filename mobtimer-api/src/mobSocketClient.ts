@@ -1,4 +1,3 @@
-import { waitForSocketState } from "./testUtils";
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
@@ -20,11 +19,35 @@ class MobSocketClient {
   static async openSocket(url: string): Promise<MobSocketClient> {
     const socket = new W3CWebSocket(url);
     const mobSocketClient = new MobSocketClient(socket);
-    await waitForSocketState(
+    await MobSocketClient.waitForSocketState(
       mobSocketClient.webSocket,
       mobSocketClient.webSocket.OPEN
     );
     return mobSocketClient;
+  }
+
+
+  /**
+ * Forces a process to wait until the socket's `readyState` becomes the specified value.
+ * @param socket The socket whose `readyState` is being watched
+ * @param state The desired `readyState` for the socket
+ */
+  static waitForSocketState(
+    socket: { readyState: number },
+    state: number
+  ): Promise<void> {
+    const client = this;
+    return new Promise(function (resolve) {
+      const timeout = setTimeout(function () {
+        if (socket.readyState === state) {
+          resolve();
+        } else {
+          MobSocketClient.waitForSocketState(socket, state).then(resolve);
+        }
+      });
+      // todo: timeout.unref() fails when running from frontend; why?
+      // timeout.unref();
+    });
   }
 
   sendEchoRequest() {
@@ -67,7 +90,7 @@ class MobSocketClient {
 
   async closeSocket() {
     this.webSocket.close();
-    await waitForSocketState(this.webSocket, this.webSocket.CLOSED);
+    await MobSocketClient.waitForSocketState(this.webSocket, this.webSocket.CLOSED);
   }
 }
 

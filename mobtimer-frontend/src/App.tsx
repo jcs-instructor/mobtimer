@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MobSocketClient } from 'mobtimer-api';
-import { waitForSocketState } from 'mobtimer-api';
 import './App.css';
 import ActionButton from './components/ActionButton';
 import { MobTimerResponses } from 'mobtimer-api';
@@ -32,7 +31,7 @@ const App = () => {
       setLabel(label);
     };
 
-    await waitForSocketState(client.webSocket, WebSocket.OPEN);
+    await MobSocketClient.waitForSocketState(client.webSocket, WebSocket.OPEN);
     client.joinMob(mobName);
     console.log('joined mob', mobName, client);    
   }
