@@ -14,31 +14,19 @@
 				"panel": "new"
 			},
 			"dependsOn": [
+				"api generate exports watch",
+				"api compile watch",
+				"api symlink watch",
+				"api symlink watch",
 				"frontend start watch",
 				"backend start watch",
-				"api compile watch",
-				"api symlink watch"
 			],
 			"problemMatcher": []
 		},
 		{
-			"label": "backend start watch",
+			"label": "api generate exports watch",
 			"type": "shell",
-			"command": "./scripts/start-backend-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "frontend start watch",
-			"type": "shell",
-			"command": "./scripts/start-frontend-watch.sh",
+			"command": "./scripts/generate-mobtimer-api-exports-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -67,6 +55,34 @@
 			"label": "api symlink watch",
 			"type": "shell",
 			"command": "./scripts/symlink-mobtimer-api-watch.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "backend start watch",
+			"type": "shell",
+			"command": "./scripts/start-backend-watch.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "frontend start watch",
+			"type": "shell",
+			"command": "./scripts/start-frontend-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
