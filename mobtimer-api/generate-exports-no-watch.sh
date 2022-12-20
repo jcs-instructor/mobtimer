@@ -12,8 +12,8 @@ for file in src/*.ts; do
     continue
   fi
   filename=$(basename "$file" .ts)
+  echo here
   echo "export * from \"./${filename}\"" >> $destfile_temp
-  cat $destfile_temp
 done
 cmp $destfile_ts $destfile_temp > diff.txt
 if [ -s diff.txt ]; then
