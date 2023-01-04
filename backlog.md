@@ -11,13 +11,14 @@ Refactor/Improve Later
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
 
-Next
+- [ ] Ethan - between sessions:
+  - [ ] Automate index.ts
+    - [ ] import and export exports.ts
+    - [ ] get rid of most export statements from index.ts (exclude MobTimer something)
+  - [ ] Check if we have an extra symlink watch
+  - [ ] Investigate regeneration of d.ts files - can't reproduce
 
-- [ ] Automate index.ts
-  - [ ] import and export exports.ts
-  - [ ] get rid of most export statements from index.ts (exclude MobTimer something)
-- [ ] Check if we have an extra symlink watch
-- [ ] Investigate regeneration of d.ts files - can't reproduce
+Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
