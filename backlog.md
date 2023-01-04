@@ -21,8 +21,12 @@ Refactor/Improve Later
 Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [ ] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
-  - [ ] Modify ActionButton when time elapses
+  - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
+  - [x] Be able to access a mob via the URL (instead of the text box)
+  - [ ] Fix bug(s) in accessing a mob via the URL (instead of the text box)
+    - [ ] See todo comments in Room.tsx
+    - [ ] remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx
+  - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Display time
   - [ ] Update (min. remaining)
