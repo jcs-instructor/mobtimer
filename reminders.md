@@ -25,10 +25,11 @@ Ethan:
 - Retro: https://docs.google.com/document/d/1EKo20gHXQsAFqiAw56kNISPx170u0RLXiXBNqulV4Rg/edit#
 
 **Facilitator**:
-12/7 - Joel
-12/14 - Ethan
-12/21 - Joel
 ...
+1/4/2023 - Ethan
+12/21/2022 - Joel
+12/14/2022 - Ethan
+12/7/2022 - Joel
 
 **Warning**:
 
