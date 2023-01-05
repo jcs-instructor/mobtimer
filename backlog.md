@@ -8,6 +8,7 @@ Refactor/Improve Later
 
 - [x] Delete testUtils.ts, migrating functions to appropriate files: mobSocketClient and mobSocketTestClient
 - [ ] Low priority. Ethan after hours:
+
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
 
@@ -25,6 +26,10 @@ Next
   - [x] Be able to access a mob via the URL (instead of the text box)
   - [ ] Fix bug(s) in accessing a mob via the URL (instead of the text box)
     - [ ] See todo comments in Room.tsx
+    - [ ] Add useEffect to Room.tsx
+    - [ ] Guard for setMob function if mob is empty
+    - [ ] Add " as { mobName: string } " after useParams()
+    - [ ] Create variable mobNameLower - otherwise, doesn't work!
     - [ ] remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
