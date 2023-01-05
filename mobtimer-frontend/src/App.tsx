@@ -17,13 +17,15 @@ const client = MobSocketClient.openSocketSync(url);
 const App = () => {
 
   const [mobName, setMobName] = useState('');
+  const [loaded, setLoaded] = useState(false);
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
 
   const submitJoinMobRequest = async () => {
-    if (!mobName) {
+    if (!mobName || loaded) {
       return;
     };
+    setLoaded(true);
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
