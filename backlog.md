@@ -6,7 +6,7 @@ See also: [Reminders](./reminders.md)
 
 Refactor/Improve Later
 
-- [x] Delete testUtils.ts, migrating functions to appropriate files: mobSocketClient and mobSocketTestClient
+- [ ] Rename folder mobtimer-api as mobtimer-shared (since it contains shared logic in addition to api)
 - [ ] Low priority. Ethan after hours:
 
   - [ ] 2nd crack on start scripts, think about class vs function
@@ -32,9 +32,12 @@ Next
     - [x] Create variable mobNameLower - otherwise, doesn't work!
   - [x] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
   - [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
+  - [ ] Display time remaining
+      - [ ] Move MobTimer class to mobtimer-api
+      - [ ] Change Timer.tsx to use MobTimer
+      - [ ] Move timer from App.tsx to Room.tsx
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] Display time remaining
   - [ ] Update (min. remaining)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob

@@ -6,7 +6,7 @@ const Timer = () => {
     const [second, setSecond] = useState(0);
     const [minute, setMinute] = useState(0);
 
-    const countdownMilliseconds = 2 * 60 * 1000; // 2 minutes - todo: unhardcode
+    const countdownMilliseconds = 61 * 1000; // todo: unhardcode
     const endTime = Date.now() + countdownMilliseconds;
 
     const setTheTimer = () => {
