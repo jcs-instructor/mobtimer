@@ -8,6 +8,7 @@ import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
 import Timer from './components/Timer';
+import { MobTimer } from './mobTimer';
 import logo from './logo.svg';
 
 // todo: unhardcode port
