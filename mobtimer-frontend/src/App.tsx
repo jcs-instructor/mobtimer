@@ -22,8 +22,7 @@ const App = () => {
 
   const submitJoinMobRequest = async () => {    
     if (!mobName) { 
-      console.log('mobName is empty');
-      return;
+      return; 
     }; 
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;

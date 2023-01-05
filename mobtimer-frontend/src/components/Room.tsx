@@ -13,7 +13,7 @@ const Room = ({ label, setMobName, submitAction, submitJoinMobRequest }: FormPar
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();
     useEffect(
         () => {
-            setMobName(mobNameLowerCase || "");
+            setMobName(mobNameLowerCase);            
             submitJoinMobRequest();
         },
         [mobNameLowerCase, setMobName, submitJoinMobRequest]

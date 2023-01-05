@@ -31,6 +31,7 @@ Next
     - [x] Add " as { mobName: string } " after useParams()
     - [x] Create variable mobNameLower - otherwise, doesn't work!
   - [ ] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
+  - [ ] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Display time
