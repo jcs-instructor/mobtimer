@@ -81,6 +81,16 @@ export class MobTimer {
     } as MobState;
   }
 
+  // todo: change to set state - where can set status, durationMinutes, secondsRemaining
+  setSecondsRemaining(secondsRemaining: number) {
+    // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
+    // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
+    const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
+    this._previouslyAccumulatedElapsedSeconds = (durationSeconds - secondsRemaining);
+    this._whenStartedInSeconds = this._nowInSecondsFunc() - this._previouslyAccumulatedElapsedSeconds;
+    console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
+  }
+
   public get status(): Status {
     // if (this._whenStartedInSeconds === 0) {
     //   return Status.Ready;
@@ -123,15 +133,6 @@ export class MobTimer {
         (this._nowInSecondsFunc() - this._whenStartedInSeconds)
       );
     }
-  }
-
-  setSecondsRemaining(secondsRemaining: number) {
-    // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
-    // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
-    const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
-    this._previouslyAccumulatedElapsedSeconds = (durationSeconds - secondsRemaining);
-
-    console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
   }
   
   public get durationMinutes(): number {

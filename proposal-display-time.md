@@ -1,0 +1,6 @@
+- [ ] Set status and durationMinutes in frontend mobtimer when get message (already set secondsRemaining); change setSecondsRemaining to setState in MobTimer
+- [ ] When get a message, restart the Timer.tsx interval
+- [ ] Change Timer.tsx to use secondsRemaining & setSecondsRemaining (not minutes & setMinutes and seconds & setSeconds)
+- [ ] Deduplicate 2 copies of MobTimer (newest should be in frontend) & move MobTimer class to mobtimer-api (shared)
+- [ ] Change Timer.tsx to use MobTimer
+- [ ] Move timer from App.tsx to Room.tsx
