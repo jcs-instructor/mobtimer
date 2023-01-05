@@ -33,6 +33,8 @@ const App = () => {
       console.log('status', response.mobState.status, response.mobState.secondsRemaining, response);
       const status = Controller.getStatus(response);
       setStatus(status);
+      const secondsRemaining = Controller.getSecondsRemaining(response);
+      mobTimer.setSecondsRemaining(secondsRemaining);
       const label = Controller.getActionButtonLabel(status);
       setLabel(label);
     };
@@ -46,7 +48,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, mobTimer, status);  
+    Controller.toggle(client, mobTimer, status);
   }
 
   return <BrowserRouter>
