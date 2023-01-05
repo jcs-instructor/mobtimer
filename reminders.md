@@ -1,13 +1,16 @@
 **Start of Session**
 Joel:
 
-- Start TTS meeting timer
+- Start TTS:
+  - Meeting timer
+  - Maybe also: Reminder to stand and stretch (or integrate into meeting timer)
 - Enable participant screen sharing in Zoom
 
 Joel & Ethan:
 
 - Open web timer https://mobti.me/arrested-egg
   - turn on Sounds
+  - add "Stand/Stretch" to names and/or role descriptions (e.g., "Navigator (STAND)")
   - optional: Browser notifications
 - Open VS Code
   - git pull
