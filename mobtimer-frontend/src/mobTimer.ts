@@ -1,6 +1,6 @@
 import { MobState, Status, TimeUtils } from "mobtimer-api";
 
-export class MobTimer {
+export class MobTimer {  
   private _mobName = "";
   private _durationMinutes = 5;
   private _whenStartedInSeconds = 0;
@@ -125,6 +125,24 @@ export class MobTimer {
     }
   }
 
+  setSecondsRemaining(secondsRemaining: number) {
+    // example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
+    //this._previouslyAccumulatedElapsedSeconds
+    //this._whenStartedInSeconds
+
+    const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
+    this._previouslyAccumulatedElapsedSeconds = (durationSeconds - secondsRemaining);
+
+    console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
+
+    // if (!this._running) {
+    // } else {
+    //   this._whenPausedInSeconds = this._nowInSecondsFunc();
+    //   this._previouslyAccumulatedElapsedSeconds +=
+    //     this._whenPausedInSeconds - this._whenStartedInSeconds;  
+    // }
+  }
+  
   public get durationMinutes(): number {
     return this._durationMinutes;
   }
