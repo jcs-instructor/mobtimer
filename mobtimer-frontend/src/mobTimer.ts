@@ -126,21 +126,12 @@ export class MobTimer {
   }
 
   setSecondsRemaining(secondsRemaining: number) {
-    // example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
-    //this._previouslyAccumulatedElapsedSeconds
-    //this._whenStartedInSeconds
-
+    // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
+    // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     this._previouslyAccumulatedElapsedSeconds = (durationSeconds - secondsRemaining);
 
     console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
-
-    // if (!this._running) {
-    // } else {
-    //   this._whenPausedInSeconds = this._nowInSecondsFunc();
-    //   this._previouslyAccumulatedElapsedSeconds +=
-    //     this._whenPausedInSeconds - this._whenStartedInSeconds;  
-    // }
   }
   
   public get durationMinutes(): number {
