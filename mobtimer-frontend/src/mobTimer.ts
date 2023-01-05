@@ -32,9 +32,9 @@ export class MobTimer {
       this._interval = setInterval(() => {
         this.checkReady();
       }, intervalMilliseconds);
-      this._interval.unref();
+      //this._interval.unref();
     }, timeoutMilliseconds - safetyMarginMilliseconds);
-    this._timer.unref();
+    //this._timer.unref();
   }
 
   checkReady() {

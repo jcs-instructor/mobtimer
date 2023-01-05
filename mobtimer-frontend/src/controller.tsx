@@ -1,6 +1,7 @@
 import { Status } from 'mobtimer-api';
 import { MobTimerResponses } from 'mobtimer-api';
 import { MobSocketClient } from 'mobtimer-api';
+import { MobTimer } from './mobTimer';
 
 export function getActionButtonLabel(status: Status) {
   switch (status) {
@@ -15,11 +16,11 @@ export function getStatus(response: MobTimerResponses.SuccessfulResponse) {
   return response.mobState.status;
 }
 
-export function toggle(client: MobSocketClient, status: Status) {
+export function toggle(client: MobSocketClient, mobTimer: MobTimer, status: Status) {
   switch (status) {
-    case Status.Running: { client.pause(); break; }
-    case Status.Paused: { client.resume(); break; }
-    case Status.Ready: { client.start(); break; }
+    case Status.Running: { client.pause(); mobTimer.pause(); break; }
+    case Status.Paused: { client.resume(); mobTimer.resume(); break; }
+    case Status.Ready: { client.start(); mobTimer.start(); break; }
   }
 }
 

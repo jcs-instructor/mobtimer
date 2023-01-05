@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { MobTimer } from '../mobTimer';
+
 const mobTimer = new MobTimer('fred');
-mobTimer.start();
 
 const Timer = () => {
 
     // todo: maybe rename as secondPart and minutePart
     const [second, setSecond] = useState(0);
-    const [minute, setMinute] = useState(0);
-
+    const [minute, setMinute] = useState(0);    
 
     const countdownMilliseconds = 61 * 1000; // todo: unhardcode
     const endTime = Date.now() + countdownMilliseconds;
 
     const setTheTimer = () => {
         const currentTime = new Date().getTime();
-        const distance = mobTimer.secondsRemaining;
+        const distance = mobTimer.secondsRemaining * 1000;
+
+        console.log('distance', distance);
 
         const newMinute = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
         const newSecond = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
@@ -46,3 +47,4 @@ const Timer = () => {
 }
 
 export default Timer;
+export { mobTimer };

@@ -7,8 +7,7 @@ import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
-import Timer from './components/Timer';
-import { MobTimer } from './mobTimer';
+import Timer, { mobTimer } from './components/Timer';
 import logo from './logo.svg';
 
 // todo: unhardcode port
@@ -47,7 +46,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, status);
+    Controller.toggle(client, mobTimer, status);  
   }
 
   return <BrowserRouter>

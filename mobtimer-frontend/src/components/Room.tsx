@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Timer from './Timer';
 
 type FormParameters = {
     label: string;
@@ -22,7 +23,8 @@ const Room = ({ label, setMobName, submitAction, submitJoinMobRequest }: FormPar
     return (
         <>
             <p>{mobNameUrlParam}</p>
-            <form onSubmit={(e) => submitAction(e)}>
+            <Timer />
+            <form onSubmit={(e) => submitAction(e)}>                
                 <button type="submit">{label || "Start (temp hack)"}</button>
             </form>
         </>
