@@ -24,13 +24,13 @@ Next
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
   - [x] Be able to access a mob via the URL (instead of the text box)
-  - [ ] Fix bug(s) in accessing a mob via the URL (instead of the text box)
-    - [ ] See todo comments in Room.tsx
-    - [ ] Add useEffect to Room.tsx
-    - [ ] Guard for setMob function if mob is empty
-    - [ ] Add " as { mobName: string } " after useParams()
-    - [ ] Create variable mobNameLower - otherwise, doesn't work!
-    - [ ] remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx
+  - [x] Fix bug(s) in accessing a mob via the URL (instead of the text box)
+    - [x] See todo comments in Room.tsx
+    - [x] Add useEffect to Room.tsx
+    - [x] Guard for setMob function if mob is empty
+    - [x] Add " as { mobName: string } " after useParams()
+    - [x] Create variable mobNameLower - otherwise, doesn't work!
+  - [ ] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Display time
@@ -52,7 +52,11 @@ Next
   - [ ] UI - Start
   - [ ] UI - Pause
   - [ ] UI - Restart
-- - [ ] Deploy (as single repo)
+  - [ ] Deploy (as single repo)
+- [ ] Handle illegal characters in mobName
+- [ ] Trim mobName (and maybe url encode characters as needed)
+- [ ] Handle trim(mobName) is empty
+- [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
 
 ## Split Repos and Deploy
 

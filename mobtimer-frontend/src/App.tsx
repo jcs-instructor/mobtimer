@@ -20,7 +20,11 @@ const App = () => {
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
 
-  const submitJoinMobRequest = async () => {
+  const submitJoinMobRequest = async () => {    
+    if (!mobName) { 
+      console.log('mobName is empty');
+      return;
+    }; 
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
@@ -46,7 +50,7 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
-      <Route path="/:mobName" element={<Room label={label} setMobName={setMobName} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" element={<Room label={label} setMobName={setMobName} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }
