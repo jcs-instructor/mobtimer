@@ -21,7 +21,13 @@ const App = () => {
   const [status, setStatus] = useState(Status.Ready);
 
   const submitJoinMobRequest = async () => {
+    console.log('submitting join mob request', mobName);
+    if (!mobName) {
+      return;
+    }
+    console.log('okay');
     client.webSocket.onmessage = (message: { data: string; }) => {
+      console.log('here we are');
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
       console.log('status', response.mobState.status, response.mobState.secondsRemaining, response);
@@ -32,8 +38,9 @@ const App = () => {
     };
 
     await client.waitForSocketState(WebSocket.OPEN);
+    console.log('socket is open');
     client.joinMob(mobName);
-    console.log('joined mob', mobName, client);    
+    console.log('joined mob', mobName, 'x', client);
   }
 
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -45,8 +52,8 @@ const App = () => {
 
   return <BrowserRouter>
     <Routes>
-      <Route path="/" element={<JoinMobForm mobName={mobName} setMobName={setMobName} submitJoinMobRequest={submitJoinMobRequest} />} />
-      <Route path="/:mobName" element={<Room label={label} setMobName={setMobName} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/" element={<JoinMobForm />} />
+      <Route path="/:mobNameParam" element={<Room label={label} mobName={mobName} setMobName={setMobName} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

@@ -1,32 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 type FormParameters = {
     label: string;
+    mobName: string;
     setMobName: (mobName: string) => void;
-    submitAction: (event: React.FormEvent<HTMLFormElement>) => void;    
+    submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ label, setMobName, submitAction, submitJoinMobRequest }: FormParameters) => {
-    const { mobName } = useParams();    
-    console.log('mobName', mobName);
-    // todo: execute this when form starts / loads
-    // setMobName(mobName || ""); 
-    // submitJoinMobRequest(); }
+const Room = ({ label, mobName, setMobName, submitAction, submitJoinMobRequest }: FormParameters) => {
+    const { mobNameParam } = useParams();
+    const mobNameParamLower = mobNameParam?.toLowerCase() || '';
+    console.log('mobNameParam', mobNameParamLower, 'x', mobName)
+    useEffect(() => {
+        console.log('here we go', mobNameParamLower, 'x', mobName);
+        console.log('abut to set mob name', mobNameParamLower, 'x', mobName);
+        setMobName(mobNameParamLower);
+        console.log('mobNameParam 2', mobNameParamLower, 'x', mobName)
+        submitJoinMobRequest();
+        console.log('submitted join mob request', mobNameParam, 'x', mobName)
+    }, [mobNameParamLower, mobName, setMobName, submitJoinMobRequest]);
 
-    
+
     return (
         <>
             <p>{mobName}</p>
             <form onSubmit={
-                    (e) => { 
-                        submitAction(e);
-                        console.log('mobNameONLOAD', mobName); 
-                        // todo: remove this after above todo is done (executing these when form starts / loads)
-                        setMobName(mobName || ""); 
-                        submitJoinMobRequest(); }
-                }>
+                (e) => {
+                    submitAction(e);
+                }
+            }>
                 <button type="submit">{label || "Start (temp hack)"}</button>
             </form>
         </>

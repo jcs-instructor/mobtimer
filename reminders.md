@@ -2,6 +2,7 @@
 Joel:
 
 - Start TTS meeting timer
+- Remember to share sound when sharing screen
 - Enable participant screen sharing in Zoom
 
 Joel & Ethan:

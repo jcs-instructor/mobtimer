@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -8,19 +8,19 @@ type FormParameters = {
     submitJoinMobRequest: () => void;
 }
 
-const JoinMobForm = ({ mobName, setMobName, submitJoinMobRequest }: FormParameters) => {
+const JoinMobForm = () => {
+    const [formValue, setFormValue] = useState('')
     const navigate = useNavigate();
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        submitJoinMobRequest();
-        navigate(`/${mobName}`);
+        navigate(`/${formValue}`);
     }
 
     return (
         <form onSubmit={(event) => onSubmit(event)}>
             <input
-                value={mobName}
-                onChange={(e) => setMobName(e.target.value)}
+                value={formValue}
+                onChange={(e) => setFormValue(e.target.value)}
                 type="text"
                 placeholder="Enter a Mob Name"
             />

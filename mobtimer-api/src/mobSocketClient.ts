@@ -26,12 +26,11 @@ class MobSocketClient {
     return mobSocketClient;
   }
 
-
   /**
- * Forces a process to wait until the socket's `readyState` becomes the specified value.
- * @param socket The socket whose `readyState` is being watched
- * @param state The desired `readyState` for the socket
- */
+   * Forces a process to wait until the socket's `readyState` becomes the specified value.
+   * @param socket The socket whose `readyState` is being watched
+   * @param state The desired `readyState` for the socket
+   */
   static waitForSocketState(
     socket: { readyState: number },
     state: number
@@ -59,6 +58,7 @@ class MobSocketClient {
   }
 
   joinMob(mobName: string) {
+    console.log("joining mob xxxxx: " + mobName, "x");
     this._sendJSON({
       action: Action.Join,
       mobName,
@@ -85,6 +85,7 @@ class MobSocketClient {
   }
 
   private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
+    console.log("sending request", request);
     this._webSocket.send(JSON.stringify(request));
   }
 

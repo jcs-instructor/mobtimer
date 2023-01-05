@@ -48,8 +48,10 @@ function _processRequest(
   parsedRequest: MobTimerRequests.MobTimerRequest,
   socket: WebSocket
 ) {
+  console.log("processing request ");
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
+  console.log("parsedRequest", parsedRequest);
 
   if (parsedRequest.action === Action.Join) {
     const joinRequest = parsedRequest as MobTimerRequests.JoinRequest;
@@ -103,11 +105,14 @@ function _processRequest(
  */
 function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
+  console.log("adding mob listeners");
 
   wss.on("connection", function (webSocket: WebSocket) {
     webSocket.on("message", function (request) {
+      console.log("received: %s", request);
       let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequests.MobTimerRequest;
+      console.log("a");
       try {
         parsedRequest = JSON.parse(
           requestString
@@ -119,6 +124,7 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         _sendJSON(webSocket, errorResponse);
         return;
       }
+      console.log("b");
       if (parsedRequest.action === Action.Echo) {
         const echoResponse = {
           actionInfo: { action: Action.Echo },
@@ -127,9 +133,11 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         return;
       }
       let mobTimer = _processRequest(wss, parsedRequest, webSocket);
+      console.log("c");
       if (!mobTimer) {
         return;
       }
+      console.log("d");
       RoomManager.broadcastToMob(mobTimer, parsedRequest.action); // todo consider moving mobName up a level
     });
   });
@@ -140,6 +148,7 @@ function _sendJSON(
   webSocket: WebSocket,
   request: MobTimerResponses.MobTimerResponse
 ) {
+  console.log("sending back");
   webSocket.send(JSON.stringify(request));
 }
 
