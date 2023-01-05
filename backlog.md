@@ -34,7 +34,7 @@ Next
   - [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] Display time
+  - [ ] Display time remaining
   - [ ] Update (min. remaining)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
