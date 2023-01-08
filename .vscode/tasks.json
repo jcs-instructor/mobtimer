@@ -17,7 +17,6 @@
 				"api generate exports watch",
 				"api compile watch",
 				"api symlink watch",
-				"api symlink watch",
 				"frontend start watch",
 				"backend start watch",
 			],

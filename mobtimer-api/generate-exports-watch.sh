@@ -6,7 +6,7 @@
 #     uses tail -1 to return last line of the file
 
 # first run -- save last line on variable old
-old=$(ls -ltr1 src/*.ts | sort)
+old=$(ls -1 src/*.ts)
 
 echo Watching for new files to generate d.ts
 
@@ -15,7 +15,7 @@ echo Monitoring
 while : ; do
     sleep 1
     # read again last line
-    new=$(ls -ltr1 src/*.ts  | sort) 
+    new=$(ls -1 src/*.ts) 
 
     # this is where the magic should happen
     [[ "$old" != "$new" ]] && ./generate-exports-no-watch.sh

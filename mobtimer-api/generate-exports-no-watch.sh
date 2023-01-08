@@ -12,9 +12,9 @@ for file in src/*.ts; do
     continue
   fi
   filename=$(basename "$file" .ts)
-  echo here
   echo "export * from \"./${filename}\"" >> $destfile_temp
 done
+cat $destfile_temp
 cmp $destfile_ts $destfile_temp > diff.txt
 if [ -s diff.txt ]; then
   echo "Updating exports.ts"
@@ -22,5 +22,7 @@ if [ -s diff.txt ]; then
 else
   echo "No changes to exports.ts"
 fi
+echo New export.ts file:
+cat $destfile_ts
 rm $destfile_temp
 rm diff.txt
