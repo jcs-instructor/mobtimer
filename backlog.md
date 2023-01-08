@@ -33,9 +33,8 @@ Next
   - [x] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
   - [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
   - [ ] Display time remaining
-      - [ ] Move MobTimer class to mobtimer-api
-      - [ ] Change Timer.tsx to use MobTimer
-      - [ ] Move timer from App.tsx to Room.tsx
+      - [x] Make temporary copy of MobTimer class in front end
+      - [ ] See [Display Time Remaining Proposal](./proposal-display-time.md)
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Update (min. remaining)

@@ -30,8 +30,9 @@ const App = () => {
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
-      console.log('status', response.mobState.status, response.mobState.secondsRemaining, response);
+      console.log('onmessage status', response.mobState.status, response.mobState.secondsRemaining, response);
       const status = Controller.getStatus(response);
+      console.log('onmessage status 2', status);
       setStatus(status);
       const secondsRemaining = Controller.getSecondsRemaining(response);
       mobTimer.setSecondsRemaining(secondsRemaining);
