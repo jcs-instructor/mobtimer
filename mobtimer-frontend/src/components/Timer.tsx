@@ -16,7 +16,7 @@ const Timer = () => {
         const currentTime = new Date().getTime();
         const distance = mobTimer.secondsRemaining * 1000;
 
-        console.log('distance', distance);
+        console.log('distance', distance.toLocaleString("en-US") + " ms ("+ Math.round(distance/1000).toLocaleString("en-US")+" sec.)");
 
         const newMinute = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
         const newSecond = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
