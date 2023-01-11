@@ -21,20 +21,20 @@ export function getSecondsRemaining(response: MobTimerResponses.SuccessfulRespon
 }
 
 
-export function toggle(client: MobSocketClient, mobTimer: MobTimer, status: Status) {
+export function toggle(client: MobSocketClient, frontendMobtimer: MobTimer, status: Status) {
   switch (status) {
-    case Status.Running: { client.pause(); mobTimer.pause(); break; }
-    case Status.Paused: { client.resume(); mobTimer.resume(); break; }
-    case Status.Ready: { client.start(); mobTimer.start(); break; }
+    case Status.Running: { client.pause(); frontendMobtimer.pause(); break; }
+    case Status.Paused: { client.resume(); frontendMobtimer.resume(); break; }
+    case Status.Ready: { client.start(); frontendMobtimer.start(); break; }
   }
 }
 
-export function changeStatus(mobTimer: MobTimer, status: Status) {
-  if (mobTimer.status !== status) {
+export function changeStatus(frontendMobtimer: MobTimer, status: Status) {
+  if (frontendMobtimer.status !== status) {
     switch (status) {
-      case Status.Running: { mobTimer.start(); break; }
-      case Status.Paused: { mobTimer.pause(); break; }
-      case Status.Ready: { mobTimer.pause(); break; }
+      case Status.Running: { frontendMobtimer.start(); break; }
+      case Status.Paused: { frontendMobtimer.pause(); break; }
+      case Status.Ready: { frontendMobtimer.pause(); break; }
     }
   }
 }

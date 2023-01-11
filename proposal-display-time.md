@@ -1,7 +1,7 @@
 - [x] Set status in frontend mobtimer when get message (already set secondsRemaining); change setSecondsRemaining to setState in MobTimer: to make more parallel with the public get state property in the MobTimer
 - [x] When get a message, restart the Timer.tsx interval
 - [ ] Possible refactor:
-    - [ ] Rename frontend mobTimer variable as frontendMobTimer
+    - [x] Rename frontend mobTimer variable as frontendMobTimer
     - [ ] Remove MobTimer.resume() and just use .start()
     - [ ] Rename _whenStartedInSeconds as _whenLastStartedInSeconds
 - [ ] Change Timer.tsx to use secondsRemaining & setSecondsRemaining (not minutes & setMinutes and seconds & setSeconds)

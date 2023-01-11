@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MobTimer } from '../mobTimer';
 
-const mobTimer = new MobTimer('front-end-timer');
+const frontendMobTimer = new MobTimer('front-end-timer');
 
 const Timer = () => {
 
@@ -14,7 +14,7 @@ const Timer = () => {
 
     const setTheTimer = () => {
         const currentTime = new Date().getTime();
-        const distance = mobTimer.secondsRemaining * 1000;
+        const distance = frontendMobTimer.secondsRemaining * 1000;
 
         console.log('distance', distance.toLocaleString("en-US") + " ms ("+ Math.round(distance/1000).toLocaleString("en-US")+" sec.)");
 
@@ -47,4 +47,4 @@ const Timer = () => {
 }
 
 export default Timer;
-export { mobTimer };
+export { frontendMobTimer };

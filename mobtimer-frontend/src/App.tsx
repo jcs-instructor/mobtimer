@@ -7,7 +7,7 @@ import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
-import Timer, { mobTimer } from './components/Timer';
+import Timer, { frontendMobTimer } from './components/Timer';
 import logo from './logo.svg';
 
 // todo: unhardcode port
@@ -35,8 +35,8 @@ const App = () => {
       console.log('onmessage status 2', status);
       setStatus(status);
       const secondsRemaining = Controller.getSecondsRemaining(response);
-      Controller.changeStatus(mobTimer, status);
-      mobTimer.setSecondsRemaining(secondsRemaining);
+      Controller.changeStatus(frontendMobTimer, status);
+      frontendMobTimer.setSecondsRemaining(secondsRemaining);
       const label = Controller.getActionButtonLabel(status);
       setLabel(label);
     };
@@ -50,7 +50,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, mobTimer, status);
+    Controller.toggle(client, frontendMobTimer, status);
   }
 
   return <BrowserRouter>
