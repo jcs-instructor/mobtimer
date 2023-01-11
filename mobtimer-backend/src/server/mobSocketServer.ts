@@ -1,6 +1,6 @@
 import * as http from "http";
 import WebSocket from "ws";
-import { MobTimer } from "../mobTimer";
+import { MobTimer } from "mobtimer-api";
 import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import express from "express";
 import * as path from "path";

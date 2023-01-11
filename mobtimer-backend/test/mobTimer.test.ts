@@ -1,4 +1,4 @@
-import { MobTimer } from "../src/mobTimer";
+import { MobTimer } from "mobtimer-api";;
 import { Status, TimeUtils } from "mobtimer-api";
 import { MockCurrentTime } from "./mockCurrentTime";
 

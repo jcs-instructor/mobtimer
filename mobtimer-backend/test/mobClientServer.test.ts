@@ -1,5 +1,5 @@
 import { startMobServer } from "../src/server/mobSocketServer";
-import { MobTimer } from "../src/mobTimer";
+import { MobTimer } from "mobtimer-api";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";

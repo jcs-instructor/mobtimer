@@ -32,9 +32,9 @@ export class MobTimer {
       this._interval = setInterval(() => {
         this.checkReady();
       }, intervalMilliseconds);
-      this._interval.unref();
+      if (this._interval.unref) this._interval.unref();
     }, timeoutMilliseconds - safetyMarginMilliseconds);
-    this._timer.unref();
+    if (this._timer.unref) this._timer.unref();
   }
 
   checkReady() {
@@ -79,6 +79,16 @@ export class MobTimer {
       secondsRemaining: this.secondsRemaining,
       // timestamp: new Date().getTime(),
     } as MobState;
+  }
+
+  setSecondsRemaining(secondsRemaining: number) {
+    // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
+    // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
+    const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
+    this._previouslyAccumulatedElapsedSeconds =
+      durationSeconds - secondsRemaining;
+    this._whenStartedInSeconds = this._nowInSecondsFunc();
+    console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
   }
 
   public get status(): Status {

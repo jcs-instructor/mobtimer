@@ -1,6 +1,6 @@
 import { Room } from "./room";
 import WebSocket from "ws";
-import { MobTimer } from "../mobTimer";
+import { MobTimer } from "mobtimer-api";
 import { Action } from "mobtimer-api";
 import { SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
 
