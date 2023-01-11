@@ -1,7 +1,7 @@
 import { Status } from 'mobtimer-api';
 import { MobTimerResponses } from 'mobtimer-api';
 import { MobSocketClient } from 'mobtimer-api';
-import { MobTimer } from './mobTimer';
+import { MobTimer } from 'mobtimer-api';
 
 export function getActionButtonLabel(status: Status) {
   switch (status) {

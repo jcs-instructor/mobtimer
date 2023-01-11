@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MobTimer } from '../mobTimer';
+import { MobTimer } from 'mobtimer-api';
 
 const frontendMobTimer = new MobTimer('front-end-timer');
 
