@@ -35,6 +35,7 @@ const App = () => {
       console.log('onmessage status 2', status);
       setStatus(status);
       const secondsRemaining = Controller.getSecondsRemaining(response);
+      Controller.changeStatus(mobTimer, status);
       mobTimer.setSecondsRemaining(secondsRemaining);
       const label = Controller.getActionButtonLabel(status);
       setLabel(label);

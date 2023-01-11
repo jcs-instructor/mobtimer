@@ -28,3 +28,13 @@ export function toggle(client: MobSocketClient, mobTimer: MobTimer, status: Stat
     case Status.Ready: { client.start(); mobTimer.start(); break; }
   }
 }
+
+export function changeStatus(mobTimer: MobTimer, status: Status) {
+  if (mobTimer.status !== status) {
+    switch (status) {
+      case Status.Running: { mobTimer.start(); break; }
+      case Status.Paused: { mobTimer.pause(); break; }
+      case Status.Ready: { mobTimer.pause(); break; }
+    }
+  }
+}
