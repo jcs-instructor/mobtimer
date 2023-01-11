@@ -29,10 +29,8 @@ Ethan:
 
 **Facilitator**:
 ...
+1/11/2023 - Joel
 1/4/2023 - Ethan
-12/21/2022 - Joel
-12/14/2022 - Ethan
-12/7/2022 - Joel
 
 **Warning**:
 
