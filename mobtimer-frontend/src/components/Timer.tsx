@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MobTimer } from '../mobTimer';
 
-const mobTimer = new MobTimer('fred');
+const mobTimer = new MobTimer('front-end-timer');
 
 const Timer = () => {
 

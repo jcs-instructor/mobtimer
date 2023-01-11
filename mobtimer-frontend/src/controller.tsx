@@ -28,5 +28,3 @@ export function toggle(client: MobSocketClient, mobTimer: MobTimer, status: Stat
     case Status.Ready: { client.start(); mobTimer.start(); break; }
   }
 }
-
-
