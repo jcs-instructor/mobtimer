@@ -6,4 +6,4 @@
   - [x] Rename \_whenStartedInSeconds as \_whenLastStartedInSeconds
 - [x] Deduplicate 2 copies of MobTimer (newest should be in frontend) & move MobTimer class to mobtimer-api (shared)
 - [x] Change Timer.tsx to use MobTimer to fix 0:0 issue etc. (should be 00:00)
-- [ ] Move timer from App.tsx to Room.tsx
+- [x] Move timer from App.tsx to Room.tsx

@@ -7,7 +7,7 @@ import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
-import Timer, { frontendMobTimer } from './components/Timer';
+import { frontendMobTimer } from './components/Timer';
 import logo from './logo.svg';
 
 // todo: unhardcode port
@@ -56,7 +56,6 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/timer" element={<Timer />} />
       <Route path="/:mobNameUrlParam" element={<Room label={label} setMobName={setMobName} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
