@@ -8,9 +8,9 @@ Refactor/Improve Later
 
 - [ ] Rename folder mobtimer-api as mobtimer-shared (since it contains shared logic in addition to api)
 - [ ] Low priority. Ethan after hours:
-
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
+  - [ ] One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other (interval is currently 1000 ms - maybe shorten - at least at first)
 
 - [ ] Ethan - between sessions:
   - [ ] Log bug in mobti.me - web version not working (vs code version still works)
@@ -23,6 +23,7 @@ Refactor/Improve Later
 Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
+  - [ ] Add duration minutes textbox in UI and sync across clients
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Update (min. remaining)
