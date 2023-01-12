@@ -23,19 +23,6 @@ Refactor/Improve Later
 Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
-  - [x] Be able to access a mob via the URL (instead of the text box)
-  - [x] Fix bug(s) in accessing a mob via the URL (instead of the text box)
-    - [x] See todo comments in Room.tsx
-    - [x] Add useEffect to Room.tsx
-    - [x] Guard for setMob function if mob is empty
-    - [x] Add " as { mobName: string } " after useParams()
-    - [x] Create variable mobNameLower - otherwise, doesn't work!
-  - [x] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
-  - [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
-  - [ ] Display time remaining
-      - [x] Make temporary copy of MobTimer class in front end
-      - [ ] See [Display Time Remaining Proposal](./proposal-display-time.md)
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Update (min. remaining)
@@ -123,6 +110,20 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed
+
+2022-01-12
+
+  - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
+  - [x] Be able to access a mob via the URL (instead of the text box)
+  - [x] Fix bug(s) in accessing a mob via the URL (instead of the text box)
+    - [x] See todo comments in Room.tsx
+    - [x] Add useEffect to Room.tsx
+    - [x] Guard for setMob function if mob is empty
+    - [x] Add " as { mobName: string } " after useParams()
+    - [x] Create variable mobNameLower - otherwise, doesn't work!
+  - [x] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
+  - [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
+  - [x] Display time remaining in UI - See [Display Time Remaining Proposal](./proposal-display-time.md)
 
 2022-12-15
 
