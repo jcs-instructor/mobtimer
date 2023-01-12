@@ -3,7 +3,7 @@ import { MobState, Status, TimeUtils } from "mobtimer-api";
 export class MobTimer {
   private _mobName = "";
   private _durationMinutes = 5;
-  private _whenStartedInSeconds = 0;
+  private _whenLastStartedInSeconds = 0;
   private _whenPausedInSeconds = 0;
   private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
   private _previouslyAccumulatedElapsedSeconds = 0;
@@ -48,7 +48,7 @@ export class MobTimer {
     this.setExpireTimeout();
     this._running = true;
     this._everStarted = true;
-    this._whenStartedInSeconds = this._nowInSecondsFunc();
+    this._whenLastStartedInSeconds = this._nowInSecondsFunc();
   }
 
   public set nowInSecondsFunc(func: () => number) {
@@ -64,7 +64,7 @@ export class MobTimer {
     if (this._timer) clearTimeout(this._timer);
     this._whenPausedInSeconds = this._nowInSecondsFunc();
     this._previouslyAccumulatedElapsedSeconds +=
-      this._whenPausedInSeconds - this._whenStartedInSeconds;
+      this._whenPausedInSeconds - this._whenLastStartedInSeconds;
   }
 
   public get state() {
@@ -83,7 +83,7 @@ export class MobTimer {
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     this._previouslyAccumulatedElapsedSeconds =
       durationSeconds - secondsRemaining;
-    this._whenStartedInSeconds = this._nowInSecondsFunc();
+    this._whenLastStartedInSeconds = this._nowInSecondsFunc();
     console.log(
       "setSecondsRemaining: sec remain / prev accum",
       secondsRemaining,
@@ -130,7 +130,7 @@ export class MobTimer {
     } else {
       return (
         this._previouslyAccumulatedElapsedSeconds +
-        (this._nowInSecondsFunc() - this._whenStartedInSeconds)
+        (this._nowInSecondsFunc() - this._whenLastStartedInSeconds)
       );
     }
   }
