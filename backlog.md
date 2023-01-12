@@ -24,6 +24,8 @@ Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Add duration minutes textbox in UI and sync across clients
+    - [x] Add texbox, label, and update button
+    - [ ] Update mobtime on front and back ends
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Update (min. remaining)
