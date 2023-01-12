@@ -13,6 +13,7 @@ Refactor/Improve Later
   - [ ] In tasks.json, reorder tasks by order of execution
 
 - [ ] Ethan - between sessions:
+  - [ ] Log bug in mobti.me - web version not working (vs code version still works)
   - [ ] Automate index.ts
     - [ ] import and export exports.ts
     - [ ] get rid of most export statements from index.ts (exclude MobTimer something)

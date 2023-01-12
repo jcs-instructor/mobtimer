@@ -1,9 +1,7 @@
 **Start of Session**
 Joel:
 
-- Start TTS:
-  - Meeting timer
-  - Maybe also: Reminder to stand and stretch (or integrate into meeting timer)
+- Start TTS meeting timer
 - Enable participant screen sharing in Zoom
 
 Joel & Ethan:
