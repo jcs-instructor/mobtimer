@@ -1,36 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { MobTimer } from 'mobtimer-api';
+import { MobTimer, TimeUtils } from 'mobtimer-api';
 
 const frontendMobTimer = new MobTimer('front-end-timer');
 
 const Timer = () => {
 
-    // todo: maybe rename as secondPart and minutePart
-    const [second, setSecond] = useState(0);
-    const [minute, setMinute] = useState(0);    
+    const [seconds, setSeconds] = useState(0);
 
-    const countdownMilliseconds = 61 * 1000; // todo: unhardcode
-    const endTime = Date.now() + countdownMilliseconds;
+    // const setTheTimer = () => {
+    //     const millisecondsRemaining = frontendMobTimer.secondsRemaining * 1000;
 
-    const setTheTimer = () => {
-        const currentTime = new Date().getTime();
-        const distance = frontendMobTimer.secondsRemaining * 1000;
+    //     console.log('Remaining time', millisecondsRemaining.toLocaleString("en-US") + " ms ("+ Math.round(millisecondsRemaining/1000).toLocaleString("en-US")+" sec.)");
 
-        console.log('distance', distance.toLocaleString("en-US") + " ms ("+ Math.round(distance/1000).toLocaleString("en-US")+" sec.)");
+    //     const newSeconds = Math.abs(Math.floor((millisecondsRemaining % (1000 * 60)) / 1000));
 
-        const newMinute = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-        const newSecond = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
-
-        return [newMinute, newSecond]
-    }
+    //     return [newSeconds]
+    // }
 
     useEffect(() => {
         //Component mounted
         const interval = setInterval(() => {
 
-            const [newMinute, newSecond] = setTheTimer();
-            setMinute(newMinute);
-            setSecond(newSecond);
+            // const [newSeconds] = setTheTimer();
+            setSeconds(frontendMobTimer.secondsRemaining);
 
         }, 1000);
 
@@ -38,10 +30,10 @@ const Timer = () => {
         return () => { clearInterval(interval) }
 
 
-    }, [minute, second]);
+    }, [seconds]);
 
     return (
-        <p>{minute}:{second}</p>
+        <p>{TimeUtils.getTimeString(seconds)}</p>
     );
 
 }
