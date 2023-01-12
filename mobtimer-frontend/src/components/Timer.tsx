@@ -5,21 +5,21 @@ const frontendMobTimer = new MobTimer('front-end-timer');
 
 const Timer = () => {
 
-    const [seconds, setSeconds] = useState(0);
+    const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
 
     useEffect(() => {
         //Component mounted
         const interval = setInterval(() => {
-            setSeconds(frontendMobTimer.secondsRemaining);
+            setTimeString(frontendMobTimer.secondsRemainingString);
         }, 1000);
 
         //Component will unmount
         return () => { clearInterval(interval) }
 
-    }, [seconds]);
+    }, [timeString]);
 
     return (
-        <p>{TimeUtils.getTimeString(seconds)}</p>
+        <p>{timeString}</p>
     );
 
 }
