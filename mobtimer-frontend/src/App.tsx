@@ -21,6 +21,7 @@ const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
+  const [durationMinutes, setDurationMinutes] = useState(5);
 
   const submitJoinMobRequest = async () => {
     if (!mobName || loaded) {
@@ -34,6 +35,8 @@ const App = () => {
       const status = Controller.getStatus(response);
       console.log('onmessage status 2', status);
       setStatus(status);
+      const durationMinutes = Controller.getDurationMinutes(response);
+      setDurationMinutes(durationMinutes);
       const secondsRemaining = Controller.getSecondsRemaining(response);
       Controller.changeStatus(frontendMobTimer, status);
       frontendMobTimer.setSecondsRemaining(secondsRemaining);
@@ -57,7 +60,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, frontendMobTimer, status);
+    Controller.update(client, durationMinutes);
   }
 
 

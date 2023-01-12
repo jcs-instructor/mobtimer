@@ -16,10 +16,13 @@ export function getStatus(response: MobTimerResponses.SuccessfulResponse) {
   return response.mobState.status;
 }
 
+export function getDurationMinutes(response: MobTimerResponses.SuccessfulResponse) {
+  return response.mobState.durationMinutes;
+}
+
 export function getSecondsRemaining(response: MobTimerResponses.SuccessfulResponse) {
   return response.mobState.secondsRemaining;
 }
-
 
 export function toggle(client: MobSocketClient, frontendMobtimer: MobTimer, status: Status) {
   switch (status) {
@@ -37,4 +40,8 @@ export function changeStatus(frontendMobtimer: MobTimer, status: Status) {
       case Status.Ready: { frontendMobtimer.pause(); break; }
     }
   }
+}
+
+export function update(client: MobSocketClient, durationMinutes: number) {
+  client.update(durationMinutes);  
 }
