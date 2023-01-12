@@ -11,6 +11,8 @@ Refactor/Improve Later
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
   - [ ] One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other (interval is currently 1000 ms - maybe shorten - at least at first)
+- [ ] Fixed mobtimer-api reference issue by deleting local files. Still an issue at times, so created a branch in case want to pursue later: branch = IncorrectReferenceShouldBreak (might be able to reproduce from this branch on Joel's PC, but maybe not). Issue was mobTimer.ts was referencing timeUtils via 
+"mobtimer-api" instead of referencing the file directly
 
 - [ ] Ethan - between sessions:
   - [ ] Log bug in mobti.me - web version not working (vs code version still works)
