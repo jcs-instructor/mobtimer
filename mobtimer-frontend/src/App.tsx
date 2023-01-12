@@ -53,6 +53,14 @@ const App = () => {
     Controller.toggle(client, frontendMobTimer, status);
   }
 
+  const submitUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
+    // Requred when using onSubmit to prevent the page from reloading page
+    // which would completely bypass below code and bypass any html field validation
+    event.preventDefault();
+    Controller.toggle(client, frontendMobTimer, status);
+  }
+
+
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
