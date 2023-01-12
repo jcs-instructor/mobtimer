@@ -7,7 +7,7 @@ import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
-import { frontendMobTimer } from './components/Timer';
+import { frontendMobTimer } from './timers';
 import logo from './logo.svg';
 
 // todo: unhardcode port

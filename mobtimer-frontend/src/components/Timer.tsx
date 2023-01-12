@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MobTimer, TimeUtils } from 'mobtimer-api';
-
-const frontendMobTimer = new MobTimer('front-end-timer');
+import { frontendMobTimer } from '../timers';
 
 const Timer = () => {
 
