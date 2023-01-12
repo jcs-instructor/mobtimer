@@ -7,13 +7,8 @@ import { MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
-import { frontendMobTimer } from './timers';
+import { client, frontendMobTimer } from './timers';
 import logo from './logo.svg';
-
-// todo: unhardcode port
-const port = 4000;
-const url = `ws://localhost:${port}`;
-const client = MobSocketClient.openSocketSync(url);
 
 const App = () => {
 
