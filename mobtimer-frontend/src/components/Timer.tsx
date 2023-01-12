@@ -1,3 +1,4 @@
+import { TimeUtils } from 'mobtimer-api';
 import React, { useEffect, useState } from 'react';
 import { frontendMobTimer } from '../timers';
 
@@ -8,6 +9,11 @@ const Timer = () => {
     useEffect(() => {
         //Component mounted
         const interval = setInterval(() => {
+            // console.log(
+            //     frontendMobTimer.secondsRemainingString, 
+            //     TimeUtils.getMinutesPart(frontendMobTimer.secondsRemaining), 
+            //     TimeUtils.getSecondsPart(frontendMobTimer.secondsRemaining),
+            //      frontendMobTimer.secondsRemaining);
             setTimeString(frontendMobTimer.secondsRemainingString);
         }, 1000);
 

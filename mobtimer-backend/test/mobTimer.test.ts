@@ -60,6 +60,15 @@ test("Get time remaining string 1 second after start", () => {
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
+test("Get time remaining string 0.1 seconds after start", () => {
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
+  mobTimer.durationMinutes = 2;
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(0.1);
+  expect(mobTimer.secondsRemainingString).toEqual("02:00");
+});
+
 test("Get seconds remaining 1 second after start (real)", async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;

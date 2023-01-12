@@ -30,8 +30,9 @@ export class TimeUtils {
   }
 
   static getTimeString(seconds: number): string {
-    return TimeUtils.getMinutesPart(seconds) + ":" +
-      TimeUtils.getSecondsPart(Math.round(seconds));
+    const integerSeconds = Math.ceil(seconds);
+    return TimeUtils.getMinutesPart(integerSeconds) + ":" +
+      TimeUtils.getSecondsPart(integerSeconds);
   }
 
   static getMinutesPart(seconds: number): string {
