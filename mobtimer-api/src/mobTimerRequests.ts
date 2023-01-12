@@ -5,8 +5,7 @@ export type MobTimerRequest =
   | JoinRequest
   | UpdateRequest
   | StartRequest
-  | PauseRequest
-  | ResumeRequest;
+  | PauseRequest;
 
 export type EchoRequest = {
   action: Action.Echo;
@@ -28,8 +27,4 @@ export type StartRequest = {
 
 export type PauseRequest = {
   action: Action.Pause;
-};
-
-export type ResumeRequest = {
-  action: Action.Resume;
 };

@@ -125,13 +125,13 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await client.pause();
-    await client.resume();
+    await client.start();
     await cleanUp(client);
     expect(client.lastSuccessfulResponse.mobState.status).toEqual(
       Status.Running
     );
     expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
-      Action.Resume
+      Action.Start
     );
   });
 
@@ -200,7 +200,7 @@ describe("WebSocket Server", () => {
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
     await client.pause();
-    await client.resume();
+    await client.start();
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
     await cleanUp(client);
     const numDigits = 1;
@@ -217,9 +217,9 @@ describe("WebSocket Server", () => {
     await client.update(TimeUtils.secondsToMinutes(0.2));
     await client.start();
     await client.pause();
-    await client.resume();
+    await client.start(); // i.e., resume
     await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(5); // join, update, start, pause, resume
+    expect(client.successfulResponses.length).toEqual(5); // join, update, start, pause, start (resume)
   });
 
   test("Echo request and response", async () => {

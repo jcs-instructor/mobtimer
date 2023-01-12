@@ -1,4 +1,4 @@
-import { MobTimer } from "mobtimer-api";;
+import { MobTimer } from "mobtimer-api";
 import { Status, TimeUtils } from "mobtimer-api";
 import { MockCurrentTime } from "./mockCurrentTime";
 
@@ -87,7 +87,7 @@ test("Resume timer", () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
   mobTimer.pause();
-  mobTimer.resume();
+  mobTimer.start();
   expect(mobTimer.status).toEqual(Status.Running);
 });
 
@@ -120,7 +120,7 @@ test("Get seconds remaining after running 1 second, paused 1 second, and resume 
   mockCurrentTime.delaySeconds(1);
   mobTimer.pause();
   mockCurrentTime.delaySeconds(2);
-  mobTimer.resume();
+  mobTimer.start();
   mockCurrentTime.delaySeconds(3);
   expect(mobTimer.secondsRemainingString).toEqual("05:56");
 });

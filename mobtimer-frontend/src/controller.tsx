@@ -24,7 +24,7 @@ export function getSecondsRemaining(response: MobTimerResponses.SuccessfulRespon
 export function toggle(client: MobSocketClient, frontendMobtimer: MobTimer, status: Status) {
   switch (status) {
     case Status.Running: { client.pause(); frontendMobtimer.pause(); break; }
-    case Status.Paused: { client.resume(); frontendMobtimer.resume(); break; }
+    case Status.Paused: { client.start(); frontendMobtimer.start(); break; }
     case Status.Ready: { client.start(); frontendMobtimer.start(); break; }
   }
 }

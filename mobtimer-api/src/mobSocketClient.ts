@@ -26,12 +26,11 @@ class MobSocketClient {
     return mobSocketClient;
   }
 
-
   /**
- * Forces a process to wait until the socket's `readyState` becomes the specified value.
- * @param socket The socket whose `readyState` is being watched
- * @param state The desired `readyState` for the socket
- */
+   * Forces a process to wait until the socket's `readyState` becomes the specified value.
+   * @param socket The socket whose `readyState` is being watched
+   * @param state The desired `readyState` for the socket
+   */
   static waitForSocketState(
     socket: { readyState: number },
     state: number
@@ -78,10 +77,6 @@ class MobSocketClient {
 
   pause() {
     this._sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
-  }
-
-  resume() {
-    this._sendJSON({ action: Action.Resume } as MobTimerRequests.ResumeRequest);
   }
 
   private _sendJSON(request: MobTimerRequests.MobTimerRequest) {

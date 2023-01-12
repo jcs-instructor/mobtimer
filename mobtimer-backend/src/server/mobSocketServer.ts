@@ -87,8 +87,8 @@ function _processRequest(
       mobTimer.pause();
       break;
     }
-    case Action.Resume: {
-      mobTimer.resume();
+    case Action.Start: {
+      mobTimer.start();
       break;
     }
   }

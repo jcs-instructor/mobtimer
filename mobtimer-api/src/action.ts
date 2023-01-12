@@ -4,7 +4,6 @@ export enum Action {
   Update = "update",
   Start = "start",
   Pause = "pause",
-  Resume = "resume",
   Expired = "expired",
   InvalidRequestError = "invalidRequestError",
   Debug = "debug34",
