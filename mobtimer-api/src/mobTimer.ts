@@ -86,11 +86,7 @@ export class MobTimer {
     this._previouslyAccumulatedElapsedSeconds =
       durationSeconds - secondsRemaining;
     this._whenLastStartedInSeconds = this._nowInSecondsFunc();
-    console.log(
-      "setSecondsRemaining: sec remain / prev accum",
-      secondsRemaining,
-      this._previouslyAccumulatedElapsedSeconds
-    );
+    //console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
   }
 
   public get status(): Status {

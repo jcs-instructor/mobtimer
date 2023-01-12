@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { frontendMobTimer } from '../timers';
+import { client, frontendMobTimer } from '../timers';
 
 const Duration = () => {
     const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        frontendMobTimer.durationMinutes = durationMinutes;
+        //frontendMobTimer.durationMinutes = durationMinutes;
+        client.update(durationMinutes);
     }
 
     return (

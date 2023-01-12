@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { MobSocketClient } from 'mobtimer-api';
 import './App.css';
 import Room from './components/Room';
-import { MobTimerResponses } from 'mobtimer-api';
+import { MobSocketTestClient, MobTimerResponses } from 'mobtimer-api';
 import { Status } from 'mobtimer-api';
 import * as Controller from './controller';
 import JoinMobForm from './components/JoinMobForm';
@@ -16,7 +15,7 @@ const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState(Status.Ready);
-  const [durationMinutes, setDurationMinutes] = useState(5);
+  const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
 
   const submitJoinMobRequest = async () => {
     if (!mobName || loaded) {
@@ -26,9 +25,10 @@ const App = () => {
     client.webSocket.onmessage = (message: { data: string; }) => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       // todo: handle if response is not successful
-      console.log('onmessage status', response.mobState.status, response.mobState.secondsRemaining, response);
+      console.log("Mob: "+response.mobState.mobName+", Action:"+response.actionInfo.action+", Status:"+response.mobState.status+", RemainingSec:"+response.mobState.secondsRemaining+", DurationMin:"+response.mobState.durationMinutes);
+      // console.log('onmessage status', response.mobState.status, response.mobState.secondsRemaining, response);
       const status = Controller.getStatus(response);
-      console.log('onmessage status 2', status);
+      // console.log('onmessage status 2', status);
       setStatus(status);
       const durationMinutes = Controller.getDurationMinutes(response);
       setDurationMinutes(durationMinutes);
