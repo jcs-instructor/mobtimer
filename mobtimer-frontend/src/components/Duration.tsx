@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { client } from 'websocket';
 
-const Duration = (durationMinutes: number, setDurationMinutes: (durationMinutes: number)=>void) => {
+const Duration = () => {
+    const [durationMinutes, setDurationMinutes] = useState(5);
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setDurationMinutes(durationMinutes);
+
     }
 
     return (
