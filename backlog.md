@@ -28,7 +28,6 @@ Next
     - [ ] Update mobtime on front and back ends
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-  - [ ] Update (min. remaining)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
