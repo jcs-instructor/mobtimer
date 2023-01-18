@@ -29,6 +29,7 @@ Next
     - [x] Add texbox, label, and update button
     - [x] Update mobtimer on front and back ends when durationMinutes changes in UI
     - [ ] WIP: Any more to do? When done, merge branch DurationMinutesUI back to main
+  - [ ] Should we upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)?
   - [ ] Modify ActionButton when time elapses (should say Start again)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
