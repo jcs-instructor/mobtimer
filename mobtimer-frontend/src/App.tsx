@@ -13,8 +13,8 @@ const App = () => {
 
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
+  const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
-  //const [status, setStatus] = useState(Status.Ready);
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
 
   const submitJoinMobRequest = async () => {
@@ -72,7 +72,7 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room label={actionButtonLabel} setMobName={setMobName} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" element={<Room label={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

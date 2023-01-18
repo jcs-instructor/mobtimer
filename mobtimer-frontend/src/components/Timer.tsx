@@ -1,10 +1,12 @@
-import { TimeUtils } from 'mobtimer-api';
 import React, { useEffect, useState } from 'react';
 import { frontendMobTimer } from '../timers';
 
-const Timer = () => {
+type FormParameters = {
+    timeString: string;
+    setTimeString: (timeString: string) => void;
+}
 
-    const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
+const Timer = ({ timeString, setTimeString } : FormParameters) => {
 
     useEffect(() => {
         //Component mounted
