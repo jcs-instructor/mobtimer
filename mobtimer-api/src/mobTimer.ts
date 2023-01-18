@@ -42,7 +42,12 @@ export class MobTimer {
   checkReady() {
     if (this.status === Status.Ready) {
       this._timerExpireFunc();
-      if (this._interval) clearInterval(this._interval);
+      if (this._interval) {
+        clearInterval(this._interval);        
+      }
+      if (this._timer) {
+        clearInterval(this._timer);        
+      }
     }
   }
 

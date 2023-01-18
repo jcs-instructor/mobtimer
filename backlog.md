@@ -15,6 +15,7 @@ Refactor/Improve Later
 "mobtimer-api" instead of referencing the file directly
 
 - [ ] Ethan - between sessions:
+  - [ ] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
   - [ ] Log bug in mobti.me - web version not working (vs code version still works)
   - [ ] Automate index.ts
     - [ ] import and export exports.ts
@@ -25,19 +26,18 @@ Refactor/Improve Later
 Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [ ] Add duration minutes textbox in UI and sync across clients
+  - [x] Add duration minutes textbox in UI and sync across clients
     - [x] Add texbox, label, and update button
     - [x] Update mobtimer on front and back ends when durationMinutes changes in UI
-    - [ ] WIP: Any more to do? When done, merge branch DurationMinutesUI back to main
-  - [ ] Should we upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)?
-  - [ ] Modify ActionButton when time elapses (should say Start again)
+    - [x] Merge branch DurationMinutesUI back to main
+  - [x] Modify ActionButton when time elapses (should say Start again)
+      - [x] Also: Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
+            then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
+            of time (from duration minutes)
   - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
-- [ ] Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
-      then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
-      of time (from duration minutes)
 
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
