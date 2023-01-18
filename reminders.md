@@ -25,7 +25,7 @@ Ethan:
 
 - Retro: https://docs.google.com/document/d/1EKo20gHXQsAFqiAw56kNISPx170u0RLXiXBNqulV4Rg/edit#
 
-**Facilitator**:
+**Facilitator (and First Navigator When Timer Doesn't Remember)**:
 ...
 1/18/2023 - Ethan
 1/11/2023 - Joel
