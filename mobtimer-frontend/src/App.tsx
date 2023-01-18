@@ -14,7 +14,7 @@ const App = () => {
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
-  const [status, setStatus] = useState(Status.Ready);
+  //const [status, setStatus] = useState(Status.Ready);
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
 
   const submitJoinMobRequest = async () => {
@@ -34,8 +34,8 @@ const App = () => {
       console.log("Mob: "+response.mobState.mobName+", Action:"+response.actionInfo.action+", Status:"+response.mobState.status+", RemainingSec:"+response.mobState.secondsRemaining+", DurationMin:"+response.mobState.durationMinutes);
       
       // Status
-      const status = Controller.getStatus(response);
-      setStatus(status);
+      const mobStatus = Controller.getStatus(response);
+      //setStatus(status);
       
       // Duration minutes
       const durationMinutes = Controller.getDurationMinutes(response);
@@ -43,9 +43,9 @@ const App = () => {
       
       // Sync frontend timer
       const secondsRemaining = Controller.getSecondsRemaining(response);
-      Controller.changeStatus(frontendMobTimer, status);
+      Controller.changeStatus(frontendMobTimer, mobStatus);
       frontendMobTimer.setSecondsRemaining(secondsRemaining);
-      const label = Controller.getActionButtonLabel(status);
+      const label = Controller.getActionButtonLabel(mobStatus);
       setActionButtonLabel(label);
     };
 
@@ -58,7 +58,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, frontendMobTimer, status);
+    Controller.toggle(client, frontendMobTimer);
   }
 
   const submitUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
