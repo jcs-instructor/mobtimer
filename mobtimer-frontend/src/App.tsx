@@ -45,6 +45,7 @@ const App = () => {
       const secondsRemaining = Controller.getSecondsRemaining(response);
       Controller.changeStatus(frontendMobTimer, mobStatus);
       frontendMobTimer.setSecondsRemaining(secondsRemaining);
+      setTimeString(frontendMobTimer.secondsRemainingString);
       const label = Controller.getActionButtonLabel(mobStatus);
       setActionButtonLabel(label);
     };

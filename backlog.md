@@ -25,8 +25,9 @@ Refactor/Improve Later
 Next
 
 - [ ] Bugs:
-  - [ ] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
-  - [ ] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere
+  - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
+  - [ ] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
+        We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
