@@ -6,7 +6,6 @@ See also: [Reminders](./reminders.md)
 
 Refactor/Improve Later
 
-- [ ] Rename folder mobtimer-api as mobtimer-shared (since it contains shared logic in addition to api)
 - [ ] Low priority. Ethan after hours:
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
@@ -26,19 +25,11 @@ Refactor/Improve Later
 Next
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
-  - [x] Add duration minutes textbox in UI and sync across clients
-    - [x] Add texbox, label, and update button
-    - [x] Update mobtimer on front and back ends when durationMinutes changes in UI
-    - [x] Merge branch DurationMinutesUI back to main
-  - [x] Modify ActionButton when time elapses (should say Start again)
-      - [x] Also: Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
-            then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
-            of time (from duration minutes)
-  - [ ] Refactor: move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
-
+- [ ] Rename folder mobtimer-api as mobtimer-shared (since it contains shared logic in addition to api)
+- [ ] In UI listener, handle if response is not successful
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
 - [ ] Create a timer
@@ -83,12 +74,24 @@ Next
 
 ## Refactoring
 
-- [ ] Convert timeUtils to function, look for others
-- [ ] \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
-- [ ] Do all todos in [proposal-refactor.md](./proposal-refactor.md)
-- [ ] move onMessage from mobSocketClient to be independently added
+- [ ] Move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
+- [ ] Maybe: \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
+- [ ] Clean up mobtimer-frontend/package.json - we might not need:
+        "crypto": "^1.0.1",
+        "http": "^0.0.1-security",
+        "https": "^1.0.0",
+        "net": "^1.0.2",
+        "stream": "^0.0.2",
+        "tls": "^0.0.1",
+        "url": "^0.11.0",
+- [ ] Use webSocketType instead of W3CWebSocket (decoupling)
+        export function waitForSocketState(
+        socket: W3CWebSocket,
+        socket: { readyState: number },
+- [ ] Think about names / whether to expose webSocket like this:
+        await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
 - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in wrong place - hard to see)
-- [ ] Create utilty functions to create timeout and interval objects that create the object and call unref() on it before returning it
+- [ ] Create utility functions to create timeout and interval objects that create the object and call unref() on it before returning it
 
 ## Other Technical
 
@@ -115,7 +118,20 @@ Next
 - [ ] Figure out way to reduce spurious failing tests (in Jest)
 - [ ] Handle console.log that complete after test completed?
 
-## Completed
+## Completed (Done)
+
+2022-01-18
+
+- [x] Add duration minutes textbox in UI and sync across clients
+  - [x] Add texbox, label, and update button
+  - [x] Update mobtimer on front and back ends when durationMinutes changes in UI
+  - [x] Merge branch DurationMinutesUI back to main
+- [x] Modify ActionButton when time elapses (should say Start again)
+    - [x] Also: Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
+          then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
+          of time (from duration minutes)
+- [x] Move onMessage from mobSocketClient to be independently added
+
 
 2022-01-12
 
