@@ -6,7 +6,6 @@ import Duration from './Duration';
 
 type FormParameters = {
     durationMinutes: number;
-    setDurationMinutes: (durationMinutes: number) => void
     actionButtonLabel: string;
     setMobName: (mobName: string) => void;
     timeString: string;
@@ -15,7 +14,7 @@ type FormParameters = {
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, setDurationMinutes, actionButtonLabel, setMobName, timeString, setTimeString, submitAction, submitJoinMobRequest }: FormParameters) => {
+const Room = ({ durationMinutes, actionButtonLabel, setMobName, timeString, setTimeString, submitAction, submitJoinMobRequest }: FormParameters) => {
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();
     useEffect(
@@ -30,7 +29,7 @@ const Room = ({ durationMinutes, setDurationMinutes, actionButtonLabel, setMobNa
         <>
             <p>{mobNameUrlParam}</p>
             <Timer timeString={timeString} setTimeString={setTimeString} />
-            <Duration durationMinutes={durationMinutes} setDurationMinutes={setDurationMinutes} />
+            <Duration durationMinutes={durationMinutes} />
             <form onSubmit={(e) => submitAction(e)}>
                 <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
             </form>
