@@ -4,7 +4,7 @@ import { MobSocketClient } from 'mobtimer-api';
 import { MobTimer } from 'mobtimer-api';
 
 export class Controller {
-  
+
   static setDurationMinutes = (durationMinutes: number) => { };
   static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
@@ -16,6 +16,7 @@ export class Controller {
   }
 }
 
+// todo: move all below into Controller class above
 export function getActionButtonLabel(status: Status) {
   switch (status) {
     case Status.Running: { return "⏸️ Pause"; }
