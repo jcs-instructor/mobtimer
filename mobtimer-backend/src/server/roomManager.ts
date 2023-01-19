@@ -84,6 +84,7 @@ export class RoomManager {
     if (!sockets) {
       return;
     }
+    console.log(`broadcasting message: ${Date.now()} ${message}`);
     sockets.forEach((socketClient: WebSocket) => {
       socketClient.send(message);
     });

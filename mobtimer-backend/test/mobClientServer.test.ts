@@ -202,7 +202,16 @@ describe("WebSocket Server", () => {
       await client.joinMob(_mobName1);
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       // todo: make this reproduce piling up of expire messages...
-      for (let i = 0; i < 500; i++) {
+      await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+
+      /* todo change loop below to interval...
+      setInterval(() => {
+          console.log(i);
+          client.start();
+          client.pause();
+          }, n);
+      */
+      for (let i = 0; i < 10; i++) {
         console.log(i);
         await client.start();
         await client.pause();
