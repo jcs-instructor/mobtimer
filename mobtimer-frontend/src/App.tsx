@@ -17,7 +17,7 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
-  Controller.injectSetDurationMinutes(setDurationMinutes);
+  Controller.Controller.injectSetDurationMinutes(setDurationMinutes);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {

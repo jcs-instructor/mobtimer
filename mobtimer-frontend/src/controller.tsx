@@ -3,11 +3,12 @@ import { MobTimerResponses } from 'mobtimer-api';
 import { MobSocketClient } from 'mobtimer-api';
 import { MobTimer } from 'mobtimer-api';
 
+export class Controller {
+  static setDurationMinutes = (durationMinutes: number) => { };
 
-let setDurationMinutes = (durationMinutes: number) => { };
-
-export function injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
-  setDurationMinutes = setDurationMinutesFunction;
+  static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
+    this.setDurationMinutes = setDurationMinutesFunction;
+  }
 }
 
 export function getActionButtonLabel(status: Status) {
@@ -51,8 +52,4 @@ export function changeStatus(frontendMobtimer: MobTimer, status: Status) {
 
 export function update(client: MobSocketClient, durationMinutes: number) {
   client.update(durationMinutes);
-}
-
-export function setDurationMinutes2(durationMinutes: number): void {
-  setDurationMinutes(durationMinutes);
 }

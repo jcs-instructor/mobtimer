@@ -18,7 +18,7 @@ const Duration = ({ durationMinutes }: FormParameters) => {
             <label>Turn Duration (minutes): </label>
             <input
                 value={durationMinutes}
-                onChange={(e) => Controller.setDurationMinutes2(e.target.value as unknown as number)}
+                onChange={(e) => Controller.Controller.setDurationMinutes(e.target.value as unknown as number)}
                 type="text"
                 placeholder="Enter a Turn Duration"
             />
