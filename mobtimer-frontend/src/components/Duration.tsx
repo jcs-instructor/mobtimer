@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { client, frontendMobTimer } from '../timers';
-import * as Controller from '../controller';
+import React from 'react'
+import { client } from '../timers';
+import { Controller } from '../controller';
 
 type FormParameters = {
     durationMinutes: number;
@@ -18,7 +18,7 @@ const Duration = ({ durationMinutes }: FormParameters) => {
             <label>Turn Duration (minutes): </label>
             <input
                 value={durationMinutes}
-                onChange={(e) => Controller.Controller.setDurationMinutes(e.target.value as unknown as number)}
+                onChange={(e) => Controller.setDurationMinutes(e.target.value as unknown as number)}
                 type="text"
                 placeholder="Enter a Turn Duration"
             />

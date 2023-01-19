@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { MobSocketTestClient, MobTimerResponses } from 'mobtimer-api';
-import { Status } from 'mobtimer-api';
-import * as Controller from './controller';
+import { MobTimerResponses } from 'mobtimer-api';
+import { Controller } from './controller';
 import JoinMobForm from './components/JoinMobForm';
 import { client, frontendMobTimer } from './timers';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 
 const App = () => {
 
@@ -17,10 +16,10 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
-  
+
   // Injections
-  Controller.Controller.injectSetDurationMinutes(setDurationMinutes);
-  Controller.Controller.injectSetTimeString(setTimeString);
+  Controller.injectSetDurationMinutes(setDurationMinutes);
+  Controller.injectSetTimeString(setTimeString);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -67,14 +66,6 @@ const App = () => {
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
     Controller.toggle(client, frontendMobTimer);
-  }
-
-  // To do: May be unused - if so, remove
-  const submitUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Requred when using onSubmit to prevent the page from reloading page
-    // which would completely bypass below code and bypass any html field validation
-    event.preventDefault();
-    Controller.update(client, durationMinutes);
   }
 
   // Browser router
