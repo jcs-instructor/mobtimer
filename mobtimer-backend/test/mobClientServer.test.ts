@@ -197,6 +197,7 @@ describe("WebSocket Server", () => {
   test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
     "Loop: Only send expiration message once - Start timer with duration %p",
     async (durationSeconds: number) => {
+      console.log("xxxxxxxxxxxxxxxx");
       const toleranceSeconds = 0.1;
       const client = await openSocket(url);
       await client.joinMob(_mobName1);
@@ -224,6 +225,7 @@ describe("WebSocket Server", () => {
         () => clearInterval(intervalId),
         (durationSeconds + toleranceSeconds) * 1000
       );
+      console.log("i is", i);
 
       // for (let i = 0; i < 10; i++) {
       //   console.log(i);
