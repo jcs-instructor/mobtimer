@@ -1,7 +1,7 @@
 import { Status } from 'mobtimer-api';
 import { MobTimerResponses } from 'mobtimer-api';
 import { MobSocketClient } from 'mobtimer-api';
-import { MobTimer } from 'mobtimer-api';
+import { Action, MobTimer } from 'mobtimer-api';
 
 export class Controller {
 
@@ -30,6 +30,11 @@ export class Controller {
     return response.mobState.status;
   }
 
+  static getAction(response: MobTimerResponses.SuccessfulResponse) {
+    return response.actionInfo.action;
+  }
+
+
   static getDurationMinutes(response: MobTimerResponses.SuccessfulResponse) {
     return response.mobState.durationMinutes;
   }
@@ -39,6 +44,7 @@ export class Controller {
   }
 
   static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
+    console.log("Controller.toggle");
     switch (frontendMobtimer.status) {
       case Status.Running: { client.pause(); frontendMobtimer.pause(); break; }
       case Status.Paused: { client.start(); frontendMobtimer.start(); break; }
@@ -46,8 +52,10 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, status: Status) {
-    if (frontendMobtimer.status !== status) {
+  static changeStatus(frontendMobtimer: MobTimer, status: Status, action: Action) {
+    console.log("In Controller.changeStatus");    
+    if (frontendMobtimer.status !== status && action !== Action.Expired) {
+      console.log("Controller.changeStatus from " + frontendMobtimer.status + " to " + status + " (with action " + action + ")");
       switch (status) {
         case Status.Running: { frontendMobtimer.start(); break; }
         case Status.Paused: { frontendMobtimer.pause(); break; }
@@ -57,6 +65,7 @@ export class Controller {
   }
 
   static update(client: MobSocketClient, durationMinutes: number) {
+    console.log("Controller.update");
     client.update(durationMinutes);
   }
 }

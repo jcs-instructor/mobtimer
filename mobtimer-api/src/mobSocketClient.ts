@@ -72,10 +72,12 @@ class MobSocketClient {
   }
 
   start() {
+    console.log("sending start request");
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
   }
 
   pause() {
+    console.log("sending pause request");
     this._sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
   }
 

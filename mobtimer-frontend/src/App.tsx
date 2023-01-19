@@ -48,7 +48,7 @@ const App = () => {
 
       // Sync frontend timer
       const secondsRemaining = Controller.getSecondsRemaining(response);
-      Controller.changeStatus(frontendMobTimer, mobStatus);
+      Controller.changeStatus(frontendMobTimer, mobStatus, Controller.getAction(response));
       frontendMobTimer.setSecondsRemaining(secondsRemaining);
       setTimeString(frontendMobTimer.secondsRemainingString);
       const label = Controller.getActionButtonLabel(mobStatus);

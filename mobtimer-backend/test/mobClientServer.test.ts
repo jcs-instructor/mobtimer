@@ -169,6 +169,31 @@ describe("WebSocket Server", () => {
     }
   );
 
+  test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
+    "Only send expiration message once - Start timer with duration %p",
+    async (durationSeconds: number) => {
+      const toleranceSeconds = 0.1;
+      const client = await openSocket(url);
+      await client.joinMob(_mobName1);
+      await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+      // todo: make this reproduce piling up of expire messages...
+      await client.start(); // 1st start
+      await client.start(); // 2nd start
+      await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+      await client.start(); // 3rd start
+      await cleanUp(client);
+      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(
+        0
+      );
+      expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+        Action.Expired
+      );
+      expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+        Status.Ready
+      );
+    }
+  );
+
   test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
     const durationSeconds = 1;
     const toleranceSeconds = 0.1;
