@@ -11,12 +11,14 @@ import logo from './logo.svg';
 
 const App = () => {
 
+  // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
 
+  // Submit join mob request
   const submitJoinMobRequest = async () => {
     
     if (!mobName || loaded) {
@@ -55,6 +57,7 @@ const App = () => {
     console.log('joined mob', mobName, client);
   }
 
+  // Submit action
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
@@ -62,6 +65,7 @@ const App = () => {
     Controller.toggle(client, frontendMobTimer);
   }
 
+  // To do: May be unused - if so, remove
   const submitUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
@@ -69,7 +73,7 @@ const App = () => {
     Controller.update(client, durationMinutes);
   }
 
-
+  // Browser router
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
