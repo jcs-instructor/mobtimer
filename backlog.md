@@ -29,12 +29,19 @@ Next
   - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
   - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
-  - [ ] WIP: If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up. - [ ] WIP: Can we write a unit for this? - Consider (possible fixes): - [ ] Don't send more than 1 expire message in a row for a given mobName
+  - [ ] WIP: If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
+
+    - [ ] WIP: Can we write a unit for this?
+    - Consider (possible fixes):
+
+      - [ ] More messages to log incoming and outgoing messages on both, where not already done
+
+      - [ ] Don't send more than 1 expire message in a row for a given mobName
 
              OR...
 
-            - Keep track of when time expired last for a given mobName, and prevent expiration messages until __ time later (0.5 sec? 1 sec? more? less?)
-            - Make changes in mob timer transactionally (locking? change dependent variables all together) (mobtimer thread safety)
+        - Keep track of when time expired last for a given mobName, and prevent expiration messages until \_\_ time later (0.5 sec? 1 sec? more? less?)
+        - Make changes in mob timer transactionally (locking? change dependent variables all together) (mobtimer thread safety)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
