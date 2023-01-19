@@ -30,7 +30,7 @@ const Room = ({ durationMinutes, setDurationMinutes, actionButtonLabel, setMobNa
         <>
             <p>{mobNameUrlParam}</p>
             <Timer timeString={timeString} setTimeString={setTimeString} />
-            <Duration />
+            <Duration durationMinutes={durationMinutes} setDurationMinutes={setDurationMinutes} />
             <form onSubmit={(e) => submitAction(e)}>
                 <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
             </form>

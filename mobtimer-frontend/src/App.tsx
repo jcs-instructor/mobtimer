@@ -77,7 +77,7 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} setDurationMinutes={setDurationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }
