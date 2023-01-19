@@ -17,7 +17,10 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
+  
+  // Injections
   Controller.Controller.injectSetDurationMinutes(setDurationMinutes);
+  Controller.Controller.injectSetTimeString(setTimeString);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -78,7 +81,7 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

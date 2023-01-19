@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { Controller } from '../controller';
 import { frontendMobTimer } from '../timers';
 
 type FormParameters = {
     timeString: string;
-    setTimeString: (timeString: string) => void;
 }
 
-const Timer = ({ timeString, setTimeString } : FormParameters) => {
+const Timer = ({ timeString } : FormParameters) => {
 
     useEffect(() => {
         //Component mounted
         const interval = setInterval(() => {
-            // console.log(
-            //     frontendMobTimer.secondsRemainingString, 
-            //     TimeUtils.getMinutesPart(frontendMobTimer.secondsRemaining), 
-            //     TimeUtils.getSecondsPart(frontendMobTimer.secondsRemaining),
-            //      frontendMobTimer.secondsRemaining);
-            setTimeString(frontendMobTimer.secondsRemainingString);
+            Controller.setTimeString(frontendMobTimer.secondsRemainingString);
         }, 1000);
 
         //Component will unmount

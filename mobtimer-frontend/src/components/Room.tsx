@@ -9,12 +9,11 @@ type FormParameters = {
     actionButtonLabel: string;
     setMobName: (mobName: string) => void;
     timeString: string;
-    setTimeString: (timeString: string) => void;
     submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, actionButtonLabel, setMobName, timeString, setTimeString, submitAction, submitJoinMobRequest }: FormParameters) => {
+const Room = ({ durationMinutes, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();
     useEffect(
@@ -28,7 +27,7 @@ const Room = ({ durationMinutes, actionButtonLabel, setMobName, timeString, setT
     return (
         <>
             <p>{mobNameUrlParam}</p>
-            <Timer timeString={timeString} setTimeString={setTimeString} />
+            <Timer timeString={timeString} />
             <Duration durationMinutes={durationMinutes} />
             <form onSubmit={(e) => submitAction(e)}>
                 <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>

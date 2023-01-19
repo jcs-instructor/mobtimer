@@ -4,10 +4,15 @@ import { MobSocketClient } from 'mobtimer-api';
 import { MobTimer } from 'mobtimer-api';
 
 export class Controller {
+  
   static setDurationMinutes = (durationMinutes: number) => { };
-
   static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
+  }
+
+  static setTimeString = (timeString: string) => { };
+  static injectSetTimeString(setTimeStringFunction: (timeString: string) => void) {
+    this.setTimeString = setTimeStringFunction;
   }
 }
 
