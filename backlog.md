@@ -10,8 +10,8 @@ Refactor/Improve Later
   - [ ] 2nd crack on start scripts, think about class vs function
   - [ ] In tasks.json, reorder tasks by order of execution
   - [ ] One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other (interval is currently 1000 ms - maybe shorten - at least at first)
-- [ ] Fixed mobtimer-api reference issue by deleting local files. Still an issue at times, so created a branch in case want to pursue later: branch = IncorrectReferenceShouldBreak (might be able to reproduce from this branch on Joel's PC, but maybe not). Issue was mobTimer.ts was referencing timeUtils via 
-"mobtimer-api" instead of referencing the file directly
+- [ ] Fixed mobtimer-api reference issue by deleting local files. Still an issue at times, so created a branch in case want to pursue later: branch = IncorrectReferenceShouldBreak (might be able to reproduce from this branch on Joel's PC, but maybe not). Issue was mobTimer.ts was referencing timeUtils via
+      "mobtimer-api" instead of referencing the file directly
 
 - [ ] Ethan - between sessions:
   - [ ] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
@@ -25,15 +25,17 @@ Refactor/Improve Later
 Next
 
 - [ ] Bugs:
+
   - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
   - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
-  - [ ] WIP: If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
-        - Consider (possible fixes): 
-          - Keep track of when time expired last for a given mobName, and prevent expiration messages until __ time later (0.5 sec? 1 sec? more? less?)
-          - Make changes in mob timer transactionally (locking? change dependent variables all together) (mobtimer thread safety)
-          - Don't send more than 1 expire message in a row for a given mobName
-        - Can we write a unit for this?
+  - [ ] WIP: If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up. - [ ] WIP: Can we write a unit for this? - Consider (possible fixes): - [ ] Don't send more than 1 expire message in a row for a given mobName
+
+             OR...
+
+            - Keep track of when time expired last for a given mobName, and prevent expiration messages until __ time later (0.5 sec? 1 sec? more? less?)
+            - Make changes in mob timer transactionally (locking? change dependent variables all together) (mobtimer thread safety)
+
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
@@ -87,19 +89,19 @@ Next
 - [ ] Move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
 - [ ] Maybe: \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
 - [ ] Clean up mobtimer-frontend/package.json - we might not need:
-        "crypto": "^1.0.1",
-        "http": "^0.0.1-security",
-        "https": "^1.0.0",
-        "net": "^1.0.2",
-        "stream": "^0.0.2",
-        "tls": "^0.0.1",
-        "url": "^0.11.0",
+      "crypto": "^1.0.1",
+      "http": "^0.0.1-security",
+      "https": "^1.0.0",
+      "net": "^1.0.2",
+      "stream": "^0.0.2",
+      "tls": "^0.0.1",
+      "url": "^0.11.0",
 - [ ] Use webSocketType instead of W3CWebSocket (decoupling)
-        export function waitForSocketState(
-        socket: W3CWebSocket,
-        socket: { readyState: number },
+      export function waitForSocketState(
+      socket: W3CWebSocket,
+      socket: { readyState: number },
 - [ ] Think about names / whether to expose webSocket like this:
-        await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
+      await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
 - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in wrong place - hard to see)
 - [ ] Create utility functions to create timeout and interval objects that create the object and call unref() on it before returning it
 
@@ -137,25 +139,24 @@ Next
   - [x] Update mobtimer on front and back ends when durationMinutes changes in UI
   - [x] Merge branch DurationMinutesUI back to main
 - [x] Modify ActionButton when time elapses (should say Start again)
-    - [x] Also: Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
-          then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
-          of time (from duration minutes)
+  - [x] Also: Investigate possible bug: When running timer from UI and time expires, the client gets a lot of messages in rapid succession, and
+        then if the timer is restarted, the time remaining is the amount from the last time the timer was paused instead of the full amount
+        of time (from duration minutes)
 - [x] Move onMessage from mobSocketClient to be independently added
-
 
 2022-01-12
 
-  - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
-  - [x] Be able to access a mob via the URL (instead of the text box)
-  - [x] Fix bug(s) in accessing a mob via the URL (instead of the text box)
-    - [x] See todo comments in Room.tsx
-    - [x] Add useEffect to Room.tsx
-    - [x] Guard for setMob function if mob is empty
-    - [x] Add " as { mobName: string } " after useParams()
-    - [x] Create variable mobNameLower - otherwise, doesn't work!
-  - [x] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
-  - [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
-  - [x] Display time remaining in UI - See [Display Time Remaining Proposal](./proposal-display-time.md)
+- [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
+- [x] Be able to access a mob via the URL (instead of the text box)
+- [x] Fix bug(s) in accessing a mob via the URL (instead of the text box)
+  - [x] See todo comments in Room.tsx
+  - [x] Add useEffect to Room.tsx
+  - [x] Guard for setMob function if mob is empty
+  - [x] Add " as { mobName: string } " after useParams()
+  - [x] Create variable mobNameLower - otherwise, doesn't work!
+- [x] Refactor: Remove mobName/setMobName/submitJoinRequest from JoinMobForm.tsx (no longer needed)
+- [x] Fix this: Every time the mob is joined from the UI, it joins twice. Also the Action button always triggers a join.
+- [x] Display time remaining in UI - See [Display Time Remaining Proposal](./proposal-display-time.md)
 
 2022-12-15
 

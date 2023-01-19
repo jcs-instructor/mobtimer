@@ -1,3 +1,5 @@
+Resource for retro: https://docs.google.com/document/d/1EKo20gHXQsAFqiAw56kNISPx170u0RLXiXBNqulV4Rg/edit#
+
 **Start of Session**
 Joel:
 
