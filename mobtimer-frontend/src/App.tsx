@@ -33,7 +33,7 @@ const App = () => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
       
       // todo: handle if response is not successful
-      console.log("Mob: "+response.mobState.mobName+", Action:"+response.actionInfo.action+", Status:"+response.mobState.status+", RemainingSec:"+response.mobState.secondsRemaining+", DurationMin:"+response.mobState.durationMinutes);
+      console.log("Mob: "+response.mobState.mobName+", Action:"+response.actionInfo.action+", Status:"+response.mobState.status+", DurationMin:"+response.mobState.durationMinutes+", RemainingSec:"+response.mobState.secondsRemaining);
       
       // Status
       const mobStatus = Controller.getStatus(response);
@@ -77,7 +77,7 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room label={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" element={<Room actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }
