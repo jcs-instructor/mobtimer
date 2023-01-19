@@ -17,33 +17,33 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
-  Controller.setDurationMinutes = setDurationMinutes;
+  Controller.injectSetDurationMinutes(setDurationMinutes);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
-    
+
     if (!mobName || loaded) {
       return;
     };
-    
+
     setLoaded(true);
 
     client.webSocket.onmessage = (message: { data: string; }) => {
-      
+
       // Get response from server
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
-      
+
       // todo: handle if response is not successful
-      console.log("Mob: "+response.mobState.mobName+", Action:"+response.actionInfo.action+", Status:"+response.mobState.status+", DurationMin:"+response.mobState.durationMinutes+", RemainingSec:"+response.mobState.secondsRemaining);
-      
+      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining);
+
       // Status
       const mobStatus = Controller.getStatus(response);
       //setStatus(status);
-      
+
       // Duration minutes
       const durationMinutes = Controller.getDurationMinutes(response);
       setDurationMinutes(durationMinutes);
-      
+
       // Sync frontend timer
       const secondsRemaining = Controller.getSecondsRemaining(response);
       Controller.changeStatus(frontendMobTimer, mobStatus);
@@ -78,7 +78,7 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} setDurationMinutes={setDurationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} setTimeString={setTimeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }
