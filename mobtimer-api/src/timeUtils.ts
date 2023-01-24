@@ -1,12 +1,13 @@
 // todo: make consistent either all classes or modules (when all static)
 export class TimeUtils {
-
-  static delaySeconds(seconds: number) {
+  static delaySeconds(seconds: number, func?: () => void): Promise<void> {
     return new Promise((resolve) => {
-      const timeout = setTimeout(resolve, TimeUtils.secondsToMilliseconds(seconds));
+      const timeout = setTimeout(
+        resolve,
+        TimeUtils.secondsToMilliseconds(seconds)
+      );
       timeout.unref();
-    }
-    );
+    });
   }
 
   static getNowInSeconds(): number {
@@ -31,8 +32,11 @@ export class TimeUtils {
 
   static getTimeString(seconds: number): string {
     const integerSeconds = Math.ceil(seconds);
-    return TimeUtils.getMinutesPart(integerSeconds) + ":" +
-      TimeUtils.getSecondsPart(integerSeconds);
+    return (
+      TimeUtils.getMinutesPart(integerSeconds) +
+      ":" +
+      TimeUtils.getSecondsPart(integerSeconds)
+    );
   }
 
   static getMinutesPart(seconds: number): string {
@@ -41,8 +45,7 @@ export class TimeUtils {
   }
 
   static getSecondsPart(seconds: number): string {
-    const secondsPart = (seconds % 60);
+    const secondsPart = seconds % 60;
     return secondsPart.toString().padStart(2, "0");
   }
-
 }

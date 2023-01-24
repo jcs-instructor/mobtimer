@@ -8,7 +8,7 @@ export class MobTimer {
   private _whenLastStartedInSeconds = 0;
   private _whenPausedInSeconds = 0;
   private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
-  private _previouslyAccumulatedElapsedSeconds = 0;
+  _previouslyAccumulatedElapsedSeconds = 0;
   private _running = false;
   private _everStarted = false;
   private _timer: NodeJS.Timeout | undefined;
@@ -28,34 +28,47 @@ export class MobTimer {
     const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(
       this.secondsRemaining
     );
-    const intervalMilliseconds = 10;
-    const safetyMarginMilliseconds = intervalMilliseconds * 5;
     this._timer = setTimeout(() => {
-      this._interval = setInterval(() => {
-        this.checkReady();
-      }, intervalMilliseconds);
-      if (this._interval.unref) this._interval.unref();
-    }, timeoutMilliseconds - safetyMarginMilliseconds);
+      this.reset();
+    }, timeoutMilliseconds);
     if (this._timer.unref) this._timer.unref();
   }
 
-  checkReady() {
-    if (this.status === Status.Ready) {
+  reset() {
+    this._previouslyAccumulatedElapsedSeconds = 0;
+    this._running = false;
+    if (this._timerExpireFunc) {
       this._timerExpireFunc();
+    }
+    if (this._timer) clearTimeout(this._timer);
+  }
+
+  async checkReady() {
+    console.log("checkReady", this.status);
+    if (this.status === Status.Ready) {
+      this._previouslyAccumulatedElapsedSeconds = 0;
+      this.pause();
+      console.log(
+        "Ready",
+        this._previouslyAccumulatedElapsedSeconds,
+        this.secondsRemaining,
+        "durationMinutes:",
+        this.durationMinutes
+      );
       if (this._interval) {
-        clearInterval(this._interval);        
+        clearInterval(this._interval);
       }
       if (this._timer) {
-        clearInterval(this._timer);        
+        clearInterval(this._timer);
       }
     }
   }
 
   start() {
-    this.setExpireTimeout();
     this._running = true;
     this._everStarted = true;
     this._whenLastStartedInSeconds = this._nowInSecondsFunc();
+    this.setExpireTimeout();
   }
 
   public set nowInSecondsFunc(func: () => number) {
@@ -100,7 +113,8 @@ export class MobTimer {
     // }
 
     // If timer hasn't been started or has elapsed fully, then: READY
-    if (this.secondsRemaining <= 0 || !this._everStarted) {
+    const topOfClock = this.secondsRemaining >= this.durationSeconds - 0.2;
+    if ((topOfClock && !this._running) || !this._everStarted) {
       // || (!this._running &&
       //   this.secondsRemaining >=
       //     TimeUtils.minutesToSeconds(this.durationMinutes))
@@ -143,5 +157,9 @@ export class MobTimer {
   }
   public set durationMinutes(duration: number) {
     this._durationMinutes = duration;
+  }
+
+  public get durationSeconds(): number {
+    return this._durationMinutes * 60;
   }
 }
