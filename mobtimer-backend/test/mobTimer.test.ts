@@ -82,10 +82,7 @@ test("Ready status after time expires", async () => {
   mobTimer.start();
   const numDigits = 2;
   await TimeUtils.delaySeconds(2);
-  expect(mobTimer.secondsRemaining).toBeCloseTo(
-    mobTimer.durationSeconds,
-    numDigits
-  );
+  expect(mobTimer.secondsRemaining).toEqual(0);
   expect(mobTimer.status).toBe(Status.Ready);
 });
 
@@ -179,7 +176,7 @@ test("After time expires and timer is started, time remaining should be full amo
   mockCurrentTime.delaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(59);
   mockCurrentTime.delaySeconds(61);
-  expect(mobTimer.secondsRemaining).toEqual(mobTimer.durationSeconds);
+  expect(mobTimer.secondsRemaining).toEqual(0);
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(60);
   mobTimer.start();
@@ -193,7 +190,7 @@ test("After time expires, seconds remaining should be 0", () => {
   mobTimer.durationMinutes = 1;
   mobTimer.start();
   mockCurrentTime.delaySeconds(65);
-  expect(mobTimer.secondsRemainingString).toEqual("01:00");
+  expect(mobTimer.secondsRemainingString).toEqual("00:00");
 });
 
 test("After time expires, elapse time raises specified event", async () => {

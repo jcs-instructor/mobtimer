@@ -175,8 +175,8 @@ describe("WebSocket Server", () => {
     }
   );
 
-  test.skip.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
-    "Only send expiration message once - Start timer with duration %p",
+  test.skip.each([0.2])(
+    "Skip (test incorrect) - Only send expiration message once - Start timer with duration %p",
     async (durationSeconds: number) => {
       const toleranceSeconds = 0.1;
       const client = await openSocket(url);
@@ -188,8 +188,11 @@ describe("WebSocket Server", () => {
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await client.start(); // 3rd start
       await cleanUp(client);
-      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(
-        0
+      expect(
+        client.lastSuccessfulResponse.mobState.secondsRemaining
+      ).toBeCloseTo(
+        client.lastSuccessfulResponse.mobState.durationMinutes * 60,
+        2
       );
       expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
         Action.Expired
@@ -201,7 +204,7 @@ describe("WebSocket Server", () => {
   );
 
   test.skip.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
-    "Loop: Only send expiration message once - Start timer with duration %p",
+    "Skip - test needs to be revisited.  Loop: Only send expiration message once - Start timer with duration %p",
     async (durationSeconds: number) => {
       console.log("xxxxxxxxxxxxxxxx");
       const toleranceSeconds = 0.1;
