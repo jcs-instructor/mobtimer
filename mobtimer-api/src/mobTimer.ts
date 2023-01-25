@@ -8,13 +8,13 @@ export class MobTimer {
   private _whenLastStartedInSeconds = 0;
   private _whenPausedInSeconds = 0;
   private _nowInSecondsFunc = TimeUtils.getNowInSeconds;
-  _previouslyAccumulatedElapsedSeconds = 0;
+  private _previouslyAccumulatedElapsedSeconds = 0;
   private _running = false;
   private _everStarted = false;
   private _timer: NodeJS.Timeout | undefined;
   private _interval: NodeJS.Timeout | undefined;
   private _timerExpireFunc = () => {};
-  private _reset = false;
+  private _expired = false;
   sockets: any;
 
   constructor(mobName: string = "") {
@@ -36,7 +36,7 @@ export class MobTimer {
 
   reset() {
     this.pause();
-    this._reset = true;
+    this._expired = true;
     if (this._timerExpireFunc) {
       this._timerExpireFunc();
     }
@@ -46,9 +46,9 @@ export class MobTimer {
   start() {
     this._running = true;
     this._everStarted = true;
-    if (this._reset) {
+    if (this._expired) {
       this._previouslyAccumulatedElapsedSeconds = 0;
-      this._reset = false;
+      this._expired = false;
     }
     this._whenLastStartedInSeconds = this._nowInSecondsFunc();
     this.setExpireTimeout();
