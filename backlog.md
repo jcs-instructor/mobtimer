@@ -29,19 +29,13 @@ Next
   - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
   - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
-  - [ ] WIP: If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
+  - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
 
-    - [ ] WIP: Can we write a unit for this?
-    - Consider (possible fixes):
-
-      - [ ] More messages to log incoming and outgoing messages on both, where not already done
-
-      - [ ] Don't send more than 1 expire message in a row for a given mobName
-
-             OR...
-
-        - Keep track of when time expired last for a given mobName, and prevent expiration messages until \_\_ time later (0.5 sec? 1 sec? more? less?)
-        - Make changes in mob timer transactionally (locking? change dependent variables all together) (mobtimer thread safety)
+- [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...)
+  - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
+- [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) - and remove tests that were later marked skipped
+- [ ] Clarify nowInSecondsFunc with either comments or renaming
+- [ ] Merge into main branch
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
