@@ -78,30 +78,25 @@ test("Get seconds remaining 1 second after start (real)", async () => {
 
 test("Ready status after time expires", async () => {
   const mobTimer = new MobTimer();
-  mobTimer.durationMinutes = 2 / 60;
+  const durationSeconds = 0.2;
+  mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
   const numDigits = 2;
-  await TimeUtils.delaySeconds(2);
+  await TimeUtils.delaySeconds(durationSeconds);
   expect(mobTimer.secondsRemaining).toEqual(0);
   expect(mobTimer.status).toBe(Status.Ready);
 });
 
 test("Start after time expires", async () => {
   const mobTimer = new MobTimer();
-  mobTimer.durationMinutes = 2 / 60;
+  const durationSeconds = 0.2;
+  const extraPaddingSecondsToBeSureTimeRunsOut = 0.1;
+  mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
   const numDigits = 1;
-  await TimeUtils.delaySeconds(3);
+  await TimeUtils.delaySeconds(durationSeconds + extraPaddingSecondsToBeSureTimeRunsOut);
   await mobTimer.start();
-  console.log(
-    "secondsRemaining: " + mobTimer.secondsRemaining,
-    mobTimer._previouslyAccumulatedElapsedSeconds,
-    mobTimer.durationMinutes
-  );
-  expect(mobTimer.secondsRemaining).toBeCloseTo(
-    mobTimer.durationSeconds,
-    numDigits
-  );
+  expect(mobTimer.secondsRemaining).toBeCloseTo(mobTimer.durationSeconds, numDigits);
   expect(mobTimer.status).toBe(Status.Running);
 });
 
