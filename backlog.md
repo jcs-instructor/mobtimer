@@ -34,8 +34,59 @@ Next
 - [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...)
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
 - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) - and remove tests that were later marked skipped
+
+- [ ] More changes to test files:
+
+                mobClientServer.test.ts (REVERT ENTIRE FILE & delete 2 .skip tests)
+
+                pause timer test:
+
+                await TimeUtils.delaySeconds(0.5); // delete this line
+
+
+                in test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
+                "Start timer with duration %p and elapse time sends message to all", :
+
+                await client.joinMob(_mobName1 + Date.now()); // remove  + Date.now()
+
+                await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2); // remove + 2
+
+                // remove console log
+
+                    expect(
+                        client.lastSuccessfulResponse.mobState.secondsRemaining
+                      ).toBeLessThanOrEqual(0.1); // toEqual(0)
+
+
+                // delete 2 .skip tests (Skip incorrect) and (Loop)
+
+
+                ----------------------
+
+
+                mobTimer.test.ts
+
+                Add back in test:
+
+                test("Get time remaining string 1 second after start", () => {
+                  const mobTimer = new MobTimer();
+                  const mockCurrentTime = createMockCurrentTime(mobTimer);
+                  mobTimer.durationMinutes = 6;
+                  mobTimer.start();
+                  mockCurrentTime.delaySeconds(1);
+                  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+                });
+
+                // above is immediately after test("Get seconds remaining 1 second after start", () => {
+
+
+
+
 - [ ] Clarify nowInSecondsFunc with either comments or renaming
 - [ ] Merge into main branch
+
+
+
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
