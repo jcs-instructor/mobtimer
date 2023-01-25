@@ -1,6 +1,6 @@
 // todo: make consistent either all classes or modules (when all static)
 export class TimeUtils {
-  static delaySeconds(seconds: number, func?: () => void): Promise<void> {
+  static delaySeconds(seconds: number): Promise<void> {
     return new Promise((resolve) => {
       const timeout = setTimeout(
         resolve,
