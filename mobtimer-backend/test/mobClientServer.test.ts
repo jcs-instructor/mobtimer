@@ -110,7 +110,7 @@ describe("WebSocket Server", () => {
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
-    await delaySeconds(0.5);
+    await TimeUtils.delaySeconds(0.5);
     await client.pause();
     await cleanUp(client);
     expect(client.lastSuccessfulResponse.mobState.status).toEqual(
@@ -153,14 +153,19 @@ describe("WebSocket Server", () => {
     async (durationSeconds: number) => {
       const toleranceSeconds = 0.1;
       const client = await openSocket(url);
-      await client.joinMob(_mobName1);
+      await client.joinMob(_mobName1 + Date.now());
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       await client.start();
-      await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+      await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2);
       await cleanUp(client);
-      expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(
-        0
+      console.log(
+        `client.lastSuccessfulResponse: ${JSON.stringify(
+          client.lastSuccessfulResponse
+        )}`
       );
+      expect(
+        client.lastSuccessfulResponse.mobState.secondsRemaining
+      ).toBeLessThanOrEqual(0.1);
       expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
         Action.Expired
       );

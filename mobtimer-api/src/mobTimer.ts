@@ -14,10 +14,10 @@ export class MobTimer {
   private _timer: NodeJS.Timeout | undefined;
   private _interval: NodeJS.Timeout | undefined;
   private _timerExpireFunc = () => {};
+  private _reset = false;
   sockets: any;
 
   constructor(mobName: string = "") {
-    console.log("MobTimer constructor2");
     this._mobName = mobName;
   }
 
@@ -35,38 +35,21 @@ export class MobTimer {
   }
 
   reset() {
-    this._previouslyAccumulatedElapsedSeconds = 0;
-    this._running = false;
+    this.pause();
+    this._reset = true;
     if (this._timerExpireFunc) {
       this._timerExpireFunc();
     }
     if (this._timer) clearTimeout(this._timer);
   }
 
-  async checkReady() {
-    console.log("checkReady", this.status);
-    if (this.status === Status.Ready) {
-      this._previouslyAccumulatedElapsedSeconds = 0;
-      this.pause();
-      console.log(
-        "Ready",
-        this._previouslyAccumulatedElapsedSeconds,
-        this.secondsRemaining,
-        "durationMinutes:",
-        this.durationMinutes
-      );
-      if (this._interval) {
-        clearInterval(this._interval);
-      }
-      if (this._timer) {
-        clearInterval(this._timer);
-      }
-    }
-  }
-
   start() {
     this._running = true;
     this._everStarted = true;
+    if (this._reset) {
+      this._previouslyAccumulatedElapsedSeconds = 0;
+      this._reset = false;
+    }
     this._whenLastStartedInSeconds = this._nowInSecondsFunc();
     this.setExpireTimeout();
   }
@@ -93,7 +76,6 @@ export class MobTimer {
       status: this.status,
       durationMinutes: this.durationMinutes,
       secondsRemaining: this.secondsRemaining,
-      // timestamp: new Date().getTime(),
     } as MobState;
   }
 
@@ -104,7 +86,6 @@ export class MobTimer {
     this._previouslyAccumulatedElapsedSeconds =
       durationSeconds - secondsRemaining;
     this._whenLastStartedInSeconds = this._nowInSecondsFunc();
-    //console.log("setSecondsRemaining: sec remain / prev accum", secondsRemaining, this._previouslyAccumulatedElapsedSeconds);
   }
 
   public get status(): Status {
@@ -113,11 +94,7 @@ export class MobTimer {
     // }
 
     // If timer hasn't been started or has elapsed fully, then: READY
-    const topOfClock = this.secondsRemaining >= this.durationSeconds - 0.2;
-    if ((topOfClock && !this._running) || !this._everStarted) {
-      // || (!this._running &&
-      //   this.secondsRemaining >=
-      //     TimeUtils.minutesToSeconds(this.durationMinutes))
+    if (this.secondsRemaining <= 0.1) {
       return Status.Ready;
     } else if (this._running) {
       return Status.Running;
@@ -138,7 +115,7 @@ export class MobTimer {
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
     const result = durationSeconds - elapsedSeconds;
-    return result < 0 ? 0 : result;
+    return result <= 0.1 ? 0 : result;
   }
 
   private calculateElapsedSeconds() {
