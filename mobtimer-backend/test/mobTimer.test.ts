@@ -102,18 +102,14 @@ test("Start after time expires", async () => {
 
 test("Pause timer", () => {
   const mobTimer = new MobTimer();
-  const mockCurrentTime = createMockCurrentTime(mobTimer);
   mobTimer.start();
-  mockCurrentTime.delaySeconds(1);
   mobTimer.pause();
   expect(mobTimer.status).toEqual(Status.Paused);
 });
 
 test("Resume timer", () => {
   const mobTimer = new MobTimer();
-  const mockCurrentTime = createMockCurrentTime(mobTimer);
   mobTimer.start();
-  mockCurrentTime.delaySeconds(1);
   mobTimer.pause();
   mobTimer.start();
   expect(mobTimer.status).toEqual(Status.Running);
