@@ -186,17 +186,16 @@ test("After time expires, seconds remaining should be 0", () => {
 
 test("After time expires, elapse time raises specified event", async () => {
   const mobTimer = new MobTimer();
-  let expired = false;
+  let expireFuncWasCalled = false;
   mobTimer.timerExpireFunc = () => {
-    console.log("timer expired");
-    expired = true;
+    expireFuncWasCalled = true;
   };
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = TimeUtils.secondsToMinutes(durationSeconds);
   mobTimer.start();
   const toleranceSeconds = 0.1;
   await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-  expect(expired).toBe(true);
+  expect(expireFuncWasCalled).toBe(true);
 });
 
 function createMockCurrentTime(mobTimer: MobTimer) {
