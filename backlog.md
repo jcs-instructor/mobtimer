@@ -29,7 +29,7 @@ Next
 - [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...).
       And if keep, probably reduce 0.1 to 0.025 (per our discussion)
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
-- [ ] Add back test: 
+- [ ] (2) Add back test: 
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
           ```
           test("Get time remaining string 1 second after start", () => {
@@ -41,7 +41,7 @@ Next
             expect(mobTimer.secondsRemainingString).toEqual("05:59");
           });
           ```
-- [ ] mobClientServer.test.ts changes:
+- [ ] (3) mobClientServer.test.ts changes:
   - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) 
   - [ ] Remove tests that were later marked skipped
   - [ ] Modify the pause timer test, i.e., delete this line: await TimeUtils.delaySeconds(0.5);
@@ -55,7 +55,6 @@ Next
                         client.lastSuccessfulResponse.mobState.secondsRemaining
                       ).toBeLessThanOrEqual(0.1); // toEqual(0)
                     ```
-- [ ] Clarify nowInSecondsFunc with either comments or renaming
 - [ ] Merge into main branch
 
 
@@ -109,6 +108,13 @@ Next
 
 ## Refactoring
 
+- [ ] Change mockCurrentTime.ts to mockMobTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
+      From:
+        const mobTimer = new MobTimer();
+        const mockCurrentTime = createMockCurrentTime(mobTimer);
+      To:
+        const mockMobTimer = new MockMobTimer();
+
 - [ ] Move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
 - [ ] Maybe: \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
 - [ ] Clean up mobtimer-frontend/package.json - we might not need:
@@ -154,6 +160,10 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-01-26
+
+- [x] Clarify nowInSecondsFunc with either comments or renaming in mockCurrentTime.ts
 
 2022-01-25
 

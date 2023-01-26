@@ -199,7 +199,5 @@ test("After time expires, elapse time raises specified event", async () => {
 });
 
 function createMockCurrentTime(mobTimer: MobTimer) {
-  const mockCurrentTime = new MockCurrentTime(mobTimer);
-  mobTimer.nowInSecondsFunc = () => mockCurrentTime.nowInSecondsFunc();
-  return mockCurrentTime;
+  return new MockCurrentTime(mobTimer);
 }

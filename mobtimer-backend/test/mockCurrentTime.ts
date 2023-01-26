@@ -6,10 +6,10 @@ export class MockCurrentTime {
 
   constructor(mobTimer: MobTimer) {
     this.mobTimer = mobTimer;
-    mobTimer.nowInSecondsFunc = this.nowInSecondsFunc.bind(this);
+    mobTimer.nowInSecondsFunc = () => this.mockNowInSecondsFunc();
   }
 
-  public nowInSecondsFunc() {
+  private mockNowInSecondsFunc() {
     return this._mockCurrentTimeSeconds;
   }
 
