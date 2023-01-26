@@ -25,7 +25,6 @@ Refactor/Improve Later
 Next
 
 - [ ] Bugs:
-
   - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
   - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
@@ -33,59 +32,34 @@ Next
 
 - [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...)
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
-- [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) - and remove tests that were later marked skipped
-
-- [ ] More changes to test files:
-
-                mobClientServer.test.ts (REVERT ENTIRE FILE & delete 2 .skip tests)
-
-                pause timer test:
-
-                await TimeUtils.delaySeconds(0.5); // delete this line
-
-
-                in test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
-                "Start timer with duration %p and elapse time sends message to all", :
-
-                await client.joinMob(_mobName1 + Date.now()); // remove  + Date.now()
-
-                await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2); // remove + 2
-
-                // remove console log
-
+- [ ] Add back test: 
+      In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
+          ```
+          test("Get time remaining string 1 second after start", () => {
+            const mobTimer = new MobTimer();
+            const mockCurrentTime = createMockCurrentTime(mobTimer);
+            mobTimer.durationMinutes = 6;
+            mobTimer.start();
+            mockCurrentTime.delaySeconds(1);
+            expect(mobTimer.secondsRemainingString).toEqual("05:59");
+          });
+          ```
+- [ ] mobClientServer.test.ts changes:
+  - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) 
+  - [ ] Remove tests that were later marked skipped
+  - [ ] Modify the pause timer test, i.e., delete this line: await TimeUtils.delaySeconds(0.5);
+  - [ ] In the test "Start timer with duration %p and elapse time sends message to all", remove:
+       - [ ] remove: "+ Date.now()"
+       - [ ] remove "+ 2" from await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2);
+       - [ ] remove console log
+       - [ ] Change expect to be equal to 0, instead of less than or equal to 0.1
+                    ```
                     expect(
                         client.lastSuccessfulResponse.mobState.secondsRemaining
                       ).toBeLessThanOrEqual(0.1); // toEqual(0)
-
-
-                // delete 2 .skip tests (Skip incorrect) and (Loop)
-
-
-                ----------------------
-
-
-                mobTimer.test.ts
-
-                Add back in test:
-
-                test("Get time remaining string 1 second after start", () => {
-                  const mobTimer = new MobTimer();
-                  const mockCurrentTime = createMockCurrentTime(mobTimer);
-                  mobTimer.durationMinutes = 6;
-                  mobTimer.start();
-                  mockCurrentTime.delaySeconds(1);
-                  expect(mobTimer.secondsRemainingString).toEqual("05:59");
-                });
-
-                // above is immediately after test("Get seconds remaining 1 second after start", () => {
-
-
-
-
+                    ```
 - [ ] Clarify nowInSecondsFunc with either comments or renaming
 - [ ] Merge into main branch
-
-
 
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
