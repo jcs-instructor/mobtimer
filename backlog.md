@@ -24,11 +24,7 @@ Refactor/Improve Later
 
 Next
 
-- [ ] Bugs:
-  - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
-  - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
-        We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
-  - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
+- [ ] Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
 
 - [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...).
       And if keep, probably reduce 0.1 to 0.025 (per our discussion)
@@ -158,6 +154,14 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-01-25
+
+- [x] Fixed bugs:
+  - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
+  - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
+        We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters.
+  - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
 
 2022-01-18
 
