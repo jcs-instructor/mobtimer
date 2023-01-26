@@ -98,12 +98,9 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await client.start();
     await cleanUp(client);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
-      Status.Running
-    );
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
-      Action.Start
-    );
+    console.log("json", JSON.stringify(client.lastSuccessfulResponse));
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Start);
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);    
   });
 
   test("Pause timer", async () => {

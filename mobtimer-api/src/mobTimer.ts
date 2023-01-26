@@ -11,9 +11,8 @@ export class MobTimer {
   private _previouslyAccumulatedElapsedSeconds = 0;
   private _running = false;
   private _timer: NodeJS.Timeout | undefined;
-  private _interval: NodeJS.Timeout | undefined;
   private _timerExpireFunc = () => {};
-  private _expired = true;
+  private _ready = true;
   sockets: any;
 
   constructor(mobName: string = "") {
@@ -24,9 +23,7 @@ export class MobTimer {
     // We will wait until very near when the timer should expire, and then very
     // frequently check to see if the timer has expired. This is to avoid
     // the case where the timer expires before we have had time to check.
-    const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(
-      this.secondsRemaining
-    );
+    const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(this.secondsRemaining);
     this._timer = setTimeout(() => {
       this.reset();
     }, timeoutMilliseconds);
@@ -35,7 +32,7 @@ export class MobTimer {
 
   reset() {
     this.pause();
-    this._expired = true;
+    this._ready = true;
     if (this._timerExpireFunc) {
       this._timerExpireFunc();
     }
@@ -44,9 +41,9 @@ export class MobTimer {
 
   start() {
     this._running = true;
-    if (this._expired) {
+    if (this._ready) {
       this._previouslyAccumulatedElapsedSeconds = 0;
-      this._expired = false;
+      this._ready = false;
     }
     this._whenLastStartedInSeconds = this._nowInSecondsFunc();
     this.setExpireTimeout();
@@ -92,7 +89,7 @@ export class MobTimer {
     // }
 
     // If timer hasn't been started or has elapsed fully, then: READY
-    if (this._expired) {
+    if (this._ready) {
       return Status.Ready;
     } else if (this._running) {
       return Status.Running;
@@ -107,7 +104,7 @@ export class MobTimer {
 
   public get secondsRemaining(): number {
     // When the timer is ready, show "0:00" for the time.
-    if (!this._expired) {
+    if (this._ready) {
       return 0;
     }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
