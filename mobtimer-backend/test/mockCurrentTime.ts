@@ -15,7 +15,9 @@ export class MockCurrentTime {
 
   public delaySeconds(seconds: number) {
     this._mockCurrentTimeSeconds += seconds;
-    if (this.mobTimer.secondsRemaining <= 0.1) {
+    const toleranceSeconds = 0.01; // for floating point precision issues
+    if (this.mobTimer.secondsRemaining <= toleranceSeconds) {
+      console.log("IN mock", this.mobTimer.secondsRemaining);
       this.mobTimer.reset();
     }
   }
