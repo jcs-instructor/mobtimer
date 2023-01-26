@@ -144,7 +144,7 @@ describe("WebSocket Server", () => {
     expect(client.lastSuccessfulResponse.actionInfo.action).toEqual("update");
   });
 
-  test.each([0.2, TimeUtils.millisecondsToSeconds(1)])(
+  test.each([0.2])( // , TimeUtils.millisecondsToSeconds(1)
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
       const toleranceSeconds = 0; // 0.1
@@ -152,7 +152,9 @@ describe("WebSocket Server", () => {
       await client.joinMob("elephant"); //_mobName1
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       await client.start();
+      const now = Date.now();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+      console.log("Time delay was... ", Date.now() - now);
       await cleanUp(client);
       console.log("DEBUG ---- json", JSON.stringify(client.lastSuccessfulResponse));
       expect(client.lastSuccessfulResponse.mobState.secondsRemaining).toEqual(

@@ -70,6 +70,7 @@ export class RoomManager {
     const mobTimerResponse = {
       actionInfo: { action: action },
       mobState: mobTimer.state,
+      logInfo: mobTimer.getLogInfo(),
     } as SuccessfulResponse;
     let message = JSON.stringify(mobTimerResponse);
     const sockets = RoomManager.getSocketsForMob(mobTimer.state.mobName);

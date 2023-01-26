@@ -74,6 +74,16 @@ export class MobTimer {
     } as MobState;
   }
 
+  getLogInfo() {
+    return  {
+      mobName: this._mobName, 
+      previouslyAccumulatedElapsedSeconds: this._previouslyAccumulatedElapsedSeconds, 
+      nowInSeconds: this._nowInSecondsFunc(), 
+      whenLastStartedInSeconds: this._whenLastStartedInSeconds,
+      elapsedSeconds: this._previouslyAccumulatedElapsedSeconds + (this._nowInSecondsFunc() - this._whenLastStartedInSeconds)
+    };
+  }
+
   setSecondsRemaining(secondsRemaining: number) {
     // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
     // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
@@ -116,7 +126,6 @@ export class MobTimer {
     if (!this._running) {
       return this._previouslyAccumulatedElapsedSeconds;
     } else {
-      console.log("prev, now, lastStarted", this._mobName, this._previouslyAccumulatedElapsedSeconds, this._nowInSecondsFunc(), this._whenLastStartedInSeconds);
       return (
         this._previouslyAccumulatedElapsedSeconds +
         (this._nowInSecondsFunc() - this._whenLastStartedInSeconds)
