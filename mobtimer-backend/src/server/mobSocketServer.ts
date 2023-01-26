@@ -9,7 +9,6 @@ import { RoomManager } from "./roomManager";
 export async function startMobServer(
   port: number
 ): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
-  console.log("text");
   const server = http.createServer();
   const wss = _addMobListeners(server);
   return new Promise((resolve) => {

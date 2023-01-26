@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import App from '../src/App';
 
 test('A test that passes', () => {
   console.log('This test passes');

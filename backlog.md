@@ -24,24 +24,40 @@ Refactor/Improve Later
 
 Next
 
-- [ ] Bugs:
+- [ ] Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
 
-  - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
-  - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
-        We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
-  - [ ] WIP: If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
+- [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...).
+      And if keep, probably reduce 0.1 to 0.025 (per our discussion)
+  - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
+- [ ] Add back test: 
+      In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
+          ```
+          test("Get time remaining string 1 second after start", () => {
+            const mobTimer = new MobTimer();
+            const mockCurrentTime = createMockCurrentTime(mobTimer);
+            mobTimer.durationMinutes = 6;
+            mobTimer.start();
+            mockCurrentTime.delaySeconds(1);
+            expect(mobTimer.secondsRemainingString).toEqual("05:59");
+          });
+          ```
+- [ ] mobClientServer.test.ts changes:
+  - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) 
+  - [ ] Remove tests that were later marked skipped
+  - [ ] Modify the pause timer test, i.e., delete this line: await TimeUtils.delaySeconds(0.5);
+  - [ ] In the test "Start timer with duration %p and elapse time sends message to all", remove:
+       - [ ] remove: "+ Date.now()"
+       - [ ] remove "+ 2" from await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2);
+       - [ ] remove console log
+       - [ ] Change expect to be equal to 0, instead of less than or equal to 0.1
+                    ```
+                    expect(
+                        client.lastSuccessfulResponse.mobState.secondsRemaining
+                      ).toBeLessThanOrEqual(0.1); // toEqual(0)
+                    ```
+- [ ] Clarify nowInSecondsFunc with either comments or renaming
+- [ ] Merge into main branch
 
-    - [ ] WIP: Can we write a unit for this?
-    - Consider (possible fixes):
-
-      - [ ] More messages to log incoming and outgoing messages on both, where not already done
-
-      - [ ] Don't send more than 1 expire message in a row for a given mobName
-
-             OR...
-
-        - Keep track of when time expired last for a given mobName, and prevent expiration messages until \_\_ time later (0.5 sec? 1 sec? more? less?)
-        - Make changes in mob timer transactionally (locking? change dependent variables all together) (mobtimer thread safety)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
@@ -138,6 +154,14 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-01-25
+
+- [x] Fixed bugs:
+  - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
+  - [x] In 2nd browser tab, Turn Duration (minutes) doesn't show the correct minutes when updated elsewhere.
+        We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters.
+  - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
 
 2022-01-18
 
