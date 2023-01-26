@@ -25,9 +25,7 @@ export class MobTimer {
     // We will wait until very near when the timer should expire, and then very
     // frequently check to see if the timer has expired. This is to avoid
     // the case where the timer expires before we have had time to check.
-    const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(
-      this.secondsRemaining
-    );
+    const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(this.secondsRemaining);
     this._timer = setTimeout(() => {
       this.reset();
     }, timeoutMilliseconds);

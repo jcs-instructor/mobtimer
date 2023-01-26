@@ -25,7 +25,8 @@ Refactor/Improve Later
 Next
 
 - [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (\_expired || !\_everStarted --> didn't work...).
-      And if keep, probably reduce 0.1 to 0.025 (per our discussion)
+      And if keep, probably reduce 0.1 to 0.025 (per our discussion). Also look at making the UI timeout shorter. The 2 together could make the last second less 
+      jumpy in the UI.
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
 
 - [ ] Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
