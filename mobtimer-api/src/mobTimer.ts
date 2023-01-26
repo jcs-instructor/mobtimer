@@ -116,6 +116,7 @@ export class MobTimer {
     if (!this._running) {
       return this._previouslyAccumulatedElapsedSeconds;
     } else {
+      console.log("prev, now, lastStarted", this._mobName, this._previouslyAccumulatedElapsedSeconds, this._nowInSecondsFunc(), this._whenLastStartedInSeconds);
       return (
         this._previouslyAccumulatedElapsedSeconds +
         (this._nowInSecondsFunc() - this._whenLastStartedInSeconds)
