@@ -12,6 +12,7 @@ describe("WebSocket Server", () => {
   const _mobName2 = "good-team";
   const port = 4000 + Number(process.env.JEST_WORKER_ID);
   const url = `ws://localhost:${port}`;
+  const toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
 
   beforeEach(async () => {
     _server = await startMobServer(port);
@@ -99,8 +100,12 @@ describe("WebSocket Server", () => {
     await client.start();
     await cleanUp(client);
     console.log("json", JSON.stringify(client.lastSuccessfulResponse));
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Start);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);    
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Start
+    );
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
   });
 
   test("Pause timer", async () => {
@@ -144,12 +149,11 @@ describe("WebSocket Server", () => {
     expect(client.lastSuccessfulResponse.actionInfo.action).toEqual("update");
   });
 
-  test.each([0.2])( 
+  test.each([0.2])(
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
-      const toleranceSeconds = 0.05;
       const client = await openSocket(url);
-      await client.joinMob("elephant"); //_mobName1
+      await client.joinMob(_mobName1);
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       await client.start();
       const now = Date.now();
@@ -169,7 +173,6 @@ describe("WebSocket Server", () => {
 
   test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
     const durationSeconds = 1;
-    const toleranceSeconds = 0.1;
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
@@ -192,7 +195,6 @@ describe("WebSocket Server", () => {
 
   test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
     const durationSeconds = 1;
-    const toleranceSeconds = 0.1;
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
