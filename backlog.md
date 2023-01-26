@@ -24,25 +24,11 @@ Refactor/Improve Later
 
 Next
 
-- [ ] Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
-
 - [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (\_expired || !\_everStarted --> didn't work...).
       And if keep, probably reduce 0.1 to 0.025 (per our discussion)
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
-- [x] Add back test:
-      In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
-      `        test("Get time remaining string 1 second after start", () => {
-          const mobTimer = new MobTimer();
-          const mockCurrentTime = createMockCurrentTime(mobTimer);
-          mobTimer.durationMinutes = 6;
-          mobTimer.start();
-          mockCurrentTime.delaySeconds(1);
-          expect(mobTimer.secondsRemainingString).toEqual("05:59");
-        });
-       `
-- [x] mobClientServer.test.ts changes:
-  - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
-  - [x] Remove tests that were later marked skipped
+
+- [ ] Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
@@ -150,6 +136,20 @@ Next
 2022-01-26
 
 - [x] Clarify nowInSecondsFunc with either comments or renaming in mockCurrentTime.ts
+- [x] Add back test:
+      In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
+      `        test("Get time remaining string 1 second after start", () => {
+          const mobTimer = new MobTimer();
+          const mockCurrentTime = createMockCurrentTime(mobTimer);
+          mobTimer.durationMinutes = 6;
+          mobTimer.start();
+          mockCurrentTime.delaySeconds(1);
+          expect(mobTimer.secondsRemainingString).toEqual("05:59");
+        });
+       `
+- [x] mobClientServer.test.ts changes:
+  - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
+  - [x] Remove tests that were later marked skipped
 
 2022-01-25
 
