@@ -40,20 +40,9 @@ Next
           expect(mobTimer.secondsRemainingString).toEqual("05:59");
         });
        `
-- [ ] mobClientServer.test.ts changes:
-  - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
-  - [ ] Remove tests that were later marked skipped
-  - [ ] Modify the pause timer test, i.e., delete this line: await TimeUtils.delaySeconds(0.5);
-  - [ ] In the test "Start timer with duration %p and elapse time sends message to all", remove:
-    - [ ] remove: "+ Date.now()"
-    - [ ] remove "+ 2" from await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2);
-    - [ ] remove console log
-    - [ ] Change expect to be equal to 0, instead of less than or equal to 0.1
-          `           expect(
-               client.lastSuccessfulResponse.mobState.secondsRemaining
-             ).toBeLessThanOrEqual(0.1); // toEqual(0)
-          `
-- [ ] Merge into main branch
+- [x] mobClientServer.test.ts changes:
+  - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
+  - [x] Remove tests that were later marked skipped
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
