@@ -30,7 +30,8 @@ Next
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters!!!!!!!!!!!!!
   - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
 
-- [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...)
+- [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...).
+      And if keep, probably reduce 0.1 to 0.025 (per our discussion)
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
 - [ ] Add back test: 
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
