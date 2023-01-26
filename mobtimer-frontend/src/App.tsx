@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { MobTimerResponses } from 'mobtimer-api';
+import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
 import { Controller } from './controller';
 import JoinMobForm from './components/JoinMobForm';
 import { client, frontendMobTimer } from './timers';
@@ -36,7 +36,7 @@ const App = () => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
 
       // todo: handle if response is not successful
-      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining);
+      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) +")");
 
       // Status
       const mobStatus = Controller.getStatus(response);
