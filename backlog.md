@@ -20,6 +20,7 @@ Improve Later
 
 Next
 
+- [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 - [ ] Refactoring: Change mockCurrentTime.ts to mockMobTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
       From:
       const mobTimer = new MobTimer();
