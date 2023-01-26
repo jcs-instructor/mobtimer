@@ -51,6 +51,15 @@ test("Get seconds remaining 1 second after start", () => {
   expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6) - 1);
 });
 
+test("Get time remaining string 1 second after start", () => {
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(1);
+  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+});
+
 test("Get time remaining string 0.1 seconds after start", () => {
   const mobTimer = new MobTimer();
   const mockCurrentTime = createMockCurrentTime(mobTimer);
@@ -94,9 +103,14 @@ test("Start after time expires", async () => {
   mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
   const numDigits = 1;
-  await TimeUtils.delaySeconds(durationSeconds + extraPaddingSecondsToBeSureTimeRunsOut);
+  await TimeUtils.delaySeconds(
+    durationSeconds + extraPaddingSecondsToBeSureTimeRunsOut
+  );
   await mobTimer.start();
-  expect(mobTimer.secondsRemaining).toBeCloseTo(mobTimer.durationSeconds, numDigits);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(
+    mobTimer.durationSeconds,
+    numDigits
+  );
   expect(mobTimer.status).toBe(Status.Running);
 });
 

@@ -26,37 +26,34 @@ Next
 
 - [ ] Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
 
-- [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (_expired || !_everStarted --> didn't work...).
+- [ ] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (\_expired || !\_everStarted --> didn't work...).
       And if keep, probably reduce 0.1 to 0.025 (per our discussion)
   - [ ] Do we need to add a padding/tolerance to the timer? Consider implications in mobTimer and in tests with tolerances/toBeCloseTo's
-- [ ] (2) Add back test: 
+- [x] Add back test:
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
-          ```
-          test("Get time remaining string 1 second after start", () => {
-            const mobTimer = new MobTimer();
-            const mockCurrentTime = createMockCurrentTime(mobTimer);
-            mobTimer.durationMinutes = 6;
-            mobTimer.start();
-            mockCurrentTime.delaySeconds(1);
-            expect(mobTimer.secondsRemainingString).toEqual("05:59");
-          });
-          ```
-- [ ] (3) mobClientServer.test.ts changes:
-  - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch) 
+      `        test("Get time remaining string 1 second after start", () => {
+          const mobTimer = new MobTimer();
+          const mockCurrentTime = createMockCurrentTime(mobTimer);
+          mobTimer.durationMinutes = 6;
+          mobTimer.start();
+          mockCurrentTime.delaySeconds(1);
+          expect(mobTimer.secondsRemainingString).toEqual("05:59");
+        });
+       `
+- [ ] mobClientServer.test.ts changes:
+  - [ ] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [ ] Remove tests that were later marked skipped
   - [ ] Modify the pause timer test, i.e., delete this line: await TimeUtils.delaySeconds(0.5);
   - [ ] In the test "Start timer with duration %p and elapse time sends message to all", remove:
-       - [ ] remove: "+ Date.now()"
-       - [ ] remove "+ 2" from await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2);
-       - [ ] remove console log
-       - [ ] Change expect to be equal to 0, instead of less than or equal to 0.1
-                    ```
-                    expect(
-                        client.lastSuccessfulResponse.mobState.secondsRemaining
-                      ).toBeLessThanOrEqual(0.1); // toEqual(0)
-                    ```
+    - [ ] remove: "+ Date.now()"
+    - [ ] remove "+ 2" from await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds + 2);
+    - [ ] remove console log
+    - [ ] Change expect to be equal to 0, instead of less than or equal to 0.1
+          `           expect(
+               client.lastSuccessfulResponse.mobState.secondsRemaining
+             ).toBeLessThanOrEqual(0.1); // toEqual(0)
+          `
 - [ ] Merge into main branch
-
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
@@ -110,10 +107,10 @@ Next
 
 - [ ] Change mockCurrentTime.ts to mockMobTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
       From:
-        const mobTimer = new MobTimer();
-        const mockCurrentTime = createMockCurrentTime(mobTimer);
+      const mobTimer = new MobTimer();
+      const mockCurrentTime = createMockCurrentTime(mobTimer);
       To:
-        const mockMobTimer = new MockMobTimer();
+      const mockMobTimer = new MockMobTimer();
 
 - [ ] Move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
 - [ ] Maybe: \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
