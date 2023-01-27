@@ -20,7 +20,6 @@ Improve Later
 
 Next
 
-- [ ] WIP: Fix word-wrapping in tests for ease of reading
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 - [x] Revisit tolerance seconds in \*.test.ts files (often 0.1) - but maybe not needed or could be much smaller, e.g., 0.01?
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.
@@ -128,7 +127,8 @@ Next
 
 2022-01-27
 
-- [X] Refactoring: Change mockCurrentTime.ts to mobTestTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
+- [x] Refactor: Fix word-wrapping in tests for ease of reading
+- [x] Refactor: Change mockCurrentTime.ts to mobTestTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
       From:
       const mobTimer = new MobTimer();
       const mockCurrentTime = createMockCurrentTime(mobTimer);
