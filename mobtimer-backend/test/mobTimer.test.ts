@@ -2,7 +2,7 @@ import { MobTimer } from "mobtimer-api";
 import { MobTestTimer } from "./mobTestTimer";
 import { Status, TimeUtils } from "mobtimer-api";
 
-test("Test that is not skipped", () => {});
+test("Test that is not skipped", () => { });
 
 test("Set duration to 3.5 minutes", () => {
   const mobTimer = new MobTestTimer();
@@ -45,9 +45,9 @@ test("Get seconds remaining 1 second after start", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6));
+  expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6));
   mobTimer.delaySeconds(1);
-  expect(mobTimer.secondsRemaining).toEqual(TimeUtils.minutesToSeconds(6) - 1);
+  expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6) - 1);
 });
 
 test("Get time remaining string 1 second after start", () => {
@@ -71,15 +71,9 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   const numDigits = 1;
-  expect(mobTimer.secondsRemaining).toBeCloseTo(
-    TimeUtils.minutesToSeconds(6),
-    numDigits
-  );
+  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6), numDigits);
   await TimeUtils.delaySeconds(1);
-  expect(mobTimer.secondsRemaining).toBeCloseTo(
-    TimeUtils.minutesToSeconds(6) - 1,
-    numDigits
-  );
+  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6) - 1, numDigits);
 });
 
 test("Ready status after time expires", async () => {
@@ -96,13 +90,11 @@ test("Ready status after time expires", async () => {
 test("Start after time expires", async () => {
   const mobTimer = new MobTimer();
   const durationSeconds = 0.2;
-  const extraPaddingSecondsToBeSureTimeRunsOut = 0.1;
+  const paddingSecondsToBeSureTimeExpires = 0.1;
   mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
   const numDigits = 1;
-  await TimeUtils.delaySeconds(
-    durationSeconds + extraPaddingSecondsToBeSureTimeRunsOut
-  );
+  await TimeUtils.delaySeconds(durationSeconds + paddingSecondsToBeSureTimeExpires);
   await mobTimer.start();
   expect(mobTimer.secondsRemaining).toBeCloseTo(
     mobTimer.durationSeconds,
@@ -147,7 +139,7 @@ test("Get seconds remaining after running 1 second and paused 1", () => {
 });
 
 test("Get seconds remaining after running 1 second, paused 1 second, and resume 1 second", () => {
-  const mobTimer = new MobTestTimer();  
+  const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   mobTimer.delaySeconds(1);
@@ -192,13 +184,20 @@ test("After time expires, seconds remaining should be 0", () => {
 test("After time expires, elapse time raises specified event", async () => {
   const mobTimer = new MobTimer();
   let expireFuncWasCalled = false;
-  mobTimer.timerExpireFunc = () => {
-    expireFuncWasCalled = true;
-  };
+  mobTimer.timerExpireFunc = () => {expireFuncWasCalled = true;};
   const durationSeconds = 0.2;
-  mobTimer.durationMinutes = TimeUtils.secondsToMinutes(durationSeconds);
+  mobTimer.durationMinutes = secondsToMinutes(durationSeconds);
   mobTimer.start();
   const toleranceSeconds = 0.1;
   await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
   expect(expireFuncWasCalled).toBe(true);
 });
+
+
+function minutesToSeconds(minutes: number) : number {
+  return TimeUtils.minutesToSeconds(minutes);
+}
+
+function secondsToMinutes(seconds: number): number {
+  return TimeUtils.secondsToMinutes(seconds);
+}
