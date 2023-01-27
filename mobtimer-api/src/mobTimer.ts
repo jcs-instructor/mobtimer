@@ -11,11 +11,12 @@ export class MobTimer {
   private _previouslyAccumulatedElapsedSeconds = 0;
   private _running = false;
   private _timer: NodeJS.Timeout | undefined;
-  private _timerExpireFunc = () => {};
+  private _timerExpireFunc = () => { };
   private _ready = true;
-  public participants: string[] = []; //Readonly<string>[] = new Array<string>(); // todo wrap in property getter/setter
+  private readonly _participants: string[] = [];
+
   sockets: any;
-  
+
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
@@ -76,10 +77,10 @@ export class MobTimer {
   }
 
   getLogInfo() {
-    return  {
-      mobName: this._mobName, 
-      previouslyAccumulatedElapsedSeconds: this._previouslyAccumulatedElapsedSeconds, 
-      nowInSeconds: this._nowInSecondsFunc(), 
+    return {
+      mobName: this._mobName,
+      previouslyAccumulatedElapsedSeconds: this._previouslyAccumulatedElapsedSeconds,
+      nowInSeconds: this._nowInSecondsFunc(),
       whenLastStartedInSeconds: this._whenLastStartedInSeconds,
       elapsedSeconds: this._previouslyAccumulatedElapsedSeconds + (this._nowInSecondsFunc() - this._whenLastStartedInSeconds)
     };
@@ -145,14 +146,12 @@ export class MobTimer {
     return this._durationMinutes * 60;
   }
 
-  // public participants() {
-  //   return this._participants;
-  // }
+  public get participants(): string[] {
+    return this._participants;
+  }
 
   public addParticipant(participant: string) {
-    //console.log("Before addParticipant: " + participant + ", length = " + this._participants.length);
-    this.participants.push(participant);
-    //console.log("After addParticipant: " + participant + ", length = " + this._participants.length);
+    this._participants.push(participant);
   }
 
 }

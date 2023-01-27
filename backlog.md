@@ -22,6 +22,11 @@ Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
+- [ ] Add participant to mob
+  - [x] Backend
+    - [x] Refactor
+  - [ ] Frontend
+
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
 
@@ -130,7 +135,6 @@ Next
 
 2022-01-27
 
-- [x] Add participant to mob
 - [x] Refactor: Move mobTimer.tests.ts to mobtimer-api/test, and add config for debugging tests
 - [x] Refactor: Fix word-wrapping in tests for ease of reading
 - [x] Refactor: Change mockCurrentTime.ts to mobTestTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
