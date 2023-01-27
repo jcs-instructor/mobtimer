@@ -3,6 +3,7 @@ import { Action } from "./action";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
+import { MobState } from "./mobState";
 
 class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
@@ -76,6 +77,16 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(
       this._successfulResponses.at(-1) || ""
     ) as SuccessfulResponse;
+  }
+
+  public get lastSuccessfulAction(): Action {
+    const lastSuccessfulResponse = this.lastSuccessfulResponse;
+    return lastSuccessfulResponse.actionInfo.action;
+  }
+
+  public get lastSuccessfulMobState(): MobState {
+    const lastSuccessfulResponse = this.lastSuccessfulResponse;
+    return lastSuccessfulResponse.mobState;
   }
 
   public get successfulResponses(): string[] {
