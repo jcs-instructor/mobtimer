@@ -21,7 +21,7 @@ Improve Later
 Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
-- [x] Revisit tolerance seconds in \*.test.ts files (often 0.1) - but maybe not needed or could be much smaller, e.g., 0.01?
+
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
 
@@ -33,10 +33,12 @@ Next
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
+
 - [ ] Rename folder mobtimer-api as mobtimer-shared (since it contains shared logic in addition to api)
 - [ ] In UI listener, handle if response is not successful
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
+
 - [ ] Create a timer
   - [ ] UI - see Example React Source Code in resources.md)
   - [ ] Hook up timer to websocket server
@@ -46,6 +48,7 @@ Next
   - [ ] UI - Pause
   - [ ] UI - Restart
   - [ ] Deploy (as single repo)
+  
 - [ ] Handle illegal characters in mobName
 - [ ] Trim mobName (and maybe url encode characters as needed)
 - [ ] Handle trim(mobName) is empty
@@ -137,6 +140,7 @@ Next
       
 2022-01-26
 
+- [x] Revisit tolerance seconds in \*.test.ts files (often 0.1) - but maybe not needed or could be much smaller, e.g., 0.01?
 - [x] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (\_expired || !\_everStarted --> didn't work...)
 - [x] Clarify nowInSecondsFunc with either comments or renaming in mockCurrentTime.ts
 - [x] Add back test:
