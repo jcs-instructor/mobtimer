@@ -22,9 +22,11 @@ Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
-- [ ] Add participant to mob
-  - [x] Backend
-    - [x] Refactor
+- [ ] Participants
+  - Backend
+    - [x] Add participant
+    - [x] Rotate participants
+    - [x] Remove participant
   - [ ] Frontend
 
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.

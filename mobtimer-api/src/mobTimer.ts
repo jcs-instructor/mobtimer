@@ -154,4 +154,19 @@ export class MobTimer {
     this._participants.push(participant);
   }
 
+  removeParticipant(index: number) {
+    // if valid index then remove participant
+    if (index >= 0 && index < this._participants.length) {
+      this._participants.splice(index, 1);
+    }
+  }
+
+  rotateParticipants() {
+    // rotate this._participants
+    const first = this._participants.shift();
+    if (first) {
+      this._participants.push(first);
+    }
+  }
+
 }

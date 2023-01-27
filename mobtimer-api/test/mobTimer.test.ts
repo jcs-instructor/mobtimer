@@ -208,10 +208,34 @@ test("Add 1st participant", async () => {
 
 test("Add 2nd participant", async () => {
   const mobTimer = new MobTimer();
-  mobTimer.addParticipant("Bob");
   mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
   expect(mobTimer.participants.length).toBe(2);
-  expect(mobTimer.participants[1]).toBe("Alice");
+  expect(mobTimer.participants).toStrictEqual(["Alice", "Bob"]);
+});
+
+test("Rotate participants", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.rotateParticipants();
+  expect(mobTimer.participants).toStrictEqual(["Bob", "Alice"]);
+});
+
+test("Remove 1st participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.removeParticipant(0);
+  expect(mobTimer.participants).toStrictEqual(["Bob"]);
+});
+
+test("Remove 2nd participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.removeParticipant(1);
+  expect(mobTimer.participants).toStrictEqual(["Alice"]);
 });
 
 function minutesToSeconds(minutes: number) : number {
