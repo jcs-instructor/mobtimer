@@ -194,17 +194,25 @@ test("After time expires, elapse time raises specified event", async () => {
   expect(expireFuncWasCalled).toBe(true);
 });
 
-// test("New mob timer has no participants", async () => {
-//   const mobTimer = new MobTimer();
-//   expect(mobTimer.participants.length).toBe(0);
-// });
+test("New mob timer has no participants", async () => {
+  const mobTimer = new MobTimer();
+  expect(mobTimer.participants.length).toBe(0);
+});
 
-// test("Add first participant", async () => {
-//   const mobTimer = new MobTimer();
-//   mobTimer.addParticipant("Bob");
-//   const actual = mobTimer.participants.length;
-//   expect(actual).toBe(1);
-// });
+test("Add 1st participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Bob");
+  expect(mobTimer.participants.length).toBe(1);
+  expect(mobTimer.participants[0]).toBe("Bob");
+});
+
+test("Add 2nd participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Bob");
+  mobTimer.addParticipant("Alice");
+  expect(mobTimer.participants.length).toBe(2);
+  expect(mobTimer.participants[1]).toBe("Alice");
+});
 
 function minutesToSeconds(minutes: number) : number {
   return TimeUtils.minutesToSeconds(minutes);

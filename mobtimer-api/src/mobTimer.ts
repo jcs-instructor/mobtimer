@@ -13,7 +13,7 @@ export class MobTimer {
   private _timer: NodeJS.Timeout | undefined;
   private _timerExpireFunc = () => {};
   private _ready = true;
-  //public participants: string[] = []; //Readonly<string>[] = new Array<string>(); // todo wrap in property getter/setter
+  public participants: string[] = []; //Readonly<string>[] = new Array<string>(); // todo wrap in property getter/setter
   sockets: any;
   
   constructor(mobName: string = "") {
@@ -145,10 +145,14 @@ export class MobTimer {
     return this._durationMinutes * 60;
   }
 
-  // public addParticipant(participant: string) {
-  //   //console.log("Before addParticipant: " + participant + ", length = " + this._participants.length);
-  //   this.participants.push(participant);
-  //   //console.log("After addParticipant: " + participant + ", length = " + this._participants.length);
+  // public participants() {
+  //   return this._participants;
   // }
+
+  public addParticipant(participant: string) {
+    //console.log("Before addParticipant: " + participant + ", length = " + this._participants.length);
+    this.participants.push(participant);
+    //console.log("After addParticipant: " + participant + ", length = " + this._participants.length);
+  }
 
 }

@@ -130,6 +130,8 @@ Next
 
 2022-01-27
 
+- [x] Add participant to mob
+- [x] Refactor: Move mobTimer.tests.ts to mobtimer-api/test, and add config for debugging tests
 - [x] Refactor: Fix word-wrapping in tests for ease of reading
 - [x] Refactor: Change mockCurrentTime.ts to mobTestTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
       From:
