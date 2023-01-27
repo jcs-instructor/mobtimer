@@ -3,8 +3,6 @@ import { MobTestTimer } from "../src/mobTestTimer";
 import { Status } from "../src/status";
 import { TimeUtils } from "../src/timeUtils";
 
-test("Test that is not skipped", () => { });
-
 test("Set duration to 3.5 minutes", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 3.5;
@@ -236,6 +234,32 @@ test("Remove 2nd participant", async () => {
   mobTimer.addParticipant("Bob");
   mobTimer.removeParticipant(1);
   expect(mobTimer.participants).toStrictEqual(["Alice"]);
+});
+
+test("Randomize participant order", async () => {
+  const mobTimer = new MobTimer();
+  
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  
+  const originalOrder = JSON.stringify(["Alice", "Bob"]);
+  const differentOrder = JSON.stringify(["Bob", "Alice"]);
+  
+  let gotDifferentOrder = false;
+  let gotOriginalOrder = false;
+
+  do {    
+    mobTimer.randomizeParticipantOrder();
+    let currentOrder = JSON.stringify(mobTimer.participants);
+    if (currentOrder === originalOrder) {
+      console.log("got original order", mobTimer.participants);
+      gotOriginalOrder = true;
+    } else if (currentOrder === differentOrder) {
+      console.log("got different order", mobTimer.participants);
+      gotDifferentOrder = true;
+    }    
+  } 
+  while (!(gotOriginalOrder && gotDifferentOrder));  
 });
 
 function minutesToSeconds(minutes: number) : number {

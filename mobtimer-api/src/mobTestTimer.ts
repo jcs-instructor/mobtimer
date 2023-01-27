@@ -16,7 +16,6 @@ export class MobTestTimer extends MobTimer {
     this._mockCurrentTimeSeconds += seconds;
     const toleranceSeconds = 0.01; // for floating point precision issues
     if (this.secondsRemaining <= toleranceSeconds) {
-      console.log("IN mock", this.secondsRemaining);
       this.reset();
     }
   }

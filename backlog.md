@@ -27,6 +27,7 @@ Next
     - [x] Add participant
     - [x] Rotate participants
     - [x] Remove participant
+    - [x] Randomize participant order
   - [ ] Frontend
 
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.
