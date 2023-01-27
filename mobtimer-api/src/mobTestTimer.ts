@@ -1,4 +1,4 @@
-import { MobTimer } from "mobtimer-api";
+import { MobTimer } from "./mobTimer";
 
 export class MobTestTimer extends MobTimer {
   private _mockCurrentTimeSeconds = 0;
