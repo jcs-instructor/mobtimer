@@ -13,6 +13,7 @@ const Participants = ({ participants }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         client.addParticipant(participantName);
+        setParticipantName('');
     }
 
     return (
