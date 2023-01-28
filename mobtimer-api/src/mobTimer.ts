@@ -157,8 +157,9 @@ export class MobTimer {
   }
 
   public addParticipant(participant: string) : string[] {
-    if (participant.trim() !== "") {
-      this._participants.push(participant);
+    const trimmedName = participant.trim();
+    if (trimmedName !== '') { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
+      this._participants.push(trimmedName);
     }
     return this.participants;
   }

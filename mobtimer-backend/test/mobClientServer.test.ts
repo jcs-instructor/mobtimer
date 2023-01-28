@@ -222,8 +222,31 @@ describe("WebSocket Server", () => {
     expect(client.lastSuccessfulMobState.participants[0]).toBe("Bob");
   });
 
-  // todo: add more tests for participants, similar to the ones in mobTimer.test.ts
-
+  test("Add 2nd participant", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    client.addParticipant("Alice");
+    client.addParticipant("Bob");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(2);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual(["Alice", "Bob"]);
+  });
+  
+  test("Don't add blank participant", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);    
+    client.addParticipant("");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
+  
+  test("Don't add participant with spaces only", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);    
+    client.addParticipant("   ");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
 });
 
 async function openSocket(url: string) {
