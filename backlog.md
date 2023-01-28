@@ -29,7 +29,7 @@ Next
     - [x] Remove participant
     - [x] Randomize participant order
   - MobSocketServer
-    - [.] WIP: Add participant (works but need to add more tests)
+    - [x] Add participant
     - [ ] Rotate participants
     - [ ] Remove participant
     - [ ] Randomize participant order
