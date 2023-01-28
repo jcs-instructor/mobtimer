@@ -156,12 +156,11 @@ export class MobTimer {
     return this._participants;
   }
 
-  public addParticipant(participant: string) : string[] {
-    const trimmedName = participant.trim();
-    if (trimmedName !== '') { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
+  public addParticipant(name: string) {
+    const trimmedName = name.trim();
+    if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
       this._participants.push(trimmedName);
     }
-    return this.participants;
   }
 
   removeParticipant(index: number) {

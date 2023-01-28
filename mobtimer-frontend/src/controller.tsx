@@ -76,13 +76,5 @@ export class Controller {
     }
   }
 
-  // static update(client: MobSocketClient, durationMinutes: number) {
-  //   client.update(durationMinutes);
-  // }
-
-  //   static addParticipant(client: MobSocketClient, name: string): void {
-  //     client.addParticipant(name);
-  // }
-
 }
 

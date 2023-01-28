@@ -80,7 +80,7 @@ function _processRequest(
     }
     case Action.AddParticipant: {
       const addParticipantRequest = parsedRequest as MobTimerRequests.AddParticipantRequest;
-      mobTimer.participants.push(addParticipantRequest.name);
+      mobTimer.addParticipant(addParticipantRequest.name);
       break;
     }
     case Action.Start: {
