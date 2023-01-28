@@ -5,14 +5,14 @@ export class MobTestTimer extends MobTimer {
 
   constructor(mobName: string = "") {
     super(mobName);
-    this.nowInSecondsFunc = () => this.mockNowInSecondsFunc();
+    this.nowInSecondsFunc = () => this.mockNowInSeconds();
   }
 
-  private mockNowInSecondsFunc() {
+  private mockNowInSeconds() {
     return this._mockCurrentTimeSeconds;
   }
 
-  public delaySeconds(seconds: number) {
+  public mockDelaySeconds(seconds: number) {
     this._mockCurrentTimeSeconds += seconds;
     const toleranceSeconds = 0.01; // for floating point precision issues
     if (this.secondsRemaining <= toleranceSeconds) {

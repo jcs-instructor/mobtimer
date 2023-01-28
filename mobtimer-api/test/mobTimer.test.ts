@@ -45,7 +45,7 @@ test("Get seconds remaining 1 second after start", () => {
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6));
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6) - 1);
 });
 
@@ -53,7 +53,7 @@ test("Get time remaining string 1 second after start", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -61,7 +61,7 @@ test("Get time remaining string 0.1 seconds after start", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 2;
   mobTimer.start();
-  mobTimer.delaySeconds(0.1);
+  mobTimer.mockDelaySeconds(0.1);
   expect(mobTimer.secondsRemainingString).toEqual("02:00");
 });
 
@@ -121,9 +121,9 @@ test("Get seconds remaining after 1 second pause", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   mobTimer.pause();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -131,9 +131,9 @@ test("Get seconds remaining after running 1 second and paused 1", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   mobTimer.pause();
-  mobTimer.delaySeconds(2);
+  mobTimer.mockDelaySeconds(2);
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -141,11 +141,11 @@ test("Get seconds remaining after running 1 second, paused 1 second, and resume 
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   mobTimer.pause();
-  mobTimer.delaySeconds(2);
+  mobTimer.mockDelaySeconds(2);
   mobTimer.start();
-  mobTimer.delaySeconds(3);
+  mobTimer.mockDelaySeconds(3);
   expect(mobTimer.secondsRemainingString).toEqual("05:56");
 });
 
@@ -153,7 +153,7 @@ test("After time expires, state should be Ready", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 1;
   mobTimer.start();
-  mobTimer.delaySeconds(61);
+  mobTimer.mockDelaySeconds(61);
   expect(mobTimer.status).toEqual(Status.Ready);
 });
 
@@ -161,14 +161,14 @@ test("After time expires and timer is started, time remaining should be full amo
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 1;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(59);
-  mobTimer.delaySeconds(61);
+  mobTimer.mockDelaySeconds(61);
   expect(mobTimer.secondsRemaining).toEqual(0);
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(60);
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(59);
 });
 
@@ -176,7 +176,7 @@ test("After time expires, seconds remaining should be 0", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 1;
   mobTimer.start();
-  mobTimer.delaySeconds(65);
+  mobTimer.mockDelaySeconds(65);
   expect(mobTimer.secondsRemainingString).toEqual("00:00");
 });
 
