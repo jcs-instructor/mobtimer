@@ -22,8 +22,6 @@ Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
-- [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired. 
-
 - [ ] Participants
   - Backend
     - [x] Add participant
@@ -31,6 +29,11 @@ Next
     - [x] Remove participant
     - [x] Randomize participant order
   - [ ] Frontend
+    - [ ] WIP: Show participants
+    - [x] Add participant
+    - [x] Rotate participants
+    - [x] Remove participant
+    - [x] Randomize participant order
   - [ ] Merge participants branch back into main
 
 - [ ] Add sound when time expires
@@ -141,6 +144,11 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-01-28
+
+- [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired. 
+
 
 2022-01-27
 
