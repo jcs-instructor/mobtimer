@@ -38,7 +38,10 @@ const App = () => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
 
       // todo: handle if response is not successful
-      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ")");
+
+      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", " +
+        "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
+        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ")");
 
       // Status
       const mobStatus = Controller.getStatus(response);
@@ -59,6 +62,12 @@ const App = () => {
       setTimeString(frontendMobTimer.secondsRemainingString);
       const label = Controller.getActionButtonLabel(mobStatus);
       setActionButtonLabel(label);
+
+      if (response.mobState.status !== frontendMobTimer.status) {
+        console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " + 
+          "Frontend Status: " + frontendMobTimer.status + ", " +
+          "Backend Status:" + response.mobState.status);
+      };
     };
 
     await client.waitForSocketState(WebSocket.OPEN);
@@ -78,10 +87,10 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" 
-             element={<Room durationMinutes={durationMinutes} particpants={participants} actionButtonLabel={actionButtonLabel} 
-             setMobName={setMobName} timeString={timeString} 
-             submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam"
+        element={<Room durationMinutes={durationMinutes} particpants={participants} actionButtonLabel={actionButtonLabel}
+          setMobName={setMobName} timeString={timeString}
+          submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

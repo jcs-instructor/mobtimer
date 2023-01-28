@@ -33,7 +33,10 @@ export class MobTimer {
   }
 
   reset() {
-    this.pause();
+    this._running = false;
+    if (this._timer) {
+      clearTimeout(this._timer);
+    }
     this._ready = true;
     if (this._timerExpireFunc) {
       this._timerExpireFunc();
@@ -61,7 +64,9 @@ export class MobTimer {
 
   pause() {
     this._running = false;
-    if (this._timer) clearTimeout(this._timer);
+    if (this._timer) {
+      clearTimeout(this._timer);
+    }
     this._whenPausedInSeconds = this._nowInSecondsFunc();
     this._previouslyAccumulatedElapsedSeconds +=
       this._whenPausedInSeconds - this._whenLastStartedInSeconds;
@@ -121,7 +126,7 @@ export class MobTimer {
     }
     const durationSeconds = TimeUtils.minutesToSeconds(this._durationMinutes);
     const elapsedSeconds = this.calculateElapsedSeconds();
-    return durationSeconds - elapsedSeconds;
+    return Math.max(0, durationSeconds - elapsedSeconds);
   }
 
   private calculateElapsedSeconds() {

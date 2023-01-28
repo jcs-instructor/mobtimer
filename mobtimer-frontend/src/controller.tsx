@@ -5,6 +5,8 @@ import { Action, MobTimer } from 'mobtimer-api';
 
 export class Controller {
 
+  // injections -----------------------
+
   // inject duration minutes
   static setDurationMinutes = (durationMinutes: number) => { };
   static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
@@ -23,15 +25,7 @@ export class Controller {
     this.setParticipants = setParticipantsFunction;
   }
 
-  // other functions
-  static getActionButtonLabel(status: Status) {
-    switch (status) {
-      case Status.Running: { return "⏸️ Pause"; }
-      case Status.Paused: { return "▶️ Resume"; }
-      case Status.Ready: { return "▶️ Start"; }
-      default: { return ""; } // todo: maybe handle invalid status differently
-    };
-  }
+  // other functions -----------------------
 
   static getStatus(response: MobTimerResponses.SuccessfulResponse) {
     return response.mobState.status;
@@ -54,6 +48,15 @@ export class Controller {
     return response.mobState.secondsRemaining;
   }
 
+  static getActionButtonLabel(backendStatus: Status) {
+    switch (backendStatus) {
+      case Status.Running: { return "⏸️ Pause"; }
+      case Status.Paused: { return "▶️ Resume"; }
+      case Status.Ready: { return "▶️ Start"; }
+      default: { return ""; } // todo: maybe handle invalid status differently
+    };
+  }
+
   static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: { client.pause(); frontendMobtimer.pause(); break; }
@@ -62,12 +65,12 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, status: Status, action: Action) {
-    if (frontendMobtimer.status !== status && action !== Action.Expired) {
-      switch (status) {
+  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status, action: Action) {
+    if (frontendMobtimer.status !== backendStatus) {
+      switch (backendStatus) {
         case Status.Running: { frontendMobtimer.start(); break; }
         case Status.Paused: { frontendMobtimer.pause(); break; }
-        case Status.Ready: { frontendMobtimer.pause(); break; }
+        case Status.Ready: { frontendMobtimer.reset(); break; }
       }
     }
   }

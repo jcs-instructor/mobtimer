@@ -22,6 +22,8 @@ Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
+- [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired. 
+
 - [ ] Participants
   - Backend
     - [x] Add participant
@@ -30,6 +32,8 @@ Next
     - [x] Randomize participant order
   - [ ] Frontend
   - [ ] Merge participants branch back into main
+
+- [ ] Add sound when time expires
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
 - [ ] Handle illegal characters in mobName
