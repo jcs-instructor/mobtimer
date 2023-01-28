@@ -39,10 +39,12 @@ const App = () => {
 
       // todo: handle if response is not successful
 
-      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", " +
+      console.log("Mob: " + response.mobState.mobName + 
+         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",")+ "), " +
+        "Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
-        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") " +
-        response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(","));
+        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") " 
+        );
 
       // Status
       const mobStatus = Controller.getStatus(response);
