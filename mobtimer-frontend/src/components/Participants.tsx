@@ -12,7 +12,10 @@ const Participants = ({ participants }: FormParameters) => {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        client.addParticipant(participantName);
+        const trimmedName = participantName.trim();
+        if (trimmedName !== '') { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
+            client.addParticipant(trimmedName);
+        }            
         setParticipantName('');
     }
 
