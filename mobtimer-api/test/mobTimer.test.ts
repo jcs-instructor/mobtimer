@@ -218,6 +218,12 @@ test("Don't add blank participant", async () => {
   expect(mobTimer.participants.length).toBe(0);
 });
 
+test("Don't add participant with spaces only", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("   ");
+  expect(mobTimer.participants.length).toBe(0);
+});
+
 test("Rotate participants", async () => {
   const mobTimer = new MobTimer();
   mobTimer.addParticipant("Alice");
