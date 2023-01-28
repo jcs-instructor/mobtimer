@@ -35,7 +35,7 @@ Next
     - [ ] Randomize participant order
   - [ ] Frontend
     - [.] WIP: Show participants
-    - [.] WIP: Add participant
+    - [.] WIP: Add participant (works but needs polishing)
     - [ ] Rotate participants
     - [ ] Remove participant
     - [ ] Randomize participant order
