@@ -5,15 +5,22 @@ import { Action, MobTimer } from 'mobtimer-api';
 
 export class Controller {
 
-  // injections
+  // inject duration minutes
   static setDurationMinutes = (durationMinutes: number) => { };
   static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
+  // inject time string
   static setTimeString = (timeString: string) => { };
   static injectSetTimeString(setTimeStringFunction: (timeString: string) => void) {
     this.setTimeString = setTimeStringFunction;
+  }
+
+  // inject participants
+  static setParticipants = (participants: string[]) => { };
+  static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
+    this.setParticipants = setParticipantsFunction;
   }
 
   // other functions
@@ -37,6 +44,10 @@ export class Controller {
 
   static getDurationMinutes(response: MobTimerResponses.SuccessfulResponse) {
     return response.mobState.durationMinutes;
+  }
+
+  static getParticipants(response: MobTimerResponses.SuccessfulResponse) {
+    return response.mobState.participants;
   }
 
   static getSecondsRemaining(response: MobTimerResponses.SuccessfulResponse) {

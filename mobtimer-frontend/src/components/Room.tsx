@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Timer from './Timer';
 import Duration from './Duration';
+import Participants from './Participants';
 
 
 type FormParameters = {
     durationMinutes: number;
+    particpants: string[];
     actionButtonLabel: string;
     setMobName: (mobName: string) => void;
     timeString: string;
@@ -13,7 +15,7 @@ type FormParameters = {
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {
+const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();
     useEffect(
@@ -29,6 +31,7 @@ const Room = ({ durationMinutes, actionButtonLabel, setMobName, timeString, subm
             <p>{mobNameUrlParam}</p>
             <Timer timeString={timeString} />
             <Duration durationMinutes={durationMinutes} />
+            <Participants participants={particpants}/>
             <form onSubmit={(e) => submitAction(e)}>
                 <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
             </form>

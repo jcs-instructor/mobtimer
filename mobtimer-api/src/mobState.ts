@@ -5,4 +5,5 @@ export type MobState = {
   status: Status;
   durationMinutes: number;
   secondsRemaining: number;
+  participants: string[];
 };

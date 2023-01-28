@@ -16,9 +16,11 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
+  const [participants, setParticipants] = useState([] as string[]);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
+  Controller.injectSetParticipants(setParticipants);
   Controller.injectSetTimeString(setTimeString);
 
   // Submit join mob request
@@ -36,7 +38,7 @@ const App = () => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
 
       // todo: handle if response is not successful
-      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) +")");
+      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ")");
 
       // Status
       const mobStatus = Controller.getStatus(response);
@@ -45,6 +47,10 @@ const App = () => {
       // Duration minutes
       const durationMinutes = Controller.getDurationMinutes(response);
       setDurationMinutes(durationMinutes);
+
+      // Participants
+      const participants = Controller.getParticipants(response);
+      setParticipants(participants);
 
       // Sync frontend timer
       const secondsRemaining = Controller.getSecondsRemaining(response);
@@ -72,7 +78,10 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam" 
+             element={<Room durationMinutes={durationMinutes} particpants={participants} actionButtonLabel={actionButtonLabel} 
+             setMobName={setMobName} timeString={timeString} 
+             submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

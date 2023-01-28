@@ -29,6 +29,13 @@ Next
     - [x] Remove participant
     - [x] Randomize participant order
   - [ ] Frontend
+  - [ ] Merge participants branch back into main
+
+- [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
+- [ ] Handle illegal characters in mobName
+- [ ] Trim mobName (and maybe url encode characters as needed)
+- [ ] Handle trim(mobName) is empty
+- [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
 
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
@@ -57,11 +64,6 @@ Next
   - [ ] UI - Restart
   - [ ] Deploy (as single repo)
   
-- [ ] Handle illegal characters in mobName
-- [ ] Trim mobName (and maybe url encode characters as needed)
-- [ ] Handle trim(mobName) is empty
-- [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
-
 ## Split Repos and Deploy
 
 - [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
