@@ -183,7 +183,7 @@ test("After time expires, seconds remaining should be 0", () => {
 test("After time expires, elapse time raises specified event", async () => {
   const mobTimer = new MobTimer();
   let expireFuncWasCalled = false;
-  mobTimer.timerExpireFunc = () => {expireFuncWasCalled = true;};
+  mobTimer.timerExpireFunc = () => { expireFuncWasCalled = true; };
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = secondsToMinutes(durationSeconds);
   mobTimer.start();
@@ -212,6 +212,12 @@ test("Add 2nd participant", async () => {
   expect(mobTimer.participants).toStrictEqual(["Alice", "Bob"]);
 });
 
+test("Don't add blank participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("");
+  expect(mobTimer.participants.length).toBe(0);
+});
+
 test("Rotate participants", async () => {
   const mobTimer = new MobTimer();
   mobTimer.addParticipant("Alice");
@@ -238,17 +244,17 @@ test("Remove 2nd participant", async () => {
 
 test("Randomize participant order", async () => {
   const mobTimer = new MobTimer();
-  
+
   mobTimer.addParticipant("Alice");
   mobTimer.addParticipant("Bob");
-  
+
   const originalOrder = JSON.stringify(["Alice", "Bob"]);
   const differentOrder = JSON.stringify(["Bob", "Alice"]);
-  
+
   let gotDifferentOrder = false;
   let gotOriginalOrder = false;
 
-  do {    
+  do {
     mobTimer.randomizeParticipantOrder();
     let currentOrder = JSON.stringify(mobTimer.participants);
     if (currentOrder === originalOrder) {
@@ -257,12 +263,12 @@ test("Randomize participant order", async () => {
     } else if (currentOrder === differentOrder) {
       console.log("got different order", mobTimer.participants);
       gotDifferentOrder = true;
-    }    
-  } 
-  while (!(gotOriginalOrder && gotDifferentOrder));  
+    }
+  }
+  while (!(gotOriginalOrder && gotDifferentOrder));
 });
 
-function minutesToSeconds(minutes: number) : number {
+function minutesToSeconds(minutes: number): number {
   return TimeUtils.minutesToSeconds(minutes);
 }
 

@@ -157,7 +157,9 @@ export class MobTimer {
   }
 
   public addParticipant(participant: string) : string[] {
-    this._participants.push(participant);
+    if (participant.trim() !== "") {
+      this._participants.push(participant);
+    }
     return this.participants;
   }
 
