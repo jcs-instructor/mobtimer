@@ -22,18 +22,23 @@ Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
-- [ ] Participants
-  - Backend
+- [ ] Participants  
+  - MobTimer 
     - [x] Add participant
     - [x] Rotate participants
     - [x] Remove participant
     - [x] Randomize participant order
+  - MobSocketServer
+    - [.] WIP: Add participant (works but need to add more tests)
+    - [ ] Rotate participants
+    - [ ] Remove participant
+    - [ ] Randomize participant order
   - [ ] Frontend
-    - [ ] WIP: Show participants
-    - [x] Add participant
-    - [x] Rotate participants
-    - [x] Remove participant
-    - [x] Randomize participant order
+    - [.] WIP: Show participants
+    - [.] WIP: Add participant
+    - [ ] Rotate participants
+    - [ ] Remove participant
+    - [ ] Randomize participant order
   - [ ] Merge participants branch back into main
 
 - [ ] Add sound when time expires

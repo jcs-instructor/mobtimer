@@ -25,6 +25,7 @@ export class Controller {
     this.setParticipants = setParticipantsFunction;
   }
 
+
   // other functions -----------------------
 
   static getStatus(response: MobTimerResponses.SuccessfulResponse) {
@@ -75,8 +76,13 @@ export class Controller {
     }
   }
 
-  static update(client: MobSocketClient, durationMinutes: number) {
-    client.update(durationMinutes);
-  }
+  // static update(client: MobSocketClient, durationMinutes: number) {
+  //   client.update(durationMinutes);
+  // }
+
+  //   static addParticipant(client: MobSocketClient, name: string): void {
+  //     client.addParticipant(name);
+  // }
+
 }
 

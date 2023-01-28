@@ -211,7 +211,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(_mobName1);
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
-  });  
+  });
 
   test("Add 1st participant", async () => {
     const client = await openSocket(url);
@@ -220,7 +220,9 @@ describe("WebSocket Server", () => {
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(1);
     expect(client.lastSuccessfulMobState.participants[0]).toBe("Bob");
-});
+  });
+
+  // todo: add more tests for participants, similar to the ones in mobTimer.test.ts
 
 });
 

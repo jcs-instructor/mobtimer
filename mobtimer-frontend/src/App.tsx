@@ -16,7 +16,7 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
-  const [participants, setParticipants] = useState([] as string[]);
+  const [participants, setParticipants] = useState(frontendMobTimer.participants);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
@@ -41,7 +41,8 @@ const App = () => {
 
       console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
-        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ")");
+        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") " +
+        response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(","));
 
       // Status
       const mobStatus = Controller.getStatus(response);
@@ -64,7 +65,7 @@ const App = () => {
       setActionButtonLabel(label);
 
       if (response.mobState.status !== frontendMobTimer.status) {
-        console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " + 
+        console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
           "Frontend Status: " + frontendMobTimer.status + ", " +
           "Backend Status:" + response.mobState.status);
       };
@@ -88,9 +89,14 @@ const App = () => {
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
       <Route path="/:mobNameUrlParam"
-        element={<Room durationMinutes={durationMinutes} particpants={participants} actionButtonLabel={actionButtonLabel}
-          setMobName={setMobName} timeString={timeString}
-          submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+        element={<Room
+          durationMinutes={durationMinutes}
+          particpants={participants}
+          actionButtonLabel={actionButtonLabel}
+          setMobName={setMobName}
+          timeString={timeString}
+          submitAction={submitAction}
+          submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

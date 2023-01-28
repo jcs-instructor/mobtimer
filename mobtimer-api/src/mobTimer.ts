@@ -156,8 +156,9 @@ export class MobTimer {
     return this._participants;
   }
 
-  public addParticipant(participant: string) {
+  public addParticipant(participant: string) : string[] {
     this._participants.push(participant);
+    return this.participants;
   }
 
   removeParticipant(index: number) {

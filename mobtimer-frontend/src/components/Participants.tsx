@@ -1,5 +1,5 @@
 import React from 'react'
-import { client } from '../timers';
+import { client, frontendMobTimer } from '../timers';
 import { Controller } from '../controller';
 
 type FormParameters = {
@@ -7,23 +7,26 @@ type FormParameters = {
 }
 
 const Participants = ({ participants }: FormParameters) => {
+
+    let participantName = "";
+
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // todo: something like this: client.update(participants);
+        client.addParticipant(frontendMobTimer.participants.slice(-1)[0]);
     }
 
     return (
         <form onSubmit={(event) => onSubmit(event)}>
-            <label>Participants: </label>
-            <label>TO DO: Add participants here</label>
-            {/* <input
-                value={participants}
-                onChange={(e) => Controller.setDurationMinutes(e.target.value as unknown as number)}
+            <label>Add Participant: </label>
+            <input
+                value={participantName}
+                onChange={(e) => Controller.setParticipants(frontendMobTimer.addParticipant(e.target.value as string))}
                 type="text"
-                placeholder="Enter a Turn Duration"
+                placeholder="Enter a particpant name"
             /> 
-            <button type="submit">Update</button>
-            */}
+            <button type="submit">Add</button>
+            <label>Participants: </label>
+            <label>{participants.join(",")}</label>           
         </form>
     )
 }
