@@ -71,11 +71,16 @@ function _processRequest(
       // todo: this is taken care of above; maybe it could be done here
       break;
     }
-    case "update": {
+    case Action.Update: {
       // todo: maybe: mobTimer.state = { ...mobTimer.state, ...parsedMessage.value };
       const updateRequest = parsedRequest as MobTimerRequests.UpdateRequest;
       mobTimer.durationMinutes =
         updateRequest.value.durationMinutes || mobTimer.durationMinutes;
+      break;
+    }
+    case Action.AddParticipant: {
+      const addParticipantRequest = parsedRequest as MobTimerRequests.AddParticipantRequest;
+      mobTimer.participants.push(addParticipantRequest.name);
       break;
     }
     case Action.Start: {
@@ -84,11 +89,7 @@ function _processRequest(
     }
     case Action.Pause: {
       mobTimer.pause();
-      break;
-    }
-    case Action.Start: {
-      mobTimer.start();
-      break;
+      break;    
     }
   }
 

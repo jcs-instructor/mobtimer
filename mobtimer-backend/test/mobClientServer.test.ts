@@ -205,6 +205,23 @@ describe("WebSocket Server", () => {
     expect(client.successfulResponses.length).toEqual(1); // join
     expect(client.errorReceived).toEqual(true);
   });
+
+  test("New mob timer has no participants", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });  
+
+  test("Add 1st participant", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    client.addParticipant("Bob");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(1);
+    expect(client.lastSuccessfulMobState.participants[0]).toBe("Bob");
+});
+
 });
 
 async function openSocket(url: string) {

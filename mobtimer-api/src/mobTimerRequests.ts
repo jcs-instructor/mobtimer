@@ -4,6 +4,7 @@ export type MobTimerRequest =
   | EchoRequest
   | JoinRequest
   | UpdateRequest
+  | AddParticipantRequest
   | StartRequest
   | PauseRequest;
 
@@ -19,6 +20,11 @@ export type JoinRequest = {
 export type UpdateRequest = {
   action: Action.Update;
   value: { durationMinutes?: number };
+};
+
+export type AddParticipantRequest = {
+  action: Action.AddParticipant;
+  name: string 
 };
 
 export type StartRequest = {
