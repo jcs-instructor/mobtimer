@@ -26,6 +26,10 @@ Next
 
 ----------
 
+- [ ] Add test for randomizing order of 3 participants (already had test for 2)
+  - [x] Add test
+  - [ ] Refactor to reduce duplication (e.g., test.each or something else; there's a lot of copy-paste code)
+
 - [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
 - [ ] Participants  
@@ -34,18 +38,18 @@ Next
     - [x] Rotate participants on demand (command)
     - [x] Rotate participants when time expires
     - [x] Remove participant
-    - [x] Randomize participant order
+    - [x] Randomize participant order (shuffle)
   - MobSocketServer
     - [x] Add participant
     - [ ] Rotate participants on demand (command)
     - [ ] Remove participant
-    - [ ] Randomize participant order
+    - [ ] Randomize participant order (shuffle)
   - [ ] Frontend
     - [x] Show participants
     - [x] Add participant
     - [ ] Rotate participants on demand (button)
     - [ ] Remove participant
-    - [ ] Randomize participant order
+    - [ ] Randomize participant order (shuffle)
   - [ ] Merge participants branch back into main
 
 - [ ] Add sound when time expires

@@ -259,7 +259,7 @@ test("Remove 2nd participant", async () => {
   expect(mobTimer.participants).toStrictEqual(["Alice"]);
 });
 
-test("Randomize participant order", async () => {
+test("Randomize order of 2 participants", async () => {
   const mobTimer = new MobTimer();
 
   mobTimer.addParticipant("Alice");
@@ -267,12 +267,13 @@ test("Randomize participant order", async () => {
 
   const originalOrder = JSON.stringify(["Alice", "Bob"]);
   const differentOrder = JSON.stringify(["Bob", "Alice"]);
-
+  
   let gotDifferentOrder = false;
   let gotOriginalOrder = false;
+  const gotBoth = () => gotOriginalOrder && gotDifferentOrder;
 
   do {
-    mobTimer.randomizeParticipantOrder();
+    mobTimer.shuffleParticipants();
     let currentOrder = JSON.stringify(mobTimer.participants);
     if (currentOrder === originalOrder) {
       console.log("got original order", mobTimer.participants);
@@ -282,7 +283,39 @@ test("Randomize participant order", async () => {
       gotDifferentOrder = true;
     }
   }
-  while (!(gotOriginalOrder && gotDifferentOrder));
+  while (!gotBoth());
+  
+  expect(gotBoth()).toBe(true);
+});
+
+test("Randomize order of 3 participants", async () => {
+  const mobTimer = new MobTimer();
+
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.addParticipant("Chris");
+
+  const originalOrder = JSON.stringify(["Alice", "Bob", "Chris"]);
+  const differentOrder = JSON.stringify(["Bob", "Chris", "Alice"]);
+  
+  let gotDifferentOrder = false;
+  let gotOriginalOrder = false;
+  const gotBoth = () => gotOriginalOrder && gotDifferentOrder;
+
+  do {
+    mobTimer.shuffleParticipants();
+    let currentOrder = JSON.stringify(mobTimer.participants);
+    if (currentOrder === originalOrder) {
+      console.log("got original order", mobTimer.participants);
+      gotOriginalOrder = true;
+    } else if (currentOrder === differentOrder) {
+      console.log("got different order", mobTimer.participants);
+      gotDifferentOrder = true;
+    }
+  }
+  while (!gotBoth());
+  
+  expect(gotBoth()).toBe(true);
 });
 
 function minutesToSeconds(minutes: number): number {
