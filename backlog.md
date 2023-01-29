@@ -20,7 +20,13 @@ Improve Later
 
 Next
 
+----------
+
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
+
+----------
+
+- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
 - [ ] Participants  
   - MobTimer 
@@ -32,14 +38,12 @@ Next
   - MobSocketServer
     - [x] Add participant
     - [ ] Rotate participants on demand (command)
-    - [ ] Rotate participants when time expires
     - [ ] Remove participant
     - [ ] Randomize participant order
   - [ ] Frontend
     - [x] Show participants
     - [x] Add participant
-    - [x] Rotate participants when time expires (works automatically when time runs out in MobTimer class)
-    - [ ] Rotate participants button
+    - [ ] Rotate participants on demand (button)
     - [ ] Remove participant
     - [ ] Randomize participant order
   - [ ] Merge participants branch back into main
@@ -69,15 +73,15 @@ Next
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
 
-- [ ] Create a timer
-  - [ ] UI - see Example React Source Code in resources.md)
-  - [ ] Hook up timer to websocket server
+- [x] Create a timer
+  - [x] UI - see Example React Source Code in resources.md)
+  - [x] Hook up timer to websocket server
   - [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
-  - [ ] Cancel
-  - [ ] UI - Start
-  - [ ] UI - Pause
-  - [ ] UI - Restart
-  - [ ] Deploy (as single repo)
+  - [x] UI - Start
+  - [x] UI - Pause
+  - [x] UI - Restart after Expired
+
+- [ ] Deploy (as single repo)
   
 ## Split Repos and Deploy
 
