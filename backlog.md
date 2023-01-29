@@ -37,9 +37,9 @@ Next
     - [x] Randomize participant order (shuffle)
   - MobSocketServer
     - [x] Add participant
-    - [ ] Rotate participants on demand (command)
-    - [ ] Remove participant
-    - [ ] Randomize participant order (shuffle)
+    - [ ] Rotate participants on demand (command) (starting with test similar to "Rotate participants" in mobTimer.test.ts)
+    - [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
+    - [ ] Randomize participant order (shuffle) (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
   - [ ] Frontend
     - [x] Show participants
     - [x] Add participant
