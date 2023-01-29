@@ -69,10 +69,11 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
+  const secondsToRunBeforeChecking = 1;
   const numDigits = 1;
   expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6), numDigits);
-  await TimeUtils.delaySeconds(1);
-  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6) - 1, numDigits);
+  await TimeUtils.delaySeconds(secondsToRunBeforeChecking);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6) - secondsToRunBeforeChecking, numDigits);
 });
 
 test("Ready status after time expires", async () => {
@@ -80,10 +81,20 @@ test("Ready status after time expires", async () => {
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
-  const numDigits = 2;
   await TimeUtils.delaySeconds(durationSeconds);
   expect(mobTimer.secondsRemaining).toEqual(0);
   expect(mobTimer.status).toBe(Status.Ready);
+});
+
+test("Participants rotated after time expires", async () => {
+  const mobTimer = new MobTimer();
+  const durationSeconds = 0.025;
+  mobTimer.durationMinutes = durationSeconds / 60;
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");  
+  mobTimer.start();
+  await TimeUtils.delaySeconds(durationSeconds);
+  expect(mobTimer.participants).toStrictEqual(["Bob","Alice"]);
 });
 
 test("Start after time expires", async () => {

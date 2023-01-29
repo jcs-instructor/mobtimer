@@ -25,18 +25,21 @@ Next
 - [ ] Participants  
   - MobTimer 
     - [x] Add participant
-    - [x] Rotate participants
+    - [x] Rotate participants on demand (command)
+    - [x] Rotate participants when time expires
     - [x] Remove participant
     - [x] Randomize participant order
   - MobSocketServer
     - [x] Add participant
-    - [ ] Rotate participants
+    - [ ] Rotate participants on demand (command)
+    - [ ] Rotate participants when time expires
     - [ ] Remove participant
     - [ ] Randomize participant order
   - [ ] Frontend
     - [x] Show participants
     - [x] Add participant
-    - [ ] Rotate participants
+    - [x] Rotate participants when time expires (works automatically when time runs out in MobTimer class)
+    - [ ] Rotate participants button
     - [ ] Remove participant
     - [ ] Randomize participant order
   - [ ] Merge participants branch back into main
