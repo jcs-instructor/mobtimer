@@ -5,26 +5,28 @@ import { Action, MobTimer } from 'mobtimer-api';
 
 export class Controller {
 
-  // injections
+  // injections -----------------------
+
+  // inject duration minutes
   static setDurationMinutes = (durationMinutes: number) => { };
   static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
+  // inject time string
   static setTimeString = (timeString: string) => { };
   static injectSetTimeString(setTimeStringFunction: (timeString: string) => void) {
     this.setTimeString = setTimeStringFunction;
   }
 
-  // other functions
-  static getActionButtonLabel(status: Status) {
-    switch (status) {
-      case Status.Running: { return "⏸️ Pause"; }
-      case Status.Paused: { return "▶️ Resume"; }
-      case Status.Ready: { return "▶️ Start"; }
-      default: { return ""; } // todo: maybe handle invalid status differently
-    };
+  // inject participants
+  static setParticipants = (participants: string[]) => { };
+  static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
+    this.setParticipants = setParticipantsFunction;
   }
+
+
+  // other functions -----------------------
 
   static getStatus(response: MobTimerResponses.SuccessfulResponse) {
     return response.mobState.status;
@@ -39,8 +41,21 @@ export class Controller {
     return response.mobState.durationMinutes;
   }
 
+  static getParticipants(response: MobTimerResponses.SuccessfulResponse) {
+    return response.mobState.participants;
+  }
+
   static getSecondsRemaining(response: MobTimerResponses.SuccessfulResponse) {
     return response.mobState.secondsRemaining;
+  }
+
+  static getActionButtonLabel(backendStatus: Status) {
+    switch (backendStatus) {
+      case Status.Running: { return "⏸️ Pause"; }
+      case Status.Paused: { return "▶️ Resume"; }
+      case Status.Ready: { return "▶️ Start"; }
+      default: { return ""; } // todo: maybe handle invalid status differently
+    };
   }
 
   static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
@@ -51,18 +66,15 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, status: Status, action: Action) {
-    if (frontendMobtimer.status !== status && action !== Action.Expired) {
-      switch (status) {
+  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status, action: Action) {
+    if (frontendMobtimer.status !== backendStatus) {
+      switch (backendStatus) {
         case Status.Running: { frontendMobtimer.start(); break; }
         case Status.Paused: { frontendMobtimer.pause(); break; }
-        case Status.Ready: { frontendMobtimer.pause(); break; }
+        case Status.Ready: { frontendMobtimer.reset(); break; }
       }
     }
   }
 
-  static update(client: MobSocketClient, durationMinutes: number) {
-    client.update(durationMinutes);
-  }
 }
 

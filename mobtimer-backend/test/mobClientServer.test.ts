@@ -205,6 +205,48 @@ describe("WebSocket Server", () => {
     expect(client.successfulResponses.length).toEqual(1); // join
     expect(client.errorReceived).toEqual(true);
   });
+
+  test("New mob timer has no participants", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
+
+  test("Add 1st participant", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    client.addParticipant("Bob");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(1);
+    expect(client.lastSuccessfulMobState.participants[0]).toBe("Bob");
+  });
+
+  test("Add 2nd participant", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    client.addParticipant("Alice");
+    client.addParticipant("Bob");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(2);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual(["Alice", "Bob"]);
+  });
+  
+  test("Don't add blank participant", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);    
+    client.addParticipant("");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
+  
+  test("Don't add participant with spaces only", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);    
+    client.addParticipant("   ");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
 });
 
 async function openSocket(url: string) {

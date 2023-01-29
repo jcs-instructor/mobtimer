@@ -1,8 +1,7 @@
-import { MobTimer } from "mobtimer-api";
-import { MobTestTimer } from "./mobTestTimer";
-import { Status, TimeUtils } from "mobtimer-api";
-
-test("Test that is not skipped", () => { });
+import { MobTimer } from "../src/mobTimer";
+import { MobTestTimer } from "../src/mobTestTimer";
+import { Status } from "../src/status";
+import { TimeUtils } from "../src/timeUtils";
 
 test("Set duration to 3.5 minutes", () => {
   const mobTimer = new MobTestTimer();
@@ -46,7 +45,7 @@ test("Get seconds remaining 1 second after start", () => {
   mobTimer.durationMinutes = 6;
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6));
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6) - 1);
 });
 
@@ -54,7 +53,7 @@ test("Get time remaining string 1 second after start", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -62,7 +61,7 @@ test("Get time remaining string 0.1 seconds after start", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 2;
   mobTimer.start();
-  mobTimer.delaySeconds(0.1);
+  mobTimer.mockDelaySeconds(0.1);
   expect(mobTimer.secondsRemainingString).toEqual("02:00");
 });
 
@@ -70,10 +69,11 @@ test("Get seconds remaining 1 second after start (real)", async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
+  const secondsToRunBeforeChecking = 1;
   const numDigits = 1;
   expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6), numDigits);
-  await TimeUtils.delaySeconds(1);
-  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6) - 1, numDigits);
+  await TimeUtils.delaySeconds(secondsToRunBeforeChecking);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6) - secondsToRunBeforeChecking, numDigits);
 });
 
 test("Ready status after time expires", async () => {
@@ -81,10 +81,20 @@ test("Ready status after time expires", async () => {
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
-  const numDigits = 2;
   await TimeUtils.delaySeconds(durationSeconds);
   expect(mobTimer.secondsRemaining).toEqual(0);
   expect(mobTimer.status).toBe(Status.Ready);
+});
+
+test("Participants rotated after time expires", async () => {
+  const mobTimer = new MobTimer();
+  const durationSeconds = 0.025;
+  mobTimer.durationMinutes = durationSeconds / 60;
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");  
+  mobTimer.start();
+  await TimeUtils.delaySeconds(durationSeconds);
+  expect(mobTimer.participants).toStrictEqual(["Bob","Alice"]);
 });
 
 test("Start after time expires", async () => {
@@ -122,9 +132,9 @@ test("Get seconds remaining after 1 second pause", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   mobTimer.pause();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -132,9 +142,9 @@ test("Get seconds remaining after running 1 second and paused 1", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   mobTimer.pause();
-  mobTimer.delaySeconds(2);
+  mobTimer.mockDelaySeconds(2);
   expect(mobTimer.secondsRemainingString).toEqual("05:59");
 });
 
@@ -142,11 +152,11 @@ test("Get seconds remaining after running 1 second, paused 1 second, and resume 
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   mobTimer.pause();
-  mobTimer.delaySeconds(2);
+  mobTimer.mockDelaySeconds(2);
   mobTimer.start();
-  mobTimer.delaySeconds(3);
+  mobTimer.mockDelaySeconds(3);
   expect(mobTimer.secondsRemainingString).toEqual("05:56");
 });
 
@@ -154,7 +164,7 @@ test("After time expires, state should be Ready", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 1;
   mobTimer.start();
-  mobTimer.delaySeconds(61);
+  mobTimer.mockDelaySeconds(61);
   expect(mobTimer.status).toEqual(Status.Ready);
 });
 
@@ -162,14 +172,14 @@ test("After time expires and timer is started, time remaining should be full amo
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 1;
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(59);
-  mobTimer.delaySeconds(61);
+  mobTimer.mockDelaySeconds(61);
   expect(mobTimer.secondsRemaining).toEqual(0);
   mobTimer.start();
   expect(mobTimer.secondsRemaining).toEqual(60);
   mobTimer.start();
-  mobTimer.delaySeconds(1);
+  mobTimer.mockDelaySeconds(1);
   expect(mobTimer.secondsRemaining).toEqual(59);
 });
 
@@ -177,14 +187,14 @@ test("After time expires, seconds remaining should be 0", () => {
   const mobTimer = new MobTestTimer();
   mobTimer.durationMinutes = 1;
   mobTimer.start();
-  mobTimer.delaySeconds(65);
+  mobTimer.mockDelaySeconds(65);
   expect(mobTimer.secondsRemainingString).toEqual("00:00");
 });
 
 test("After time expires, elapse time raises specified event", async () => {
   const mobTimer = new MobTimer();
   let expireFuncWasCalled = false;
-  mobTimer.timerExpireFunc = () => {expireFuncWasCalled = true;};
+  mobTimer.timerExpireFunc = () => { expireFuncWasCalled = true; };
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = secondsToMinutes(durationSeconds);
   mobTimer.start();
@@ -193,8 +203,89 @@ test("After time expires, elapse time raises specified event", async () => {
   expect(expireFuncWasCalled).toBe(true);
 });
 
+test("New mob timer has no participants", async () => {
+  const mobTimer = new MobTimer();
+  expect(mobTimer.participants.length).toBe(0);
+});
 
-function minutesToSeconds(minutes: number) : number {
+test("Add 1st participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Bob");
+  expect(mobTimer.participants.length).toBe(1);
+  expect(mobTimer.participants[0]).toBe("Bob");
+});
+
+test("Add 2nd participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  expect(mobTimer.participants.length).toBe(2);
+  expect(mobTimer.participants).toStrictEqual(["Alice", "Bob"]);
+});
+
+test("Don't add blank participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("");
+  expect(mobTimer.participants.length).toBe(0);
+});
+
+test("Don't add participant with spaces only", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("   ");
+  expect(mobTimer.participants.length).toBe(0);
+});
+
+test("Rotate participants", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.rotateParticipants();
+  expect(mobTimer.participants).toStrictEqual(["Bob", "Alice"]);
+});
+
+test("Remove 1st participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.removeParticipant(0);
+  expect(mobTimer.participants).toStrictEqual(["Bob"]);
+});
+
+test("Remove 2nd participant", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.removeParticipant(1);
+  expect(mobTimer.participants).toStrictEqual(["Alice"]);
+});
+
+test("Randomize participant order", async () => {
+  const mobTimer = new MobTimer();
+
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+
+  const originalOrder = JSON.stringify(["Alice", "Bob"]);
+  const differentOrder = JSON.stringify(["Bob", "Alice"]);
+
+  let gotDifferentOrder = false;
+  let gotOriginalOrder = false;
+
+  do {
+    mobTimer.randomizeParticipantOrder();
+    let currentOrder = JSON.stringify(mobTimer.participants);
+    if (currentOrder === originalOrder) {
+      console.log("got original order", mobTimer.participants);
+      gotOriginalOrder = true;
+    } else if (currentOrder === differentOrder) {
+      console.log("got different order", mobTimer.participants);
+      gotDifferentOrder = true;
+    }
+  }
+  while (!(gotOriginalOrder && gotDifferentOrder));
+});
+
+function minutesToSeconds(minutes: number): number {
   return TimeUtils.minutesToSeconds(minutes);
 }
 

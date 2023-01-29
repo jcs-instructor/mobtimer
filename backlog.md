@@ -22,6 +22,36 @@ Next
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
+- [ ] Participants  
+  - MobTimer 
+    - [x] Add participant
+    - [x] Rotate participants on demand (command)
+    - [x] Rotate participants when time expires
+    - [x] Remove participant
+    - [x] Randomize participant order
+  - MobSocketServer
+    - [x] Add participant
+    - [ ] Rotate participants on demand (command)
+    - [ ] Rotate participants when time expires
+    - [ ] Remove participant
+    - [ ] Randomize participant order
+  - [ ] Frontend
+    - [x] Show participants
+    - [x] Add participant
+    - [x] Rotate participants when time expires (works automatically when time runs out in MobTimer class)
+    - [ ] Rotate participants button
+    - [ ] Remove participant
+    - [ ] Randomize participant order
+  - [ ] Merge participants branch back into main
+
+- [ ] Add sound when time expires
+
+- [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
+- [ ] Handle illegal characters in mobName
+- [ ] Trim mobName (and maybe url encode characters as needed)
+- [ ] Handle trim(mobName) is empty
+- [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
+
 - [ ] Make the UI timeout shorter so it's not choppy, especially last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
 
@@ -49,11 +79,6 @@ Next
   - [ ] UI - Restart
   - [ ] Deploy (as single repo)
   
-- [ ] Handle illegal characters in mobName
-- [ ] Trim mobName (and maybe url encode characters as needed)
-- [ ] Handle trim(mobName) is empty
-- [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
-
 ## Split Repos and Deploy
 
 - [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
@@ -128,8 +153,14 @@ Next
 
 ## Completed (Done)
 
+2022-01-28
+
+- [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired. 
+
+
 2022-01-27
 
+- [x] Refactor: Move mobTimer.tests.ts to mobtimer-api/test, and add config for debugging tests
 - [x] Refactor: Fix word-wrapping in tests for ease of reading
 - [x] Refactor: Change mockCurrentTime.ts to mobTestTimer and derive from mobTimer, allowing us to combine these 2 lines into one:
       From:

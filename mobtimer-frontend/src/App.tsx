@@ -16,9 +16,11 @@ const App = () => {
   const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
+  const [participants, setParticipants] = useState(frontendMobTimer.participants);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
+  Controller.injectSetParticipants(setParticipants);
   Controller.injectSetTimeString(setTimeString);
 
   // Submit join mob request
@@ -36,7 +38,13 @@ const App = () => {
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
 
       // todo: handle if response is not successful
-      console.log("Mob: " + response.mobState.mobName + ", Action:" + response.actionInfo.action + ", Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) +")");
+
+      console.log("Mob: " + response.mobState.mobName + 
+         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",")+ "), " +
+        "Action:" + response.actionInfo.action + ", " +
+        "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
+        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") " 
+        );
 
       // Status
       const mobStatus = Controller.getStatus(response);
@@ -46,6 +54,10 @@ const App = () => {
       const durationMinutes = Controller.getDurationMinutes(response);
       setDurationMinutes(durationMinutes);
 
+      // Participants
+      const participants = Controller.getParticipants(response);
+      setParticipants(participants);
+
       // Sync frontend timer
       const secondsRemaining = Controller.getSecondsRemaining(response);
       Controller.changeStatus(frontendMobTimer, mobStatus, Controller.getAction(response));
@@ -53,6 +65,12 @@ const App = () => {
       setTimeString(frontendMobTimer.secondsRemainingString);
       const label = Controller.getActionButtonLabel(mobStatus);
       setActionButtonLabel(label);
+
+      if (response.mobState.status !== frontendMobTimer.status) {
+        console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
+          "Frontend Status: " + frontendMobTimer.status + ", " +
+          "Backend Status:" + response.mobState.status);
+      };
     };
 
     await client.waitForSocketState(WebSocket.OPEN);
@@ -72,7 +90,15 @@ const App = () => {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<JoinMobForm />} />
-      <Route path="/:mobNameUrlParam" element={<Room durationMinutes={durationMinutes} actionButtonLabel={actionButtonLabel} setMobName={setMobName} timeString={timeString} submitAction={submitAction} submitJoinMobRequest={submitJoinMobRequest} />} />
+      <Route path="/:mobNameUrlParam"
+        element={<Room
+          durationMinutes={durationMinutes}
+          particpants={participants}
+          actionButtonLabel={actionButtonLabel}
+          setMobName={setMobName}
+          timeString={timeString}
+          submitAction={submitAction}
+          submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
   </BrowserRouter>;
 }

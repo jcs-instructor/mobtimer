@@ -9,7 +9,7 @@ type FormParameters = {
 const Duration = ({ durationMinutes }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        //frontendMobTimer.durationMinutes = durationMinutes;
+        // Controller.setDurationMinutes(durationMinutes);
         client.update(durationMinutes);
     }
 
