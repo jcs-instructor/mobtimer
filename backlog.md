@@ -26,10 +26,6 @@ Next
 
 ----------
 
-- [ ] Add test for randomizing order of 3 participants (already had test for 2)
-  - [x] Add test
-  - [ ] Refactor to reduce duplication (e.g., test.each or something else; there's a lot of copy-paste code)
-
 - [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
 - [ ] Participants  
@@ -160,6 +156,10 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-01-29
+
+- [x] Add test for randomizing order of 3 participants (already had test for 2)
 
 2022-01-28
 
