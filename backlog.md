@@ -52,6 +52,8 @@ Next
 
 - [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
+- [ ] Make roles changeable (currently hardcoded in UI as "Navigator,Driver")
+
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
 - [ ] Handle illegal characters in mobName
 - [ ] Trim mobName (and maybe url encode characters as needed)
@@ -162,6 +164,7 @@ Next
 2022-01-30
 
 - [x] Play pneumatic horn sound when time expires, using wav file from: https://bigsoundbank.com/detail-1828-pneumatic-horn-simple-2.html 
+- [x] Add hardcoded roles to UI
 
 2022-01-29
 
