@@ -26,7 +26,9 @@ Next
 
 ----------
 
-- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
+- [ ] Add sound when time expires
+
+- [ ] Deploy (as single repo) - Once this is done, we can  start using it ourselves when pair programming together :-)
 
 - [ ] Participants  
   - MobTimer 
@@ -48,7 +50,7 @@ Next
     - [ ] Randomize participant order (shuffle)
   - [ ] Merge participants branch back into main
 
-- [ ] Add sound when time expires
+- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
 - [ ] Handle illegal characters in mobName
@@ -81,8 +83,6 @@ Next
   - [x] UI - Pause
   - [x] UI - Restart after Expired
 
-- [ ] Deploy (as single repo)
-  
 ## Split Repos and Deploy
 
 - [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
