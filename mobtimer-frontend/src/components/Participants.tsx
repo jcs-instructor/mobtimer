@@ -10,6 +10,8 @@ type FormParameters = {
 const Participants = ({ participants }: FormParameters) => {
     const [participantName, setParticipantName] = useState('');
 
+    const roles = "Navigator,Driver";
+    
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const trimmedName = participantName.trim();
@@ -30,7 +32,7 @@ const Participants = ({ participants }: FormParameters) => {
             />
             <button type="submit">Add</button>
             <p />
-            <label>Participants: </label>
+            <label>Participants ({roles}): </label>
             <label>{participants.join(",")}</label>
             {/* <ul>
                 {participants.map(o => <li key={o}>{o}</li>)}
