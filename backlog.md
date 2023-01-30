@@ -164,7 +164,7 @@ Next
 
 2022-01-30
 
-- [x] Add sound when time expires (simple version)
+- [x] Play sound when time expires (simple version)
 
 2022-01-29
 
