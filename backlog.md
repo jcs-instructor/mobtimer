@@ -30,11 +30,6 @@ Next
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
 
-- [ ] Improve sound when time expires. Currently using a base64 encoded sound that says "hello", which I found 
-      here: https://iandevlin.com/html5/data-uri/audio.php. I added a couple of .wav files to the frontend "assets" folder, but don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat
-      them as text/html. Here's what I tried:
-      const soundSource = "./assets/sound1828.wav"; 
-
 - [ ] Participants  
   - MobTimer 
     - [x] Add participant
@@ -79,6 +74,8 @@ Next
 - [ ] In UI listener, handle if response is not successful
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
+
+- [ ] Refactor: Use wav file directly instead of base64 encoded file to play pneumatic horn  when time expires. The file is in the frontend "assets" folder, but not currently used. (There are 2 copies of the file, one using the original name and the other renamed to be shorter. don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat them as text/html. Here's what I tried: const soundSource = "./assets/sound1828.wav";)
 
 - [x] Create a timer
   - [x] UI - see Example React Source Code in resources.md)
@@ -164,7 +161,7 @@ Next
 
 2022-01-30
 
-- [x] Play sound when time expires (simple version)
+- [x] Play pneumatic horn sound when time expires 
 
 2022-01-29
 
