@@ -33,7 +33,7 @@ Next
 - [ ] Improve sound when time expires. Currently using a base64 encoded sound that says "hello", which I found 
       here: https://iandevlin.com/html5/data-uri/audio.php. I added a couple of .wav files to the frontend "assets" folder, but don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat
       them as text/html. Here's what I tried:
-      const soundFilePath = "./assets/sound1828.wav"; 
+      const soundSource = "./assets/sound1828.wav"; 
 
 - [ ] Participants  
   - MobTimer 
