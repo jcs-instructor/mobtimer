@@ -26,9 +26,14 @@ Next
 
 ----------
 
-- [ ] Add sound when time expires
+- [ ] Deploy (as single repo) so can  start using it ourselves when pair programming together :-) 
+      (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
+      (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
 
-- [ ] Deploy (as single repo) - Once this is done, we can  start using it ourselves when pair programming together :-)
+- [ ] Improve sound when time expires. Currently using a base64 encoded sound that says "hello", which I found 
+      here: https://iandevlin.com/html5/data-uri/audio.php. I added a couple of .wav files to the frontend "assets" folder, but don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat
+      them as text/html. Here's what I tried:
+      const soundFilePath = "./assets/sound1828.wav"; 
 
 - [ ] Participants  
   - MobTimer 
@@ -156,6 +161,10 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-01-30
+
+- [x] Add sound when time expires (simple version)
 
 2022-01-29
 
