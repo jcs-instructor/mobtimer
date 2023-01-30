@@ -48,8 +48,7 @@ Next
     - [ ] Rotate participants on demand (button)
     - [ ] Remove participant
     - [ ] Randomize participant order (shuffle)
-  - [ ] Merge participants branch back into main
-
+  
 - [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
 - [ ] Make roles changeable (currently hardcoded in UI as "Navigator,Driver")

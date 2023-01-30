@@ -26,11 +26,13 @@ export class MobTimer {
     // frequently check to see if the timer has expired. This is to avoid
     // the case where the timer expires before we have had time to check.
     const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(this.secondsRemaining);
-    this._timer = setTimeout(() => {
-      this.rotateParticipants();
-      this.reset();
-    }, timeoutMilliseconds);
+    this._timer = setTimeout(() => this.onExpire(), timeoutMilliseconds);
     if (this._timer.unref) this._timer.unref();
+  }
+
+  protected onExpire() {
+    this.rotateParticipants();
+    this.reset();
   }
 
   reset() {

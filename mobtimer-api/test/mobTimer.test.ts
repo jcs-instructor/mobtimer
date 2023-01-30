@@ -86,6 +86,17 @@ test("Ready status after time expires", async () => {
   expect(mobTimer.status).toBe(Status.Ready);
 });
 
+test("Ready status after mock time expires", async () => {
+  const mobTimer = new MobTestTimer();
+  const durationSeconds = 0.2;
+  mobTimer.durationMinutes = durationSeconds / 60;
+  mobTimer.start();
+  await mobTimer.mockDelaySeconds(durationSeconds);
+  expect(mobTimer.secondsRemaining).toEqual(0);
+  expect(mobTimer.status).toBe(Status.Ready);
+});
+
+
 test("Participants rotated after time expires", async () => {
   const mobTimer = new MobTimer();
   const durationSeconds = 0.025;
@@ -94,6 +105,17 @@ test("Participants rotated after time expires", async () => {
   mobTimer.addParticipant("Bob");
   mobTimer.start();
   await TimeUtils.delaySeconds(durationSeconds);
+  expect(mobTimer.participants).toStrictEqual(["Bob", "Alice"]);
+});
+
+test("Participants rotated after mock time expires", async () => {
+  const mobTimer = new MobTestTimer();
+  const durationSeconds = 0.025;
+  mobTimer.durationMinutes = durationSeconds / 60;
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.start();
+  await mobTimer.mockDelaySeconds(durationSeconds);
   expect(mobTimer.participants).toStrictEqual(["Bob", "Alice"]);
 });
 
