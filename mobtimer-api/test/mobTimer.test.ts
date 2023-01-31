@@ -1,75 +1,75 @@
 import { MobTimer } from "../src/mobTimer";
-import { MobTestTimer } from "../src/mobTestTimer";
+import { MobMockTimer } from "../src/mobMockTimer";
 import { Status } from "../src/status";
 import { TimeUtils } from "../src/timeUtils";
 
 test("Set duration to 3.5 minutes", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 3.5;
   expect(mobTimer.durationMinutes).toEqual(3.5);
 });
 
 test("Initial status - timer is Ready", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   expect(mobTimer.status).toEqual(Status.Ready);
 });
 
 test("Start timer", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.start();
   expect(mobTimer.status).toEqual(Status.Running);
 });
 
 test("Get seconds remaining before start for turn duration with single digit minutes", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   expect(mobTimer.secondsRemainingString).toEqual("00:00");
 });
 
 test("Get seconds remaining string after start for turn duration with fractional minutes", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 5.5;
   mobTimer.start();
   expect(mobTimer.secondsRemainingString).toEqual("05:30");
 });
 
 test("Get seconds remaining string after start for turn duration with double digit minutes", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 12;
   mobTimer.start();
   expect(mobTimer.secondsRemainingString).toEqual("12:00");
 });
 
 test("Get seconds remaining 1 second after start", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 6;
-  mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6));
-  mobTimer.mockDelaySeconds(1);
-  expect(mobTimer.secondsRemaining).toEqual(minutesToSeconds(6) - 1);
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 6;
+  mobMockTimer.start();
+  expect(mobMockTimer.secondsRemaining).toEqual(minutesToSeconds(6));
+  mobMockTimer.mockDelaySeconds(1);
+  expect(mobMockTimer.secondsRemaining).toEqual(minutesToSeconds(6) - 1);
 });
 
 test("Get time remaining string 1 second after start", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 6;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(1);
-  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 6;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(1);
+  expect(mobMockTimer.secondsRemainingString).toEqual("05:59");
 });
 
 test("Get time remaining string 0.1 seconds after start", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 2;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(0.1);
-  expect(mobTimer.secondsRemainingString).toEqual("02:00");
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 2;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(0.1);
+  expect(mobMockTimer.secondsRemainingString).toEqual("02:00");
 });
 
 test("Get seconds remaining 1 second after start (real)", async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
-  const secondsToRunBeforeChecking = 1;
+  const secondsToRunBeforeChecking = 0.2;
   const numDigits = 1;
   expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6), numDigits);
   await TimeUtils.delaySeconds(secondsToRunBeforeChecking);
@@ -87,13 +87,13 @@ test("Ready status after time expires", async () => {
 });
 
 test("Ready status after mock time expires", async () => {
-  const mobTimer = new MobTestTimer();
+  const mobMockTimer = new MobMockTimer();
   const durationSeconds = 0.2;
-  mobTimer.durationMinutes = durationSeconds / 60;
-  mobTimer.start();
-  await mobTimer.mockDelaySeconds(durationSeconds);
-  expect(mobTimer.secondsRemaining).toEqual(0);
-  expect(mobTimer.status).toBe(Status.Ready);
+  mobMockTimer.durationMinutes = durationSeconds / 60;
+  mobMockTimer.start();
+  await mobMockTimer.mockDelaySeconds(durationSeconds);
+  expect(mobMockTimer.secondsRemaining).toEqual(0);
+  expect(mobMockTimer.status).toBe(Status.Ready);
 });
 
 
@@ -109,14 +109,14 @@ test("Participants rotated after time expires", async () => {
 });
 
 test("Participants rotated after mock time expires", async () => {
-  const mobTimer = new MobTestTimer();
+  const mobMockTimer = new MobMockTimer();
   const durationSeconds = 0.025;
-  mobTimer.durationMinutes = durationSeconds / 60;
-  mobTimer.addParticipant("Alice");
-  mobTimer.addParticipant("Bob");
-  mobTimer.start();
-  await mobTimer.mockDelaySeconds(durationSeconds);
-  expect(mobTimer.participants).toStrictEqual(["Bob", "Alice"]);
+  mobMockTimer.durationMinutes = durationSeconds / 60;
+  mobMockTimer.addParticipant("Alice");
+  mobMockTimer.addParticipant("Bob");
+  mobMockTimer.start();
+  await mobMockTimer.mockDelaySeconds(durationSeconds);
+  expect(mobMockTimer.participants).toStrictEqual(["Bob", "Alice"]);
 });
 
 test("Start after time expires", async () => {
@@ -136,14 +136,14 @@ test("Start after time expires", async () => {
 });
 
 test("Pause timer", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.start();
   mobTimer.pause();
   expect(mobTimer.status).toEqual(Status.Paused);
 });
 
 test("Resume timer", () => {
-  const mobTimer = new MobTestTimer();
+  const mobTimer = new MobTimer();
   mobTimer.start();
   mobTimer.pause();
   mobTimer.start();
@@ -151,66 +151,66 @@ test("Resume timer", () => {
 });
 
 test("Get seconds remaining after 1 second pause", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 6;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(1);
-  mobTimer.pause();
-  mobTimer.mockDelaySeconds(1);
-  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 6;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(1);
+  mobMockTimer.pause();
+  mobMockTimer.mockDelaySeconds(1);
+  expect(mobMockTimer.secondsRemainingString).toEqual("05:59");
 });
 
 test("Get seconds remaining after running 1 second and paused 1", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 6;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(1);
-  mobTimer.pause();
-  mobTimer.mockDelaySeconds(2);
-  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 6;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(1);
+  mobMockTimer.pause();
+  mobMockTimer.mockDelaySeconds(2);
+  expect(mobMockTimer.secondsRemainingString).toEqual("05:59");
 });
 
 test("Get seconds remaining after running 1 second, paused 1 second, and resume 1 second", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 6;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(1);
-  mobTimer.pause();
-  mobTimer.mockDelaySeconds(2);
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(3);
-  expect(mobTimer.secondsRemainingString).toEqual("05:56");
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 6;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(1);
+  mobMockTimer.pause();
+  mobMockTimer.mockDelaySeconds(2);
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(3);
+  expect(mobMockTimer.secondsRemainingString).toEqual("05:56");
 });
 
 test("After time expires, state should be Ready", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 1;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(61);
-  expect(mobTimer.status).toEqual(Status.Ready);
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 1;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(61);
+  expect(mobMockTimer.status).toEqual(Status.Ready);
 });
 
 test("After time expires and timer is started, time remaining should be full amount of time", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 1;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(1);
-  expect(mobTimer.secondsRemaining).toEqual(59);
-  mobTimer.mockDelaySeconds(61);
-  expect(mobTimer.secondsRemaining).toEqual(0);
-  mobTimer.start();
-  expect(mobTimer.secondsRemaining).toEqual(60);
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(1);
-  expect(mobTimer.secondsRemaining).toEqual(59);
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 1;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(1);
+  expect(mobMockTimer.secondsRemaining).toEqual(59);
+  mobMockTimer.mockDelaySeconds(61);
+  expect(mobMockTimer.secondsRemaining).toEqual(0);
+  mobMockTimer.start();
+  expect(mobMockTimer.secondsRemaining).toEqual(60);
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(1);
+  expect(mobMockTimer.secondsRemaining).toEqual(59);
 });
 
 test("After time expires, seconds remaining should be 0", () => {
-  const mobTimer = new MobTestTimer();
-  mobTimer.durationMinutes = 1;
-  mobTimer.start();
-  mobTimer.mockDelaySeconds(65);
-  expect(mobTimer.secondsRemainingString).toEqual("00:00");
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.durationMinutes = 1;
+  mobMockTimer.start();
+  mobMockTimer.mockDelaySeconds(65);
+  expect(mobMockTimer.secondsRemainingString).toEqual("00:00");
 });
 
 test("After time expires, elapse time raises specified event", async () => {

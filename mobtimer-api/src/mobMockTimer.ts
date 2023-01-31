@@ -1,6 +1,6 @@
 import { MobTimer } from "./mobTimer";
 
-export class MobTestTimer extends MobTimer {
+export class MobMockTimer extends MobTimer {
   private _mockCurrentTimeSeconds = 0;
 
   constructor(mobName: string = "") {
