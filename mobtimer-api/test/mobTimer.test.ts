@@ -65,7 +65,7 @@ test("Get time remaining string 0.1 seconds after start", () => {
   expect(mobMockTimer.secondsRemainingString).toEqual("02:00");
 });
 
-test("Get seconds remaining 1 second after start (real)", async () => {
+test("Get seconds remaining 0.2 seconds after start (real)", async () => {
   const mobTimer = new MobTimer();
   mobTimer.durationMinutes = 6;
   mobTimer.start();
@@ -96,6 +96,23 @@ test("Ready status after mock time expires", async () => {
   expect(mobMockTimer.status).toBe(Status.Ready);
 });
 
+test("Reset timer", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.start();
+  await TimeUtils.delaySeconds(0.2);
+  mobTimer.reset();
+  expect(mobTimer.secondsRemaining).toEqual(0);
+  expect(mobTimer.status).toBe(Status.Ready);
+});
+
+test("Reset mock timer", async () => {
+  const mobMockTimer = new MobMockTimer();
+  mobMockTimer.start();
+  await mobMockTimer.mockDelaySeconds(1);
+  mobMockTimer.reset();
+  expect(mobMockTimer.secondsRemaining).toEqual(0);
+  expect(mobMockTimer.status).toBe(Status.Ready);
+});
 
 test("Participants rotated after time expires", async () => {
   const mobTimer = new MobTimer();
