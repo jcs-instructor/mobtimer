@@ -12,6 +12,7 @@ const Timer = ({ timeString } : FormParameters) => {
         //Component mounted
         const interval = setInterval(() => {
             Controller.setTimeString(frontendMobTimer.secondsRemainingString);
+            document.title = `${frontendMobTimer.secondsRemainingString} - Mob Timer`;
         }, 1000);
 
         //Component will unmount

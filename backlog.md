@@ -160,6 +160,10 @@ Next
 
 ## Completed (Done)
 
+2022-01-31
+
+- [x] Update document.title to show time remaining and Mob Timer (e.g., "01:28 - Mob Timer"). (Note: This shows up in the browser tab.)
+
 2022-01-30
 
 - [x] Play pneumatic horn sound when time expires, using wav file from: https://bigsoundbank.com/detail-1828-pneumatic-horn-simple-2.html 
