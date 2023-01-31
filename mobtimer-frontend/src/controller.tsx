@@ -5,6 +5,10 @@ import { Action, MobTimer } from 'mobtimer-api';
 
 export class Controller {
 
+  static getAppTitle() { 
+    return "Mob Timer"; 
+  }
+
   // injections -----------------------
 
   // inject duration minutes
