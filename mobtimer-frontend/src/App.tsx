@@ -10,8 +10,6 @@ import { client, frontendMobTimer } from './timers';
 
 const App = () => {
 
-  document.title = Controller.getAppTitle();
-
   // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
