@@ -50,9 +50,6 @@ Next
 - [ ] Handle trim(mobName) is empty
 - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
 
-- [ ] Make the UI timeout shorter so it's not choppy, especially last second.
-      (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
-
 - [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
       - Not reproducible on Ethan's machine
       - On Joel's machine, it might be fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled first)
@@ -154,6 +151,9 @@ Next
 2022-02-01 
 
 - [x] Rotate participants on demand (button)
+- [x] Make the UI timer tick-down less choppy, which often is especially obvious in the last second.
+      (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
+
 
 2022-01-31
 
