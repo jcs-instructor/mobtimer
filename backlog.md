@@ -45,7 +45,7 @@ Next
   - [ ] Frontend
     - [x] Show participants
     - [x] Add participant
-    - [ ] WIP: Rotate participants on demand (button)
+    - [x] Rotate participants on demand (button)
     - [ ] Remove participant
     - [ ] Randomize participant order (shuffle)
   
@@ -161,6 +161,10 @@ Next
 - [ ] Handle console.log that complete after test completed?
 
 ## Completed (Done)
+
+2022-02-01 
+
+- [x] Rotate participants on demand (button)
 
 2022-01-31
 

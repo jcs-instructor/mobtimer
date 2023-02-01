@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { client } from '../timers';
 
-type FormParameters = {
-    participants: string[];
-}
-
-const AddParticipant = ({ participants }: FormParameters) => {
+const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
