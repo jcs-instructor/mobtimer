@@ -8,8 +8,7 @@ type FormParameters = {
 
 const Duration = ({ durationMinutes }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Controller.setDurationMinutes(durationMinutes);
+        event.preventDefault();        
         client.update(durationMinutes);
     }
 

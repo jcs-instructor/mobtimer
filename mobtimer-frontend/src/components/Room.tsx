@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Timer from './Timer';
 import Duration from './Duration';
 import Participants from './Participants';
+import AddParticipant from './AddParticipant';
 
 
 type FormParameters = {
@@ -33,7 +34,10 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
             <p />
             <Duration durationMinutes={durationMinutes} />
             <p />
+            <AddParticipant participants={particpants}/>
+            <p />
             <Participants participants={particpants}/>
+            <p />
             <form onSubmit={(e) => submitAction(e)}>
                 <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
             </form>

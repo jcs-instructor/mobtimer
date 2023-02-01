@@ -45,7 +45,7 @@ Next
   - [ ] Frontend
     - [x] Show participants
     - [x] Add participant
-    - [ ] Rotate participants on demand (button)
+    - [ ] WIP: Rotate participants on demand (button)
     - [ ] Remove participant
     - [ ] Randomize participant order (shuffle)
   
