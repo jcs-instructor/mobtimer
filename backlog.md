@@ -30,24 +30,13 @@ Next
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
      
-- [ ] Participants  
-  - MobTimer 
-    - [x] Add participant
-    - [x] Rotate participants on demand (command)
-    - [x] Rotate participants when time expires
-    - [x] Remove participant
-    - [x] Randomize participant order (shuffle)
-  - MobSocketServer
-    - [x] Add participant
-    - [x] Rotate participants on demand (command) (starting with test similar to "Rotate participants" in mobTimer.test.ts)
-    - [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
-    - [ ] Randomize participant order (shuffle) (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
-  - [ ] Frontend
-    - [x] Show participants
-    - [x] Add participant
-    - [x] Rotate participants on demand (button)
-    - [ ] Remove participant
-    - [ ] Randomize participant order (shuffle)
+- [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
+  - [x] Implement code in MobTimer and MobTimer tests
+  - [ ] Implement in MobSocketServer, tests, and UI
+
+- [ ] Randomize participant order (shuffle) 
+  - [x] Implement code in MobTimer and MobTimer tests
+  - [ ] Implement in MobSocketServer, tests, and UI (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
   
 - [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
 
