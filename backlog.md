@@ -39,7 +39,7 @@ Next
     - [x] Randomize participant order (shuffle)
   - MobSocketServer
     - [x] Add participant
-    - [ ] Rotate participants on demand (command) (starting with test similar to "Rotate participants" in mobTimer.test.ts)
+    - [x] Rotate participants on demand (command) (starting with test similar to "Rotate participants" in mobTimer.test.ts)
     - [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
     - [ ] Randomize participant order (shuffle) (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
   - [ ] Frontend
@@ -50,6 +50,8 @@ Next
     - [ ] Randomize participant order (shuffle)
   
 - [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
+
+- [ ] Move one participant (e.g., from 3rd position to 2nd position in mob)
 
 - [ ] Make roles changeable (currently hardcoded in UI as "Navigator,Driver")
 

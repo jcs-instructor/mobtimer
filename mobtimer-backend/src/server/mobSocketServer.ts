@@ -83,6 +83,10 @@ function _processRequest(
       mobTimer.addParticipant(addParticipantRequest.name);
       break;
     }
+    case Action.RotateParticipants: {
+      mobTimer.rotateParticipants();
+      break;
+    }
     case Action.Start: {
       mobTimer.start();
       break;

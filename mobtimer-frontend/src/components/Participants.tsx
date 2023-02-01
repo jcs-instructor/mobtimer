@@ -30,7 +30,13 @@ const Participants = ({ participants }: FormParameters) => {
                 type="text"
                 placeholder="Enter a particpant name"
             />
-            <button type="submit">Add</button>
+            <button type="submit">Add</button> 
+            {/* ➕ */}
+            {
+            /* 🔄 */
+            /* &nbsp;&nbsp;
+            <button type="button" onClick={() => frontendMobTimer.rotateParticipants()}>🔄 Rotate</button> 
+            */}
             <p />
             <label>Participants ({roles}): </label>
             <label>{participants.join(",")}</label>

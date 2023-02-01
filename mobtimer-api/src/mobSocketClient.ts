@@ -73,6 +73,10 @@ class MobSocketClient {
     this._sendJSON({ action: Action.AddParticipant, name: name } as MobTimerRequests.AddParticipantRequest);
   }
 
+  rotateParticipants() {
+    this._sendJSON({ action: Action.RotateParticipants } as MobTimerRequests.RotateParticipantRequest);
+  }
+
   start() {
     console.log("sending start request");
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);

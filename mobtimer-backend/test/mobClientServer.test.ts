@@ -247,6 +247,17 @@ describe("WebSocket Server", () => {
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
   });
+
+  test("Rotate participants", async () => {
+    const client = await openSocket(url);
+    await client.joinMob(_mobName1);
+    client.addParticipant("Alice");
+    client.addParticipant("Bob");
+    client.rotateParticipants();
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual(["Bob", "Alice"]);
+  });
+
 });
 
 async function openSocket(url: string) {

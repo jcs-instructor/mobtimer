@@ -3,6 +3,7 @@ export enum Action {
   Join = "join",
   Update = "update",
   AddParticipant = "addParticipant",
+  RotateParticipants = "rotateParticipants",
   Start = "start",
   Pause = "pause",
   Expired = "expired",
