@@ -16,10 +16,13 @@ const Timer = ({ timeString }: FormParameters) => {
 
     useEffect(() => {
         // Continuously re-sync the interval to match the frontendMobTimer so that we display whole
-        // seconds as accurately as possible.
+        // seconds as accurately as possible in the UI. Otherwise, it can be choppy (off by 1 to 999 ms)
         const fractionalSeconds = frontendMobTimer.secondsRemaining % 1;
-        const secondsBetweenTicks = (fractionalSeconds > 0) ? fractionalSeconds : 1;
-        const millisecondsBetweenTicks = TimeUtils.secondsToMilliseconds(secondsBetweenTicks);
+        const millisecondsUntilNextWholeSecond = TimeUtils.secondsToMilliseconds(fractionalSeconds);
+        let millisecondsBetweenTicks = 
+            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond < 1000) ? 
+            millisecondsUntilNextWholeSecond : 
+            1000;
 
         //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
 
