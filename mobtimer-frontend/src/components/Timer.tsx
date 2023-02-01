@@ -7,26 +7,24 @@ type FormParameters = {
     timeString: string;
 }
 
-const Timer = ({ timeString } : FormParameters) => {
+const Timer = ({ timeString }: FormParameters) => {
 
     function onTick() {
         Controller.setTimeString(frontendMobTimer.secondsRemainingString);
         document.title = `${frontendMobTimer.secondsRemainingString} - ${Controller.getAppTitle()}`;
     }
- 
-    useEffect(() => {
-        const fractionalSeconds = frontendMobTimer.secondsRemaining % 1;        
-        let millisecondsBetweenTicks: number;
-        if (fractionalSeconds > 0) {
-            millisecondsBetweenTicks = TimeUtils.secondsToMilliseconds(fractionalSeconds);
-        } else {
-            millisecondsBetweenTicks = 1000;
-        }
 
-        console.log("--- millisecondsBetweenTicks: " + millisecondsBetweenTicks + " ---");
-        
+    useEffect(() => {
+        // Continuously re-sync the interval to match the frontendMobTimer so that we display whole
+        // seconds as accurately as possible.
+        const fractionalSeconds = frontendMobTimer.secondsRemaining % 1;
+        const secondsBetweenTicks = (fractionalSeconds > 0) ? fractionalSeconds : 1;
+        const millisecondsBetweenTicks = TimeUtils.secondsToMilliseconds(secondsBetweenTicks);
+
+        //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
+
         //Component mounted
-        let interval = setInterval(() => {onTick();}, millisecondsBetweenTicks);
+        let interval = setInterval(() => { onTick(); }, millisecondsBetweenTicks);
 
         //Component will unmount
         return () => { clearInterval(interval) };
