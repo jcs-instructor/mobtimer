@@ -65,16 +65,23 @@ class MobSocketClient {
   }
 
   update(durationMinutes: number) {
-    this._sendJSON({ action: Action.Update, value: { durationMinutes },
+    this._sendJSON({
+      action: Action.Update,
+      value: { durationMinutes },
     } as MobTimerRequests.UpdateRequest);
   }
 
   addParticipant(name: string) {
-    this._sendJSON({ action: Action.AddParticipant, name: name } as MobTimerRequests.AddParticipantRequest);
+    this._sendJSON({
+      action: Action.AddParticipant,
+      name: name,
+    } as MobTimerRequests.AddParticipantRequest);
   }
 
   rotateParticipants() {
-    this._sendJSON({ action: Action.RotateParticipants } as MobTimerRequests.RotateParticipantRequest);
+    this._sendJSON({
+      action: Action.RotateParticipants,
+    } as MobTimerRequests.RotateParticipantsRequest);
   }
 
   start() {
