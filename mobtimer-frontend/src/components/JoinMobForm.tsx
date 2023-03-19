@@ -11,19 +11,21 @@ const JoinMobForm = () => {
     }
 
     return (
-        <div className="JoinMob">
+        <div style={{ display: 'inline-flex' }}>
+            <div className="JoinMob">
 
-            <form onSubmit={(event) => onSubmit(event)}>
-                <label htmlFor="mobName" className="mobLabel">Mob Name</label>
-                <input
-                    value={mobNameUrlParam}
-                    onChange={(e) => setMobNameUrlParam(e.target.value)}
-                    type="text"
-                    placeholder="Enter a Mob Name"
-                    id="mobName"
-                />
-                <button type="submit">Submit</button>
-            </form>
+                <form onSubmit={(event) => onSubmit(event)}>
+                    <label htmlFor="mobName" className="mobLabel">Mob Name</label>
+                    <input
+                        value={mobNameUrlParam}
+                        onChange={(e) => setMobNameUrlParam(e.target.value)}
+                        type="text"
+                        placeholder="Enter a Mob Name"
+                        id="mobName"
+                    />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     )
 }
