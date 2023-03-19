@@ -1,0 +1,16 @@
+.JoinMob { 
+    display: inline-flex;
+    padding-right: 0.5rem;
+    border-width: 0.1rem;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-color: black;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    margin-bottom: 1rem;
+}
+.MobLabel {
+    color: grey
+}
