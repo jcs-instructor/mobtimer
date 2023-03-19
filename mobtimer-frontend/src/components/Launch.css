@@ -2,6 +2,8 @@
     background-color: lightgrey;
     margin-left: 2rem;
     padding-left: 2rem;
-    padding-top: 2rem;
+    position: relative;
+    padding-top: 8rem; /* Make room for image */
+    padding-bottom: 8rem; /* Make room for image */
 }
 
