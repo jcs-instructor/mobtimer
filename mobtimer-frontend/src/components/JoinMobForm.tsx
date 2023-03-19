@@ -11,15 +11,9 @@ const JoinMobForm = () => {
     }
 
     return (
-        <div><p>top</p>
-            <div className="JoinMob">
+        <div className="JoinMob">
 
-                <p>
-                    abc
-                </p>
-                <p>def</p>
-                <p>ghi</p>
-                {/* <form onSubmit={(event) => onSubmit(event)}>
+            <form onSubmit={(event) => onSubmit(event)}>
                 <label htmlFor="mobName" className="mobLabel">Mob Name</label>
                 <input
                     value={mobNameUrlParam}
@@ -29,10 +23,8 @@ const JoinMobForm = () => {
                     id="mobName"
                 />
                 <button type="submit">Submit</button>
-            </form> */}
-                {/* def */}
-            </div>
-            <p>bottom</p></div>
+            </form>
+        </div>
     )
 }
 
