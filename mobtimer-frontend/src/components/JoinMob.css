@@ -9,22 +9,22 @@
     width: 100%;
     display: inline-flex;
     background-color: white;
-    margin: 1rem;
-}
-.MobLabel {
-    color: grey
-}
-button {
+    margin: 1rem 0rem;
+} button {
     background-color: blue;
     color: white;
     border-radius: 0.25rem;
     border-width: 0.1rem;
     border-style: solid;
     border-color: black;
-    font-weight:bold;
-}
-label, input, button {
+    font-weight: bold;
+} label,
+input,
+button {
     margin: 1rem;
     font-size: large;
     padding: 0.5rem;
 }
+
+
+

@@ -11,7 +11,7 @@ const JoinMobForm = () => {
     }
 
     return (
-        <div style={{ display: 'inline-flex', gap: '10%' }}>
+        <div style={{ display: 'inline-flex' }}>
             <div className="JoinMob">
 
                 <form onSubmit={(event) => onSubmit(event)}>
