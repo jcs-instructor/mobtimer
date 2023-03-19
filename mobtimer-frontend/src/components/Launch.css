@@ -6,4 +6,8 @@
     padding-top: 8rem; /* Make room for image */
     padding-bottom: 8rem; /* Make room for image */
 }
+.LaunchStyle a {
+    font-size: x-large;
+    font-weight: bold;
+}
 
