@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import JoinMobForm from "./JoinMobForm";
-import './Launch.css';
+import '../App.css';
 
 const Launch = () => {
     return (
         <div>
-            <div className="LaunchStyle">
+            <div className="LaunchMain">
                 <h1>A collaborative timer</h1>
                 <h2>for your mob team</h2>
                 <JoinMobForm />
@@ -17,7 +17,7 @@ const Launch = () => {
                 <img style={{ width: "285px", height: "384px", bottom: "65px", right: "80px", display: "block", position: "absolute" }} src="./images/mansitting.svg" alt="" />
 
             </div>
-            <div className="LaunchAdStyle">
+            <div className="LaunchBottom">
                 <div>
                     <h1>
                         It works across all your devices

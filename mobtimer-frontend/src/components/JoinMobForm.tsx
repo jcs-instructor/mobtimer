@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import './JoinMob.css';
+import '../App.css';
 
 const JoinMobForm = () => {
     const [mobNameUrlParam, setMobNameUrlParam] = useState('');

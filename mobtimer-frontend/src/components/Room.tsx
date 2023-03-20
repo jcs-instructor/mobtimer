@@ -30,14 +30,14 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
 
     return (
         <>
-            <p>{mobNameUrlParam}</p>
+            <p>TEAM: {mobNameUrlParam}</p>
             <Timer timeString={timeString} />
             <p />
             <Duration durationMinutes={durationMinutes} />
             <p />
             <AddParticipant />
             <p />
-            <Participants participants={particpants}/>
+            <Participants participants={particpants} />
             <RotateParticipants />
             <p />
             <form onSubmit={(e) => submitAction(e)}>
