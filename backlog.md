@@ -23,6 +23,7 @@ Next
 - [ ] Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
+- [ ] Discuss approach for removing, reordering, renaming participants - always send complete participant list?
 - [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
 
   - [x] Implement code in MobTimer and MobTimer tests
@@ -181,15 +182,14 @@ Next
 - [x] Clarify nowInSecondsFunc with either comments or renaming in mockCurrentTime.ts
 - [x] Add back test:
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
-      `      test("Get time remaining string 1 second after start", () => {
-      const mobTimer = new MobTimer();
-      const mockCurrentTime = createMockCurrentTime(mobTimer);
-      mobTimer.durationMinutes = 6;
-      mobTimer.start();
-      mockCurrentTime.delaySeconds(1);
-      expect(mobTimer.secondsRemainingString).toEqual("05:59");
-    });
- `
+      `     test("Get time remaining string 1 second after start", () => {
+     const mobTimer = new MobTimer();
+     const mockCurrentTime = createMockCurrentTime(mobTimer);
+     mobTimer.durationMinutes = 6;
+     mobTimer.start();
+     mockCurrentTime.delaySeconds(1);
+     expect(mobTimer.secondsRemainingString).toEqual("05:59");
+   });`
 - [x] mobClientServer.test.ts changes:
   - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [x] Remove tests that were later marked skipped
