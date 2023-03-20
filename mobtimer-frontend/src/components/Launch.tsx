@@ -18,13 +18,14 @@ const Launch = () => {
 
             </div>
             <div className="LaunchAdStyle">
-                <h1>
-                    It works acros all your devices
-                </h1>
-                <br />
-                <h1>
-                    ...and more information to entice.
-                </h1>
+                <div>
+                    <h1>
+                        It works across all your devices
+                    </h1>
+                    <h1>
+                        ... and more information to entice.
+                    </h1>
+                </div>
             </div>
         </div>
     )
