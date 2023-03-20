@@ -53,6 +53,13 @@ button {
   padding: 0.5rem;
 }
 
+.RoomBox {
+  margin: auto;
+  width:fit-content;
+  margin-top: 8rem;
+  border: 1px solid black;
+  padding: 2rem;
+}
 .Time {
   font-size: xxx-large;
   font-weight: bolder;
