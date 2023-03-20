@@ -60,6 +60,12 @@ button {
   border: 1px solid black;
   padding: 2rem;
 }
+
+.RoomBox p, label {
+  font-size: x-large;
+  font-weight: bold;
+}
+
 .Time {
   font-size: xxx-large;
   font-weight: bolder;
