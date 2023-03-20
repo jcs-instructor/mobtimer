@@ -21,7 +21,7 @@
   margin-top: 8rem;
 }
 
-.JoinMob {
+.JoinMobForm {
   padding-right: 0.5rem;
   border-width: 0.1rem;
   border-radius: 0.25rem;
@@ -35,7 +35,7 @@
   margin: 1rem 0rem;
 }
 
-.JoinMob button {
+.JoinMobForm button {
   background-color: blue;
   color: white;
   border-radius: 0.25rem;
@@ -45,7 +45,7 @@
   font-weight: bold;
 }
 
-.JoinMob label,
+.JoinMobForm label,
 input,
 button {
   margin: 1rem;
@@ -53,6 +53,11 @@ button {
   padding: 0.5rem;
 }
 
+.Time {
+  font-size: xxx-large;
+  font-weight: bolder;
+  margin: 1rem 0;
+}
 
 .App {
   text-align: center;

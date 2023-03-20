@@ -12,7 +12,7 @@ const JoinMobForm = () => {
 
     return (
         <div style={{ display: 'inline-flex' }}>
-            <div className="JoinMob">
+            <div className="JoinMobForm">
 
                 <form onSubmit={(event) => onSubmit(event)}>
                     <label htmlFor="mobName" className="mobLabel">Mob Name</label>

@@ -19,10 +19,10 @@ const Timer = ({ timeString }: FormParameters) => {
         // seconds as accurately as possible in the UI. Otherwise, it can be choppy (off by 1 to 999 ms)
         const fractionalSeconds = frontendMobTimer.secondsRemaining % 1;
         const millisecondsUntilNextWholeSecond = TimeUtils.secondsToMilliseconds(fractionalSeconds);
-        let millisecondsBetweenTicks = 
-            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond < 1000) ? 
-            millisecondsUntilNextWholeSecond : 
-            1000;
+        let millisecondsBetweenTicks =
+            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond < 1000) ?
+                millisecondsUntilNextWholeSecond :
+                1000;
 
         //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
 
@@ -35,7 +35,7 @@ const Timer = ({ timeString }: FormParameters) => {
     }, [timeString]);
 
     return (
-        <p>{timeString}</p>
+        <p className='Time'>{timeString}</p>
     );
 
 }

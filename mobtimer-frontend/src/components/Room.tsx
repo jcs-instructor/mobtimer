@@ -29,7 +29,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
     );
 
     return (
-        <>
+        <div className="RoomBox">
             <p>TEAM: {mobNameUrlParam}</p>
             <Timer timeString={timeString} />
             <p />
@@ -43,7 +43,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
             <form onSubmit={(e) => submitAction(e)}>
                 <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
             </form>
-        </>
+        </div>
     )
 }
 
