@@ -60,6 +60,5 @@ cd mobtimer-backend
 For some issues, you may want to delete node_modules and run yarn again. After yarn is done, you will need to relink the mobtimer-api directory. Follow these directions to do both steps:
 
 ```
-cd mobtimer-frontend
-../scripts/reyarn.sh
+../scripts/clean.sh mobtimer-frontend
 ```
