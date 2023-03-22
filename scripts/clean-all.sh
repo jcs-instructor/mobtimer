@@ -1,12 +1,4 @@
-# todo: make directory a parameter of reyarn.sh
-
-./scripts/reyarn.sh
-
-cd mobtimer-api
-../scripts/reyarn.sh
-
-cd ../mobtimer-backend
-../scripts/reyarn.sh
-
-cd ../mobtimer-frontend
-../scripts/reyarn.sh
+./scripts/clean.sh .
+./scripts/clean.sh mobtimer-api
+./scripts/clean.sh mobtimer-backend
+./scripts/clean.sh mobtimer-frontend
