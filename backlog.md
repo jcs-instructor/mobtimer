@@ -23,7 +23,14 @@ Next
 - [ ] Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
-- [ ] Discuss approach for removing, reordering, renaming participants - always send complete participant list?
+- [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
+- [ ] Deploy
+
+## Participants
+
+- [ ] Discuss
+  - [ ] always send complete participant list?
+  - [ ] UI: remove, edit name, drag and drop, enter comma separated list
 - [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
 
   - [x] Implement code in MobTimer and MobTimer tests
@@ -32,11 +39,19 @@ Next
 - [ ] Randomize participant order (shuffle)
   - [x] Implement code in MobTimer and MobTimer tests
   - [ ] Implement in MobSocketServer, tests, and UI (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
-- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
+  - [ ] Move one participant (e.g., from 3rd position to 2nd position in mob)
 
-- [ ] Move one participant (e.g., from 3rd position to 2nd position in mob)
+## Roles
 
 - [ ] Make roles changeable (currently hardcoded in UI as "Navigator,Driver")
+
+## Features from mobti.me
+
+- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
+- [ ] Turn noise off
+- [ ] Notifications
+- [ ] Set sound
+- [ ] Goals
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
 - [ ] Handle illegal characters in mobName
@@ -66,16 +81,6 @@ Next
   - [x] UI - Start
   - [x] UI - Pause
   - [x] UI - Restart after Expired
-
-## Split Repos and Deploy
-
-- [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
-- [ ] Deploy
-
-## Timer - Minimum Features for Ethan & Joel to Use Instead of MobTi.me
-
-- [ ] Mobbers, Rotate
-- [ ] Settings: Sound
 
 # High Value Features
 
@@ -183,13 +188,13 @@ Next
 - [x] Add back test:
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
       `     test("Get time remaining string 1 second after start", () => {
-     const mobTimer = new MobTimer();
-     const mockCurrentTime = createMockCurrentTime(mobTimer);
-     mobTimer.durationMinutes = 6;
-     mobTimer.start();
-     mockCurrentTime.delaySeconds(1);
-     expect(mobTimer.secondsRemainingString).toEqual("05:59");
-   });`
+   const mobTimer = new MobTimer();
+   const mockCurrentTime = createMockCurrentTime(mobTimer);
+   mobTimer.durationMinutes = 6;
+   mobTimer.start();
+   mockCurrentTime.delaySeconds(1);
+   expect(mobTimer.secondsRemainingString).toEqual("05:59");
+ });`
 - [x] mobClientServer.test.ts changes:
   - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [x] Remove tests that were later marked skipped
