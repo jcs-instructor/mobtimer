@@ -24,11 +24,13 @@ export function renderHomePage(port: number) {
 
   // Folder configuration
   app.use(express.static("public"));
+  console.log("dirname", __dirname);
   app.set("views", path.join(__dirname, "views"));
 
   // Without middleware
   app.get("/", function (req: any, res: any) {
     console.log(req);
+    console.log("xyz");
 
     // Rendering home.ejs page
     res.render("home");
@@ -79,7 +81,8 @@ function _processRequest(
       break;
     }
     case Action.AddParticipant: {
-      const addParticipantRequest = parsedRequest as MobTimerRequests.AddParticipantRequest;
+      const addParticipantRequest =
+        parsedRequest as MobTimerRequests.AddParticipantRequest;
       mobTimer.addParticipant(addParticipantRequest.name);
       break;
     }
@@ -93,7 +96,7 @@ function _processRequest(
     }
     case Action.Pause: {
       mobTimer.pause();
-      break;    
+      break;
     }
   }
 
