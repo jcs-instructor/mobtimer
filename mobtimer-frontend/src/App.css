@@ -1,3 +1,19 @@
+.ParticipantBorder {
+  border-color: red ;
+  border-style: solid;
+  width: 15rem;
+}
+.CellBox {
+  border-width: 0.1rem;
+  margin: 0rem;
+  padding: 0.1rem;
+}
+.ParticipantRow {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: normal;
+  padding: 0.1rem;
+}
 
 .LaunchMain {
   background-color: lightgrey;
@@ -48,6 +64,7 @@
 .JoinMobForm label,
 input,
 button {
+
   margin: 1rem;
   font-size: large;
   padding: 0.5rem;
