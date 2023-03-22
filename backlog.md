@@ -148,6 +148,10 @@ Next
 
 ## Completed (Done)
 
+2022-03-022
+
+- [x] Create clean-all (reyarns all,...)
+
 2022-02-01 
 
 - [x] Rotate participants on demand (button)
