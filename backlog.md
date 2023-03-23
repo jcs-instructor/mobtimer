@@ -13,9 +13,15 @@ Improve Later
 
 Next
 
+- [ ] Cleanup:
+  - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
+  - [ ] Delete unused files:
+    - [ ] home.html
+    - [ ] app.yaml
 - [ ] WIP: Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
+  - [ ] (AT SOME POINT DISCUSS: mobtimer-api as package - why/alternatives if any????????????????????)
   - [ ] Demo how the backend is deployed on render.comn
   - [ ] Deploy to GitHub Pages
   - [ ] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
