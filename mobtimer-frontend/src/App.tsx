@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
 import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
@@ -88,7 +88,7 @@ const App = () => {
 
   console.log('aaaa6');
   // Browser router
-  return <HashRouter>
+  return <BrowserRouter>
     <Routes>
       <Route path="/" element={<Launch />} />
       <Route path="/:mobNameUrlParam"
@@ -102,7 +102,7 @@ const App = () => {
           submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
 
-  </HashRouter >;
+  </BrowserRouter >;
 }
 
 export default App;
