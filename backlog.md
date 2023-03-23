@@ -179,7 +179,11 @@ Next
 
 ## Completed (Done)
 
-2022-02-01
+2022-03-22
+
+- [x] Create clean-all (reyarns all,...)
+
+2022-02-01 
 
 - [x] Rotate participants on demand (button)
 - [x] Make the UI timer tick-down less choppy, which often is especially obvious in the last second.
