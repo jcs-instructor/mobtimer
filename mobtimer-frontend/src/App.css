@@ -1,3 +1,94 @@
+.ParticipantBorder {
+  border-color: red ;
+  border-style: solid;
+  width: 15rem;
+}
+.CellBox {
+  border-width: 0.1rem;
+  margin: 0rem;
+  padding: 0.1rem;
+}
+.ParticipantRow {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: normal;
+  padding: 0.1rem;
+}
+
+.LaunchMain {
+  background-color: lightgrey;
+  margin-left: 2rem;
+  padding-left: 2rem;
+  position: relative;
+  padding-top: 8rem;
+  /* Make room for image */
+  padding-bottom: 8rem;
+  /* Make room for image */
+}
+
+.LaunchMain a {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.LaunchBottom {
+  margin-left: 2rem;
+  text-align: center;
+  margin-top: 8rem;
+}
+
+.JoinMobForm {
+  padding-right: 0.5rem;
+  border-width: 0.1rem;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-color: black;
+  align-items: center;
+  gap: 10%;
+  width: 100%;
+  display: inline-flex;
+  background-color: white;
+  margin: 1rem 0rem;
+}
+
+.JoinMobForm button {
+  background-color: blue;
+  color: white;
+  border-radius: 0.25rem;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: black;
+  font-weight: bold;
+}
+
+.JoinMobForm label,
+input,
+button {
+
+  margin: 1rem;
+  font-size: large;
+  padding: 0.5rem;
+}
+
+.RoomBox {
+  margin: auto;
+  width:fit-content;
+  margin-top: 8rem;
+  border: 1px solid black;
+  padding: 2rem;
+}
+
+.RoomBox p, label {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.Time {
+  font-size: xxx-large;
+  font-weight: bolder;
+  margin: 1rem 0;
+}
+
 .App {
   text-align: center;
 }
@@ -32,6 +123,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

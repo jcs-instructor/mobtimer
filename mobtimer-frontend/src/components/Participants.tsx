@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { client } from '../timers';
-
+import "../App.css"
 type FormParameters = {
     participants: string[];
 }
@@ -9,24 +8,17 @@ const Participants = ({ participants }: FormParameters) => {
     const [participantName, setParticipantName] = useState('');
 
     const roles = "Navigator,Driver";
-    
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const trimmedName = participantName.trim();
-        if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
-            client.addParticipant(trimmedName);
-        }            
-        setParticipantName('');
-    }
+    const rolesArray = ["Navigator", "Driver"];
+    const defaultRole = "Team Member";
 
     return (
-        <form onSubmit={(event) => onSubmit(event)}>
+        <div style={{ display: "block" }}>
             <label>Participants ({roles}): </label>
-            <label>{participants.join(",")}</label>
-            {/* <ul>
-                {participants.map(o => <li key={o}>{o}</li>)}
-            </ul> */}
-        </form>
+            {participants.map((participant, i) =>
+                <div className="ParticipantRow">
+                    <div key={participant} className="CellBox ParticipantBorder">{participant}</div>
+                    <div className="CellBox">{rolesArray[i] || defaultRole}</div></div>)}
+        </div>
     )
 }
 

@@ -2,7 +2,7 @@ import { Room } from "./room";
 import WebSocket from "ws";
 import { MobTimer } from "mobtimer-api";
 import { Action } from "mobtimer-api";
-import { SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
+import { MobTimerResponses } from "mobtimer-api";
 
 export class RoomManager {
   /*
@@ -55,10 +55,7 @@ export class RoomManager {
     const mobTimer = new MobTimer(mobName);
     // todo: rename timerExpireFunc
     mobTimer.timerExpireFunc = () =>
-      RoomManager.broadcastToMob(
-        mobTimer as MobTimer,
-        Action.Expired
-      );
+      RoomManager.broadcastToMob(mobTimer as MobTimer, Action.Expired);
     const room = { mobTimer, sockets: new Set<WebSocket>() };
     RoomManager._roomsByMobName.set(mobName, room);
     RoomManager._joinRoom(room, socket);
@@ -71,7 +68,7 @@ export class RoomManager {
       actionInfo: { action: action },
       mobState: mobTimer.state,
       //logInfo: mobTimer.getLogInfo(),
-    } as SuccessfulResponse;
+    } as MobTimerResponses.SuccessfulResponse;
     let message = JSON.stringify(mobTimerResponse);
     const sockets = RoomManager.getSocketsForMob(mobTimer.state.mobName);
     RoomManager._broadcast(sockets, message);

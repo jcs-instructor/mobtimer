@@ -2,47 +2,89 @@
 
 See also: [Reminders](./reminders.md)
 
+## Epics / Categories
+
+- Finish deploy
+  - Configure ws url
+- Participant UI (reorder, edit, delete, drag/drop)
+- Pitch for front page
+  - Reg scheduled events
+  - Encourage pairing on real projects
+- Randomize order
+- Additional features
+  - Must Have
+    - Roles
+  - Should Have features
+    - Turn on/off sound
+    - Notifications
+- Enhancements
+  - Alarm for breaks, etc
+  - Set alarm duration / pausing
+  - Raise hand/make comments
+  - Reminder to stretch
+  - RPG
+  - Lists (such as goals)
+- Create VSCode version
+- Refactor & Technical
+  - rethink mobtimer-api
+    - change to d.ts
+    - separate time library?
+    - separate mobtimer library?
+  - correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
+  - review list below
+- Security / Permanent Storage
+
 ## Timer - Minimum Deployable Features
 
 Improve Later
 
 - [ ] Low priority. Ethan after hours:
   - [ ] 2nd crack on start scripts, think about class vs function
-  - [ ] In tasks.json, reorder tasks by order of execution  
+  - [ ] In tasks.json, reorder tasks by order of execution
 - [ ] Ethan - between sessions:
   - [ ] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
-  - [ ] Log bug in mobti.me - web version not working (vs code version still works)
-  - [ ] Automate index.ts
-    - [ ] import and export exports.ts
-    - [ ] get rid of most export statements from index.ts (exclude MobTimer something)
-  - [ ] Check if we have an extra symlink watch
-  - [ ] Investigate regeneration of d.ts files - can't reproduce
 
 Next
 
-----------
+---
 
 - [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
 
-----------
+---
 
-- [ ] Deploy (as single repo) so can  start using it ourselves when pair programming together :-) 
+- [ ] WIP: Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
-     
+  - [ ] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
+  - [ ] Make ws configurable
+  - [ ] Document deploy
+
+## Participants
+
+- [ ] Discuss
+  - [ ] always send complete participant list?
+  - [ ] UI: remove, edit name, drag and drop, enter comma separated list
 - [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
+
   - [x] Implement code in MobTimer and MobTimer tests
   - [ ] Implement in MobSocketServer, tests, and UI
 
-- [ ] Randomize participant order (shuffle) 
+- [ ] Randomize participant order (shuffle)
   - [x] Implement code in MobTimer and MobTimer tests
   - [ ] Implement in MobSocketServer, tests, and UI (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
-  
-- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
+  - [ ] Move one participant (e.g., from 3rd position to 2nd position in mob)
 
-- [ ] Move one participant (e.g., from 3rd position to 2nd position in mob)
+## Roles
 
 - [ ] Make roles changeable (currently hardcoded in UI as "Navigator,Driver")
+
+## Features from mobti.me
+
+- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
+- [ ] Turn noise off
+- [ ] Notifications
+- [ ] Set sound
+- [ ] Goals
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
 - [ ] Handle illegal characters in mobName
@@ -50,11 +92,10 @@ Next
 - [ ] Handle trim(mobName) is empty
 - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
 
-- [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)"
-      - Not reproducible on Ethan's machine
-      - On Joel's machine, it might be fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled first)
+- [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)" - Not reproducible on Ethan's machine - On Joel's machine, it might be fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled first)
 
 - [ ] UI features (without styling) for all server-exposed methods - using React:
+
   - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
     - [ ] Messages not sent to all browsers in different mobs
@@ -64,7 +105,7 @@ Next
 - [ ] Make ports configurable (on frontend & backend)
 - [ ] Make WebSocketServer url configurable (frontend)
 
-- [ ] Refactor: Use wav file directly instead of base64 encoded file to play pneumatic horn  when time expires. The file is in the frontend "assets" folder, but not currently used. (There are 2 copies of the file, one using the original name and the other renamed to be shorter. don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat them as text/html. Here's what I tried: const soundSource = "./assets/sound1828.wav";)
+- [ ] Refactor: Use wav file directly instead of base64 encoded file to play pneumatic horn when time expires. The file is in the frontend "assets" folder, but not currently used. (There are 2 copies of the file, one using the original name and the other renamed to be shorter. don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat them as text/html. Here's what I tried: const soundSource = "./assets/sound1828.wav";)
 
 - [x] Create a timer
   - [x] UI - see Example React Source Code in resources.md)
@@ -73,16 +114,6 @@ Next
   - [x] UI - Start
   - [x] UI - Pause
   - [x] UI - Restart after Expired
-
-## Split Repos and Deploy
-
-- [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
-- [ ] Deploy
-
-## Timer - Minimum Features for Ethan & Joel to Use Instead of MobTi.me
-
-- [ ] Mobbers, Rotate
-- [ ] Settings: Sound
 
 # High Value Features
 
@@ -148,7 +179,7 @@ Next
 
 ## Completed (Done)
 
-2022-03-022
+2022-03-22
 
 - [x] Create clean-all (reyarns all,...)
 
@@ -158,14 +189,13 @@ Next
 - [x] Make the UI timer tick-down less choppy, which often is especially obvious in the last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
 
-
 2022-01-31
 
 - [x] Update document.title to show time remaining and Mob Timer (e.g., "01:28 - Mob Timer"). (Note: This shows up in the browser tab.)
 
 2022-01-30
 
-- [x] Play pneumatic horn sound when time expires, using wav file from: https://bigsoundbank.com/detail-1828-pneumatic-horn-simple-2.html 
+- [x] Play pneumatic horn sound when time expires, using wav file from: https://bigsoundbank.com/detail-1828-pneumatic-horn-simple-2.html
 - [x] Add hardcoded roles to UI
 
 2022-01-29
@@ -174,8 +204,7 @@ Next
 
 2022-01-28
 
-- [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired. 
-
+- [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired.
 
 2022-01-27
 
@@ -187,7 +216,7 @@ Next
       const mockCurrentTime = createMockCurrentTime(mobTimer);
       To:
       const mockMobTimer = new MockMobTimer();
-      
+
 2022-01-26
 
 - [x] Revisit tolerance seconds in \*.test.ts files (often 0.1) - but maybe not needed or could be much smaller, e.g., 0.01?
@@ -195,15 +224,14 @@ Next
 - [x] Clarify nowInSecondsFunc with either comments or renaming in mockCurrentTime.ts
 - [x] Add back test:
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
-      `       test("Get time remaining string 1 second after start", () => {
-        const mobTimer = new MobTimer();
-        const mockCurrentTime = createMockCurrentTime(mobTimer);
-        mobTimer.durationMinutes = 6;
-        mobTimer.start();
-        mockCurrentTime.delaySeconds(1);
-        expect(mobTimer.secondsRemainingString).toEqual("05:59");
-      });
-    `
+      `     test("Get time remaining string 1 second after start", () => {
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(1);
+  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+});`
 - [x] mobClientServer.test.ts changes:
   - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [x] Remove tests that were later marked skipped

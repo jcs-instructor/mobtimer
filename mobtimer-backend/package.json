@@ -24,7 +24,7 @@
   "scripts": {
     "start": "node .",
     "launch": "echo todo: doesn't work & cd ./src/server & ls & ls *.json & ts-node . & open http://localhost:3000",
-    "build": "tsc",
+    "build": "tsc && cp -r ./src/server/views ./dist/server/views",
     "test": "jest --watch --verbose",
     "debug": "node --debug-brk --inspect ./node_modules/jest/bin/jest -i",
     "dev": "nodemon",
@@ -38,7 +38,7 @@
     "express": "^4.18.1",
     "jest-websocket-mock": "^2.3.0",
     "jquery": "^3.6.0",
-    "mobtimer-api": "^1.0.0",
+    "mobtimer-api": "^1.0.2",
     "nodemon": "^2.0.19",
     "websocket": "^1.0.34",
     "ws": "^8.6.0"

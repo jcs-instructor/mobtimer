@@ -4,7 +4,7 @@ import './App.css';
 import Room from './components/Room';
 import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
 import { Controller } from './controller';
-import JoinMobForm from './components/JoinMobForm';
+import Launch from './components/Launch';
 import { client, frontendMobTimer } from './timers';
 // import logo from './logo.svg';
 
@@ -39,12 +39,12 @@ const App = () => {
 
       // todo: handle if response is not successful
 
-      console.log("Mob: " + response.mobState.mobName + 
-         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",")+ "), " +
+      console.log("Mob: " + response.mobState.mobName +
+        " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
         "Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
-        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") " 
-        );
+        "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
+      );
 
       // Status
       const mobStatus = Controller.getStatus(response);
@@ -86,10 +86,11 @@ const App = () => {
     Controller.toggle(client, frontendMobTimer);
   }
 
+  console.log('aaaa6');
   // Browser router
   return <BrowserRouter>
     <Routes>
-      <Route path="/" element={<JoinMobForm />} />
+      <Route path="/" element={<Launch />} />
       <Route path="/:mobNameUrlParam"
         element={<Room
           durationMinutes={durationMinutes}
@@ -100,7 +101,8 @@ const App = () => {
           submitAction={submitAction}
           submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>
-  </BrowserRouter>;
+
+  </BrowserRouter >;
 }
 
 export default App;
