@@ -4,7 +4,7 @@ import { soundSource } from "./assets/soundSource";
 // todo: unhardcode port
 const url =
   process.env.REACT_WEBSOCKET_URL ||
-  `ws://localhost:${process.env.REACT_WEBSOCKET_PORT || ""}`;
+  `ws://localhost:${process.env.REACT_WEBSOCKET_PORT || "4000"}`;
 export const client = MobSocketClient.openSocketSync(url);
 console.log("url", url);
 
