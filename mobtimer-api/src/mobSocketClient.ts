@@ -11,6 +11,7 @@ class MobSocketClient {
   }
 
   static openSocketSync(url: string): MobSocketClient {
+    console.log("opening socket");
     const socket = new W3CWebSocket(url);
     const mobSocketClient = new MobSocketClient(socket);
     return mobSocketClient;

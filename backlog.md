@@ -2,6 +2,38 @@
 
 See also: [Reminders](./reminders.md)
 
+## Epics / Categories
+
+- Finish deploy
+  - Configure ws url
+- Participant UI (reorder, edit, delete, drag/drop)
+- Pitch for front page
+  - Reg scheduled events
+  - Encourage pairing on real projects
+- Randomize order
+- Additional features
+  - Must Have
+    - Roles
+  - Should Have features
+    - Turn on/off sound
+    - Notifications
+- Enhancements
+  - Alarm for breaks, etc
+  - Set alarm duration / pausing
+  - Raise hand/make comments
+  - Reminder to stretch
+  - RPG
+  - Lists (such as goals)
+- Create VSCode version
+- Refactor & Technical
+  - rethink mobtimer-api
+    - change to d.ts
+    - separate time library?
+    - separate mobtimer library?
+  - correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
+  - review list below
+- Security / Permanent Storage
+
 ## Timer - Minimum Deployable Features
 
 Improve Later
@@ -23,8 +55,8 @@ Next
 - [ ] Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
-- [ ] Split repos before deploy (see [background-and-decisions](./background-and-decisions.md))
-- [ ] Deploy
+  - [ ] Make ws configurable
+  - [ ] Document deploy
 
 ## Participants
 
@@ -188,13 +220,13 @@ Next
 - [x] Add back test:
       In mobTimer.test.ts, add back the following test (immediately after the test "Get seconds remaining 1 second after start"):
       `     test("Get time remaining string 1 second after start", () => {
-   const mobTimer = new MobTimer();
-   const mockCurrentTime = createMockCurrentTime(mobTimer);
-   mobTimer.durationMinutes = 6;
-   mobTimer.start();
-   mockCurrentTime.delaySeconds(1);
-   expect(mobTimer.secondsRemainingString).toEqual("05:59");
- });`
+  const mobTimer = new MobTimer();
+  const mockCurrentTime = createMockCurrentTime(mobTimer);
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  mockCurrentTime.delaySeconds(1);
+  expect(mobTimer.secondsRemainingString).toEqual("05:59");
+});`
 - [x] mobClientServer.test.ts changes:
   - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [x] Remove tests that were later marked skipped
