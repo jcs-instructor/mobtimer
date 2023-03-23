@@ -1,0 +1,31 @@
+# Epics / Categories
+
+- Finish deploy
+  - Configure ws url
+- Participant UI (reorder, edit, delete, drag/drop)
+- Pitch for front page
+  - Reg scheduled events
+  - Encourage pairing on real projects
+- Randomize order
+- Additional features
+  - Must Have
+    - Roles
+  - Should Have features
+    - Turn on/off sound
+    - Notifications
+- Enhancements
+  - Alarm for breaks, etc
+  - Set alarm duration / pausing
+  - Raise hand/make comments
+  - Reminder to stretch
+  - RPG
+  - Lists (such as goals)
+- Create VSCode version
+- Refactor & Technical
+  - rethink mobtimer-api
+    - change to d.ts
+    - separate time library?
+    - separate mobtimer library?
+  - correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
+  - review list below
+- Security / Permanent Storage

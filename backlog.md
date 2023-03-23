@@ -1,40 +1,7 @@
 # Backlog
 
 See also: [Reminders](./reminders.md)
-
-## Epics / Categories
-
-- Finish deploy
-  - Configure ws url
-- Participant UI (reorder, edit, delete, drag/drop)
-- Pitch for front page
-  - Reg scheduled events
-  - Encourage pairing on real projects
-- Randomize order
-- Additional features
-  - Must Have
-    - Roles
-  - Should Have features
-    - Turn on/off sound
-    - Notifications
-- Enhancements
-  - Alarm for breaks, etc
-  - Set alarm duration / pausing
-  - Raise hand/make comments
-  - Reminder to stretch
-  - RPG
-  - Lists (such as goals)
-- Create VSCode version
-- Refactor & Technical
-  - rethink mobtimer-api
-    - change to d.ts
-    - separate time library?
-    - separate mobtimer library?
-  - correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
-  - review list below
-- Security / Permanent Storage
-
-## Timer - Minimum Deployable Features
+See also: [Epics](./epics.md)
 
 Improve Later
 
@@ -46,15 +13,11 @@ Improve Later
 
 Next
 
----
-
-- [ ] Revisit schedule: Ethan says Thursday afternoons are ideal for pickleball, so see if can reschedule
-
----
-
 - [ ] WIP: Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
+  - [ ] Demo how the backend is deployed on render.comn
+  - [ ] Deploy to GitHub Pages
   - [ ] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
   - [ ] Make ws configurable
   - [ ] Document deploy
