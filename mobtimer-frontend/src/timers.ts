@@ -6,6 +6,7 @@ const url =
   process.env.REACT_WEBSOCKET_URL ||
   `ws://localhost:${process.env.REACT_WEBSOCKET_PORT || ""}`;
 export const client = MobSocketClient.openSocketSync(url);
+console.log("url", url);
 
 export const frontendMobTimer = createFrontendMobTimer();
 
