@@ -23,7 +23,7 @@ Next
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
   - [x] Deploy to GitHub Pages
     - [x] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
-  - [ ] NEXT: Get localhost:3000 to work !!!!!!!
+  - [ ] NEXT: Get localhost:3000 to work !!!!!!! e.g., http://localhost:3000/mobtimer#/bb1 -> http://localhost:3000/mobtimer/#/bb1 ????
     - [ ] (AT SOME POINT DISCUSS: mobtimer-api as package - why/alternatives if any????????????????????)
   - [ ] Deploy backend and document in CONTRIBUTING.md
   - [ ] Make ws configurable
