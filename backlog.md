@@ -21,10 +21,11 @@ Next
 - [ ] WIP: Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
-  - [ ] (AT SOME POINT DISCUSS: mobtimer-api as package - why/alternatives if any????????????????????)
-  - [ ] Demo how the backend is deployed on render.comn
-  - [ ] Deploy to GitHub Pages
-  - [ ] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
+  - [x] Deploy to GitHub Pages
+    - [x] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
+  - [ ] NEXT: Get localhost:3000 to work !!!!!!!
+    - [ ] (AT SOME POINT DISCUSS: mobtimer-api as package - why/alternatives if any????????????????????)
+  - [ ] Deploy backend and document in CONTRIBUTING.md
   - [ ] Make ws configurable
   - [ ] Document deploy
 

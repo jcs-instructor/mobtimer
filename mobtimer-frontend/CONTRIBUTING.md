@@ -26,3 +26,24 @@ For some issues, you may want to delete node_modules and run yarn again. After y
 ```
 ../scripts/clean.sh mobtimer-frontend
 ```
+
+## GitHub Pages Deployment
+
+### One-time setup
+- Clone or fork this repo (e.g., jcs-instructor/mobtimer)
+- In the terminal, enter:
+    ```
+    cd mobtimer-frontend/
+    npm run deploy
+    ```
+- In the GitHub repo from the prior step, go to Settings, then Pages, and select the Branch: gh-pages,
+  and click Save (to the right of it)
+- Create a repo called <username>.github.io (e.g., jcs-instructor.github.io)
+- View in web browser - note: it might take a few minutes to be available
+
+### Subsequent deployments
+- In the terminal, enter:
+    ```
+    cd mobtimer-frontend/
+    npm run deploy
+    ```
