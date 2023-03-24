@@ -10,6 +10,7 @@ Improve Later
   - [ ] In tasks.json, reorder tasks by order of execution
 - [ ] Ethan - between sessions:
   - [ ] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
+- [ ] Delete old unused branches
 
 Next
 
