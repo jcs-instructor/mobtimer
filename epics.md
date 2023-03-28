@@ -1,6 +1,6 @@
 # Epics / Categories
 
-<details><summary>Deploy (see backlogp)</summary><blockquote>
+<details><summary>Deploy (see backlog)</summary><blockquote>
 
 - See backlog
   
