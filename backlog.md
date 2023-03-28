@@ -1,6 +1,6 @@
 # Backlog
 
-See also: [Reminders](./reminders.md) and [Epics](./epics.md)
+See also: [Reminders](./reminders.md), [Epics](./epics.md), and [Completed](./completed.md)
 
 Improve Later
 
