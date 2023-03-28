@@ -79,7 +79,8 @@
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
 - [ ] refactor mobtimerclient to use socket injection
 - [ ] solve websocket error
-- [ ] make npmjs package more like other packages
+  - [ ] try other socket client packages (tried socket.io-client, had trouble setting url)
+- [ ] make more like other npmjs packages (no dist folder, figure out package.json)
 - [ ] change to d.ts, create type library
 - [ ] create separate time library?
 - [ ] create separate mobtimerclient library?
