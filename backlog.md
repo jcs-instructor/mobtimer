@@ -14,16 +14,17 @@ Improve Later
 Next
 
 - Deploy to render.com
-  - [ ] Deploy to render.com
-  - [ ] Copy mobtimerclient to mobtimer-frontend and change references
+  - [ ] WIP: Deploy to render.com (fix error)
+  - [x] Copy mobtimerclient to mobtimer-frontend and change references
   - [ ] Clean up warnings
-  - [ ] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
+  - [x] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
   - [ ] Verify working
   - [ ] Try BrowserRouter
   - [ ] We currently have it https://mobtimer-backend-pj2v.onrender.com, and modified the environment variable, but haven't been able to test yet in Postman;
     and in the deployed UI, it is still trying to access the localhost backend even though we set the environment variable to go to
     [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
   - [ ] Update CONTRIBUTING.md
+  - [ ] Review duplicated code mobSocketClient (and dependency on websocket) and see "rethink mobtimer-api" in [Epics](./epics.md) for this
 - [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
 - [ ] Cleanup
   - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
