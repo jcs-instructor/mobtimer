@@ -30,19 +30,21 @@ For some issues, you may want to delete node_modules and run yarn again. After y
 ## GitHub Pages Deployment
 
 ## One-time setup:
+
 - On render.com, create static website
-    - Name: mobtimer-frontend
-    - Root Directory: mobtimer-frontend
-    - Build Command: yarn; yarn build
-    - Click "Create Static Website" button at bottom to save
-    - Click Environment and add variable:
-        - Key: REACT_APP_WEBSOCKET_URL
-        - Value: paste url from the backend web service (e.g., https://mobtimer-backend-pj2v.onrender.com)
-    - Click link at top left corner of page to view in web browser - note: it might take a few minutes to be available (e.g., https://mobtimer-frontend-iwa7.onrender.com)
+  - Name: mobtimer-frontend
+  - Root Directory: mobtimer-frontend
+  - Build Command: yarn; yarn build
+  - Click "Create Static Website" button at bottom to save
+  - Click Environment and add variable:
+    - Key: REACT_APP_WEBSOCKET_URL
+    - Value: paste url from the backend web service and change https to wss (e.g., wss://mobtimer-backend-pj2v.onrender.com)
+  - Click link at top left corner of page to view in web browser - note: it might take a few minutes to be available (e.g., https://mobtimer-frontend-iwa7.onrender.com)
 
 ### Subsequent deployments
+
 - In the terminal, enter:
-    ```
-    cd mobtimer-frontend/
-    npm run deploy
-    ```
+  ```
+  cd mobtimer-frontend/
+  npm run deploy
+  ```
