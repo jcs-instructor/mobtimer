@@ -1,18 +1,6 @@
 # Epics / Categories
 
-<details><summary>Finish deploy</summary><blockquote>
-
-- Copy changes from mobtimer-new repo, mobtimer-frontend</summary>
-
-- <details><summary> Deploy mobtimer-frontend to render.com (or vercel.com)</summary><blockquote>
-
-  - [ ] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
-  - [ ] Verify working
-  - [ ] Update CONTRIBUTING.md
-
-</blockquote></details>
-
-</blockquote></details>
+- (See backlog) Deploy mobtimer-frontend to render.com (or vercel.com)
 
 <details><summary>Participant UI (reorder, edit, delete, drag/drop)</summary><blockquote>
 
