@@ -74,8 +74,6 @@
 
 </blockquote></details>
 
-<details><summary>Refactor & Technical</summary><blockquote>
-
 <details><summary>rethink mobtimer-api</summary><blockquote>
 
 - [ ] separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
@@ -88,7 +86,7 @@
 
 </blockquote></details>
 
-<details><summary>Other</summary><blockquote>
+<details><summary>Refactor & Technical</summary><blockquote>
 
 - [ ] correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
 - [ ] Use wav file directly instead of base64 encoded file to play pneumatic horn when time expires. The file is in the frontend "assets" folder, but not currently used. (There are 2 copies of the file, one using the original name and the other renamed to be shorter. don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat them as text/html. Here's what I tried: const soundSource = "./assets/sound1828.wav";)
@@ -130,7 +128,6 @@
 - [ ] Figure out way to reduce spurious failing tests (in Jest)
 - [ ] Handle console.log that complete after test completed?
 
-</blockquote></details>
 </blockquote></details>
 
 <details><summary>Security / Permanent Storage / Persistence</summary><blockquote>
