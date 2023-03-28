@@ -14,8 +14,14 @@ Improve Later
 
 Next
 
+- Deploy to render.com
+  - [ ] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
+  - [ ] Copy mobtimerclient to mobtimer-frontend and change references
+  - [ ] Clean up warnings
+  - [ ] Verify working
+  - [ ] Try BrowserRouter
+  - [ ] Update CONTRIBUTING.md
 - [ ] Cleanup
-  - [ ] Fix warnings
   - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
   - [ ] Delete unused files:
     - [ ] home.html
