@@ -66,16 +66,18 @@ For some issues, you may want to delete node_modules and run yarn again. After y
 # Deployment
 
 ## One-time setup:
+
 - On render.com, create web service
-    - Name: mobtimer-backend
-    - Root Directory: mobtimer-backend
-    - Build Command: yarn; yarn build
-    - Click "Create Web Service" button at bottom to save
-    - Copy link to web service (at top left corner of page)
-- In the mobtimer repo, go to Settings, then Environments; select github-pages, and add an Environment Variable (at bottom):
-    - Name: REACT_APP_WEBSOCKET_URL
-    - Value: <paste url from the render web service above> (e.g., https://mobtimer-backend-pj2v.onrender.com)
-- Test using Postman app
-    - todo:
-    ```
-    ```
+  - Name: mobtimer-backend
+  - Root Directory: mobtimer-backend
+  - Build Command: yarn; yarn build
+  - Click "Create Web Service" button at bottom to save
+  - Once complete, click on the link to the web service (at top left corner of the screen). Browser should open with message "http server started"
+  - Copy link to web service (at top left corner of page) for use when deploying frontend
+- (Optional) Test using Postman app - for more details see https://blog.postman.com/postman-supports-websocket-apis/
+  - Click on My Workspace
+  - Click on New
+  - Click on Websocket Request
+  - Paste previously copied link and change https to wss
+  - Click Connect
+  - Send the message "Test". A message something like {"actionInfo":{"action":"invalidRequestError"}} will be returned.
