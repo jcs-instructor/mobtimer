@@ -6489,12 +6489,13 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-mobtimer-api@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.5.tgz#fbc5bb03f4a44eeef75fe411ae9f682cae2e4f44"
-  integrity sha512-gjyhBNjIwq+XtgKIWRDoyxKhNjo3oiuGNEbl5mAy/1YmFyemUutiUEDCC4Xy3QbY6Vglag77UK+cU72LvDm10Q==
+mobtimer-api@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.6.tgz#2187790d203ef4cd18ff08fa19730c01d5275524"
+  integrity sha512-FCI6JK3UuJ97yh+0eKr3rrgj8axDNftIw0ixctwN2nXgTJdlVgYgnKiW104zvABfoCx9zQDu1VHp+6PXgmN7Ag==
   dependencies:
     "@types/uuidv4" "^5.0.0"
+    "@types/websocket" "^1.0.5"
     uuid "^9.0.0"
 
 ms@2.0.0:
