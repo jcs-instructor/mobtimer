@@ -1,6 +1,10 @@
 # Epics / Categories
 
-- (See backlog) Deploy mobtimer-frontend to render.com (or vercel.com)
+<details><summary>Deploy (see backlogp)</summary><blockquote>
+
+- See backlog
+  
+</details></blockquote>
 
 <details><summary>Participant UI (reorder, edit, delete, drag/drop)</summary><blockquote>
 
