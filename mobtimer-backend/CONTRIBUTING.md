@@ -73,7 +73,7 @@ For some issues, you may want to delete node_modules and run yarn again. After y
     - Click "Create Web Service" button at bottom to save
     - Copy link to web service (at top left corner of page)
 - In the mobtimer repo, go to Settings, then Environments; select github-pages, and add an Environment Variable (at bottom):
-    - Name: REACT_WEBSOCKET_URL
+    - Name: REACT_APP_WEBSOCKET_URL
     - Value: <paste url from the render web service above> (e.g., https://mobtimer-backend-pj2v.onrender.com)
 - Test using Postman app
     - todo:
