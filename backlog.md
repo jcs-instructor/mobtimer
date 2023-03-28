@@ -1,7 +1,6 @@
 # Backlog
 
-See also: [Reminders](./reminders.md)
-See also: [Epics](./epics.md)
+See also: [Reminders](./reminders.md) and [Epics](./epics.md)
 
 Improve Later
 
@@ -23,8 +22,8 @@ Next
   - [ ] We currently have it https://mobtimer-backend-pj2v.onrender.com, and modified the environment variable, but haven't been able to test yet in Postman;
     and in the deployed UI, it is still trying to access the localhost backend even though we set the environment variable to go to
     [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
-
   - [ ] Update CONTRIBUTING.md
+- [ ] Review [Epics](./epics.md) - put into bugs
 - [ ] Cleanup
   - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
   - [ ] Delete unused files:
