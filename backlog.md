@@ -15,6 +15,7 @@ Next
 
 - Deploy to render.com
   - [ ] WIP: Deploy to render.com (fix error)
+    - [ ] Is there a way for it to make a sound and/or other notification when done?
   - [x] Copy mobtimerclient to mobtimer-frontend and change references
   - [ ] Clean up warnings
   - [x] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
