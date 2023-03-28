@@ -14,7 +14,8 @@ Improve Later
 
 Next
 
-- [ ] Cleanup:
+- [ ] Cleanup
+  - [ ] Fix warnings
   - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
   - [ ] Delete unused files:
     - [ ] home.html
@@ -22,165 +23,60 @@ Next
 - [ ] WIP: Deploy (as single repo) so can start using it ourselves when pair programming together :-)
       (NOTE: We currently have mobbers and a sound when time expires, so we can start using it!!!)
       (Consider Firebase or something else for free web hosting: https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/#firebase)
-  - [x] Deploy to GitHub Pages
-    - [x] Redo HashRouter and debug: BrowserRouter -> HashRouter, homepageXX -> homepage
   - [ ] WIP: Deploy backend and document in [CONTRIBUTING.md](./mobtimer-backend/CONTRIBUTING.md)
-    - We currently have it https://mobtimer-backend-pj2v.onrender.com, and modified the environment variable, but haven't been able to test yet in Postman; 
-      and in the deployed UI, it is still trying to access the localhost backend even though we set the environment variable to go to
-      [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
-  - [ ] NEXT: Get localhost:3000 to work !!!!!!! e.g., http://localhost:3000/mobtimer#/bb1 -> http://localhost:3000/mobtimer/#/bb1 ????
-    - [ ] (AT SOME POINT DISCUSS: mobtimer-api as package - why/alternatives if any????????????????????)
-  - [ ] Make ws configurable
-  - [ ] Document deploy
+  - We currently have it https://mobtimer-backend-pj2v.onrender.com, and modified the environment variable, but haven't been able to test yet in Postman;
+    and in the deployed UI, it is still trying to access the localhost backend even though we set the environment variable to go to
+    [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 
-## Participants
+## Completed (Done)
 
-- [ ] Discuss
-  - [ ] always send complete participant list?
-  - [ ] UI: remove, edit name, drag and drop, enter comma separated list
-- [ ] Remove participant (starting with tests similar to "Remove 1st participant" and "Remove 2nd participant" in mobTimer.test.ts)
+2023-22-03-23
 
-  - [x] Implement code in MobTimer and MobTimer tests
-  - [ ] Implement in MobSocketServer, tests, and UI
+- [x] NEXT: Get localhost:3000 to work !!!!!!! e.g., http://localhost:3000/mobtimer#/bb1 -> http://localhost:3000/mobtimer/#/bb1 ????
+- [x] Make ws configurable
+- [x] UI features (without styling) for all server-exposed methods - using React:
 
-- [ ] Randomize participant order (shuffle)
-  - [x] Implement code in MobTimer and MobTimer tests
-  - [ ] Implement in MobSocketServer, tests, and UI (starting with tests similar to "Randomize order of participants: %p" in mobTimer.test.ts)
-  - [ ] Move one participant (e.g., from 3rd position to 2nd position in mob)
-
-## Roles
-
-- [ ] Make roles changeable (currently hardcoded in UI as "Navigator,Driver")
-
-## Features from mobti.me
-
-- [ ] Cancel timer after started (reset back to full time remaining, and put time back to "00:00" / ready state)
-- [ ] Turn noise off
-- [ ] Notifications
-- [ ] Set sound
-- [ ] Goals
-
-- [ ] When update duration minutes, don't change the time remaining for the currently running timer (if running); just store in nextDurationMinutes (or similar)
-- [ ] Handle illegal characters in mobName
-- [ ] Trim mobName (and maybe url encode characters as needed)
-- [ ] Handle trim(mobName) is empty
-- [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
-
-- [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And the play button says, "Start (temp hack)" - Not reproducible on Ethan's machine - On Joel's machine, it might be fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled first)
-
-- [ ] UI features (without styling) for all server-exposed methods - using React:
-
-  - [ ] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
+  - [x] Run UI from multiple browsers (or tabs) and verify both are changed/receiving messages
     - [x] Messages sent to all browsers in same mob
-    - [ ] Messages not sent to all browsers in different mobs
+    - [x] Messages not sent to all browsers in different mobs
 
-- [ ] Rename folder mobtimer-api as mobtimer-shared (since it contains shared logic in addition to api)
-- [ ] In UI listener, handle if response is not successful
-- [ ] Make ports configurable (on frontend & backend)
-- [ ] Make WebSocketServer url configurable (frontend)
-
-- [ ] Refactor: Use wav file directly instead of base64 encoded file to play pneumatic horn when time expires. The file is in the frontend "assets" folder, but not currently used. (There are 2 copies of the file, one using the original name and the other renamed to be shorter. don't currently use them. I tried the following, but it didn't work, perhaps because some additional configuration is needed to recognize .wav files and not treat them as text/html. Here's what I tried: const soundSource = "./assets/sound1828.wav";)
-
+- [x] Make ports configurable (on frontend & backend)
+- [x] Make WebSocketServer url configurable (frontend)
 - [x] Create a timer
   - [x] UI - see Example React Source Code in resources.md)
   - [x] Hook up timer to websocket server
-  - [ ] Mulitple repos - see [Multi-Repo Proposal](./proposal-multiple-repos.md)
   - [x] UI - Start
   - [x] UI - Pause
   - [x] UI - Restart after Expired
 
-# High Value Features
-
-- [ ] Have separate alarm / timer for breaks and retro
-- [ ] Rearrangeable lists
-  - [ ] Reminders (similar to goals)
-- [ ] Lists
-  - [ ] Chat messages
-- [ ] Make tabs into sizeable windows
-- [ ] Raise hand and chat
-- [ ] Incorporate with vscode
-
-## Other Features
-
-- [ ] Roles, Randomize, Reorder
-- [ ] Settings: Notifications
-
-## Refactoring
-
-- [ ] Move as much logic out of App.tsx as possible (e.g., MVC / MVVM style decoupling)
-- [ ] Maybe: \*\*Discuss [proposal-message-structure.md](./proposal-message-structure.md)
-- [ ] Clean up mobtimer-frontend/package.json - we might not need:
-      "crypto": "^1.0.1",
-      "http": "^0.0.1-security",
-      "https": "^1.0.0",
-      "net": "^1.0.2",
-      "stream": "^0.0.2",
-      "tls": "^0.0.1",
-      "url": "^0.11.0",
-- [ ] Use webSocketType instead of W3CWebSocket (decoupling)
-      export function waitForSocketState(
-      socket: W3CWebSocket,
-      socket: { readyState: number },
-- [ ] Think about names / whether to expose webSocket like this:
-      await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
-- [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in wrong place - hard to see)
-- [ ] Create utility functions to create timeout and interval objects that create the object and call unref() on it before returning it
-
-## Other Technical
-
-- [ ] Investigate Eclipse, Intellij, & Visual Studio
-  - [ ] Review prior retros for generic lessons re. languages/environments/etc.
-- [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
-
-  - [ ] Consider gated checkin testing with push instead of commit
-
-- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see https://reactjs.org/docs/testing-recipes.html
-- [ ] Look into TypeScript Modules .d.ts: https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html
-- [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
-- [ ] Set tsc options: target es2015 or later
-- [ ] Backend
-  - [ ] Handle Bad Json Gracefully on Client (JSON.parse …)
-  - [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest
-  - [ ] Maybe add timestamp to MobTimerResponse.actionInfo
-- [ ] Persistence -
-  - [ ] Timeout: Should mobs be deleted on timeout (after period of inactivity)?
-  - [ ] Persist Mobs in case server is reset, etc. (e.g., in DB or other physical storage)
-- [ ] Maybe: Try decorators - https://www.typescriptlang.org/docs/handbook/decorators.html
-- [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
-- [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of string concatenation, e.g., `${minutesPart}:${secondsPart}`;
-- [ ] Figure out way to reduce spurious failing tests (in Jest)
-- [ ] Handle console.log that complete after test completed?
-
-## Completed (Done)
-
-2022-03-22
+2023-03-22
 
 - [x] Create clean-all (reyarns all,...)
 
-2022-02-01 
+2023-02-01
 
 - [x] Rotate participants on demand (button)
 - [x] Make the UI timer tick-down less choppy, which often is especially obvious in the last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
 
-2022-01-31
+2023-01-31
 
 - [x] Update document.title to show time remaining and Mob Timer (e.g., "01:28 - Mob Timer"). (Note: This shows up in the browser tab.)
 
-2022-01-30
+2023-01-30
 
 - [x] Play pneumatic horn sound when time expires, using wav file from: https://bigsoundbank.com/detail-1828-pneumatic-horn-simple-2.html
 - [x] Add hardcoded roles to UI
 
-2022-01-29
+2023-01-29
 
 - [x] Add test for randomizing order of 3 participants (already had test for 2)
 
-2022-01-28
+2023-01-28
 
 - [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired.
 
-2022-01-27
+2023-01-27
 
 - [x] Refactor: Move mobTimer.tests.ts to mobtimer-api/test, and add config for debugging tests
 - [x] Refactor: Fix word-wrapping in tests for ease of reading
@@ -191,7 +87,7 @@ Next
       To:
       const mockMobTimer = new MockMobTimer();
 
-2022-01-26
+2023-01-26
 
 - [x] Revisit tolerance seconds in \*.test.ts files (often 0.1) - but maybe not needed or could be much smaller, e.g., 0.01?
 - [x] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (\_expired || !\_everStarted --> didn't work...)
@@ -210,7 +106,7 @@ Next
   - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [x] Remove tests that were later marked skipped
 
-2022-01-25
+2023-01-25
 
 - [x] Fixed bugs:
   - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
@@ -218,7 +114,7 @@ Next
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters.
   - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
 
-2022-01-18
+2023-01-18
 
 - [x] Add duration minutes textbox in UI and sync across clients
   - [x] Add texbox, label, and update button
@@ -230,7 +126,7 @@ Next
         of time (from duration minutes)
 - [x] Move onMessage from mobSocketClient to be independently added
 
-2022-01-12
+2023-01-12
 
 - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
 - [x] Be able to access a mob via the URL (instead of the text box)
