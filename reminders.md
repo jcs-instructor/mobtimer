@@ -17,6 +17,7 @@ Joel & Ethan:
   - run startAll task
   - verify tests are working
   - synchronize extension timer (stop, start, stop)
+- Read "Practices to Focus On" section below!!!!!!!!!!!!!!!!!!!!!!!
 
 Ethan:
 
@@ -39,14 +40,18 @@ Ethan:
 
 **Practices to Focus On**:
 
-- List accomplishments in retros
-- Rotate who facilitates session startups & retros
-- When entering commands from Terminal, write script first (so have a record of steps needed / makes environment changes repeatable)
-- Snack for Ethan
+- While waiting for long activities (e.g., deploy), consider activities can do while waiting.
+- Try documenting in parallel with doing (e.g., having Ethan make changes to CONTRIBUTING.md, while Joel is deploying).
+- Between session work:
+  - Maybe would’ve been faster to look at diffs on Ethan’s PC to avoid multiple commit, build, deploy attempts to recreate on Joel’s PC.
 - Always look at reminders & have 1 or 2 things to focus on (at least)
 
 **Other Practices**:
 
+- Rotate who facilitates session startups & retros
+- List accomplishments/what happened in retros
+- When entering commands from Terminal, write script first (so have a record of steps needed / makes environment changes repeatable)
+- Snack for Ethan
 - **Strict navigator style**
 - **If confused as driver, ask questions rather than suggesting alternatives**
 - **Consider working in parallel**
