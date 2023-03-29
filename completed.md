@@ -1,33 +1,44 @@
 ## Completed (Done)
 
-2022-03-22
+2023-03-29
+
+- For deployment:
+  - [x] Review duplicated code mobSocketClient (and dependency on websocket) and see "rethink mobtimer-api" in [Epics](./epics.md) for this
+  - [x] Remove unused tasks and scripts, e.g., startAll2,...
+  - [x] Deploy to render.com (fix error)
+  - [x] Copy mobtimerclient to mobtimer-frontend and change references
+  - [x] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
+  - [x] Verify working
+
+
+2023-03-22
 
 - [x] Create clean-all (reyarns all,...)
 
-2022-02-01 
+2023-02-01 
 
 - [x] Rotate participants on demand (button)
 - [x] Make the UI timer tick-down less choppy, which often is especially obvious in the last second.
       (One-second delay in Timer.tsx can make browser clients off by 0.000 to 0.999 seconds from each other; interval is currently 1000 ms - maybe shorten - at least at first)
 
-2022-01-31
+2023-01-31
 
 - [x] Update document.title to show time remaining and Mob Timer (e.g., "01:28 - Mob Timer"). (Note: This shows up in the browser tab.)
 
-2022-01-30
+2023-01-30
 
 - [x] Play pneumatic horn sound when time expires, using wav file from: https://bigsoundbank.com/detail-1828-pneumatic-horn-simple-2.html
 - [x] Add hardcoded roles to UI
 
-2022-01-29
+2023-01-29
 
 - [x] Add test for randomizing order of 3 participants (already had test for 2)
 
-2022-01-28
+2023-01-28
 
 - [x] Bug: After update duration minutes, UI timer sometimes keeps going into negative numbers even after time has expired.
 
-2022-01-27
+2023-01-27
 
 - [x] Refactor: Move mobTimer.tests.ts to mobtimer-api/test, and add config for debugging tests
 - [x] Refactor: Fix word-wrapping in tests for ease of reading
@@ -38,7 +49,7 @@
       To:
       const mockMobTimer = new MockMobTimer();
 
-2022-01-26
+2023-01-26
 
 - [x] Revisit tolerance seconds in \*.test.ts files (often 0.1) - but maybe not needed or could be much smaller, e.g., 0.01?
 - [x] Revisit 0.1 in 3 places (2x in mobTimer.ts & once in mockCurrentTime.ts) - maybe can use booleans in some way (\_expired || !\_everStarted --> didn't work...)
@@ -57,7 +68,7 @@
   - [x] Revert mobClientServer.test.ts to version in main branch (prior to expire-timer branch)
   - [x] Remove tests that were later marked skipped
 
-2022-01-25
+2023-01-25
 
 - [x] Fixed bugs:
   - [x] When paused and start 2nd browser tab, latter tab says "00:00" instead of actual time remaining
@@ -65,7 +76,7 @@
         We need to add durationMinutes and setDurationMinutes state variables to the Room.tsx form parameters.
   - [x] If pause/start timer rapidly when 1 sec. or less remaining, expire messages pile up.
 
-2022-01-18
+2023-01-18
 
 - [x] Add duration minutes textbox in UI and sync across clients
   - [x] Add texbox, label, and update button
@@ -77,7 +88,7 @@
         of time (from duration minutes)
 - [x] Move onMessage from mobSocketClient to be independently added
 
-2022-01-12
+2023-01-12
 
 - [x] Put action button on separate page that is shown after you join mob. See [React Router Proposal](./proposal-react-router.md)
 - [x] Be able to access a mob via the URL (instead of the text box)

@@ -14,19 +14,11 @@ Improve Later
 Next
 
 - Deploy to render.com
-  - [ ] WIP: Deploy to render.com (fix error)
-    - [ ] Is there a way for it to make a sound and/or other notification when done?
-  - [x] Copy mobtimerclient to mobtimer-frontend and change references
+  - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
+  - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
   - [ ] Clean up warnings
-  - [x] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
-  - [ ] Verify working
   - [ ] Try BrowserRouter
-  - [ ] We currently have it https://mobtimer-backend-pj2v.onrender.com, and modified the environment variable, but haven't been able to test yet in Postman;
-    and in the deployed UI, it is still trying to access the localhost backend even though we set the environment variable to go to
-    [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
-  - [ ] Update CONTRIBUTING.md
-  - [x] Review duplicated code mobSocketClient (and dependency on websocket) and see "rethink mobtimer-api" in [Epics](./epics.md) for this
-  - [x] Remove unused tasks and scripts, e.g., startAll2,...
+
 - [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
 - [ ] Cleanup
   - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
