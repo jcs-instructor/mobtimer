@@ -14,7 +14,6 @@
 				"panel": "new"
 			},
 			"dependsOn": [
-				"api publish watch",
 				"frontend2 start watch",
 				"backend2 start watch",
 			],
@@ -59,6 +58,20 @@
 			"label": "api publish watch",
 			"type": "shell",
 			"command": "./scripts/publish-mobtimer-api-watch.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "api compile watch",
+			"type": "shell",
+			"command": "./scripts/compile-mobtimer-api-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true

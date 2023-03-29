@@ -73,7 +73,7 @@ For some issues, you may want to delete node_modules and run yarn again. After y
   - Build Command: yarn; yarn build
   - Click "Create Web Service" button at bottom to save
   - Once complete, click on the link to the web service (at top left corner of the screen). Browser should open with message "http server started"
-  - Copy link to web service (at top left corner of page) for use when deploying frontend
+  - Copy link to web service (at top left corner of page, e.g., https://mobtimer-backend-pj2v.onrender.com/) for use when deploying frontend )
 - (Optional) Test using Postman app - for more details see https://blog.postman.com/postman-supports-websocket-apis/
   - Click on My Workspace
   - Click on New
