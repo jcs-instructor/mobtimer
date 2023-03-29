@@ -25,7 +25,8 @@ Next
     and in the deployed UI, it is still trying to access the localhost backend even though we set the environment variable to go to
     [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
   - [ ] Update CONTRIBUTING.md
-  - [ ] Review duplicated code mobSocketClient (and dependency on websocket) and see "rethink mobtimer-api" in [Epics](./epics.md) for this
+  - [x] Review duplicated code mobSocketClient (and dependency on websocket) and see "rethink mobtimer-api" in [Epics](./epics.md) for this
+  - [ ] Revist all "2" scripts and tasks, e.g., startAll2,...
 - [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
 - [ ] Cleanup
   - [ ] Remove unused elements from App.css, i.e., all starting with ".App"
