@@ -2,24 +2,6 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "startAll2",
-			"type": "shell",
-			"command": "echo running front and back ends",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"dependsOn": [
-				"frontend2 start watch",
-				"backend2 start watch",
-			],
-			"problemMatcher": []
-		},
-		{
 			"label": "startAll",
 			"type": "shell",
 			"command": "echo running front and back ends",
@@ -95,39 +77,11 @@
 				"panel": "new"
 			},
 			"problemMatcher": []
-		},
-		{
-			"label": "backend2 start watch",
-			"type": "shell",
-			"command": "./scripts/start-backend2-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
+		},		
 		{
 			"label": "backend start watch",
 			"type": "shell",
 			"command": "./scripts/start-backend-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "frontend2 start watch",
-			"type": "shell",
-			"command": "./scripts/start-frontend2-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
