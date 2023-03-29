@@ -1,3 +1,4 @@
+# Development
 ## Windows PC Setup
 
 In VS Code, set your default terminal to Git Bash as follows (needed for "startAll" task to work on PC):
@@ -8,7 +9,16 @@ In VS Code, set your default terminal to Git Bash as follows (needed for "startA
 
 ## Initial Setup
 
-Follow initial setup instructions for frontend, backend, and API
+- From the Terminal:
+    ```
+    git clone [this repository name here]
+    cd [this repository name here]
+    ```
+
+- Run clean-all script to execute yarn:
+    ```
+    ./scripts/clean-all.sh
+    ```
 
 ## Start All Components
 
@@ -19,6 +29,11 @@ In VS Code,
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
 - Search for "startAll" and select it
+
+## Make code changes
+
+- Change code as desired
+- Push to development branch
 
 ## Helper Scripts
 
@@ -47,3 +62,48 @@ See additional CONTRIBUTING.md files
 - [Frontend]](./mobtimer-frontend/CONTRIBUTING.md)
 - [Backend]](./mobtimer-backend/CONTRIBUTING.md)
 - [API]](./mobtimer-api/CONTRIBUTING.md)
+
+
+# Production Deployment
+
+## One-time setup
+
+### Frontend
+
+- On render.com, create static website
+  - Name: mobtimer-frontend
+  - Root Directory: mobtimer-frontend
+  - Build Command: yarn; yarn build
+  - Click "Create Static Website" button at bottom to save
+  - Click Environment and add variable:
+    - Key: REACT_APP_WEBSOCKET_URL
+    - Value: paste url from the backend web service and change https to wss (e.g., wss://mobtimer-backend-pj2v.onrender.com)
+  - Click link at top left corner of page to view in web browser - note: it might take a few minutes to be available (e.g., https://mobtimer-frontend-iwa7.onrender.com)
+
+### Backend
+
+- On render.com, create web service
+  - Name: mobtimer-backend
+  - Root Directory: mobtimer-backend
+  - Build Command: yarn; yarn build
+  - Click "Create Web Service" button at bottom to save
+  - Once complete, click on the link to the web service (at top left corner of the screen). Browser should open with message "http server started"
+  - Copy link to web service (at top left corner of page, e.g., https://mobtimer-backend-pj2v.onrender.com/) for use when deploying frontend )
+- (Optional) Test using Postman app - for more details see https://blog.postman.com/postman-supports-websocket-apis/
+  - Click on My Workspace
+  - Click on New
+  - Click on Websocket Request
+  - Paste previously copied link and change https to wss
+  - Click Connect
+  - Send the message "Test". A message something like {"actionInfo":{"action":"invalidRequestError"}} will be returned.
+
+## Subsequent deployments
+
+- Publish the API:
+
+    ```
+    cd mobtimer-api
+    ./publish-no-watch.sh
+    ```
+
+- Push to main branch

@@ -86,7 +86,6 @@ const App = () => {
     Controller.toggle(client, frontendMobTimer);
   }
 
-  console.log('aaaa6');
   // Browser router
   return <HashRouter>
     <Routes>

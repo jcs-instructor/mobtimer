@@ -22,17 +22,6 @@
 </details>
 
 <details>
-  <summary>Pitch for front page</summary>
-  <blockquote>
-
-    - [ ] Reg scheduled events
-    - [ ] Encourage pairing on real projects
-    - [ ] How this project was done
-
-  </blockquote>
-</details>
-
-<details>
   <summary>Other Must-Haves</summary>
   <blockquote>
 
@@ -42,6 +31,17 @@
     - [ ] Turn on/off sound
     - [ ] Notifications
     - [ ] Images get in the way when screen narrows
+
+  </blockquote>
+</details>
+
+<details>
+  <summary>Pitch for front page</summary>
+  <blockquote>
+
+    - [ ] Reg scheduled events
+    - [ ] Encourage pairing on real projects
+    - [ ] How this project was done
 
   </blockquote>
 </details>
