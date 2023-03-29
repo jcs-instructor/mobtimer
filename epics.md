@@ -5,6 +5,7 @@
   <blockquote>
 
     - See backlog
+
   </blockquote>
 </details>
 
@@ -16,6 +17,7 @@
     - [ ] UI: Reorder participants with drag/drop
     - [ ] UI: Rename participant
     - [ ] UI: Delete participant
+
   </blockquote>
 </details>
 
@@ -26,6 +28,7 @@
     - [ ] Reg scheduled events
     - [ ] Encourage pairing on real projects
     - [ ] How this project was done
+
   </blockquote>
 </details>
 
@@ -38,6 +41,8 @@
     - [ ] Cancel
     - [ ] Turn on/off sound
     - [ ] Notifications
+    - [ ] Images get in the way when screen narrows
+
   </blockquote>
 </details>
 
@@ -52,6 +57,8 @@
     - [ ] Handle trim(mobName) is empty
     - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
     - [ ] In UI listener, handle if response is not successful
+    - [ ] Improve images in frontend
+
   </blockquote>
 </details>
 
@@ -64,6 +71,7 @@
     the play button says, "Start (temp hack)" - Not reproducible on Ethan's machine - On Joel's machine, it might be
     fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
     first)
+
   </blockquote>
 </details>
   
@@ -76,6 +84,7 @@
     - [ ] Raise hand/make comments
     - [ ] RPG
     - [ ] Lists (such as goals)
+
   </blockquote>
 </details>
 
@@ -84,6 +93,7 @@
   <blockquote>
 
     - [ ] TBD
+
   </blockquote>
 </details>
 
@@ -99,6 +109,7 @@
     - [ ] change to d.ts, create type library
     - [ ] create separate time library?
     - [ ] create separate mobtimerclient library?
+
   </blockquote>
 </details>
 
@@ -154,6 +165,7 @@
           string concatenation, e.g., `${minutesPart}:${secondsPart}`;
           - [ ] Figure out way to reduce spurious failing tests (in Jest)
           - [ ] Handle console.log that complete after test completed?
+
   </blockquote>
 </details>
 
