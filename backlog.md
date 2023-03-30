@@ -13,11 +13,8 @@ Improve Later
 
 Next
 
-- Deploy to render.com
-  - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
-  - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
-  - [ ] Try BrowserRouter
-
+- [ ] Get rid of # in URL - try BrowserRouter
+  - [ ] Should we have something after main url and before room code?
 - [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
 - [ ] Cleanup
   - [ ] Maybe: Delete unused branches (?)

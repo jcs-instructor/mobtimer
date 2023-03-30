@@ -1,15 +1,6 @@
 # Epics / Categories
 
 <details>
-  <summary>Deploy (see backlog)</summary>
-  <blockquote>
-
-    - See backlog
-
-  </blockquote>
-</details>
-
-<details>
   <summary>Participant UI (reorder, edit, delete, drag/drop)</summary>
   <blockquote>
 
@@ -117,6 +108,8 @@
   <summary>Refactor & Technical</summary>
   <blockquote>
 
+    - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
+    - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
     - [ ] correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
     - [ ] Use wav file directly instead of base64 encoded file to play pneumatic horn when time expires. The file is in
     the frontend "assets" folder, but not currently used. (There are 2 copies of the file, one using the original name
