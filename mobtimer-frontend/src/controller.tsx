@@ -12,19 +12,19 @@ export class Controller {
   // injections -----------------------
 
   // inject duration minutes
-  static setDurationMinutes = (durationMinutes: number) => { };
+  static setDurationMinutes = (_durationMinutes: number) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
   // inject time string
-  static setTimeString = (timeString: string) => { };
+  static setTimeString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetTimeString(setTimeStringFunction: (timeString: string) => void) {
     this.setTimeString = setTimeStringFunction;
   }
 
   // inject participants
-  static setParticipants = (participants: string[]) => { };
+  static setParticipants = (_participants: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
     this.setParticipants = setParticipantsFunction;
   }
@@ -70,7 +70,7 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status, action: Action) {
+  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status) {
     if (frontendMobtimer.status !== backendStatus) {
       switch (backendStatus) {
         case Status.Running: { frontendMobtimer.start(); break; }

@@ -1,5 +1,12 @@
 ## Completed (Done)
 
+2023-03-30
+
+- Added error checking to tsconfig:
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+
 2023-03-29
 
 - For deployment:

@@ -16,7 +16,6 @@ Next
 - Deploy to render.com
   - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
   - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
-  - [ ] Clean up warnings
   - [ ] Try BrowserRouter
 
 - [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
@@ -25,3 +24,4 @@ Next
   - [ ] Delete unused files:
     - [ ] home.html
     - [ ] app.yaml
+  - [ ] Maybe: Delete unused branches (?)

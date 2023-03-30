@@ -10,6 +10,9 @@
     "rootDir": "./src",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
   },
   "include": [
     "./src"

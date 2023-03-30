@@ -45,7 +45,6 @@ export function renderHomePage(port: number) {
 }
 
 function _processRequest(
-  wss: WebSocket.Server,
   parsedRequest: MobTimerRequests.MobTimerRequest,
   socket: WebSocket
 ) {
@@ -133,7 +132,7 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
         _sendJSON(webSocket, echoResponse);
         return;
       }
-      let mobTimer = _processRequest(wss, parsedRequest, webSocket);
+      let mobTimer = _processRequest(parsedRequest, webSocket);
       if (!mobTimer) {
         return;
       }
