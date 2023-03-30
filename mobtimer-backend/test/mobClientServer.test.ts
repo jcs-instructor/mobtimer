@@ -141,6 +141,19 @@ describe("WebSocket Server", () => {
     }
   );
 
+  test("Reset (Cancel) timer", async () => {
+      const client = await openSocket(url);
+      await client.joinMob(_mobName1);
+      await client.start();
+      await client.reset();
+      await cleanUp(client);
+      expect(client.lastSuccessfulAction).toEqual(Action.Reset);
+      expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
+      expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
+      // todo: expect participants don't rotate
+    }
+  );
+
   test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
     const durationSeconds = 1;
     const client = await openSocket(url);
@@ -170,6 +183,8 @@ describe("WebSocket Server", () => {
     expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
     expect(client.lastSuccessfulAction).toEqual(Action.Expired);
     expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
+    // todo: expect participants rotate - maybe in a separate test
+    // todo: make a simpler expired test (no pausing, etc.)
   });
 
   test("Check got expected number of messages", async () => {
