@@ -2,10 +2,14 @@
 
 2023-03-30
 
-- Added error checking to tsconfig:
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
+- [x] Delete unused files:
+  - [x] home.html
+  - [x] app.yaml
+- [x] Get rid of unused css (from original react app)
+- [x] Added error checking to tsconfig:
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noImplicitAny": true,
 
 2023-03-29
 
@@ -17,12 +21,11 @@
   - [x] Set REACT_APP_WEBSOCKET_URL to something like: wss://final1-u56m.onrender.com
   - [x] Verify working
 
-
 2023-03-22
 
 - [x] Create clean-all (reyarns all,...)
 
-2023-02-01 
+2023-02-01
 
 - [x] Rotate participants on demand (button)
 - [x] Make the UI timer tick-down less choppy, which often is especially obvious in the last second.
