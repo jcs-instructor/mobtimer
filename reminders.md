@@ -8,7 +8,7 @@ Joel:
 
 Joel & Ethan:
 
-- Open web timer https://mobti.me/arrested-egg (or if that's not working, try: http://mobtimer.zoeetrope.com/)
+- Open our depoloyed web timer https://mobtimer-frontend-iwa7.onrender.com (or if that's not working, try: https://mobti.me/arrested-egg or http://mobtimer.zoeetrope.com/)
   - turn on Sounds
   - add "Stand/Stretch" to names and/or role descriptions (e.g., "Navigator (STAND)")
   - optional: Browser notifications

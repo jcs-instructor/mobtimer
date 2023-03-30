@@ -18,7 +18,6 @@
 
     - [ ] Randomize order
     - [ ] Roles
-    - [ ] Cancel
     - [ ] Turn on/off sound
     - [ ] Notifications
     - [ ] Images get in the way when screen narrows
@@ -75,15 +74,6 @@
     - [ ] Raise hand/make comments
     - [ ] RPG
     - [ ] Lists (such as goals)
-
-  </blockquote>
-</details>
-
-<details>
-  <summary>Create VSCode version</summary>
-  <blockquote>
-
-    - [ ] TBD
 
   </blockquote>
 </details>

@@ -13,6 +13,9 @@ Improve Later
 
 Next
 
+- [ ] Cancel
+- [ ] Create VSCode extension (needed so we can use it ourselves)
+
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
 - [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
