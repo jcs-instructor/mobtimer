@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
 import "../App.css"
 type FormParameters = {
     participants: string[];
 }
 
 const Participants = ({ participants }: FormParameters) => {
-    const [participantName, setParticipantName] = useState('');
 
     const roles = "Navigator,Driver";
     const rolesArray = ["Navigator", "Driver"];

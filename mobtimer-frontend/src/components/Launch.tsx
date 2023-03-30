@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import JoinMobForm from "./JoinMobForm";
 import '../App.css';
 

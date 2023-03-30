@@ -1,7 +1,7 @@
 import { Status } from 'mobtimer-api';
 import { MobTimerResponses } from 'mobtimer-api';
 import { MobSocketClient } from 'mobtimer-api';
-import { Action, MobTimer } from 'mobtimer-api';
+import { MobTimer } from 'mobtimer-api';
 
 export class Controller {
 

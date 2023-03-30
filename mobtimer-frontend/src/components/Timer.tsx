@@ -1,5 +1,5 @@
 import { TimeUtils } from 'mobtimer-api';
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Controller } from '../controller';
 import { frontendMobTimer } from '../timers';
 
