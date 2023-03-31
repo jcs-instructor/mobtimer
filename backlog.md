@@ -11,15 +11,14 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
   - [ ] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
 - [ ] Delete old unused branches
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+
 ## Next
 
 - [ ] WIP: Reset timer from UI (i.e,. Cancel)
-  - [ ] WIP: See todo comments in test files - finished on 3/30/23 on "red" because need to implement resent in client and Action:
-        - await client.reset();
-        - expect(client.lastSuccessfulAction).toEqual(Action.Reset); 
+  - [ ] WIP: See todo comments in test files - finished on 3/30/23 on "red" because need to implement resent in client and Action: - await client.reset(); - expect(client.lastSuccessfulAction).toEqual(Action.Reset);
 - [ ] Investigate all error in Problems tab (e.g., tsconfig.json has a "bonjour" problem)
-- [ ] Create VSCode extension (needed so we can use it ourselves)
+- [ ] Create VSCode extension (needed so we can use it ourselves) - see [vsocode-extension readme](./vscode-extension.md)
 
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
@@ -28,26 +27,34 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
   - [ ] Maybe: Delete unused branches (?)
 
 ## Participant UI (reorder, edit, delete, drag/drop)
+
 - [ ] Proposal: create route for replacing all existing participants, all work done in UI
 - [ ] UI: Reorder participants with drag/drop
 - [ ] UI: Rename participant
 - [ ] UI: Delete participant
 
 ## Other Must-Haves
+
 - [ ] Randomize order
 - [ ] Roles
 - [ ] Turn on/off sound
 - [ ] Notifications
-- [ ] Home page must be more  different from mobti.me. Change text, images, and appearance so they aren't confusingly similar or an obvious knock-off of mobti.me
+- [ ] Home page must be more different from mobti.me. Change text, images, and appearance so they aren't confusingly similar or an obvious knock-off of mobti.me
 - [ ] Images get in the way: (1) when screen narrows, (2) on mobile browser
 - [ ] Change home page link for "Learn more about mob programming" from Google search to something authoritative and unlikely to disappear or change unexpectedly for the worse over time (e.g., https://www.agilealliance.org/glossary/mob-programming/) (later: maybe change it to something of our own, such as a page on our mobtimer website)
 
 ## Pitch for front page
+
 - [ ] Reg scheduled events
 - [ ] Encourage pairing on real projects
 - [ ] How this project was done
 
+## Look at mrozzbarry code and discussions
+
+- See [here](./mrozbarry.md)
+
 ## Could-Haves
+
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if
       running); just store in nextDurationMinutes (or similar)
 - [ ] Handle illegal characters in mobName
@@ -58,6 +65,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Improve images in frontend
 
 ## Investigate
+
     - [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
     in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
     the play button says, "Start (temp hack)" - Not reproducible on Ethan's machine - On Joel's machine, it might be
@@ -65,6 +73,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
     first)
 
 ## Enhancements
+
 - [ ] Alarm for breaks, stretch, etc
 - [ ] Set alarm duration / pausing
 - [ ] Raise hand/make comments
@@ -72,6 +81,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Lists (such as goals)
 
 ## rethink mobtimer-api
+
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
 - [ ] refactor mobtimerclient to use socket injection
 - [ ] solve websocket error
@@ -115,9 +125,9 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
 - [ ] Consider gated checkin testing with push instead of commit
 - [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https:
-  //reactjs.org/docs/testing-recipes.html>
+      //reactjs.org/docs/testing-recipes.html>
   - [ ] Look into TypeScript Modules .d.ts: <https:
-    //www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html>
+        //www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html>
     - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
     - [ ] Set tsc options: target es2015 or later
     - [ ] Backend
@@ -135,4 +145,5 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
       - [ ] Handle console.log that complete after test completed?
 
 ## Security / Permanent Storage
+
 - [ ] Security / Permanent Storage - TBD

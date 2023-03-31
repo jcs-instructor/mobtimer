@@ -1,0 +1,13 @@
+- [ ] Must haves for Joel/Ethan
+  - [ ] Configure URL
+  - [ ] Join
+  - [ ] See time remaining at bottom
+  - [ ] Start, Stop, Cancel, Rotate at bottom
+- [ ] Could Have (can do all through web)
+  - [ ] Manage participants
+  - [ ] Randomize
+  - [ ] Manage Roles
+- [ ] Investigate re-using mrozzbarry (See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
+- [ ] Build from scratch
+  - [ ] Create a hello
+  - [ ] Implement Must Haves
