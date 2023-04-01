@@ -22,7 +22,7 @@ const Launch = () => {
                         The Story Behind This Product
                     </h1>
                     <p>
-                        We (Joel Silberman and Ethan Strominger) enjoy coding together because we both like to strive to create clean code that
+                        We (Joel Silberman and Ethan Strominger!) enjoy coding together because we both like to strive to create clean code that
                         is easy to understand, enhance, and maintain.
                         We also could not find a mob timer with all the features we were looking for, so we decided to build one from scratch and to
                         do it using paired programming.
