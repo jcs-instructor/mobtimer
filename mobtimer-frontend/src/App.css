@@ -15,21 +15,38 @@
   padding: 0.1rem;
 }
 
-.LaunchMain {
+.LaunchTop {
   background-color: lightgrey;
   margin-left: 2rem;
   padding-left: 2rem;
   position: relative;
   padding-top: 8rem;
+  width: 100%;
+  flex-wrap: none;
+  display: inline-flex;
+  justify-content: space-between;
   /* Make room for image */
   padding-bottom: 8rem;
   /* Make room for image */
 }
 
-.LaunchMain a {
+.LaunchTop a {
   font-size: x-large;
   font-weight: bold;
 }
+
+.LaunchTop img {
+  width: 285px;
+  padding-right: 4rem;
+}
+
+@media screen and (max-width: 800px) {
+  img {
+    display: none;
+  }
+} */
+  
+
 
 .LaunchBottom {
   margin-left: 2rem;
