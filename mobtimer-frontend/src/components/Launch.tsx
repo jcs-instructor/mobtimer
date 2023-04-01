@@ -19,11 +19,19 @@ const Launch = () => {
             <div className="LaunchBottom">
                 <div>
                     <h1>
-                        It works across all your devices!
+                        The Story Behind This Product
                     </h1>
-                    <h1>
-                        ... and more information to entice.
-                    </h1>
+                    <p>
+                        We (Joel Silberman and Ethan Strominger) are believers in creating clean
+                        code that is easy to maintain and enhance.  We have known each other for a while and enjoy coding together.
+                        We could not find a mob timer with all the features we were looking for, so we decided to build one from scratch and to
+                        do it using paired programming.
+                    </p>
+                    <p>
+                        The front end was built using React and Typescript.  We chose React because it has a large user base and frequent updates so it
+                        will be well supported and we will have a larger base to recruit as developers.  The back end was built using Node.js, Express, and
+                        TypeScript to enable sharing of code between the front and back ends.
+                    </p>
                 </div>
             </div>
         </div>
