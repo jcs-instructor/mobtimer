@@ -10,7 +10,7 @@ const Launch = () => {
                     <h2>for your mob team</h2>
                     <JoinMobForm />
                     <p><a href="https://www.google.com/search?q=mob+programming" rel="noreferrer">
-                        Learn more about mob programming!
+                        Learn more about mob programming
                     </a>
                     </p>
                 </div>
@@ -19,7 +19,7 @@ const Launch = () => {
             <div className="LaunchBottom">
                 <div>
                     <h1>
-                        It works across all your devices
+                        It works across all your devices!
                     </h1>
                     <h1>
                         ... and more information to entice.
