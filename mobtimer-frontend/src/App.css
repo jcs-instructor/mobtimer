@@ -46,11 +46,11 @@
   }
 } 
   
-
-
 .LaunchBottom {
-  margin: 2rem;
+  margin: auto;
+  width: 670px;
 }
+
 .LaunchBottom h1, h2 {
   text-align: center;
 }
