@@ -1,4 +1,5 @@
 # Development
+
 ## Windows PC Setup
 
 In VS Code, set your default terminal to Git Bash as follows (needed for "startAll" task to work on PC):
@@ -10,15 +11,16 @@ In VS Code, set your default terminal to Git Bash as follows (needed for "startA
 ## Initial Setup
 
 - From the Terminal:
-    ```
-    git clone [this repository name here]
-    cd [this repository name here]
-    ```
+
+  ```
+  git clone [this repository name here]
+  cd [this repository name here]
+  ```
 
 - Run clean-all script to execute yarn:
-    ```
-    ./scripts/clean-all.sh
-    ```
+  ```
+  ./scripts/clean-all.sh
+  ```
 
 ## Start All Components
 
@@ -34,6 +36,13 @@ In VS Code,
 
 - Change code as desired
 - Push to development branch
+
+## Making Changes to Icons
+
+Icons were created using Ethan Strominger's gmail account:
+
+- https://pixelied.com/editor/design/6428399563ff01432c82a888
+- https://cloudconvert.com/
 
 ## Helper Scripts
 
@@ -62,7 +71,6 @@ See additional CONTRIBUTING.md files
 - [Frontend]](./mobtimer-frontend/CONTRIBUTING.md)
 - [Backend]](./mobtimer-backend/CONTRIBUTING.md)
 - [API]](./mobtimer-api/CONTRIBUTING.md)
-
 
 # Production Deployment
 
@@ -101,9 +109,9 @@ See additional CONTRIBUTING.md files
 
 - Publish the API:
 
-    ```
-    cd mobtimer-api
-    ./publish-no-watch.sh
-    ```
+  ```
+  cd mobtimer-api
+  ./publish-no-watch.sh
+  ```
 
 - Push to main branch
