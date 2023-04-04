@@ -15,26 +15,44 @@
   padding: 0.1rem;
 }
 
-.LaunchMain {
+.LaunchTop {
   background-color: lightgrey;
   margin-left: 2rem;
   padding-left: 2rem;
   position: relative;
   padding-top: 8rem;
-  /* Make room for image */
-  padding-bottom: 8rem;
-  /* Make room for image */
+  width: 100%;
+  flex-wrap: none;
+  display: inline-flex;
+  justify-content: space-between;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
-.LaunchMain a {
+.LaunchTop a {
   font-size: x-large;
   font-weight: bold;
 }
 
+.LaunchTop img {
+  width: 285px;
+  padding-right: 4rem;
+  padding-top: 4rem;
+}
+
+@media screen and (max-width: 800px) {
+  .LaunchTop img {
+    display: none;
+  }
+} 
+  
 .LaunchBottom {
-  margin-left: 2rem;
+  margin: auto;
+  width: 670px;
+}
+
+.LaunchBottom h1, h2 {
   text-align: center;
-  margin-top: 8rem;
 }
 
 .JoinMobForm {

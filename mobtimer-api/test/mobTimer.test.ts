@@ -96,7 +96,7 @@ test("Ready status after mock time expires", async () => {
   expect(mobMockTimer.status).toBe(Status.Ready);
 });
 
-test("Reset timer", async () => {
+test("Reset (Cancel) timer", async () => {
   const mobTimer = new MobTimer();
   mobTimer.start();
   await TimeUtils.delaySeconds(0.2);
