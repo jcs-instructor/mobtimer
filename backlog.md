@@ -15,6 +15,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Next
 
+- [ ] Update instructions on how to update icons
 - [ ] WIP: Reset timer from UI (i.e,. Cancel)
   - [ ] WIP: See todo comments in test files - finished on 3/30/23 on "red" because need to implement resent in client and Action: - await client.reset(); - expect(client.lastSuccessfulAction).toEqual(Action.Reset);
 - [ ] Investigate all error in Problems tab (e.g., tsconfig.json has a "bonjour" problem)
