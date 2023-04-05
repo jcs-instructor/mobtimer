@@ -1,3 +1,23 @@
+# VS Code Extension 
+
+## Implementation
+### Option 1: Use mrozzbarry with minimal edits
+
+(See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
+
+- [ ] Create a separate helloworld vscode plugin (to learn) on a branch 
+- [ ] Clone mrozzbarry repo
+- [ ] Get cloned code working as is with the current mobti.me url (from our copy in our codebase)
+- [ ] Modify url
+- [ ] See must-haves, etc. at bottom of this file 
+
+### Option 2: Create from scratch
+
+- [ ] Create a new helloworld vscode plugin (to start with)
+- [ ] See must-haves, etc. at bottom of this file
+
+## Must Haves
+
 - [ ] Must haves for Joel/Ethan
   - [ ] Configure URL
   - [ ] Join, and see all default fields
@@ -11,11 +31,3 @@
   - [ ] Randomize
   - [ ] Manage Roles
   - [ ] Stop, Cancel, Rotate
-- [ ] Investigate re-using mrozzbarry (See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
-  - [ ] Create a separate helloworld vscode plugin (to learn)
-  - [ ] Get mrozbarry's plugin working as is with the current mobti.me url (from our copy in our codebase)
-  - [ ] Modify url
-  - [ ] See must-haves, etc. at top of this file  
-- [ ] Build from scratch
-  - [ ] Create a hello
-  - [ ] Implement Must Haves
