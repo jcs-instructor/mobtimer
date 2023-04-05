@@ -10,7 +10,7 @@ const Reset = () => {
 
     return (
         <form onSubmit={(event) => onSubmit(event)}>
-            <button type="submit">Cancel</button> {/* ❌ */}
+            <button type="submit">❌ Cancel</button>
         </form>
     )
 }

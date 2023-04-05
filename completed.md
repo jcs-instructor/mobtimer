@@ -1,5 +1,9 @@
 ## Completed (Done)
 
+2023-04-05
+
+- [x] Reset timer from UI (i.e,. Cancel)
+
 2023-03-30
 
 - [x] Delete unused files:

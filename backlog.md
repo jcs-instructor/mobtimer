@@ -15,8 +15,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Next
 
-- [ ] WIP: Reset timer from UI (i.e,. Cancel)
-- [ ] Update instructions on how to update icons
+- [ ] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
 - [ ] Create VSCode extension (needed so we can use it ourselves) - see [vsocode-extension readme](./vscode-extension.md)
 
 - [ ] Get rid of # in URL - try BrowserRouter
