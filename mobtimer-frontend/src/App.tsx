@@ -13,7 +13,7 @@ const App = () => {
   // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
-  const [timeString, setTimeString] = useState(frontendMobTimer.secondsRemainingString);
+  const [secondsRemainingString, setSecondsRemaining] = useState(frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
   const [participants, setParticipants] = useState(frontendMobTimer.participants);
@@ -21,7 +21,7 @@ const App = () => {
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
   Controller.injectSetParticipants(setParticipants);
-  Controller.injectSetTimeString(setTimeString);
+  Controller.injectSetTimeString(setSecondsRemaining);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -62,7 +62,7 @@ const App = () => {
       const secondsRemaining = Controller.getSecondsRemaining(response);
       Controller.changeStatus(frontendMobTimer, mobStatus);
       frontendMobTimer.setSecondsRemaining(secondsRemaining);
-      setTimeString(frontendMobTimer.secondsRemainingString);
+      setSecondsRemaining(frontendMobTimer.secondsRemainingString);
       const label = Controller.getActionButtonLabel(mobStatus);
       setActionButtonLabel(label);
 
@@ -96,7 +96,7 @@ const App = () => {
           particpants={participants}
           actionButtonLabel={actionButtonLabel}
           setMobName={setMobName}
-          timeString={timeString}
+          timeString={secondsRemainingString}
           submitAction={submitAction}
           submitJoinMobRequest={submitJoinMobRequest} />} />
     </Routes>

@@ -16,7 +16,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [ ] WIP: Reset timer from UI (i.e,. Cancel)
-  - [ ] WIP: See todo comments in test files - finished on 3/30/23 on "red" because need to implement resent in client and Action: - await client.reset(); - expect(client.lastSuccessfulAction).toEqual(Action.Reset);
 - [ ] Update instructions on how to update icons
 - [ ] Create VSCode extension (needed so we can use it ourselves) - see [vsocode-extension readme](./vscode-extension.md)
 
