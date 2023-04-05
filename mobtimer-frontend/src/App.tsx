@@ -21,7 +21,7 @@ const App = () => {
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
   Controller.injectSetParticipants(setParticipants);
-  Controller.injectSetTimeString(setSecondsRemaining);
+  Controller.injectSetSecondsRemainingString(setSecondsRemaining);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {

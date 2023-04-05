@@ -10,7 +10,7 @@ type FormParameters = {
 const Timer = ({ timeString }: FormParameters) => {
 
     function onTick() {
-        Controller.setTimeString(frontendMobTimer.secondsRemainingString);
+        Controller.setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
         document.title = `${frontendMobTimer.secondsRemainingString} - ${Controller.getAppTitle()}`;
     }
 

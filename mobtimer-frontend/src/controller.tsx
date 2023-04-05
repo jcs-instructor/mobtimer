@@ -18,9 +18,9 @@ export class Controller {
   }
 
   // inject time string
-  static setTimeString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetTimeString(setTimeStringFunction: (timeString: string) => void) {
-    this.setTimeString = setTimeStringFunction;
+  static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void) {
+    this.setSecondsRemainingString = setSecondsRemainingStringFunction;
   }
 
   // inject participants
