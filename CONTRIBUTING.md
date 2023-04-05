@@ -44,7 +44,7 @@ Files to change:
   - test:
     - mobTimer.test.ts 
   - src:
-    - action.ts src
+    - action.ts
     - mobSocketClient.ts
     - mobTimerRequests.ts
 - mobtimer-backend:
