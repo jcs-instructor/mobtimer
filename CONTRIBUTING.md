@@ -32,12 +32,29 @@ In VS Code,
 - Search for "Tasks: Run Task"
 - Search for "startAll" and select it
 
-## Make code changes
+## Making Code Changes
 
 - Change code as desired
 - Push to development branch
 
-## Making Changes to Icons
+### Adding a New Feature
+
+Files to change:
+- mobtimer-api:
+  - test:
+    - mobTimer.test.ts 
+  - src:
+    - action.ts src
+    - mobSocketClient.ts
+    - mobTimerRequests.ts
+- mobtimer-backend:
+  - test: 
+    - mobClientServer.test.ts 
+  - src:
+    - server: 
+      - mobSocketServer.ts 
+
+### Making Changes to Icons
 
 Icons were created using Ethan Strominger's gmail account:
 
