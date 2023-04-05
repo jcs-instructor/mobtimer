@@ -5,7 +5,7 @@
 
 (See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
 
-- [ ] Create a separate helloworld vscode plugin (to learn) on a branch 
+- [ ] Create a separate helloworld vscode plugin (to learn) on a branch (see https://code.visualstudio.com/api/get-started/your-first-extension)
 - [ ] Clone mrozzbarry repo
 - [ ] Get cloned code working as is with the current mobti.me url (from our copy in our codebase)
 - [ ] Modify url
