@@ -97,6 +97,10 @@ function _processRequest(
       mobTimer.pause();
       break;
     }
+    case Action.Reset: {
+      mobTimer.reset();
+      break;
+    }
   }
 
   return mobTimer;

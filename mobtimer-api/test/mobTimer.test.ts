@@ -73,7 +73,10 @@ test("Get seconds remaining 0.2 seconds after start (real)", async () => {
   const numDigits = 1;
   expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6), numDigits);
   await TimeUtils.delaySeconds(secondsToRunBeforeChecking);
-  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6) - secondsToRunBeforeChecking, numDigits);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(
+    minutesToSeconds(6) - secondsToRunBeforeChecking,
+    numDigits
+  );
 });
 
 test("Ready status after time expires", async () => {
@@ -143,7 +146,9 @@ test("Start after time expires", async () => {
   mobTimer.durationMinutes = durationSeconds / 60;
   mobTimer.start();
   const numDigits = 1;
-  await TimeUtils.delaySeconds(durationSeconds + paddingSecondsToBeSureTimeExpires);
+  await TimeUtils.delaySeconds(
+    durationSeconds + paddingSecondsToBeSureTimeExpires
+  );
   await mobTimer.start();
   expect(mobTimer.secondsRemaining).toBeCloseTo(
     mobTimer.durationSeconds,
@@ -233,7 +238,9 @@ test("After time expires, seconds remaining should be 0", () => {
 test("After time expires, elapse time raises specified event", async () => {
   const mobTimer = new MobTimer();
   let expireFuncWasCalled = false;
-  mobTimer.timerExpireFunc = () => { expireFuncWasCalled = true; };
+  mobTimer.timerExpireFunc = () => {
+    expireFuncWasCalled = true;
+  };
   const durationSeconds = 0.2;
   mobTimer.durationMinutes = secondsToMinutes(durationSeconds);
   mobTimer.start();
@@ -300,13 +307,20 @@ test("Remove 2nd participant", async () => {
 
 const randomizationCases = [
   [JSON.stringify(["Alice", "Bob"]), JSON.stringify(["Bob", "Alice"])],
-  [JSON.stringify(["Alice", "Bob", "Chris"]), JSON.stringify(["Bob", "Chris", "Alice"])],
+  [
+    JSON.stringify(["Alice", "Bob", "Chris"]),
+    JSON.stringify(["Bob", "Chris", "Alice"]),
+  ],
 ];
 
-test.each(randomizationCases)("Randomize order of participants: %p", async (originalOrder: string, differentOrder: string) => {
+test.each(randomizationCases)(
+  "Randomize order of participants: %p",
+  async (originalOrder: string, differentOrder: string) => {
     const mobTimer = new MobTimer();
     const participants = JSON.parse(originalOrder);
-    participants.forEach((participant: string) => mobTimer.addParticipant(participant));
+    participants.forEach((participant: string) =>
+      mobTimer.addParticipant(participant)
+    );
 
     let gotDifferentOrder = false;
     let gotOriginalOrder = false;
@@ -322,8 +336,7 @@ test.each(randomizationCases)("Randomize order of participants: %p", async (orig
         console.log("got different order", mobTimer.participants);
         gotDifferentOrder = true;
       }
-    }
-    while (!gotBoth());
+    } while (!gotBoth());
 
     expect(gotBoth()).toBe(true);
   }

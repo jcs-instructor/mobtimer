@@ -63,8 +63,6 @@ describe("WebSocket Server", () => {
     expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
   });
 
-  // todo check other branch(es) for tests that might not have been copied into this branch (!)
-
   // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";
