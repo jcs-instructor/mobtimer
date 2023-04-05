@@ -6,6 +6,7 @@ export enum Action {
   RotateParticipants = "rotateParticipants",
   Start = "start",
   Pause = "pause",
+  Reset = "reset",
   Expired = "expired",
   InvalidRequestError = "invalidRequestError",
 }

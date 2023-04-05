@@ -143,13 +143,14 @@ describe("WebSocket Server", () => {
     }
   );
 
-  test.skip("Reset (Cancel) timer", async () => {
+  test("Reset (Cancel) timer", async () => {
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
-    // await client.reset();
+    await TimeUtils.delaySeconds(0.2);
+    await client.reset();
     await cleanUp(client);
-    // todo: uncomment this: expect(client.lastSuccessfulAction).toEqual(Action.Reset);
+    expect(client.lastSuccessfulAction).toEqual(Action.Reset);
     expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
     expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
     // todo: expect participants don't rotate

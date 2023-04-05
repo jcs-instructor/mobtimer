@@ -95,6 +95,11 @@ class MobSocketClient {
     this._sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
   }
 
+  reset() {
+    console.log("sending reset request");
+    this._sendJSON({ action: Action.Reset } as MobTimerRequests.ResetRequest);
+  }
+
   private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
     this._webSocket.send(JSON.stringify(request));
   }
