@@ -39,29 +39,6 @@ In VS Code,
 
 ### Adding a New Feature
 
-#### Frontend Changes
-
-- Decide on a name for the screen or screen fragment (for instance, Goals)
-
-- If a new screen
-
-  - create a new tsx file (see Room.tsx for an example)
-  - add Routes to App.tsx
-  - modify code to call the Route
-
-- If a screen fragment
-  - Identify where you want the screen fragment to go and the corresponding tsx
-  - Add <fragement name/> to the tsx file
-  - Find a similar screen fragment and copy. For instance, if it has a single button find a screen
-    fragment with a single button
-- If adding new attribute(s), look for participants in App.tsx and Room.tsx as an example of how to pass and set attribute(s).
-- If the attribute appears on other screens or screen fragments, you will need to pass a set function. See setMobName as an example.
-- Modify Controller.tsx (previous step should lead you to doing that)
-
-Copy Room.tsx and take out stuff N/A.
-
-- If an existing screen edit
-
 #### Backend Changes
 
 Files to change:
@@ -79,6 +56,28 @@ Files to change:
   - src:
     - server:
       - mobSocketServer.ts
+
+#### Frontend Changes
+
+- Decide on a name for the screen or screen fragment (for instance, Goals)
+
+- If adding a "React fragment" to an existing screen (e.g, say you wanted to put Goals on the same screen as Room.tsx)
+  - Identify where you want the React fragment to be displayed
+  - Open the corresponding tsx (e.g., Room.tsx)
+  - Decide on a name for the fragment. Use that name where you see _fragment name_ below
+  - You will see a bunch of calls to React framents (e.g., <Participants/ >)
+  - Add <_fragment name_/ > to the tsx file
+  - Find a similar screen fragment and copy. For instance, if
+    - creating a screen for goals, copy participants.tsx which allows you to add, modify, and delete records.
+    - adding a button, look at Reset.tsx (may be renamed to Cancel.tsx) which contains a single button
+  - If the attribute appears on other screens or screen fragments, you will need to pass a set function. See setMobName as an example.
+- Modify Controller.tsx (previous step should lead you to doing that)
+
+- If a new screen
+  - create a new tsx file that will call other React fragments (see Room.tsx for an example)
+  - add Routes to App.tsx
+  - modify code to call the Route
+  - now add a React fragment to the tsx you created using instructions for adding a React fragment
 
 ### Adding/Changes to Images
 
