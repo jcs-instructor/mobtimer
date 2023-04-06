@@ -39,27 +39,69 @@ In VS Code,
 
 ### Adding a New Feature
 
+#### Frontend Changes
+
+- Decide on a name for the screen or screen fragment (for instance, Goals)
+
+- If a new screen
+
+  - create a new tsx file (see Room.tsx for an example)
+  - add Routes to App.tsx
+  - modify code to call the Route
+
+- If a screen fragment
+  - Identify where you want the screen fragment to go and the corresponding tsx
+  - Add <fragement name/> to the tsx file
+  - Find a similar screen fragment and copy. For instance, if it has a single button find a screen
+    fragment with a single button
+- If adding new attribute(s), look for participants in App.tsx and Room.tsx as an example of how to pass and set attribute(s).
+- If the attribute appears on other screens or screen fragments, you will need to pass a set function. See setMobName as an example.
+- Modify Controller.tsx (previous step should lead you to doing that)
+
+Copy Room.tsx and take out stuff N/A.
+
+- If an existing screen edit
+
+#### Backend Changes
+
 Files to change:
+
 - mobtimer-api:
   - test:
-    - mobTimer.test.ts 
+    - mobTimer.test.ts
   - src:
     - action.ts
     - mobSocketClient.ts
     - mobTimerRequests.ts
 - mobtimer-backend:
-  - test: 
-    - mobClientServer.test.ts 
+  - test:
+    - mobClientServer.test.ts
   - src:
-    - server: 
-      - mobSocketServer.ts 
+    - server:
+      - mobSocketServer.ts
 
-### Making Changes to Icons
+### Adding/Changes to Images
 
-Icons were created using Ethan Strominger's gmail account:
+- Create an image using your favorite drawing tool
+- Save or convert to an SVG
+- Save in public/images
+- Add details here how you created the image
 
-- https://pixelied.com/editor/design/6428399563ff01432c82a888
-- https://cloudconvert.com/
+svg files:
+
+- mobrotation.svg was drawn using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan
+  Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you want
+  to modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
+
+### Modifying the Icon
+
+The icon file is stored at public/favicon.ico. To modify this file
+
+- Create an image using your favorite drawing tool
+- Save or convert to favicon.ico icon file
+- Add details here how you created the icon
+
+The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you wantto modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
 
 ## Helper Scripts
 
