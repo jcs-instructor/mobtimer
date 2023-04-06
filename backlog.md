@@ -18,12 +18,11 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
 - [ ] Create VSCode extension (needed so we can use it ourselves) - see [vsocode-extension readme](./vscode-extension.md)
 - [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
-
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
-- [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
 - [ ] Cleanup
   - [ ] Maybe: Delete unused branches (?)
+- [ ] Discuss Ethan's idea for new image
 
 ## Participant UI (reorder, edit, delete, drag/drop)
 
