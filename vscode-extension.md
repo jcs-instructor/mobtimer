@@ -5,7 +5,7 @@
 Goal: Use mrozzbarry with minimal edits
 (FYI: See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
 
-## Must Haves
+## Must Haves for Ethan & Joel
 
 - [ ] Join, and see all default fields
   - [ ] WIP: Handle wss://localhost:4000/mobname (see mobSocketServer.ts TODO comment)
@@ -14,14 +14,14 @@ Goal: Use mrozzbarry with minimal edits
   - [ ] Participants
 - [ ] Start, Pause at bottom
 
-## Could Haves
+## Must Haves for Other People
 
 - [ ] (Add who's Navigator next to time on bottom)
 - [ ] Manage participants
 - [ ] Randomize
 - [ ] Manage Roles
 - [ ] Stop, Cancel, Rotate
-- [ ] Required if and when merging to mrozzbarry
+- [ ] Required if and when merging to mrozzbarry (change our fork here: https://github.com/jcs-instructor/mobtime-vscode-extension)
   - [ ] Configure URL 
     - [ ] replace all localhost:4000 with mobti.me and figure out how to configure URL
 
