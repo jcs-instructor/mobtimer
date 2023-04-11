@@ -17,6 +17,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
 - [ ] Create VSCode extension (needed so we can use it ourselves) - see [vscode-extension readme](./vscode-extension.md)
+  - [ ] Working on https://github.com/jcs-instructor/mobtime-vscode-extension
 - [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
