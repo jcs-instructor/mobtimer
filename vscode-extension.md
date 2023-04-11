@@ -1,34 +1,33 @@
 # VS Code Extension
 
-## Implementation
+## Intro
 
-### Option 1: Use mrozzbarry with minimal edits
+Goal: Use mrozzbarry with minimal edits
+(FYI: See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
 
-(See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
+## Must Haves
+
+- [ ] Join, and see all default fields
+  - [ ] WIP: Handle wss://localhost:4000/mobname (see mobSocketServer.ts TODO comment)
+  - [ ] Time remaining in sidebar and bottom
+  - [ ] Duration
+  - [ ] Participants
+- [ ] Start, Pause at bottom
+
+## Could Haves
+
+- [ ] (Add who's Navigator next to time on bottom)
+- [ ] Manage participants
+- [ ] Randomize
+- [ ] Manage Roles
+- [ ] Stop, Cancel, Rotate
+- [ ] Required if and when merging to mrozzbarry
+  - [ ] Configure URL 
+    - [ ] replace all localhost:4000 with mobti.me and figure out how to configure URL
+
+## Completed VSCode Extension tasks
 
 - [x] Create a separate helloworld vscode plugin (to learn) on a branch (see https://code.visualstudio.com/api/get-started/your-first-extension)
 - [x] Fork mrozzbarry repo - https://github.com/jcs-instructor/mobtime-vscode-extension
 - [x] Get forked code working as is with the current mobti.me url (from our copy in our codebase)
-- [ ] Modify url
-- [ ] See must-haves, etc. at bottom of this file
-
-### Option 2: Create from scratch
-
-- [ ] Create a new helloworld vscode plugin (to start with)
-- [ ] See must-haves, etc. at bottom of this file
-
-## Must Haves
-
-- [ ] Must haves for Joel/Ethan
-  - [ ] Configure URL
-  - [ ] Join, and see all default fields
-    - [ ] Time remaining in sidebar and bottom
-    - [ ] Duration
-    - [ ] Participants
-  - [ ] Start, Pause at bottom
-- [ ] Could Have (can do all through web)
-  - [ ] (Add who's Navigotor next to time on bottom)
-  - [ ] Manage participants
-  - [ ] Randomize
-  - [ ] Manage Roles
-  - [ ] Stop, Cancel, Rotate
+- [x] Modify url to use our server: localhost:4000; and modify mrozberry code on fork here: https://github.com/jcs-instructor/mobtime-vscode-extension

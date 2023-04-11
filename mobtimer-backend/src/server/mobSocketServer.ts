@@ -116,6 +116,12 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
 
   wss.on("connection", function (webSocket: WebSocket) {
     webSocket.on("message", function (request) {
+
+      // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
+      webSocket.send(JSON.stringify({"type":"settings:update","settings":{"mobOrder":"Navigator,Driver","duration":300000}}));
+      webSocket.send(JSON.stringify({"type":"mob:update","mob":[]}));
+      webSocket.send(JSON.stringify({"type":"goals:update","goals":[]}));          
+
       let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequests.MobTimerRequest;
       try {
