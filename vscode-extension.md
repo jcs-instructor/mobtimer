@@ -8,7 +8,7 @@ Goal: Use mrozzbarry with minimal edits
 ## Must Haves for Ethan & Joel
 
 - [ ] Join, and see all default fields
-  - [ ] WIP: Handle wss://localhost:4000/mobname (see mobSocketServer.ts TODO comment)
+  - [ ] WIP: Handle wss://localhost:4000/mobname (see mobSocketServer.ts TODO comment which includes sample code)
   - [ ] Time remaining in sidebar and bottom
   - [ ] Duration
   - [ ] Participants
@@ -22,7 +22,7 @@ Goal: Use mrozzbarry with minimal edits
 - [ ] Manage Roles
 - [ ] Stop, Cancel, Rotate
 - [ ] Required if and when merging to mrozzbarry (change our fork here: https://github.com/jcs-instructor/mobtime-vscode-extension)
-  - [ ] Configure URL 
+  - [ ] Configure URL
     - [ ] replace all localhost:4000 with mobti.me and figure out how to configure URL
 
 ## Completed VSCode Extension tasks
