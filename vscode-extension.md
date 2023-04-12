@@ -1,9 +1,5 @@
 # VS Code Extension
 
-## Intro
-
-Goal: Use mrozzbarry with minimal edits
-
 ## Resources
 
 - https://vscode-docs.readthedocs.io/en/stable/extensions/example-word-count/
@@ -12,17 +8,19 @@ Goal: Use mrozzbarry with minimal edits
 
 ## Must Haves for Ethan & Joel
 
+- [ ] Status bar
+  - [ ] Join, Start, Stop
+  - [ ] Show time remaining in status bar
+
+## Must Haves for Other People
+
 - [ ] Join, and see all default fields
   - [ ] WIP: Handle wss://localhost:4000/mobname (see mobSocketServer.ts TODO comment which includes sample code)
   - [ ] Time remaining in sidebar and bottom
   - [ ] Duration
   - [ ] Participants
 - [ ] Start, Pause at bottom
-
-## Must Haves for Other People
-
 - [ ] (Add who's Navigator next to time on bottom)
-- [ ] Manage participants
 - [ ] Randomize
 - [ ] Manage Roles
 - [ ] Stop, Cancel, Rotate
