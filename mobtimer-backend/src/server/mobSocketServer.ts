@@ -114,7 +114,10 @@ function _processRequest(
 function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", function (webSocket: WebSocket) {
+  wss.on("connection", function (webSocket: WebSocket, request2: any) {
+    const url = new URL(request2.url, `http://${request2.headers.host}`);
+    let mobName = url.pathname.replace("/", "");
+
     webSocket.on("message", function (request) {
       // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
       // SAMPLE CODE FROM MROZZBARRY
