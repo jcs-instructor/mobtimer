@@ -3,7 +3,12 @@
 ## Intro
 
 Goal: Use mrozzbarry with minimal edits
-(FYI: See issue for https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2)
+
+## Resources
+
+- https://vscode-docs.readthedocs.io/en/stable/extensions/example-word-count/
+- https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2
+- https://github.com/microsoft/vscode-extension-samples/blob/main/statusbar-sample/src/extension.ts
 
 ## Must Haves for Ethan & Joel
 
