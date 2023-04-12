@@ -114,7 +114,7 @@ function _processRequest(
 function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", function (webSocket: WebSocket, request2: any) {
+  wss.on("connection", async function (webSocket: WebSocket, request2: any) {
     const url = new URL(request2.url, `http://${request2.headers.host}`);
     let mobName = url.pathname.replace("/", "");
     if (mobName) {
@@ -163,7 +163,12 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
 }
 
 function _initialize(webSocket: WebSocket) {
-  webSocket.send(JSON.stringify({ type: "settings:update", settings: { mobOrder: "Navigator,Driver", duration: 300000 },}));
+  webSocket.send(
+    JSON.stringify({
+      type: "settings:update",
+      settings: { mobOrder: "Navigator,Driver", duration: 300000 },
+    })
+  );
   webSocket.send(JSON.stringify({ type: "mob:update", mob: [] }));
   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
 }
