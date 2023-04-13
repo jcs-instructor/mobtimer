@@ -6,9 +6,9 @@ Goal: Use mrozzbarry with minimal edits
 
 ## Resources
 
-- https://vscode-docs.readthedocs.io/en/stable/extensions/example-word-count/
-- https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2
-- https://github.com/microsoft/vscode-extension-samples/blob/main/statusbar-sample/src/extension.ts
+- Tutorial: https://vscode-docs.readthedocs.io/en/stable/extensions/example-word-count/
+- Microsoft Docs: https://github.com/microsoft/vscode-extension-samples/blob/main/statusbar-sample/src/extension.ts
+- Ethan's convo w/mrozbarry: https://github.com/mobtimeapp/mobtime-vscode-extension/issues/2
 
 ## Must Haves for Ethan & Joel
 
