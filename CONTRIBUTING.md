@@ -122,14 +122,6 @@ When you need to refresh node_modules in frontend or backend, run ../scripts/cle
 
 - clean-all.sh must be run. Removes the dist and node_module directories, and reruns yarn.
 
-## See also
-
-See additional CONTRIBUTING.md files
-
-- [Frontend]](./mobtimer-frontend/CONTRIBUTING.md)
-- [Backend]](./mobtimer-backend/CONTRIBUTING.md)
-- [API]](./mobtimer-api/CONTRIBUTING.md)
-
 # Production Deployment
 
 ## One-time setup
