@@ -16,7 +16,8 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
-- [ ] Create VSCode extension (needed so we can use it ourselves) - see [vscode-extension readme](./vscode-extension.md)
+- [ ] Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
+      https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
   
 - [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
 - [ ] Get rid of # in URL - try BrowserRouter
