@@ -36,6 +36,14 @@ In VS Code,
 
 - Change code as desired
 - Push to development branch
+- If you want to deploy changes to web:
+  - push to main branch
+  - if you made API changes, publish to npm
+  - TODO: instructions
+
+### API changes
+
+- If the changes need to be consumed by VSCode extension or deploying to web, publish to npm
 
 ### Adding a New Feature
 
