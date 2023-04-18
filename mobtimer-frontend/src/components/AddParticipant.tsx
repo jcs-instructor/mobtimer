@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { client } from '../timers';
+import { client } from '../controller/timers';
 
 const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');

@@ -1,5 +1,5 @@
 import React from 'react';
-import { client } from '../timers';
+import { client } from '../controller/timers';
 
 const Reset = () => {
     
