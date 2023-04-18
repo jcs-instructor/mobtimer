@@ -3,9 +3,9 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
 import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
-import { Controller } from './controller';
+import { Controller } from './controller/controller';
 import Launch from './components/Launch';
-import { client, frontendMobTimer } from './timers';
+import { client, frontendMobTimer } from './controller/timers';
 // import logo from './logo.svg';
 
 const App = () => {

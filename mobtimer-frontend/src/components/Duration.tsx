@@ -1,6 +1,6 @@
 import React from 'react'
-import { client } from '../timers';
-import { Controller } from '../controller';
+import { client } from '../controller/timers';
+import { Controller } from '../controller/controller';
 
 type FormParameters = {
     durationMinutes: number;

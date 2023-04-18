@@ -16,8 +16,12 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
-- [ ] Create VSCode extension (needed so we can use it ourselves) - see [vscode-extension readme](./vscode-extension.md)
-  
+- [ ] Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
+      https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
+- [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
+      - [ ] Baby step: subfolder within mobtimer-frontend 
+      - [ ] New repo: mobtimer-controller
+
 - [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
