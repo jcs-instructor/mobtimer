@@ -5,9 +5,16 @@ import Room from './components/Room';
 import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
-import { frontendMobTimer } from './controller/timers';
-import { client } from './controller/timerController';
 // import logo from './logo.svg';
+import { soundSource } from "./assets/soundSource";
+
+export const frontendMobTimer = Controller.createFrontendMobTimer(playAudio);
+
+function playAudio() {
+  console.log("timer expired on front end");
+  const audio = new Audio(soundSource);
+  audio.play();
+}
 
 const App = () => {
 
