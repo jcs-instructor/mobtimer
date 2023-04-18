@@ -5,7 +5,8 @@ import Room from './components/Room';
 import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
-import { client, frontendMobTimer } from './controller/timers';
+import { frontendMobTimer } from './controller/timers';
+import { client } from './controller/timerController';
 // import logo from './logo.svg';
 
 const App = () => {
