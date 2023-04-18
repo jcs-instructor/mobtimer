@@ -8,7 +8,9 @@ import Launch from './components/Launch';
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 
-export const frontendMobTimer = Controller.createFrontendMobTimer(playAudio);
+Controller.initializeFrontendMobTimer(playAudio);
+const frontendMobTimer = Controller.frontendMobTimer
+const client = Controller.client;
 
 function playAudio() {
   console.log("timer expired on front end");

@@ -1,11 +1,11 @@
 import React from 'react';
-import { client } from '../controller/timers';
+import { Controller } from '../controller/controller';
 
 const Reset = () => {
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        client.reset();
+        Controller.client.reset();
     }
 
     return (

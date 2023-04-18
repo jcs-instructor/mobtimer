@@ -1,14 +1,15 @@
 import { TimeUtils } from 'mobtimer-api';
 import { useEffect } from 'react';
 import { Controller } from '../controller/controller';
-import { frontendMobTimer } from '../controller/timers';
 
 type FormParameters = {
     timeString: string;
 }
 
-const Timer = ({ timeString }: FormParameters) => {
+const frontendMobTimer = Controller.frontendMobTimer;
 
+const Timer = ({ timeString }: FormParameters) => {
+    
     function onTick() {
         Controller.setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
         document.title = `${frontendMobTimer.secondsRemainingString} - ${Controller.getAppTitle()}`;
@@ -41,4 +42,3 @@ const Timer = ({ timeString }: FormParameters) => {
 }
 
 export default Timer;
-export { frontendMobTimer };

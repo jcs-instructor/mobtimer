@@ -13,12 +13,13 @@ console.log("url", url);
 export class Controller {
   static client = MobSocketClient.openSocketSync(url);
 
-  static createFrontendMobTimer(timerExpireFunc: () => void) {
-    const mobTimer = new MobTimer("front-end-timer");
-    mobTimer.timerExpireFunc = () => {
+  static frontendMobTimer: MobTimer;
+  
+  static initializeFrontendMobTimer(timerExpireFunc: () => void) {
+    Controller.frontendMobTimer = new MobTimer("front-end-timer");
+    Controller.frontendMobTimer.timerExpireFunc = () => {
       timerExpireFunc();
     };
-    return mobTimer;
   }
 
   static getAppTitle() {

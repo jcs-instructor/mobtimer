@@ -1,11 +1,11 @@
 import React from 'react';
-import { client } from '../controller/timers';
+import { Controller } from '../controller/controller';
 
 const RotateParticipants = () => {
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        client.rotateParticipants();
+        Controller.client.rotateParticipants();
     }
 
     return (

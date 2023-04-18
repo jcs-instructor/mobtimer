@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { client } from '../controller/timers';
+import { Controller } from '../controller/controller';
 
 const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');
@@ -8,7 +8,7 @@ const AddParticipant = () => {
         event.preventDefault();
         const trimmedName = participantName.trim();
         if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
-            client.addParticipant(trimmedName);
+            Controller.client.addParticipant(trimmedName);
         }            
         setParticipantName('');
     }
