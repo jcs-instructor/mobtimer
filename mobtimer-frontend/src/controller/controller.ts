@@ -14,7 +14,7 @@ export class Controller {
   static client = MobSocketClient.openSocketSync(url);
 
   static frontendMobTimer: MobTimer;
-  
+
   static initializeFrontendMobTimer(timerExpireFunc: () => void) {
     Controller.frontendMobTimer = new MobTimer("front-end-timer");
     Controller.frontendMobTimer.timerExpireFunc = () => {
@@ -54,24 +54,13 @@ export class Controller {
 
   // other functions -----------------------
 
-  static getStatus(response: MobTimerResponses.SuccessfulResponse) {
-    return response.mobState.status;
-  }
-
-  static getAction(response: MobTimerResponses.SuccessfulResponse) {
-    return response.actionInfo.action;
-  }
-
-  static getDurationMinutes(response: MobTimerResponses.SuccessfulResponse) {
-    return response.mobState.durationMinutes;
-  }
-
-  static getParticipants(response: MobTimerResponses.SuccessfulResponse) {
-    return response.mobState.participants;
-  }
-
-  static getSecondsRemaining(response: MobTimerResponses.SuccessfulResponse) {
-    return response.mobState.secondsRemaining;
+  static translateResponseData(response: MobTimerResponses.SuccessfulResponse) {
+    const mobState = response.mobState;
+    const mobStatus = mobState.status;
+    const durationMinutes = mobState.durationMinutes;
+    const participants = mobState.participants;
+    const secondsRemaining = mobState.secondsRemaining;
+    return { mobStatus, durationMinutes, participants, secondsRemaining };
   }
 
   static getActionButtonLabel(backendStatus: Status) {

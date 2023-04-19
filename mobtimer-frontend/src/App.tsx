@@ -48,7 +48,7 @@ const App = () => {
 
       // todo: handle if response is not successful
 
-      console.log("Mob: " + response.mobState.mobName +
+      console.log("MOB: " + response.mobState.mobName +
         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
         "Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
@@ -56,19 +56,19 @@ const App = () => {
       );
 
       // Read response data 
-      const { mobStatus, durationMinutes, participants, secondsRemaining } = getResponseData(response); // todo: *** move into controller
+      const { mobStatus, durationMinutes, participants, secondsRemaining } = Controller.translateResponseData(response);
 
       // Derive mob label from response status
       const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
 
       // modify frontend mob timer
       Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
-      Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining); 
+      Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
 
       // update React state variables
       setDurationMinutes(durationMinutes);
       setParticipants(participants);
-      setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString); 
+      setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
       setActionButtonLabel(label);
 
 
@@ -111,11 +111,3 @@ const App = () => {
 }
 
 export default App;
-function getResponseData(response: MobTimerResponses.SuccessfulResponse) {
-  const mobStatus = Controller.getStatus(response);
-  const durationMinutes = Controller.getDurationMinutes(response);
-  const participants = Controller.getParticipants(response);
-  const secondsRemaining = Controller.getSecondsRemaining(response);
-  return { mobStatus, durationMinutes, participants, secondsRemaining };
-}
-
