@@ -9,7 +9,6 @@ import Launch from './components/Launch';
 import { soundSource } from "./assets/soundSource";
 
 Controller.initializeFrontendMobTimer(playAudio);
-const frontendMobTimer = Controller.frontendMobTimer
 const client = Controller.client;
 
 function playAudio() {
@@ -23,15 +22,15 @@ const App = () => {
   // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
-  const [secondsRemainingString, setSecondsRemaining] = useState(frontendMobTimer.secondsRemainingString);
+  const [secondsRemainingString, setSecondsRemainingString] = useState(Controller.frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
-  const [durationMinutes, setDurationMinutes] = useState(frontendMobTimer.durationMinutes);
-  const [participants, setParticipants] = useState(frontendMobTimer.participants);
+  const [durationMinutes, setDurationMinutes] = useState(Controller.frontendMobTimer.durationMinutes);
+  const [participants, setParticipants] = useState(Controller.frontendMobTimer.participants);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
   Controller.injectSetParticipants(setParticipants);
-  Controller.injectSetSecondsRemainingString(setSecondsRemaining);
+  Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -49,36 +48,33 @@ const App = () => {
 
       // todo: handle if response is not successful
 
-      console.log("MOB: " + response.mobState.mobName +
+      console.log("Mob: " + response.mobState.mobName +
         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
         "Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
         "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
       );
 
-      // Read response data
-      const mobStatus = Controller.getStatus(response);
-      const durationMinutes = Controller.getDurationMinutes(response);
-      const participants = Controller.getParticipants(response);
-      const secondsRemaining = Controller.getSecondsRemaining(response);
+      // Read response data 
+      const { mobStatus, durationMinutes, participants, secondsRemaining } = getResponseData(response); // todo: *** move into controller
 
       // Derive mob label from response status
-      const label = Controller.getActionButtonLabel(mobStatus);
+      const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
 
       // modify frontend mob timer
-      Controller.changeStatus(frontendMobTimer, mobStatus);
+      Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
+      Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining); 
 
       // update React state variables
       setDurationMinutes(durationMinutes);
       setParticipants(participants);
-      setSecondsRemaining(frontendMobTimer.secondsRemainingString); // todo: names are inconsistent
+      setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString); 
       setActionButtonLabel(label);
 
-      frontendMobTimer.setSecondsRemaining(secondsRemaining);
 
-      if (response.mobState.status !== frontendMobTimer.status) {
+      if (response.mobState.status !== Controller.frontendMobTimer.status) {
         console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
-          "Frontend Status: " + frontendMobTimer.status + ", " +
+          "Frontend Status: " + Controller.frontendMobTimer.status + ", " +
           "Backend Status:" + response.mobState.status);
       };
     };
@@ -93,7 +89,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, frontendMobTimer);
+    Controller.toggle(client, Controller.frontendMobTimer);
   }
 
   // Browser router
@@ -115,3 +111,11 @@ const App = () => {
 }
 
 export default App;
+function getResponseData(response: MobTimerResponses.SuccessfulResponse) {
+  const mobStatus = Controller.getStatus(response);
+  const durationMinutes = Controller.getDurationMinutes(response);
+  const participants = Controller.getParticipants(response);
+  const secondsRemaining = Controller.getSecondsRemaining(response);
+  return { mobStatus, durationMinutes, participants, secondsRemaining };
+}
+
