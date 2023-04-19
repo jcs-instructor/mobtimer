@@ -49,25 +49,32 @@ const App = () => {
 
       // todo: handle if response is not successful
 
-      console.log("Mob: " + response.mobState.mobName +
+      console.log("MOB: " + response.mobState.mobName +
         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
         "Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
         "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
       );
 
+      // Read response data
       const mobStatus = Controller.getStatus(response);
-      Controller.changeStatus(frontendMobTimer, mobStatus);
-      const label = Controller.getActionButtonLabel(mobStatus);
       const durationMinutes = Controller.getDurationMinutes(response);
       const participants = Controller.getParticipants(response);
       const secondsRemaining = Controller.getSecondsRemaining(response);
-      
+
+      // Derive mob label from response status
+      const label = Controller.getActionButtonLabel(mobStatus);
+
+      // modify frontend mob timer
+      Controller.changeStatus(frontendMobTimer, mobStatus);
+
+      // update React state variables
       setDurationMinutes(durationMinutes);
       setParticipants(participants);
-      frontendMobTimer.setSecondsRemaining(secondsRemaining);
-      setSecondsRemaining(frontendMobTimer.secondsRemainingString);
+      setSecondsRemaining(frontendMobTimer.secondsRemainingString); // todo: names are inconsistent
       setActionButtonLabel(label);
+
+      frontendMobTimer.setSecondsRemaining(secondsRemaining);
 
       if (response.mobState.status !== frontendMobTimer.status) {
         console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
