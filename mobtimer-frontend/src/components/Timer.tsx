@@ -6,9 +6,10 @@ type FormParameters = {
     timeString: string;
 }
 
-const frontendMobTimer = Controller.frontendMobTimer;
 
 const Timer = ({ timeString }: FormParameters) => {
+    
+    const frontendMobTimer = Controller.frontendMobTimer;
     
     function onTick() {
         Controller.setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
