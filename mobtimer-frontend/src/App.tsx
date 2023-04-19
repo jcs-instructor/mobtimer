@@ -56,24 +56,17 @@ const App = () => {
         "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
       );
 
-      // Status
       const mobStatus = Controller.getStatus(response);
-      //setStatus(status);
-
-      // Duration minutes
-      const durationMinutes = Controller.getDurationMinutes(response);
-      setDurationMinutes(durationMinutes);
-
-      // Participants
-      const participants = Controller.getParticipants(response);
-      setParticipants(participants);
-
-      // Sync frontend timer
-      const secondsRemaining = Controller.getSecondsRemaining(response);
       Controller.changeStatus(frontendMobTimer, mobStatus);
+      const label = Controller.getActionButtonLabel(mobStatus);
+      const durationMinutes = Controller.getDurationMinutes(response);
+      const participants = Controller.getParticipants(response);
+      const secondsRemaining = Controller.getSecondsRemaining(response);
+      
+      setDurationMinutes(durationMinutes);
+      setParticipants(participants);
       frontendMobTimer.setSecondsRemaining(secondsRemaining);
       setSecondsRemaining(frontendMobTimer.secondsRemainingString);
-      const label = Controller.getActionButtonLabel(mobStatus);
       setActionButtonLabel(label);
 
       if (response.mobState.status !== frontendMobTimer.status) {
