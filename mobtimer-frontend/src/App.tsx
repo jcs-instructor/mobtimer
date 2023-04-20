@@ -22,9 +22,9 @@ const App = () => {
   // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
   const [mobName, setMobName] = useState('');
   const [loaded, setLoaded] = useState(false);
-  const [secondsRemainingString, setSecondsRemainingString] = useState(Controller.frontendMobTimer.secondsRemainingString);
+  const [secondsRemainingString, setSecondsRemainingString] = useState('');
   const [actionButtonLabel, setActionButtonLabel] = useState('');
-  const [durationMinutes, setDurationMinutes] = useState(Controller.frontendMobTimer.durationMinutes);
+  const [durationMinutes, setDurationMinutes] = useState(0);
   const [participants, setParticipants] = useState([] as string[]);
 
   // Injections
@@ -48,7 +48,7 @@ const App = () => {
 
       // todo: handle if response is not successful
 
-      console.log("MOB: " + response.mobState.mobName +
+      console.log("Mob: " + response.mobState.mobName +
         " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
         "Action:" + response.actionInfo.action + ", " +
         "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
