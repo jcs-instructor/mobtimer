@@ -13,8 +13,8 @@ const Participants = ({ participants }: FormParameters) => {
         <div style={{ display: "block" }}>
             <label>Participants ({roles}): </label>
             {participants.map((participant, i) =>
-                <div className="ParticipantRow">
-                    <div key={participant} className="CellBox ParticipantBorder">{participant}</div>
+                <div key={i} className="ParticipantRow">
+                    <div className="CellBox ParticipantBorder">{participant}</div>
                     <div className="CellBox">{rolesArray[i] || defaultRole}</div></div>)}
         </div>
     )

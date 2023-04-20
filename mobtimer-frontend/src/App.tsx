@@ -25,7 +25,7 @@ const App = () => {
   const [secondsRemainingString, setSecondsRemainingString] = useState(Controller.frontendMobTimer.secondsRemainingString);
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(Controller.frontendMobTimer.durationMinutes);
-  const [participants, setParticipants] = useState(Controller.frontendMobTimer.participants);
+  const [participants, setParticipants] = useState([] as string[]);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
