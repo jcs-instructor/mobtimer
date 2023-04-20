@@ -21,7 +21,14 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
       - [x] Baby step: subfolder within mobtimer-frontend 
       - [x] Controller decoupling and refactoring
-      - [ ] App.tsx lines 45-88 - move to controller
+      - [x] App.tsx lines 45-88 - move to controller
+      - [ ] Decouple participants from MobTimer: 
+            - [ ] Either:
+                  - 1. Extract a superclass for MobTimer, called CountdownTimer, with a subclass called MobTimer that includes the Participants, or...
+                  - 2. Rename MobTimer as CountdownTimer, and make Participants a separate class and just inject the rotate function into the  
+                       CountdownTimer's timerExpireFunc
+            - [ ] Use the decoupled CountdownTimer in the frontend, and rename frontendMobTimer as countdownTimer (since it never uses the
+                  front end timer's participants functionality; it just uses the client and backend response)
       - [ ] New repo: mobtimer-controller
 
 - [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
