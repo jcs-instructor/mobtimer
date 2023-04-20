@@ -16,12 +16,10 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
-- [ ] Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
+- [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
-      - [x] Baby step: subfolder within mobtimer-frontend 
-      - [x] Controller decoupling and refactoring
-      - [x] App.tsx lines 45-88 - move to controller
+      - [ ] NEXT: MobSocketClient & MobSocketTestClient: Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry)
       - [ ] Decouple participants from MobTimer: 
             - [ ] Either:
                   - 1. Extract a superclass for MobTimer, called CountdownTimer, with a subclass called MobTimer that includes the Participants, or...
@@ -29,7 +27,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
                        CountdownTimer's timerExpireFunc
             - [ ] Use the decoupled CountdownTimer in the frontend, and rename frontendMobTimer as countdownTimer (since it never uses the
                   front end timer's participants functionality; it just uses the client and backend response)
-      - [ ] New repo: mobtimer-controller
+      - [ ] IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! - move to new repo: mobtimer-controller 
 
 - [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
 - [ ] Get rid of # in URL - try BrowserRouter
