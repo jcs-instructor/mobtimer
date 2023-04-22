@@ -51,7 +51,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Notifications
 - [ ] Home page must be more different from mobti.me. Change text, images, and appearance so they aren't confusingly similar or an obvious knock-off of mobti.me
 - [ ] Images get in the way: (1) when screen narrows, (2) on mobile browser
-- [ ] Change home page link for "Learn more about mob programming" from Google search to something authoritative and unlikely to disappear or change unexpectedly for the worse over time (e.g., https://www.agilealliance.org/glossary/mob-programming/) (later: maybe change it to something of our own, such as a page on our mobtimer website)
+- [x] Change home page link for "Learn more about mob programming" from Google search to something authoritative and unlikely to disappear or change unexpectedly for the worse over time, e.g., https://www.agilealliance.org/glossary/mob-programming/
 
 ## Pitch for front page
 
@@ -73,6 +73,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
 - [ ] In UI listener, handle if response is not successful
 - [ ] Improve images in frontend
+- [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
 
 ## Investigate
 
