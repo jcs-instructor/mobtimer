@@ -14,7 +14,7 @@ const Launch = () => {
                 <img style={{ height: "285px" }} src="./images/mobrotation.svg" alt="" />
             </div>
             <div className="LaunchBottom">
-                <div>F
+                <div>
                     <h1>
                         The Story Behind This Product
                     </h1>
