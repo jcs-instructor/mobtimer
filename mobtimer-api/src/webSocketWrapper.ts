@@ -11,37 +11,48 @@ interface WebSocketWrapper {
   onmessage: (message: {data: string}) => void;
 }
 
-class W3CWebSocketWrapper implements WebSocketWrapper {
-  private _webSocket: WebSocketType;
-
+class W3CWebSocketWrapper extends W3CWebSocket {
   constructor(url: string) {
-    this._webSocket = new W3CWebSocket(url);
+    super(url);
   }
 
-  get readyState(): number {
-    return this._webSocket.readyState;
+  onmessage = (message: any) => {
+    this.onmessage(message);
   }
-
-  send(message: string): void {
-    this._webSocket.send(message);
-  }
-
-  close(): void {
-    this._webSocket.close();
-  }
-
-  get OPEN(): number {
-    return this._webSocket.OPEN;
-  }
-
-  get CLOSED(): number {
-    return this._webSocket.CLOSED;
-  }
-
-  onmessage = (message: {data: string}) => {
-    this._webSocket.onmessage(message);
-  }
+    
 }
+
+// class W3CWebSocketWrapper implements WebSocketWrapper {
+//   private _webSocket: WebSocketType;
+
+//   constructor(url: string) {
+//     this._webSocket = new W3CWebSocket(url);
+//   }
+
+//   get readyState(): number {
+//     return this._webSocket.readyState;
+//   }
+
+//   send(message: string): void {
+//     this._webSocket.send(message);
+//   }
+
+//   close(): void {
+//     this._webSocket.close();
+//   }
+
+//   get OPEN(): number {
+//     return this._webSocket.OPEN;
+//   }
+
+//   get CLOSED(): number {
+//     return this._webSocket.CLOSED;
+//   }
+
+//   onmessage = (message: {data: string}) => {
+//     this._webSocket.onmessage(message);
+//   }
+// }
 
 // class WebSocketWrapperWS implements WebSocketWrapper {
 //   private _webSocket: WebSocket;
