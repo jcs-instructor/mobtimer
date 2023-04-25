@@ -1,17 +1,18 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import WebSocket from "ws";
+import { WebSocketType } from "./webSocketType";
 
 interface WebSocketWrapper {
   readyState: number;
-  send: (data: any) => void;
+  send: (message: string) => void;
   close: () => void;
   OPEN: number;
   CLOSED: number;
-  onmessage: (callback: (event: any) => void) => void;
+  onmessage: (message: {data: string}) => void;
 }
 
 class W3CWebSocketWrapper implements WebSocketWrapper {
-  private _webSocket: W3CWebSocket;
+  private _webSocket: WebSocketType;
 
   constructor(url: string) {
     this._webSocket = new W3CWebSocket(url);
@@ -21,8 +22,8 @@ class W3CWebSocketWrapper implements WebSocketWrapper {
     return this._webSocket.readyState;
   }
 
-  send(data: any): void {
-    this._webSocket.send(data);
+  send(message: string): void {
+    this._webSocket.send(message);
   }
 
   close(): void {
@@ -37,46 +38,46 @@ class W3CWebSocketWrapper implements WebSocketWrapper {
     return this._webSocket.CLOSED;
   }
 
-  onmessage(callback: (event: any) => void): void {
-    this._webSocket.onmessage = callback;
+  onmessage = (message: {data: string}) => {
+    this._webSocket.onmessage(message);
   }
 }
 
-class WebSocketWrapperWS implements WebSocketWrapper {
-  private _webSocket: WebSocket;
+// class WebSocketWrapperWS implements WebSocketWrapper {
+//   private _webSocket: WebSocket;
 
-  constructor(url: string) {
-    this._webSocket = new WebSocket(url);
-  }
+//   constructor(url: string) {
+//     this._webSocket = new WebSocket(url);
+//   }
 
-  get readyState(): number {
-    return this._webSocket.readyState;
-  }
+//   get readyState(): number {
+//     return this._webSocket.readyState;
+//   }
 
-  send(data: any): void {
-    this._webSocket.send(data);
-  }
+//   send(data: any): void {
+//     this._webSocket.send(data);
+//   }
 
-  close(): void {
-    this._webSocket.close();
-  }
+//   close(): void {
+//     this._webSocket.close();
+//   }
 
-  get OPEN(): number {
-    return WebSocket.OPEN;
-  }
+//   get OPEN(): number {
+//     return WebSocket.OPEN;
+//   }
 
-  get CLOSED(): number {
-    return WebSocket.CLOSED;
-  }
+//   get CLOSED(): number {
+//     return WebSocket.CLOSED;
+//   }
 
-  onmessage(callback: (event: any) => void): void {
-    this._webSocket.on("message", (data: any) => {
-      const event = new MessageEvent("message", { data });
-      callback(event);
-    });
-  }
-}
+//   onmessage(callback: (event: any) => void): void {
+//     this._webSocket.on("message", (data: any) => {
+//       const event = new MessageEvent("message", { data });
+//       callback(event);
+//     });
+//   }
+// }
 
 // MobSocketClient class remains unchanged...
 
-export { WebSocketWrapper, W3CWebSocketWrapper, WebSocketWrapperWS };
+export { WebSocketWrapper, W3CWebSocketWrapper }; //, WebSocketWrapperWS

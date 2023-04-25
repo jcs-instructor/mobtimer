@@ -26,11 +26,8 @@ describe("WebSocket Server", () => {
   });
 
   test.only("Create mob", async () => {
-    console.log("1a here -------------------");
     const client = await openSocket(url);
-    console.log("2a here -------------------", JSON.stringify(client));
     await client.joinMob(_mobName1);
-    console.log("3a here -------------------", JSON.stringify(client));
     await cleanUp(client);
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(client.lastSuccessfulAction).toEqual(Action.Join);
