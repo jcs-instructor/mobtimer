@@ -4,14 +4,15 @@ import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
+import { W3CWebSocketWrapper } from "./webSocketWrapper";
 
 class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-  private _socket: WebSocketType;
+  private _socket: W3CWebSocketWrapper;
 
-  constructor(webSocket: WebSocketType) {
+  constructor(webSocket: W3CWebSocketWrapper) {
     super(webSocket);
     this._socket = webSocket;
     this._socket.onmessage = (message) => {
@@ -19,8 +20,8 @@ class MobSocketTestClient extends MobSocketClient {
     };
   }
 
-  private trackMessage(message: { data: string }) {
-    const responseObject = this.convertToMobTimerResponse(message.data);
+  private trackMessage(message: any) {
+    const responseObject = this.convertToMobTimerResponse(message.data as string);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -43,13 +44,13 @@ class MobSocketTestClient extends MobSocketClient {
   }
 
   static openSocketSync(url: string): MobSocketTestClient {
-    const socket = new W3CWebSocket(url);
+    const socket = new W3CWebSocketWrapper(url);
     const mobSocketTestClient = new MobSocketTestClient(socket);
     return mobSocketTestClient;
   }
 
   static async openSocket(url: string): Promise<MobSocketTestClient> {
-    const socket = new W3CWebSocket(url);
+    const socket = new W3CWebSocketWrapper(url);
     const mobSocketTestClient = new MobSocketTestClient(socket);
     await mobSocketTestClient.waitForSocketState(mobSocketTestClient.webSocket.OPEN);
     return mobSocketTestClient;
