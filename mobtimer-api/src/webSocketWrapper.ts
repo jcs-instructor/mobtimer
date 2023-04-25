@@ -1,4 +1,5 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import WebSocket from "ws";
 
 interface WebSocketWrapper {
   readyState: number;
@@ -6,7 +7,7 @@ interface WebSocketWrapper {
   close: () => void;
   OPEN: number;
   CLOSED: number;
-  onMessage: (callback: (event: any) => void) => void;
+  onmessage: (callback: (event: any) => void) => void;
 }
 
 class W3CWebSocketWrapper implements WebSocketWrapper {
@@ -36,7 +37,7 @@ class W3CWebSocketWrapper implements WebSocketWrapper {
     return this._webSocket.CLOSED;
   }
 
-  onMessage(callback: (event: any) => void): void {
+  onmessage(callback: (event: any) => void): void {
     this._webSocket.onmessage = callback;
   }
 }
@@ -68,7 +69,7 @@ class WebSocketWrapperWS implements WebSocketWrapper {
     return WebSocket.CLOSED;
   }
 
-  onMessage(callback: (event: MessageEvent) => void): void {
+  onmessage(callback: (event: any) => void): void {
     this._webSocket.on("message", (data: any) => {
       const event = new MessageEvent("message", { data });
       callback(event);
@@ -78,4 +79,4 @@ class WebSocketWrapperWS implements WebSocketWrapper {
 
 // MobSocketClient class remains unchanged...
 
-export { MobSocketClient, W3CWebSocketWrapper, WebSocketWrapperWS };
+export { WebSocketWrapper, W3CWebSocketWrapper, WebSocketWrapperWS };
