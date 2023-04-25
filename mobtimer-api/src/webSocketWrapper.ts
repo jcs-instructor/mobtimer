@@ -2,16 +2,16 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 import WebSocket from "ws";
 import { WebSocketType } from "./webSocketType";
 
-interface WebSocketWrapper {
+interface IWebSocketWrapper {
   readyState: number;
   send: (message: string) => void;
   close: () => void;
   OPEN: number;
   CLOSED: number;
-  onmessage: (message: {data: string}) => void;
+  onmessage: (message: any) => void;
 }
 
-class W3CWebSocketWrapper extends W3CWebSocket {
+class W3CWebSocketWrapper extends W3CWebSocket implements IWebSocketWrapper {
   constructor(url: string) {
     super(url);
   }
@@ -91,4 +91,4 @@ class W3CWebSocketWrapper extends W3CWebSocket {
 
 // MobSocketClient class remains unchanged...
 
-export { WebSocketWrapper, W3CWebSocketWrapper }; //, WebSocketWrapperWS
+export { IWebSocketWrapper, W3CWebSocketWrapper }; //, WebSocketWrapperWS
