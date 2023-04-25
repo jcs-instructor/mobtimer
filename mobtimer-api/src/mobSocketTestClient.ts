@@ -16,12 +16,15 @@ class MobSocketTestClient extends MobSocketClient {
     super(webSocket);
     this._socket = webSocket;
     this._socket.onmessage = (message) => {
+      console.log("message received*****", JSON.stringify(message));
       this.trackMessage(message);
     };
   }
 
   private trackMessage(message: any) {
-    const responseObject = this.convertToMobTimerResponse(message.data as string);
+    const responseObject = this.convertToMobTimerResponse(
+      message.data as string
+    );
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -52,7 +55,9 @@ class MobSocketTestClient extends MobSocketClient {
   static async openSocket(url: string): Promise<MobSocketTestClient> {
     const socket = new W3CWebSocketWrapper(url);
     const mobSocketTestClient = new MobSocketTestClient(socket);
-    await mobSocketTestClient.waitForSocketState(mobSocketTestClient.webSocket.OPEN);
+    await mobSocketTestClient.waitForSocketState(
+      mobSocketTestClient.webSocket.OPEN
+    );
     return mobSocketTestClient;
   }
 
@@ -60,7 +65,7 @@ class MobSocketTestClient extends MobSocketClient {
     await super.sendEchoRequest();
     await this.waitForEcho();
   }
-  
+
   async waitForEcho(): Promise<void> {
     const client = this;
     return new Promise(function (resolve) {
