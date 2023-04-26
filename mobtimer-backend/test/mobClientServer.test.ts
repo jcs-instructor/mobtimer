@@ -5,6 +5,7 @@ import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient } from "mobtimer-api";
+import { W3CWebSocketWrapper } from "mobtimer-api";
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -284,7 +285,7 @@ describe("WebSocket Server", () => {
 });
 
 async function openSocket(url: string) {
-  return await MobSocketTestClient.openSocket(url);
+  return await MobSocketTestClient.openSocket(new W3CWebSocketWrapper(url));
 }
 
 async function cleanUp(client: MobSocketTestClient) {
