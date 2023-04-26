@@ -1,34 +1,27 @@
-import { Status } from "mobtimer-api";
+import { IWebSocketWrapper, Status } from "mobtimer-api";
 import { MobTimerResponses } from "mobtimer-api";
 import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
-import { W3CWebSocketWrapper } from "mobtimer-api";
-
-// todo: unhardcode port
-const url =
-  process.env.REACT_APP_WEBSOCKET_URL ||
-  `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
-console.log("process.env", process.env);
-console.log("url", url);
 
 export class Controller {
-  static client = MobSocketClient.openSocketSync(new W3CWebSocketWrapper(url));
-
+  
   static frontendMobTimer: MobTimer;
-
-  static initializeFrontendMobTimer(timerExpireFunc: () => void) {
+  static client: MobSocketClient;
+  
+  static initializeClientAndFrontendMobTimer(webSocket: IWebSocketWrapper, timerExpireFunc: () => void) {
+    Controller.client = new MobSocketClient(webSocket);
     Controller.frontendMobTimer = new MobTimer("front-end-timer");
     Controller.frontendMobTimer.timerExpireFunc = () => {
       timerExpireFunc();
     };
   }
-
+  
   static getAppTitle() {
     return "Mob Timer";
   }
-
+  
   // injections -----------------------
-
+  
   // inject duration minutes
   static setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetDurationMinutes(
