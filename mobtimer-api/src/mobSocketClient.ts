@@ -2,21 +2,21 @@ import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { W3CWebSocketWrapper } from "./webSocketWrapper";
+import { IWebSocketWrapper } from "./webSocketWrapper";
 
 class MobSocketClient {
-  private _webSocket: W3CWebSocketWrapper;
+  private _webSocket: IWebSocketWrapper;
 
-  constructor(webSocket: W3CWebSocketWrapper) {
+  constructor(webSocket: IWebSocketWrapper) {
     this._webSocket = webSocket;
   }
 
-  static openSocketSync(webSocket: W3CWebSocketWrapper): MobSocketClient {
+  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketClient {
     const mobSocketClient = new MobSocketClient(webSocket);
     return mobSocketClient;
   }
 
-  static async openSocket(webSocket: W3CWebSocketWrapper): Promise<MobSocketClient> {
+  static async openSocket(webSocket: IWebSocketWrapper): Promise<MobSocketClient> {
     const mobSocketClient = new MobSocketClient(webSocket);
     await MobSocketClient.waitForSocketState(
       mobSocketClient.webSocket,
@@ -102,7 +102,7 @@ class MobSocketClient {
     this._webSocket.send(JSON.stringify(request));
   }
 
-  public get webSocket(): W3CWebSocketWrapper {
+  public get webSocket(): IWebSocketWrapper {
     return this._webSocket;
   }
 
