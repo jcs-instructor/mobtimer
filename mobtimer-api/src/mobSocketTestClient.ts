@@ -16,6 +16,7 @@ class MobSocketTestClient extends MobSocketClient {
     super(webSocket);
     this._socket = webSocket;
     this._socket.onmessage = (message) => {
+      console.log("message:::::::::::::::", message)
       this.trackMessage(message);
     };
   }

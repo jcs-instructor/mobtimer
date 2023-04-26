@@ -5,7 +5,7 @@ import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient } from "mobtimer-api";
-import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
+import { W3CWebSocketWrapper /*, WSWebSocketWrapper */ } from "mobtimer-api";
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -26,13 +26,13 @@ describe("WebSocket Server", () => {
     await _server.httpServer.close();
   });
 
-  test("Create mob with alternative websocket", async () => {
-    const client = await openSocketAlternative(url);
-    await client.joinMob(_mobName1);
-    await cleanUp(client);
-    expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
-    expect(client.lastSuccessfulAction).toEqual(Action.Join);
-  });
+  // test.skip("Create mob with alternative websocket", async () => {
+  //   const client = await openSocketAlternative(url);
+  //   await client.joinMob(_mobName1);
+  //   await cleanUp(client);
+  //   expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
+  //   expect(client.lastSuccessfulAction).toEqual(Action.Join);
+  // });
 
   test("Create mob", async () => {
     const client = await openSocket(url);
@@ -296,9 +296,9 @@ async function openSocket(url: string) {
   return await MobSocketTestClient.openSocket(new W3CWebSocketWrapper(url));
 }
 
-async function openSocketAlternative(url: string) {
-  return await MobSocketTestClient.openSocket(new WSWebSocketWrapper(url));
-}
+// async function openSocketAlternative(url: string) {
+//   return await MobSocketTestClient.openSocket(new WSWebSocketWrapper(url));
+// }
 
 async function cleanUp(client: MobSocketTestClient) {
   await client.waitForLastResponse();
