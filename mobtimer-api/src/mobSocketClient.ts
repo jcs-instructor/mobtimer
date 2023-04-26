@@ -11,16 +11,13 @@ class MobSocketClient {
     this._webSocket = webSocket;
   }
 
-  static openSocketSync(url: string): MobSocketClient {
-    console.log("opening socket", url);
-    const socket = new W3CWebSocketWrapper(url);
-    const mobSocketClient = new MobSocketClient(socket);
+  static openSocketSync(webSocket: W3CWebSocketWrapper): MobSocketClient {
+    const mobSocketClient = new MobSocketClient(webSocket);
     return mobSocketClient;
   }
 
-  static async openSocket(url: string): Promise<MobSocketClient> {
-    const socket = new W3CWebSocketWrapper(url);
-    const mobSocketClient = new MobSocketClient(socket);
+  static async openSocket(webSocket: W3CWebSocketWrapper): Promise<MobSocketClient> {
+    const mobSocketClient = new MobSocketClient(webSocket);
     await MobSocketClient.waitForSocketState(
       mobSocketClient.webSocket,
       mobSocketClient.webSocket.OPEN

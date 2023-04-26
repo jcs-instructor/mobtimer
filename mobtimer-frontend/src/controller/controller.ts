@@ -2,6 +2,7 @@ import { Status } from "mobtimer-api";
 import { MobTimerResponses } from "mobtimer-api";
 import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
+import { W3CWebSocketWrapper } from "mobtimer-api";
 
 // todo: unhardcode port
 const url =
@@ -11,7 +12,7 @@ console.log("process.env", process.env);
 console.log("url", url);
 
 export class Controller {
-  static client = MobSocketClient.openSocketSync(url);
+  static client = MobSocketClient.openSocketSync(new W3CWebSocketWrapper(url));
 
   static frontendMobTimer: MobTimer;
 

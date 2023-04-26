@@ -2,7 +2,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 import WebSocket from "ws";
 import { WebSocketType } from "./webSocketType";
 
-interface IWebSocketWrapper {
+export interface IWebSocketWrapper {
   readyState: number;
   send: (message: string) => void;
   close: () => void;
@@ -11,7 +11,7 @@ interface IWebSocketWrapper {
   onmessage: (message: any) => void;
 }
 
-class W3CWebSocketWrapper implements IWebSocketWrapper {
+export class W3CWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: WebSocketType;
 
   constructor(url: string) {    
@@ -43,7 +43,7 @@ class W3CWebSocketWrapper implements IWebSocketWrapper {
   }    
 }
 
-class WSWebSocketWrapper implements IWebSocketWrapper {
+export class WSWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: WebSocket;
 
   constructor(url: string) {    
@@ -75,4 +75,3 @@ class WSWebSocketWrapper implements IWebSocketWrapper {
   }
 }
 
-export { IWebSocketWrapper, W3CWebSocketWrapper, WSWebSocketWrapper }; 
