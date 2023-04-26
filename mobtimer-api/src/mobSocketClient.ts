@@ -13,14 +13,12 @@ class MobSocketClient {
 
   static openSocketSync(url: string): MobSocketClient {
     console.log("opening socket", url);
-    //const socket = new W3CWebSocket(url);
     const socket = new W3CWebSocketWrapper(url);
     const mobSocketClient = new MobSocketClient(socket);
     return mobSocketClient;
   }
 
   static async openSocket(url: string): Promise<MobSocketClient> {
-    //const socket = new W3CWebSocket(url);
     const socket = new W3CWebSocketWrapper(url);
     const mobSocketClient = new MobSocketClient(socket);
     await MobSocketClient.waitForSocketState(

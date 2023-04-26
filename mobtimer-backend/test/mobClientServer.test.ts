@@ -25,7 +25,7 @@ describe("WebSocket Server", () => {
     await _server.httpServer.close();
   });
 
-  test("Create mob", async () => {
+  test.only("Create mob", async () => {
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
     await cleanUp(client);

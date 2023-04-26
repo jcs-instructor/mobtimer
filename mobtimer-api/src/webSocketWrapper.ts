@@ -11,14 +11,45 @@ interface IWebSocketWrapper {
   onmessage: (message: any) => void;
 }
 
-class W3CWebSocketWrapper extends W3CWebSocket implements IWebSocketWrapper {
-  constructor(url: string) {
-    super(url);
+class W3CWebSocketWrapper implements IWebSocketWrapper {
+  private _webSocket: WebSocketType;
+
+  constructor(url: string) {    
+    this._webSocket = new W3CWebSocket(url);
   }
 
-  onmessage = (message: any) => {
-    this.onmessage(message);
+  public get readyState(): number {
+    return this._webSocket.readyState;
   }
+
+  public send(message: string): void {
+    this._webSocket.send(message);
+  }
+
+  public close(): void {
+    this._webSocket.close();
+  }
+
+  public get OPEN(): number {
+    return this._webSocket.OPEN;
+  }
+
+  public get CLOSED(): number {
+    return this._webSocket.CLOSED;
+  }
+  
+  public set onmessage(handler: (message: {data: string}) => void) {
+    this._webSocket.onmessage = handler;
+  }
+
+  // extends W3CWebSocket
+  // constructor(url: string) {
+  //   super(url);
+  // }
+
+  // onmessage = (message: any) => {
+  //   this.onmessage(message);
+  // }
     
 }
 
