@@ -14,7 +14,7 @@ export interface IWebSocketWrapper {
 export class W3CWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: WebSocketType;
 
-  constructor(url: string) {    
+  constructor(url: string) {
     this._webSocket = new W3CWebSocket(url);
   }
 
@@ -37,16 +37,16 @@ export class W3CWebSocketWrapper implements IWebSocketWrapper {
   public get CLOSED(): number {
     return this._webSocket.CLOSED;
   }
-  
-  public set onmessage(handler: (message: {data: string}) => void) {
+
+  public set onmessage(handler: (message: { data: string }) => void) {
     this._webSocket.onmessage = handler;
-  }    
+  }
 }
 
 export class WSWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: WebSocket;
 
-  constructor(url: string) {    
+  constructor(url: string) {
     this._webSocket = new WebSocket(url);
   }
 
@@ -69,9 +69,10 @@ export class WSWebSocketWrapper implements IWebSocketWrapper {
   public get CLOSED(): number {
     return this._webSocket.CLOSED;
   }
-  
+
   public set onmessage(handler: (message: any) => void) {
-    this._webSocket.on("message", handler);
+    this._webSocket.on("message", (message) => {
+      handler({ data: message });
+    });
   }
 }
-
