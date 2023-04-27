@@ -21,7 +21,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
       - [x] Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry) 
       - [x] Get unit test working with WS Web Socket Wrapper (already works for W3C wrapper) (check console log - already set up in .on in test client)     
-      - [ ] Split files by class (e.g., 3 files for 2 wrappers + 1 interface)
+      - [x] Split files by class (e.g., 3 files for 2 wrappers + 1 interface)
       - [ ] Use WS Web Socket Wrapper in extension
       - [ ] Refactor / cleanup:
             - [ ] where possible, don't use any types, e.g.:                  

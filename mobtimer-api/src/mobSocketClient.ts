@@ -2,7 +2,7 @@ import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { IWebSocketWrapper } from "./webSocketWrapper";
+import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketClient {
   private _webSocket: IWebSocketWrapper;

@@ -4,7 +4,7 @@ import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
-import { IWebSocketWrapper } from "./webSocketWrapper";
+import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
