@@ -13,7 +13,7 @@ const Timer = ({ timeString }: FormParameters) => {
     
     function onTick() {
         Controller.setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
-        document.title = `${frontendMobTimer.secondsRemainingString} - ${Controller.getAppTitle()}`;
+        Controller.updateSummary(frontendMobTimer.secondsRemainingString);
     }
 
     useEffect(() => {
@@ -43,3 +43,6 @@ const Timer = ({ timeString }: FormParameters) => {
 }
 
 export default Timer;
+
+
+

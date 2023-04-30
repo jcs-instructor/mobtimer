@@ -4,6 +4,14 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
+  static updateSummary(secondsRemainingString: string) {    
+    // todo: refactor / unhardcode emojis, etc.
+    let participantsString = "🗣️" + Controller._participants.join(", ");
+    if (Controller._participants.length > 1) {
+      participantsString = participantsString.replace(", ", ",🛞");
+    }
+    document.title = `${secondsRemainingString} ${participantsString} - ${Controller.getAppTitle()}`;
+  }
   
   static frontendMobTimer: MobTimer;
   static client: MobSocketClient;
@@ -53,9 +61,12 @@ export class Controller {
     const mobStatus = mobState.status;
     const durationMinutes = mobState.durationMinutes;
     const participants = mobState.participants;
+    Controller._participants = participants;
     const secondsRemaining = mobState.secondsRemaining;
     return { mobStatus, durationMinutes, participants, secondsRemaining };
   }
+
+  static _participants: string[] = [];
 
   static getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
