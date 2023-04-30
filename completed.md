@@ -1,5 +1,9 @@
 ## Completed (Done)
 
+2023-04-30
+
+- [x] Modify Participants UI (emojis for roles, etc.)
+
 2023-04-05
 
 - [x] Reset timer from UI (i.e,. Cancel)
