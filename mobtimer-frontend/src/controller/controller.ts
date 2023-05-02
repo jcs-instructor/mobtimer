@@ -32,22 +32,19 @@ export class Controller {
 
   // inject duration minutes
   static setDurationMinutes = (_durationMinutes: number) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetDurationMinutes(
-    setDurationMinutesFunction: (durationMinutes: number) => void) {
+  static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
   // inject time string
   static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetSecondsRemainingString(
-    setSecondsRemainingStringFunction: (timeString: string) => void) {
+  static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void) {
     this.setSecondsRemainingString = setSecondsRemainingStringFunction;
   }
 
   // inject participants
   static setParticipants = (_participants: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetParticipants(
-    setParticipantsFunction: (participants: string[]) => void) {
+  static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
     this.setParticipants = setParticipantsFunction;
   }
 
