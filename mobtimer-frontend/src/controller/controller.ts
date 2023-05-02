@@ -4,7 +4,7 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
-  static updateSummary() {    
+  static updateSummary() {
     // todo: refactor / unhardcode emojis, etc.
     let participantsString = "🗣️" + Controller._participants.join(", ");
     if (Controller._participants.length > 1) {
@@ -12,10 +12,10 @@ export class Controller {
     }
     document.title = `${Controller.frontendMobTimer.secondsRemainingString} ${participantsString} - ${Controller.getAppTitle()}`;
   }
-  
+
   static frontendMobTimer: MobTimer;
   static client: MobSocketClient;
-  
+
   static initializeClientAndFrontendMobTimer(webSocket: IWebSocketWrapper, timerExpireFunc: () => void) {
     Controller.client = new MobSocketClient(webSocket);
     Controller.frontendMobTimer = new MobTimer("front-end-timer");
@@ -23,34 +23,31 @@ export class Controller {
       timerExpireFunc();
     };
   }
-  
+
   static getAppTitle() {
     return "Mob Timer";
   }
-  
+
   // injections -----------------------
-  
+
   // inject duration minutes
-  static setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static setDurationMinutes = (_durationMinutes: number) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetDurationMinutes(
-    setDurationMinutesFunction: (durationMinutes: number) => void
-  ) {
+    setDurationMinutesFunction: (durationMinutes: number) => void) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
   // inject time string
-  static setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetSecondsRemainingString(
-    setSecondsRemainingStringFunction: (timeString: string) => void
-  ) {
+    setSecondsRemainingStringFunction: (timeString: string) => void) {
     this.setSecondsRemainingString = setSecondsRemainingStringFunction;
   }
 
   // inject participants
-  static setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static setParticipants = (_participants: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetParticipants(
-    setParticipantsFunction: (participants: string[]) => void
-  ) {
+    setParticipantsFunction: (participants: string[]) => void) {
     this.setParticipants = setParticipantsFunction;
   }
 
