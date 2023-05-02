@@ -38,8 +38,11 @@ export class Controller {
 
   // inject time string
   static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void) {
-    this.setSecondsRemainingString = setSecondsRemainingStringFunction;
+  static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void): void {
+    this.setSecondsRemainingString = (timeString: string)  => {
+      setSecondsRemainingStringFunction(timeString);
+      Controller.updateSummary();
+    }
   }
 
   // inject participants
