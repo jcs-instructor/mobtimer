@@ -4,18 +4,19 @@ import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
-import { W3CWebSocketWrapper } from "./webSocketWrapper";
+import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-  private _socket: W3CWebSocketWrapper;
+  private _socket: IWebSocketWrapper;
 
-  constructor(webSocket: W3CWebSocketWrapper) {
+  constructor(webSocket: IWebSocketWrapper) {
     super(webSocket);
     this._socket = webSocket;
-    this._socket.onmessage = (message) => {
+    this._socket.onmessageReceived = (message) => {
+      console.log("message:::::::::::::::", message);
       this.trackMessage(message);
     };
   }
@@ -45,17 +46,17 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
-  static openSocketSync(url: string): MobSocketTestClient {
-    const socket = new W3CWebSocketWrapper(url);
-    const mobSocketTestClient = new MobSocketTestClient(socket);
+  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketTestClient {
+    const mobSocketTestClient = new MobSocketTestClient(webSocket);
     return mobSocketTestClient;
   }
 
-  static async openSocket(url: string): Promise<MobSocketTestClient> {
-    const socket = new W3CWebSocketWrapper(url);
-    const mobSocketTestClient = new MobSocketTestClient(socket);
+  static async openSocket(
+    webSocket: IWebSocketWrapper
+  ): Promise<MobSocketTestClient> {
+    const mobSocketTestClient = new MobSocketTestClient(webSocket);
     await mobSocketTestClient.waitForSocketState(
-      mobSocketTestClient.webSocket.OPEN
+      mobSocketTestClient.webSocket.OPEN_CODE
     );
     return mobSocketTestClient;
   }

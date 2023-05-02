@@ -5,17 +5,17 @@ type FormParameters = {
 
 const Participants = ({ participants }: FormParameters) => {
 
-    const roles = "Navigator,Driver";
-    const rolesArray = ["Navigator", "Driver"];
-    const defaultRole = "Team Member";
+    const rolesArray = ["🗣️ Navigator", "🛞 Driver"];
+    const defaultRole = "";
 
     return (
         <div style={{ display: "block" }}>
-            <label>Participants ({roles}): </label>
+            <label>Participants: </label>
             {participants.map((participant, i) =>
                 <div key={i} className="ParticipantRow">
                     <div className="CellBox ParticipantBorder">{participant}</div>
-                    <div className="CellBox">{rolesArray[i] || defaultRole}</div></div>)}
+                    <div className="CellBox">{rolesArray[i] || defaultRole}</div>
+                </div>)}
         </div>
     )
 }

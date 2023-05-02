@@ -19,7 +19,16 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
-      - [ ] NEXT: MobSocketClient & MobSocketTestClient: Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry)
+      - [x] Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry) 
+      - [x] Get unit test working with WS Web Socket Wrapper (already works for W3C wrapper) (check console log - already set up in .on in test client)     
+      - [x] Split files by class (e.g., 3 files for 2 wrappers + 1 interface)
+      - [ ] Use WS Web Socket Wrapper in extension
+      - [ ] Refactor / cleanup:
+            - [ ] where possible, don't use any types, e.g.:                  
+                  // in mobSocketTestClient.ts:
+                  private trackMessage(message: { data: string })
+                  // in App.tsx:
+                  client.webSocket.onmessage = (message: { data: string; })      
       - [ ] Decouple participants from MobTimer: 
             - [ ] Either:
                   - 1. Extract a superclass for MobTimer, called CountdownTimer, with a subclass called MobTimer that includes the Participants, or...

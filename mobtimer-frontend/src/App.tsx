@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { MobTimerResponses, TimeUtils } from 'mobtimer-api';
+import { MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 
-Controller.initializeFrontendMobTimer(playAudio);
+// todo: unhardcode port
+const url =
+  process.env.REACT_APP_WEBSOCKET_URL ||
+  `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
+console.log("process.env", process.env);
+console.log("url", url);
+
+Controller.initializeClientAndFrontendMobTimer(new W3CWebSocketWrapper(url), playAudio);
 const client = Controller.client;
 
 function playAudio() {
@@ -41,7 +48,7 @@ const App = () => {
 
     setLoaded(true);
 
-    client.webSocket.onmessage = (message: any) => {
+    client.webSocket.onmessageReceived = (message: any) => {
 
       // Get response from server
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
