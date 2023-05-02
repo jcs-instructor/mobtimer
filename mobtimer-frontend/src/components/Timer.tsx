@@ -13,7 +13,7 @@ const Timer = ({ timeString }: FormParameters) => {
     
     function onTick() {
         Controller.setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
-        Controller.updateSummary(frontendMobTimer.secondsRemainingString);
+        Controller.updateSummary();
     }
 
     useEffect(() => {

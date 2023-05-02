@@ -4,13 +4,13 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
-  static updateSummary(secondsRemainingString: string) {    
+  static updateSummary() {    
     // todo: refactor / unhardcode emojis, etc.
     let participantsString = "🗣️" + Controller._participants.join(", ");
     if (Controller._participants.length > 1) {
       participantsString = participantsString.replace(", ", ",🛞");
     }
-    document.title = `${secondsRemainingString} ${participantsString} - ${Controller.getAppTitle()}`;
+    document.title = `${Controller.frontendMobTimer.secondsRemainingString} ${participantsString} - ${Controller.getAppTitle()}`;
   }
   
   static frontendMobTimer: MobTimer;
