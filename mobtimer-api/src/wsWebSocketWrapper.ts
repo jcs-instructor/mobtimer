@@ -8,27 +8,27 @@ export class WSWebSocketWrapper implements IWebSocketWrapper {
     this._webSocket = new WebSocket(url);
   }
 
-  public get readyState(): number {
+  public get socketState(): number {
     return this._webSocket.readyState;
   }
 
-  public send(message: string): void {
+  public sendMessage(message: string): void {
     this._webSocket.send(message);
   }
 
-  public close(): void {
+  public closeSocket(): void {
     this._webSocket.close();
   }
 
-  public get OPEN(): number {
+  public get OPEN_CODE(): number {
     return this._webSocket.OPEN;
   }
 
-  public get CLOSED(): number {
+  public get CLOSED_CODE(): number {
     return this._webSocket.CLOSED;
   }
 
-  public set onmessage(handler: (message: any) => void) {
+  public set onmessageReceived(handler: (message: any) => void) {
     this._webSocket.on("message", (message) => {
       handler({ data: message });
     });

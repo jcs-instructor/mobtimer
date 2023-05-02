@@ -48,7 +48,7 @@ const App = () => {
 
     setLoaded(true);
 
-    client.webSocket.onmessage = (message: any) => {
+    client.webSocket.onmessageReceived = (message: any) => {
 
       // Get response from server
       const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;

@@ -218,7 +218,7 @@ describe("WebSocket Server", () => {
 
   test("Handle bad message and get good error message", async () => {
     const client = await openSocket(url);
-    await client.webSocket.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
     await cleanUp(client);
     expect(client.successfulResponses.length).toEqual(0);
     expect(client.errorReceived).toEqual(true);
@@ -226,7 +226,7 @@ describe("WebSocket Server", () => {
 
   test("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket(url);
-    await client.webSocket.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
     await client.joinMob(_mobName1);
     await cleanUp(client);
     expect(client.successfulResponses.length).toEqual(1); // join
