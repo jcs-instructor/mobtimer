@@ -10,7 +10,29 @@ export class Controller {
     if (Controller._participants.length > 1) {
       participantsString = participantsString.replace(", ", ",🛞");
     }
-    document.title = `${Controller.frontendMobTimer.secondsRemainingString} ${participantsString} - ${Controller.getAppTitle()}`;
+    document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
+  }
+
+  static get secondsRemainingStringWithoutLeadingZero() {
+    const secondsRemainingString = Controller.frontendMobTimer.secondsRemainingString;
+    return secondsRemainingString.startsWith("0") ? secondsRemainingString.substring(1) : secondsRemainingString;
+  }
+
+  static statusSymbolText() {
+    let symbol = "";
+    switch (Controller.frontendMobTimer.status) {
+      case Status.Running: 
+        symbol = "▶️";
+        break;      
+      case Status.Ready: 
+      case Status.Paused: 
+        symbol = "🟥";
+        break;      
+      // case Status.Ready: 
+      //   symbol = "⏰";
+      //   break;      
+    }
+    return symbol;
   }
 
   static frontendMobTimer: MobTimer;
@@ -39,7 +61,7 @@ export class Controller {
   // inject time string
   static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void): void {
-    this.setSecondsRemainingString = (timeString: string)  => {
+    this.setSecondsRemainingString = (timeString: string) => {
       setSecondsRemainingStringFunction(timeString);
       Controller.updateSummary();
     }
@@ -49,6 +71,7 @@ export class Controller {
   static setParticipants = (_participants: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
     this.setParticipants = setParticipantsFunction;
+    Controller.updateSummary();
   }
 
   // other functions -----------------------
@@ -121,3 +144,4 @@ export class Controller {
     }
   }
 }
+
