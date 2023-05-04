@@ -1,5 +1,10 @@
 ## Completed (Done)
 
+2023-05-03
+
+- [x] Display symbol in browser tab for whether timer is running or not, i.e., ▶️ if running and 🟥 if not (the latter being attention grabbing
+      to help people notice the timer isn't running, which is commonly missed)
+
 2023-04-30
 
 - [x] Modify Participants UI and browser tab text (document title) with emojis for roles, etc.
