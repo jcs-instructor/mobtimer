@@ -1,6 +1,6 @@
 {
   "name": "mobtimer-api",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Mobtimer api",
   "main": "dist/index.js",
   "files": [
