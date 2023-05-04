@@ -22,6 +22,12 @@ In VS Code, set your default terminal to Git Bash as follows (needed for "startA
   ./scripts/clean-all.sh
   ```
 
+- Install nodemon
+  ```
+  npm install -g nodemon
+  npm install -g ts-node
+  ```
+
 ## Start All Components
 
 To start all components (frontend server, backend server, and api build):
