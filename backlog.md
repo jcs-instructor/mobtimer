@@ -16,6 +16,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
+- [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
