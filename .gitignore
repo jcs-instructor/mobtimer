@@ -1,3 +1,4 @@
+settings.json
 .npmrc
 node_modules
 /yarn.lock

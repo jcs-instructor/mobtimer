@@ -4,23 +4,27 @@ import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
+import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-  private _socket: WebSocketType;
+  private _socket: IWebSocketWrapper;
 
-  constructor(webSocket: WebSocketType) {
+  constructor(webSocket: IWebSocketWrapper) {
     super(webSocket);
     this._socket = webSocket;
-    this._socket.onmessage = (message) => {
+    this._socket.onmessageReceived = (message) => {
+      console.log("message:::::::::::::::", message);
       this.trackMessage(message);
     };
   }
 
-  private trackMessage(message: { data: string }) {
-    const responseObject = this.convertToMobTimerResponse(message.data);
+  private trackMessage(message: any) {
+    const responseObject = this.convertToMobTimerResponse(
+      message.data as string
+    );
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -42,16 +46,18 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
-  static openSocketSync(url: string): MobSocketTestClient {
-    const socket = new W3CWebSocket(url);
-    const mobSocketTestClient = new MobSocketTestClient(socket);
+  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketTestClient {
+    const mobSocketTestClient = new MobSocketTestClient(webSocket);
     return mobSocketTestClient;
   }
 
-  static async openSocket(url: string): Promise<MobSocketTestClient> {
-    const socket = new W3CWebSocket(url);
-    const mobSocketTestClient = new MobSocketTestClient(socket);
-    await mobSocketTestClient.waitForSocketState(mobSocketTestClient.webSocket.OPEN);
+  static async openSocket(
+    webSocket: IWebSocketWrapper
+  ): Promise<MobSocketTestClient> {
+    const mobSocketTestClient = new MobSocketTestClient(webSocket);
+    await mobSocketTestClient.waitForSocketState(
+      mobSocketTestClient.webSocket.OPEN_CODE
+    );
     return mobSocketTestClient;
   }
 
@@ -59,7 +65,7 @@ class MobSocketTestClient extends MobSocketClient {
     await super.sendEchoRequest();
     await this.waitForEcho();
   }
-  
+
   async waitForEcho(): Promise<void> {
     const client = this;
     return new Promise(function (resolve) {

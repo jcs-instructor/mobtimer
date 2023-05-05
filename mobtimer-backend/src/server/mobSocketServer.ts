@@ -97,6 +97,10 @@ function _processRequest(
       mobTimer.pause();
       break;
     }
+    case Action.Reset: {
+      mobTimer.reset();
+      break;
+    }
   }
 
   return mobTimer;
@@ -110,8 +114,24 @@ function _processRequest(
 function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", function (webSocket: WebSocket) {
+  wss.on("connection", async function (webSocket: WebSocket) { // 2nd paramater for mrozbarry, request2: any
+    // const url = new URL(request2.url, `http://${request2.headers.host}`);
+    // let mobName = url.pathname.replace("/", "");
+    // if (mobName) {
+    //   _initialize(webSocket);
+    // }
+
     webSocket.on("message", function (request) {
+      // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
+      // SAMPLE CODE FROM MROZZBARRY
+      //    wss.on('connection', async (client, request) => {
+      // const url = new URL(request.url, `http://${request.headers.host}`);
+      // const timerId = url.pathname.replace('/', '');
+      // log('websocket.connect', timerId);
+      // client.on('close', () => {
+      //   log('websocket.disconnect', timerId);
+      // });
+
       let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequests.MobTimerRequest;
       try {
@@ -141,6 +161,17 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
   });
   return wss;
 }
+
+// function _initialize(webSocket: WebSocket) {
+//   webSocket.send(
+//     JSON.stringify({
+//       type: "settings:update",
+//       settings: { mobOrder: "Navigator,Driver", duration: 300000 },
+//     })
+//   );
+//   webSocket.send(JSON.stringify({ type: "mob:update", mob: [] }));
+//   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
+// }
 
 function _sendJSON(
   webSocket: WebSocket,

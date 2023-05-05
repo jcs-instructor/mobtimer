@@ -7,7 +7,8 @@ export type MobTimerRequest =
   | AddParticipantRequest
   | RotateParticipantsRequest
   | StartRequest
-  | PauseRequest;
+  | PauseRequest
+  | ResetRequest;
 
 export type EchoRequest = {
   action: Action.Echo;
@@ -39,4 +40,8 @@ export type StartRequest = {
 
 export type PauseRequest = {
   action: Action.Pause;
+};
+
+export type ResetRequest = {
+  action: Action.Reset;
 };

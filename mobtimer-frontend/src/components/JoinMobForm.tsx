@@ -15,7 +15,7 @@ const JoinMobForm = () => {
             <div className="JoinMobForm">
 
                 <form onSubmit={(event) => onSubmit(event)}>
-                    <label htmlFor="mobName" className="mobLabel">Mob Name</label>
+                    <label htmlFor="mobName" className="mobLabel">Mob Name:</label>
                     <input
                         value={mobNameUrlParam}
                         onChange={(e) => setMobNameUrlParam(e.target.value)}

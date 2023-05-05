@@ -5,7 +5,7 @@ import Duration from './Duration';
 import Participants from './Participants';
 import AddParticipant from './AddParticipant';
 import RotateParticipants from './RotateParticipants';
-
+import Reset from './Reset';
 
 type FormParameters = {
     durationMinutes: number;
@@ -36,6 +36,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 <form onSubmit={(e) => submitAction(e)}>
                     <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
                 </form>
+                <Reset />
                 <Participants participants={particpants} />
                 <RotateParticipants />
                 <hr />

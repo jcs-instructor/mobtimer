@@ -1,5 +1,21 @@
 ## Completed (Done)
 
+2023-05-03
+
+- [x] Display symbol in browser tab for whether timer is running or not, i.e., ▶️ if running and 🟥 if not (the latter being attention grabbing
+      to help people notice the timer isn't running, which is commonly missed)
+
+2023-04-30
+
+- [x] Modify Participants UI and browser tab text (document title) with emojis for roles, etc.
+  - Add participant names to browser tab text, so can see along with time remaining even when another tab is active. Entire mob is visible in tooltip (if hover),
+    even if it's a long list.
+  - Add emojis for Navigator and Driver
+
+2023-04-05
+
+- [x] Reset timer from UI (i.e,. Cancel)
+
 2023-03-30
 
 - [x] Delete unused files:

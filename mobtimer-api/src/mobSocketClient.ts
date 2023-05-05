@@ -2,27 +2,27 @@ import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { WebSocketType } from "./webSocketType";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketClient {
-  private _webSocket: WebSocketType;
+  private _webSocket: IWebSocketWrapper;
 
-  constructor(webSocket: WebSocketType) {
+  constructor(webSocket: IWebSocketWrapper) {
     this._webSocket = webSocket;
   }
 
-  static openSocketSync(url: string): MobSocketClient {
-    console.log("opening socket", url);
-    const socket = new W3CWebSocket(url);
-    const mobSocketClient = new MobSocketClient(socket);
+  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketClient {
+    const mobSocketClient = new MobSocketClient(webSocket);
     return mobSocketClient;
   }
 
-  static async openSocket(url: string): Promise<MobSocketClient> {
-    const socket = new W3CWebSocket(url);
-    const mobSocketClient = new MobSocketClient(socket);
+  static async openSocket(
+    webSocket: IWebSocketWrapper
+  ): Promise<MobSocketClient> {
+    const mobSocketClient = new MobSocketClient(webSocket);
     await MobSocketClient.waitForSocketState(
       mobSocketClient.webSocket,
-      mobSocketClient.webSocket.OPEN
+      mobSocketClient.webSocket.OPEN_CODE
     );
     return mobSocketClient;
   }
@@ -33,13 +33,13 @@ class MobSocketClient {
    * @param state The desired `readyState` for the socket
    */
   static waitForSocketState(
-    socket: { readyState: number },
+    socket: { socketState: number },
     state: number
   ): Promise<void> {
     const client = this;
     return new Promise(function (resolve) {
       const timeout = setTimeout(function () {
-        if (socket.readyState === state) {
+        if (socket.socketState === state) {
           resolve();
         } else {
           MobSocketClient.waitForSocketState(socket, state).then(resolve);
@@ -59,6 +59,7 @@ class MobSocketClient {
   }
 
   joinMob(mobName: string) {
+    console.log("sending join request", mobName);
     this._sendJSON({
       action: Action.Join,
       mobName,
@@ -95,17 +96,22 @@ class MobSocketClient {
     this._sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
   }
 
-  private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
-    this._webSocket.send(JSON.stringify(request));
+  reset() {
+    console.log("sending reset request");
+    this._sendJSON({ action: Action.Reset } as MobTimerRequests.ResetRequest);
   }
 
-  public get webSocket(): WebSocketType {
+  private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
+    this._webSocket.sendMessage(JSON.stringify(request));
+  }
+
+  public get webSocket(): any {
     return this._webSocket;
   }
 
   async closeSocket() {
-    this.webSocket.close();
-    await this.waitForSocketState(this.webSocket.CLOSED);
+    this.webSocket.closeSocket();
+    await this.waitForSocketState(this.webSocket.CLOSED_CODE);
   }
 }
 

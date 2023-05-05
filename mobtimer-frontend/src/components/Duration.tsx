@@ -1,6 +1,5 @@
 import React from 'react'
-import { client } from '../timers';
-import { Controller } from '../controller';
+import { Controller } from '../controller/controller';
 
 type FormParameters = {
     durationMinutes: number;
@@ -9,7 +8,7 @@ type FormParameters = {
 const Duration = ({ durationMinutes }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
-        client.update(durationMinutes);
+        Controller.client.update(durationMinutes);
     }
 
     return (

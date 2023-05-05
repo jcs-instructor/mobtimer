@@ -5,6 +5,7 @@ import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient } from "mobtimer-api";
+import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -23,6 +24,14 @@ describe("WebSocket Server", () => {
     // todo: Refactor to change return type for the startMobServer method to be a class with one exposed close method (so don't have to close both httpServer and wss separately from the consumer).
     await _server.wss.close();
     await _server.httpServer.close();
+  });
+
+  test("Create mob with alternative websocket", async () => {
+    const client = await openSocketAlternative(url);
+    await client.joinMob(_mobName1);
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
+    expect(client.lastSuccessfulAction).toEqual(Action.Join);
   });
 
   test("Create mob", async () => {
@@ -62,8 +71,6 @@ describe("WebSocket Server", () => {
     );
     expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
   });
-
-  // todo check other branch(es) for tests that might not have been copied into this branch (!)
 
   // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
   test("Modify one shared mob timer", async () => {
@@ -143,13 +150,14 @@ describe("WebSocket Server", () => {
     }
   );
 
-  test.skip("Reset (Cancel) timer", async () => {
+  test("Reset (Cancel) timer", async () => {
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
-    // await client.reset();
+    await TimeUtils.delaySeconds(0.2);
+    await client.reset();
     await cleanUp(client);
-    // todo: uncomment this: expect(client.lastSuccessfulAction).toEqual(Action.Reset);
+    expect(client.lastSuccessfulAction).toEqual(Action.Reset);
     expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
     expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
     // todo: expect participants don't rotate
@@ -210,7 +218,7 @@ describe("WebSocket Server", () => {
 
   test("Handle bad message and get good error message", async () => {
     const client = await openSocket(url);
-    await client.webSocket.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
     await cleanUp(client);
     expect(client.successfulResponses.length).toEqual(0);
     expect(client.errorReceived).toEqual(true);
@@ -218,7 +226,7 @@ describe("WebSocket Server", () => {
 
   test("Handle bad message and subsequent request succeeds", async () => {
     const client = await openSocket(url);
-    await client.webSocket.send("some-bad-garbage-not-a-real-request");
+    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
     await client.joinMob(_mobName1);
     await cleanUp(client);
     expect(client.successfulResponses.length).toEqual(1); // join
@@ -285,7 +293,11 @@ describe("WebSocket Server", () => {
 });
 
 async function openSocket(url: string) {
-  return await MobSocketTestClient.openSocket(url);
+  return await MobSocketTestClient.openSocket(new W3CWebSocketWrapper(url));
+}
+
+async function openSocketAlternative(url: string) {
+  return await MobSocketTestClient.openSocket(new WSWebSocketWrapper(url));
 }
 
 async function cleanUp(client: MobSocketTestClient) {

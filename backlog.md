@@ -15,17 +15,36 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Next
 
-- [ ] Update instructions on how to update icons
-- [ ] WIP: Reset timer from UI (i.e,. Cancel)
-  - [ ] WIP: See todo comments in test files - finished on 3/30/23 on "red" because need to implement resent in client and Action: - await client.reset(); - expect(client.lastSuccessfulAction).toEqual(Action.Reset);
-- [ ] Investigate all error in Problems tab (e.g., tsconfig.json has a "bonjour" problem)
-- [ ] Create VSCode extension (needed so we can use it ourselves) - see [vsocode-extension readme](./vscode-extension.md)
+- [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
+- [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
+- [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
+      https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
+- [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
+      - [x] Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry) 
+      - [x] Get unit test working with WS Web Socket Wrapper (already works for W3C wrapper) (check console log - already set up in .on in test client)     
+      - [x] Split files by class (e.g., 3 files for 2 wrappers + 1 interface)
+      - [ ] Use WS Web Socket Wrapper in extension
+      - [ ] Refactor / cleanup:
+            - [ ] where possible, don't use any types, e.g.:                  
+                  // in mobSocketTestClient.ts:
+                  private trackMessage(message: { data: string })
+                  // in App.tsx:
+                  client.webSocket.onmessage = (message: { data: string; })      
+      - [ ] Decouple participants from MobTimer: 
+            - [ ] Either:
+                  - 1. Extract a superclass for MobTimer, called CountdownTimer, with a subclass called MobTimer that includes the Participants, or...
+                  - 2. Rename MobTimer as CountdownTimer, and make Participants a separate class and just inject the rotate function into the  
+                       CountdownTimer's timerExpireFunc
+            - [ ] Use the decoupled CountdownTimer in the frontend, and rename frontendMobTimer as countdownTimer (since it never uses the
+                  front end timer's participants functionality; it just uses the client and backend response)
+      - [ ] IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! - move to new repo: mobtimer-controller 
 
+- [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
-- [ ] Review [Epics](./epics.md), and migrate into GitHub Issues?
 - [ ] Cleanup
   - [ ] Maybe: Delete unused branches (?)
+- [ ] Discuss Ethan's idea for new image
 
 ## Participant UI (reorder, edit, delete, drag/drop)
 
@@ -42,7 +61,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Notifications
 - [ ] Home page must be more different from mobti.me. Change text, images, and appearance so they aren't confusingly similar or an obvious knock-off of mobti.me
 - [ ] Images get in the way: (1) when screen narrows, (2) on mobile browser
-- [ ] Change home page link for "Learn more about mob programming" from Google search to something authoritative and unlikely to disappear or change unexpectedly for the worse over time (e.g., https://www.agilealliance.org/glossary/mob-programming/) (later: maybe change it to something of our own, such as a page on our mobtimer website)
+- [x] Change home page link for "Learn more about mob programming" from Google search to something authoritative and unlikely to disappear or change unexpectedly for the worse over time, e.g., https://www.agilealliance.org/glossary/mob-programming/
 
 ## Pitch for front page
 
@@ -64,12 +83,13 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
 - [ ] In UI listener, handle if response is not successful
 - [ ] Improve images in frontend
+- [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
 
 ## Investigate
 
     - [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
     in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
-    the play button says, "Start (temp hack)" - Not reproducible on Ethan's machine - On Joel's machine, it might be
+    the play button says, "Start (temp hack)" -  it might be
     fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
     first)
 
