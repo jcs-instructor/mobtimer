@@ -86,6 +86,13 @@ class MobSocketClient {
     } as MobTimerRequests.RotateParticipantsRequest);
   }
 
+  editParticipants(participants: string[]) {
+    this._sendJSON({
+      action: Action.EditParticipants,
+      participants: participants,
+    } as MobTimerRequests.EditParticipantsRequest);
+  }
+
   start() {
     console.log("sending start request");
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);

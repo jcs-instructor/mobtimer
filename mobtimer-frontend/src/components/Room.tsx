@@ -5,6 +5,7 @@ import Duration from './Duration';
 import Participants from './Participants';
 import AddParticipant from './AddParticipant';
 import RotateParticipants from './RotateParticipants';
+import EditParticipants from './EditParticipants';
 import Reset from './Reset';
 
 type FormParameters = {
@@ -38,6 +39,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 </form>
                 <Reset />
                 <Participants participants={particpants} />
+                <EditParticipants participants={particpants} />
                 <RotateParticipants />
                 <hr />
                 <Duration durationMinutes={durationMinutes} />
