@@ -1,11 +1,8 @@
 {
   "name": "mobtimer-api",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Mobtimer api",
   "main": "index.js",
-  "files": [
-    "dist"
-  ],
   "dependencies": {
     "@types/uuidv4": "^5.0.0",
     "@types/websocket": "^1.0.5",
