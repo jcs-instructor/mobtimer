@@ -21,6 +21,8 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
       - [ ] WIP: Edit Participants List (quick feature to allow changing of participants as a comma-delimited string; allows editing names, reordering, 
             deleting participants, etc.; not as good as drag-and-drop, etc., but good enough for now)
+            AS OF 5/4/23, everything is done in all layers except:
+            - [] See todo comment in EditParticipants.tsx
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
