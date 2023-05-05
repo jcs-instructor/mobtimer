@@ -2019,9 +2019,9 @@
   integrity sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
 
 "@types/node@*":
-  version "18.16.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.3.tgz#6bda7819aae6ea0b386ebc5b24bdf602f1b42b01"
-  integrity sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.0.0.tgz#081d9afd28421be956c1a47ced1c9a0034b467e2"
+  integrity sha512-cD2uPTDnQQCVpmRefonO98/PPijuOnnEy5oytWJFPY1N9aJCz2wJ5kSGWO+zJoed2cY2JxQh6yBuUq4vIn61hw==
 
 "@types/node@^16.11.49":
   version "16.18.25"
@@ -3871,9 +3871,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.383"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.383.tgz#61f44a9bb55957b1bb1236704ca53f7214f7a941"
-  integrity sha512-BQyvFauIMzCJqILViJNs0kIBEAlx1bYLS5CRLyJtlun1KAnZlhNSgyfyWifPWagQ5s8KYPY6BpNHZsEMkxZAQQ==
+  version "1.4.384"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.384.tgz#5c23b5579930dec9af2a93edafddbe991542eace"
+  integrity sha512-I97q0MmRAAqj53+a8vZsDkEXBZki+ehYAOPzwtQzALip52aEp2+BJqHFtTlsfjoqVZYwPpHC8wM6MbsSZQ/Eqw==
 
 email-addresses@^5.0.0:
   version "5.0.0"
@@ -6498,14 +6498,7 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-mobtimer-api@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.15.tgz#6113dc238bef54acee85de714164b6b4916c12b2"
-  integrity sha512-UB9mevgRHweTruPlkdUisjUPsWzq5E9Kpmt89mep9RWvpWtma/P7dM3nCMOM/eigbnWg4YuXcPyD7E2rNKC3yg==
-  dependencies:
-    "@types/websocket" "^1.0.5"
-
-mobtimer-api@^1.0.34:
+mobtimer-api@^1.0.15, mobtimer-api@^1.0.34:
   version "1.0.34"
   resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.34.tgz#7877889fa114679d0699028d0affa02b35813663"
   integrity sha512-GhoNBkkN/4BbsK1e3Fmu4zaYM+ICR7NnFajho6F2TFj3pqvZyyfcoGXHcs+roBNweOZcx1GbRzDCMiIMo3i+mw==
