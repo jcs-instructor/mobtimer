@@ -26,6 +26,13 @@
   dependencies:
     "@types/node" "*"
 
+mobtimer-api@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.15.tgz#6113dc238bef54acee85de714164b6b4916c12b2"
+  integrity sha512-UB9mevgRHweTruPlkdUisjUPsWzq5E9Kpmt89mep9RWvpWtma/P7dM3nCMOM/eigbnWg4YuXcPyD7E2rNKC3yg==
+  dependencies:
+    "@types/websocket" "^1.0.5"
+
 tsc@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/tsc/-/tsc-2.0.4.tgz#5f6499146abea5dca4420b451fa4f2f9345238f5"
