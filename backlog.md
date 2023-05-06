@@ -137,10 +137,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
       "stream": "^0.0.2",
       "tls": "^0.0.1",
       "url": "^0.11.0",
-- [ ] Use webSocketType instead of W3CWebSocket (decoupling)
-      export function waitForSocketState(
-      socket: W3CWebSocket,
-      socket: { readyState: number },
 - [ ] Think about names / whether to expose webSocket like this:
       await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
 - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in

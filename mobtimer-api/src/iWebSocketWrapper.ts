@@ -4,5 +4,5 @@ export interface IWebSocketWrapper {
   closeSocket: () => void;
   OPEN_CODE: number;
   CLOSED_CODE: number;
-  onmessageReceived: (message: any) => void;
+  onmessageReceived: (message: { data: any }) => void;
 }

@@ -1,7 +1,5 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { WebSocketType } from "./webSocketType";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
@@ -21,7 +19,7 @@ class MobSocketTestClient extends MobSocketClient {
     };
   }
 
-  private trackMessage(message: any) {
+  private trackMessage(message: { data: any }) {
     const responseObject = this.convertToMobTimerResponse(
       message.data as string
     );

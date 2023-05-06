@@ -28,7 +28,7 @@ export class WSWebSocketWrapper implements IWebSocketWrapper {
     return this._webSocket.CLOSED;
   }
 
-  public set onmessageReceived(handler: (message: any) => void) {
+  public set onmessageReceived(handler: (message: { data: any }) => void) {
     this._webSocket.on("message", (message) => {
       handler({ data: message });
     });
