@@ -112,7 +112,7 @@ class MobSocketClient {
     this._webSocket.sendMessage(JSON.stringify(request));
   }
 
-  public get webSocket(): any {
+  public get webSocket(): IWebSocketWrapper {
     return this._webSocket;
   }
 

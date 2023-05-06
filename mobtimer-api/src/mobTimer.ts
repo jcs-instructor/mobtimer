@@ -15,8 +15,6 @@ export class MobTimer {
   private _ready = true;
   private _participants: string[] = [];
 
-  sockets: any;
-
   constructor(mobName: string = "") {
     this._mobName = mobName;
   }
