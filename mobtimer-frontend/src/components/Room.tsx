@@ -38,14 +38,14 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 <form onSubmit={(e) => submitAction(e)}>
                     <button type="submit">{actionButtonLabel || "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}</button>
                 </form>
-                <Reset />
+                <Reset /> {/* Cancel button */}
+                <Duration durationMinutes={durationMinutes} />
+                <hr />
                 <Participants participants={particpants} />
-                {/* <EditParticipants participants={particpants} /> */}
                 <RotateParticipants />
                 <ShuffleParticipants />
-                <hr />
-                <Duration durationMinutes={durationMinutes} />
                 <AddParticipant />
+                <EditParticipants participants={particpants} />
             </div>
         </>
     )

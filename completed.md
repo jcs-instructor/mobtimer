@@ -2,7 +2,9 @@
 
 2023-05-06
 
-- [x] Randomize order
+- [x] Randomize participants order
+- [x] Edit participants order
+- [x] Add emojis to more UI buttons, and revise UI layout
 
 2023-05-05
 

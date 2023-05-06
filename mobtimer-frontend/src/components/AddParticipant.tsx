@@ -22,7 +22,7 @@ const AddParticipant = () => {
                 type="text"
                 placeholder="Enter a particpant name"
             />
-            <button type="submit">Add</button> {/* ➕ */}
+            <button type="submit">➕ Add</button> {/* ➕ */}
         </form>
     )
 }

@@ -11,7 +11,7 @@ const ShuffleParticipants = () => {
 
     return (
         <form onSubmit={(event) => onSubmit(event)}>
-            <button type="submit">Randomize</button> {/* 🔁 */}
+            <button type="submit">⭿ Randomize</button> {/* 🔁 */}
         </form>
     )
 }
