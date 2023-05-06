@@ -16,14 +16,22 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
-- [ ] Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
+- [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
       - [ ] WIP: Edit Participants List (quick feature to allow changing of participants as a comma-delimited string; allows editing names, reordering, 
             deleting participants, etc.; not as good as drag-and-drop, etc., but good enough for now)
             AS OF 5/4/23, everything is done in all layers except:
             - [] See todo comment in EditParticipants.tsx
-      - [ ] Clean up UI; e.g., spacing of buttons, etc.
+      - [ ] Clean up UI:
+            - Spacing of buttons
+            - More compact (to fit more on screen)?
+            - Landing page: 
+                  - Make look more different from morozbarry's
+                  - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
+                  - Maybe have simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
+                    Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
+                        - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
@@ -121,6 +129,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Refactor & Technical
 
+- [ ] Review GitHub issues in mrozbarry's MobTime to look for possible test cases for our mob timer (maybe they fixed some bugs/nuanced issues we don't even know we have)
 - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
 - [ ] correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
