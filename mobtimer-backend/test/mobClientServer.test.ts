@@ -291,6 +291,7 @@ describe("WebSocket Server", () => {
     ]);
   });
 
+  
   test("Edit participants", async () => {
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
@@ -300,6 +301,8 @@ describe("WebSocket Server", () => {
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants).toStrictEqual(["Chris", "Danielle"]);
   });
+
+  // todo: Add test for shuffling participants (i.e., randomizing). We alreay have a test for it in mobTimer.test.ts, but we should also test it here.
 
 });
 

@@ -83,6 +83,12 @@ class MobSocketClient {
       action: Action.RotateParticipants,
     } as MobTimerRequests.RotateParticipantsRequest);
   }
+  
+  shuffleParticipants() {
+    this._sendJSON({
+      action: Action.ShuffleParticipants,
+    } as MobTimerRequests.ShuffleParticipantsRequest);
+  }
 
   editParticipants(participants: string[]) {
     this._sendJSON({

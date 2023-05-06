@@ -23,6 +23,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
             deleting participants, etc.; not as good as drag-and-drop, etc., but good enough for now)
             AS OF 5/4/23, everything is done in all layers except:
             - [] See todo comment in EditParticipants.tsx
+      - [ ] Clean up UI; e.g., spacing of buttons, etc.
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
@@ -61,7 +62,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Other Must-Haves
 
-- [ ] Randomize order
 - [ ] Roles
 - [ ] Turn on/off sound
 - [ ] Notifications

@@ -1,5 +1,9 @@
 ## Completed (Done)
 
+2023-05-06
+
+- [x] Randomize order
+
 2023-05-05
 
 - [x] When frontend is available but backend is not, change play/pause button to say "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"

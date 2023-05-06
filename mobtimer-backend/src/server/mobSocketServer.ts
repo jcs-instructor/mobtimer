@@ -88,6 +88,10 @@ function _processRequest(
       mobTimer.rotateParticipants();
       break;
     }
+    case Action.ShuffleParticipants: {
+      mobTimer.shuffleParticipants();
+      break;
+    }
     case Action.EditParticipants: {
       const editParticipantsRequest = parsedRequest as MobTimerRequests.EditParticipantsRequest;
       mobTimer.editParticipants(editParticipantsRequest.participants);
