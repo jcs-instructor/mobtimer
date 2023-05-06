@@ -21,7 +21,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
       - [ ] NEXT: 
             - [ ] Bugs: 
-                  - [ ] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
+                  - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
                         - add
                         - rotate
                         - randommize
