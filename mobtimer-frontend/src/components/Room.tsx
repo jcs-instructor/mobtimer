@@ -35,7 +35,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 <p>TEAM: {mobNameUrlParam}</p>
                 <Timer timeString={timeString} />
                 <form onSubmit={(e) => submitAction(e)}>
-                    <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
+                    <button type="submit">{actionButtonLabel || "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}</button>
                 </form>
                 <Reset />
                 <Participants participants={particpants} />

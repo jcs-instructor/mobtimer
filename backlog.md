@@ -93,11 +93,12 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Investigate
 
-    - [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
-    in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
-    the play button says, "Start (temp hack)" -  it might be
-    fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
-    first)
+    - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
+      - Background: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
+        in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
+        the play button says, "Start (temp hack)" -  it might be
+        fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
+        first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")
 
 ## Enhancements
 
