@@ -1,7 +1,5 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
-import { WebSocketType } from "./webSocketType";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketClient {
@@ -85,6 +83,19 @@ class MobSocketClient {
       action: Action.RotateParticipants,
     } as MobTimerRequests.RotateParticipantsRequest);
   }
+  
+  shuffleParticipants() {
+    this._sendJSON({
+      action: Action.ShuffleParticipants,
+    } as MobTimerRequests.ShuffleParticipantsRequest);
+  }
+
+  editParticipants(participants: string[]) {
+    this._sendJSON({
+      action: Action.EditParticipants,
+      participants: participants,
+    } as MobTimerRequests.EditParticipantsRequest);
+  }
 
   start() {
     console.log("sending start request");
@@ -105,7 +116,7 @@ class MobSocketClient {
     this._webSocket.sendMessage(JSON.stringify(request));
   }
 
-  public get webSocket(): any {
+  public get webSocket(): IWebSocketWrapper {
     return this._webSocket;
   }
 

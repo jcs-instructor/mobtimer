@@ -5,7 +5,9 @@ import Duration from './Duration';
 import Participants from './Participants';
 import AddParticipant from './AddParticipant';
 import RotateParticipants from './RotateParticipants';
+import EditParticipants from './EditParticipants';
 import Reset from './Reset';
+import ShuffleParticipants from './ShuffleParticipants';
 
 type FormParameters = {
     durationMinutes: number;
@@ -34,11 +36,13 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 <p>TEAM: {mobNameUrlParam}</p>
                 <Timer timeString={timeString} />
                 <form onSubmit={(e) => submitAction(e)}>
-                    <button type="submit">{actionButtonLabel || "Start (temp hack)"}</button>
+                    <button type="submit">{actionButtonLabel || "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}</button>
                 </form>
                 <Reset />
                 <Participants participants={particpants} />
+                {/* <EditParticipants participants={particpants} /> */}
                 <RotateParticipants />
+                <ShuffleParticipants />
                 <hr />
                 <Duration durationMinutes={durationMinutes} />
                 <AddParticipant />

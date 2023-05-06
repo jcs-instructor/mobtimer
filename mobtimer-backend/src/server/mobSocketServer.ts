@@ -80,13 +80,21 @@ function _processRequest(
       break;
     }
     case Action.AddParticipant: {
-      const addParticipantRequest =
-        parsedRequest as MobTimerRequests.AddParticipantRequest;
+      const addParticipantRequest = parsedRequest as MobTimerRequests.AddParticipantRequest;
       mobTimer.addParticipant(addParticipantRequest.name);
       break;
     }
     case Action.RotateParticipants: {
       mobTimer.rotateParticipants();
+      break;
+    }
+    case Action.ShuffleParticipants: {
+      mobTimer.shuffleParticipants();
+      break;
+    }
+    case Action.EditParticipants: {
+      const editParticipantsRequest = parsedRequest as MobTimerRequests.EditParticipantsRequest;
+      mobTimer.editParticipants(editParticipantsRequest.participants);
       break;
     }
     case Action.Start: {

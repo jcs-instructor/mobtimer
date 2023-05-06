@@ -16,7 +16,14 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 - [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
-- [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
+- [ ] Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
+      - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
+      - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
+      - [ ] WIP: Edit Participants List (quick feature to allow changing of participants as a comma-delimited string; allows editing names, reordering, 
+            deleting participants, etc.; not as good as drag-and-drop, etc., but good enough for now)
+            AS OF 5/4/23, everything is done in all layers except:
+            - [] See todo comment in EditParticipants.tsx
+      - [ ] Clean up UI; e.g., spacing of buttons, etc.
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
@@ -55,7 +62,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Other Must-Haves
 
-- [ ] Randomize order
 - [ ] Roles
 - [ ] Turn on/off sound
 - [ ] Notifications
@@ -87,11 +93,12 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Investigate
 
-    - [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
-    in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
-    the play button says, "Start (temp hack)" -  it might be
-    fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
-    first)
+    - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
+      - Background: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
+        in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
+        the play button says, "Start (temp hack)" -  it might be
+        fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
+        first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")
 
 ## Enhancements
 
@@ -131,10 +138,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
       "stream": "^0.0.2",
       "tls": "^0.0.1",
       "url": "^0.11.0",
-- [ ] Use webSocketType instead of W3CWebSocket (decoupling)
-      export function waitForSocketState(
-      socket: W3CWebSocket,
-      socket: { readyState: number },
 - [ ] Think about names / whether to expose webSocket like this:
       await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
 - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in

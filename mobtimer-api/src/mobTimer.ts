@@ -13,9 +13,7 @@ export class MobTimer {
   private _timer: NodeJS.Timeout | undefined;
   private _timerExpireFunc = () => { };
   private _ready = true;
-  private readonly _participants: string[] = [];
-
-  sockets: any;
+  private _participants: string[] = [];
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
@@ -177,6 +175,10 @@ export class MobTimer {
     if (first) {
       this._participants.push(first);
     }
+  }
+
+  editParticipants(participants: string[]) {
+    this._participants = participants;
   }
 
   shuffleParticipants() {
