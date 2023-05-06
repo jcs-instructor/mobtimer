@@ -19,6 +19,17 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
+      - [ ] NEXT: 
+            - [ ] Bugs: 
+                  - [ ] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
+                        - add
+                        - rotate
+                        - randommize
+                        - update (i.e., trimmed values)
+                        - etc.
+                  - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining
+                  - [ ] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
+                        the people from the previous mob ("team1") in the UI for the new mob ("team2")
       - [ ] Clean up UI:
             - Spacing of buttons
             - More compact (to fit more on screen)?
