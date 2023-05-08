@@ -15,28 +15,30 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Next
 
-- [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
+New,to be prioritized and be aware of
+- [ ] Review backlog.md differences for awareness
 - [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-      - [ ] NEXT: 
-            - [ ] Bugs: 
-                  - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
-                        - add
-                        - rotate
-                        - randommize
-                        - update (i.e., trimmed values)
-                        - etc.
-                  - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining
-                  - [ ] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
-                        the people from the previous mob ("team1") in the UI for the new mob ("team2")
+      - [ ] Bugs: 
+            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
+                  - add
+                  - rotate
+                  - randommize
+                  - update (i.e., trimmed values)
+                  - etc.
+            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining
+            - [ ] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
+                  the people from the previous mob ("team1") in the UI for the new mob ("team2")
+      - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
       - [ ] Clean up UI:
             - Spacing of buttons
             - More compact (to fit more on screen)?
+            - Change Cancel to X and put it next to Start button
             - Landing page: 
                   - Make look more different from morozbarry's
                   - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
-                  - Maybe have simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
+                  - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
                     Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
                         - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
@@ -65,8 +67,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
 - [ ] Cleanup
-  - [ ] Maybe: Delete unused branches (?)
-- [ ] Discuss Ethan's idea for new image
+  - [ ] Delete unused branches (?)
 
 ## Participant UI (reorder, edit, delete, drag/drop)
 
@@ -98,7 +99,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if
       running); just store in nextDurationMinutes (or similar)
-- [ ] Handle illegal characters in mobName
+- [ ] Handle illegal characters in mobName - show error in red message under field
 - [ ] Trim mobName (and maybe url encode characters as needed)
 - [ ] Handle trim(mobName) is empty
 - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
@@ -116,18 +117,23 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
         first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")
 
 ## Enhancements
-
 - [ ] Alarm for breaks, stretch, etc
 - [ ] Set alarm duration / pausing
 - [ ] Raise hand/make comments
 - [ ] RPG
 - [ ] Lists (such as goals)
 
+NEW:
+- [ ] Info about Th morning group and potentially other groups
+  - [ ] List of mobbing groups
+- [ ] List of mob searchers, what looking for, and contact info
+- [ ] Link to channel in mobtimer Slack
+
+
 ## rethink mobtimer-api
 
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
-- [ ] refactor mobtimerclient to use socket injection
-- [ ] solve websocket error
+- [ ] solve websocket error - is this still an issue?
 - [ ] try other socket client packages (tried socket.io-client, had trouble setting url)
 - [ ] make more like other npmjs packages (no dist folder, figure out package.json)
 - [ ] change to d.ts, create type library
