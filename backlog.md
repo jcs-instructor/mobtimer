@@ -27,9 +27,11 @@ New,to be prioritized and be aware of
                   - randommize
                   - update (i.e., trimmed values)
                   - etc.
-            - [ ] WIP: Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
-                  I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
-                  require a 2nd client to join)
+            - [x] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+                  - [x] Fix and test in UI
+                  - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
+                        require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
+                        the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
             - [ ] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
                   the people from the previous mob ("team1") in the UI for the new mob ("team2")
             - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?

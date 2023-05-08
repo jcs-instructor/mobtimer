@@ -133,6 +133,7 @@ export class Controller {
           break;
         }
         case Status.Paused: {
+          // frontendMobtimer.start(); // To get into the paused state, the timer must have been running, so make sure to start before pause to be sure; otherwise a bug can occur.    
           frontendMobtimer.pause();
           break;
         }

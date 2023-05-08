@@ -65,6 +65,7 @@ export class MobTimer {
 
   pause() {
     this._running = false;
+    this._ready = false;
     if (this._timer) {
       clearTimeout(this._timer);
     }
