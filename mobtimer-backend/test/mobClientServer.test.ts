@@ -93,6 +93,35 @@ describe("WebSocket Server", () => {
     expect(client2.successfulResponses.length).toEqual(2); // join, update
   });
 
+  test.skip("Second client joins shared mob in paused state", async () => {
+    const mobNameForBothTeams = "super-team";
+
+    const client = await openSocket(url);
+    await client.joinMob(mobNameForBothTeams);
+    await client.update(1);
+    client.start();
+    const delaySeconds = 0.2
+    TimeUtils.delaySeconds(delaySeconds);
+    client.pause();
+
+    const client2 = await openSocket(url);
+    await client2.joinMob(mobNameForBothTeams);
+
+    await cleanUp(client);
+    await cleanUp(client2);
+
+    const numDigits = 1;
+    const expected = 60 - delaySeconds;
+    expect(client.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
+      expected,
+      numDigits
+    );
+    expect(client2.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
+      expected,
+      numDigits
+    );
+  });
+
   test("Start timer", async () => {
     const client = await openSocket(url);
     await client.joinMob(_mobName1);
