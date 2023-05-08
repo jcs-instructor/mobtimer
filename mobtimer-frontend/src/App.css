@@ -82,7 +82,6 @@
 .JoinMobForm label,
 input,
 button {
-
   margin: 1rem;
   font-size: large;
   padding: 0.5rem;
@@ -91,18 +90,18 @@ button {
 .RoomBox {
   margin: auto;
   width:fit-content;
-  margin-top: 8rem;
+  margin-top: 1rem; 
   border: 1px solid black;
-  padding: 2rem;
+  padding: 2rem;  
 }
 
-.RoomBox p, label {
+.RoomBox {
   font-size: x-large;
   font-weight: bold;
 }
 
 .Time {
   font-size: xxx-large;
-  font-weight: bolder;
-  margin: 1rem 0;
+  font-weight: normal;
+  margin: 0;
 }
