@@ -10,7 +10,7 @@ const RotateParticipants = () => {
 
     return (
         <form onSubmit={(event) => onSubmit(event)}>
-            <button type="submit">↑ Rotate</button>
+            <button type="submit">↑ Rotate</button> {/* ⬆️ */}
         </form>
     )
 }

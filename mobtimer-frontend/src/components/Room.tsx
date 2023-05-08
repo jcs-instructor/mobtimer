@@ -34,7 +34,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
         <>
             <div className="RoomBox">
                 
-                <p>TEAM: {mobNameUrlParam}</p>
+                <p className="Team">TEAM: {mobNameUrlParam}</p>
                 
                 <Timer timeString={timeString} />
                 
