@@ -6,6 +6,7 @@ export enum Action {
   RotateParticipants = "rotateParticipants",
   ShuffleParticipants = "shuffleParticipants",
   EditParticipants = "editParticipants",
+  EditRoles = "editRoles",
   Start = "start",
   Pause = "pause",
   Reset = "reset",

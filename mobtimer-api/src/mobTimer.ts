@@ -14,6 +14,7 @@ export class MobTimer {
   private _timerExpireFunc = () => { };
   private _ready = true;
   private _participants: string[] = [];
+  private _roles: string[] = ["🗣️ Navigator", "🛞 Driver"];
 
   constructor(mobName: string = "") {
     this._mobName = mobName;
@@ -80,6 +81,7 @@ export class MobTimer {
       status: this.status,
       durationMinutes: this.durationMinutes,
       participants: this._participants,
+      roles: this._roles,
       secondsRemaining: this.secondsRemaining,
     } as MobState;
   }
@@ -158,6 +160,10 @@ export class MobTimer {
     return this._participants;
   }
 
+  public get roles(): string[] {
+    return this._roles;
+  }
+
   public addParticipant(name: string) {
     const trimmedName = name.trim();
     if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
@@ -180,6 +186,10 @@ export class MobTimer {
 
   editParticipants(participants: string[]) {
     this._participants = participants;
+  }
+
+  editRoles(roles: string[]) {
+    this._roles = roles;
   }
 
   shuffleParticipants() {

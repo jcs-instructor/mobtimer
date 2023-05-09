@@ -81,6 +81,13 @@ class MobSocketClient {
     } as MobTimerRequests.EditParticipantsRequest);
   }
 
+  editRoles(roles: string[]) {
+    this._sendJSON({
+      action: Action.EditRoles,
+      roles: roles,
+    } as MobTimerRequests.EditRolesRequest);
+  }
+
   start() {
     console.log("sending start request");
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);

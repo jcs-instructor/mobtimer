@@ -97,6 +97,11 @@ function _processRequest(
       mobTimer.editParticipants(editParticipantsRequest.participants);
       break;
     }
+    case Action.EditRoles: {
+      const editRolesRequest = parsedRequest as MobTimerRequests.EditRolesRequest;
+      mobTimer.editRoles(editRolesRequest.roles);
+      break;
+    }
     case Action.Start: {
       mobTimer.start();
       break;

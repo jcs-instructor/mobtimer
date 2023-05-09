@@ -74,6 +74,13 @@ export class Controller {
     Controller.updateSummary();
   }
 
+  // inject roles
+  static setRoles = (_roles: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetRoles(setRolesFunction: (roles: string[]) => void) {
+    this.setRoles = setRolesFunction;
+    Controller.updateSummary();
+  }
+
   // other functions -----------------------
 
   static translateResponseData(response: MobTimerResponses.SuccessfulResponse) {
@@ -82,12 +89,15 @@ export class Controller {
     const durationMinutes = mobState.durationMinutes;
     const participants = mobState.participants;
     Controller._participants = participants;
+    const roles = mobState.roles;
+    Controller._roles = roles;
     const secondsRemaining = mobState.secondsRemaining;
-    return { mobStatus, durationMinutes, participants, secondsRemaining };
+    return { mobStatus, durationMinutes, participants, roles, secondsRemaining };
   }
 
   static _participants: string[] = [];
-
+  static _roles: string[] = [];
+  
   static getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
       case Status.Running: {

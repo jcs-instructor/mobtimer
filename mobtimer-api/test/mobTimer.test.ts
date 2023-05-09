@@ -313,6 +313,14 @@ test("Edit participants", async () => {
   expect(mobTimer.participants).toStrictEqual(["Chris", "Danielle"]);
 });
 
+test("Edit roles", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.editRoles(["Talker", "Typer"]);
+  expect(mobTimer.roles).toStrictEqual(["Talker", "Typer"]);
+  mobTimer.editRoles(["Driver", "Navigator"]);
+  expect(mobTimer.roles).toStrictEqual(["Driver", "Navigator"]);
+});
+
 test("Remove 1st participant", async () => {
   const mobTimer = new MobTimer();
   mobTimer.addParticipant("Alice");
