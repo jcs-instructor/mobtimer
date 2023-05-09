@@ -73,7 +73,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
                 
                 <hr />
 
-                <EditRoles rolesString={roles.join(",")} />
+                <EditRoles />
 
             </div>
         </>
