@@ -7,25 +7,26 @@ type FormParameters = {
 
 const EditRoles = ({ rolesString }: FormParameters) => {
 
-    // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault();
-    //     Controller.client.editRoles(rolesString.split(",").map((name) => name.trim()));
-    // }
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        Controller.client.editRoles(rolesString.split(",").map((name) => name.trim()));
+    }
 
     return (
-        // <form onSubmit={(event) => onSubmit(event)}>
-        <form>
+        <form onSubmit={(event) => onSubmit(event)}>
+        {/* <form> */}
             <label>Edit Roles: </label>
             <input
                 // value={roles.join(",")}                                
                 value={rolesString}
                 //onChange={(e) => Controller.setRoles((e.target.value as string).split(",").map((name) => name.trim()))}
-                onChange={(e) => Controller.client.editRoles((e.target.value as string).split(",").map((name) => name.trim()))}                                
+                // onChange={(e) => Controller.client.editRoles((e.target.value as string).split(",").map((name) => name.trim()))}                                
                 //onChange={(e) => setRolesString(e.target.value as string)}
+                onFocus={(e) => e.target.value = Controller._roles.join(",")}                                
                 type="text"
-                placeholder="Enter roles"
+                placeholder="Enter/Edit Roles"
             />
-            {/* <button type="submit">👥 Update</button> */}
+            <button type="submit">Update</button>
         </form>
     )
 }
