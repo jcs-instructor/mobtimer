@@ -6,7 +6,6 @@ type FormParameters = {
     timeString: string;
 }
 
-
 const Timer = ({ timeString }: FormParameters) => {
     
     const frontendMobTimer = Controller.frontendMobTimer;
@@ -36,7 +35,7 @@ const Timer = ({ timeString }: FormParameters) => {
     }, [timeString]);
 
     return (
-        <p className='Time'>{timeString}</p>
+        <p className='Time'>{timeString}</p>        
     );
 
 }

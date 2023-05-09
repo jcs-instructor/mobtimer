@@ -27,20 +27,37 @@ New,to be prioritized and be aware of
                   - randommize
                   - update (i.e., trimmed values)
                   - etc.
-            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining
+            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+                  - [x] Fix and test in UI
+                  - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
+                        require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
+                        the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
             - [ ] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
                   the people from the previous mob ("team1") in the UI for the new mob ("team2")
+            - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
+                  - Background:
+                        Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
+                        in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
+                        the play button says, "Start (temp hack)" -  it might be fixed by adding sleep for 2 seconds in the frontend start 
+                        watch (to make sure other components are compiled first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" 
+                        to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")              
       - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
       - [ ] Clean up UI:
-            - Spacing of buttons
-            - More compact (to fit more on screen)?
-            - Change Cancel to X and put it next to Start button
-            - Landing page: 
+            - [x] Make time remaining text bigger
+            - [x] Spacing of buttons, e.g., show vertically stacked buttons horizontally instead (e.g., Start & Cancel on one line; Rotate & Randomize on one line)
+            - [ ] More compact (to fit more on screen at 100% zoom)
+            - [ ] Maybe: Change Cancel to X and put it next to Start button
+            - [ ] Landing page: 
                   - Make look more different from morozbarry's
                   - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
                   - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
                     Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
                         - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
+- [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
+      - [ ] Add README.md to mobtimer-api
+      - [ ] Add Joel to permission to publish mobtimer-api to npmjs.com
+      - [ ] CI/CD 
+      - [ ] cleanup console.log stms
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
@@ -106,15 +123,6 @@ New,to be prioritized and be aware of
 - [ ] In UI listener, handle if response is not successful
 - [ ] Improve images in frontend
 - [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
-
-## Investigate
-
-    - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
-      - Background: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
-        in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
-        the play button says, "Start (temp hack)" -  it might be
-        fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
-        first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")
 
 ## Enhancements
 - [ ] Alarm for breaks, stretch, etc

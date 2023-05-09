@@ -33,17 +33,39 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
     return (
         <>
             <div className="RoomBox">
-                <p>TEAM: {mobNameUrlParam}</p>
+                
+                <p className="Team">TEAM: {mobNameUrlParam}</p>
+                
                 <Timer timeString={timeString} />
-                <form onSubmit={(e) => submitAction(e)}>
-                    <button type="submit">{actionButtonLabel || "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}</button>
-                </form>
-                <Reset /> {/* Cancel button */}
+                
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form onSubmit={(e) => submitAction(e)}>
+                                    <button type="submit">{actionButtonLabel || "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}</button>
+                                </form>
+                            </td>
+                            <td><Reset /> {/* Cancel button */}</td>
+                        </tr>
+                    </tbody>
+                </table>                
+                
                 <Duration durationMinutes={durationMinutes} />
+                
                 <hr />
+                
                 <Participants participants={particpants} />
-                <RotateParticipants />
-                <ShuffleParticipants />
+                
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><RotateParticipants /></td>
+                            <td><ShuffleParticipants /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
                 <AddParticipant />
                 <EditParticipants participants={particpants} />
             </div>
