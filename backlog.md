@@ -26,6 +26,8 @@ New,to be prioritized and be aware of
       - [ ] Bugs: 
             - [ ] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
                   the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
+                  - [x] EditParticipants
+                  - [ ] EditRoles
             - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
                   - add
                   - rotate
@@ -51,6 +53,7 @@ New,to be prioritized and be aware of
             - [x] Make time remaining text bigger
             - [x] Spacing of buttons, e.g., show vertically stacked buttons horizontally instead (e.g., Start & Cancel on one line; Rotate & Randomize on one line)
             - [ ] More compact (to fit more on screen at 100% zoom)
+            - [ ] Change browser tab title text for landing page
             - [ ] Maybe: Change Cancel to X and put it next to Start button
             - [ ] Landing page: 
                   - Make look more different from morozbarry's

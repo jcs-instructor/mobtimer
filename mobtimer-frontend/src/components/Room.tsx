@@ -69,7 +69,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
                 </table>
                 
                 <AddParticipant />
-                <EditParticipants participants={participants} />
+                <EditParticipants participantsString={participants.join(",")} />
                 
                 <hr />
 

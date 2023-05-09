@@ -2,14 +2,14 @@ import React from 'react';
 import { Controller } from '../controller/controller';
 
 type FormParameters = {
-    participants: string[];
+    participantsString: string;
 }
 
-const EditParticipants = ({ participants }: FormParameters) => {
+const EditParticipants = ({ participantsString }: FormParameters) => {
 
     // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     //     event.preventDefault();
-    //     Controller.client.editParticipants(participants);
+    //     Controller.client.editParticipants(participantsString.split(",").map((name) => name.trim()));
     // }
 
     return (
@@ -17,9 +17,11 @@ const EditParticipants = ({ participants }: FormParameters) => {
         <form>
             <label>Edit Participants: </label>
             <input
-                value={participants.join(",")}                
+                // value={participants.join(",")}                                
+                value={participantsString}
                 //onChange={(e) => Controller.setParticipants((e.target.value as string).split(",").map((name) => name.trim()))}
-                onChange={(e) => Controller.client.editParticipants((e.target.value as string).split(",").map((name) => name.trim()))}
+                onChange={(e) => Controller.client.editParticipants((e.target.value as string).split(",").map((name) => name.trim()))}                                
+                //onChange={(e) => setParticipantsString(e.target.value as string)}
                 type="text"
                 placeholder="Enter particpants names"
             />
