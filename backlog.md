@@ -24,6 +24,8 @@ New,to be prioritized and be aware of
             - [x] Implement generally
             - [ ] Unhardcode emojis from browser tab title text
       - [ ] Bugs: 
+            - [ ] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
+                  the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
             - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
                   - add
                   - rotate
