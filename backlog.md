@@ -21,7 +21,7 @@ New,to be prioritized and be aware of
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
       - [ ] WIP: Edit roles (navigator, driver)
-            - [x] Implement generally
+            - [ ] Implement generally
             - [ ] Unhardcode emojis from browser tab title text: refactor roles to be a class with a name and emoji
       - [ ] Bugs: 
             - [ ] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 

@@ -23,7 +23,7 @@ const EditParticipants = ({ participantsString }: FormParameters) => {
                 onChange={(e) => Controller.client.editParticipants((e.target.value as string).split(",").map((name) => name.trim()))}                                
                 //onChange={(e) => setParticipantsString(e.target.value as string)}
                 type="text"
-                placeholder="Enter particpants names"
+                placeholder="Enter participants' names"
             />
             {/* <button type="submit">👥 Update</button> */}
         </form>
