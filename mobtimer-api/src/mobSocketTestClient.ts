@@ -44,12 +44,7 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
-  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketTestClient {
-    const mobSocketTestClient = new MobSocketTestClient(webSocket);
-    return mobSocketTestClient;
-  }
-
-  static async openSocket(
+  static async waitForOpenSocket(
     webSocket: IWebSocketWrapper
   ): Promise<MobSocketTestClient> {
     const mobSocketTestClient = new MobSocketTestClient(webSocket);

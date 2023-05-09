@@ -4,7 +4,7 @@ import { Status, TimeUtils, Action } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { MobSocketTestClient } from "mobtimer-api";
+import { MobSocketTestClient, MobSocketClient } from "mobtimer-api";
 import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
 
 describe("WebSocket Server", () => {
@@ -35,7 +35,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Create mob", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await cleanUp(client);
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
@@ -43,10 +43,10 @@ describe("WebSocket Server", () => {
   });
 
   test("Create 2 mobs", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
 
-    const client2 = await openSocket(url);
+    const client2 = await openMobSocket(url);
     await client2.joinMob(_mobName2);
 
     await cleanUp(client);
@@ -57,10 +57,10 @@ describe("WebSocket Server", () => {
   });
 
   test("Modify one of two mob timers", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
 
-    const client2 = await openSocket(url);
+    const client2 = await openMobSocket(url);
     await client2.joinMob(_mobName2);
     await client2.update(17);
     await cleanUp(client);
@@ -76,10 +76,10 @@ describe("WebSocket Server", () => {
   test("Modify one shared mob timer", async () => {
     const mobNameForBothTeams = "super-team";
 
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(mobNameForBothTeams);
 
-    const client2 = await openSocket(url);
+    const client2 = await openMobSocket(url);
     await client2.joinMob(mobNameForBothTeams);
     await client2.update(17);
 
@@ -94,7 +94,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Start timer", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
     await cleanUp(client);
@@ -103,7 +103,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Pause timer", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
     await client.pause();
@@ -113,7 +113,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Resume timer", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
     await client.pause();
@@ -124,7 +124,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Update timer", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
     await client.update(40);
@@ -137,7 +137,7 @@ describe("WebSocket Server", () => {
   test.each([0.2])(
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
-      const client = await openSocket(url);
+      const client = await openMobSocket(url);
       await client.joinMob(_mobName1);
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       await client.start();
@@ -151,7 +151,7 @@ describe("WebSocket Server", () => {
   );
 
   test("Reset (Cancel) timer", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
     await TimeUtils.delaySeconds(0.2);
@@ -165,7 +165,7 @@ describe("WebSocket Server", () => {
 
   test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
     const durationSeconds = 1;
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
@@ -183,7 +183,7 @@ describe("WebSocket Server", () => {
 
   test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
     const durationSeconds = 1;
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
@@ -200,7 +200,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Check got expected number of messages", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.update(TimeUtils.secondsToMinutes(0.2));
     await client.start();
@@ -211,13 +211,13 @@ describe("WebSocket Server", () => {
   });
 
   test("Echo request and response", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await cleanUp(client);
     expect(client.echoReceived).toEqual(true);
   });
 
   test("Handle bad message and get good error message", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
     await cleanUp(client);
     expect(client.successfulResponses.length).toEqual(0);
@@ -225,7 +225,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Handle bad message and subsequent request succeeds", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
     await client.joinMob(_mobName1);
     await cleanUp(client);
@@ -234,14 +234,14 @@ describe("WebSocket Server", () => {
   });
 
   test("New mob timer has no participants", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
   test("Add 1st participant", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     client.addParticipant("Bob");
     await cleanUp(client);
@@ -250,7 +250,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Add 2nd participant", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     client.addParticipant("Alice");
     client.addParticipant("Bob");
@@ -263,7 +263,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Don't add blank participant", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     client.addParticipant("");
     await cleanUp(client);
@@ -271,7 +271,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Don't add participant with spaces only", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     client.addParticipant("   ");
     await cleanUp(client);
@@ -279,7 +279,7 @@ describe("WebSocket Server", () => {
   });
 
   test("Rotate participants", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     client.addParticipant("Alice");
     client.addParticipant("Bob");
@@ -291,27 +291,32 @@ describe("WebSocket Server", () => {
     ]);
   });
 
-  
   test("Edit participants", async () => {
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     client.addParticipant("Alice");
     client.addParticipant("Bob");
     client.editParticipants(["Chris", "Danielle"]);
     await cleanUp(client);
-    expect(client.lastSuccessfulMobState.participants).toStrictEqual(["Chris", "Danielle"]);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual([
+      "Chris",
+      "Danielle",
+    ]);
   });
 
   // todo: Add test for shuffling participants (i.e., randomizing). We alreay have a test for it in mobTimer.test.ts, but we should also test it here.
-
 });
 
-async function openSocket(url: string) {
-  return await MobSocketTestClient.openSocket(new W3CWebSocketWrapper(url));
+async function openMobSocket(url: string) {
+  return await MobSocketTestClient.waitForOpenSocket(
+    new W3CWebSocketWrapper(url)
+  );
 }
 
 async function openSocketAlternative(url: string) {
-  return await MobSocketTestClient.openSocket(new WSWebSocketWrapper(url));
+  return await MobSocketTestClient.waitForOpenSocket(
+    new WSWebSocketWrapper(url)
+  );
 }
 
 async function cleanUp(client: MobSocketTestClient) {

@@ -9,22 +9,6 @@ class MobSocketClient {
     this._webSocket = webSocket;
   }
 
-  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketClient {
-    const mobSocketClient = new MobSocketClient(webSocket);
-    return mobSocketClient;
-  }
-
-  static async openSocket(
-    webSocket: IWebSocketWrapper
-  ): Promise<MobSocketClient> {
-    const mobSocketClient = new MobSocketClient(webSocket);
-    await MobSocketClient.waitForSocketState(
-      mobSocketClient.webSocket,
-      mobSocketClient.webSocket.OPEN_CODE
-    );
-    return mobSocketClient;
-  }
-
   /**
    * Forces a process to wait until the socket's `readyState` becomes the specified value.
    * @param socket The socket whose `readyState` is being watched
@@ -83,7 +67,7 @@ class MobSocketClient {
       action: Action.RotateParticipants,
     } as MobTimerRequests.RotateParticipantsRequest);
   }
-  
+
   shuffleParticipants() {
     this._sendJSON({
       action: Action.ShuffleParticipants,
