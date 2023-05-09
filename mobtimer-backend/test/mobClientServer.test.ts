@@ -96,15 +96,15 @@ describe("WebSocket Server", () => {
   test.skip("Second client joins shared mob in paused state", async () => {
     const mobNameForBothTeams = "super-team";
 
-    const client = await openSocket(url);
+    const client = await openMobSocket(url);
     await client.joinMob(mobNameForBothTeams);
     await client.update(1);
     client.start();
-    const delaySeconds = 0.2
+    const delaySeconds = 0.2;
     TimeUtils.delaySeconds(delaySeconds);
     client.pause();
 
-    const client2 = await openSocket(url);
+    const client2 = await openMobSocket(url);
     await client2.joinMob(mobNameForBothTeams);
 
     await cleanUp(client);
