@@ -21,13 +21,16 @@ New,to be prioritized and be aware of
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
       - [ ] WIP: Edit roles (navigator, driver)
-            - [ ] Implement generally
+            - [x] Implement generally
             - [ ] Unhardcode emojis from browser tab title text: refactor roles to be a class with a name and emoji
+      - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
+            - [ ] Edit Participants
+            - [ ] Edit Roles
       - [ ] Bugs: 
-            - [ ] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
+            - [x] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
                   the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
                   - [x] EditParticipants
-                  - [ ] EditRoles
+                  - [x] EditRoles
             - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
                   - add
                   - rotate
