@@ -20,9 +20,9 @@ const Timer = ({ timeString }: FormParameters) => {
         const fractionalSeconds = frontendMobTimer.secondsRemaining % 1;
         const millisecondsUntilNextWholeSecond = TimeUtils.secondsToMilliseconds(fractionalSeconds);
         let millisecondsBetweenTicks =
-            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond < 1000) ?
+            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond <= 1000) ?
                 millisecondsUntilNextWholeSecond :
-                1000;
+                200;
 
         //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
 

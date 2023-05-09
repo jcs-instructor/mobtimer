@@ -27,6 +27,7 @@ New,to be prioritized and be aware of
             - [ ] Edit Participants
             - [ ] Edit Roles
       - [ ] Bugs: 
+            - [x] UI: Fix bug where not every countdown second appears (was reproducible if duration was set to 0.08888 min. or so)
             - [x] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
                   the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
                   - [x] EditParticipants
