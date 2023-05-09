@@ -5,10 +5,12 @@ import { MobTimer } from "mobtimer-api";
 
 export class Controller {
   static updateSummary() {
-    // todo: refactor / unhardcode emojis, etc.
-    let participantsString = "🗣️" + Controller._participants.join(", ");
-    if (Controller._participants.length > 1) {
-      participantsString = participantsString.replace(", ", ",🛞");
+    // Unhardcode emojis from browser tab title text: refactor roles to be a class with a name and emoji
+    const firstRolePrefix = '🗣️'; // = Controller._roles.length > 0 ? Controller._roles[0].symbol : 0;
+    const secondRolePrefix = "🛞"; // = Controller._roles.length > 1 ? Controller._roles[1].symbol : 0;
+    let participantsString = firstRolePrefix + Controller._participants.join(", ");
+    if (Controller._participants.length > 1) {      
+      participantsString = participantsString.replace(", ", "," + secondRolePrefix);
     }
     document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
   }
@@ -74,6 +76,13 @@ export class Controller {
     Controller.updateSummary();
   }
 
+  // inject roles
+  static setRoles = (_roles: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetRoles(setRolesFunction: (roles: string[]) => void) {
+    this.setRoles = setRolesFunction;
+    Controller.updateSummary();
+  }
+
   // other functions -----------------------
 
   static translateResponseData(response: MobTimerResponses.SuccessfulResponse) {
@@ -82,12 +91,15 @@ export class Controller {
     const durationMinutes = mobState.durationMinutes;
     const participants = mobState.participants;
     Controller._participants = participants;
+    const roles = mobState.roles;
+    Controller._roles = roles;
     const secondsRemaining = mobState.secondsRemaining;
-    return { mobStatus, durationMinutes, participants, secondsRemaining };
+    return { mobStatus, durationMinutes, participants, roles, secondsRemaining };
   }
 
   static _participants: string[] = [];
-
+  static _roles: string[] = [];
+  
   static getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
       case Status.Running: {

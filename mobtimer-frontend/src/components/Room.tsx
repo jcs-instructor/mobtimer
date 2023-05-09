@@ -6,12 +6,14 @@ import Participants from './Participants';
 import AddParticipant from './AddParticipant';
 import RotateParticipants from './RotateParticipants';
 import EditParticipants from './EditParticipants';
+import EditRoles from './EditRoles';
 import Reset from './Reset';
 import ShuffleParticipants from './ShuffleParticipants';
 
 type FormParameters = {
     durationMinutes: number;
-    particpants: string[];
+    participants: string[];
+    roles: string[];
     actionButtonLabel: string;
     setMobName: (mobName: string) => void;
     timeString: string;
@@ -19,7 +21,7 @@ type FormParameters = {
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {
+const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();
     useEffect(
@@ -55,7 +57,7 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 
                 <hr />
                 
-                <Participants participants={particpants} />
+                <Participants participants={participants} roles={roles} />
                 
                 <table>
                     <tbody>
@@ -67,7 +69,12 @@ const Room = ({ durationMinutes, particpants, actionButtonLabel, setMobName, tim
                 </table>
                 
                 <AddParticipant />
-                <EditParticipants participants={particpants} />
+                <EditParticipants participants={participants} />
+                
+                <hr />
+
+                <EditRoles roles={roles} />
+
             </div>
         </>
     )

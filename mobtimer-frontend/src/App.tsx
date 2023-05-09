@@ -33,10 +33,12 @@ const App = () => {
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [participants, setParticipants] = useState([] as string[]);
+  const [roles, setRoles] = useState([] as string[]);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
   Controller.injectSetParticipants(setParticipants);
+  Controller.injectSetRoles(setRoles);
   Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
 
   // Submit join mob request
@@ -63,7 +65,7 @@ const App = () => {
       );
 
       // Read response data 
-      const { mobStatus, durationMinutes, participants, secondsRemaining } = Controller.translateResponseData(response);
+      const { mobStatus, durationMinutes, participants, roles, secondsRemaining } = Controller.translateResponseData(response);
 
       // Derive mob label from response status
       const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
@@ -75,6 +77,7 @@ const App = () => {
       // update React state variables
       setDurationMinutes(durationMinutes);
       setParticipants(participants);
+      setRoles(roles);
       setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
       setActionButtonLabel(label);
 
@@ -106,7 +109,8 @@ const App = () => {
       <Route path="/:mobNameUrlParam"
         element={<Room
           durationMinutes={durationMinutes}
-          particpants={participants}
+          participants={participants}
+          roles={roles}
           actionButtonLabel={actionButtonLabel}
           setMobName={setMobName}
           timeString={secondsRemainingString}

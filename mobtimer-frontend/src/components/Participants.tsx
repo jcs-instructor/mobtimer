@@ -1,11 +1,11 @@
 import "../App.css"
 type FormParameters = {
     participants: string[];
+    roles: string[];
 }
 
-const Participants = ({ participants }: FormParameters) => {
+const Participants = ({ participants, roles }: FormParameters) => {
 
-    const rolesArray = ["🗣️ Navigator", "🛞 Driver"];
     const defaultRole = "";
 
     return (
@@ -14,7 +14,7 @@ const Participants = ({ participants }: FormParameters) => {
             {participants.map((participant, i) =>
                 <div key={i} className="ParticipantRow">
                     <div className="CellBox ParticipantBorder">{participant}</div>
-                    <div className="CellBox">{rolesArray[i] || defaultRole}</div>
+                    <div className="CellBox">{roles[i] || defaultRole}</div>
                 </div>)}
         </div>
     )
