@@ -5,10 +5,12 @@ import { MobTimer } from "mobtimer-api";
 
 export class Controller {
   static updateSummary() {
-    // todo: refactor / unhardcode emojis, etc.
-    let participantsString = "🗣️" + Controller._participants.join(", ");
-    if (Controller._participants.length > 1) {
-      participantsString = participantsString.replace(", ", ",🛞");
+    // Unhardcode emojis from browser tab title text: refactor roles to be a class with a name and emoji
+    const firstRolePrefix = '🗣️'; // = Controller._roles.length > 0 ? Controller._roles[0].symbol : 0;
+    const secondRolePrefix = "🛞"; // = Controller._roles.length > 1 ? Controller._roles[1].symbol : 0;
+    let participantsString = firstRolePrefix + Controller._participants.join(", ");
+    if (Controller._participants.length > 1) {      
+      participantsString = participantsString.replace(", ", "," + secondRolePrefix);
     }
     document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
   }
