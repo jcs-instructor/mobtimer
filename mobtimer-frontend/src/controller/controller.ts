@@ -4,30 +4,44 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
+
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
-    const firstRolePrefix = Controller._roles.length > 0 ? this.extractFirstEmoji(Controller._roles[0]) : 0;
-    const secondRolePrefix = Controller._roles.length > 0 ? this.extractFirstEmoji(Controller._roles[1]) : 0;
-    let participantsString = firstRolePrefix + Controller._participants.join(", ");
-    if (Controller._participants.length > 1) {
-      participantsString = participantsString.replace(", ", "," + secondRolePrefix);
-    }
+    let participantsString = Controller.createListOfParticipantsWithRoleEmojisPrepended();
     document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
   }
 
-  //Usage: console.log(extractFirstEmoji("🗣️Abc")); // Output: "🗣️"
-  static extractFirstEmoji(str: string): string | null {
-    // Unicode regex for matching emojis using Extended_Pictographic property
-    const emojiRegex = /\p{Extended_Pictographic}/u;
+  private static createListOfParticipantsWithRoleEmojisPrepended(): string {
+    const participantsCount = Controller._participants.length;
+    const rolesCount = Controller._roles.length;
+    const minCount = Math.min(participantsCount, rolesCount);
 
-    // Find the first match
-    const match = str.match(emojiRegex);
-
-    // Return the first emoji if found, otherwise return null
-    return match ? match[0] : "";
+    let participants = [];
+    if (minCount > 0) {
+      // build up a participant string with the role emoji prefix
+      for (let i = 0; i < minCount; i++) {
+        const rolePrefix = this.extractFirstEmoji(Controller._roles[i]);
+        const participant = Controller._participants[i];
+        const combo = `${rolePrefix}${participant}`;
+        participants.push(combo);
+      }
+      // if there are more participants than roles, add the remaining participants without a role prefix
+      if (participantsCount > rolesCount) {
+        for (let i = rolesCount; i < participantsCount; i++) {
+          const participant = Controller._participants[i];
+          participants.push(participant);
+        }
+      }
+    }
+    return participants.join(",");
   }
 
-
+  static extractFirstEmoji(str: string): string {
+    // Regex is copied from: https://unicode.org/reports/tr51/
+    const emojiRegex = /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
+    const match = str.match(emojiRegex);
+    return match ? match[0] : "";
+  }
 
   static get secondsRemainingStringWithoutLeadingZero() {
     const secondsRemainingString = Controller.frontendMobTimer.secondsRemainingString;
