@@ -69,11 +69,11 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
                 </table>
                 
                 <AddParticipant />
-                <EditParticipants participants={participants} />
+                <EditParticipants />
                 
                 <hr />
 
-                <EditRoles roles={roles} />
+                <EditRoles />
 
             </div>
         </>
