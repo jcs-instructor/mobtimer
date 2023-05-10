@@ -36,6 +36,7 @@ New,to be prioritized and be aware of
             - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
                   add, rotate, randommize, update (i.e., trimmed values), etc.
             - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+                  - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
                   - [x] Fix and test in UI
                   - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
                         require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
