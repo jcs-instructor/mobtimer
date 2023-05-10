@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
+import { MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
@@ -15,7 +15,7 @@ const url =
 console.log("process.env", process.env);
 console.log("url", url);
 
-Controller.initializeClientAndFrontendMobTimer(new W3CWebSocketWrapper(url), playAudio);
+Controller.initializeClient(new W3CWebSocketWrapper(url));
 const client = Controller.client;
 
 function playAudio() {
@@ -43,12 +43,13 @@ const App = () => {
   // Submit join mob request
   const submitJoinMobRequest = async () => {
 
-    if (!mobName || Controller.frontendMobTimer.state.mobName === mobName) {
+    const alreadyJoined = Controller.frontendMobTimer && Controller.frontendMobTimer.state.mobName === mobName;
+    if (!mobName || alreadyJoined) {
       return;
     };
 
-    Controller.frontendMobTimer = new MobTimer(mobName);
-
+    Controller.initializeFrontendMobTimer(mobName, playAudio);
+    
     client.webSocket.onmessageReceived = (message: { data: any }) => {
 
       // Get response from server

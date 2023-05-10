@@ -18,7 +18,7 @@ export class Controller {
     const rolesCount = Controller._roles.length;
     const minCount = Math.min(participantsCount, rolesCount);
 
-    let participants = [] as any;
+    let participants = [] as string[];
     if (minCount > 0) {
       // build up a participant string with the role emoji prefix
       for (let i = 0; i < minCount; i++) {
@@ -71,18 +71,18 @@ export class Controller {
     return symbol;
   }
 
-  static frontendMobTimer: MobTimer;
+  static frontendMobTimer: MobTimer = new MobTimer("temp-not-to-be-used");
   static client: MobSocketClient;
 
-  static initializeClientAndFrontendMobTimer(
-    webSocket: IWebSocketWrapper,
-    timerExpireFunc: () => void
-  ) {
-    Controller.client = new MobSocketClient(webSocket);
-    Controller.frontendMobTimer = new MobTimer("front-end-timer");
+  static initializeFrontendMobTimer(mobName: string, timerExpireFunc: () => void) {
+    Controller.frontendMobTimer = new MobTimer(mobName);
     Controller.frontendMobTimer.timerExpireFunc = () => {
       timerExpireFunc();
     };
+  }
+
+  static initializeClient(webSocket: IWebSocketWrapper) {
+    Controller.client = new MobSocketClient(webSocket);
   }
 
   static getAppTitle() {
