@@ -42,10 +42,7 @@ In VS Code,
 
 - Change code as desired
 - Push to development branch
-- If you want to deploy changes to web:
-  - push to main branch
-  - if you made API changes, publish to npm
-  - TODO: instructions
+- If you want to deploy changes, see Subsequent deployments" section (below)
 
 ### API changes
 
@@ -114,7 +111,7 @@ The icon file is stored at public/favicon.ico. To modify this file
 - Save or convert to favicon.ico icon file
 - Add details here how you created the icon
 
-The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you wantto modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
+The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you want to modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
 
 ## Helper Scripts
 
