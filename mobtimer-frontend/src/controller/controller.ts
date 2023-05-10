@@ -4,11 +4,13 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
-
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
-    let participantsString = Controller.createListOfParticipantsWithRoleEmojisPrepended();
-    document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
+    let participantsString =
+      Controller.createListOfParticipantsWithRoleEmojisPrepended();
+    document.title = `${Controller.statusSymbolText()}${
+      Controller.secondsRemainingStringWithoutLeadingZero
+    } ${participantsString} - ${Controller.getAppTitle()}`;
   }
 
   private static createListOfParticipantsWithRoleEmojisPrepended(): string {
@@ -16,7 +18,7 @@ export class Controller {
     const rolesCount = Controller._roles.length;
     const minCount = Math.min(participantsCount, rolesCount);
 
-    let participants = [];
+    let participants = [] as any;
     if (minCount > 0) {
       // build up a participant string with the role emoji prefix
       for (let i = 0; i < minCount; i++) {
@@ -38,14 +40,18 @@ export class Controller {
 
   static extractFirstEmoji(str: string): string {
     // Regex is copied from: https://unicode.org/reports/tr51/
-    const emojiRegex = /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
+    const emojiRegex =
+      /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
     const match = str.match(emojiRegex);
     return match ? match[0] : "";
   }
 
   static get secondsRemainingStringWithoutLeadingZero() {
-    const secondsRemainingString = Controller.frontendMobTimer.secondsRemainingString;
-    return secondsRemainingString.startsWith("0") ? secondsRemainingString.substring(1) : secondsRemainingString;
+    const secondsRemainingString =
+      Controller.frontendMobTimer.secondsRemainingString;
+    return secondsRemainingString.startsWith("0")
+      ? secondsRemainingString.substring(1)
+      : secondsRemainingString;
   }
 
   static statusSymbolText() {
@@ -58,9 +64,9 @@ export class Controller {
       case Status.Paused:
         symbol = "🟥";
         break;
-      // case Status.Ready: 
+      // case Status.Ready:
       //   symbol = "⏰";
-      //   break;      
+      //   break;
     }
     return symbol;
   }
@@ -68,7 +74,10 @@ export class Controller {
   static frontendMobTimer: MobTimer;
   static client: MobSocketClient;
 
-  static initializeClientAndFrontendMobTimer(webSocket: IWebSocketWrapper, timerExpireFunc: () => void) {
+  static initializeClientAndFrontendMobTimer(
+    webSocket: IWebSocketWrapper,
+    timerExpireFunc: () => void
+  ) {
     Controller.client = new MobSocketClient(webSocket);
     Controller.frontendMobTimer = new MobTimer("front-end-timer");
     Controller.frontendMobTimer.timerExpireFunc = () => {
@@ -83,29 +92,35 @@ export class Controller {
   // injections -----------------------
 
   // inject duration minutes
-  static setDurationMinutes = (_durationMinutes: number) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
+  static setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetDurationMinutes(
+    setDurationMinutesFunction: (durationMinutes: number) => void
+  ) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
   // inject time string
-  static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void): void {
+  static setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetSecondsRemainingString(
+    setSecondsRemainingStringFunction: (timeString: string) => void
+  ): void {
     this.setSecondsRemainingString = (timeString: string) => {
       setSecondsRemainingStringFunction(timeString);
       Controller.updateSummary();
-    }
+    };
   }
 
   // inject participants
-  static setParticipants = (_participants: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
+  static setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetParticipants(
+    setParticipantsFunction: (participants: string[]) => void
+  ) {
     this.setParticipants = setParticipantsFunction;
     Controller.updateSummary();
   }
 
   // inject roles
-  static setRoles = (_roles: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static setRoles = (_roles: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetRoles(setRolesFunction: (roles: string[]) => void) {
     this.setRoles = setRolesFunction;
     Controller.updateSummary();
@@ -122,7 +137,13 @@ export class Controller {
     const roles = mobState.roles;
     Controller._roles = roles;
     const secondsRemaining = mobState.secondsRemaining;
-    return { mobStatus, durationMinutes, participants, roles, secondsRemaining };
+    return {
+      mobStatus,
+      durationMinutes,
+      participants,
+      roles,
+      secondsRemaining,
+    };
   }
 
   static _participants: string[] = [];
@@ -173,7 +194,7 @@ export class Controller {
           break;
         }
         case Status.Paused: {
-          // frontendMobtimer.start(); // To get into the paused state, the timer must have been running, so make sure to start before pause to be sure; otherwise a bug can occur.    
+          // frontendMobtimer.start(); // To get into the paused state, the timer must have been running, so make sure to start before pause to be sure; otherwise a bug can occur.
           frontendMobtimer.pause();
           break;
         }
@@ -185,4 +206,3 @@ export class Controller {
     }
   }
 }
-

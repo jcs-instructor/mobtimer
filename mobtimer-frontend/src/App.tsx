@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
+import { MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
@@ -43,10 +43,12 @@ const App = () => {
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
+    console.log('submitJoinMobRequest()', mobName, "x", Controller.frontendMobTimer.state.mobName);
 
-    if (!mobName || loaded) {
+    if (!mobName || Controller.frontendMobTimer.state.mobName === mobName) {
       return;
     };
+    Controller.frontendMobTimer = new MobTimer(mobName);
 
     setLoaded(true);
 
