@@ -100,7 +100,7 @@ describe("WebSocket Server", () => {
     await client.joinMob(mobNameForBothTeams);
     await client.update(1);
     client.start();
-    const delaySeconds = 0.2
+    const delaySeconds = 0.2;
     TimeUtils.delaySeconds(delaySeconds);
     client.pause();
 
