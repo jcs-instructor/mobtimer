@@ -43,7 +43,7 @@ const App = () => {
   // Submit join mob request
   const submitJoinMobRequest = async () => {
 
-    const alreadyJoined = Controller.frontendMobTimer && Controller.frontendMobTimer.state.mobName === mobName;
+    const alreadyJoined = Controller.frontendMobTimer.state.mobName === mobName;
     if (!mobName || alreadyJoined) {
       return;
     };

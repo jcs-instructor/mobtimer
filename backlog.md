@@ -50,6 +50,17 @@ New,to be prioritized and be aware of
                   EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
                   the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
                   an empty string.)
+            - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
+                  closing the error message (if available for that browser) or refreshing the page.
+                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
+                        Sound Effects
+                        You previously enabled sound effects,
+                        do you want to enable this time, too?
+                        OKAY! / NOT NOW / NEVER
+                  - [ ] Fix this bug
+                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
+                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
             - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
                   - Background:
                         Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
@@ -167,7 +178,6 @@ NEW:
 
 ## Refactor & Technical
 
-- [ ] Review GitHub issues in mrozbarry's MobTime to look for possible test cases for our mob timer (maybe they fixed some bugs/nuanced issues we don't even know we have)
 - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
 - [ ] correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent
