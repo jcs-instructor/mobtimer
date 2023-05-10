@@ -33,19 +33,21 @@ New,to be prioritized and be aware of
                   the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
                   - [x] EditParticipants
                   - [x] EditRoles
-            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
-                  - add
-                  - rotate
-                  - randommize
-                  - update (i.e., trimmed values)
-                  - etc.
+            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
+                  add, rotate, randommize, update (i.e., trimmed values), etc.
             - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
                   - [x] Fix and test in UI
                   - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
                         require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
                         the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
-            - [ ] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
+            - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
                   the people from the previous mob ("team1") in the UI for the new mob ("team2")
+            - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
+                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+                  an empty string.)
             - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
                   - Background:
                         Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
