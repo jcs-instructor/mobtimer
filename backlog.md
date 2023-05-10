@@ -20,9 +20,9 @@ New,to be prioritized and be aware of
 - [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-      - [ ] WIP: Edit roles (navigator, driver)
+      - [x] Edit roles (navigator, driver)
             - [x] Implement generally
-            - [ ] Unhardcode emojis from browser tab title text: refactor roles to be a class with a name and emoji
+            - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
       - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
             - [ ] Edit Participants
             - [ ] Edit Roles

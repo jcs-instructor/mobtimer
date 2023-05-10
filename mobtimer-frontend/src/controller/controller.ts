@@ -5,15 +5,29 @@ import { MobTimer } from "mobtimer-api";
 
 export class Controller {
   static updateSummary() {
-    // Unhardcode emojis from browser tab title text: refactor roles to be a class with a name and emoji
-    const firstRolePrefix = '🗣️'; // = Controller._roles.length > 0 ? Controller._roles[0].symbol : 0;
-    const secondRolePrefix = "🛞"; // = Controller._roles.length > 1 ? Controller._roles[1].symbol : 0;
+    // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
+    const firstRolePrefix = Controller._roles.length > 0 ? this.extractFirstEmoji(Controller._roles[0]) : 0;
+    const secondRolePrefix = Controller._roles.length > 0 ? this.extractFirstEmoji(Controller._roles[1]) : 0;
     let participantsString = firstRolePrefix + Controller._participants.join(", ");
-    if (Controller._participants.length > 1) {      
+    if (Controller._participants.length > 1) {
       participantsString = participantsString.replace(", ", "," + secondRolePrefix);
     }
     document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
   }
+
+  //Usage: console.log(extractFirstEmoji("🗣️Abc")); // Output: "🗣️"
+  static extractFirstEmoji(str: string): string | null {
+    // Unicode regex for matching emojis using Extended_Pictographic property
+    const emojiRegex = /\p{Extended_Pictographic}/u;
+
+    // Find the first match
+    const match = str.match(emojiRegex);
+
+    // Return the first emoji if found, otherwise return null
+    return match ? match[0] : "";
+  }
+
+
 
   static get secondsRemainingStringWithoutLeadingZero() {
     const secondsRemainingString = Controller.frontendMobTimer.secondsRemainingString;
@@ -23,13 +37,13 @@ export class Controller {
   static statusSymbolText() {
     let symbol = "";
     switch (Controller.frontendMobTimer.status) {
-      case Status.Running: 
+      case Status.Running:
         symbol = "▶️";
-        break;      
-      case Status.Ready: 
-      case Status.Paused: 
+        break;
+      case Status.Ready:
+      case Status.Paused:
         symbol = "🟥";
-        break;      
+        break;
       // case Status.Ready: 
       //   symbol = "⏰";
       //   break;      
@@ -99,7 +113,7 @@ export class Controller {
 
   static _participants: string[] = [];
   static _roles: string[] = [];
-  
+
   static getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
       case Status.Running: {
