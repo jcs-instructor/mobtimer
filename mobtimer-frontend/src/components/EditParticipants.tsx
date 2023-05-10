@@ -6,14 +6,14 @@ const EditParticipants = () => {
     // const [participantsNames, setParticipantsNames] = useState(Controller._participants.join(","));
     const [participantsNames, setParticipantsNames] = useState("");
 
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        update(participantsNames, setParticipantsNames);
-    }
+    // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     update(participantsNames, setParticipantsNames);
+    // }
 
     return (
-        <form onSubmit={(event) => onSubmit(event)}>
-            {/* <form> */}
+        // <form onSubmit={(event) => onSubmit(event)}>
+            <form>
             <label>Edit Participants: </label>
             <input
                 // value={participants.join(",")}                                
@@ -25,8 +25,8 @@ const EditParticipants = () => {
                 // onBlur={(e) => update(e.target.value, setParticipantsNames)}                    
                 // todo: replace window.confirm with a modal
                 onBlur={(e) => handleBlur(e)}
+                // onKeyDown={(e) => handleKeyPress(e)}
                 onChange={(e) => setParticipantsNames(e.target.value as string)}
-
                 type="text"
                 placeholder="Enter/Edit Participants"
             />
@@ -34,9 +34,7 @@ const EditParticipants = () => {
         </form>
     )
 
-    function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
-        const newValue = splitTrimAndRejoin(e.target.value as string);
-        const oldValue = Controller._participants.join(",");
+    function confirmUpdate(newValue: string, oldValue: string): void {
         return (newValue) !== oldValue
             && window.confirm("Update Participants from '"
                 + oldValue.replaceAll(",", ", ")
@@ -46,6 +44,18 @@ const EditParticipants = () => {
             ? update(newValue, setParticipantsNames)
             : setParticipantsNames("");
     }
+
+    function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
+        const newValue = splitTrimAndRejoin(e.target.value as string);
+        const oldValue = Controller._participants.join(",");
+        confirmUpdate(newValue, oldValue);
+    }
+
+    // function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>): void {
+    //     if (e.key === 'Enter') {
+    //         handleBlur(e as any);
+    //     }
+    // }
 
     function update(participantsNames: string, setParticipantsNames: React.Dispatch<React.SetStateAction<string>>) {
         Controller.client.editParticipants(participantsNames.split(",").map((name) => name.trim()));

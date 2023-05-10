@@ -6,14 +6,14 @@ const EditRoles = () => {
     // const [rolesString, setRolesString] = useState(Controller._roles.join(","));
     const [rolesString, setRolesString] = useState("");
     
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        update(rolesString, setRolesString);
-    }
+    // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     update(rolesString, setRolesString);
+    // }
 
     return (
-        <form onSubmit={(event) => onSubmit(event)}>
-        {/* <form> */}
+        // <form onSubmit={(event) => onSubmit(event)}>
+        <form>
             <label>Edit Roles: </label>
             <input
                 // value={roles.join(",")}                                
