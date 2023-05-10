@@ -6,7 +6,8 @@ export class TimeUtils {
         resolve,
         TimeUtils.secondsToMilliseconds(seconds)
       );
-      timeout.unref();
+      // todo: timeout.unref() fails when running from frontend; why?
+      // timeout.unref();
     });
   }
 

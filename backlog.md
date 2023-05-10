@@ -15,8 +15,77 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Next
 
-- [x] ETHAN: BETWEEN SESSIONS: Update instructions on how to update icons
-- [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
+New,to be prioritized and be aware of
+- [ ] Review backlog.md differences for awareness
+- [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
+      - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
+      - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
+      - [x] Edit roles (navigator, driver)
+            - [x] Implement generally
+            - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
+      - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
+            - [ ] Edit Participants
+            - [ ] Edit Roles
+      - [ ] Bugs: 
+            - [x] When edit participants or roles, if you press Enter, it submits without prompting you to confirm
+            - [x] UI: Fix bug where not every countdown second appears (was reproducible if duration was set to 0.08888 min. or so)
+            - [x] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
+                  the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
+                  - [x] EditParticipants
+                  - [x] EditRoles
+            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
+                  add, rotate, randommize, update (i.e., trimmed values), etc.
+            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+                  - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
+                  - [x] Fix and test in UI
+                  - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
+                        require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
+                        the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
+            - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
+                  the people from the previous mob ("team1") in the UI for the new mob ("team2")
+            - [x] Fix bug: UI sound not playing
+            - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
+                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+                  an empty string.)
+            - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
+                  closing the error message (if available for that browser) or refreshing the page.
+                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
+                        Sound Effects
+                        You previously enabled sound effects,
+                        do you want to enable this time, too?
+                        OKAY! / NOT NOW / NEVER
+                  - [ ] Fix this bug
+                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
+                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
+            - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
+                  - Background:
+                        Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
+                        in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
+                        the play button says, "Start (temp hack)" -  it might be fixed by adding sleep for 2 seconds in the frontend start 
+                        watch (to make sure other components are compiled first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" 
+                        to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")              
+      - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
+      - [ ] Clean up UI:
+            - [x] Make time remaining text bigger
+            - [x] Spacing of buttons, e.g., show vertically stacked buttons horizontally instead (e.g., Start & Cancel on one line; Rotate & Randomize on one line)
+            - [ ] More compact (to fit more on screen at 100% zoom)
+            - [ ] Change browser tab title text for landing page
+            - [ ] Maybe: Change Cancel to X and put it next to Start button
+            - [ ] Landing page: 
+                  - Make look more different from morozbarry's
+                  - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
+                  - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
+                    Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
+                        - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
+- [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
+      - [ ] Add README.md to mobtimer-api
+      - [ ] Add Joel to permission to publish mobtimer-api to npmjs.com
+      - [ ] CI/CD 
+      - [ ] cleanup console.log stms
 - [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
       https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
@@ -43,8 +112,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
 - [ ] Cleanup
-  - [ ] Maybe: Delete unused branches (?)
-- [ ] Discuss Ethan's idea for new image
+  - [ ] Delete unused branches (?)
 
 ## Participant UI (reorder, edit, delete, drag/drop)
 
@@ -55,7 +123,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Other Must-Haves
 
-- [ ] Randomize order
 - [ ] Roles
 - [ ] Turn on/off sound
 - [ ] Notifications
@@ -77,7 +144,7 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if
       running); just store in nextDurationMinutes (or similar)
-- [ ] Handle illegal characters in mobName
+- [ ] Handle illegal characters in mobName - show error in red message under field
 - [ ] Trim mobName (and maybe url encode characters as needed)
 - [ ] Handle trim(mobName) is empty
 - [ ] Disable buttons as appropriate, e.g., if no legal mobName don't allow to click Join button
@@ -85,27 +152,24 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 - [ ] Improve images in frontend
 - [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
 
-## Investigate
-
-    - [ ] WIP: Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
-    in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
-    the play button says, "Start (temp hack)" -  it might be
-    fixed by adding sleep for 2 seconds in the frontend start watch (to make sure other components are compiled
-    first)
-
 ## Enhancements
-
 - [ ] Alarm for breaks, stretch, etc
 - [ ] Set alarm duration / pausing
 - [ ] Raise hand/make comments
 - [ ] RPG
 - [ ] Lists (such as goals)
 
+NEW:
+- [ ] Info about Th morning group and potentially other groups
+  - [ ] List of mobbing groups
+- [ ] List of mob searchers, what looking for, and contact info
+- [ ] Link to channel in mobtimer Slack
+
+
 ## rethink mobtimer-api
 
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
-- [ ] refactor mobtimerclient to use socket injection
-- [ ] solve websocket error
+- [ ] solve websocket error - is this still an issue?
 - [ ] try other socket client packages (tried socket.io-client, had trouble setting url)
 - [ ] make more like other npmjs packages (no dist folder, figure out package.json)
 - [ ] change to d.ts, create type library
@@ -131,10 +195,6 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
       "stream": "^0.0.2",
       "tls": "^0.0.1",
       "url": "^0.11.0",
-- [ ] Use webSocketType instead of W3CWebSocket (decoupling)
-      export function waitForSocketState(
-      socket: W3CWebSocket,
-      socket: { readyState: number },
 - [ ] Think about names / whether to expose webSocket like this:
       await waitForSocketState(socket.webSocket, socket.webSocket.OPEN);
 - [ ] Look at where we have timeouts and intervals and change code blocks to function (otherwise ms arg can be in

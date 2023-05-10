@@ -19,11 +19,11 @@ const Launch = () => {
                         The Story Behind This Product
                     </h1>
                     <p>
-                        We (Joel Silberman and Ethan Strominger) enjoy coding together because we both like to strive to create clean code that
-                        is easy to understand, enhance, and maintain - while staying open to continuous learning and improvement.
+                        We (Joel Silberman and Ethan Strominger) enjoy coding together because we both like (and do our best) to create clean code 
+                        that is easy to understand, enhance, and maintain - and strive to stay open to continuous learning and improvement.
                     </p>
                     <p>We also could not find a mob timer with all the features we were looking for, so we decided to build one from scratch and to
-                        do it using pair programming.
+                        do it using pair programming. Our timer works great whether pairing or mobbing.
                     </p>
                     <p>
                         (Technical Details for Developers TLDR: The front end was built using React and Typescript. We chose React because it has a large user 

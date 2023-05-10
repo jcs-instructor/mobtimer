@@ -6,6 +6,9 @@ export type MobTimerRequest =
   | UpdateRequest
   | AddParticipantRequest
   | RotateParticipantsRequest
+  | ShuffleParticipantsRequest
+  | EditParticipantsRequest
+  | EditRolesRequest
   | StartRequest
   | PauseRequest
   | ResetRequest;
@@ -32,6 +35,21 @@ export type AddParticipantRequest = {
 export type RotateParticipantsRequest = {
   action: Action.RotateParticipants;
   name: string 
+};
+
+export type ShuffleParticipantsRequest = {
+  action: Action.ShuffleParticipants;
+  name: string 
+};
+
+export type EditParticipantsRequest = {
+  action: Action.EditParticipants;
+  participants: string[]
+};
+
+export type EditRolesRequest = {
+  action: Action.EditRoles;
+  roles: string[]
 };
 
 export type StartRequest = {

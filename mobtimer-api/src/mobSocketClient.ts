@@ -1,7 +1,5 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
-import { WebSocketType } from "./webSocketType";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 class MobSocketClient {
@@ -9,22 +7,6 @@ class MobSocketClient {
 
   constructor(webSocket: IWebSocketWrapper) {
     this._webSocket = webSocket;
-  }
-
-  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketClient {
-    const mobSocketClient = new MobSocketClient(webSocket);
-    return mobSocketClient;
-  }
-
-  static async openSocket(
-    webSocket: IWebSocketWrapper
-  ): Promise<MobSocketClient> {
-    const mobSocketClient = new MobSocketClient(webSocket);
-    await MobSocketClient.waitForSocketState(
-      mobSocketClient.webSocket,
-      mobSocketClient.webSocket.OPEN_CODE
-    );
-    return mobSocketClient;
   }
 
   /**
@@ -86,6 +68,26 @@ class MobSocketClient {
     } as MobTimerRequests.RotateParticipantsRequest);
   }
 
+  shuffleParticipants() {
+    this._sendJSON({
+      action: Action.ShuffleParticipants,
+    } as MobTimerRequests.ShuffleParticipantsRequest);
+  }
+
+  editParticipants(participants: string[]) {
+    this._sendJSON({
+      action: Action.EditParticipants,
+      participants: participants,
+    } as MobTimerRequests.EditParticipantsRequest);
+  }
+
+  editRoles(roles: string[]) {
+    this._sendJSON({
+      action: Action.EditRoles,
+      roles: roles,
+    } as MobTimerRequests.EditRolesRequest);
+  }
+
   start() {
     console.log("sending start request");
     this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
@@ -105,7 +107,7 @@ class MobSocketClient {
     this._webSocket.sendMessage(JSON.stringify(request));
   }
 
-  public get webSocket(): any {
+  public get webSocket(): IWebSocketWrapper {
     return this._webSocket;
   }
 

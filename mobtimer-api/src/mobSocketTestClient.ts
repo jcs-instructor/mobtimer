@@ -1,7 +1,5 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { WebSocketType } from "./webSocketType";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
@@ -16,12 +14,11 @@ class MobSocketTestClient extends MobSocketClient {
     super(webSocket);
     this._socket = webSocket;
     this._socket.onmessageReceived = (message) => {
-      console.log("message:::::::::::::::", message);
       this.trackMessage(message);
     };
   }
 
-  private trackMessage(message: any) {
+  private trackMessage(message: { data: any }) {
     const responseObject = this.convertToMobTimerResponse(
       message.data as string
     );
@@ -46,12 +43,7 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
-  static openSocketSync(webSocket: IWebSocketWrapper): MobSocketTestClient {
-    const mobSocketTestClient = new MobSocketTestClient(webSocket);
-    return mobSocketTestClient;
-  }
-
-  static async openSocket(
+  static async waitForOpenSocket(
     webSocket: IWebSocketWrapper
   ): Promise<MobSocketTestClient> {
     const mobSocketTestClient = new MobSocketTestClient(webSocket);

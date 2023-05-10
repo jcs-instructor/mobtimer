@@ -5,45 +5,84 @@ import { MobTimer } from "mobtimer-api";
 
 export class Controller {
   static updateSummary() {
-    // todo: refactor / unhardcode emojis, etc.
-    let participantsString = "🗣️" + Controller._participants.join(", ");
-    if (Controller._participants.length > 1) {
-      participantsString = participantsString.replace(", ", ",🛞");
+    // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
+    let participantsString =
+      Controller.createListOfParticipantsWithRoleEmojisPrepended();
+    document.title = `${Controller.statusSymbolText()}${
+      Controller.secondsRemainingStringWithoutLeadingZero
+    } ${participantsString} - ${Controller.getAppTitle()}`;
+  }
+
+  private static createListOfParticipantsWithRoleEmojisPrepended(): string {
+    const participantsCount = Controller._participants.length;
+    const rolesCount = Controller._roles.length;
+    const minCount = Math.min(participantsCount, rolesCount);
+
+    let participants = [] as string[];
+    if (minCount > 0) {
+      // build up a participant string with the role emoji prefix
+      for (let i = 0; i < minCount; i++) {
+        const rolePrefix = this.extractFirstEmoji(Controller._roles[i]);
+        const participant = Controller._participants[i];
+        const combo = `${rolePrefix}${participant}`;
+        participants.push(combo);
+      }
+      // if there are more participants than roles, add the remaining participants without a role prefix
+      if (participantsCount > rolesCount) {
+        for (let i = rolesCount; i < participantsCount; i++) {
+          const participant = Controller._participants[i];
+          participants.push(participant);
+        }
+      }
     }
-    document.title = `${Controller.statusSymbolText()}${Controller.secondsRemainingStringWithoutLeadingZero} ${participantsString} - ${Controller.getAppTitle()}`;
+    return participants.join(",");
+  }
+
+  static extractFirstEmoji(str: string): string {
+    // Regex is copied from: https://unicode.org/reports/tr51/
+    const emojiRegex =
+      /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
+    const match = str.match(emojiRegex);
+    return match ? match[0] : "";
   }
 
   static get secondsRemainingStringWithoutLeadingZero() {
-    const secondsRemainingString = Controller.frontendMobTimer.secondsRemainingString;
-    return secondsRemainingString.startsWith("0") ? secondsRemainingString.substring(1) : secondsRemainingString;
+    const secondsRemainingString =
+      Controller.frontendMobTimer.secondsRemainingString;
+    return secondsRemainingString.startsWith("0")
+      ? secondsRemainingString.substring(1)
+      : secondsRemainingString;
   }
 
   static statusSymbolText() {
     let symbol = "";
     switch (Controller.frontendMobTimer.status) {
-      case Status.Running: 
+      case Status.Running:
         symbol = "▶️";
-        break;      
-      case Status.Ready: 
-      case Status.Paused: 
+        break;
+      case Status.Ready:
+      case Status.Paused:
         symbol = "🟥";
-        break;      
-      // case Status.Ready: 
+        break;
+      // case Status.Ready:
       //   symbol = "⏰";
-      //   break;      
+      //   break;
     }
     return symbol;
   }
 
-  static frontendMobTimer: MobTimer;
+  static frontendMobTimer: MobTimer = new MobTimer("temp-not-to-be-used");
   static client: MobSocketClient;
 
-  static initializeClientAndFrontendMobTimer(webSocket: IWebSocketWrapper, timerExpireFunc: () => void) {
-    Controller.client = new MobSocketClient(webSocket);
-    Controller.frontendMobTimer = new MobTimer("front-end-timer");
+  static initializeFrontendMobTimer(mobName: string, timerExpireFunc: () => void) {
+    Controller.frontendMobTimer = new MobTimer(mobName);
     Controller.frontendMobTimer.timerExpireFunc = () => {
       timerExpireFunc();
     };
+  }
+
+  static initializeClient(webSocket: IWebSocketWrapper) {
+    Controller.client = new MobSocketClient(webSocket);
   }
 
   static getAppTitle() {
@@ -53,24 +92,37 @@ export class Controller {
   // injections -----------------------
 
   // inject duration minutes
-  static setDurationMinutes = (_durationMinutes: number) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetDurationMinutes(setDurationMinutesFunction: (durationMinutes: number) => void) {
+  static setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetDurationMinutes(
+    setDurationMinutesFunction: (durationMinutes: number) => void
+  ) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
   // inject time string
-  static setSecondsRemainingString = (_timeString: string) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetSecondsRemainingString(setSecondsRemainingStringFunction: (timeString: string) => void): void {
+  static setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetSecondsRemainingString(
+    setSecondsRemainingStringFunction: (timeString: string) => void
+  ): void {
     this.setSecondsRemainingString = (timeString: string) => {
       setSecondsRemainingStringFunction(timeString);
       Controller.updateSummary();
-    }
+    };
   }
 
   // inject participants
-  static setParticipants = (_participants: string[]) => { }; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetParticipants(setParticipantsFunction: (participants: string[]) => void) {
+  static setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetParticipants(
+    setParticipantsFunction: (participants: string[]) => void
+  ) {
     this.setParticipants = setParticipantsFunction;
+    Controller.updateSummary();
+  }
+
+  // inject roles
+  static setRoles = (_roles: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  static injectSetRoles(setRolesFunction: (roles: string[]) => void) {
+    this.setRoles = setRolesFunction;
     Controller.updateSummary();
   }
 
@@ -82,11 +134,20 @@ export class Controller {
     const durationMinutes = mobState.durationMinutes;
     const participants = mobState.participants;
     Controller._participants = participants;
+    const roles = mobState.roles;
+    Controller._roles = roles;
     const secondsRemaining = mobState.secondsRemaining;
-    return { mobStatus, durationMinutes, participants, secondsRemaining };
+    return {
+      mobStatus,
+      durationMinutes,
+      participants,
+      roles,
+      secondsRemaining,
+    };
   }
 
   static _participants: string[] = [];
+  static _roles: string[] = [];
 
   static getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
@@ -133,6 +194,7 @@ export class Controller {
           break;
         }
         case Status.Paused: {
+          // frontendMobtimer.start(); // To get into the paused state, the timer must have been running, so make sure to start before pause to be sure; otherwise a bug can occur.
           frontendMobtimer.pause();
           break;
         }
@@ -144,4 +206,3 @@ export class Controller {
     }
   }
 }
-

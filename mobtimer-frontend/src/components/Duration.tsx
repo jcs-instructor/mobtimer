@@ -20,7 +20,7 @@ const Duration = ({ durationMinutes }: FormParameters) => {
                 type="text"
                 placeholder="Enter a Turn Duration"
             />
-            <button type="submit">Update</button>
+            <button type="submit">⏱️ Update</button>
         </form>
     )
 }

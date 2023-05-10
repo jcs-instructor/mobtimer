@@ -1,5 +1,16 @@
 ## Completed (Done)
 
+2023-05-06
+
+- [x] Randomize participants order
+- [x] Edit participants order
+- [x] Add emojis to more UI buttons, and revise UI layout
+
+2023-05-05
+
+- [x] When frontend is available but backend is not, change play/pause button to say "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"
+      (instead of "Start (temp hack)") 
+
 2023-05-03
 
 - [x] Display symbol in browser tab for whether timer is running or not, i.e., ▶️ if running and 🟥 if not (the latter being attention grabbing

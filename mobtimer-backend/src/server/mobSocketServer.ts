@@ -28,10 +28,7 @@ export function renderHomePage(port: number) {
   app.set("views", path.join(__dirname, "views"));
 
   // Without middleware
-  app.get("/", function (req: any, res: any) {
-    console.log(req);
-    console.log("xyz");
-
+  app.get("/", function (_req: any, res: any) {
     // Rendering home.ejs page
     res.render("home");
   });
@@ -89,6 +86,22 @@ function _processRequest(
       mobTimer.rotateParticipants();
       break;
     }
+    case Action.ShuffleParticipants: {
+      mobTimer.shuffleParticipants();
+      break;
+    }
+    case Action.EditParticipants: {
+      const editParticipantsRequest =
+        parsedRequest as MobTimerRequests.EditParticipantsRequest;
+      mobTimer.editParticipants(editParticipantsRequest.participants);
+      break;
+    }
+    case Action.EditRoles: {
+      const editRolesRequest =
+        parsedRequest as MobTimerRequests.EditRolesRequest;
+      mobTimer.editRoles(editRolesRequest.roles);
+      break;
+    }
     case Action.Start: {
       mobTimer.start();
       break;
@@ -114,7 +127,8 @@ function _processRequest(
 function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", async function (webSocket: WebSocket) { // 2nd paramater for mrozbarry, request2: any
+  wss.on("connection", async function (webSocket: WebSocket) {
+    // 2nd paramater for mrozbarry, request2: any
     // const url = new URL(request2.url, `http://${request2.headers.host}`);
     // let mobName = url.pathname.replace("/", "");
     // if (mobName) {

@@ -6,7 +6,6 @@ type FormParameters = {
     timeString: string;
 }
 
-
 const Timer = ({ timeString }: FormParameters) => {
     
     const frontendMobTimer = Controller.frontendMobTimer;
@@ -21,9 +20,9 @@ const Timer = ({ timeString }: FormParameters) => {
         const fractionalSeconds = frontendMobTimer.secondsRemaining % 1;
         const millisecondsUntilNextWholeSecond = TimeUtils.secondsToMilliseconds(fractionalSeconds);
         let millisecondsBetweenTicks =
-            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond < 1000) ?
+            (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond <= 1000) ?
                 millisecondsUntilNextWholeSecond :
-                1000;
+                200;
 
         //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
 
@@ -36,7 +35,7 @@ const Timer = ({ timeString }: FormParameters) => {
     }, [timeString]);
 
     return (
-        <p className='Time'>{timeString}</p>
+        <p className='Time'>{timeString}</p>        
     );
 
 }

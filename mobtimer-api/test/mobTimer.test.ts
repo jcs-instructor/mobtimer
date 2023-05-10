@@ -79,6 +79,22 @@ test("Get seconds remaining 0.2 seconds after start (real)", async () => {
   );
 });
 
+test("Get seconds remaining 0.2 seconds after start and when paused (real)", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.durationMinutes = 6;
+  mobTimer.start();
+  const secondsToRunBeforeChecking = 0.2;
+  const numDigits = 1;
+  expect(mobTimer.secondsRemaining).toBeCloseTo(minutesToSeconds(6), numDigits);
+  await TimeUtils.delaySeconds(secondsToRunBeforeChecking);
+  mobTimer.pause();
+  await TimeUtils.delaySeconds(0.2);
+  expect(mobTimer.secondsRemaining).toBeCloseTo(
+    minutesToSeconds(6) - secondsToRunBeforeChecking,
+    numDigits
+  );
+});
+
 test("Ready status after time expires", async () => {
   const mobTimer = new MobTimer();
   const durationSeconds = 0.2;
@@ -172,7 +188,7 @@ test("Resume timer", () => {
   expect(mobTimer.status).toEqual(Status.Running);
 });
 
-test("Get seconds remaining after 1 second pause", () => {
+test("Get mock seconds remaining after 1 second pause", () => {
   const mobMockTimer = new MobMockTimer();
   mobMockTimer.durationMinutes = 6;
   mobMockTimer.start();
@@ -287,6 +303,22 @@ test("Rotate participants", async () => {
   mobTimer.addParticipant("Bob");
   mobTimer.rotateParticipants();
   expect(mobTimer.participants).toStrictEqual(["Bob", "Alice"]);
+});
+
+test("Edit participants", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.addParticipant("Alice");
+  mobTimer.addParticipant("Bob");
+  mobTimer.editParticipants(["Chris", "Danielle"]);
+  expect(mobTimer.participants).toStrictEqual(["Chris", "Danielle"]);
+});
+
+test("Edit roles", async () => {
+  const mobTimer = new MobTimer();
+  mobTimer.editRoles(["Talker", "Typer"]);
+  expect(mobTimer.roles).toStrictEqual(["Talker", "Typer"]);
+  mobTimer.editRoles(["Driver", "Navigator"]);
+  expect(mobTimer.roles).toStrictEqual(["Driver", "Navigator"]);
 });
 
 test("Remove 1st participant", async () => {

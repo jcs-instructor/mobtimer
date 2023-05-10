@@ -1,18 +1,44 @@
+.RoomBox {
+  margin: auto;
+  width:fit-content;
+  margin-top: 1rem; 
+  border: 1px solid black;
+  padding: 2rem;  
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.Team {
+  font-size: 120%;
+  font-weight: bold;  
+  margin: 1rem;
+}
+
+.Time {
+  font-size: 250%;
+  font-weight: bold;  
+  margin: 1rem;
+}
+
 .ParticipantBorder {
   border-color: darkgrey;
   border-style: solid;
   width: 15rem;
 }
+
 .CellBox {
   border-width: 0.1rem;
   margin: 0rem;
   padding: 0.1rem;
 }
+
 .ParticipantRow {
   display: flex;
   flex-wrap: wrap;
   word-wrap: normal;
   padding: 0.1rem;
+  font-size: smaller;
+  font-weight: normal;
 }
 
 .LaunchTop {
@@ -82,27 +108,8 @@
 .JoinMobForm label,
 input,
 button {
-
   margin: 1rem;
   font-size: large;
   padding: 0.5rem;
 }
 
-.RoomBox {
-  margin: auto;
-  width:fit-content;
-  margin-top: 8rem;
-  border: 1px solid black;
-  padding: 2rem;
-}
-
-.RoomBox p, label {
-  font-size: x-large;
-  font-weight: bold;
-}
-
-.Time {
-  font-size: xxx-large;
-  font-weight: bolder;
-  margin: 1rem 0;
-}
