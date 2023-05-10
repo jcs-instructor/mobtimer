@@ -28,7 +28,6 @@ const App = () => {
 
   // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
   const [mobName, setMobName] = useState('');
-  const [loaded, setLoaded] = useState(false);
   const [secondsRemainingString, setSecondsRemainingString] = useState('');
   const [actionButtonLabel, setActionButtonLabel] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(0);
@@ -43,14 +42,12 @@ const App = () => {
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
-    console.log('submitJoinMobRequest()', mobName, "x", Controller.frontendMobTimer.state.mobName);
 
     if (!mobName || Controller.frontendMobTimer.state.mobName === mobName) {
       return;
     };
-    Controller.frontendMobTimer = new MobTimer(mobName);
 
-    setLoaded(true);
+    Controller.frontendMobTimer = new MobTimer(mobName);
 
     client.webSocket.onmessageReceived = (message: { data: any }) => {
 
