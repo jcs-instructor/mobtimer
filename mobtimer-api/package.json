@@ -6,6 +6,7 @@
   "dependencies": {
     "@types/uuidv4": "^5.0.0",
     "@types/websocket": "^1.0.5",
+    "@types/ws": "^8.5.4",
     "mobtimer-api": "^1.0.15",
     "uuid": "^9.0.0"
   },

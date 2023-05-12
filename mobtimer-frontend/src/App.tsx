@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
+import { IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper, WSWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
@@ -15,8 +15,13 @@ const url =
 console.log("process.env", process.env);
 console.log("url", url);
 
-Controller.initializeClient(new W3CWebSocketWrapper(url));
+const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+Controller.client = new MobSocketClient(wrapperSocket);
+const mobName = "front-end-timer";
+Controller.frontendMobTimer = new MobTimer(mobName);
+Controller.frontendMobTimer.timerExpireFunc = playAudio;
 const client = Controller.client;
+client.joinMob(mobName);
 
 function playAudio() {
   console.log("timer expired on front end");
@@ -48,8 +53,8 @@ const App = () => {
       return;
     };
 
-    Controller.initializeFrontendMobTimer(mobName, playAudio);
-    
+    Controller.frontendMobTimer = new MobTimer(mobName);
+
     client.webSocket.onmessageReceived = (message: { data: any }) => {
 
       // Get response from server

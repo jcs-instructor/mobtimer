@@ -1,6 +1,11 @@
 import * as http from "http";
 import WebSocket from "ws";
-import { MobTimer } from "mobtimer-api";
+import {
+  IWebSocketWrapper,
+  MobSocketClient,
+  MobTimer,
+  WSWebSocketWrapper,
+} from "mobtimer-api";
 import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
@@ -145,6 +150,7 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
       // client.on('close', () => {
       //   log('websocket.disconnect', timerId);
       // });
+      const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
 
       let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequests.MobTimerRequest;
@@ -187,11 +193,17 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
 //   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
 // }
 
-function _sendJSON(
+async function _sendJSON(
   webSocket: WebSocket,
   request: MobTimerResponses.MobTimerResponse
 ) {
-  webSocket.send(JSON.stringify(request));
+  const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
+  await MobSocketClient.waitForSocketState(
+    webSocketWrapper,
+    webSocketWrapper.OPEN_CODE
+  );
+  console.log("state: " + webSocketWrapper.socketState);
+  webSocketWrapper.sendMessage(JSON.stringify(request));
 }
 
 function _requestToString(request: WebSocket.RawData) {

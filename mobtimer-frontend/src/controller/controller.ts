@@ -74,17 +74,6 @@ export class Controller {
   static frontendMobTimer: MobTimer = new MobTimer("temp-not-to-be-used");
   static client: MobSocketClient;
 
-  static initializeFrontendMobTimer(mobName: string, timerExpireFunc: () => void) {
-    Controller.frontendMobTimer = new MobTimer(mobName);
-    Controller.frontendMobTimer.timerExpireFunc = () => {
-      timerExpireFunc();
-    };
-  }
-
-  static initializeClient(webSocket: IWebSocketWrapper) {
-    Controller.client = new MobSocketClient(webSocket);
-  }
-
   static getAppTitle() {
     return "Mob Timer";
   }
