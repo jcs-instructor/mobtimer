@@ -33,21 +33,34 @@ New,to be prioritized and be aware of
                   the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
                   - [x] EditParticipants
                   - [x] EditRoles
-            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after:
-                  - add
-                  - rotate
-                  - randommize
-                  - update (i.e., trimmed values)
-                  - etc.
-                  - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.          
-                  
-                - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.  
+            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
+                  add, rotate, randommize, update (i.e., trimmed values), etc.
+            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+                  - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
                   - [x] Fix and test in UI
                   - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
                         require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
                         the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
             - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
                   the people from the previous mob ("team1") in the UI for the new mob ("team2")
+            - [x] Fix bug: UI sound not playing
+            - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
+                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+                  an empty string.)
+            - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
+                  closing the error message (if available for that browser) or refreshing the page.
+                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
+                        Sound Effects
+                        You previously enabled sound effects,
+                        do you want to enable this time, too?
+                        OKAY! / NOT NOW / NEVER
+                  - [ ] Fix this bug
+                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
+                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
             - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
                   - Background:
                         Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
@@ -165,7 +178,6 @@ NEW:
 
 ## Refactor & Technical
 
-- [ ] Review GitHub issues in mrozbarry's MobTime to look for possible test cases for our mob timer (maybe they fixed some bugs/nuanced issues we don't even know we have)
 - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
 - [ ] correct anti-pattern? Pass business logic into UI (no mobtimer.xxxx) - however, consistent

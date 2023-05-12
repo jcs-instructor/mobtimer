@@ -175,4 +175,6 @@ When you need to refresh node_modules in frontend or backend, run ../scripts/cle
   ./publish-no-watch.sh
   ```
 
+- After running the script, there will be changes to package.json and yarn.lock files. Commit and push these changes.
+
 - Push to main branch
