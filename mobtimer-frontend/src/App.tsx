@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper, WSWebSocketWrapper } from 'mobtimer-api';
+import { Action, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
@@ -72,6 +72,10 @@ const App = () => {
       // Read response data 
       const { mobStatus, durationMinutes, participants, roles, secondsRemaining } = Controller.translateResponseData(response);
 
+      if (response.actionInfo.action === Action.Expired || response.actionInfo.action === Action.Reset) {
+        playAudio();
+      }
+
       // Derive mob label from response status
       const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
 
@@ -85,7 +89,6 @@ const App = () => {
       setRoles(roles);
       setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
       setActionButtonLabel(label);
-
 
       if (response.mobState.status !== Controller.frontendMobTimer.status) {
         console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
