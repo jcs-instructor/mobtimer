@@ -1,4 +1,3 @@
-- [ ] Merge main to dev?  Which one do we use?
 - [ ] Retro on last week while working separately and texting updates (What happened? How did that feel? etc.)
   - [ ] Should we continue divide and conquer outside?
 - [ ] Stakeholder / general rollout plan
