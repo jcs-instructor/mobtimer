@@ -22,7 +22,7 @@ const Timer = ({ timeString }: FormParameters) => {
         let millisecondsBetweenTicks =
             (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond <= 1000) ?
                 millisecondsUntilNextWholeSecond :
-                200;
+                50;
 
         //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
 
