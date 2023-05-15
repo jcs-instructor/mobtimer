@@ -16,7 +16,10 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 New,to be prioritized and be aware of
-- [ ] ⚠️ Review backlog.md differences for awareness and also questions, e.g.: 
+- [ ] ⚠️ Review backlog.md differences for awareness
+- [ ] ⚠️ Review code differences for awareness and also questions, e.g.,
+      - [ ] Code diff tool use issue: It's sometimes hard to see real diffs in the diff tool.
+            Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
       - [ ] Why are we joining the mob twice in the App.tsx?
             Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
             In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
