@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { Action, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper, WSWebSocketWrapper } from 'mobtimer-api';
+import { Action, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
