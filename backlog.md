@@ -15,17 +15,40 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## 5/15/2023 Agenda
 
-- Review backlog and code changes from last week
-- Priorities/goals for this week and beyond, including 
-  - Blocking issues
-  - Specific possible users of our product (e.g., 1. the Thursday Mob, 2. Bob Allen's Mobs, 3. us, 4. others.
-  - UI testing / customer release readiness / product stability
-- Retro on last week while working separately and texting updates (What happened? How did that feel? etc.) 
+- [ ] For Ethan, discuss how to find coding parter.  AgileVentures, codebuddies, mob programming channel
+- [ ] Change default channel to dev
+- [ ] Retro on last week while working separately and texting updates (What happened? How did that feel? etc.)
+  - [ ] Should we continue divide and conquer outside?
+- [ ] Stakeholder / general rollout plan
+  - [ ] UI testing / customer release readiness / product stability
+
+  - [ ] Decide on must haves for rollout to others
+    - [ ] Specify mobtimer in vscode extension
+    - [ ] Provide instructions for installing extension
+    - [ ] Bugs
+    - [ ] Home page changes?
+    - [ ] Break timer?  Other differentiator?
+  - [ ] Discuss approach with Thu morning mob
+    - [ ] Would vscode extension be a big win?
+    - [ ] Solicit desired enhancements
+    - [ ] Show our list of enhancements
+    - [ ] Incorporate their code into mobtimer
+  - [ ] Discuss approach with Bob Allen's mob - differences?
+  - [ ] Solicit others?  Ethan's gut - no if Bob Allen shows interest
+- [ ] Competitor: mobster
+- [ ] Priorities/goals for this week and beyond
+  - [ ] New items
+    - [ ] Create repo that includes mobtimer and mobtime-vscode-extension
+    - [ ] Shared google email - discuss or add to backlog
+    - [ ] Buy a domain - discuss or add to backlog.  Some options: xptogether, codingtogether/codetogether, cleancodingtogether (my favorite, although long)/cleancodetogether
+
+- [ ] plan meeting times for rest of week, including possibly meeting Fri. instead of Tuesday
+
+(If we don't meet today, then the above agenda topics could be for Tues. or Wed.) 
 
 ## Next
 
 New,to be prioritized and be aware of
-<<<<<<< HEAD
 - [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
@@ -33,49 +56,13 @@ New,to be prioritized and be aware of
             - [ ] Edit Participants
             - [ ] Edit Roles
       - [ ] Bugs: 
-            - [x] When edit participants or roles, if you press Enter, it submits without prompting you to confirm
             - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
             - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
                   - [ ] Joel - verify
-            - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
-                  the people from the previous mob ("team1") in the UI for the new mob ("team2")
-            - [x] Fix bug: UI sound not playing
-            - [x] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
-                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
-                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
-                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
-                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
-                  an empty string.)
+            - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+                  other mob. Fixed, Joel - verify
             - [ ] Bug: participants and roles shows blank when save changes - could be done with defaultValue
             - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
-=======
-- [ ] ⚠️ Review backlog.md differences for awareness
-- [ ] ⚠️ Review code differences for awareness and also questions, e.g.,
-      - [ ] Code diff tool use issue: It's sometimes hard to see real diffs in the diff tool.
-            Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
-      - [ ] Why are we joining the mob twice in the App.tsx?
-            Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
-            In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
-            Should the Room.tsx be the place for initializing the Controller frontend timer and client; i.e., after the mobName is entered,
-            navigate to the room url and do the initializing there?
-            (Note: Currently the landing page browser tab title text shows time remaining, etc., but really should just say "Mob Timer" or something like that.
-            If we address the above questions, that might make the change easier.)
-- [ ] PREP FOR CUSTOMERS TO USE:
-      - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
-      - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-      - [ ] UI Edit Participants & Roles 
-            - [x] Implement generally
-            - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
-            - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
-                  - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
-                        (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
-                        - [ ] Later: Implement drag & drop for moving up/down
-                  - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
-                        - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
-                              block popups and also it will be more user-friendly.
-      - [ ] Bugs: 
-            - [ ] ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
->>>>>>> e7711c55d07154561188293c131c40061eb85cd9
                   handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
                   closing the error message (if available for that browser) or refreshing the page.
                   Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
@@ -86,20 +73,7 @@ New,to be prioritized and be aware of
                   - [ ] Fix this bug
                   - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
                         we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
-            - [x] Edit Participants and Roles: When edit participants or roles, if you press Enter, it submits without prompting you to confirm
-            - [x] UI: Fix bug where not every countdown second appears (was reproducible if duration was set to 0.08888 min. or so)
-            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
-                  - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-                  - [x] Fix and test in UI
-                  - [ ] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
-                        require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
-                        the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
-            - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
-                  the people from the previous mob ("team1") in the UI for the new mob ("team2")
-            - [x] UI bug: UI sound not playing (again). Also, make sound play when get expired or reset message from server, rather
-                  than relying entirely on the frontendmobtimer, which could be a fraction of a second out of sync with the server and other
-                  clients, which could cause the sound to play when it should't (i.e., when someone else paused it just in time).
-            - [x] UI bug: Time ticks can be very choppy.
+            - [ ] Verify bug fix: Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
             - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it 
                   for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
                   be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
