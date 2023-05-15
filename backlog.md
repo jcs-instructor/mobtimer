@@ -16,7 +16,14 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 ## Next
 
 New,to be prioritized and be aware of
-- [ ] Review backlog.md differences for awareness
+- [ ] ⚠️ Review backlog.md differences for awareness and also questions, e.g.: 
+      - [ ] Why are we joining the mob twice in the App.tsx?
+            Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
+            In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
+            Should the Room.tsx be the place for initializing the Controller frontend timer and client; i.e., after the mobName is entered,
+            navigate to the room url and do the initializing there?
+            (Note: Currently the landing page browser tab title text shows time remaining, etc., but really should just say "Mob Timer" or something like that.
+            If we address the above questions, that might make the change easier.)
 - [ ] PREP FOR CUSTOMERS TO USE:
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
