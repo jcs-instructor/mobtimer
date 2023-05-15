@@ -15,19 +15,22 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## 5/15/2023 Agenda
 
-- [ ] For Ethan, discuss how to find coding parter.  AgileVentures, codebuddies, mob programming channel
-- [ ] Change default channel to dev
-- [ ] Retro on last week while working separately and texting updates (What happened? How did that feel? etc.)
-  - [ ] Should we continue divide and conquer outside?
 - [ ] Stakeholder / general rollout plan
-  - [ ] UI testing / customer release readiness / product stability
-
+  
   - [ ] Decide on must haves for rollout to others
-    - [ ] Specify mobtimer in vscode extension
-    - [ ] Provide instructions for installing extension
-    - [ ] Bugs
-    - [ ] Home page changes?
-    - [ ] Break timer?  Other differentiator?
+    - [ ] Extension
+      - Specify mobName in vscode extension (not "front-end-timer") - see also "front-end-timer" related backlog item below
+      - Provide instructions for installing extension
+      - Bugs (manual test and fix, etc.)            
+      - Does sound work? Is it needed
+    - [ ] Web app
+      - Home page changes?
+      - Bugs (manual test and fix, etc.)
+      - Differentiators:
+            - Break timer?  
+            - Other differentiator?
+    - [ ] See also all "⚠️" items in backlog below
+  
   - [ ] Discuss approach with Thu morning mob
     - [ ] Would vscode extension be a big win?
     - [ ] Solicit desired enhancements
@@ -48,8 +51,11 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ## Next
 
+- [ ] NEW: Review onmessage related code
+- [ ] Backlog org. - e.g., short title
+
 New,to be prioritized and be aware of
-- [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
+- [ ] PREP FOR CUSTOMERS TO USE:
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
        - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
@@ -62,6 +68,36 @@ New,to be prioritized and be aware of
             - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
                   other mob. Fixed, Joel - verify
             - [ ] Bug: participants and roles shows blank when save changes - could be done with defaultValue
+      - [ ] ⚠️ Review backlog.md differences for awareness
+      - [ ] ⚠️ Review code differences for awareness and also questions, e.g.,
+            - [ ] Code diff tool use issue: It's sometimes hard to see real diffs in the diff tool.
+                  Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
+            - [ ] Why are we joining the mob twice in the App.tsx?
+                  Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
+                  In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
+                  Should the Room.tsx be the place for initializing the Controller frontend timer and client; i.e., after the mobName is entered,
+                  navigate to the room url and do the initializing there?
+                  (Note: Currently the landing page browser tab title text shows time remaining, etc., but really should just say "Mob Timer" or something like that.
+                  If we address the above questions, that might make the change easier.)
+            - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
+            - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
+            - [ ] UI Edit Participants & Roles 
+                  - [x] Implement generally
+                  - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
+                  - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
+                        - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
+                              (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
+                              - [ ] Later: Implement drag & drop for moving up/down
+                        - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
+                              - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
+                                    block popups and also it will be more user-friendly.
+      - [ ] Bugs: 
+            - [ ] ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+
+
+
+
+
             - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
                   handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
                   closing the error message (if available for that browser) or refreshing the page.
@@ -87,9 +123,13 @@ New,to be prioritized and be aware of
                         the play button says, "Start (temp hack)" -  it might be fixed by adding sleep for 2 seconds in the frontend start 
                         watch (to make sure other components are compiled first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" 
                         to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")              
-      - [ ] ⚠️ UI Testing (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
+      - [ ] ⚠️ Controller and UI Testing (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
+            - [ ] Add Controller tests
             - [ ] List out what needs to be tested manually (and automated if possible)
-            - [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
+                  - See completed for ideas, and...
+                  - ...
+            - [ ] Code coverage
+            - [ ] Maybe: Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
       - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
       - [ ] Clean up UI:
             - [ ] More compact (to fit more on screen at 100% zoom)
@@ -182,10 +222,11 @@ New,to be prioritized and be aware of
   - [ ] Control who can join a session
 
 NEW:
-- [ ] Bob Allen would like a social platform to connect people who want to mob - opt in, name, email, times want to mob, programming language preferences, etc.
+- [ ] Feature: Find coding partners  
+      - List of mob searchers, what looking for, and contact info
+      - Bob Allen would like a social platform to connect people who want to mob - opt in, name, email, times want to mob, programming language preferences, etc.
 - [ ] Info about Thursday morning group and potentially other groups (e.g., Thursday group is interested in rotating the driver at a different rate than the navigator)
   - [ ] List of mobbing groups
-- [ ] List of mob searchers, what looking for, and contact info
 - [ ] Link to channel in mobtimer Slack
 
 ## rethink mobtimer-api
