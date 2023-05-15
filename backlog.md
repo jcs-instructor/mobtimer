@@ -17,24 +17,33 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 New,to be prioritized and be aware of
 - [ ] Review backlog.md differences for awareness
-- [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
+- [ ] PREP FOR CUSTOMERS TO USE:
       - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
       - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-      - [x] Edit roles (navigator, driver)
+      - [ ] UI Edit Participants & Roles 
             - [x] Implement generally
             - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
-      - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
-            - [ ] Edit Participants
-            - [ ] Edit Roles
+            - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
+                  - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
+                        (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
+                        - [ ] Later: Implement drag & drop for moving up/down
+                  - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
+                        - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
+                              block popups and also it will be more user-friendly.
       - [ ] Bugs: 
-            - [x] When edit participants or roles, if you press Enter, it submits without prompting you to confirm
+            - [ ] ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
+                  closing the error message (if available for that browser) or refreshing the page.
+                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
+                        Sound Effects
+                        You previously enabled sound effects,
+                        do you want to enable this time, too?
+                        OKAY! / NOT NOW / NEVER
+                  - [ ] Fix this bug
+                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
+                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
+            - [x] Edit Participants and Roles: When edit participants or roles, if you press Enter, it submits without prompting you to confirm
             - [x] UI: Fix bug where not every countdown second appears (was reproducible if duration was set to 0.08888 min. or so)
-            - [x] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
-                  the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
-                  - [x] EditParticipants
-                  - [x] EditRoles
-            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
-                  add, rotate, randommize, update (i.e., trimmed values), etc.
             - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
                   - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
                   - [x] Fix and test in UI
@@ -47,23 +56,12 @@ New,to be prioritized and be aware of
                   than relying entirely on the frontendmobtimer, which could be a fraction of a second out of sync with the server and other
                   clients, which could cause the sound to play when it should't (i.e., when someone else paused it just in time).
             - [x] UI bug: Time ticks can be very choppy.
-            - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
-                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
-                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+            - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it 
+                  for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
+                  be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
                   EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
                   the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
-                  an empty string.)
-            - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
-                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
-                  closing the error message (if available for that browser) or refreshing the page.
-                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
-                        Sound Effects
-                        You previously enabled sound effects,
-                        do you want to enable this time, too?
-                        OKAY! / NOT NOW / NEVER
-                  - [ ] Fix this bug
-                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
-                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
+                  an empty string.) (Reproducible?) 
             - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
                   - Background:
                         Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
@@ -71,6 +69,9 @@ New,to be prioritized and be aware of
                         the play button says, "Start (temp hack)" -  it might be fixed by adding sleep for 2 seconds in the frontend start 
                         watch (to make sure other components are compiled first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" 
                         to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")              
+      - [ ] ⚠️ UI Testing (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
+            - [ ] List out what needs to be tested manually (and automated if possible)
+            - [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
       - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
       - [ ] Clean up UI:
             - [x] Make time remaining text bigger
@@ -157,6 +158,7 @@ New,to be prioritized and be aware of
 - [ ] In UI listener, handle if response is not successful
 - [ ] Improve images in frontend
 - [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
+- [ ] Show all roles at all times (even when there are fewer than 2 participants)
 
 ## Enhancements
 - [ ] Alarm for breaks, stretch, etc
@@ -166,11 +168,11 @@ New,to be prioritized and be aware of
 - [ ] Lists (such as goals)
 
 NEW:
-- [ ] Info about Th morning group and potentially other groups
+- [ ] Bob Allen would like a social platform to connect people who want to mob - opt in, name, email, times want to mob, programming language preferences, etc.
+- [ ] Info about Thursday morning group and potentially other groups (e.g., Thursday group is interested in rotating the driver at a different rate than the navigator)
   - [ ] List of mobbing groups
 - [ ] List of mob searchers, what looking for, and contact info
 - [ ] Link to channel in mobtimer Slack
-
 
 ## rethink mobtimer-api
 
@@ -211,25 +213,22 @@ NEW:
 - [ ] Review prior retros for generic lessons re. languages/environments/etc.
 - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
 - [ ] Consider gated checkin testing with push instead of commit
-- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https:
-      //reactjs.org/docs/testing-recipes.html>
-  - [ ] Look into TypeScript Modules .d.ts: <https:
-        //www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html>
-    - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
-    - [ ] Set tsc options: target es2015 or later
-    - [ ] Backend
-    - [ ] Handle Bad Json Gracefully on Client (JSON.parse …)
-    - [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest
-    - [ ] Maybe add timestamp to MobTimerResponse.actionInfo
-    - [ ] Persistence -
-    - [ ] Timeout: Should mobs be deleted on timeout (after period of inactivity)?
-    - [ ] Persist Mobs in case server is reset, etc. (e.g., in DB or other physical storage)
-    - [ ] Maybe: Try decorators - <https://www.typescriptlang.org/docs/handbook/decorators.html>
-      - [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
-      - [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of
-            string concatenation, e.g., `${minutesPart}:${secondsPart}`;
-      - [ ] Figure out way to reduce spurious failing tests (in Jest)
-      - [ ] Handle console.log that complete after test completed?
+- [ ] Look into TypeScript Modules .d.ts: <https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html>
+- [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
+- [ ] Set tsc options: target es2015 or later
+- [ ] Backend
+- [ ] Handle Bad Json Gracefully on Client (JSON.parse …)
+- [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest
+- [ ] Maybe add timestamp to MobTimerResponse.actionInfo
+- [ ] Persistence -
+- [ ] Timeout: Should mobs be deleted on timeout (after period of inactivity)?
+- [ ] Persist Mobs in case server is reset, etc. (e.g., in DB or other physical storage)
+- [ ] Maybe: Try decorators - <https://www.typescriptlang.org/docs/handbook/decorators.html>
+- [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
+- [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of
+      string concatenation, e.g., `${minutesPart}:${secondsPart}`;
+- [ ] Figure out way to reduce spurious failing tests (in Jest)
+- [ ] Handle console.log that complete after test completed?
 
 ## Security / Permanent Storage
 
