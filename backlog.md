@@ -13,6 +13,15 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 ---
 
+## 5/15/2023 Agenda
+
+- Review backlog and code changes from last week
+- Priorities/goals for this week and beyond, including 
+  - Blocking issues
+  - Specific possible users of our product (e.g., 1. the Thursday Mob, 2. Bob Allen's Mobs, 3. us, 4. others.
+  - UI testing / customer release readiness / product stability
+- Retro on last week while working separately and texting updates (What happened? How did that feel? etc.) 
+
 ## Next
 
 New,to be prioritized and be aware of
