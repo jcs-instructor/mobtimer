@@ -98,13 +98,7 @@ New,to be prioritized and be aware of
       - [ ] ⚠️ Review code 
             - [ ] Code diff tool use issue: It's sometimes hard to see real diffs in the diff tool.
                   Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
-            - [ ] Why are we joining the mob twice in the App.tsx?
-                  Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
-                  In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
-                  Should the Room.tsx be the place for initializing the Controller frontend timer and client; i.e., after the mobName is entered,
-                  navigate to the room url and do the initializing there?
-                  (Note: Currently the landing page browser tab title text shows time remaining, etc., but really should just say "Mob Timer" or something like that.
-                  If we address the above questions, that might make the change easier.)
+            - [x] Refactor: Fix redundant mobName in App.tsx and controller 
             - [ ] UI Edit Participants & Roles 
                   - [x] Implement generally
                   - [x] Unhardcode emojis for Navigator & Driver from browser tab title text

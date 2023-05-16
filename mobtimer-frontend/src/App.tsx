@@ -17,11 +17,7 @@ console.log("url", url);
 
 const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
 Controller.client = new MobSocketClient(wrapperSocket);
-const mobName = "front-end-timer";
-Controller.frontendMobTimer = new MobTimer(mobName);
-Controller.frontendMobTimer.timerExpireFunc = playAudio;
 const client = Controller.client;
-client.joinMob(mobName);
 
 function playAudio() {
   console.log("timer expired on front end");

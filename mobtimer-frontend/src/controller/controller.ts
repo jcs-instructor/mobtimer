@@ -71,7 +71,7 @@ export class Controller {
     return symbol;
   }
 
-  static frontendMobTimer: MobTimer = new MobTimer("temp-not-to-be-used");
+  static frontendMobTimer: MobTimer = new MobTimer("");
   static client: MobSocketClient;
 
   static getAppTitle() {
