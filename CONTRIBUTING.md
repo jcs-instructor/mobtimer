@@ -129,7 +129,7 @@ from the root directory:
 - start-frontend-watch.sh - Compiles frontend and starts frontend server. Recompiles backend if any changes to frontend files.
 - compile-mobtimer-api-watch.sh - calls compile-api-no-watch and waits for changes.
 
-When you need to refresh node_modules in frontend or backend, run ../scripts/clean-all.sh
+When you need to refresh node_modules in frontend or backend, run ./scripts/clean-all.sh
 
 - clean-all.sh must be run. Removes the dist and node_module directories, and reruns yarn.
 
