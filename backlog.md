@@ -1,6 +1,8 @@
 # Backlog
 
 See also: [Reminders](./reminders.md), [Completed](./completed.md)
+And
+VSCode extension is in a separate repo here: https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 
 ## Improve Later
 
@@ -19,10 +21,10 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
   
   - [ ] Decide on must haves for rollout to others
     - [ ] Extension
-      - Specify mobName in vscode extension (not "front-end-timer") - see also "front-end-timer" related backlog item below
+      - Specify mobName (unhardcode) (not "front-end-timer") - see also "front-end-timer" related backlog item below
       - Provide instructions for installing extension
       - Bugs (manual test and fix, etc.)            
-      - Does sound work? Is it needed
+      - Does sound work? Is it needed?
     - [ ] Web app
       - Home page changes?
       - Bugs (manual test and fix, etc.)
@@ -30,14 +32,19 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
             - Break timer?  
             - Other differentiator?
     - [ ] See also all "⚠️" items in backlog below
-  
-  - [ ] Discuss approach with Thu morning mob
-    - [ ] Would vscode extension be a big win?
-    - [ ] Solicit desired enhancements
-    - [ ] Show our list of enhancements
-    - [ ] Incorporate their code into mobtimer
-  - [ ] Discuss approach with Bob Allen's mob - differences?
-  - [ ] Solicit others?  Ethan's gut - no if Bob Allen shows interest
+
+    - [ ] Audiences:
+      - [ ] Us (dogfooding)
+      - [ ] Thu morning mob
+            - [ ] Would vscode extension be a big win?
+            - [ ] Solicit desired enhancements
+            - [ ] Show our list of enhancements
+            - [ ] Incorporate their code into mobtimer
+      - [ ] Bob Allen
+            - Discuss approach with Bob Allen's mob - differences?
+      - [ ] Others
+            - Solicit others?  Ethan's gut - no if Bob Allen shows interest
+
 - [ ] Competitor: mobster
 - [ ] Priorities/goals for this week and beyond
   - [ ] New items
@@ -56,49 +63,14 @@ See also: [Reminders](./reminders.md), [Completed](./completed.md)
 
 New,to be prioritized and be aware of
 - [ ] PREP FOR CUSTOMERS TO USE:
-      - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
-      - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-       - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
-            - [ ] Edit Participants
-            - [ ] Edit Roles
-      - [ ] Bugs: 
+      - [ ] ⚠️ Bugs: 
             - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
             - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
                   - [ ] Joel - verify
             - [ ] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
                   other mob. Fixed, Joel - verify
             - [ ] Bug: participants and roles shows blank when save changes - could be done with defaultValue
-      - [ ] ⚠️ Review backlog.md differences for awareness
-      - [ ] ⚠️ Review code differences for awareness and also questions, e.g.,
-            - [ ] Code diff tool use issue: It's sometimes hard to see real diffs in the diff tool.
-                  Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
-            - [ ] Why are we joining the mob twice in the App.tsx?
-                  Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
-                  In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
-                  Should the Room.tsx be the place for initializing the Controller frontend timer and client; i.e., after the mobName is entered,
-                  navigate to the room url and do the initializing there?
-                  (Note: Currently the landing page browser tab title text shows time remaining, etc., but really should just say "Mob Timer" or something like that.
-                  If we address the above questions, that might make the change easier.)
-            - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
-            - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-            - [ ] UI Edit Participants & Roles 
-                  - [x] Implement generally
-                  - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
-                  - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
-                        - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
-                              (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
-                              - [ ] Later: Implement drag & drop for moving up/down
-                        - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
-                              - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
-                                    block popups and also it will be more user-friendly.
-      - [ ] Bugs: 
             - [ ] ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
-
-
-
-
-
-            - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
                   handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
                   closing the error message (if available for that browser) or refreshing the page.
                   Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
@@ -122,7 +94,27 @@ New,to be prioritized and be aware of
                         in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
                         the play button says, "Start (temp hack)" -  it might be fixed by adding sleep for 2 seconds in the frontend start 
                         watch (to make sure other components are compiled first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" 
-                        to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")              
+                        to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")   
+      - [ ] ⚠️ Review code 
+            - [ ] Code diff tool use issue: It's sometimes hard to see real diffs in the diff tool.
+                  Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
+            - [ ] Why are we joining the mob twice in the App.tsx?
+                  Why are do we have the mobName "front-end-timer" in App.tsx and "temp-not-to-be-used" in controller.ts?
+                  In App.tsx, why do we have a const mobName and also a state variable with the same name, i.e., in const [mobName, setMobName] = useState('')?
+                  Should the Room.tsx be the place for initializing the Controller frontend timer and client; i.e., after the mobName is entered,
+                  navigate to the room url and do the initializing there?
+                  (Note: Currently the landing page browser tab title text shows time remaining, etc., but really should just say "Mob Timer" or something like that.
+                  If we address the above questions, that might make the change easier.)
+            - [ ] UI Edit Participants & Roles 
+                  - [x] Implement generally
+                  - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
+                  - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
+                        - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
+                              (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
+                              - [ ] Later: Implement drag & drop for moving up/down
+                        - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
+                              - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
+                                    block popups and also it will be more user-friendly.           
       - [ ] ⚠️ Controller and UI Testing (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
             - [ ] Add Controller tests
             - [ ] List out what needs to be tested manually (and automated if possible)
@@ -143,14 +135,11 @@ New,to be prioritized and be aware of
                         - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
 - [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
       - [ ] Add README.md to mobtimer-api
-      - [ ] Add Joel to permission to publish mobtimer-api to npmjs.com
       - [ ] CI/CD 
       - [ ] cleanup console.log stms
 - [ ] Refactor Controller, which is becoming a "god object" (i.e., references too many things) and requires components to call it instead of just getting what the
       component needs. Possible remediations to try:
       - Try creating a generic StateVariable<T> class, so both the property and its React setter can be passed around together: [proposal](./proposal-generic-state-variable.md)
-- [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
-      https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
       - [ ] Refactor / cleanup:
             - [ ] where possible, don't use any types, e.g.:                  
@@ -167,7 +156,6 @@ New,to be prioritized and be aware of
                   front end timer's participants functionality; it just uses the client and backend response)
       - [ ] IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! - move to new repo: mobtimer-controller 
 
-- [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
 - [ ] Cleanup
@@ -184,9 +172,12 @@ New,to be prioritized and be aware of
 
 - [ ] Roles
 - [ ] Turn on/off sound
-- [ ] Notifications
 - [ ] Home page must be more different from mobti.me. Change text, images, and appearance so they aren't confusingly similar or an obvious knock-off of mobti.me
 - [ ] Images get in the way: (1) when screen narrows, (2) on mobile browser
+
+## Should-Haves
+
+- [ ] Notifications
 
 ## Pitch for front page
 
