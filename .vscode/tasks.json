@@ -16,7 +16,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "mobtimer startAll",
+			"label": "mobtimer start all",
 			"type": "shell",
 			"command": "echo running front and back ends",
 			"group": {

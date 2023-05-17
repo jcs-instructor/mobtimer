@@ -14,7 +14,6 @@ Remember to review Improve Later and To be prioritized
 
 # To be prioritized / refined
 
-- [ ] **pre-start.sh documentation**: Update CONTRIBUTING.md regarding when/how to use pre-start.sh
 - [ ] **Review init code** for initializing web socket, client, and mob
 - [ ] **Refactor onmessage**
   - [ ] Extract onmessage code to a function (name must begin with use)

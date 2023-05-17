@@ -14,7 +14,9 @@ Joel & Ethan:
   - optional: Browser notifications
 - Open VS Code
   - git pull
-  - run startAll task
+  - run tasks:
+    - pre start 
+    - start all
   - verify tests are working
   - synchronize extension timer (stop, start, stop)
 - Read "Practices to Focus On" section below!!!!!!!!!!!!!!!!!!!!!!!
