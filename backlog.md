@@ -59,7 +59,7 @@ VSCode extension is in a separate repo here: https://github.com/jcs-instructor/m
 ## Next
 
 - [ ] NEW: Review onmessage related code
-- [ ] Backlog org. - e.g., short title
+- [ ] Backlog organization, e.g., use short titles
 
 New,to be prioritized and be aware of
 - [ ] PREP FOR CUSTOMERS TO USE:
@@ -119,8 +119,7 @@ New,to be prioritized and be aware of
       - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
       - [ ] Clean up UI:
             - [ ] More compact (to fit more on screen at 100% zoom)
-            - [ ] Change browser tab title text for landing page
-            - [ ] Maybe: Change Cancel to X and put it next to Start button
+            - [ ] Change browser tab title text for landing page            
             - [ ] Landing page: 
                   - Make look more different from morozbarry's
                   - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
@@ -128,6 +127,9 @@ New,to be prioritized and be aware of
                     Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
                         - E.G., Image of happy people around one computer: 
                           https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
+            - [ ] Button disabling: Trim input box value on submit and disable submit button when input box is invalid (similar to what already did on JoinMobForm); do this for:
+                  - [ ] Add Participant button (disable if participantName.trim() !== '')
+                  - [ ] Update Duration button (disable if durationMinutes isn't >= 0.17 minutes, i.e., at least one second)
 - [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
       - [ ] Add README.md to mobtimer-api
       - [ ] CI/CD 
