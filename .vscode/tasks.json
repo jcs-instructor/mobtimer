@@ -28,11 +28,11 @@
 				"panel": "new"
 			},
 			"dependsOn": [
-				"api generate exports watch",
-				"api compile watch",
-				"api symlink watch",
-				"frontend start watch",
-				"backend start watch",
+				"mobtimer api generate exports watch",
+				"mobtimer api compile watch",
+				"mobtimer api symlink watch",
+				"mobtimer frontend start watch",
+				"mobtimer backend start watch",
 			],
 			"problemMatcher": []
 		},
