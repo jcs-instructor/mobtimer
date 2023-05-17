@@ -21,8 +21,8 @@ Remember to review Improve Later and To be prioritized
 
 # Next
 
-- [ ] **Refactor: move UI code in controller**:
-      - Call from either onMessage or Room.tsx  
+- [ ] **Refactor: remove UI code from controller**:
+      - document.title should not be in the controller (inject something instead from App.tsx)
 
 ## PREP FOR CUSTOMERS TO USE
 

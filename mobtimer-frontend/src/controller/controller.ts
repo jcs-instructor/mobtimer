@@ -4,6 +4,7 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
+  
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
