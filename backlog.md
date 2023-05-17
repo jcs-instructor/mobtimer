@@ -11,6 +11,7 @@ Remember to review Improve Later and To be prioritized
 - [ ] Ethan: **Deduplicate 2 copies of controller.ts** IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! 
       - move to new subrepo: mobtimer-controller       
 - [ ] Ethan: In tasks.json, reorder tasks by order of execution
+- [ ] Ethan: **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 
 ----
 
@@ -20,15 +21,6 @@ Remember to review Improve Later and To be prioritized
 
 # Next
 
-- [ ] **Review init code** for initializing web socket, client, and mob
-- [ ] **Refactor onmessage**
-  - [ ] Extract onmessage code to a function (name must begin with use)
-  - [ ] Move code out of submitJoinMobRequest
-  - [ ] Only execute if onmessage has not been defined
-  - [ ] Rename client.joinMob to sendJoin
-  - [ ] Rename client methods
-    - [ ] update to sendUpdate
-    - [ ] update all client methods that send to server to prepend "send"
 - [ ] **Refactor: move UI code in controller**:
       - Move updateSummary and getActionButtonLabel into Controller/src/ui
       - Call from either onMessage or Room.tsx  
@@ -121,6 +113,7 @@ Remember to review Improve Later and To be prioritized
                        CountdownTimer's timerExpireFunc
             - [ ] Use the decoupled CountdownTimer in the frontend, and rename frontendMobTimer as countdownTimer (since it never uses the
                   front end timer's participants functionality; it just uses the client and backend response)      
+- [ ] **client.sendCommand** - Add client.sendCommand property for all commands, e.g., client.sendCommand.pause()
 
 ## Misc
 - [ ] Get rid of # in URL - try BrowserRouter
