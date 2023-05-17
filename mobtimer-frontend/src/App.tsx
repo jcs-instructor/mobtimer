@@ -15,7 +15,8 @@ const url =
 console.log("process.env", process.env);
 console.log("url", url);
 
-const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; 
+// todo: test if connected and retry if not
 Controller.client = new MobSocketClient(wrapperSocket);
 const client = Controller.client;
 
@@ -23,6 +24,54 @@ function playAudio() {
   console.log("timer expired on front end");
   const audio = new Audio(soundSource);
   audio.play();
+}
+
+function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateAction<number>>, setParticipants: React.Dispatch<React.SetStateAction<string[]>>, setRoles: React.Dispatch<React.SetStateAction<string[]>>, setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>, setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>) {
+  client.webSocket.onmessageReceived = (message: { data: any; }) => {
+
+    // Get response from server
+    const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
+
+    // todo: handle if response is not successful
+    consoleLogResponse(response);
+
+    // Read response data 
+    const { mobStatus, durationMinutes, participants, roles, secondsRemaining } = Controller.translateResponseData(response);
+
+    if (response.actionInfo.action === Action.Expired || response.actionInfo.action === Action.Reset) {
+      playAudio();
+    }
+
+    // Derive mob label from response status
+    const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
+
+
+    // modify frontend mob timer
+    Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
+    Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
+
+    // update React state variables
+    setDurationMinutes(durationMinutes);
+    setParticipants(participants);
+    setRoles(roles);
+    setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
+    setActionButtonLabel(label);
+
+    if (response.mobState.status !== Controller.frontendMobTimer.status) {
+      console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
+        "Frontend Status: " + Controller.frontendMobTimer.status + ", " +
+        "Backend Status:" + response.mobState.status);
+    };
+  };
+}
+
+function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
+  console.log("Mob: " + response.mobState.mobName +
+    " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
+    "Action:" + response.actionInfo.action + ", " +
+    "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
+    "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
+  );
 }
 
 const App = () => {
@@ -40,8 +89,9 @@ const App = () => {
   Controller.injectSetParticipants(setParticipants);
   Controller.injectSetRoles(setRoles);
   Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
-  useSetOnmessage(setDurationMinutes, setParticipants, setRoles, setSecondsRemainingString, setActionButtonLabel);
-
+  
+  // Set socket listener
+  setSocketListener(setDurationMinutes, setParticipants, setRoles, setSecondsRemainingString, setActionButtonLabel);
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -86,47 +136,3 @@ const App = () => {
 }
 
 export default App;
-function useSetOnmessage(setDurationMinutes: React.Dispatch<React.SetStateAction<number>>, setParticipants: React.Dispatch<React.SetStateAction<string[]>>, setRoles: React.Dispatch<React.SetStateAction<string[]>>, setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>, setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>) {
-  client.webSocket.onmessageReceived = (message: { data: any; }) => {
-
-    // Get response from server
-    const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
-
-    // todo: handle if response is not successful
-    console.log("Mob: " + response.mobState.mobName +
-      " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
-      "Action:" + response.actionInfo.action + ", " +
-      "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
-      "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
-    );
-
-    // Read response data 
-    const { mobStatus, durationMinutes, participants, roles, secondsRemaining } = Controller.translateResponseData(response);
-
-    if (response.actionInfo.action === Action.Expired || response.actionInfo.action === Action.Reset) {
-      playAudio();
-    }
-
-    // Derive mob label from response status
-    const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
-
-
-    // modify frontend mob timer
-    Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
-    Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
-
-    // update React state variables
-    setDurationMinutes(durationMinutes);
-    setParticipants(participants);
-    setRoles(roles);
-    setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
-    setActionButtonLabel(label);
-
-    if (response.mobState.status !== Controller.frontendMobTimer.status) {
-      console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
-        "Frontend Status: " + Controller.frontendMobTimer.status + ", " +
-        "Backend Status:" + response.mobState.status);
-    };
-  };
-}
-
