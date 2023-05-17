@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
-import { Action, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
+import { Action, Command, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from './controller/controller';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
@@ -26,6 +26,23 @@ function playAudio() {
   audio.play();
 }
 
+function getActionButtonLabel() {
+  switch (Controller.frontendMobTimer.nextCommand) {
+    case Command.Pause: { 
+      return "⏸️ Pause";
+    }
+    case Command.Resume: {
+      return "▶️ Resume";
+    }
+    case Command.Start: {
+      return "▶️ Start";
+    }
+    default: {
+      return "";
+    } // todo: maybe handle invalid status differently
+  }
+}
+
 function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateAction<number>>, setParticipants: React.Dispatch<React.SetStateAction<string[]>>, setRoles: React.Dispatch<React.SetStateAction<string[]>>, setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>, setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>) {
   client.webSocket.onmessageReceived = (message: { data: any; }) => {
 
@@ -42,13 +59,12 @@ function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateActi
       playAudio();
     }
 
-    // Derive mob label from response status
-    const label = Controller.getActionButtonLabel(mobStatus); // todo: make enum 
-
-
     // modify frontend mob timer
     Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
     Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
+
+    // Derive mob label from response status
+    const label = getActionButtonLabel(); 
 
     // update React state variables
     setDurationMinutes(durationMinutes);

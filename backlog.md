@@ -22,7 +22,6 @@ Remember to review Improve Later and To be prioritized
 # Next
 
 - [ ] **Refactor: move UI code in controller**:
-      - Move getActionButtonLabel into Controller/src/ui
       - Call from either onMessage or Room.tsx  
 
 ## PREP FOR CUSTOMERS TO USE

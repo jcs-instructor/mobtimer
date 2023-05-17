@@ -137,23 +137,6 @@ export class Controller {
   static _participants: string[] = [];
   static _roles: string[] = [];
 
-  static getActionButtonLabel(backendStatus: Status) {
-    switch (backendStatus) {
-      case Status.Running: {
-        return "⏸️ Pause";
-      }
-      case Status.Paused: {
-        return "▶️ Resume";
-      }
-      case Status.Ready: {
-        return "▶️ Start";
-      }
-      default: {
-        return "";
-      } // todo: maybe handle invalid status differently
-    }
-  }
-
   static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: {
