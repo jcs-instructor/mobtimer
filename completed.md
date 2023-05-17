@@ -2,7 +2,11 @@
 
 2023-05-17
 
-- [x] Mob Name on Launch Page: Disable and dim join mob button if mob name is blank or just spaces; also, trim any spaces from mob name before joining mob.
+- Button disabling: Trim input box value on submit and disable submit button when input box is invalid; do this for:
+- [x] Join Mob button (enable if mobName.trim() !== '')
+- [x] Add Participant button (enable if participantName.trim() !== '')
+- [x] Update Duration button (enable if durationMinutes is equivalent to at least one second)
+- [x] Rotate and Randomize Participants buttons (enable if there are at least 2 participants)
 
 2023-05-15
 

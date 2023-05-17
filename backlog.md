@@ -127,9 +127,6 @@ New,to be prioritized and be aware of
                     Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
                         - E.G., Image of happy people around one computer: 
                           https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
-            - [ ] Button disabling: Trim input box value on submit and disable submit button when input box is invalid (similar to what already did on JoinMobForm); do this for:
-                  - [ ] Add Participant button (disable if participantName.trim() !== '')
-                  - [ ] Update Duration button (disable if durationMinutes isn't >= 0.17 minutes, i.e., at least one second)
 - [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
       - [ ] Add README.md to mobtimer-api
       - [ ] CI/CD 
