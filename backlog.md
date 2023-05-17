@@ -1,22 +1,18 @@
-## Other resources
+# Other resources
 
 See also: [Reminders](./reminders.md), [Completed](./completed.md), [Agenda](./agenda.md) and
 VSCode extension is in a separate repo here: https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 
 Remember to review Improve Later and To be prioritized
 
-## Improve Later
+# Improve Later
 
 - [ ] Agree ok to delete old branches other than dev and main
-- [ ] Backlog organization, e.g., short titles
+- [ ] In tasks.json, reorder tasks by order of execution
 
-- [?] In tasks.json, reorder tasks by order of execution
-- [x] Ethan - between sessions:
-  -  [x]] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
+----
 
----
-
-## To be prioritized
+# To be prioritized / refined
 
 - [ ] **pre-start.sh documentation**: Update CONTRIBUTING.md regarding when/how to use pre-start.sh
 - [ ] **Review init code** for initializing web socket, client, and mob
@@ -30,77 +26,81 @@ Remember to review Improve Later and To be prioritized
     - [ ] update all client methods that send to server to prepend "send"
 - [ ] **Refactor: move UI code in controller**. Move updateSummary and getActionButtonLabel into Controller/src/ui.  Call from either onMessage or Room.tsx  
 
-## Next
+-----------------------------------------------------------------------------------------------------------------------
 
-### [ ] PREP FOR CUSTOMERS TO USE
+# Next
 
-#### [ ] ⚠️ Bugs: 
-**Bold** 
-            - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-            - [ ] **Join Paused Mob bug**: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
-            - [ ] **Join second mob bug**: Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
-                  other mob. Fixed, Joel - verify
-            - [ ] **Participant/roles blanked out bug**: participants and roles shows blank when save changes - could be done with defaultValue
-            - [ ] **Play Sound Bug**: ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
-                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
-                  closing the error message (if available for that browser) or refreshing the page.
-                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
-                        Sound Effects
-                        You previously enabled sound effects,
-                        do you want to enable this time, too?
-                        OKAY! / NOT NOW / NEVER
-                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
-                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
-            - [ ] **Mob in Separate Tabs Bug** May be fixed by other bug fix.  Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for 
-                  on sometimes also starts it 
-                  for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
-                  be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
-                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
-                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
-                  an empty string.) (Reproducible?) 
-            - [ ] **Retry if connection fails**
-                  - Background:
-                        Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
-                        join a mob for the first time, we get this error messag 
-           - [ ] **Bug: Participant/Role flaky** 
-                  - [x] Implement generally
-                  - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
-                  - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
-                        - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
-                              (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
-                              - [ ] Later: Implement drag & drop for moving up/down
-                        - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
-                              - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
-                                    block popups and also it will be more user-friendly.           
+## PREP FOR CUSTOMERS TO USE
 
-#### Misc
-**Bold**
-      - [ ] ⚠️ Review code 
-            - [ ] **Code diff tool** use issue: It's sometimes hard to see real diffs in the diff tool.
-                  Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
-            - [x] Refactor: Fix redundant mobName in App.tsx and controller 
-       - [ ] **Controller and UI Testing** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
-            - [ ] Add Controller tests
-            - [ ] List out what needs to be tested manually (and automated if possible)
-                  - See completed.md for ideas, and...
-                  - Test in different browsers on PC, Mac, and mobile; with various screen widths, heights, and zoom levels
-                  - ...
-                  - ...
-            - [ ] Code coverage
-            - [ ] Maybe: Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
-      - [ ] **Clean up UI**
-            - [ ] More compact (to fit more on screen at 100% zoom)
-            - [ ] Change browser tab title text for landing page            
-            - [ ] Landing page: 
-                  - Make look more different from morozbarry's
-                  - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
-                  - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
-                    Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
-                        - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
-      - [ ] **Add README.md to mobtimer-api**
-      - [ ] **CI/CD** 
-      - [ ] **cleanup console.log**
-### Refactoring
+### Bugs ⚠️ 
+
+- [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
+- [ ] **Join Paused Mob bug**: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+- [ ] **Join second mob bug**: Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+      other mob. Fixed, Joel - verify
+- [ ] **Participant/roles blanked out bug**: participants and roles shows blank when save changes - could be done with defaultValue
+- [ ] **Play Sound Bug**: ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+      handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
+      closing the error message (if available for that browser) or refreshing the page.
+      Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
+            Sound Effects
+            You previously enabled sound effects,
+            do you want to enable this time, too?
+            OKAY! / NOT NOW / NEVER
+      - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
+            we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
+- [ ] **Mob in Separate Tabs Bug** May be fixed by other bug fix.  Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for 
+      on sometimes also starts it 
+      for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
+      be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+      EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+      the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+      an empty string.) (Reproducible?) 
+- [ ] **Retry if connection fails**
+      - Background:
+            Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
+            join a mob for the first time, we get this error messag 
+- [ ] **Bug: Participant/Role flaky** 
+      - [x] Implement generally
+      - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
+      - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
+            - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
+                  (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
+                  - [ ] Later: Implement drag & drop for moving up/down
+            - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
+                  - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
+                        block popups and also it will be more user-friendly.           
+
+### Misc
+
+- [ ] **Review code** ⚠️
+      - [ ] **Code diff tool** use issue: It's sometimes hard to see real diffs in the diff tool.
+            Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?
+      - [x] Refactor: Fix redundant mobName in App.tsx and controller 
+      - [ ] **Controller and UI Testing** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
+      - [ ] Add Controller tests
+      - [ ] List out what needs to be tested manually (and automated if possible)
+            - See completed.md for ideas, and...
+            - Test in different browsers on PC, Mac, and mobile; with various screen widths, heights, and zoom levels
+            - ...
+            - ...
+      - [ ] Code coverage
+      - [ ] Maybe: Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
+- [ ] **Clean up UI**
+      - [ ] More compact (to fit more on screen at 100% zoom)
+      - [ ] Change browser tab title text for landing page            
+      - [ ] Landing page: 
+            - Make look more different from morozbarry's
+            - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
+            - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
+                  Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
+                  - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
+- [ ] **Add README.md to mobtimer-api**
+- [ ] **CI/CD** 
+- [ ] **cleanup console.log**
+
+## Refactoring
+
 - [ ] Refactor Controller, which is becoming a "god object" (i.e., references too many things) and requires components to call it instead of just getting what the
       component needs. Possible remediations to try:
       - Try creating a generic StateVariable<T> class, so both the property and its React setter can be passed around together: [proposal](./proposal-generic-state-variable.md)
@@ -120,32 +120,32 @@ Remember to review Improve Later and To be prioritized
                   front end timer's participants functionality; it just uses the client and backend response)
       - [ ] IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! - move to new repo: mobtimer-controller 
 
-### Misc
+## Misc
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
 
-### Participant UI (reorder, edit, delete, drag/drop)
+## Participant UI (reorder, edit, delete, drag/drop)
 
 - [ ] Proposal: create route for replacing all existing participants, all work done in UI
 - [ ] UI: Reorder participants with drag/drop
 - [ ] UI: Rename participant
 - [ ] UI: Delete participant
 
-### Should-Haves
+## Should-Haves
 
 - [ ] Notifications
 
-### Pitch for front page
+## Pitch for front page
 
 - [ ] Reg scheduled events
 - [ ] Encourage pairing on real projects
 - [ ] How this project was done
 
-### Look at mrozzbarry code and discussions
+## Look at mrozzbarry code and discussions
 
 - See [here](./mrozbarry.md)
 
-### Could-Haves
+## Could-Haves
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if
       running); just store in nextDurationMinutes (or similar)
@@ -158,7 +158,8 @@ Remember to review Improve Later and To be prioritized
 - [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
 - [ ] Show all roles at all times (even when there are fewer than 2 participants)
 
-### Enhancements
+## Enhancements
+
 - [ ] Alarm for breaks, stretch, etc
 - [ ] Set alarm duration / pausing
 - [ ] Raise hand/make comments
@@ -174,7 +175,7 @@ Remember to review Improve Later and To be prioritized
   - [ ] List of mobbing groups
   - [ ] Link to channel in mobtimer Slack
 
-### rethink mobtimer-api
+## Rethink mobtimer-api
 
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
 - [ ] solve websocket error - is this still an issue?
@@ -184,7 +185,7 @@ Remember to review Improve Later and To be prioritized
 - [ ] create separate time library?
 - [ ] create separate mobtimerclient library?
 
-### Refactor & Technical
+## Refactor & Technical
 
 - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
@@ -230,6 +231,6 @@ Remember to review Improve Later and To be prioritized
 - [ ] Figure out way to reduce spurious failing tests (in Jest)
 - [ ] Handle console.log that complete after test completed?
 
-### Security / Permanent Storage
+## Security / Permanent Storage
 
 - [ ] Security / Permanent Storage - TBD
