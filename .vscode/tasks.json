@@ -2,7 +2,21 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "startAll",
+			"label": "mobtimer pre start",
+			"type": "shell",
+			"command": "./scripts/pre-start.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "mobtimer startAll",
 			"type": "shell",
 			"command": "echo running front and back ends",
 			"group": {
@@ -23,7 +37,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "api generate exports watch",
+			"label": "mobtimer api generate exports watch",
 			"type": "shell",
 			"command": "./scripts/generate-mobtimer-api-exports-watch.sh",
 			"group": {
@@ -37,7 +51,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "api publish watch",
+			"label": "mobtimer api publish watch",
 			"type": "shell",
 			"command": "./scripts/publish-mobtimer-api-watch.sh",
 			"group": {
@@ -51,7 +65,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "api compile watch",
+			"label": "mobtimer api compile watch",
 			"type": "shell",
 			"command": "./scripts/compile-mobtimer-api-watch.sh",
 			"group": {
@@ -65,7 +79,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "api symlink watch",
+			"label": "mobtimer api symlink watch",
 			"type": "shell",
 			"command": "./scripts/symlink-mobtimer-api-watch.sh",
 			"group": {
@@ -79,7 +93,7 @@
 			"problemMatcher": []
 		},		
 		{
-			"label": "backend start watch",
+			"label": "mobtimer backend start watch",
 			"type": "shell",
 			"command": "./scripts/start-backend-watch.sh",
 			"group": {
@@ -93,7 +107,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "frontend start watch",
+			"label": "mobtimer frontend start watch",
 			"type": "shell",
 			"command": "./scripts/start-frontend-watch.sh",
 			"group": {
