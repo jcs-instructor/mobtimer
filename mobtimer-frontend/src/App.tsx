@@ -57,6 +57,9 @@ function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateActi
     setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
     setActionButtonLabel(label);
 
+    // Update browser tab title text
+    Controller.updateSummary();
+
     if (response.mobState.status !== Controller.frontendMobTimer.status) {
       console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
         "Frontend Status: " + Controller.frontendMobTimer.status + ", " +
