@@ -5,14 +5,20 @@ VSCode extension is in a separate repo here: https://github.com/jcs-instructor/m
 
 Remember to review Improve Later and To be prioritized
 
-# Improve Later
+# Between sessions
 
-- [ ] Agree ok to delete old branches other than dev and main
-- [ ] In tasks.json, reorder tasks by order of execution
+- [ ] Ethan: Delete old branches other than dev and main, as long as not updated May 17, 2023 or later
+- [ ] Ethan: **Deduplicate 2 copies of controller.ts** IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! 
+      - move to new subrepo: mobtimer-controller       
+- [ ] Ethan: In tasks.json, reorder tasks by order of execution
 
 ----
 
 # To be prioritized / refined
+
+-----------------------------------------------------------------------------------------------------------------------
+
+# Next
 
 - [ ] **Review init code** for initializing web socket, client, and mob
 - [ ] **Refactor onmessage**
@@ -23,11 +29,9 @@ Remember to review Improve Later and To be prioritized
   - [ ] Rename client methods
     - [ ] update to sendUpdate
     - [ ] update all client methods that send to server to prepend "send"
-- [ ] **Refactor: move UI code in controller**. Move updateSummary and getActionButtonLabel into Controller/src/ui.  Call from either onMessage or Room.tsx  
-
------------------------------------------------------------------------------------------------------------------------
-
-# Next
+- [ ] **Refactor: move UI code in controller**:
+      - Move updateSummary and getActionButtonLabel into Controller/src/ui
+      - Call from either onMessage or Room.tsx  
 
 ## PREP FOR CUSTOMERS TO USE
 
@@ -100,7 +104,7 @@ Remember to review Improve Later and To be prioritized
 
 ## Refactoring
 
-- [ ] Refactor Controller, which is becoming a "god object" (i.e., references too many things) and requires components to call it instead of just getting what the
+- [ ] **Controller "God Object"** - Refactor Controller, which is becoming a "god object" (i.e., references too many things) and requires components to call it instead of just getting what the
       component needs. Possible remediations to try:
       - Try creating a generic StateVariable<T> class, so both the property and its React setter can be passed around together: [proposal](./proposal-generic-state-variable.md)
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
@@ -116,8 +120,7 @@ Remember to review Improve Later and To be prioritized
                   - 2. Rename MobTimer as CountdownTimer, and make Participants a separate class and just inject the rotate function into the  
                        CountdownTimer's timerExpireFunc
             - [ ] Use the decoupled CountdownTimer in the frontend, and rename frontendMobTimer as countdownTimer (since it never uses the
-                  front end timer's participants functionality; it just uses the client and backend response)
-      - [ ] IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! - move to new repo: mobtimer-controller 
+                  front end timer's participants functionality; it just uses the client and backend response)      
 
 ## Misc
 - [ ] Get rid of # in URL - try BrowserRouter
