@@ -9,9 +9,13 @@ const ShuffleParticipants = () => {
         Controller.client.shuffleParticipants();
     }
 
+    function ableToShuffle(): boolean {
+        return Controller._participants.length > 1;
+    }
+
     return (
         <form onSubmit={(event) => onSubmit(event)}>
-            <button type="submit">⭿ Randomize</button> {/* 🔁 */}
+            <button type="submit" disabled={!ableToShuffle()}>⭿ Randomize</button> {/* 🔁 */}
         </form>
     )
 }

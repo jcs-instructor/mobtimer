@@ -87,8 +87,7 @@ Remember to review Improve Later and To be prioritized
             - [ ] Maybe: Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
       - [ ] **Clean up UI**
             - [ ] More compact (to fit more on screen at 100% zoom)
-            - [ ] Change browser tab title text for landing page
-            - [ ] Maybe: Change Cancel to X and put it next to Start button
+            - [ ] Change browser tab title text for landing page            
             - [ ] Landing page: 
                   - Make look more different from morozbarry's
                   - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab

@@ -1,42 +1,52 @@
 ## Completed (Done)
 
+2023-05-17
+
+- Button disabling: Trim input box value on submit and disable submit button when input box is invalid; do this for:
+- [x] Join Mob button (enable if mobName.trim() !== '')
+- [x] Add Participant button (enable if participantName.trim() !== '')
+- [x] Update Duration button (enable if durationMinutes is equivalent to at least one second)
+- [x] Rotate and Randomize Participants buttons (enable if there are at least 2 participants)
+
 2023-05-15
-New,to be prioritized and be aware of
-- [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
-      - [x] Edit roles (navigator, driver)
-            - [x] Implement generally
-            - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
-      - [ ] Bugs: 
-            - [x] When edit participants or roles, if you press Enter, it submits without prompting you to confirm
-            - [x] UI: Fix bug where not every countdown second appears (was reproducible if duration was set to 0.08888 min. or so)
-            - [x] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
-                  the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
-                  - [x] EditParticipants
-                  - [x] EditRoles
-            - [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
-                  add, rotate, randommize, update (i.e., trimmed values), etc.
-            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
-                  - [x] Fix and test in UI
-                  - [x] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
-                        require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
-                        the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
-            - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
-                  the people from the previous mob ("team1") in the UI for the new mob ("team2")
-            - [x] Fix bug: UI sound not playing
-            - [x] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
-                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
-                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
-                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
-                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
-                  an empty string.)
-      - [ ] Clean up UI:
-            - [x] Make time remaining text bigger
-            - [x] Spacing of buttons, e.g., show vertically stacked buttons horizontally instead (e.g., Start & Cancel on one line; Rotate & Randomize on one line)
-  excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
-- [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
-      - [x] Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry) 
-      - [x] Get unit test working with WS Web Socket Wrapper (already works for W3C wrapper) (check console log - already set up in .on in test client)     
-      - [x] Split files by class (e.g., 3 files for 2 wrappers + 1 interface)
+
+- Edit roles (navigator, driver):
+- [x] Implement generally
+- [x] Unhardcode emojis for Navigator & Driver from browser tab title text
+
+- Fix Bugs
+- [x] When edit participants or roles, if you press Enter, it submits without prompting you to confirm
+- [x] UI: Fix bug where not every countdown second appears (was reproducible if duration was set to 0.08888 min. or so)
+- [x] Edit participants and roles input boxes - if you try to edit in the middle of the input box, it immediately updates and moves 
+      the cursor to the end of the input box. (We might be able to live with this for now; but it needs to be fixed.)
+      - [x] EditParticipants
+      - [x] EditRoles
+- [x] Edit Participants Syncing: Need to update the input box for editing participants whenever participants change; i.e., after: 
+      add, rotate, randommize, update (i.e., trimmed values), etc.
+- [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+      - [x] Fix and test in UI
+      - [x] I've added a failing test to mobClientServer.test.ts that reproduces the bug, which fails even for the first client (doesn't
+            require a 2nd client to join). Test is currently marked as skipped. I don't know why it still fails even though it succeeds in
+            the UI; maybe I need to do a clean all and then try again so it's using the latest mobTimer class, which has the fix
+- [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
+      the people from the previous mob ("team1") in the UI for the new mob ("team2")
+- [x] Fix bug: UI sound not playing
+- [x] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+      other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
+      that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+      EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+      the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+      an empty string.)
+
+- Clean up UI:
+- [x] Make time remaining text bigger
+- [x] Spacing of buttons, e.g., show vertically stacked buttons horizontally instead (e.g., Start & Cancel on one line; Rotate & Randomize on one    
+      line)                  
+
+- Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension):
+- [x] Decouple w3cwebsocket to allow choice of that or ws package (latter works in extension for mrozbarry) 
+- [x] Get unit test working with WS Web Socket Wrapper (already works for W3C wrapper) (check console log - already set up in .on in test client)     
+- [x] Split files by class (e.g., 3 files for 2 wrappers + 1 interface)
 
 2023-05-06
 

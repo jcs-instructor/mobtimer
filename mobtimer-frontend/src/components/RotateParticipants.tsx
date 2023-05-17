@@ -8,9 +8,13 @@ const RotateParticipants = () => {
         Controller.client.rotateParticipants();
     }
 
+    function ableToRotate(): boolean {
+        return Controller._participants.length > 1;
+    }
+
     return (
         <form onSubmit={(event) => onSubmit(event)}>
-            <button type="submit">↑ Rotate</button> {/* ⬆️ */}
+            <button type="submit" disabled={!ableToRotate()}>↑ Rotate</button> {/* ⬆️ */}
         </form>
     )
 }

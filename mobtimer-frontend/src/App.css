@@ -102,7 +102,15 @@
   border-width: 0.1rem;
   border-style: solid;
   border-color: black;
-  font-weight: bold;
+  font-weight: bold;  
+}
+
+.JoinMobForm button:disabled, button[disabled] {
+  opacity: 0.15;
+}
+
+button:disabled, button[disabled] {
+  opacity: 0.7;
 }
 
 .JoinMobForm label,
