@@ -63,7 +63,7 @@ VSCode extension is in a separate repo here: https://github.com/jcs-instructor/m
 
 New,to be prioritized and be aware of
 - [ ] PREP FOR CUSTOMERS TO USE:
-      - [ ] ⚠️ Bugs: 
+      - [ ] ⚠️ Bugs:             
             - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
             - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
                   - [ ] Joel - verify
@@ -126,7 +126,8 @@ New,to be prioritized and be aware of
                   - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
                   - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
                     Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
-                        - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
+                        - E.G., Image of happy people around one computer: 
+                          https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
 - [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
       - [ ] Add README.md to mobtimer-api
       - [ ] CI/CD 
