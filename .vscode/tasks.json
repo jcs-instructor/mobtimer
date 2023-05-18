@@ -135,5 +135,19 @@
 			},
 			"problemMatcher": []
 		},
+		{
+			"label": "mobtimer clean all",
+			"type": "shell",
+			"command": "./scripts/clean-all.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
 	]
 }
