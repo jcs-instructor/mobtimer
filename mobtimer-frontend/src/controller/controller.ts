@@ -4,7 +4,6 @@ import { MobSocketClient } from "mobtimer-api";
 import { MobTimer } from "mobtimer-api";
 
 export class Controller {
-  
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
@@ -137,6 +136,23 @@ export class Controller {
 
   static _participants: string[] = [];
   static _roles: string[] = [];
+
+  static getActionButtonLabel(backendStatus: Status) {
+    switch (backendStatus) {
+      case Status.Running: {
+        return "⏸️ Pause";
+      }
+      case Status.Paused: {
+        return "▶️ Resume";
+      }
+      case Status.Ready: {
+        return "▶️ Start";
+      }
+      default: {
+        return "";
+      } // todo: maybe handle invalid status differently
+    }
+  }
 
   static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {

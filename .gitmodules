@@ -1,0 +1,3 @@
+[submodule "mobtimer-vscode"]
+	path = mobtimer-vscode
+	url = git@github.com:jcs-instructor/mobtimer-vscode.git
