@@ -79,6 +79,9 @@ Remember to review Improve Later and To be prioritized
       - [ ] List out what needs to be tested manually (and automated if possible)
             - See completed.md for ideas, and...
             - Test in different browsers on PC, Mac, and mobile; with various screen widths, heights, and zoom levels
+            - Test multiple mobs in different tabs and different browsers simultaneously
+            - Test what happens when you join a mob and then disconnect the backend server and then reconnect (or when the backend server is down/times out)            
+            - In the UI, manually test every scenario we have for the backend unit tests (start, pause, resume, cancel, add participant, etc...) (or automate if possible)
             - ...
             - ...
       - [ ] Code coverage
