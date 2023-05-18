@@ -51,6 +51,10 @@ In VS Code,
 
 ### Adding a New Feature
 
+#### VSCode extension changes
+
+See vscode [CONTRIBUTING.md](./mobtimer-vscode/CONTRIBUTING.md)
+
 #### Backend Changes
 
 Files to change:
@@ -137,6 +141,10 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 # Production Deployment
 
 ## One-time setup
+
+### VSCode extension
+
+See [CONTRIBUTING.md](./mobtimer-vscode/CONTRIBUTING.md)
 
 ### Frontend
 

@@ -33,6 +33,7 @@
 				"mobtimer api symlink watch",
 				"mobtimer frontend start watch",
 				"mobtimer backend start watch",
+				"mobtimer vscode compile watch"
 			],
 			"problemMatcher": []
 		},
@@ -96,6 +97,20 @@
 			"label": "mobtimer backend start watch",
 			"type": "shell",
 			"command": "./scripts/start-backend-watch.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "mobtimer vscode compile watch",
+			"type": "shell",
+			"command": "./scripts/start-vscode-watch.sh",
 			"group": {
 				"kind": "build",
 				"isDefault": true
