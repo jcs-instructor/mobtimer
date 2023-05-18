@@ -16,24 +16,37 @@ Remember to review Improve Later and To be prioritized
 ----
 
 # To be prioritized / refined
-- 
+- [ ] **Refactor: remove UI code from controller**:
+      - document.title should not be in the controller (inject something instead from App.tsx)
+      - proposal: inject clockTickFunc modelled after whenExpiredFunc that the mob timer executes every second. The logic in intervals in front end, back end, and vscode
+        extension can be moved into a function that is then injected.
+
 
 -----------------------------------------------------------------------------------------------------------------------
 
 # Next
 
-- [ ] **Refactor: remove UI code from controller**:
-      - document.title should not be in the controller (inject something instead from App.tsx)
 
 ## PREP FOR CUSTOMERS TO USE
 
 ### Bugs ⚠️ 
 
-- [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-- [ ] **Join Paused Mob bug**: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
-- [ ] **Join second mob bug**: Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+- **SOCKET CONNECTION BUGS**
+  - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
+  - [ ] **Retry if connection fails**
+      - Background:
+            Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
+            join a mob for the first time, we get this error messag 
+- **Verify bugs fixed for two mobs**
+  - [ ] **Join Paused Mob bug**: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+  - [ ] **Join second mob bug**: Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
       other mob. Fixed, Joel - verify
-- [ ] **Participant/roles blanked out bug**: participants and roles shows blank when save changes - could be done with defaultValue
+      - [ ] **Mob in Separate Tabs Bug** May be fixed by other bug fix.  Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for 
+            on sometimes also starts it  for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
+            be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+            EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+            the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+            an empty string.) (Reproducible?) 
 - [ ] **Play Sound Bug**: ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
       handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
       closing the error message (if available for that browser) or refreshing the page.
@@ -44,17 +57,6 @@ Remember to review Improve Later and To be prioritized
             OKAY! / NOT NOW / NEVER
       - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
             we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
-- [ ] **Mob in Separate Tabs Bug** May be fixed by other bug fix.  Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for 
-      on sometimes also starts it 
-      for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
-      be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
-      EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
-      the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
-      an empty string.) (Reproducible?) 
-- [ ] **Retry if connection fails**
-      - Background:
-            Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
-            join a mob for the first time, we get this error messag 
 - [ ] **Bug: Participant/Role flaky** 
       - [x] Implement generally
       - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
