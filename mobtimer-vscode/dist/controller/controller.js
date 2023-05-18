@@ -67,11 +67,9 @@ class Controller {
     }
     static injectSetParticipants(setParticipantsFunction) {
         this.setParticipants = setParticipantsFunction;
-        Controller.updateSummary();
     }
     static injectSetRoles(setRolesFunction) {
         this.setRoles = setRolesFunction;
-        Controller.updateSummary();
     }
     static translateResponseData(response) {
         const mobState = response.mobState;
@@ -110,14 +108,17 @@ class Controller {
         switch (frontendMobtimer.status) {
             case mobtimer_api_1.Status.Running: {
                 client.pause();
+                frontendMobtimer.pause();
                 break;
             }
             case mobtimer_api_1.Status.Paused: {
                 client.start();
+                frontendMobtimer.start();
                 break;
             }
             case mobtimer_api_1.Status.Ready: {
                 client.start();
+                frontendMobtimer.start();
                 break;
             }
         }
@@ -142,7 +143,7 @@ class Controller {
     }
 }
 exports.Controller = Controller;
-Controller.frontendMobTimer = new mobtimer_api_2.MobTimer("temp-not-to-be-used");
+Controller.frontendMobTimer = new mobtimer_api_2.MobTimer("");
 Controller.setDurationMinutes = (_durationMinutes) => { };
 Controller.setSecondsRemainingString = (_timeString) => { };
 Controller.setParticipants = (_participants) => { };
