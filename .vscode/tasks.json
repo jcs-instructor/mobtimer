@@ -135,10 +135,63 @@
 			},
 			"problemMatcher": []
 		},
-		{
+				{
 			"label": "mobtimer clean all",
 			"type": "shell",
+			"command": "echo running front and back ends",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"mobtimer clean vscode",
+				"mobtimer clean frontend",
+				"mobtimer clean backend"
+			],
+			"problemMatcher": []
+		},
+
+		{
+			"label": "mobtimer clean all with script",
+			"type": "shell",
 			"command": "./scripts/clean-all.sh",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "mobtimer clean vscode",
+			"type": "shell",
+			"command": "./scripts/clean.sh mobtimer-vscode",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "mobtimer clean frontend",
+			"type": "shell",
+			"command": "./scripts/clean.sh mobtimer-frontend",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "mobtimer clean backend",
+			"type": "shell",
+			"command": "./scripts/clean.sh mobtimer-backend",
 			"group": "build",
 			"presentation": {
 				"reveal": "always",
