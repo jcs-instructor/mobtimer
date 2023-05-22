@@ -1,7 +1,7 @@
 {
   "main": "dist/server/index.js",
   "engines": {
-    "node": "16.x"
+    "node": "20.x"
   },
   "nodemonConfig": {
     "ext": "ts",
