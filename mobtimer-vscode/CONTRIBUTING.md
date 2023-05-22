@@ -13,9 +13,10 @@ From the Terminal:
 
 To start and debug:
 
-- In the terminal, enter 
-  `yarn run watch`        
+- If this component hasn't been started yet, then in the terminal, enter `yarn run watch`        
 - Press F5 (i.e., Run > Debug)
+- Enter VS Code command (ctrl-shift-P in Windows) to run the Hello World task 
+  (you should then the mobtimer in the statusbar)
 
 ## Create an installer
 
