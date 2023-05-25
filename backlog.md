@@ -18,6 +18,7 @@ Remember to review Improve Later and To be prioritized
 ----
 
 # To be prioritized / refined
+- [ ] **Address node flakiness** e.g., maybe use Docker or GitPod or other VM
 - [ ] **Refactor: remove UI code from controller**:
       - document.title should not be in the controller (inject something instead from App.tsx)
       - proposal: inject clockTickFunc modelled after whenExpiredFunc that the mob timer executes every second. The logic in intervals in front end, back end, and vscode
