@@ -83,9 +83,7 @@ Remember to review Improve Later and To be prioritized
 
 ### Misc
 
-- [ ] **Controller and UI Testing** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
-- [ ] **Add Controller tests**
-- [ ] **Manual tests**
+- [ ] **UI / Manual tests** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
   - [ ] List out what needs to be tested manually (and automated if possible)
       - See completed.md for ideas, and...
       - Test in different browsers on PC, Mac, and mobile; with various screen widths, heights, and zoom levels
