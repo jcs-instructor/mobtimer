@@ -12,8 +12,6 @@ Remember to review Improve Later and To be prioritized
       - remove duplicate files/scripts/etc. (including backlog-vscode twice?)
       - update .gitignore 
 - [ ] Joel: Delete old branches other than dev and main, as long as not updated May 17, 2023 or later
-- [ ] Ethan: **Deduplicate 2 copies of controller.ts** IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! 
-      - move to new subrepo: mobtimer-controller       
 - [ ] Ethan: In tasks.json, reorder tasks by order of execution
 - [ ] Ethan: **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 
@@ -32,17 +30,15 @@ Remember to review Improve Later and To be prioritized
 
 -----------------------------------------------------------------------------------------------------------------------
 
-# Next
+# Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-
-## PREP FOR CUSTOMERS TO USE
-
-### High Priority
+- [ ] **Clone repo** - Try cloning repo from scratch (on Joel's pc)
 - [ ] **DE-DUPLICATE controller code**
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
+- [ ] **Merge** to dev (and then main when ready to deploy)
 
-### Bugs ⚠️ 
+## Bugs ⚠️ 
 
 - **SOCKET CONNECTION BUGS**
   - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
@@ -81,7 +77,7 @@ Remember to review Improve Later and To be prioritized
                   - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
                         block popups and also it will be more user-friendly.           
 
-### Misc
+## Misc
 
 - [ ] **UI / Manual tests** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
   - [ ] List out what needs to be tested manually (and automated if possible)
@@ -139,21 +135,21 @@ Remember to review Improve Later and To be prioritized
 - [ ] UI: Rename participant
 - [ ] UI: Delete participant
 
-## Should-Haves
+# Should-Haves
 
 - [ ] Notifications
 
-## Pitch for front page
+# Pitch for front page
 
 - [ ] Reg scheduled events
 - [ ] Encourage pairing on real projects
 - [ ] How this project was done
 
-## Look at mrozzbarry code and discussions
+# Look at mrozzbarry code and discussions
 
 - See [here](./mrozbarry.md)
 
-## Could-Haves
+# Could-Haves
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if
       running); just store in nextDurationMinutes (or similar)
@@ -166,7 +162,7 @@ Remember to review Improve Later and To be prioritized
 - [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
 - [ ] Show all roles at all times (even when there are fewer than 2 participants)
 
-## Enhancements
+# Enhancements
 
 - [ ] Alarm for breaks, stretch, etc
 - [ ] Set alarm duration / pausing
@@ -183,7 +179,7 @@ Remember to review Improve Later and To be prioritized
   - [ ] List of mobbing groups
   - [ ] Link to channel in mobtimer Slack
 
-## Rethink mobtimer-api
+# Rethink mobtimer-api
 
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
 - [ ] solve websocket error - is this still an issue?
@@ -193,7 +189,7 @@ Remember to review Improve Later and To be prioritized
 - [ ] create separate time library?
 - [ ] create separate mobtimerclient library?
 
-## Refactor & Technical
+# Refactor & Technical
 
 - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
@@ -239,6 +235,6 @@ Remember to review Improve Later and To be prioritized
 - [ ] Figure out way to reduce spurious failing tests (in Jest)
 - [ ] Handle console.log that complete after test completed?
 
-## Security / Permanent Storage
+# Security / Permanent Storage
 
 - [ ] Security / Permanent Storage - TBD
