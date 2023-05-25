@@ -148,6 +148,7 @@
 				"panel": "new"
 			},
 			"dependsOn": [
+				"mobtimer clean api",
 				"mobtimer clean vscode",
 				"mobtimer clean frontend",
 				"mobtimer clean backend"
@@ -159,6 +160,17 @@
 			"label": "mobtimer clean all with script",
 			"type": "shell",
 			"command": "./scripts/clean-all.sh",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "mobtimer clean api",
+			"type": "shell",
+			"command": "./scripts/clean.sh mobtimer-api",
 			"group": "build",
 			"presentation": {
 				"reveal": "always",
