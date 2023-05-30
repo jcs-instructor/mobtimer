@@ -7,6 +7,7 @@ Remember to review Improve Later and To be prioritized
 
 # Between sessions
 
+- [ ] Ethan: **Clone repo** - Try cloning repo from scratch (on Ethan's PC)
 - [ ] Ethan: WIP: get add-extension branch working 
       - get working
       - remove duplicate files/scripts/etc. (including backlog-vscode twice?)
@@ -33,7 +34,7 @@ Remember to review Improve Later and To be prioritized
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [ ] **Clone repo** - Try cloning repo from scratch (on Joel's pc)
+- [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
 - [ ] **DE-DUPLICATE controller code**
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
