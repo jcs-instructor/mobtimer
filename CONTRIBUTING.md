@@ -10,22 +10,21 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
 
 ## Initial Setup
 
-- From the Terminal:
+From the Terminal:
 
   ```
   git clone [this repository name here]
   cd [this repository name here]
-  ```
-
-- Run clean-all script to execute yarn:
-  - Search for "Tasks: Run Task"
-  - Run "mobtimer clean all"
-  
-- Install nodemon
-  ```
   npm install -g nodemon
   npm install -g ts-node
-  ```
+  ```Run clean all task to execute yarn:
+
+  In VS Code,
+
+  - Press CTRL + SHIFT + P to open the Command Palette
+  - Search for "Tasks: Run Task"
+  - Run "mobtimer clean all"
+
 
 ## Start All Components
 
@@ -133,7 +132,9 @@ from the root directory:
 - start-frontend-watch.sh - Compiles frontend and starts frontend server. Recompiles backend if any changes to frontend files.
 - compile-mobtimer-api-watch.sh - calls compile-api-no-watch and waits for changes.
 
-When you need to refresh node_modules in frontend or backend, run "mobtimer clean all" task. (This removes the dist and node_module directories, and reruns yarn.)
+When you need to refresh node_modules in frontend or backend, run ./scripts/clean-all.sh
+
+- clean-all.sh must be run. Removes the dist and node_module directories, and reruns yarn.
 
 # Production Deployment
 
