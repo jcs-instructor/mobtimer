@@ -3,4 +3,3 @@
 ./scripts/clean.sh mobtimer-backend
 ./scripts/clean.sh mobtimer-frontend
 ./scripts/clean.sh mobtimer-vscode
-./scripts/pre-start.sh

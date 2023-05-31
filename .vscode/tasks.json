@@ -1,240 +1,275 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-		{
-			"label": "mobtimer pre start",
-			"type": "shell",
-			"command": "./scripts/pre-start.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer start all",
-			"type": "shell",
-			"command": "echo running front and back ends",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"dependsOn": [
-				"mobtimer api generate exports watch",
-				"mobtimer api compile watch",
-				"mobtimer api symlink watch",
-				"mobtimer frontend start watch",
-				"mobtimer backend start watch",
-				"mobtimer vscode compile watch"
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer api generate exports watch",
-			"type": "shell",
-			"command": "./scripts/generate-mobtimer-api-exports-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer api publish watch",
-			"type": "shell",
-			"command": "./scripts/publish-mobtimer-api-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer api compile watch",
-			"type": "shell",
-			"command": "./scripts/compile-mobtimer-api-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer api symlink watch",
-			"type": "shell",
-			"command": "./scripts/symlink-mobtimer-api-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer backend start watch",
-			"type": "shell",
-			"command": "./scripts/start-backend-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer vscode compile watch",
-			"type": "shell",
-			"command": "./scripts/start-vscode-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer frontend start watch",
-			"type": "shell",
-			"command": "./scripts/start-frontend-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-				{
-			"label": "mobtimer clean all",
-			"type": "shell",
-			"command": "echo running front and back ends",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"dependsOn": [
-				"mobtimer clean .",
-				"mobtimer clean api",
-				"mobtimer clean vscode",
-				"mobtimer clean frontend",
-				"mobtimer clean backend"
-			],
-			"problemMatcher": []
-		},
-
-		{
-			"label": "mobtimer clean all with script",
-			"type": "shell",
-			"command": "./scripts/clean-all.sh",
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer clean .",
-			"type": "shell",
-			"command": "./scripts/clean.sh .",
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer clean api",
-			"type": "shell",
-			"command": "./scripts/clean.sh mobtimer-api",
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer clean vscode",
-			"type": "shell",
-			"command": "./scripts/clean.sh mobtimer-vscode",
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer clean frontend",
-			"type": "shell",
-			"command": "./scripts/clean.sh mobtimer-frontend",
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "mobtimer clean backend",
-			"type": "shell",
-			"command": "./scripts/clean.sh mobtimer-backend",
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"type": "typescript",
-			"tsconfig": "mobtimer-vscode/tsconfig.json",
-			"option": "watch",
-			"problemMatcher": [
-				"$tsc-watch"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"label": "tsc: watch - mobtimer-vscode/tsconfig.json"
-		}
-	]
+    {
+      "label": "mobtimer step 2 - api setup",
+      "type": "shell",
+      "command": "./scripts/step2-api-setup.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 3 - start watch",
+      "type": "shell",
+      "command": "echo running front and back ends",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": [
+        "mobtimer api generate exports watch",
+        "mobtimer api compile watch",
+        "mobtimer api symlink watch",
+        "mobtimer frontend start watch",
+        "mobtimer backend start watch",
+        "mobtimer vscode compile watch"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api generate exports watch",
+      "type": "shell",
+      "command": "./scripts/generate-mobtimer-api-exports-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api publish watch",
+      "type": "shell",
+      "command": "./scripts/publish-mobtimer-api-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api compile watch",
+      "type": "shell",
+      "command": "./scripts/compile-mobtimer-api-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api symlink watch",
+      "type": "shell",
+      "command": "./scripts/symlink-mobtimer-api-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer backend start watch",
+      "type": "shell",
+      "command": "./scripts/start-backend-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer vscode compile watch",
+      "type": "shell",
+      "command": "./scripts/compile-vscode-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer vscode compile no watch (for debugger)",
+      "type": "shell",
+      "command": "./scripts/compile-vscode-no-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer frontend start watch",
+      "type": "shell",
+      "command": "./scripts/start-frontend-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 1 - clean all parallel",
+      "type": "shell",
+      "command": "echo running front and back ends",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": [
+        "mobtimer clean .",
+        "mobtimer clean api",
+        "mobtimer clean vscode",
+        "mobtimer clean frontend",
+        "mobtimer clean backend"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer all steps",
+      "type": "shell",
+      "command": "echo executed all steps",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": ["mobtimer step 1 and 2", "mobtimer step 3 - start watch"],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 1 and 2",
+      "type": "shell",
+      "command": "echo Executing step 1 and step 2",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "mobtimer step 1 - clean all parallel",
+        "mobtimer step 2 - api setup"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer clean .",
+      "type": "shell",
+      "command": "./scripts/clean.sh .",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer clean api",
+      "type": "shell",
+      "command": "./scripts/clean.sh mobtimer-api",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer clean vscode",
+      "type": "shell",
+      "command": "./scripts/clean.sh mobtimer-vscode",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer clean frontend",
+      "type": "shell",
+      "command": "./scripts/clean.sh mobtimer-frontend",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer clean backend",
+      "type": "shell",
+      "command": "./scripts/clean.sh mobtimer-backend",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "mobtimer-vscode/tsconfig.json",
+      "option": "watch",
+      "problemMatcher": ["$tsc-watch"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "tsc: watch - mobtimer-vscode/tsconfig.json"
+    }
+  ]
 }
