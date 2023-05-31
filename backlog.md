@@ -35,6 +35,7 @@ Remember to review Improve Later and To be prioritized
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
+- [ ] **Vscode CONTRIBUTING.md** - revise and refer back to parent CONTRIBUTING.md
 - [ ] **DE-DUPLICATE controller code**
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
