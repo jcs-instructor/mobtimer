@@ -2,7 +2,7 @@
 
 ## Initial Setup
 
-From the Terminal:
+If repo not cloned when doing set up for all, then from the Terminal:
 
   ```
   git clone [this repository name here]
@@ -15,7 +15,8 @@ To start and debug:
 
 - If this component hasn't been started yet, then in the terminal, enter `yarn run watch`        
 - Press F5 (i.e., Run > Debug)
-- Enter VS Code command (ctrl-shift-P in Windows) to run the Hello World task 
+- When prompted for compiler, search for "debug" and select found tasks
+- A new window should appear.  Enter VS Code command (ctrl-shift-P in Windows) to run the Hello World task 
   (you should then the mobtimer in the statusbar)
 
 ## Create an installer
@@ -25,14 +26,14 @@ To start and debug:
 
 ### Subsequent
 1. From terminal in top directory for the project: `vsce package`
-2. Find file mobtimer-vscode.vsix.  For Mac, I found it in Documents,then copied to Downloads
+2. Find file mobtimer-vscode.vsix.  For Mac, I found it in Documents,then copied to Downloads.
 3. To install in your vscode, from terminal: 
 
 ```
-     cd <file location>
+     cd <location of vsix (see step 2)>
      code --install-extension mobtimer-vscode.vsix
 ```
-4. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
+4. To install in vscode on other machines, download the vsix file to a directory on that machine, and then follow instructions in the previous step.
 
 ## Publish extension
 

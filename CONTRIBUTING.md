@@ -23,7 +23,7 @@ From the Terminal:
 
   - Press CTRL + SHIFT + P to open the Command Palette
   - Search for "Tasks: Run Task"
-  - Run "mobtimer clean all"
+  - Run "mobtimer all tasks"
 
 
 ## Start All Components
@@ -34,7 +34,6 @@ In VS Code,
 
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
-- Run "mobtimer pre start"
 - Run "mobtimer start all"
 
 ## Making Code Changes
