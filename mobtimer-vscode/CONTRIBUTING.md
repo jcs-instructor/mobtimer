@@ -26,7 +26,7 @@ To start and debug:
 ### Subsequent
 1. From terminal in the mobtimer-vscode directory: 
 ```
-cd <mobtimer-vscode directory>
+cd mobtimer-vscode
 vsce package
 ```
 2. Find file mobtimer-vscode*.vsix. 
