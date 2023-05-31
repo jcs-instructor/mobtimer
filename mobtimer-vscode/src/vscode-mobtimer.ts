@@ -1,5 +1,5 @@
 import { StatusBarAlignment, StatusBarItem, window } from "vscode";
-import { Controller } from "./controller/controller";
+import { Controller } from 'mobtimer-api';
 import { TOGGLE_TIMER_COMMAND } from "./constants";
 import { commands } from "vscode";
 

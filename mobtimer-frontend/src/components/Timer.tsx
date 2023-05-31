@@ -1,6 +1,6 @@
 import { TimeUtils } from 'mobtimer-api';
 import { useEffect } from 'react';
-import { Controller } from '../controller/controller';
+import { Controller } from 'mobtimer-api';
 
 type FormParameters = {
     timeString: string;
