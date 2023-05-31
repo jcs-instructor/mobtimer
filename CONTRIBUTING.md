@@ -10,23 +10,21 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
 
 ## Initial Setup
 
-- From the Terminal:
+From the Terminal:
 
   ```
   git clone [this repository name here]
   cd [this repository name here]
-  ```
-
-- Run clean-all script to execute yarn:
-  ```
-  ./scripts/clean-all.sh
-  ```
-
-- Install nodemon
-  ```
   npm install -g nodemon
   npm install -g ts-node
-  ```
+  ```Run clean all task to execute yarn:
+
+  In VS Code,
+
+  - Press CTRL + SHIFT + P to open the Command Palette
+  - Search for "Tasks: Run Task"
+  - Run "mobtimer all tasks"
+
 
 ## Start All Components
 
@@ -36,7 +34,6 @@ In VS Code,
 
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
-- Run "mobtimer pre start"
 - Run "mobtimer start all"
 
 ## Making Code Changes

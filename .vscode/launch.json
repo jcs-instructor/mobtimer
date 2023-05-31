@@ -5,8 +5,9 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+
 		{
-			"name": "Run Extension",
+			"name": "Run Extension3",
 			"type": "extensionHost",
 			"request": "launch",
 			"args": [
