@@ -24,21 +24,21 @@ To start and debug:
 - `yarn global add @vscode/vsce`   
 
 ### Subsequent
-1. From terminal in the mobtimer-vscode directory: 
+1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)
+2. From terminal in the mobtimer-vscode directory: 
 ```
 cd mobtimer-vscode
 vsce package
 ```
-2. Find file mobtimer-vscode*.vsix. 
+3. Find file mobtimer-vscode*.vsix. 
   - For Mac, I found it in Documents,then copied to Downloads
   - For PC, I found in in the current directory
-3. To install in your vscode, from terminal: 
+4. To install in your vscode, from terminal: 
 
 ```
      cd <file location>
      code --install-extension mobtimer-vscode*.vsix
 ```
-4. ?
 5. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
 
 ## Publish extension
