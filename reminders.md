@@ -40,6 +40,8 @@ Ethan:
 
 **Practices to Focus On**:
 
+- Do one thing at a time and then commit
+- 
 - While waiting for long activities (e.g., deploy), consider activities can do while waiting.
 - Try documenting in parallel with doing (e.g., having Ethan make changes to CONTRIBUTING.md, while Joel is deploying).
 - Between session work:
