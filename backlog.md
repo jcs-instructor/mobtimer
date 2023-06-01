@@ -35,8 +35,14 @@ Remember to review Improve Later and To be prioritized
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
-      - [ ] WIP: Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
-      - [ ] **Vscode CONTRIBUTING.md** - revise and refer back to parent CONTRIBUTING.md
+      WIP: 
+      - [ ] Adjust localhost background color (RoomGray) - move from room tsx to background for whole page (inside of box white)
+            - [ ] And change from lightgray to something else (if desired)
+      - [ ] Deploy to main
+      - [ ] Actually use the deployed one (dogfooding)
+      - [ ] **Vscode CONTRIBUTING.md** 
+            - [ ] Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
+            - [ ] revise and refer back to parent CONTRIBUTING.md
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
 - [ ] **Merge** to dev (and then main when ready to deploy)
