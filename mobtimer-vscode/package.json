@@ -3,7 +3,7 @@
   "displayName": "Mobtimer for VSCode",
   "repository": "mobtimer-vscode",
   "description": "",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "engines": {
     "vscode": "^1.77.0"
   },
@@ -18,7 +18,7 @@
     "commands": [
       {
         "command": "mobtimer.display",
-        "title": "Mobtimer for VSCode"
+        "title": "Mobtimer for VSCode 0.0.22"
       }
     ]
   },

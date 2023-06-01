@@ -32,11 +32,12 @@ export class VscodeMobTimer {
       "Debug Controller.client",
       Controller.client.webSocket ? "exists" : "does not exist"
     );
-    const mobName = "front-end-timer";
+    const mobName = "hippo-time";
     Controller.frontendMobTimer.timerExpireFunc = onExpire;
     const client = Controller.client;
     Controller.frontendMobTimer = new MobTimer(mobName);
     client.joinMob(mobName);
+    client.update(8);
     client.webSocket.onmessageReceived = async (message: { data: string }) => {
       // Get response from server
       console.log("message received");
