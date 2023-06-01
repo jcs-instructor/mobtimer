@@ -1,7 +1,7 @@
-import { Status } from "mobtimer-api";
-import { MobTimerResponses } from "mobtimer-api";
-import { MobSocketClient } from "mobtimer-api";
-import { MobTimer } from "mobtimer-api";
+import { Status } from "./status";
+import * as MobTimerResponses  from "./mobTimerResponse";
+import { MobSocketClient } from "./mobSocketClient";
+import { MobTimer } from "./mobTimer";
 
 export class Controller {
   static updateSummary() {
