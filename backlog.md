@@ -34,7 +34,6 @@ Remember to review Improve Later and To be prioritized
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [ ] **DE-DUPLICATE controller code** - WIP on dedupe-controller branch
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
       - [ ] WIP: Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
       - [ ] **Vscode CONTRIBUTING.md** - revise and refer back to parent CONTRIBUTING.md
