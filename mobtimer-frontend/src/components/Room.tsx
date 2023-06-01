@@ -9,6 +9,7 @@ import EditParticipants from './EditParticipants';
 import EditRoles from './EditRoles';
 import Reset from './Reset';
 import ShuffleParticipants from './ShuffleParticipants';
+import { Controller } from 'mobtimer-api';
 
 type FormParameters = {
     durationMinutes: number;
@@ -21,9 +22,10 @@ type FormParameters = {
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {
+const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {    
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
-    const mobNameLowerCase = mobNameUrlParam.toLowerCase();
+    const mobNameLowerCase = mobNameUrlParam.toLowerCase();    
+    const gray = Controller.url.includes("localhost");
     useEffect(
         () => {
             setMobName(mobNameLowerCase);
@@ -34,7 +36,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
 
     return (
         <>
-            <div className="RoomBox">
+            <div className={gray ? "RoomBox RoomBoxGray" : "RoomBox"}>
                 
                 <p className="Team">TEAM: {mobNameUrlParam}</p>
                 
