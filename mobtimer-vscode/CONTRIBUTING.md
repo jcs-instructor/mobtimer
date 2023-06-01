@@ -25,6 +25,8 @@ To start and debug:
 
 ### Subsequent
 1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)
+1b. Uninstall old version of mobtimer-vscode & click "Reload Required" button
+1c. In package.json: Increment the mobtimer-vscode "version" number and command "title" to match the new ver.
 2. From terminal in the mobtimer-vscode directory: 
 ```
 cd mobtimer-vscode
