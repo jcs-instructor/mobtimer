@@ -10,7 +10,7 @@ export class Timer {
   public update() {
     // Every second, update the status bar with the current time with seconds
     setInterval(() => {
-      const text = `[ $(clock) CURRENT version24: ${this.getCurrentTime()} ]`;
+      const text = `[ $(clock) v0.0.21: ${this.getCurrentTime()} ]`;
       this._statusBarItem.text = text;
     }, 1000); // 1000 ms = 1 second
     this._statusBarItem.show();

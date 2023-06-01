@@ -15,7 +15,6 @@ import { WSWebSocketWrapper } from "mobtimer-api";
 export class VscodeMobTimer {
   private _statusBarItem: StatusBarItem;
   private _playButton: StatusBarItem;
-  private _seconds = 0;
 
   public constructor() {
     console.log("Debug VscodeMobTimer constructor");
@@ -64,9 +63,8 @@ export class VscodeMobTimer {
     // Every second, update the status bar with the current time with seconds
     console.log("update");
     setInterval(() => {
-      console.log("Clicking version24");
-      this._seconds++;
-      const text = `[ $(clock) ${this._seconds} version24: ${Controller.frontendMobTimer.secondsRemainingString} ]`;
+      console.log("Clicking ");
+      const text = `[ $(clock) ${Controller.frontendMobTimer.secondsRemainingString} ]`;
       this._statusBarItem.text = text;
     }, 1000); // 1000 ms = 1 second
     this._statusBarItem.show();

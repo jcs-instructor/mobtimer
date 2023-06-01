@@ -18,7 +18,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "mobtimer-vscodeversion24",
+    "name": "mobtimer-vscode",
     "displayName": "Mobtimer for VSCode",
     "repository": "mobtimer-vscode",
     "description": "",
@@ -30,14 +30,14 @@ npm manifest:
       "Other"
     ],
     "activationEvents": [
-      "mobtimer.helloWorldversion24"
+      "mobtimer.display"
     ],
     "main": "./dist/extension.js",
     "contributes": {
       "commands": [
         {
-          "command": "mobtimer.helloWorldversion24",
-          "title": "Hello World version24"
+          "command": "mobtimer.display",
+          "title": "Hello World "
         }
       ]
     },
