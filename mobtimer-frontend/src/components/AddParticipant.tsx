@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Controller } from '../controller/controller';
+import { Controller } from 'mobtimer-api';
 
 const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');

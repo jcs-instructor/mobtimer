@@ -37,7 +37,6 @@ Remember to review Improve Later and To be prioritized
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
       - [ ] WIP: Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
       - [ ] **Vscode CONTRIBUTING.md** - revise and refer back to parent CONTRIBUTING.md
-- [ ] **DE-DUPLICATE controller code**
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
 - [ ] **Merge** to dev (and then main when ready to deploy)

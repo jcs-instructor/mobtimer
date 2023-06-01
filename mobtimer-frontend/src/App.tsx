@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Room from './components/Room';
 import { Action, Command, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
-import { Controller } from './controller/controller';
+import { Controller } from 'mobtimer-api';
 import Launch from './components/Launch';
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";

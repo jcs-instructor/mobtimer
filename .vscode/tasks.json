@@ -2,7 +2,28 @@
 	"version": "2.0.0",
 	"tasks": [
     {
-      "label": "mobtimer step 2 - api setup",
+      "label": "mobtimer step 1 - clean all parallel", 
+      "type": "shell",
+      "command": "echo running front and back ends",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": [
+        "mobtimer clean .",
+        "mobtimer clean api",
+        "mobtimer clean vscode",
+        "mobtimer clean frontend",
+        "mobtimer clean backend"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 2 - api setup", 
       "type": "shell",
       "command": "./scripts/step2-api-setup.sh",
       "group": {
@@ -16,7 +37,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer step 3 - start watch",
+      "label": "mobtimer step 3 - start watch", /* start all */
       "type": "shell",
       "command": "echo running front and back ends",
       "group": {
@@ -150,27 +171,6 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer step 1 - clean all parallel",
-      "type": "shell",
-      "command": "echo running front and back ends",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "dependsOn": [
-        "mobtimer clean .",
-        "mobtimer clean api",
-        "mobtimer clean vscode",
-        "mobtimer clean frontend",
-        "mobtimer clean backend"
-      ],
-      "problemMatcher": []
-    },
-    {
       "label": "mobtimer all steps",
       "type": "shell",
       "command": "echo executed all steps",
@@ -183,7 +183,10 @@
         "panel": "new"
       },
       "dependsOrder": "sequence",
-      "dependsOn": ["mobtimer step 1 and 2", "mobtimer step 3 - start watch"],
+      "dependsOn": [
+        "mobtimer step 1 - clean all parallel",
+        "mobtimer step 2 - api setup",
+        "mobtimer step 3 - start watch"],
       "problemMatcher": []
     },
     {
@@ -260,16 +263,5 @@
       },
       "problemMatcher": []
     },
-    {
-      "type": "typescript",
-      "tsconfig": "mobtimer-vscode/tsconfig.json",
-      "option": "watch",
-      "problemMatcher": ["$tsc-watch"],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "label": "tsc: watch - mobtimer-vscode/tsconfig.json"
-    }
   ]
 }

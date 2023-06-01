@@ -4,7 +4,7 @@
   
   - [ ] Decide on must haves for rollout to others
     - [ ] Extension
-      - Specify mobName (unhardcode) (not "front-end-timer") - see also "front-end-timer" related backlog item below
+      - Specify mobName (unhardcode) (not "hippo-time") - see also "front-end-timer"/"hippo-time" related backlog item below
       - Provide instructions for installing extension
       - Bugs (manual test and fix, etc.)            
       - Does sound work? Is it needed?
