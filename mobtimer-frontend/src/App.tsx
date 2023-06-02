@@ -9,9 +9,9 @@ import Launch from './components/Launch';
 import { soundSource } from "./assets/soundSource";
 
 // todo: unhardcode port
-const url =
-  process.env.REACT_APP_WEBSOCKET_URL ||
-  `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
+const url = Controller.url;
+  // process.env.REACT_APP_WEBSOCKET_URL ||
+  // `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
 console.log("process.env", process.env);
 console.log("url", url);
 

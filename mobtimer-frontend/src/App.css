@@ -8,6 +8,10 @@
   font-weight: bold;
 }
 
+.RoomBoxGray {
+  background-color: lightgray;
+}
+
 .Team {
   font-size: 120%;
   font-weight: bold;  

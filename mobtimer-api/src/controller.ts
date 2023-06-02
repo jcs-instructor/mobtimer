@@ -46,6 +46,11 @@ export class Controller {
     return match ? match[0] : "";
   }
 
+  static get url() {
+    return process.env.REACT_APP_WEBSOCKET_URL ||
+      `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
+  }
+
   static get secondsRemainingStringWithoutLeadingZero() {
     const secondsRemainingString =
       Controller.frontendMobTimer.secondsRemainingString;

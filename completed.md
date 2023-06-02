@@ -1,5 +1,9 @@
 ## Completed (Done)
 
+2023-06-01
+
+- [x] Make deployment UI look different from development UI
+
 2023-05-17
 
 - Button disabling: Trim input box value on submit and disable submit button when input box is invalid; do this for:
