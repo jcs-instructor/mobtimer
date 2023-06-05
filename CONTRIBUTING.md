@@ -15,9 +15,12 @@ From the Terminal:
   ```
   git clone [this repository name here]
   cd [this repository name here]
-  npm install -g nodemon
-  npm install -g ts-node
-  ```Run clean all task to execute yarn:
+  yarn global add nodemon
+  yarn global add ts-node
+  yarn global add @vscode/vsce
+  ```
+  
+  Run clean all task to execute yarn:
 
   In VS Code,
 
@@ -35,13 +38,20 @@ In VS Code,
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
 - Run task "mobtimer step 3 - start watch" 
-  - If get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks
+  - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks
+- To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
 
 ## Making Code Changes
 
 - Change code as desired
+- Mobtimer Frontend and Backend will automatically restart (because of the watchers).  VSCode Extension will automatically rebuild but not run a(see steps below for running with the new code)
+- If you want to run vscode extension in debug mode, enter VS Code command (ctrl-shift-P in Windows) "Mobtimer for VSCode x.x.x"
+- To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
+
 - Push to development branch
-- If you want to deploy changes, see Subsequent deployments" section (below)
+- If you want to deploy changes, see "Subsequent deployments" section (below)
+
+
 
 ### API changes
 
@@ -49,9 +59,6 @@ In VS Code,
 
 ### Adding a New Feature
 
-#### VSCode extension changes
-
-See vscode [CONTRIBUTING.md](./mobtimer-vscode/CONTRIBUTING.md)
 
 #### Backend Changes
 
@@ -116,6 +123,32 @@ The icon file is stored at public/favicon.ico. To modify this file
 
 The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you want to modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
 
+## Builidng and Installing VSCode Extension
+1. Re-publish mobtimer-api.  See [step 1 of subsequent deployments](#Subsequent-deployments)
+#Publish-the-API)
+2. Uninstall old version of mobtimer-vscode & click "Reload Required" button
+3. In package.json: Increment the mobtimer-vscode "version" number and command "title" to match the new ver.
+4. From terminal in the mobtimer-vscode directory: 
+```
+cd mobtimer-vscode
+vsce package
+```
+5. Find file mobtimer-vscode*.vsix. 
+  - For Mac, I found it in Documents,then copied to Downloads
+  - For PC, I found in in the current directory
+6. To install in your vscode, from terminal: 
+
+```
+     cd <file location>
+     code --install-extension mobtimer-vscode*.vsix
+```
+5. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
+
+## Publish extension
+
+For information on how to publish an extension, see https://code.visualstudio.com/api/working-with-extensions/publishing-extension#vsce.
+
+
 ## Helper Scripts
 
 All these scripts are contained in the scripts directory and should be executed
@@ -174,13 +207,16 @@ See [CONTRIBUTING.md](./mobtimer-vscode/CONTRIBUTING.md)
   - Send the message "Test". A message something like {"actionInfo":{"action":"invalidRequestError"}} will be returned.
 
 ## Subsequent deployments
-- Publish the API:
-
-  ```
+### Step 1 - Publish the API
+- Run script:
+```
   cd mobtimer-api
   ./publish-no-watch.sh
-  ```
-
+```
 - After running the script, there will be changes to package.json and yarn.lock files. Commit and push these changes.
 
-- Push to main branch
+### Step 2 - Push to main branch
+Push to main branch
+
+
+ 
