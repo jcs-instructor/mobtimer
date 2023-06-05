@@ -1,5 +1,9 @@
 ## Completed (Done)
 
+2023-06-05
+
+- [x] Different background color when running on localhost (so can tell when on dev vs. deployed site)
+
 2023-06-01
 
 - [x] Make deployment UI look different from development UI

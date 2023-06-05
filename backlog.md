@@ -25,11 +25,8 @@ Remember to review Improve Later and To be prioritized
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [ ] Review agreement
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
       WIP: 
-      - [ ] Adjust localhost background color (RoomGray) - move from room tsx to background for whole page (inside of box white)
-            - [ ] And change from lightgray to something else (if desired)
       - [ ] Deploy to main
       - [ ] Actually use the deployed one (dogfooding)
       - [ ] **Vscode CONTRIBUTING.md** 

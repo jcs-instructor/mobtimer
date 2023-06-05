@@ -3,13 +3,10 @@
   width:fit-content;
   margin-top: 1rem; 
   border: 1px solid black;
+  background-color: white;
   padding: 2rem;  
   font-size: x-large;
   font-weight: bold;
-}
-
-.RoomBoxGray {
-  background-color: lightgray;
 }
 
 .Team {

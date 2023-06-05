@@ -25,7 +25,9 @@ type FormParameters = {
 const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {    
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();    
-    const gray = Controller.url.includes("localhost");
+    if (Controller.url.includes("localhost")) {
+        document.body.style.backgroundColor = 'lightblue'
+    }    
     useEffect(
         () => {
             setMobName(mobNameLowerCase);
@@ -36,7 +38,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
 
     return (
         <>
-            <div className={gray ? "RoomBox RoomBoxGray" : "RoomBox"}>
+            <div className={"RoomBox"}>
                 
                 <p className="Team">TEAM: {mobNameUrlParam}</p>
                 
