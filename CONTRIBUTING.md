@@ -35,7 +35,7 @@ In VS Code,
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
 - Run task "mobtimer step 3 - start watch" 
-  - If get compilation or runtime errors, consider running task "mobtimer all steps"
+  - If get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks
 
 ## Making Code Changes
 
@@ -174,7 +174,6 @@ See [CONTRIBUTING.md](./mobtimer-vscode/CONTRIBUTING.md)
   - Send the message "Test". A message something like {"actionInfo":{"action":"invalidRequestError"}} will be returned.
 
 ## Subsequent deployments
-
 - Publish the API:
 
   ```

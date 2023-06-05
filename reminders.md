@@ -15,7 +15,7 @@ Joel & Ethan:
 - Open VS Code
   - git pull
   - run task "mobtimer step 3 - start watch" 
-    - if get compilation or runtime errors, consider running task "mobtimer all steps"
+    - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks
   - verify tests are working
   - synchronize extension timer (stop, start, stop)
 - Read "Practices to Focus On" section below!!!!!!!!!!!!!!!!!!!!!!!
