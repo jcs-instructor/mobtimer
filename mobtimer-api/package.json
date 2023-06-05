@@ -1,6 +1,6 @@
 {
   "name": "mobtimer-api",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "Mobtimer api",
   "main": "index.js",
   "dependencies": {
@@ -14,8 +14,7 @@
     "tsc": "^2.0.4",
     "typescript": "^4.8.4"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
