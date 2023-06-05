@@ -35,7 +35,7 @@ Remember to review Improve Later and To be prioritized
       - [ ] **Vscode CONTRIBUTING.md** 
             - [ ] Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
             - [ ] revise and refer back to parent CONTRIBUTING.md
-      - [ ] Update all references to old tasks ("start all", "pre start", etc.) and revise accordingly (in CONTRIBUTING.md, reminders.md, etc.)
+      - [x] Update all references to old tasks ("start all", "pre start", etc.) and revise accordingly (in CONTRIBUTING.md, reminders.md, etc.)
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
 - [ ] **Merge** to dev (and then main when ready to deploy)

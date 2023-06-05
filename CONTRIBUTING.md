@@ -2,7 +2,7 @@
 
 ## Windows PC Setup
 
-In VS Code, set your default terminal to Git Bash as follows (needed for some tasks to work on PC, e.g., "mobtimer pre start" and "mobtimer start all"):
+In VS Code, set your default terminal to Git Bash as follows (needed for some tasks to work on PC):
 
 - Press CTRL + SHIFT + P to open the Command Palette.
 - Search for “Terminal: Select Default Profile” (previously “Terminal: Select Default Shell”)
@@ -34,7 +34,8 @@ In VS Code,
 
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
-- Run "mobtimer start all"
+- Run task "mobtimer step 3 - start watch" 
+  - If get compilation or runtime errors, consider running task "mobtimer all steps"
 
 ## Making Code Changes
 
