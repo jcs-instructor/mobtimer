@@ -1,5 +1,5 @@
-./scripts/clean.sh .
-./scripts/clean.sh mobtimer-api
-./scripts/clean.sh mobtimer-backend
-./scripts/clean.sh mobtimer-frontend
-./scripts/clean.sh mobtimer-vscode
+./scripts/yarn-and-api.sh .
+./scripts/yarn-and-api.sh mobtimer-api
+./scripts/yarn-and-api.sh mobtimer-backend
+./scripts/yarn-and-api.sh mobtimer-frontend
+./scripts/yarn-and-api.sh mobtimer-vscode

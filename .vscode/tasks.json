@@ -191,7 +191,7 @@
     {
       "label": "mobtimer yarn-and-api .",
       "type": "shell",
-      "command": "./scripts/clean.sh .",
+      "command": "./scripts/yarn-and-api.sh .",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -202,7 +202,7 @@
     {
       "label": "mobtimer yarn-and-api api",
       "type": "shell",
-      "command": "./scripts/clean.sh mobtimer-api",
+      "command": "./scripts/yarn-and-api.sh mobtimer-api",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -213,7 +213,7 @@
     {
       "label": "mobtimer yarn-and-api vscode",
       "type": "shell",
-      "command": "./scripts/clean.sh mobtimer-vscode",
+      "command": "./scripts/yarn-and-api.sh mobtimer-vscode",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -224,7 +224,7 @@
     {
       "label": "mobtimer yarn-and-api frontend",
       "type": "shell",
-      "command": "./scripts/clean.sh mobtimer-frontend",
+      "command": "./scripts/yarn-and-api.sh mobtimer-frontend",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -235,7 +235,7 @@
     {
       "label": "mobtimer yarn-and-api backend",
       "type": "shell",
-      "command": "./scripts/clean.sh mobtimer-backend",
+      "command": "./scripts/yarn-and-api.sh mobtimer-backend",
       "group": "build",
       "presentation": {
         "reveal": "always",
