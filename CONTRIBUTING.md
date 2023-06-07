@@ -124,23 +124,24 @@ The icon file is stored at public/favicon.ico. To modify this file
 The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you want to modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
 
 ## Builidng and Installing VSCode Extension
-1. Re-publish mobtimer-api.  See [step 1 of subsequent deployments](#Subsequent-deployments)
+1. Re-publish mobtimer-api if npmjs version is outdated.  See [step 1 of subsequent deployments](#Subsequent-deployments)
 #Publish-the-API)
-2. Uninstall old version of mobtimer-vscode & click "Reload Required" button
-3. In package.json: Increment the mobtimer-vscode "version" number and command "title" to match the new ver.
+2. Uninstall old version of mobtimer-vscode & click "Reload Required" button if it appears
+3. Optional: Increment version in package.json by running `npm version`
 4. From terminal in the mobtimer-vscode directory: 
 ```
 cd mobtimer-vscode
 vsce package
 ```
-5. Find file mobtimer-vscode*.vsix. 
-  - For Mac, I found it in Documents,then copied to Downloads
-  - For PC, I found in in the current directory
+5. To find out the name of the file produced by the previous step:
+```
+ls *.vsix
+```
+
 6. To install in your vscode, from terminal: 
 
 ```
-     cd <file location>
-     code --install-extension mobtimer-vscode*.vsix
+     code --install-extension <file name>.vsix
 ```
 5. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
 
