@@ -126,7 +126,10 @@ The current version of favicon.ico was created using https://pixelied.com/editor
 ## Builidng and Installing VSCode Extension
 1. Re-publish mobtimer-api if npmjs version is outdated.  See [step 1 of subsequent deployments](#Subsequent-deployments)
 #Publish-the-API)
-2. Uninstall old version of mobtimer-vscode & click "Reload Required" button if it appears
+2. Uninstall old version of mobtimer-vscode
+   2a. Select the extension in the VSCode Extensions window
+   2b. Click on gear and select Uninstall
+   2c. Either click on "Reload Required" button if it appears or click the refresh button at the top
 3. Optional: Increment version in package.json by running `npm version`
 4. From terminal in the mobtimer-vscode directory: 
 ```

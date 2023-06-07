@@ -1,11 +1,17 @@
 {
   "name": "mobtimer-vscode",
-  "displayName": "Mobtimer for VSCode ${version}",
   "repository": "mobtimer-vscode",
   "description": "",
-  "version": "0.0.28",
-  "engines": {
+  "version": "0.0.32",
+  "displayName": "Mobtimer for VSCode",
+    "engines": {
     "vscode": "^1.77.0"
+  },
+  "config": {
+    "elephant": "tiger"
+  },
+  "config2": {
+    "elephant2": "tiger2"
   },
   "categories": [
     "Other"
@@ -18,7 +24,7 @@
     "commands": [
       {
         "command": "mobtimer.display",
-        "title": "Mobtimer for VSCode ${version}"
+        "title": "Mobtimer for VSCode"
       }
     ]
   },
