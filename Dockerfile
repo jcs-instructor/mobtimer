@@ -4,4 +4,4 @@ COPY mobtimer-frontend/package.json ./
 COPY mobtimer-frontend/yarn.lock ./
 COPY ./ ./
 RUN yarn
-CMD ["./scripts/step2-api-setup.sh2.sh"]
+CMD ["./scripts/api-setup.sh2.sh"]

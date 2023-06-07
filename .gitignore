@@ -3,3 +3,4 @@ settings.json
 node_modules
 /yarn.lock
 .DS_Store
+coverage

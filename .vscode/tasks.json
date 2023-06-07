@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
     {
-      "label": "mobtimer step 1 - clean all parallel", 
+      "label": "mobtimer step 1 and 2 - yarn and api setup", 
       "type": "shell",
       "command": "echo running front and back ends",
       "group": {
@@ -14,18 +14,18 @@
         "panel": "new"
       },
       "dependsOn": [
-        "mobtimer clean .",
-        "mobtimer clean api",
-        "mobtimer clean vscode",
-        "mobtimer clean frontend",
-        "mobtimer clean backend"
+        "mobtimer yarn-and-api .",
+        "mobtimer yarn-and-api api",
+        "mobtimer yarn-and-api vscode",
+        "mobtimer yarn-and-api frontend",
+        "mobtimer yarn-and-api backend"
       ],
       "problemMatcher": []
     },
     {
       "label": "mobtimer step 2 - api setup", 
       "type": "shell",
-      "command": "./scripts/step2-api-setup.sh",
+      "command": "./scripts/api-setup.sh",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -184,32 +184,12 @@
       },
       "dependsOrder": "sequence",
       "dependsOn": [
-        "mobtimer step 1 - clean all parallel",
-        "mobtimer step 2 - api setup",
+        "mobtimer step 1 and 2 - yarn and api setup",
         "mobtimer step 3 - start watch"],
       "problemMatcher": []
     },
     {
-      "label": "mobtimer step 1 and 2",
-      "type": "shell",
-      "command": "echo Executing step 1 and step 2",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "mobtimer step 1 - clean all parallel",
-        "mobtimer step 2 - api setup"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "mobtimer clean .",
+      "label": "mobtimer yarn-and-api .",
       "type": "shell",
       "command": "./scripts/clean.sh .",
       "group": "build",
@@ -220,7 +200,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer clean api",
+      "label": "mobtimer yarn-and-api api",
       "type": "shell",
       "command": "./scripts/clean.sh mobtimer-api",
       "group": "build",
@@ -231,7 +211,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer clean vscode",
+      "label": "mobtimer yarn-and-api vscode",
       "type": "shell",
       "command": "./scripts/clean.sh mobtimer-vscode",
       "group": "build",
@@ -242,7 +222,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer clean frontend",
+      "label": "mobtimer yarn-and-api frontend",
       "type": "shell",
       "command": "./scripts/clean.sh mobtimer-frontend",
       "group": "build",
@@ -253,7 +233,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer clean backend",
+      "label": "mobtimer yarn-and-api backend",
       "type": "shell",
       "command": "./scripts/clean.sh mobtimer-backend",
       "group": "build",
