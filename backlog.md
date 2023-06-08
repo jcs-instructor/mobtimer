@@ -27,7 +27,8 @@ Remember to review Improve Later and To be prioritized
 
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
       WIP: 
-      - [ ] **Deploy** to main
+      - [x] **Deploy** to main
+      - [ ] Install vscode ext.
       - [ ] **VSCode Configuration** Set environment variable for finding backend server
       - [ ] Actually use the deployed one (dogfooding)
       - [ ] **Vscode CONTRIBUTING.md** 

@@ -217,7 +217,5 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 - After running the script, there will be changes to package.json and yarn.lock files. Commit and push these changes.
 
 ### Step 2 - Push to main branch
-Push to main branch
-
-
- 
+- Push to main branch
+- Click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
