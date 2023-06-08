@@ -14,11 +14,10 @@ class MobSocketClient {
    * @param socket The socket whose `readyState` is being watched
    * @param state The desired `readyState` for the socket
    */
-  static waitForSocketState(
-    socket: { socketState: number },
+  static async waitForSocketState(
+    socket: IWebSocketWrapper,
     state: number
   ): Promise<void> {
-    const client = this;
     return new Promise(function (resolve) {
       const timeout = setTimeout(function () {
         if (socket.socketState === state) {
@@ -32,7 +31,7 @@ class MobSocketClient {
     });
   }
 
-  public waitForSocketState(state: number): Promise<void> {
+  public async waitForSocketState(state: number): Promise<void> {
     return MobSocketClient.waitForSocketState(this._webSocket, state);
   }
 
@@ -103,7 +102,11 @@ class MobSocketClient {
     this._sendJSON({ action: Action.Reset } as MobTimerRequests.ResetRequest);
   }
 
-  private _sendJSON(request: MobTimerRequests.MobTimerRequest) {
+  private async _sendJSON(request: MobTimerRequests.MobTimerRequest) {
+    await MobSocketClient.waitForSocketState(
+      this.webSocket,
+      this.webSocket.OPEN_CODE
+    );
     this._webSocket.sendMessage(JSON.stringify(request));
   }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Controller } from '../controller/controller';
+import { Controller } from 'mobtimer-api';
 
 const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');
@@ -13,6 +13,10 @@ const AddParticipant = () => {
         setParticipantName('');
     }
 
+    function isParticipantNameValid(): boolean {
+        return participantName.trim() !== '';
+    };
+
     return (
         <form onSubmit={(event) => onSubmit(event)}>
             <label>Add Participant: </label>
@@ -22,7 +26,7 @@ const AddParticipant = () => {
                 type="text"
                 placeholder="Enter a particpant name"
             />
-            <button type="submit">➕ Add</button> {/* ➕ */}
+            <button type="submit" disabled={!isParticipantNameValid()}>➕ Add</button> {/* ➕ */}
         </form>
     )
 }

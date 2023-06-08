@@ -2,7 +2,7 @@
 
 ## Windows PC Setup
 
-In VS Code, set your default terminal to Git Bash as follows (needed for "startAll" task to work on PC):
+In VS Code, set your default terminal to Git Bash as follows (needed for some tasks to work on PC):
 
 - Press CTRL + SHIFT + P to open the Command Palette.
 - Search for “Terminal: Select Default Profile” (previously “Terminal: Select Default Shell”)
@@ -10,23 +10,24 @@ In VS Code, set your default terminal to Git Bash as follows (needed for "startA
 
 ## Initial Setup
 
-- From the Terminal:
+From the Terminal:
 
   ```
   git clone [this repository name here]
   cd [this repository name here]
+  yarn global add nodemon
+  yarn global add ts-node
+  yarn global add @vscode/vsce
   ```
+  
+  Run clean all task to execute yarn:
 
-- Run clean-all script to execute yarn:
-  ```
-  ./scripts/clean-all.sh
-  ```
+  In VS Code,
 
-- Install nodemon
-  ```
-  npm install -g nodemon
-  npm install -g ts-node
-  ```
+  - Press CTRL + SHIFT + P to open the Command Palette
+  - Search for "Tasks: Run Task"
+  - Run "mobtimer all tasks" (run a 2nd time if errors the first time)
+
 
 ## Start All Components
 
@@ -36,19 +37,29 @@ In VS Code,
 
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
-- Search for "startAll" and select it
+- Run task "mobtimer step 3 - start watch" 
+  - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
+      twice  if get errors the first time)
+- To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
 
 ## Making Code Changes
 
 - Change code as desired
+- Mobtimer Frontend and Backend will automatically restart (because of the watchers).  VSCode Extension will automatically rebuild but not run a(see steps below for running with the new code)
+- If you want to run vscode extension in debug mode, enter VS Code command (ctrl-shift-P in Windows) "Mobtimer for VSCode x.x.x"
+- To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
+
 - Push to development branch
-- If you want to deploy changes, see Subsequent deployments" section (below)
+- If you want to deploy changes, see "Subsequent deployments" section (below)
+
+
 
 ### API changes
 
 - If the changes need to be consumed by VSCode extension or deploying to web, publish to npm
 
 ### Adding a New Feature
+
 
 #### Backend Changes
 
@@ -113,6 +124,36 @@ The icon file is stored at public/favicon.ico. To modify this file
 
 The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you want to modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
 
+## Builidng and Installing VSCode Extension
+1. Re-publish mobtimer-api if npmjs version is outdated.  See [step 1 of subsequent deployments](#Subsequent-deployments)
+#Publish-the-API)
+2. Uninstall old version of mobtimer-vscode
+   2a. Select the extension in the VSCode Extensions window
+   2b. Click on gear and select Uninstall
+   2c. Either click on "Reload Required" button if it appears or click the refresh button at the top
+3. Optional: Increment version in package.json by running `npm version`
+4. From terminal in the mobtimer-vscode directory: 
+```
+cd mobtimer-vscode
+vsce package
+```
+5. To find out the name of the file produced by the previous step:
+```
+ls *.vsix
+```
+
+6. To install in your vscode, from terminal: 
+
+```
+     code --install-extension <file name>.vsix
+```
+5. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
+
+## Publish extension
+
+For information on how to publish an extension, see https://code.visualstudio.com/api/working-with-extensions/publishing-extension#vsce.
+
+
 ## Helper Scripts
 
 All these scripts are contained in the scripts directory and should be executed
@@ -129,7 +170,7 @@ from the root directory:
 - start-frontend-watch.sh - Compiles frontend and starts frontend server. Recompiles backend if any changes to frontend files.
 - compile-mobtimer-api-watch.sh - calls compile-api-no-watch and waits for changes.
 
-When you need to refresh node_modules in frontend or backend, run ../scripts/clean-all.sh
+When you need to refresh node_modules in frontend or backend, run ./scripts/clean-all.sh
 
 - clean-all.sh must be run. Removes the dist and node_module directories, and reruns yarn.
 
@@ -167,14 +208,16 @@ When you need to refresh node_modules in frontend or backend, run ../scripts/cle
   - Send the message "Test". A message something like {"actionInfo":{"action":"invalidRequestError"}} will be returned.
 
 ## Subsequent deployments
-
-- Publish the API:
-
-  ```
+### Step 1 - Publish the API
+- Run script:
+```
   cd mobtimer-api
   ./publish-no-watch.sh
-  ```
-
+```
 - After running the script, there will be changes to package.json and yarn.lock files. Commit and push these changes.
 
-- Push to main branch
+### Step 2 - Push to main branch
+Push to main branch
+
+
+ 

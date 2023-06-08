@@ -1,78 +1,123 @@
-# Backlog
+# Other resources
 
-See also: [Reminders](./reminders.md), [Completed](./completed.md)
+See also: [Reminders](./reminders.md), [Completed](./completed.md), [Agenda](./agenda.md) and
+VSCode extension is in a separate repo here: https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
 
-## Improve Later
+Remember to review Improve Later and To be prioritized
 
-- [ ] Low priority. Ethan after hours:
-  - [ ] 2nd crack on start scripts, think about class vs function
-  - [ ] In tasks.json, reorder tasks by order of execution
-- [ ] Ethan - between sessions:
-  - [ ] Upgrade to new version of nodemon (current ver. 2.0.19, latest ver. 2.0.20)
-- [ ] Delete old unused branches
+# Between sessions
 
----
+- [ ] Ethan: **Clone repo** - Try cloning repo from scratch (on Ethan's PC)
+- [ ] Ethan: WIP: get add-extension branch working 
+      - get working
+      - remove duplicate files/scripts/etc. (including backlog-vscode twice?)
+      - update .gitignore 
+- [ ] Joel: Delete old branches other than dev and main, as long as not updated May 17, 2023 or later
+- [ ] Ethan: In tasks.json, reorder tasks by order of execution
+- [ ] Ethan: **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 
-## Next
+----
 
-New,to be prioritized and be aware of
-- [ ] PREP FOR CUSTOMERS TO USE STARTING THURS. 5/11/2023!!! Goal: Have good enough product deployed, stable, well tested before next Thursday AM mob 5/11/23 9am)
-      - [ ] Fix script error: rm: cannot remove 'src/exports.tmp': No such file or directory
-      - [ ] Follow steps in CONTRIBUTING.md to deploy (e.g., publish mobtimer-api, push to main, etc.)
-       - [ ] Replace window.confirm with a modal (since some browsers block popups and also it will be more user-friendly) for:
-            - [ ] Edit Participants
-            - [ ] Edit Roles
-      - [ ] Bugs: 
-            - [x] When edit participants or roles, if you press Enter, it submits without prompting you to confirm
-            - [ ] Bug: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-            - [ ] Join Paused Mob: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
-                  - [ ] Joel - verify
-            - [x] Back Button: After adding people to a mob ("team1"), if you hit the back button in the browser and join a new mob ("team2"), you see 
-                  the people from the previous mob ("team1") in the UI for the new mob ("team2")
-            - [x] Fix bug: UI sound not playing
-            - [x] Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
-                  other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may be
-                  that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
-                  EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
-                  the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
-                  an empty string.)
-            - [ ] Bug: participants and roles shows blank when save changes - could be done with defaultValue
-            - [ ] Bug: Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
-                  handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
-                  closing the error message (if available for that browser) or refreshing the page.
-                  Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
-                        Sound Effects
-                        You previously enabled sound effects,
-                        do you want to enable this time, too?
-                        OKAY! / NOT NOW / NEVER
-                  - [ ] Fix this bug
-                  - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
-                        we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
-            - [ ] WIP/maybe the new message "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes" is good enough?
-                  - Background:
-                        Bug on clean start: When start all tasks and join a mob for the first time, we get this error message
-                        in the browser console: "The connection to ws://localhost:4000/ was interrupted while the page was loading." And
-                        the play button says, "Start (temp hack)" -  it might be fixed by adding sleep for 2 seconds in the frontend start 
-                        watch (to make sure other components are compiled first) (Note: On 5/5/23, I changed the message from "Start (temp hack)" 
-                        to "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes")              
-      - [ ] Refactor: move any UI code out of Controller and call either from Timer.tsx or from onMessage.  Includes updateSummary and getActionButtonLabel.  
-      - [ ] Clean up UI:
-            - [ ] More compact (to fit more on screen at 100% zoom)
-            - [ ] Change browser tab title text for landing page
-            - [ ] Maybe: Change Cancel to X and put it next to Start button
-            - [ ] Landing page: 
-                  - Make look more different from morozbarry's
-                  - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
-                  - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
-                    Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
-                        - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
-- [ ] More backlog itesm: Move these to the correct priority/location in the backlog:
-      - [ ] Add README.md to mobtimer-api
-      - [ ] Add Joel to permission to publish mobtimer-api to npmjs.com
-      - [ ] CI/CD 
-      - [ ] cleanup console.log stms
-- [ ] ON HOLD: Create VSCode extension (needed so we can use it ourselves) - see our vscode extension repo here:
-      https://github.com/jcs-instructor/mobtimer-vscode/blob/main/backlog-vscode.md
+# To be prioritized / refined
+- ...
+
+-----------------------------------------------------------------------------------------------------------------------
+
+# Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
+
+- [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
+      WIP: 
+      - [ ] **Deploy** to main
+      - [ ] **VSCode Configuration** Set environment variable for finding backend server
+      - [ ] Actually use the deployed one (dogfooding)
+      - [ ] **Vscode CONTRIBUTING.md** 
+            - [ ] Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
+            - [ ] revise and refer back to parent CONTRIBUTING.md
+      - [x] Update all references to old tasks ("start all", "pre start", etc.) and revise accordingly (in CONTRIBUTING.md, reminders.md, etc.)
+- [ ] **CONTROLLER unit tests** Jest
+- [ ] **Manual tests (see below)**
+- [ ] **Merge** to dev (and then main when ready to deploy)
+
+- [ ] Rename exports.ts as exports-autogenerated.ts        
+- [ ] **VSIX script & task** - Add a script to update the vsix file, and call from tasks.json
+- [ ] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
+      - [ ] **Refactor: remove UI code from controller**:
+            - document.title should not be in the controller (inject something instead from App.tsx)
+            - proposal: inject clockTickFunc modelled after whenExpiredFunc that the mob timer executes every second. The logic in intervals in front end, back end, and vscode extension can be moved into a function that is then injected.
+- [ ] **Sync linters on Joel & Ethan's environments** (Use issue: It's sometimes hard to see real diffs in the diff tool.
+      Could this be  because of auto-formatting/spacing somehow being different between Joel & Ethan's dev environments?)
+
+## Bugs ⚠️ 
+
+- **SOCKET CONNECTION BUGS**
+  - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
+  - [ ] **Retry if connection fails**
+      - Background:
+            Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
+            join a mob for the first time, we get this error messag 
+- **Verify bugs fixed for two mobs**
+  - [ ] **Join Paused Mob bug**: When join mob where timer is paused, the timer shows 00:00 instead of the actual timer remaining.
+  - [ ] **Join second mob bug**: Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for one mob sometimes also starts it for the 
+      other mob. Fixed, Joel - verify
+      - [ ] **Mob in Separate Tabs Bug** May be fixed by other bug fix.  Bug when you create 2 new mobs in separate tabs of the same browser, starting the timer for 
+            on sometimes also starts it  for the other mob. This may depend on whether the back button has been used for one or more of the mobs. Having difficulty reproducing. It may 
+            be that having the controller be a singleton is causing this issue. (Similarly, with multiple mobs open in different tabs, sometime the
+            EditPariticants and EditRoles input boxes don't work correctly, i.e., when you click on the input box, it remains blank rather than revealing
+            the current comma-separated values and can't type in the box; and when you exit the input box, it asks if you want to replace the values with 
+            an empty string.) (Reproducible?) 
+- [ ] **Play Sound Bug**: ⚠️ Play sound is blocked by some browsers if you join a mob but don't click to interact with the page in any way. We should
+      handle this gracefully. In the meantime, the user can dismiss the error message and see the page content again by either 
+      closing the error message (if available for that browser) or refreshing the page.
+      Note: Mrozbarry's mobtimer gets around this by prompting you as follows (in the top right of his screen when you join):
+            Sound Effects
+            You previously enabled sound effects,
+            do you want to enable this time, too?
+            OKAY! / NOT NOW / NEVER
+      - [ ] Review GitHub issues in mrozbarry's MobTime to look for more possible bugs in our code (maybe they fixed some bugs/nuanced issues 
+            we don't know we have); also look at mrozbarry's unit tests and production code for more possible bugs/nuances we might not have considered
+- [ ] **Bug: Participant/Role flaky** 
+      - [x] Implement generally
+      - [x] Unhardcode emojis for Navigator & Driver from browser tab title text
+      - [ ] ⚠️ Get working consistently (currently flaky); probably replace current methodology with one of the following:
+            - [ ] For each participant and role, show buttons for: ➕ add, ➖ remove, ⬆️ move up, and ⬇️ move down.
+                  (Whatever the value in the input box is, just try to match it with the existing list for removal/moving/down.) 
+                  - [ ] Later: Implement drag & drop for moving up/down
+            - [ ] Instead of an input box for editing, just show a button that pops up a modal for editing the list.
+                  - [ ] Note: If we still have window.confirm, we should replace it with a modal dialog since some browsers 
+                        block popups and also it will be more user-friendly.           
+
+## Misc
+
+- [ ] **Docker?** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM
+- [ ] **UI / Manual tests** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
+  - [ ] List out what needs to be tested manually (and automated if possible)
+      - See completed.md for ideas, and...
+      - Test in different browsers on PC, Mac, and mobile; with various screen widths, heights, and zoom levels
+      - Test multiple mobs in different tabs and different browsers simultaneously
+      - Test what happens when you join a mob and then disconnect the backend server and then reconnect (or when the backend server is down/times out)            
+      - In the UI, manually test every scenario we have for the backend unit tests (start, pause, resume, cancel, add participant, etc...) (or automate if possible)
+      - ...
+      - ...
+      - [ ] Code coverage
+      - [ ] Maybe: Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https://reactjs.org/docs/testing-recipes.html>
+- [ ] **Clean up UI**
+      - [ ] More compact (to fit more on screen at 100% zoom)
+      - [ ] Change browser tab title text for landing page            
+      - [ ] Landing page: 
+            - Make look more different from morozbarry's
+            - Make more customer-centric; e.g., maybe a screenshot highlighting key features, such as the info in the browser tab
+            - Create simpler SVG graphic on landing page so it looks like one equal team (not separate roles); and/or... 
+                  Consider adding a royalty-free image with people, e.g., from pexels (Search: https://www.pexels.com/search/people%20collaborating%20around%20a%20computer/)
+                  - E.G., Image of happy people around one computer: https://www.pexels.com/photo/excited-multiracial-colleagues-enjoying-triumph-together-in-front-of-laptop-in-office-3931634/
+- [ ] **Add README.md to mobtimer-api**
+- [ ] **CI/CD** 
+- [ ] **cleanup console.log**
+
+## Refactoring
+
+- [ ] **Controller "God Object"** - Refactor Controller, which is becoming a "god object" (i.e., references too many things) and requires components to call it instead of just getting what the
+      component needs. Possible remediations to try:
+      - Try creating a generic StateVariable<T> class, so both the property and its React setter can be passed around together: [proposal](./proposal-generic-state-variable.md)
 - [ ] Extract mobtimer-controller (refactor to share with both React mobtimer-frontend and mobtimer-vscode extension)
       - [ ] Refactor / cleanup:
             - [ ] where possible, don't use any types, e.g.:                  
@@ -86,14 +131,12 @@ New,to be prioritized and be aware of
                   - 2. Rename MobTimer as CountdownTimer, and make Participants a separate class and just inject the rotate function into the  
                        CountdownTimer's timerExpireFunc
             - [ ] Use the decoupled CountdownTimer in the frontend, and rename frontendMobTimer as countdownTimer (since it never uses the
-                  front end timer's participants functionality; it just uses the client and backend response)
-      - [ ] IMPORTANT: WE HAVE DUPLICATE CODE FOR CONTROLLER.TS!!!! - move to new repo: mobtimer-controller 
+                  front end timer's participants functionality; it just uses the client and backend response)      
+- [ ] **client.sendCommand** - Add client.sendCommand property for all commands, e.g., client.sendCommand.pause()
 
-- [ ] Improve look by moving Cancel button om same row as timer and removing word "Cancel"
+## Misc
 - [ ] Get rid of # in URL - try BrowserRouter
   - [ ] Should we have something after main url and before room code?
-- [ ] Cleanup
-  - [ ] Delete unused branches (?)
 
 ## Participant UI (reorder, edit, delete, drag/drop)
 
@@ -102,25 +145,21 @@ New,to be prioritized and be aware of
 - [ ] UI: Rename participant
 - [ ] UI: Delete participant
 
-## Other Must-Haves
+# Should-Haves
 
-- [ ] Roles
-- [ ] Turn on/off sound
 - [ ] Notifications
-- [ ] Home page must be more different from mobti.me. Change text, images, and appearance so they aren't confusingly similar or an obvious knock-off of mobti.me
-- [ ] Images get in the way: (1) when screen narrows, (2) on mobile browser
 
-## Pitch for front page
+# Pitch for front page
 
 - [ ] Reg scheduled events
 - [ ] Encourage pairing on real projects
 - [ ] How this project was done
 
-## Look at mrozzbarry code and discussions
+# Look at mrozzbarry code and discussions
 
 - See [here](./mrozbarry.md)
 
-## Could-Haves
+# Could-Haves
 
 - [ ] When update duration minutes, don't change the time remaining for the currently running timer (if
       running); just store in nextDurationMinutes (or similar)
@@ -131,8 +170,10 @@ New,to be prioritized and be aware of
 - [ ] In UI listener, handle if response is not successful
 - [ ] Improve images in frontend
 - [ ] Maybe: Change home page link for "Learn more about mob programming" to something of our own, such as a page on our mobtimer website
+- [ ] Show all roles at all times (even when there are fewer than 2 participants)
 
-## Enhancements
+# Enhancements
+
 - [ ] Alarm for breaks, stretch, etc
 - [ ] Set alarm duration / pausing
 - [ ] Raise hand/make comments
@@ -141,15 +182,14 @@ New,to be prioritized and be aware of
 - [ ] User Epic
   - [ ] User identification / log in for people connected
   - [ ] Control who can join a session
-
-NEW:
-- [ ] Info about Th morning group and potentially other groups
+- [ ] Feature: Find coding partners  
+      - List of mob searchers, what looking for, and contact info
+      - Bob Allen would like a social platform to connect people who want to mob - opt in, name, email, times want to mob, programming language preferences, etc.
+- [ ] Info about Thursday morning group and potentially other groups (e.g., Thursday group is interested in rotating the driver at a different rate than the navigator)
   - [ ] List of mobbing groups
-- [ ] List of mob searchers, what looking for, and contact info
-- [ ] Link to channel in mobtimer Slack
+  - [ ] Link to channel in mobtimer Slack
 
-
-## rethink mobtimer-api
+# Rethink mobtimer-api
 
 - [ ] Discuss: separate into different repos? see [Multi-Repo Proposal](./proposal-multiple-repos.md)
 - [ ] solve websocket error - is this still an issue?
@@ -159,7 +199,7 @@ NEW:
 - [ ] create separate time library?
 - [ ] create separate mobtimerclient library?
 
-## Refactor & Technical
+# Refactor & Technical
 
 - [ ] Try Postman and double-check Postman steps in documentation: [CONTRIBUTING](./mobtimer-backend/CONTRIBUTING.md)
 - [ ] When deploy, is there a way for it to make a sound and/or other notification when done?
@@ -188,26 +228,23 @@ NEW:
 - [ ] Review prior retros for generic lessons re. languages/environments/etc.
 - [ ] Investigate improve gated checkin,else get rid of gated checkin requiring tests to pass
 - [ ] Consider gated checkin testing with push instead of commit
-- [ ] Get UI tests working in App.test.tsx (look for .skip, etc.) - maybe see <https:
-      //reactjs.org/docs/testing-recipes.html>
-  - [ ] Look into TypeScript Modules .d.ts: <https:
-        //www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html>
-    - [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
-    - [ ] Set tsc options: target es2015 or later
-    - [ ] Backend
-    - [ ] Handle Bad Json Gracefully on Client (JSON.parse …)
-    - [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest
-    - [ ] Maybe add timestamp to MobTimerResponse.actionInfo
-    - [ ] Persistence -
-    - [ ] Timeout: Should mobs be deleted on timeout (after period of inactivity)?
-    - [ ] Persist Mobs in case server is reset, etc. (e.g., in DB or other physical storage)
-    - [ ] Maybe: Try decorators - <https://www.typescriptlang.org/docs/handbook/decorators.html>
-      - [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
-      - [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of
-            string concatenation, e.g., `${minutesPart}:${secondsPart}`;
-      - [ ] Figure out way to reduce spurious failing tests (in Jest)
-      - [ ] Handle console.log that complete after test completed?
+- [ ] Look into TypeScript Modules .d.ts: <https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html>
+- [ ] Write script to automatically start frontend and backend (currently documented in CONTRIBUTING.
+- [ ] Set tsc options: target es2015 or later
+- [ ] Backend
+- [ ] Handle Bad Json Gracefully on Client (JSON.parse …)
+- [ ] detectOpenHandles: Maybe try using --detectOpenHandles with Jest
+- [ ] Maybe add timestamp to MobTimerResponse.actionInfo
+- [ ] Persistence -
+- [ ] Timeout: Should mobs be deleted on timeout (after period of inactivity)?
+- [ ] Persist Mobs in case server is reset, etc. (e.g., in DB or other physical storage)
+- [ ] Maybe: Try decorators - <https://www.typescriptlang.org/docs/handbook/decorators.html>
+- [ ] Backend - Think about what to do if pause/resume/start methods are called when shouldn’t be (throw?)
+- [ ] JavaScript template literals (refactoring): Consider using Javascript template literals instead of
+      string concatenation, e.g., `${minutesPart}:${secondsPart}`;
+- [ ] Figure out way to reduce spurious failing tests (in Jest)
+- [ ] Handle console.log that complete after test completed?
 
-## Security / Permanent Storage
+# Security / Permanent Storage
 
 - [ ] Security / Permanent Storage - TBD

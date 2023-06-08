@@ -22,6 +22,7 @@ class MobSocketTestClient extends MobSocketClient {
     const responseObject = this.convertToMobTimerResponse(
       message.data as string
     );
+    console.log("responseObject", responseObject);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -83,6 +84,7 @@ class MobSocketTestClient extends MobSocketClient {
   }
 
   public get lastSuccessfulMobState(): MobState {
+    console.log("lastSuccessfulResponse", this.lastSuccessfulResponse.mobState);
     const lastSuccessfulResponse = this.lastSuccessfulResponse;
     return lastSuccessfulResponse.mobState;
   }

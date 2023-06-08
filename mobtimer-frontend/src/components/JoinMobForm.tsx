@@ -7,8 +7,12 @@ const JoinMobForm = () => {
     const navigate = useNavigate();
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        navigate(`/${mobNameUrlParam.toLowerCase()}`);
+        navigate(`/${mobNameUrlParam.trim().toLowerCase()}`);
     }
+
+    function isMobNameValid(): boolean {
+        return mobNameUrlParam.trim() !== '';
+    };
 
     return (
         <div style={{ display: 'inline-flex' }}>
@@ -23,7 +27,7 @@ const JoinMobForm = () => {
                         placeholder="Enter a Mob Name"
                         id="mobName"
                     />
-                    <button type="submit">START</button>
+                    <button type="submit" disabled={!isMobNameValid()}>START</button>
                 </form>
             </div>
         </div>

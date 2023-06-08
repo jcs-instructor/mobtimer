@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller } from '../controller/controller';
+import { Controller } from 'mobtimer-api';
 
 const Reset = () => {
     

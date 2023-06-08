@@ -3,6 +3,7 @@
   width:fit-content;
   margin-top: 1rem; 
   border: 1px solid black;
+  background-color: white;
   padding: 2rem;  
   font-size: x-large;
   font-weight: bold;
@@ -102,7 +103,15 @@
   border-width: 0.1rem;
   border-style: solid;
   border-color: black;
-  font-weight: bold;
+  font-weight: bold;  
+}
+
+.JoinMobForm button:disabled, button[disabled] {
+  opacity: 0.15;
+}
+
+button:disabled, button[disabled] {
+  opacity: 0.7;
 }
 
 .JoinMobForm label,

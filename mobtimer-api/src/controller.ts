@@ -1,7 +1,7 @@
-import { IWebSocketWrapper, Status } from "mobtimer-api";
-import { MobTimerResponses } from "mobtimer-api";
-import { MobSocketClient } from "mobtimer-api";
-import { MobTimer } from "mobtimer-api";
+import { Status } from "./status";
+import * as MobTimerResponses  from "./mobTimerResponse";
+import { MobSocketClient } from "./mobSocketClient";
+import { MobTimer } from "./mobTimer";
 
 export class Controller {
   static updateSummary() {
@@ -46,6 +46,11 @@ export class Controller {
     return match ? match[0] : "";
   }
 
+  static get url() {
+    return process.env.REACT_APP_WEBSOCKET_URL ||
+      `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
+  }
+
   static get secondsRemainingStringWithoutLeadingZero() {
     const secondsRemainingString =
       Controller.frontendMobTimer.secondsRemainingString;
@@ -71,19 +76,8 @@ export class Controller {
     return symbol;
   }
 
-  static frontendMobTimer: MobTimer = new MobTimer("temp-not-to-be-used");
+  static frontendMobTimer: MobTimer = new MobTimer("");
   static client: MobSocketClient;
-
-  static initializeFrontendMobTimer(mobName: string, timerExpireFunc: () => void) {
-    Controller.frontendMobTimer = new MobTimer(mobName);
-    Controller.frontendMobTimer.timerExpireFunc = () => {
-      timerExpireFunc();
-    };
-  }
-
-  static initializeClient(webSocket: IWebSocketWrapper) {
-    Controller.client = new MobSocketClient(webSocket);
-  }
 
   static getAppTitle() {
     return "Mob Timer";
@@ -106,6 +100,7 @@ export class Controller {
   ): void {
     this.setSecondsRemainingString = (timeString: string) => {
       setSecondsRemainingStringFunction(timeString);
+      // Time ticking is tracked on the front end, so we need to update the summary here
       Controller.updateSummary();
     };
   }
@@ -116,14 +111,12 @@ export class Controller {
     setParticipantsFunction: (participants: string[]) => void
   ) {
     this.setParticipants = setParticipantsFunction;
-    Controller.updateSummary();
   }
 
   // inject roles
   static setRoles = (_roles: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   static injectSetRoles(setRolesFunction: (roles: string[]) => void) {
     this.setRoles = setRolesFunction;
-    Controller.updateSummary();
   }
 
   // other functions -----------------------

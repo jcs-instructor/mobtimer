@@ -4,8 +4,11 @@ import { IWebSocketWrapper } from "./iWebSocketWrapper";
 export class W3CWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: W3CWebSocket;
 
-  constructor(url: string) {
-    this._webSocket = new W3CWebSocket(url);
+  constructor(url: string, webSocket?: W3CWebSocket) {
+    if (url) this._webSocket = new W3CWebSocket(url);
+    else {
+      this._webSocket = webSocket!;
+    }
   }
 
   public get socketState(): number {

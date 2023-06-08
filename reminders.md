@@ -14,8 +14,13 @@ Joel & Ethan:
   - optional: Browser notifications
 - Open VS Code
   - git pull
-  - run startAll task
+  - run task "mobtimer step 3 - start watch" 
+    - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
+      twice  if get errors the first time)
   - verify tests are working
+  - verify UIs are working:
+    - browser
+    - vscode extension
   - synchronize extension timer (stop, start, stop)
 - Read "Practices to Focus On" section below!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -30,23 +35,21 @@ Ethan:
 
 **Facilitator (and First Navigator When Timer Doesn't Remember)**:
 ...
-5/2/2023 - Joel
-4/25/2023 - Ethan
+5/17/2023 - Joel
 
 **Warning**:
 
 - Make sure to run tests manually frequently! (since we turned off gated checkins and are making ui changes)
 
-**Practices to Focus On**:
+**Practices to Focus On (always have 1 or 2 items here)**:
 
-- While waiting for long activities (e.g., deploy), consider activities can do while waiting.
-- Try documenting in parallel with doing (e.g., having Ethan make changes to CONTRIBUTING.md, while Joel is deploying).
-- Between session work:
-  - Maybe would’ve been faster to look at diffs on Ethan’s PC to avoid multiple commit, build, deploy attempts to recreate on Joel’s PC.
-- Always look at reminders & have 1 or 2 things to focus on (at least)
+- Do one thing at a time and then commit
+- Always review between-sesssion changes at start of next session (& notify when making these changes)
 
 **Other Practices**:
 
+- While waiting for long activities (e.g., deploy), consider activities can do while waiting.
+- Try documenting in parallel with doing (e.g., having Ethan make changes to CONTRIBUTING.md, while Joel is deploying).
 - Rotate who facilitates session startups & retros
 - List accomplishments/what happened in retros
 - When entering commands from Terminal, write script first (so have a record of steps needed / makes environment changes repeatable)

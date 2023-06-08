@@ -1,110 +1,247 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-		{
-			"label": "startAll",
-			"type": "shell",
-			"command": "echo running front and back ends",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"dependsOn": [
-				"api generate exports watch",
-				"api compile watch",
-				"api symlink watch",
-				"frontend start watch",
-				"backend start watch",
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "api generate exports watch",
-			"type": "shell",
-			"command": "./scripts/generate-mobtimer-api-exports-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "api publish watch",
-			"type": "shell",
-			"command": "./scripts/publish-mobtimer-api-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "api compile watch",
-			"type": "shell",
-			"command": "./scripts/compile-mobtimer-api-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "api symlink watch",
-			"type": "shell",
-			"command": "./scripts/symlink-mobtimer-api-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},		
-		{
-			"label": "backend start watch",
-			"type": "shell",
-			"command": "./scripts/start-backend-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "frontend start watch",
-			"type": "shell",
-			"command": "./scripts/start-frontend-watch.sh",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		},
-	]
+    {
+      "label": "mobtimer step 1 and 2 - yarn and api setup", 
+      "type": "shell",
+      "command": "echo running front and back ends",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": [
+        "mobtimer yarn-and-api .",
+        "mobtimer yarn-and-api api",
+        "mobtimer yarn-and-api vscode",
+        "mobtimer yarn-and-api frontend",
+        "mobtimer yarn-and-api backend"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 2 - api setup", 
+      "type": "shell",
+      "command": "./scripts/api-setup.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 3 - start watch", /* start all */
+      "type": "shell",
+      "command": "echo running front and back ends",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": [
+        "mobtimer api generate exports watch",
+        "mobtimer api compile watch",
+        "mobtimer api symlink watch",
+        "mobtimer frontend start watch",
+        "mobtimer backend start watch",
+        "mobtimer vscode compile watch"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api generate exports watch",
+      "type": "shell",
+      "command": "./scripts/generate-mobtimer-api-exports-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api publish watch",
+      "type": "shell",
+      "command": "./scripts/publish-mobtimer-api-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api compile watch",
+      "type": "shell",
+      "command": "./scripts/compile-mobtimer-api-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer api symlink watch",
+      "type": "shell",
+      "command": "./scripts/symlink-mobtimer-api-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer backend start watch",
+      "type": "shell",
+      "command": "./scripts/start-backend-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer vscode compile watch",
+      "type": "shell",
+      "command": "./scripts/compile-vscode-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer vscode compile no watch (for debugger)",
+      "type": "shell",
+      "command": "./scripts/compile-vscode-no-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer frontend start watch",
+      "type": "shell",
+      "command": "./scripts/start-frontend-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer all steps",
+      "type": "shell",
+      "command": "echo executed all steps",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "mobtimer step 1 and 2 - yarn and api setup",
+        "mobtimer step 3 - start watch"],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer yarn-and-api .",
+      "type": "shell",
+      "command": "./scripts/yarn-and-api.sh .",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer yarn-and-api api",
+      "type": "shell",
+      "command": "./scripts/yarn-and-api.sh mobtimer-api",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer yarn-and-api vscode",
+      "type": "shell",
+      "command": "./scripts/yarn-and-api.sh mobtimer-vscode",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer yarn-and-api frontend",
+      "type": "shell",
+      "command": "./scripts/yarn-and-api.sh mobtimer-frontend",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer yarn-and-api backend",
+      "type": "shell",
+      "command": "./scripts/yarn-and-api.sh mobtimer-backend",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+  ]
 }

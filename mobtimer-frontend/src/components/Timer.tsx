@@ -1,6 +1,6 @@
 import { TimeUtils } from 'mobtimer-api';
 import { useEffect } from 'react';
-import { Controller } from '../controller/controller';
+import { Controller } from 'mobtimer-api';
 
 type FormParameters = {
     timeString: string;
@@ -22,7 +22,7 @@ const Timer = ({ timeString }: FormParameters) => {
         let millisecondsBetweenTicks =
             (millisecondsUntilNextWholeSecond > 1 && millisecondsUntilNextWholeSecond <= 1000) ?
                 millisecondsUntilNextWholeSecond :
-                200;
+                50;
 
         //console.log("--- millisecondsBetweenTicks : " + millisecondsBetweenTicks + " ---");
 
