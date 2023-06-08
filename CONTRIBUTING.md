@@ -178,10 +178,6 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ## One-time setup
 
-### VSCode extension
-
-See [CONTRIBUTING.md](./mobtimer-vscode/CONTRIBUTING.md)
-
 ### Frontend
 
 - On render.com, create static website

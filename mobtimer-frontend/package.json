@@ -16,7 +16,7 @@
     "gh-pages": "^5.0.0",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
-    "mobtimer-api": "^1.0.36",
+    "mobtimer-api": "^1.0.39",
     "net": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
