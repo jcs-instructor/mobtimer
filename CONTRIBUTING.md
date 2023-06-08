@@ -231,9 +231,9 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ### Step 3 - Configure environment variable(s)
 - Exit VSCode 
-- In an outside terminal:
+- In an outside terminal, set the environment variable REACT_APP_WEBSOCKET_URL to the url of the web socket (e.g., wss://mobtimer-backend-pj2v.onrender.com)
 ```
-export REACT_APP_WEBSOCKET_URL=wss://mobtimer-backend-pj2v.onrender.com
+export REACT_APP_WEBSOCKET_URL=<web socket server url here>
 code .
 ```
 - Reopen the MobTimer project folder in VSCode
