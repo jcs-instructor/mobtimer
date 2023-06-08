@@ -28,13 +28,13 @@ Remember to review Improve Later and To be prioritized
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
       WIP: 
       - [x] **Deploy** to main
-      - [ ] Install vscode ext.
-      - [ ] **VSCode Configuration** Set environment variable for finding backend server
+      - [x] Install vscode ext.
+      - [x] **VSCode Configuration** Set environment variable for the web socket server
       - [ ] Actually use the deployed one (dogfooding)
-      - [ ] **Vscode CONTRIBUTING.md** 
-            - [ ] Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
-            - [ ] revise and refer back to parent CONTRIBUTING.md
+      - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
       - [x] Update all references to old tasks ("start all", "pre start", etc.) and revise accordingly (in CONTRIBUTING.md, reminders.md, etc.)
+      - [ ] Follow up on: "Detected presence of yarn.lock. Using 'yarn' instead of 'npm' (to override this pass '--no-yarn' on the command line).
+This extension consists of 7070 files, out of which 3001 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension . You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore"
 - [ ] **CONTROLLER unit tests** Jest
 - [ ] **Manual tests (see below)**
 - [ ] **Merge** to dev (and then main when ready to deploy)

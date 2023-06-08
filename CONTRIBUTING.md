@@ -40,14 +40,14 @@ In VS Code,
 - Run task "mobtimer step 3 - start watch" 
   - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
       twice  if get errors the first time)
-- To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
+- To install latest VSCode extension into vscode, see [here](#Building-and-Installing-VSCode-Extension)
 
 ## Making Code Changes
 
 - Change code as desired
 - Mobtimer Frontend and Backend will automatically restart (because of the watchers).  VSCode Extension will automatically rebuild but not run a(see steps below for running with the new code)
 - If you want to run vscode extension in debug mode, enter VS Code command (ctrl-shift-P in Windows) "Mobtimer for VSCode x.x.x"
-- To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
+- To install latest VSCode extension into vscode, see [here](#Building-and-Installing-VSCode-Extension)
 
 - Push to development branch
 - If you want to deploy changes, see "Subsequent deployments" section (below)
@@ -124,15 +124,23 @@ The icon file is stored at public/favicon.ico. To modify this file
 
 The current version of favicon.ico was created using https://pixelied.com/editor/design/6428399563ff01432c82a888 with Ethan Strominger's gmail account, then coverted to svg using https://cloudconvert.com/. If you want to modify an image using the same tool and source you would need to ask Ethan. It is not exportable.
 
-## Builidng and Installing VSCode Extension
+## Building and Installing VSCode Extension
+0. Delete old *.vsix files from mobtimer-vscode directory (if exist)
+```
+cd mobtimer-vscode
+ls *.vsix
+rm *.vsix
+```
 1. Re-publish mobtimer-api if npmjs version is outdated.  See [step 1 of subsequent deployments](#Subsequent-deployments)
 #Publish-the-API)
 2. Uninstall old version of mobtimer-vscode
    2a. Select the extension in the VSCode Extensions window
    2b. Click on gear and select Uninstall
-   2c. Either click on "Reload Required" button if it appears or click the refresh button at the top
-3. Optional: Increment version in package.json by running `npm version`
-4. From terminal in the mobtimer-vscode directory: 
+   2c. Refresh by doing one of the following: 
+    - Click on the "Reload Required" button if it appears, or 
+    - Click the refresh button at the very top of the list of Extensions in VSCode (in left panel)
+3. Optional: Increment version in the mobtimer-vscode/package.json by running `npm version`
+4. From terminal: 
 ```
 cd mobtimer-vscode
 vsce package
@@ -209,7 +217,7 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ## Subsequent deployments
 ### Step 1 - Publish the API
-- Run script:
+- If the published version of the MobTimer API is out of date, publish the API; in the terminal:
 ```
   cd mobtimer-api
   ./publish-no-watch.sh
@@ -219,3 +227,13 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 ### Step 2 - Push to main branch
 - Push to main branch
 - Click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
+- To see any changes to the vscode extension in VSCode, see above section "Building and Installing VSCode Extension"
+
+### Step 3 - Configure environment variable(s)
+- Exit VSCode 
+- In an outside terminal:
+```
+export REACT_APP_WEBSOCKET_URL=wss://mobtimer-backend-pj2v.onrender.com
+code .
+```
+- Reopen the MobTimer project folder in VSCode
