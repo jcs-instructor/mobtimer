@@ -26,7 +26,7 @@ From the Terminal:
 
   - Press CTRL + SHIFT + P to open the Command Palette
   - Search for "Tasks: Run Task"
-  - Run "mobtimer all tasks"
+  - Run "mobtimer all tasks" (run a 2nd time if errors the first time)
 
 
 ## Start All Components
@@ -38,7 +38,8 @@ In VS Code,
 - Press CTRL + SHIFT + P to open the Command Palette
 - Search for "Tasks: Run Task"
 - Run task "mobtimer step 3 - start watch" 
-  - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks
+  - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
+      twice  if get errors the first time)
 - To install latest VSCode extension into vscode, see [here](#Builidng-and-Installing-VSCode-Extension)
 
 ## Making Code Changes

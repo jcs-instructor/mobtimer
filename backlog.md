@@ -27,7 +27,8 @@ Remember to review Improve Later and To be prioritized
 
 - [ ] **Dogfood our extension** - Use our vscode extension for our own mobbing sessions
       WIP: 
-      - [ ] Deploy to main
+      - [ ] **Deploy** to main
+      - [ ] **VSCode Configuration** Set environment variable for finding backend server
       - [ ] Actually use the deployed one (dogfooding)
       - [ ] **Vscode CONTRIBUTING.md** 
             - [ ] Resume with vscode/CONTRIBUTING.md step "1. Re-publish mobtimer-api first (see main CONTRIBUTING.md for mobtimer project)"
