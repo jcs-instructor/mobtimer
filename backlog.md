@@ -25,6 +25,8 @@ Ethan:
             - document.title should not be in the controller (inject something instead from App.tsx)
             - proposal: inject clockTickFunc modelled after whenExpiredFunc that the mob timer executes every second. The logic in intervals in front end, back end, and vscode extension can be moved into a function that is then injected.
 
+- [ ] **Extension stops connecting** When deployed mobtimer backend times out, our vscode extension doesn't seem to connect to it properly
+
 - [ ] Maybe: Add "localhost" to the text in browser (after "TEAM:") to make more obvious
 - [ ] Follow up on: "Detected presence of yarn.lock. Using 'yarn' instead of 'npm' (to override this pass '--no-yarn' on the command line).
 - [ ] **Exclude unneeded extenstion files** - We get this message:
