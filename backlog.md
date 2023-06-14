@@ -7,8 +7,9 @@ Remember to review Improve Later and To be prioritized
 
 # Between sessions
 
-- [ ] Ethan: In tasks.json, reorder tasks by order of execution
-- [ ] Ethan: **Listener performance**: Only execute setSocketListener if listener has not yet been defined
+Ethan:
+- [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
+- [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
 
 ----
 
@@ -24,8 +25,8 @@ Remember to review Improve Later and To be prioritized
       - [x] **Deploy** to main
       - [x] Install vscode ext.
       - [x] **VSCode Configuration** Set environment variable for the web socket server
+      - [ ] Add "localhost" to the text in browser (after "TEAM:")
       - [ ] Actually use the deployed one (dogfooding)
-      - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
       - [x] Update all references to old tasks ("start all", "pre start", etc.) and revise accordingly (in CONTRIBUTING.md, reminders.md, etc.)
       - [ ] Follow up on: "Detected presence of yarn.lock. Using 'yarn' instead of 'npm' (to override this pass '--no-yarn' on the command line).
 This extension consists of 7070 files, out of which 3001 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension . You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore"
