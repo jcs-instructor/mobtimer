@@ -7,12 +7,6 @@ Remember to review Improve Later and To be prioritized
 
 # Between sessions
 
-- [ ] Ethan: **Clone repo** - Try cloning repo from scratch (on Ethan's PC)
-- [ ] Ethan: WIP: get add-extension branch working 
-      - get working
-      - remove duplicate files/scripts/etc. (including backlog-vscode twice?)
-      - update .gitignore 
-- [ ] Joel: Delete old branches other than dev and main, as long as not updated May 17, 2023 or later
 - [ ] Ethan: In tasks.json, reorder tasks by order of execution
 - [ ] Ethan: **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 
