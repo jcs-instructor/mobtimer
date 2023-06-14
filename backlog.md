@@ -21,6 +21,7 @@ Ethan:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
+      - [ ] WIP: Add participants & roles to VSCode statusbar
       - [ ] **Refactor: remove UI code from controller**:
             - document.title should not be in the controller (inject something instead from App.tsx)
             - proposal: inject clockTickFunc modelled after whenExpiredFunc that the mob timer executes every second. The logic in intervals in front end, back end, and vscode extension can be moved into a function that is then injected.

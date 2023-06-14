@@ -13,7 +13,7 @@ export class Controller {
     } ${participantsString} - ${Controller.getAppTitle()}`;
   }
 
-  private static createListOfParticipantsWithRoleEmojisPrepended(): string {
+  public static createListOfParticipantsWithRoleEmojisPrepended(): string {
     const participantsCount = Controller._participants.length;
     const rolesCount = Controller._roles.length;
     const minCount = Math.min(participantsCount, rolesCount);
