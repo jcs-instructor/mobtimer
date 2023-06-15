@@ -49,6 +49,9 @@ Ethan:
 
 **Practices to Focus On (always have 1 or 2 items here)**:
 
+- When struggling, try to understand the flow and consider refactoring
+  - Code by intent (e.g., if (debug).... before even have the debug variable implementation)
+    - Should be able to read code at level of intent (higher level of abstraction)
 - Do one thing at a time and then commit
 - Always review between-sesssion changes at start of next session (& notify when making these changes)
 

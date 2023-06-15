@@ -22,6 +22,9 @@ Ethan:
 
 - [ ] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
       - [ ] WIP: Add participants & roles to VSCode statusbar
+      - [ ] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
+      - [ ] **Add debug to VscodeMobTimer ctor**
+      - [ ] **Refactor URL code more** in App.tsx and VscodeMobTimer.ts (and extension.ts)
       - [ ] **Refactor: remove UI code from controller**:
             - document.title should not be in the controller (inject something instead from App.tsx)
             - proposal: inject clockTickFunc modelled after whenExpiredFunc that the mob timer executes every second. The logic in intervals in front end, back end, and vscode extension can be moved into a function that is then injected.
