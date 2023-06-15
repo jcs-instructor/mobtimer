@@ -1,11 +1,15 @@
 import { commands, ExtensionContext } from "vscode";
 import { VscodeMobTimer } from "./vscode-mobtimer";
+import * as vscode from "vscode";
 
-// Your extension is activated the very first time the command is executed
+// The extension is activated the very first time the command is executed
 export async function activate(context: ExtensionContext) {
-  console.log(
-    'Congratulations Ethan, your extension "mobtimer.display" is now active!'
-  );
+  const debug = (context.extensionMode === vscode.ExtensionMode.Development);
+  if (debug) {
+    process.env.REACT_APP_WEBSOCKET_URL = `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
+  }
+  console.log("In extension.ts, process.env.REACT_APP_WEBSOCKET_URL = ", process.env.REACT_APP_WEBSOCKET_URL);
+  console.log('"mobtimer.display" is now active!');
   let vscodeMobTimer = new VscodeMobTimer();
   console.log("Done");
 

@@ -7,7 +7,7 @@ export class Controller {
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
-      Controller.createListOfParticipantsWithRoleEmojisPrepended();
+      Controller.createListOfParticipantsWithRoleEmojisPrepended() + "---zzz";
     document.title = `${Controller.statusSymbolText()}${
       Controller.secondsRemainingStringWithoutLeadingZero
     } ${participantsString} - ${Controller.getAppTitle()}`;
@@ -44,11 +44,6 @@ export class Controller {
       /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
     const match = str.match(emojiRegex);
     return match ? match[0] : "";
-  }
-
-  static get url() {
-    return process.env.REACT_APP_WEBSOCKET_URL ||
-      `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
   }
 
   static get secondsRemainingStringWithoutLeadingZero() {

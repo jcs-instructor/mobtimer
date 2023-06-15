@@ -9,7 +9,6 @@ import EditParticipants from './EditParticipants';
 import EditRoles from './EditRoles';
 import Reset from './Reset';
 import ShuffleParticipants from './ShuffleParticipants';
-import { Controller } from 'mobtimer-api';
 
 type FormParameters = {
     durationMinutes: number;
@@ -25,8 +24,10 @@ type FormParameters = {
 const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {    
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();    
-    if (Controller.url.includes("localhost")) {
-        document.body.style.backgroundColor = 'lightblue'
+    // todo: refactor reduncant code for debug boolean (also in App.tsx)
+    const debug = window.location.href.includes('localhost');
+    if (debug) {
+        document.body.style.backgroundColor = "lightblue";
     }    
     useEffect(
         () => {
