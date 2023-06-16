@@ -44,9 +44,12 @@ In VS Code,
 
 ## Making Code Changes
 
-- Change code as desired
+- Change code as desired 
 - Mobtimer Frontend and Backend will automatically restart (because of the watchers).  VSCode Extension will automatically rebuild but not run a(see steps below for running with the new code)
-- If you want to run vscode extension in debug mode, enter VS Code command (ctrl-shift-P in Windows) "Mobtimer for VSCode x.x.x"
+- If you want to run the VSCode extension in Debug mode:
+  - Press F5 (or Run > Start Debugging)
+  - When prompted, select "mobtimer vscode compile no watch (for debugger)"
+  - Once a new VSCode instance opens, enter the VSCode command (ctrl-shift-P in Windows): "Mobtimer for VSCode"
 - To install and run latest VSCode extension into vscode, see [here](#Building-and-Installing-VSCode-Extension)
 - Push to development branch
 - If you want to deploy changes, see "Subsequent deployments" section (below)
