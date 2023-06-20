@@ -7,7 +7,7 @@ export class Controller {
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
-      Controller.createListOfParticipantsWithRoleEmojisPrepended() + "---zzz";
+      Controller.createListOfParticipantsWithRoleEmojisPrepended();
     document.title = `${Controller.statusSymbolText()}${
       Controller.secondsRemainingStringWithoutLeadingZero
     } ${participantsString} - ${Controller.getAppTitle()}`;

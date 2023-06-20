@@ -22,7 +22,7 @@ scripts/start-vscode.sh
   - git pull
   - run task "mobtimer step 3 - start watch" 
     - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
-      twice  if get errors the first time)
+      twice if get errors the first time)
   - verify tests are working
   - verify UIs are working:
     - browser
@@ -41,7 +41,7 @@ Ethan:
 
 **Facilitator (and First Navigator When Timer Doesn't Remember)**:
 ...
-6/8/2023 - Joel
+6/20/2023 - Joel
 
 **Warning**:
 
