@@ -61,7 +61,7 @@ function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateActi
     }
 
     // modify frontend mob timer
-    Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
+    Controller.changeFrontendStatus(Controller.frontendMobTimer, mobStatus);
     Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
 
     // Derive mob label from response status
@@ -133,7 +133,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, Controller.frontendMobTimer);
+    Controller.toggleStatus(client, Controller.frontendMobTimer);
   }
 
   // Browser router

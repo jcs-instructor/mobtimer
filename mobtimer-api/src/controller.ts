@@ -154,7 +154,7 @@ export class Controller {
     }
   }
 
-  static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
+  static toggleStatus(client: MobSocketClient, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: {
         client.pause();
@@ -174,9 +174,9 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status) {
-    if (frontendMobtimer.status !== backendStatus) {
-      switch (backendStatus) {
+  static changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {
+    if (frontendMobtimer.status !== newStatus) {
+      switch (newStatus) {
         case Status.Running: {
           frontendMobtimer.start();
           break;

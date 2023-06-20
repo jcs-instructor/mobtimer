@@ -33,6 +33,7 @@ Ethan:
 - [ ] **Unhardcode Mobname in Extension** WIP: Ethan (on branch)
 - [ ] Consider - Bugs and easy refactoring in sections below (and watch out for tech debt):
 - [ ] **Refactor Extension**
+      - [ ] Dedupe Controller.toggleStatus and vscode-mobtimer.ts commands.registerCommand(TOGGLE_TIMER_COMMAND, () => {... code
       - [ ] **Refactor URL code more** in App.tsx and VscodeMobTimer.ts (and extension.ts)
       - [ ] **Refactor: remove UI code from controller**:
             - document.title should not be in the controller (inject something instead from App.tsx)
