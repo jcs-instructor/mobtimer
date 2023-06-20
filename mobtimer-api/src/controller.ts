@@ -7,7 +7,7 @@ export class Controller {
   static updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
-      Controller.createListOfParticipantsWithRoleEmojisPrepended() + "---zzz";
+      Controller.createListOfParticipantsWithRoleEmojisPrepended();
     document.title = `${Controller.statusSymbolText()}${
       Controller.secondsRemainingStringWithoutLeadingZero
     } ${participantsString} - ${Controller.getAppTitle()}`;
@@ -154,7 +154,7 @@ export class Controller {
     }
   }
 
-  static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
+  static toggleStatus(client: MobSocketClient, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: {
         client.pause();
@@ -174,9 +174,9 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status) {
-    if (frontendMobtimer.status !== backendStatus) {
-      switch (backendStatus) {
+  static changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {
+    if (frontendMobtimer.status !== newStatus) {
+      switch (newStatus) {
         case Status.Running: {
           frontendMobtimer.start();
           break;

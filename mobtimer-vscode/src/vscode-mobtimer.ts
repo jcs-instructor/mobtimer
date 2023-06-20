@@ -87,7 +87,7 @@ function controllerOnMessage(message: { data: string }) {
     Controller.translateResponseData(response);
 
   // modify frontend mob timer
-  Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
+  Controller.changeFrontendStatus(Controller.frontendMobTimer, mobStatus);
   Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
 }
 

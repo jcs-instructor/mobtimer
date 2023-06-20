@@ -39,7 +39,7 @@ In VS Code,
 - Search for "Tasks: Run Task"
 - Run task "mobtimer step 3 - start watch" 
   - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
-      twice  if get errors the first time)
+      twice if get errors the first time)
 - To install latest VSCode extension into vscode, see [here](#Building-and-Installing-VSCode-Extension)
 
 ## Making Code Changes
