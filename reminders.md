@@ -49,6 +49,8 @@ Ethan:
 
 **Practices to Focus On (always have 1 or 2 items here)**:
 
+- Refine backlog at end of session when still fresh - have 3-4 next items ready to go (timebox to 5-10 minutes max.)
+- When working on branch, test first on GitPod; and only if going to merge, try on other person's PC
 - When struggling, try to understand the flow and consider refactoring
   - Code by intent (e.g., if (debug).... before even have the debug variable implementation)
     - Should be able to read code at level of intent (higher level of abstraction)
