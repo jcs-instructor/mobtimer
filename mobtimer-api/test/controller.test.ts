@@ -1,7 +1,7 @@
 import { IWebSocketWrapper, MobSocketClient, W3CWebSocketWrapper } from 'mobtimer-api';
 import { Controller } from 'mobtimer-api';
 
-test("To do", () => {
+test("Change frontend status from Ready to Running", () => {
     const runningLocal = true;
     const url = runningLocal 
         ? `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}` 

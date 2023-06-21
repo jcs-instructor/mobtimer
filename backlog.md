@@ -24,6 +24,7 @@ Ethan:
       - [x] Add participants & roles to VSCode statusbar
       - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
 - [x] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
+- [ ] **Heartbeat** to keep backend from sleeping
 - [ ] **CONTROLLER unit tests** Jest - WIP (created controller.test.ts but have no tests implemented yet)
 - [ ] **Manual tests (see below)**
 - [ ] **Extension stops connecting** When deployed mobtimer backend times out, our vscode extension doesn't seem to connect to it properly
