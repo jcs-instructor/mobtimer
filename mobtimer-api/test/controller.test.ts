@@ -1,5 +1,5 @@
-import { IWebSocketWrapper, MobSocketClient, W3CWebSocketWrapper } from 'mobtimer-api';
-import { Controller } from 'mobtimer-api';
+import { IWebSocketWrapper, MobSocketClient, Status, W3CWebSocketWrapper } from '../src';
+import { Controller } from '../src/controller';
 
 test("Change frontend status from Ready to Running", () => {
     const runningLocal = true;
@@ -10,5 +10,7 @@ test("Change frontend status from Ready to Running", () => {
     // todo: test if connected and retry if not
     Controller.client = new MobSocketClient(wrapperSocket);
     const client = Controller.client;
+    Controller.changeFrontendStatus(Controller.frontendMobTimer, Status.Running);
+    expect(Controller.frontendMobTimer.status).toBe(Status.Running);
 });
 
