@@ -15,19 +15,24 @@ import { Controller } from "../src/controller";
 // Controller.client = new MobSocketClient(wrapperSocket);
 // const client = Controller.client;
 
-test("Change frontend status from Ready to Running", () => {
-  Controller.changeFrontendStatus(Controller.frontendMobTimer, Status.Running);
-  expect(Controller.frontendMobTimer.status).toBe(Status.Running);
-});
+describe("Change frontend status", () => {
+  test("Ready to Running", () => {
+    Controller.changeFrontendStatus(
+      Controller.frontendMobTimer,
+      Status.Running
+    );
+    expect(Controller.frontendMobTimer.status).toBe(Status.Running);
+  });
 
-test("Change frontend status from Running to Paused", () => {
-  Controller.frontendMobTimer.start();
-  Controller.changeFrontendStatus(Controller.frontendMobTimer, Status.Paused);
-  expect(Controller.frontendMobTimer.status).toBe(Status.Paused);
-});
+  test("Running to Paused", () => {
+    Controller.frontendMobTimer.start();
+    Controller.changeFrontendStatus(Controller.frontendMobTimer, Status.Paused);
+    expect(Controller.frontendMobTimer.status).toBe(Status.Paused);
+  });
 
-test("Change frontend status from Running to Ready", () => {
-  Controller.frontendMobTimer.start();
-  Controller.changeFrontendStatus(Controller.frontendMobTimer, Status.Ready);
-  expect(Controller.frontendMobTimer.status).toBe(Status.Ready);
+  test("Running to Ready", () => {
+    Controller.frontendMobTimer.start();
+    Controller.changeFrontendStatus(Controller.frontendMobTimer, Status.Ready);
+    expect(Controller.frontendMobTimer.status).toBe(Status.Ready);
+  });
 });
