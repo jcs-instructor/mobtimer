@@ -63,6 +63,7 @@ function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateActi
     // modify frontend mob timer
     Controller.changeFrontendStatus(Controller.frontendMobTimer, mobStatus);
     Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
+    Controller.frontendMobTimer.durationMinutes = durationMinutes;
 
     // Derive mob label from response status
     const label = getActionButtonLabel(); 

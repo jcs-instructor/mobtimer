@@ -118,6 +118,7 @@ export class MobTimer {
     };
   }
 
+  // todo: consider refactoring to a property setter, i.e., set secondsRemaining - and moving next to the existing getter
   setSecondsRemaining(secondsRemaining: number) {
     // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
     // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds
