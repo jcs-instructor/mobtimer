@@ -25,10 +25,11 @@ Ethan:
       - [x] Add participants & roles to VSCode statusbar
       - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
 - [x] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
+- [ ] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
 - [ ] **Heartbeat** to keep backend from sleeping. Ideas:
       - Ping every ___ sec./min.
       - Check render.com documentation for our level of subscription: 
-            - Timeout?
+            - Backend Timeout? (probably 15 min.)
             - Useage limit? (What if we ping/use too much?)
 - [ ] **CONTROLLER unit tests** Jest - WIP (created controller.test.ts but have no tests implemented yet)
       - [x] changeFrontendStatus tests
