@@ -26,9 +26,9 @@ Ethan:
       - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
 - [x] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
 - [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
+- [ ] **Deploy to onrender so can dogfood**
 - [ ] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
       - Replace All: Controller._roles with Controller.frontendMobTimer.roles (and edit related code)
-- [ ] **Deploy to onrender so can dogfood**
 - [ ] **Sync all frontendMobTimer properties**, not just those currently used
       - Currently need to add these: participants, roles
       - possibly do this by adding MobTimer public set state() (similar to existing get state() but with care about using setSecondsRemaining... and mobName; and what to do if secondsRemaining is passed in greater than durationMinutes)
