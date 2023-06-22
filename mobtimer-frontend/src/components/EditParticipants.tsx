@@ -3,7 +3,7 @@ import { Controller } from 'mobtimer-api';
 
 const EditParticipants = () => {
 
-    // const [participantsNames, setParticipantsNames] = useState(Controller._participants.join(","));
+    // const [participantsNames, setParticipantsNames] = useState(Controller.frontendMobTimer.participants.join(","));
     const [participantsNames, setParticipantsNames] = useState("");
 
     // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,7 @@ const EditParticipants = () => {
                 //onChange={(e) => Controller.setParticipants((e.target.value as string).split(",").map((name) => name.trim()))}
                 //onChange={(e) => Controller.client.editParticipants((e.target.value as string).split(",").map((name) => name.trim()))}                                
                 //onChange={(e) => setParticipantsString(e.target.value as string)}
-                onFocus={(e) => e.target.value = Controller._participants.join(",")}
+                onFocus={(e) => e.target.value = Controller.frontendMobTimer.participants.join(",")}
                 // onBlur={(e) => update(e.target.value, setParticipantsNames)}                    
                 // todo: replace window.confirm with a modal
                 onBlur={(e) => handleBlur(e)}
@@ -47,7 +47,7 @@ const EditParticipants = () => {
 
     function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
         const newValue = splitTrimAndRejoin(e.target.value as string);
-        const oldValue = Controller._participants.join(",");
+        const oldValue = Controller.frontendMobTimer.participants.join(",");
         confirmUpdate(newValue, oldValue);
     }
 
