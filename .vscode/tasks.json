@@ -37,7 +37,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer step 3 - start watch", /* start all */
+      "label": "mobtimer step 3 - start watch", 
       "type": "shell",
       "command": "echo running front and back ends",
       "group": {
@@ -185,6 +185,24 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "mobtimer step 1 and 2 - yarn and api setup",
+        "mobtimer step 3 - start watch"],
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer steps 2 and 3",
+      "type": "shell",
+      "command": "echo executed all steps",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "mobtimer step 2 - api setup",
         "mobtimer step 3 - start watch"],
       "problemMatcher": []
     },

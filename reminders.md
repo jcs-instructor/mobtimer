@@ -20,7 +20,7 @@ scripts/start-vscode.sh
   - optional: Browser notifications
 - Open VS Code
   - git pull
-  - run task "mobtimer step 3 - start watch" 
+  - run task "mobtimer steps 2 and 3"
     - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
       twice if get errors the first time)
   - verify tests are working
