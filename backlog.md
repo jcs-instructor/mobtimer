@@ -25,7 +25,10 @@ Ethan:
       - [x] Add participants & roles to VSCode statusbar
       - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
 - [x] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
-- [ ] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
+- [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
+- [ ] **Sync all frontendMobTimer properties**, not just those currently used
+      - Currently need to add these: participants, roles
+      - possibly do this by adding MobTimer public set state() (similar to existing get state() but with care about using setSecondsRemaining... and mobName)
 - [ ] **Heartbeat** to keep backend from sleeping. Ideas:
       - Ping every ___ sec./min.
       - Check render.com documentation for our level of subscription: 
