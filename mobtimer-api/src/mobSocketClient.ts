@@ -1,7 +1,7 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
-
+console.log("4");
 class MobSocketClient {
   private _webSocket: IWebSocketWrapper;
 

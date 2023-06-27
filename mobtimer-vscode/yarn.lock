@@ -2405,9 +2405,9 @@ minimatch@^5.0.1:
     brace-expansion "^2.0.1"
 
 mobtimer-api@^1.0.15, mobtimer-api@^1.0.36:
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.39.tgz#043344a4a88996cac5f7c5460a1baf6ad12529b3"
-  integrity sha512-AJmM0hZ2WoA0LAbg8FqZNGfwpZQj0BeUo63Cjn+NRwMVeNn3E5bOs3jvau3UW7hi/TgbCMXustM7pUHllX53Og==
+  version "1.0.42"
+  resolved "https://registry.yarnpkg.com/mobtimer-api/-/mobtimer-api-1.0.42.tgz#827b59bbc28b132470e3597e5dc92ec2e0237e39"
+  integrity sha512-JZG1lknOdkNZa1p/SMeku5PfH+bxKDvpR6FLSxVLJ01X46cHNqiJieRCrgcOxGD5BDTTtpQuaaaDMl5erNwWxw==
   dependencies:
     "@types/uuidv4" "^5.0.0"
     "@types/websocket" "^1.0.5"
