@@ -8,7 +8,9 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
+- [ ] **Reset npmjs password**
 - [ ] **Generate exports watch** doesn't seem to be refreshing on change
+- [ ] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
 
@@ -21,10 +23,10 @@ Ethan:
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [ ] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
+- [x] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
       - [x] Add participants & roles to VSCode statusbar
       - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
-- [x] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
+- [ ] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
 - [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
 - [ ] **Deploy to onrender so can dogfood**
 - [ ] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
