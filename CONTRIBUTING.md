@@ -52,7 +52,7 @@ In VS Code,
   - Once a new VSCode instance opens, enter the VSCode command (ctrl-shift-P in Windows): "Mobtimer for VSCode"
 - To install and run latest VSCode extension into vscode, see [here](#Building-and-Installing-VSCode-Extension)
 - Push to development branch
-- If you want to deploy changes, see "Subsequent deployments" section (below)
+- If you want to deploy changes, see [subsequent deployments](#Subsequent-deployments)
 
 ### API changes
 
@@ -222,7 +222,8 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   cd mobtimer-api
   ./publish-no-watch.sh
 ```
-- After running the script, there will be changes to package.json and yarn.lock files. Commit and push these changes.
+- When prompted, authenticate with npmjs.com as instructed in terminal.
+- After the script finishes running, there will be changes to package.json and yarn.lock files. Commit and push these changes.
 
 ### Step 2 - Push to main branch
 - Push to main branch
