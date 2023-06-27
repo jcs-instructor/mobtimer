@@ -227,7 +227,8 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ### Step 2 - Push to main branch
 - Push to main branch
-- Click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
+- Check deployment dashboard (e.g., https://dashboard.render.com/) to see if deployment is successful (or still in progress or failed).
+- Once deployment has finished successfully, click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
 - To see any changes to the vscode extension in VSCode, see above section ["Building and Installing VSCode Extension"](#Building-and-Installing-VSCode-Extension)
 
 ### Step 3 - Configure environment variable(s)
