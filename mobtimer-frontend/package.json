@@ -1,5 +1,8 @@
 {
   "name": "mobtimer-frontend",
+  "engines": {
+    "node": "18.x"
+  },
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
