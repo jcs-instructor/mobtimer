@@ -13,8 +13,8 @@ export class Controller {
     } ${participantsString} - ${Controller.getAppTitle()}`;
   }
 
-  private static createListOfParticipantsWithRoleEmojisPrepended(): string {
-    const participantsCount = Controller._participants.length;
+  public static createListOfParticipantsWithRoleEmojisPrepended(): string {
+    const participantsCount = Controller.frontendMobTimer.participants.length;
     const rolesCount = Controller._roles.length;
     const minCount = Math.min(participantsCount, rolesCount);
 
@@ -23,14 +23,14 @@ export class Controller {
       // build up a participant string with the role emoji prefix
       for (let i = 0; i < minCount; i++) {
         const rolePrefix = this.extractFirstEmoji(Controller._roles[i]);
-        const participant = Controller._participants[i];
+        const participant = Controller.frontendMobTimer.participants[i];
         const combo = `${rolePrefix}${participant}`;
         participants.push(combo);
       }
       // if there are more participants than roles, add the remaining participants without a role prefix
       if (participantsCount > rolesCount) {
         for (let i = rolesCount; i < participantsCount; i++) {
-          const participant = Controller._participants[i];
+          const participant = Controller.frontendMobTimer.participants[i];
           participants.push(participant);
         }
       }
@@ -44,11 +44,6 @@ export class Controller {
       /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
     const match = str.match(emojiRegex);
     return match ? match[0] : "";
-  }
-
-  static get url() {
-    return process.env.REACT_APP_WEBSOCKET_URL ||
-      `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
   }
 
   static get secondsRemainingStringWithoutLeadingZero() {
@@ -126,7 +121,7 @@ export class Controller {
     const mobStatus = mobState.status;
     const durationMinutes = mobState.durationMinutes;
     const participants = mobState.participants;
-    Controller._participants = participants;
+    // Controller.frontendMobTimer.participants = participants;
     const roles = mobState.roles;
     Controller._roles = roles;
     const secondsRemaining = mobState.secondsRemaining;
@@ -139,7 +134,7 @@ export class Controller {
     };
   }
 
-  static _participants: string[] = [];
+  // static _participants: string[] = [];
   static _roles: string[] = [];
 
   static getActionButtonLabel(backendStatus: Status) {
@@ -159,7 +154,7 @@ export class Controller {
     }
   }
 
-  static toggle(client: MobSocketClient, frontendMobtimer: MobTimer) {
+  static toggleStatus(client: MobSocketClient, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: {
         client.pause();
@@ -179,9 +174,9 @@ export class Controller {
     }
   }
 
-  static changeStatus(frontendMobtimer: MobTimer, backendStatus: Status) {
-    if (frontendMobtimer.status !== backendStatus) {
-      switch (backendStatus) {
+  static changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {
+    if (frontendMobtimer.status !== newStatus) {
+      switch (newStatus) {
         case Status.Running: {
           frontendMobtimer.start();
           break;

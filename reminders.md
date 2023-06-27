@@ -8,15 +8,21 @@ Joel:
 
 Joel & Ethan:
 
-- Open our depoloyed web timer https://mobtimer-frontend-iwa7.onrender.com (or if that's not working, try: https://mobti.me/arrested-egg or http://mobtimer.zoeetrope.com/)
+- Open VSCode using outside terminal (GitBash)
+```
+cd C:/Users/Joel/source/repos/mobtimer/
+scripts/start-vscode.sh  
+```
+- Open our depoloyed web timer:
+  - https://mobtimer-frontend-iwa7.onrender.com/#/hippo-time (or if that's not working, try: https://mobti.me/arrested-egg or http://mobtimer.zoeetrope.com/)
   - turn on Sounds
   - add "Stand/Stretch" to names and/or role descriptions (e.g., "Navigator (STAND)")
   - optional: Browser notifications
 - Open VS Code
   - git pull
-  - run task "mobtimer step 3 - start watch" 
+  - run task "mobtimer steps 2 and 3"
     - if get compilation or runtime errors, consider running task "mobtimer all steps" or re-running the failed tasks (may need to run mobtimer all steps
-      twice  if get errors the first time)
+      twice if get errors the first time)
   - verify tests are working
   - verify UIs are working:
     - browser
@@ -35,7 +41,7 @@ Ethan:
 
 **Facilitator (and First Navigator When Timer Doesn't Remember)**:
 ...
-5/17/2023 - Joel
+6/20/2023 - Joel
 
 **Warning**:
 
@@ -43,6 +49,11 @@ Ethan:
 
 **Practices to Focus On (always have 1 or 2 items here)**:
 
+- Refine backlog at end of session when still fresh - have 3-4 next items ready to go (timebox to 5-10 minutes max.)
+- When working on branch, test first on GitPod; and only if going to merge, try on other person's PC
+- When struggling, try to understand the flow and consider refactoring
+  - Code by intent (e.g., if (debug).... before even have the debug variable implementation)
+    - Should be able to read code at level of intent (higher level of abstraction)
 - Do one thing at a time and then commit
 - Always review between-sesssion changes at start of next session (& notify when making these changes)
 

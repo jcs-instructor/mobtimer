@@ -9,7 +9,7 @@ const RotateParticipants = () => {
     }
 
     function ableToRotate(): boolean {
-        return Controller._participants.length > 1;
+        return Controller.frontendMobTimer.participants.length > 1;
     }
 
     return (

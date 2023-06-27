@@ -40,6 +40,7 @@ export class MobTimer {
     // We will wait until very near when the timer should expire, and then very
     // frequently check to see if the timer has expired. This is to avoid
     // the case where the timer expires before we have had time to check.
+    console.log("setExpireTimeout, this.secondsRemaining: " + this.secondsRemaining)
     const timeoutMilliseconds = TimeUtils.secondsToMilliseconds(
       this.secondsRemaining
     );
@@ -117,6 +118,7 @@ export class MobTimer {
     };
   }
 
+  // todo: consider refactoring to a property setter, i.e., set secondsRemaining - and moving next to the existing getter
   setSecondsRemaining(secondsRemaining: number) {
     // You can't set seconds remaining directly since it's a calculated number, so change the correlated variables to have that effect:
     // Example: if duration = 1 minute and secondsRemaining = 20 seconds, then previously accumulated elapsed seconds = 40 seconds

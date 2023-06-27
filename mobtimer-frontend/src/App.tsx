@@ -8,10 +8,11 @@ import Launch from './components/Launch';
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 
-// todo: unhardcode port
-const url = Controller.url;
-  // process.env.REACT_APP_WEBSOCKET_URL ||
-  // `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
+const runningLocal = window.location.href.includes('localhost');
+const url = runningLocal 
+  ? `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}` 
+  : process.env.REACT_APP_WEBSOCKET_URL as string;
+console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
 
@@ -60,8 +61,10 @@ function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateActi
     }
 
     // modify frontend mob timer
-    Controller.changeStatus(Controller.frontendMobTimer, mobStatus);
+    Controller.changeFrontendStatus(Controller.frontendMobTimer, mobStatus);
     Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
+    Controller.frontendMobTimer.durationMinutes = durationMinutes;
+    Controller.frontendMobTimer.editParticipants(participants);
 
     // Derive mob label from response status
     const label = getActionButtonLabel(); 
@@ -132,7 +135,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggle(client, Controller.frontendMobTimer);
+    Controller.toggleStatus(client, Controller.frontendMobTimer);
   }
 
   // Browser router
