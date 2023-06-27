@@ -1,5 +1,10 @@
 ## Completed (Done)
 
+2023-06-27
+
+- [x] **Exclude unneeded extenstion files** - We get this message:
+      This extension consists of 7070 files, out of which 3001 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension . You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore"
+      
 2023-06-05
 
 - [x] Different background color when running on localhost (so can tell when on dev vs. deployed site)

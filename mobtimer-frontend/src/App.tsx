@@ -15,6 +15,7 @@ const url = runningLocal
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
+console.log("Redeployed 1");
 
 const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; 
 // todo: test if connected and retry if not
