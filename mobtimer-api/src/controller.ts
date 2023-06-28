@@ -1,7 +1,8 @@
 import { Status } from "./status";
-import * as MobTimerResponses  from "./mobTimerResponse";
+import * as MobTimerResponses from "./mobTimerResponse";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobTimer } from "./mobTimer";
+console.log("Controller redeploy 3");
 
 export class Controller {
   static updateSummary() {
@@ -172,6 +173,12 @@ export class Controller {
         break;
       }
     }
+  }
+
+  static getUrl(useLocalHost: boolean) {
+    return useLocalHost
+        ? process.env.REACT_APP_LOCAL_WEBSOCKET_URL || "ws://localhost:4000"
+        : process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL || "ws://mobtimer-backend-pj2v.onrender.com"
   }
 
   static changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {

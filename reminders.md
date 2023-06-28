@@ -8,11 +8,6 @@ Joel:
 
 Joel & Ethan:
 
-- Open VSCode using outside terminal (GitBash)
-```
-cd C:/Users/Joel/source/repos/mobtimer/
-scripts/start-vscode.sh  
-```
 - Open our depoloyed web timer:
   - https://mobtimer-frontend-iwa7.onrender.com/#/hippo-time (or if that's not working, try: https://mobti.me/arrested-egg or http://mobtimer.zoeetrope.com/)
   - turn on Sounds

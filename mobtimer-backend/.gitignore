@@ -1,4 +1,4 @@
-Date.txt
+Date*.txt
 out
 node_modules
 coverage

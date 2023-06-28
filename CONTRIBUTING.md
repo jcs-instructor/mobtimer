@@ -10,8 +10,9 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
 
 ## Initial Setup
 
-From the Terminal:
+1. Clone and install global yarn packages:
 
+  From the Terminal:
   ```
   git clone [this repository name here]
   cd [this repository name here]
@@ -20,13 +21,26 @@ From the Terminal:
   yarn global add @vscode/vsce
   ```
   
-  Run clean all task to execute yarn:
+2. Create a .env file in mobtimer-frontend:
+   
+   From the Terminal:
+   ```
+   cd mobtimer-frontend
+   cp .env.EXAMPLE .env
+   ```
 
-  In VS Code,
+3. Examine values in .env, especially REACT_APP_DEPLOYED_WEBSOCKET_URL. Set the value to the url you are using for deploying on the web (e.g., ws://mobtimer-backend-pj2v.onrender.com). This is required to be set when you install the extension in vscode. If you haven't deployed yet, then set this when you do deploy.
+    
+4. Repeat steps 2 and 3 for mobtimer-vscode
+
+5. Run "mobtimer all steps"
+
+  In VSCode:
 
   - Press CTRL + SHIFT + P to open the Command Palette
   - Search for "Tasks: Run Task"
-  - Run "mobtimer all tasks" (run a 2nd time if errors the first time)
+  - Run "mobtimer all steps".  Note: If compile errors and not obvious how to fix it 
+  sometimes re-running "mobtimer all tasks" or applicable steps for the component will work.
 
 
 ## Start All Components
@@ -56,10 +70,11 @@ In VS Code,
 
 ### API changes
 
-- If the changes need to be consumed by VSCode extension or deploying to web, publish to npm
+- Make changes to mobtimer-api. Any changes will be automatically picked up by the watcher tasks (running on localhost)
+- Also if you are reinstalling the mobtimer-vscode extension or deploying mobtimer-frontend to the web, you will need to 
+  publish the mobtimer-api to npmjs. See [step 1 of subsequent deployments](#Subsequent-deployments)
 
 ### Adding a New Feature
-
 
 #### Backend Changes
 
@@ -132,7 +147,6 @@ ls *.vsix
 rm *.vsix
 ```
 2. Re-publish mobtimer-api if npmjs version is outdated.  See [step 1 of subsequent deployments](#Subsequent-deployments)
-#Publish-the-API)
 3. Uninstall old version of mobtimer-vscode
    - Select the extension in the VSCode Extensions window
    - Click on gear and select Uninstall
@@ -194,8 +208,8 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   - Build Command: yarn; yarn build
   - Click "Create Static Website" button at bottom to save
   - Click Environment and add variable:
-    - Key: REACT_APP_WEBSOCKET_URL
-    - Value: paste url from the backend web service and change https to wss (e.g., wss://mobtimer-backend-pj2v.onrender.com)
+    - Key: REACT_APP_DEPLOYED_WEBSOCKET_URL
+    - Value: paste url from the backend web service and change https to ws (e.g., ws://mobtimer-backend-pj2v.onrender.com)
   - Click link at top left corner of page to view in web browser - note: it might take a few minutes to be available (e.g., https://mobtimer-frontend-iwa7.onrender.com)
 
 ### Backend
@@ -206,7 +220,7 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   - Build Command: yarn; yarn build
   - Click "Create Web Service" button at bottom to save
   - Once complete, click on the link to the web service (at top left corner of the screen). Browser should open with message "http server started"
-  - Copy link to web service (at top left corner of page, e.g., https://mobtimer-backend-pj2v.onrender.com/) for use when deploying frontend )
+  - Copy link to web service (at top left corner of page, e.g., https://mobtimer-backend-pj2v.onrender.com/) for use when deploying frontend 
 - (Optional) Test using Postman app - for more details see https://blog.postman.com/postman-supports-websocket-apis/
   - Click on My Workspace
   - Click on New
@@ -231,11 +245,11 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 - Once deployment has finished successfully, click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
 - To see any changes to the vscode extension in VSCode, see above section ["Building and Installing VSCode Extension"](#Building-and-Installing-VSCode-Extension)
 
-### Step 3 - Configure environment variable(s)
-- Exit VSCode 
-- In an outside terminal, set the environment variable REACT_APP_WEBSOCKET_URL to the url of the web socket (e.g., wss://mobtimer-backend-pj2v.onrender.com)
-```
-export REACT_APP_WEBSOCKET_URL=<web socket server url here>
-code .
-```
-- Reopen the MobTimer project folder in VSCode
+## Troubleshooting
+- If getting non-obvious compile errors:
+  - Try re-running "Mobtimer Start All" task or individual related tasks.
+  - Look at the dates when the applicable tasks (all of the dependent tasks in "Mobtimer Start All" task) were run 
+    and see if they are in the correct order (i.e., the same order as in tasks.json). All jobs except "mobtimer frontend start watch" will display the date and time. 
+- If it seems like the new code is doing nothing and you are not confident the new version has been included,
+  you can either look at the dates as described above or you can modify the console.log statements and see if the
+  console log output changes at runtime.
