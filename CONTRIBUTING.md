@@ -29,16 +29,17 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
    cp .env.EXAMPLE .env
    ```
 
-3. Examine values, especially REACT_APP_DEPLOYED_WEBSOCKET_URL.  Set the value to the url you are using for deploying on the web (vs localhost).  
-This is required to be set when you install the extension into your app.  If you haven't deployed yet then set this when you do deploy.
+3. Examine values in .env, especially REACT_APP_DEPLOYED_WEBSOCKET_URL. Set the value to the url you are using for deploying on the web (e.g., ws://mobtimer-backend-pj2v.onrender.com). This is required to be set when you install the extension in vscode. If you haven't deployed yet, then set this when you do deploy.
     
 4. Repeat steps 2 and 3 for mobtimer-vscode
 
-5. Run compile and start tasks.  In VS Code:
+5. Run "mobtimer all steps"
+
+  In VSCode:
 
   - Press CTRL + SHIFT + P to open the Command Palette
   - Search for "Tasks: Run Task"
-  - Run "mobtimer all tasks".  Note: If compile errors and not obvious how to fix it 
+  - Run "mobtimer all steps".  Note: If compile errors and not obvious how to fix it 
   sometimes re-running "mobtimer all tasks" or applicable steps for the component will work.
 
 
@@ -69,10 +70,11 @@ In VS Code,
 
 ### API changes
 
-- If the changes need to be consumed by VSCode extension or deploying to web, publish to npm
+- Make changes to mobtimer-api. Any changes will be automatically picked up by the watcher tasks (running on localhost)
+- Also if you are reinstalling the mobtimer-vscode extension or deploying mobtimer-frontend to the web, you will need to 
+  publish the mobtimer-api to npmjs. See [step 1 of subsequent deployments](#Subsequent-deployments)
 
 ### Adding a New Feature
-
 
 #### Backend Changes
 
@@ -145,7 +147,6 @@ ls *.vsix
 rm *.vsix
 ```
 2. Re-publish mobtimer-api if npmjs version is outdated.  See [step 1 of subsequent deployments](#Subsequent-deployments)
-#Publish-the-API)
 3. Uninstall old version of mobtimer-vscode
    - Select the extension in the VSCode Extensions window
    - Click on gear and select Uninstall
@@ -219,7 +220,7 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   - Build Command: yarn; yarn build
   - Click "Create Web Service" button at bottom to save
   - Once complete, click on the link to the web service (at top left corner of the screen). Browser should open with message "http server started"
-  - Copy link to web service (at top left corner of page, e.g., https://mobtimer-backend-pj2v.onrender.com/) for use when deploying frontend )
+  - Copy link to web service (at top left corner of page, e.g., https://mobtimer-backend-pj2v.onrender.com/) for use when deploying frontend 
 - (Optional) Test using Postman app - for more details see https://blog.postman.com/postman-supports-websocket-apis/
   - Click on My Workspace
   - Click on New
