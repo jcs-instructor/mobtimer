@@ -12,6 +12,7 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
 
 1. Clone and install global yarn packages:
 
+  From the Terminal:
   ```
   git clone [this repository name here]
   cd [this repository name here]
@@ -21,6 +22,8 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
   ```
   
 2. Create a .env file in mobtimer-frontend:
+   
+   From the Terminal:
    ```
    cd mobtimer-frontend
    cp .env.EXAMPLE .env
