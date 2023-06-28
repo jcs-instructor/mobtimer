@@ -244,20 +244,11 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 - Once deployment has finished successfully, click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
 - To see any changes to the vscode extension in VSCode, see above section ["Building and Installing VSCode Extension"](#Building-and-Installing-VSCode-Extension)
 
-### Step 3 - Configure environment variable(s)
-- Exit VSCode 
-- In an outside terminal, set the environment variable REACT_APP_WEBSOCKET_URL to the url of the web socket (e.g., wss://mobtimer-backend-pj2v.onrender.com)
-```
-export REACT_APP_WEBSOCKET_URL=<web socket server url here>
-code .
-```
-- Reopen the MobTimer project folder in VSCode
-
 ## Troubleshooting
-- If getting non-obvious compile errors
-  - try re-running "Mobtimer Start All" tasks or individual related tasks.
-  - look at the dates tasks run and see if they are in the correct order.  All jobs except starting frontend
-  will display the date and time.  To see frontend start time, look for file Date-compile-started.tx in
-  mobtimer-frontend directory.
+- If getting non-obvious compile errors:
+  - Try re-running "Mobtimer Start All" task or individual related tasks.
+  - Look at the dates when the applicable tasks (all of the dependent tasks in "Mobtimer Start All" task) were run 
+    and see if they are in the correct order (i.e., the same order as in tasks.json). All jobs except "mobtimer frontend start watch" will display the date and time. 
 - If it seems like the new code is doing nothing and you are not confident the new version has been included,
-you can look at the dates as described above and you can modify the statements that say "deployed".
+  you can either look at the dates as described above or you can modify the console.log statements and see if the
+  console log output changes at runtime.

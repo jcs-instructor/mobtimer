@@ -10,7 +10,7 @@ Remember to review Improve Later and To be prioritized
 Ethan:
 - [ ] **Reset npmjs password**
 - [ ] **Generate exports watch** doesn't seem to be refreshing on change
-- [ ] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
+- [x] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
 
