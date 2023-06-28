@@ -19,7 +19,7 @@ if [ -s diff.txt ]; then
   echo "Updating $destfile_ts"
   cp $destfile_temp $destfile_ts
 else
-  echo "No changes to exports.ts"
+  echo "No changes to $destfile_ts"
 fi
 rm $destfile_temp
 rm diff.txt

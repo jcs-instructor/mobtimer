@@ -29,11 +29,14 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
 3. Examine values, especially REACT_APP_DEPLOYED_WEBSOCKET_URL.  Set the value to the url you are using for deploying on the web (vs localhost).  
 This is required to be set when you install the extension into your app.  If you haven't deployed yet then set this when you do deploy.
     
-4. Run compile and start tasks.  In VS Code:
+4. Repeat steps 2 and 3 for mobtimer-vscode
+
+5. Run compile and start tasks.  In VS Code:
 
   - Press CTRL + SHIFT + P to open the Command Palette
   - Search for "Tasks: Run Task"
-  - Run "mobtimer all tasks" (run a 2nd time if errors the first time)
+  - Run "mobtimer all tasks".  Note: If compile errors and not obvious how to fix it 
+  sometimes re-running "mobtimer all tasks" or applicable steps for the component will work.
 
 
 ## Start All Components
@@ -246,3 +249,10 @@ export REACT_APP_WEBSOCKET_URL=<web socket server url here>
 code .
 ```
 - Reopen the MobTimer project folder in VSCode
+
+## Troubleshooting
+- If getting non-obvious compile errors
+  - try re-running "Mobtimer Start All" tasks or individual related tasks.
+  - look at the dates tasks run and see if they are in the correct order.  All jobs except starting frontend
+  will display the date and time.  To see frontend start time, look for file Date-compile-started.tx in
+  mobtimer-frontend directory.

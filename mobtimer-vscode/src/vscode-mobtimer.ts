@@ -17,13 +17,13 @@ export class VscodeMobTimer {
   private _statusBarItem: StatusBarItem;
   private _playButton: StatusBarItem;
 
-  public constructor(debug = true) {
+  public constructor(isLocal = true) {
     console.log("Debug VscodeMobTimer constructor");
     this._statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left);
     this._playButton = window.createStatusBarItem(StatusBarAlignment.Left);
     this._playButton.text = getPlayButtonLabel();
     this._playButton.show();
-    const url = Controller.getUrl(debug);
+    const url = Controller.getUrl(isLocal);
     console.log("In extension.ts, url = ", url);
     console.log('"mobtimer.display" is now active!');
 
