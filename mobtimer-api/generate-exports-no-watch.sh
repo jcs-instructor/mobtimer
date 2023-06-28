@@ -15,15 +15,11 @@ for file in src/*.ts; do
   filename=$(basename "$file" .ts)
   echo "export * from \"./${filename}\"" >> $destfile_temp
 done
-echo Old $destfile_ts file:
-cat $destfile_ts
 cmp $destfile_ts $destfile_temp > diff.txt
 if [ -s diff.txt ]; then
   echo "Updating exports.ts"
   time
   cp $destfile_temp $destfile_ts
-  echo New $destfile_ts file:
-  cat $destfile_ts
 else
   echo "No changes to exports.ts"
 fi
