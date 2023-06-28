@@ -4,11 +4,10 @@ import * as vscode from "vscode";
 
 // The extension is activated the very first time the command is executed
 export async function activate(context: ExtensionContext) {
-  // Debug is true if running in debug mode.
-  // If not debug, installed version is running.
-  // used by VscodeMobTimer to determine url
-  const isLocal = (context.extensionMode === vscode.ExtensionMode.Development);
-  let vscodeMobTimer = new VscodeMobTimer(isLocal);
+  // When running in debug mode, we want to use localhost.
+  // When running the installed mobtimer-vscode extension, we want to use the deployed url.
+  const useLocalHost = (context.extensionMode === vscode.ExtensionMode.Development);
+  let vscodeMobTimer = new VscodeMobTimer(useLocalHost);
   console.log("Done");
 
   // The commandId parameter must match the command field in package.json

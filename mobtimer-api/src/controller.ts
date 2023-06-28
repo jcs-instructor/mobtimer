@@ -175,8 +175,8 @@ export class Controller {
     }
   }
 
-  static getUrl(isLocal: boolean) {
-    return isLocal
+  static getUrl(useLocalHost: boolean) {
+    return useLocalHost
         ? process.env.REACT_APP_LOCAL_WEBSOCKET_URL || "ws://localhost:4000"
         : process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL || "ws://mobtimer-backend-pj2v.onrender.com"
   }

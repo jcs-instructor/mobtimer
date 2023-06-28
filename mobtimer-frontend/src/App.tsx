@@ -8,8 +8,8 @@ import Launch from './components/Launch';
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 
-const isLocal = window.location.href.includes('localhost');
-const url = Controller.getUrl(isLocal);
+const useLocalHost = window.location.href.includes('localhost');
+const url = Controller.getUrl(useLocalHost);
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
