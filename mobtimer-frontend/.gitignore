@@ -15,7 +15,7 @@ mobtimer-api
 /build
 
 # misc
-Date.txt
+Date*.txt
 .DS_Store
 .env.local
 .env.development.local

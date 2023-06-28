@@ -1,4 +1,4 @@
-Date.txt
+Date*.txt
 .env
 dist
 *.vsix
