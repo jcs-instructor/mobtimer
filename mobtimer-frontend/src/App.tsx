@@ -8,14 +8,12 @@ import Launch from './components/Launch';
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 
-const runningLocal = window.location.href.includes('localhost');
-const url = runningLocal 
-  ? `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}` 
-  : process.env.REACT_APP_WEBSOCKET_URL as string;
+const isLocal = window.location.href.includes('localhost');
+const url = Controller.getUrl(isLocal);
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
-console.log("Redeployed 1");
+console.log("Redeployed 2");
 
 const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; 
 // todo: test if connected and retry if not

@@ -1,5 +1,5 @@
 import { StatusBarAlignment, StatusBarItem, window } from "vscode";
-import { Controller } from 'mobtimer-api';
+import { Controller } from "mobtimer-api";
 import { TOGGLE_TIMER_COMMAND } from "./constants";
 import { commands } from "vscode";
 
@@ -17,15 +17,17 @@ export class VscodeMobTimer {
   private _statusBarItem: StatusBarItem;
   private _playButton: StatusBarItem;
 
-  public constructor() {
+  public constructor(debug = true) {
     console.log("Debug VscodeMobTimer constructor");
     this._statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left);
     this._playButton = window.createStatusBarItem(StatusBarAlignment.Left);
     this._playButton.text = getPlayButtonLabel();
     this._playButton.show();
+    const url = Controller.getUrl(debug);
+    console.log("In extension.ts, url = ", url);
+    console.log('"mobtimer.display" is now active!');
 
-    // todo: delete the part after process.env.REACT_APP_WEBSOCKET_URL (i.e., no fallback url)
-    const url = process.env.REACT_APP_WEBSOCKET_URL as string;
+    
     const wrapperSocket = new WSWebSocketWrapper(url) as IWebSocketWrapper;
     Controller.client = new MobSocketClient(wrapperSocket);
     console.log(
@@ -62,10 +64,12 @@ export class VscodeMobTimer {
 
   public update() {
     // Every second, update the status bar with the current time with seconds
-    console.log("update");  
+    console.log("update");
     setInterval(() => {
       console.log("Clicking ");
-      const text = `[${Controller.frontendMobTimer.secondsRemainingString} ${Controller.createListOfParticipantsWithRoleEmojisPrepended()} ]`; //$(clock) 
+      const text = `[${
+        Controller.frontendMobTimer.secondsRemainingString
+      } ${Controller.createListOfParticipantsWithRoleEmojisPrepended()} ]`; //$(clock)
       this._statusBarItem.text = text;
     }, 1000); // 1000 ms = 1 second
     this._statusBarItem.show();

@@ -10,7 +10,7 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
 
 ## Initial Setup
 
-From the Terminal:
+1. Clone and install global yarn packages:
 
   ```
   git clone [this repository name here]
@@ -20,9 +20,16 @@ From the Terminal:
   yarn global add @vscode/vsce
   ```
   
-  Run clean all task to execute yarn:
+2. Create a .env file in mobtimer-frontend:
+   ```
+   cd mobtimer-frontend
+   cp .env.EXAMPLE .env
+   ```
 
-  In VS Code,
+3. Examine values, especially REACT_APP_DEPLOYED_WEBSOCKET_URL.  Set the value to the url you are using for deploying on the web (vs localhost).  
+This is required to be set when you install the extension into your app.  If you haven't deployed yet then set this when you do deploy.
+    
+4. Run compile and start tasks.  In VS Code:
 
   - Press CTRL + SHIFT + P to open the Command Palette
   - Search for "Tasks: Run Task"
@@ -194,8 +201,8 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   - Build Command: yarn; yarn build
   - Click "Create Static Website" button at bottom to save
   - Click Environment and add variable:
-    - Key: REACT_APP_WEBSOCKET_URL
-    - Value: paste url from the backend web service and change https to wss (e.g., wss://mobtimer-backend-pj2v.onrender.com)
+    - Key: REACT_APP_DEPLOYED_WEBSOCKET_URL
+    - Value: paste url from the backend web service and change https to ws (e.g., ws://mobtimer-backend-pj2v.onrender.com)
   - Click link at top left corner of page to view in web browser - note: it might take a few minutes to be available (e.g., https://mobtimer-frontend-iwa7.onrender.com)
 
 ### Backend
