@@ -256,3 +256,5 @@ code .
   - look at the dates tasks run and see if they are in the correct order.  All jobs except starting frontend
   will display the date and time.  To see frontend start time, look for file Date-compile-started.tx in
   mobtimer-frontend directory.
+- If it seems like the new code is doing nothing and you are not confident the new version has been included,
+you can look at the dates as described above and you can modify the statements that say "deployed".
