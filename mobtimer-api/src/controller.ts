@@ -16,7 +16,7 @@ export class Controller {
 
   public static createListOfParticipantsWithRoleEmojisPrepended(): string {
     const participantsCount = Controller.frontendMobTimer.participants.length;
-    const rolesCount = Controller._roles.length;
+    const rolesCount = Controller.frontendMobTimer.roles.length;
     const minCount = Math.min(participantsCount, rolesCount);
 
     let participants = [] as string[];
@@ -122,9 +122,7 @@ export class Controller {
     const mobStatus = mobState.status;
     const durationMinutes = mobState.durationMinutes;
     const participants = mobState.participants;
-    // Controller.frontendMobTimer.participants = participants;
     const roles = mobState.roles;
-    Controller._roles = roles;
     const secondsRemaining = mobState.secondsRemaining;
     return {
       mobStatus,

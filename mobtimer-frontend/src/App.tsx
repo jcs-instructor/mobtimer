@@ -15,7 +15,7 @@ console.log("process.env", process.env);
 console.log("url", url);
 console.log("App.tsx redeployed 3 on", new Date());
 
-const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; 
+const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
 // todo: test if connected and retry if not
 Controller.client = new MobSocketClient(wrapperSocket);
 const client = Controller.client;
@@ -28,7 +28,7 @@ function playAudio() {
 
 function getActionButtonLabel() {
   switch (Controller.frontendMobTimer.nextCommand) {
-    case Command.Pause: { 
+    case Command.Pause: {
       return "⏸️ Pause";
     }
     case Command.Resume: {
@@ -43,7 +43,12 @@ function getActionButtonLabel() {
   }
 }
 
-function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateAction<number>>, setParticipants: React.Dispatch<React.SetStateAction<string[]>>, setRoles: React.Dispatch<React.SetStateAction<string[]>>, setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>, setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>) {
+function setSocketListener(
+  setDurationMinutes: React.Dispatch<React.SetStateAction<number>>, 
+  setParticipants: React.Dispatch<React.SetStateAction<string[]>>, 
+  setRoles: React.Dispatch<React.SetStateAction<string[]>>, 
+  setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>, 
+  setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>) {
   client.webSocket.onmessageReceived = (message: { data: any; }) => {
 
     // Get response from server
@@ -64,9 +69,11 @@ function setSocketListener(setDurationMinutes: React.Dispatch<React.SetStateActi
     Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
     Controller.frontendMobTimer.durationMinutes = durationMinutes;
     Controller.frontendMobTimer.editParticipants(participants);
+    Controller.frontendMobTimer.editRoles(roles);
+
 
     // Derive mob label from response status
-    const label = getActionButtonLabel(); 
+    const label = getActionButtonLabel();
 
     // update React state variables
     setDurationMinutes(durationMinutes);
@@ -110,7 +117,7 @@ const App = () => {
   Controller.injectSetParticipants(setParticipants);
   Controller.injectSetRoles(setRoles);
   Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
-  
+
   // Set socket listener
   setSocketListener(setDurationMinutes, setParticipants, setRoles, setSecondsRemainingString, setActionButtonLabel);
 
