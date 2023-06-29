@@ -21,17 +21,25 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
   yarn global add @vscode/vsce
   ```
   
-2. Create a .env file in mobtimer-frontend:
+2. Create a .env file in mobtimer-vscode:
    
    From the Terminal:
+   ```
+   cd mobtimer-vscode
+   cp .env.EXAMPLE .env
+   ```
+
+3. Examine values in .env, especially REACT_APP_DEPLOYED_WEBSOCKET_URL. Set the value to the url you are using for deploying on the web (e.g., ws://mobtimer-backend-pj2v.onrender.com). This is required to be set when you install the extension in vscode. If you haven't deployed yet, then set this when you do deploy.  REACT_APP_LOCAL_WEBSOCKET_URL, which 
+is used when running extension in debug mode, is set to ws://localhost:3000
+    
+4. Optionally, create a .env file for mobtimer-frontend.  If you don't, REACT_APP_LOCAL_WEBSOCKET_URL will default
+to ws://localhost:3000.  REACT_APP_DEPLOYED_WEBSOCKET_URL is not used when running the REACT app locally.
+
+   From the Terminal (optional):
    ```
    cd mobtimer-frontend
    cp .env.EXAMPLE .env
    ```
-
-3. Examine values in .env, especially REACT_APP_DEPLOYED_WEBSOCKET_URL. Set the value to the url you are using for deploying on the web (e.g., ws://mobtimer-backend-pj2v.onrender.com). This is required to be set when you install the extension in vscode. If you haven't deployed yet, then set this when you do deploy.
-    
-4. Repeat steps 2 and 3 for mobtimer-vscode
 
 5. Run "mobtimer all steps"
 
@@ -153,23 +161,25 @@ rm *.vsix
    - Refresh by doing one of the following: 
      - Click on the "Reload Required" button if it appears, or 
      - Click the refresh button at the very top of the list of Extensions in VSCode (in left panel)
-4. Optional: Increment version in the mobtimer-vscode/package.json by running `npm version`
-5. From terminal: 
+4. Inspect value of REACT_APP_DEPLOYED_WEBSOCKET_URL in .env file located in the mobtimer-vscode directory.
+This should point to the deployed version of the extension.
+5. Optional: Increment version in the mobtimer-vscode/package.json by running `npm version`
+6. From terminal: 
 ```
 vsce package
 ```
-6. To find out the name of the file produced by the previous step:
+7. To find out the name of the file produced by the previous step:
 ```
 ls *.vsix
 ```
 
-7. To install in your vscode, from terminal: 
+8. To install in your vscode, from terminal: 
 
 ```
      code --install-extension <file name>.vsix
 ```
-8. See [reminders](reminders.md) **Start of session** for how to start VSCode
-9. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
+9. See [reminders](reminders.md) **Start of session** for how to start VSCode
+10. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
 
 ## Publish extension
 
