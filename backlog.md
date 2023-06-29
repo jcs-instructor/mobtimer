@@ -28,6 +28,7 @@ Ethan:
       - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
 - [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
 - [x] **Deploy to onrender so can dogfood**
+- [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
 - [ ] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
       - Replace All: Controller._roles with Controller.frontendMobTimer.roles (and edit related code)
