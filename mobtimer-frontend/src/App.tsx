@@ -13,7 +13,7 @@ const url = Controller.getUrl(useLocalHost);
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
-console.log("App.tsx redeployed 3");
+console.log("App.tsx redeployed 3 on", new Date());
 
 const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; 
 // todo: test if connected and retry if not
