@@ -31,7 +31,7 @@ Ethan:
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
 - [ ] **Heartbeat** to keep backend from sleeping. Ideas:
-      - Ping every ___ sec./min.
+      - WIP: Ping every ___ sec./min. (see startHeartbeat in code; currently doing console.log, but later will send echoRequest - see comments in Controller)
       - Check render.com documentation for our level of subscription: 
             - Backend Timeout? (probably 15 min.)
             - Useage limit? (What if we ping/use too much?)

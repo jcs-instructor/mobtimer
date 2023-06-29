@@ -134,6 +134,8 @@ const App = () => {
     await client.waitForSocketState(WebSocket.OPEN);
     client.joinMob(mobName);
     console.log('joined mob', mobName, client);
+
+    Controller.startHeartbeat();
   }
 
   // Submit action
