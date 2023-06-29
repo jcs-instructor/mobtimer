@@ -241,9 +241,12 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ## Subsequent deployments
 ### Step 1 - Publish the API
-- If the published version of the MobTimer API is out of date, publish the API; in the terminal:
+If the published version of the MobTimer API is out of date, publish the API.
+
+In the terminal
 ```
   cd mobtimer-api
+  npm login # if not logged in already - follow prompts
   ./publish-no-watch.sh
 ```
 - When prompted, authenticate with npmjs.com as instructed in terminal.
