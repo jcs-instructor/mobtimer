@@ -30,11 +30,6 @@ Ethan:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
-- [x] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
-      - Replace All: Controller._roles with Controller.frontendMobTimer.roles (and edit related code)
-- [ ] **Sync all frontendMobTimer properties**, not just those currently used
-      - Currently need to add these: participants, roles
-      - possibly do this by adding MobTimer public set state() (similar to existing get state() but with care about using setSecondsRemaining... and mobName; and what to do if secondsRemaining is passed in greater than durationMinutes)
 - [ ] **Heartbeat** to keep backend from sleeping. Ideas:
       - Ping every ___ sec./min.
       - Check render.com documentation for our level of subscription: 
@@ -43,6 +38,8 @@ Ethan:
 - [ ] **CONTROLLER unit tests** Jest - WIP (created controller.test.ts but have no tests implemented yet)
       - [x] changeFrontendStatus tests
       - [ ] more...
+- [ ] **Sync all frontendMobTimer properties** differently:
+      - possibly do this by adding MobTimer public set state() (similar to existing get state() but with care about using setSecondsRemaining... and mobName; and what to do if secondsRemaining is passed in greater than durationMinutes)
 - [ ] **Manual tests (see below)**
 - [ ] **Extension stops connecting** When deployed mobtimer backend times out, our vscode extension doesn't seem to connect to it properly
 - [ ] **Unhardcode Mobname in Extension** WIP: Ethan (on branch)
