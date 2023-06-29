@@ -260,7 +260,8 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   - Try re-running "Mobtimer Start All" task or individual related tasks.
   - Look at the dates when the applicable tasks (all of the dependent tasks in "Mobtimer Start All" task) were run 
     and see if they are in the correct order (i.e., the same order as in tasks.json). All jobs except "mobtimer frontend start watch" will display the date and time.  To see when mobtimer-frontend last started to compile, look at
-    date of `Date-prestart.txt` in `mobtimer-vscode` directory.
+    the console in the web browser with the mobtimer displayed.  The message will say something like 
+    "App.tsx redeployed 3 on Thu Jun 29 2023 12:01:52 GMT-0400 (Eastern Daylight Time)"
 - If it seems like the new code is doing nothing and you are not confident the new version has been included,
   you can either look at the dates as described above or you can modify the console.log statements and see if the
   console log output changes at runtime.
