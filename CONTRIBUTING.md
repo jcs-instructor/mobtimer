@@ -21,17 +21,25 @@ In VS Code, set your default terminal to Git Bash as follows (needed for some ta
   yarn global add @vscode/vsce
   ```
   
-2. Create a .env file in mobtimer-frontend:
+2. Create a .env file in mobtimer-vscode:
    
    From the Terminal:
+   ```
+   cd mobtimer-vscode
+   cp .env.EXAMPLE .env
+   ```
+
+3. Examine values in .env, especially REACT_APP_DEPLOYED_WEBSOCKET_URL. Set the value to the url you are using for deploying on the web (e.g., ws://mobtimer-backend-pj2v.onrender.com). This is required to be set when you install the extension in vscode. If you haven't deployed yet, then set this when you do deploy.  REACT_APP_LOCAL_WEBSOCKET_URL, which 
+is used when running extension in debug mode, is set to ws://localhost:3000
+    
+4. Optionally, create a .env file for mobtimer-frontend.  If you don't, REACT_APP_LOCAL_WEBSOCKET_URL will default
+to ws://localhost:3000.  REACT_APP_DEPLOYED_WEBSOCKET_URL is not used when running the REACT app locally.
+
+   From the Terminal (optional):
    ```
    cd mobtimer-frontend
    cp .env.EXAMPLE .env
    ```
-
-3. Examine values in .env, especially REACT_APP_DEPLOYED_WEBSOCKET_URL. Set the value to the url you are using for deploying on the web (e.g., ws://mobtimer-backend-pj2v.onrender.com). This is required to be set when you install the extension in vscode. If you haven't deployed yet, then set this when you do deploy.
-    
-4. Repeat steps 2 and 3 for mobtimer-vscode
 
 5. Run "mobtimer all steps"
 
@@ -153,23 +161,25 @@ rm *.vsix
    - Refresh by doing one of the following: 
      - Click on the "Reload Required" button if it appears, or 
      - Click the refresh button at the very top of the list of Extensions in VSCode (in left panel)
-4. Optional: Increment version in the mobtimer-vscode/package.json by running `npm version`
-5. From terminal: 
+4. Inspect value of REACT_APP_DEPLOYED_WEBSOCKET_URL in .env file located in the mobtimer-vscode directory.
+This should point to the deployed version of the extension.
+5. Optional: Increment version in the mobtimer-vscode/package.json by running `npm version`
+6. From terminal: 
 ```
 vsce package
 ```
-6. To find out the name of the file produced by the previous step:
+7. To find out the name of the file produced by the previous step:
 ```
 ls *.vsix
 ```
 
-7. To install in your vscode, from terminal: 
+8. To install in your vscode, from terminal: 
 
 ```
      code --install-extension <file name>.vsix
 ```
-8. See [reminders](reminders.md) **Start of session** for how to start VSCode
-9. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
+9. See [reminders](reminders.md) **Start of session** for how to start VSCode
+10. To install in vscode on other machines, copy the vsix file to a directory, and then follow instructions in the previous step.
 
 ## Publish extension
 
@@ -231,9 +241,12 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ## Subsequent deployments
 ### Step 1 - Publish the API
-- If the published version of the MobTimer API is out of date, publish the API; in the terminal:
+If the published version of the MobTimer API is out of date, publish the API.
+
+In the terminal
 ```
   cd mobtimer-api
+  npm login # if not logged in already - follow prompts
   ./publish-no-watch.sh
 ```
 - When prompted, authenticate with npmjs.com as instructed in terminal.
@@ -241,7 +254,9 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
 
 ### Step 2 - Push to main branch
 - Push to main branch
-- Check deployment dashboard (e.g., https://dashboard.render.com/) to see if deployment is successful (or still in progress or failed). Note: You might have to refresh the page after it completes to see the real "LAST DEPLOYED" time.
+- In the deployment dashboard (e.g., https://dashboard.render.com/):
+  - Check if deployment is successful (or still in progress or failed). Note: You might have to refresh the page after it completes to see the real "LAST DEPLOYED" time.
+  - If mobtimer-frontend's environment variables changed, modify them in the dashboard (e.g., for the frontend, click the 3 dots, choose settings, and then Environment Variables)
 - Once deployment has finished successfully, click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
 - To see any changes to the vscode extension in VSCode, see above section ["Building and Installing VSCode Extension"](#Building-and-Installing-VSCode-Extension)
 
@@ -250,7 +265,8 @@ When you need to refresh node_modules in frontend or backend, run ./scripts/clea
   - Try re-running "Mobtimer Start All" task or individual related tasks.
   - Look at the dates when the applicable tasks (all of the dependent tasks in "Mobtimer Start All" task) were run 
     and see if they are in the correct order (i.e., the same order as in tasks.json). All jobs except "mobtimer frontend start watch" will display the date and time.  To see when mobtimer-frontend last started to compile, look at
-    date of `Date-prestart.txt` in `mobtimer-vscode` directory.
+    the console in the web browser with the mobtimer displayed.  The message will say something like 
+    "App.tsx redeployed 3 on Thu Jun 29 2023 12:01:52 GMT-0400 (Eastern Daylight Time)"
 - If it seems like the new code is doing nothing and you are not confident the new version has been included,
   you can either look at the dates as described above or you can modify the console.log statements and see if the
   console log output changes at runtime.

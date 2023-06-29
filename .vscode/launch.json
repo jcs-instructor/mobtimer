@@ -16,7 +16,8 @@
 			"outFiles": [
 				"${workspaceFolder}/mobtimer-vscode/dist/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"preLaunchTask": "${defaultBuildTask}",
+			"envFile": "${workspaceFolder}/mobtimer-vscode/.env"
 		},
 		{
 			"name": "Extension Tests",
