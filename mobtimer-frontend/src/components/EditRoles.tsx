@@ -3,7 +3,7 @@ import { Controller } from 'mobtimer-api';
 
 const EditRoles = () => {
 
-    // const [rolesString, setRolesString] = useState(Controller._roles.join(","));
+    // const [rolesString, setRolesString] = useState(Controller.frontendMobTimer.roles.join(","));
     const [rolesString, setRolesString] = useState("");
     
     // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,7 @@ const EditRoles = () => {
                 //onChange={(e) => Controller.setRoles((e.target.value as string).split(",").map((name) => name.trim()))}
                 //onChange={(e) => Controller.client.editRoles((e.target.value as string).split(",").map((name) => name.trim()))}                                
                 //onChange={(e) => setRolesString(e.target.value as string)}
-                onFocus={(e) => e.target.value = Controller._roles.join(",")}     
+                onFocus={(e) => e.target.value = Controller.frontendMobTimer.roles.join(",")}     
                 // onBlur={(e) => update(e.target.value, setRolesString)}                    
                 onBlur={(e) => handleBlur(e)}                 
                 onChange={(e) => setRolesString(e.target.value as string)}
@@ -35,7 +35,7 @@ const EditRoles = () => {
 
     function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
         const newValue = splitTrimAndRejoin(e.target.value as string);
-        const oldValue = Controller._roles.join(",");
+        const oldValue = Controller.frontendMobTimer.roles.join(",");
         // todo: replace window.confirm with a modal        
         return (newValue) !== oldValue
             && window.confirm("Update Roles from '"

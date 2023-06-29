@@ -30,7 +30,7 @@ Ethan:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
-- [ ] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
+- [x] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
       - Replace All: Controller._roles with Controller.frontendMobTimer.roles (and edit related code)
 - [ ] **Sync all frontendMobTimer properties**, not just those currently used
       - Currently need to add these: participants, roles

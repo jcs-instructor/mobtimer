@@ -23,7 +23,7 @@ export class Controller {
     if (minCount > 0) {
       // build up a participant string with the role emoji prefix
       for (let i = 0; i < minCount; i++) {
-        const rolePrefix = this.extractFirstEmoji(Controller._roles[i]);
+        const rolePrefix = this.extractFirstEmoji(Controller.frontendMobTimer.roles[i]);
         const participant = Controller.frontendMobTimer.participants[i];
         const combo = `${rolePrefix}${participant}`;
         participants.push(combo);
@@ -132,10 +132,7 @@ export class Controller {
       secondsRemaining,
     };
   }
-
-  // static _participants: string[] = [];
-  static _roles: string[] = [];
-
+  
   static getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
       case Status.Running: {
