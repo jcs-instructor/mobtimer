@@ -254,7 +254,9 @@ In the terminal
 
 ### Step 2 - Push to main branch
 - Push to main branch
-- Check deployment dashboard (e.g., https://dashboard.render.com/) to see if deployment is successful (or still in progress or failed). Note: You might have to refresh the page after it completes to see the real "LAST DEPLOYED" time.
+- In the deployment dashboard (e.g., https://dashboard.render.com/):
+  - Check if deployment is successful (or still in progress or failed). Note: You might have to refresh the page after it completes to see the real "LAST DEPLOYED" time.
+  - If mobtimer-frontend's environment variables changed, modify them in the dashboard (e.g., for the frontend, click the 3 dots, choose settings, and then Environment Variables)
 - Once deployment has finished successfully, click link to open deployed frontend in browser (it might take a few minutes to be available): https://mobtimer-frontend-iwa7.onrender.com
 - To see any changes to the vscode extension in VSCode, see above section ["Building and Installing VSCode Extension"](#Building-and-Installing-VSCode-Extension)
 
