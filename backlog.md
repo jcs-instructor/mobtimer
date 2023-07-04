@@ -30,12 +30,14 @@ Ethan:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
-- [ ] **Heartbeat** Stay awake without ever timeing out (requires doing something every 14 minutes). 
-   - Limits
+- [ ] **Heartbeat for Backend** WIP: Stay awake without ever timing out (requires doing something every 14 minutes). 
+   - [ ] See todo comments in mobSocketServer.ts
+   - Limits:
      - 750 hours running across all onrender services and 15 minutes of inactivity.  See [here](https://render.com/docs/free#free-web-services),  This is 31.25 days, so if you only
      have one service you could be up all the time, with two services you would have to do
      half time, unless you run them on separate accounts.
      - 500 free build minutes (should not be an issue).  See [here](https://render.com/pricing)
+- [ ] **Heartbeat/Timeout Sniffing for Frontend** Maybe: Add clearInterval code to Timer.tsx (when timer is stopped, clear interval; when it's started, set interval). (Probably don't need a heartbeat, but investigate / sniff. May depend on browser caching.)
 - [ ] **CONTROLLER unit tests** Jest - WIP (created controller.test.ts but have no tests implemented yet)
       - [x] changeFrontendStatus tests
       - [ ] more...
