@@ -30,7 +30,7 @@ Ethan:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
-- [ ] **Heartbeat** to keep backend from sleeping. Ideas:
+- [ ] **Heartbeat** Stay awake without ever timeing out (requires doing something every 14 minutes). Ideas:
       - WIP: Ping every ___ sec./min. (see startHeartbeat in code; currently doing console.log, but later will send echoRequest - see comments in Controller)
       - Check render.com documentation for our level of subscription: 
             - Backend Timeout? (probably 15 min.)
