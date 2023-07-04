@@ -23,6 +23,10 @@ export class TimeUtils {
     return seconds * 1000;
   }
 
+  static minutesToMilliseconds(minutes: number): number {
+    return minutes * 1000 * 60;
+  }
+
   static secondsToMinutes(seconds: number): number {
     return seconds / 60;
   }

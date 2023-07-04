@@ -4,6 +4,7 @@ import {
   IWebSocketWrapper,
   MobSocketClient,
   MobTimer,
+  TimeUtils,
   WSWebSocketWrapper,
 } from "mobtimer-api";
 import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
@@ -42,6 +43,11 @@ export function renderHomePage(port: number) {
     const time = new Date().toLocaleTimeString();
     console.log(`[${time}] Server listening on PORT ${port}`);
   });
+
+  const heartbeatMinutes = parseFloat(process.env.HEARTBEAT_MINUTES || '0.05');
+  setInterval(() => {    
+    console.log("Heartbeat 2: " + new Date().toLocaleTimeString());
+  }, TimeUtils.minutesToMilliseconds(heartbeatMinutes));
 
   _addMobListeners(server);
 }
