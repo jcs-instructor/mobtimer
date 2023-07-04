@@ -1,5 +1,5 @@
-yarn
 cd mobtimer-api
+yarn
 yarn build
 cd ../mobtimer-frontend
 yarn
