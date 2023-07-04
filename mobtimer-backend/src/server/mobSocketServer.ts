@@ -44,12 +44,16 @@ export function renderHomePage(port: number) {
     console.log(`[${time}] Server listening on PORT ${port}`);
   });
 
-  const heartbeatMinutes = parseFloat(process.env.HEARTBEAT_MINUTES || '0.05');
-  setInterval(() => {    
-    console.log("Heartbeat 2: " + new Date().toLocaleTimeString());
-  }, TimeUtils.minutesToMilliseconds(heartbeatMinutes));
+  startHeartbeat();
 
   _addMobListeners(server);
+}
+
+function startHeartbeat() {
+  const heartbeatMinutes = parseFloat(process.env.HEARTBEAT_MINUTES || '0.05');
+  setInterval(() => {
+    console.log("Heartbeat 3: " + new Date().toLocaleTimeString());
+  }, TimeUtils.minutesToMilliseconds(heartbeatMinutes));
 }
 
 function _processRequest(
