@@ -49,10 +49,17 @@ export function renderHomePage(port: number) {
   _addMobListeners(server);
 }
 
-function startHeartbeat() {
-  const heartbeatMinutes = parseFloat(process.env.HEARTBEAT_MINUTES || '0.05');
-  setInterval(() => {
-    console.log("Heartbeat 3: " + new Date().toLocaleTimeString());
+const maxMinutesUp = parseFloat(process.env.MAX_MINUTES_UP || '0.2');  // todo: make 120 
+const serverStartTime = new Date().getTime(); // todo: make this server last pinged or started
+
+function startHeartbeat() {  
+  const heartbeatMinutes = parseFloat(process.env.HEARTBEAT_MINUTES || '0.0333333');  
+  const keepAliveInterval = setInterval(() => {
+    const elapsedSeconds = TimeUtils.millisecondsToSeconds(new Date().getTime() - serverStartTime);
+    console.log("Heartbeat: " + new Date().toLocaleTimeString() + ", Elapsed Seconds: " + elapsedSeconds);
+    if (TimeUtils.secondsToMinutes(elapsedSeconds) > maxMinutesUp) {
+      clearInterval(keepAliveInterval);
+    }
   }, TimeUtils.minutesToMilliseconds(heartbeatMinutes));
 }
 
