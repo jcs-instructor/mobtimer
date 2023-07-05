@@ -30,8 +30,13 @@ Ethan:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
-- [ ] **Heartbeat for Backend** WIP: Stay awake without ever timing out (requires doing something every 14 minutes). 
-   - [ ] See todo comments in mobSocketServer.ts
+- [ ] **Heartbeat for Backend** 
+   - WIP: 
+      - [ ] Stay awake without ever timing out (requires doing something every 14 minutes) 
+      - [ ] Go to sleep after a certain amt. of inactivity (e.g., 2 hours)      
+            - [ ] After server starts
+            - [ ] After any activity 
+      - [ ] See todo comments in mobSocketServer.ts
    - Limits:
      - 750 hours running across all onrender services and 15 minutes of inactivity.  See [here](https://render.com/docs/free#free-web-services),  This is 31.25 days, so if you only
      have one service you could be up all the time, with two services you would have to do
