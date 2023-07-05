@@ -9,8 +9,11 @@ export class MockHeartbeat {
 
     mockDelayMinutes(minutes: number) {
       console.log("delay minutes = " + minutes);
-      if (minutes >= 14) {
+      if (minutes === 15) {
         this.func();
-      }
+      } else if (minutes === 30) {
+        this.func();
+        this.func();
+      } 
     }
 }
