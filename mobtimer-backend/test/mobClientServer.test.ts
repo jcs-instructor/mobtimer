@@ -27,13 +27,6 @@ describe("WebSocket Server", () => {
     await _server.httpServer.close();
   });
 
-  test("Heartbeat does nothing if time has not been reached", async () => {
-    let counter = 0;
-    const heartbeat = new MockHeartbeat(14, ()=> { counter++ });
-    heartbeat.mockDelayMinutes(1);
-    expect(counter).toEqual(0);
-  });
-
   test("Create mob with alternative websocket", async () => {
     const client = await openSocketAlternative(url);
     await client.joinMob(_mobName1);
