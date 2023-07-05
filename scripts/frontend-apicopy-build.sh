@@ -1,5 +1,7 @@
 echo ***************************
-cd mobtimer-api
+cd mobtimer-backend
+yarn
+cd ../mobtimer-api
 yarn
 yarn build
 cd ../mobtimer-frontend
