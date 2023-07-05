@@ -1,3 +1,4 @@
+echo ***************************
 cd mobtimer-api
 yarn
 yarn build
