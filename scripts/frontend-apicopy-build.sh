@@ -1,6 +1,4 @@
 echo ***************************
-cd mobtimer-backend
-yarn
 cd ../mobtimer-api
 yarn
 yarn build
