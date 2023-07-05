@@ -6,6 +6,7 @@ import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient, MobSocketClient } from "mobtimer-api";
 import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
+import { MockHeartbeat } from "../src/server/mockHeartbeat";
 
 describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -32,7 +33,6 @@ describe("WebSocket Server", () => {
     heartbeat.mockDelayMinutes(1);
     expect(counter).toEqual(0);
   });
-
 
   test("Create mob with alternative websocket", async () => {
     const client = await openSocketAlternative(url);
