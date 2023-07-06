@@ -13,30 +13,31 @@ describe("Heartbeat tests", () => {
   // if activity occurs at 50 and then another 40 seconds elapse, callback is called 6 times
   // if elapsed time is 120, an activity occurs, and then 30 seconds elapses, callback is called 6 times
 
-  test("Heartbeat does nothing if time has not been reached", async () => {
-    const heartbeat = new Heartbeat(14, jest.fn());
+  test.each([{heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0}])
+  ("Heartbeat does nothing if time has not been reached", async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
+    const heartbeat = new Heartbeat(heartbeatDurationMinutes, jest.fn());
     heartbeat.start();
-    advanceTimersBySeconds(10);
-    expect(jest.fn()).toBeCalledTimes(0);
+    advanceTimersBySeconds(TimeUtils.minutesToSeconds(delayMinutes));
+    expect(jest.fn()).toBeCalledTimes(expectedCallbacks);
   });
 
-  test.skip("Heartbeat beats once after one time period has elapsed", async () => {
-    let counter = 0;
-    const heartbeat = new Heartbeat(14, () => {
-      counter++;
-    });
-    heartbeat.mockDelayMinutes(15);
-    expect(counter).toEqual(1);
-  });
+  // test.skip("Heartbeat beats once after one time period has elapsed", async () => {
+  //   let counter = 0;
+  //   const heartbeat = new Heartbeat(14, () => {
+  //     counter++;
+  //   });
+  //   heartbeat.mockDelayMinutes(15);
+  //   expect(counter).toEqual(1);
+  // });
 
-  test.skip("Heartbeat beats once after one time period has elapsed", async () => {
-    let counter = 0;
-    const heartbeat = new Heartbeat(14, () => {
-      counter++;
-    });
-    heartbeat.mockDelayMinutes(30);
-    expect(counter).toEqual(2);
-  });
+  // test.skip("Heartbeat beats once after one time period has elapsed", async () => {
+  //   let counter = 0;
+  //   const heartbeat = new Heartbeat(14, () => {
+  //     counter++;
+  //   });
+  //   heartbeat.mockDelayMinutes(30);
+  //   expect(counter).toEqual(2);
+  // });
   
 });
 
