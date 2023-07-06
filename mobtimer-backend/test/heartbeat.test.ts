@@ -13,12 +13,17 @@ describe("Heartbeat tests", () => {
   // if activity occurs at 50 and then another 40 seconds elapse, callback is called 6 times
   // if elapsed time is 120, an activity occurs, and then 30 seconds elapses, callback is called 6 times
 
-  test.each([{heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0}])
-  ("Heartbeat does nothing if time has not been reached", async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
-    const heartbeat = new Heartbeat(heartbeatDurationMinutes, jest.fn());
+  test.each([
+    {heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0},
+    {heartbeatDurationMinutes: 14, delayMinutes: 16, expectedCallbacks: 1},
+  ])
+  ("When duration is set to $heartbeatDurationMinutes min. and wait $delayMinutes min., then expect $expectedCallbacks callbacks", 
+  async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
+    const callback = jest.fn();
+    const heartbeat = new Heartbeat(heartbeatDurationMinutes, callback);
     heartbeat.start();
-    advanceTimersBySeconds(TimeUtils.minutesToSeconds(delayMinutes));
-    expect(jest.fn()).toBeCalledTimes(expectedCallbacks);
+    advanceTimersByMinutes(delayMinutes);
+    expect(callback).toBeCalledTimes(expectedCallbacks);
   });
 
   // test.skip("Heartbeat beats once after one time period has elapsed", async () => {
@@ -41,7 +46,7 @@ describe("Heartbeat tests", () => {
   
 });
 
-function advanceTimersBySeconds(delaySeconds: number): number {
-  jest.advanceTimersByTime(TimeUtils.secondsToMilliseconds(delaySeconds));
-  return delaySeconds;
+function advanceTimersByMinutes(delayMinutes: number): number {
+  jest.advanceTimersByTime(TimeUtils.minutesToMilliseconds(delayMinutes));
+  return delayMinutes;
 }

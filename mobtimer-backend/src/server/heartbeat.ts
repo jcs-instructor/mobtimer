@@ -1,15 +1,17 @@
+import { TimeUtils } from "mobtimer-api";
+
 export class Heartbeat {
     
     func: () => void;
-    minutesRemaining: number;
+    durationMinutes: number;
     
     constructor(durationMinutes: number, func = () => { }) {        
         console.log(durationMinutes, func);
         this.func = func;
-        this.minutesRemaining = durationMinutes;
+        this.durationMinutes = durationMinutes;
     }    
 
     start() {
-      
+      const interval = setInterval(this.func, TimeUtils.minutesToMilliseconds(this.durationMinutes));
     }
 }
