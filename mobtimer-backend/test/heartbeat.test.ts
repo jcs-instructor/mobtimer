@@ -1,6 +1,9 @@
-import { MockHeartbeat } from "../src/server/mockHeartbeat";
+import { TimeUtils } from "mobtimer-api";
+import { Heartbeat } from "../src/server/heartbeat";
 
-describe.skip("Heartbeat tests", () => {
+jest.useFakeTimers();
+
+describe("Heartbeat tests", () => {
 
   // callback is not executed if elapsed time < wakeup time
   // callback is executed once if elapsed time >= wakeup time
@@ -11,25 +14,24 @@ describe.skip("Heartbeat tests", () => {
   // if elapsed time is 120, an activity occurs, and then 30 seconds elapses, callback is called 6 times
 
   test("Heartbeat does nothing if time has not been reached", async () => {
-    let counter = 0;
-    const heartbeat = new MockHeartbeat(14, () => {
-      counter++;
-    });
-    heartbeat.mockDelayMinutes(1);
-    expect(counter).toEqual(0);
+    const heartbeat = new Heartbeat(14, jest.fn());
+    heartbeat.start();
+    advanceTimersBySeconds(10);
+    expect(jest.fn()).toBeCalledTimes(0);
   });
-  test("Heartbeat beats once after one time period has elapsed", async () => {
+
+  test.skip("Heartbeat beats once after one time period has elapsed", async () => {
     let counter = 0;
-    const heartbeat = new MockHeartbeat(14, () => {
+    const heartbeat = new Heartbeat(14, () => {
       counter++;
     });
     heartbeat.mockDelayMinutes(15);
     expect(counter).toEqual(1);
   });
 
-  test("Heartbeat beats once after one time period has elapsed", async () => {
+  test.skip("Heartbeat beats once after one time period has elapsed", async () => {
     let counter = 0;
-    const heartbeat = new MockHeartbeat(14, () => {
+    const heartbeat = new Heartbeat(14, () => {
       counter++;
     });
     heartbeat.mockDelayMinutes(30);
@@ -37,3 +39,8 @@ describe.skip("Heartbeat tests", () => {
   });
   
 });
+
+function advanceTimersBySeconds(delaySeconds: number): number {
+  jest.advanceTimersByTime(TimeUtils.secondsToMilliseconds(delaySeconds));
+  return delaySeconds;
+}
