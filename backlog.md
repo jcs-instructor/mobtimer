@@ -33,9 +33,9 @@ Ethan:
 - [ ] **Heartbeat for Backend** 
    - WIP: 
       - [ ] Stay awake without ever timing out (requires doing something every 14 minutes) 
-      - [ ] Go to sleep after a certain amt. of inactivity (e.g., 2 hours)      
-            - [ ] After server starts
-            - [ ] After any activity 
+      - [ ] Go to sleep (i.e., kill stay awake interval) after a certain amt. of inactivity (e.g., 2 hours)      
+            - [ ] After server starts (i.e., start Sleep timer which will kill stay awake timer)
+            - [ ] After any activity (i.e., kill and restart Go to sleep timer)
       - [ ] See todo comments in mobSocketServer.ts
    - Limits:
      - 750 hours running across all onrender services and 15 minutes of inactivity.  See [here](https://render.com/docs/free#free-web-services),  This is 31.25 days, so if you only
