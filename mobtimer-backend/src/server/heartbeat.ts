@@ -1,17 +1,30 @@
 import { TimeUtils } from "mobtimer-api";
 
 export class Heartbeat {
-    
-    func: () => void;
-    durationMinutes: number;
-    
-    constructor(durationMinutes: number, func = () => { }) {        
-        console.log(durationMinutes, func);
-        this.func = func;
-        this.durationMinutes = durationMinutes;
-    }    
+  func: () => void;
+  durationMinutes: number;
+  maxInactivityMinutes: number;
 
-    start() {
-      const interval = setInterval(this.func, TimeUtils.minutesToMilliseconds(this.durationMinutes));
-    }
+  constructor(
+    durationMinutes: number,
+    maxInactivityMinutes: number,
+    func = () => {}
+  ) {
+    console.log(durationMinutes, func);
+    this.func = func;
+    this.durationMinutes = durationMinutes;
+    this.maxInactivityMinutes = maxInactivityMinutes;
+  }
+
+  start() {
+    const interval = setInterval(
+      this.func,
+      TimeUtils.minutesToMilliseconds(this.durationMinutes)
+    );
+    setTimeout(
+      () => clearInterval(interval),
+      TimeUtils.minutesToMilliseconds(this.maxInactivityMinutes)
+    );
+
+  }
 }
