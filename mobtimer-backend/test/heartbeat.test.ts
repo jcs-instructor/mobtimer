@@ -14,36 +14,19 @@ describe("Heartbeat tests", () => {
   // if elapsed time is 120, an activity occurs, and then 30 seconds elapses, callback is called 6 times
 
   test.each([
-    {heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0},
-    {heartbeatDurationMinutes: 14, delayMinutes: 16, expectedCallbacks: 1},
-  ])
-  ("When duration is set to $heartbeatDurationMinutes min. and wait $delayMinutes min., then expect $expectedCallbacks callbacks", 
-  async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
-    const callback = jest.fn();
-    const heartbeat = new Heartbeat(heartbeatDurationMinutes, callback);
-    heartbeat.start();
-    advanceTimersByMinutes(delayMinutes);
-    expect(callback).toBeCalledTimes(expectedCallbacks);
-  });
-
-  // test.skip("Heartbeat beats once after one time period has elapsed", async () => {
-  //   let counter = 0;
-  //   const heartbeat = new Heartbeat(14, () => {
-  //     counter++;
-  //   });
-  //   heartbeat.mockDelayMinutes(15);
-  //   expect(counter).toEqual(1);
-  // });
-
-  // test.skip("Heartbeat beats once after one time period has elapsed", async () => {
-  //   let counter = 0;
-  //   const heartbeat = new Heartbeat(14, () => {
-  //     counter++;
-  //   });
-  //   heartbeat.mockDelayMinutes(30);
-  //   expect(counter).toEqual(2);
-  // });
-  
+    { heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0 },
+    { heartbeatDurationMinutes: 14, delayMinutes: 16, expectedCallbacks: 1 },
+    { heartbeatDurationMinutes: 14, delayMinutes: 30, expectedCallbacks: 2 },
+  ])(
+    "Duration: $heartbeatDurationMinutes min, Delay: $delayMinutes min => Calls: $expectedCallbacks",
+    async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
+      const callback = jest.fn();
+      const heartbeat = new Heartbeat(heartbeatDurationMinutes, callback);
+      heartbeat.start();
+      advanceTimersByMinutes(delayMinutes);
+      expect(callback).toBeCalledTimes(expectedCallbacks);
+    }
+  ); 
 });
 
 function advanceTimersByMinutes(delayMinutes: number): number {
