@@ -158,6 +158,8 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
       // });
       const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
 
+      heartbeat.restart();
+
       let requestString: string = _requestToString(request);
       let parsedRequest: MobTimerRequests.MobTimerRequest;
       try {
