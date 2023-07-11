@@ -5,21 +5,8 @@ jest.useFakeTimers();
 
 describe.only("Heartbeat tests", () => {
 
-  test.each([
-    { heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0 },
-    { heartbeatDurationMinutes: 14, delayMinutes: 16, expectedCallbacks: 1 },
-    { heartbeatDurationMinutes: 14, delayMinutes: 30, expectedCallbacks: 2 },
-  ])(
-    "Duration: $heartbeatDurationMinutes min, Delay: $delayMinutes min => Calls: $expectedCallbacks",
-    async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
-      const callback = jest.fn();
-      const heartbeat = new Heartbeat(heartbeatDurationMinutes, 60, callback);
-      heartbeat.start();
-      advanceTimersByMinutes(delayMinutes);
-      expect(callback).toBeCalledTimes(expectedCallbacks);
-    }
-  );
-  
+ 
+
   test("Restart heartbeat before first heartbeat", async () => {
     const callback = jest.fn();
     const heartbeat = new Heartbeat(15, 60, callback);
@@ -29,6 +16,20 @@ describe.only("Heartbeat tests", () => {
     advanceTimersByMinutes(6);
     expect(callback).toBeCalledTimes(0);
   });
+
+   test.each([
+     { heartbeatDurationMinutes: 14, delayMinutes: 1, expectedCallbacks: 0 },
+     { heartbeatDurationMinutes: 14, delayMinutes: 16, expectedCallbacks: 1 },
+     { heartbeatDurationMinutes: 14, delayMinutes: 30, expectedCallbacks: 2 },
+   ])(
+     "Duration: $heartbeatDurationMinutes min, Delay: $delayMinutes min => Calls: $expectedCallbacks",
+     async ({ heartbeatDurationMinutes, delayMinutes, expectedCallbacks }) => {
+       const heartbeat = new Heartbeat(heartbeatDurationMinutes, 60, () => {});
+       heartbeat.start();
+       advanceTimersByMinutes(delayMinutes);
+       expect(heartbeat.count).toEqual(expectedCallbacks);
+     }
+   );
 
   test("Restart heartbeat after 3 heartbeats and let run for 2 heartbeats (with no timeout)", async () => {
     // The heartbeat is restarted after 50 min. (3 callbacks so far prior to restart),

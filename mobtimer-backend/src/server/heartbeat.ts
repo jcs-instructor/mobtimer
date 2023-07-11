@@ -6,6 +6,7 @@ export class Heartbeat {
   maxInactivityMinutes: number;
   _interval: NodeJS.Timer | undefined;
   _timeout: NodeJS.Timeout | undefined;
+  count: number = 0;
 
   constructor(
     durationMinutes: number,
