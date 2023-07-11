@@ -3,7 +3,7 @@ import { Heartbeat } from "../src/server/heartbeat";
 
 jest.useFakeTimers();
 
-describe.only("Heartbeat tests", () => {
+describe("Heartbeat tests", () => {
   test("Restart heartbeat before first heartbeat", async () => {
     const callback = jest.fn();
     const heartbeat = new Heartbeat(15, 60, callback);
