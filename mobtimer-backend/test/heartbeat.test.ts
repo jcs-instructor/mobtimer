@@ -6,8 +6,18 @@ jest.useFakeTimers();
 describe.only("Heartbeat tests", () => {
   // More test examples:
   // Set up: heartbeatDurationMinutes is 15, maxInactivityMinutes is 60 (higher later)
-  //  - An activity occurs after 120 min. (4 callbacks so far; both timers would've stopped after 60 min.; on activity, restart both timers);
-  //      then another 30 min. later, expect 6 callbacks (i.e., 2 more callbacks added to the prior 4)
+
+  test("Restart heartbeat after inactivity timeout", async () => {
+    // An activity occurs after 120 min. (4 callbacks so far; both timers would've stopped after 60 min.; on activity, restart both timers);
+    // then another 30 min. later, expect 6 callbacks (i.e., 2 more callbacks added to the prior 4)
+    const callback = jest.fn();
+    const heartbeat = new Heartbeat(15, 60, callback);
+    heartbeat.start();
+    advanceTimersByMinutes(120);
+    heartbeat.restart();
+    advanceTimersByMinutes(30);
+    expect(callback).toBeCalledTimes(6);
+  });
 
   test("Restart heartbeat after 3 heartbeats and let run for 2 heartbeats (with no timeout)", async () => {
     // The heartbeat is restarted after 50 min. (3 callbacks so far prior to restart),
