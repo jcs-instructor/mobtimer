@@ -30,5 +30,6 @@ export class Heartbeat {
 
   restart() {
     clearInterval(this._interval);    
+    this.start();
   }
 }
