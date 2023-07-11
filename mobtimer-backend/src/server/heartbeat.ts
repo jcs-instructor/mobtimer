@@ -25,6 +25,9 @@ export class Heartbeat {
       () => clearInterval(interval),
       TimeUtils.minutesToMilliseconds(this.maxInactivityMinutes)
     );
+  }
 
+  restart() {
+    clearInterval(this._interval);
   }
 }
