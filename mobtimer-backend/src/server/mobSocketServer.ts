@@ -11,6 +11,7 @@ import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
+import { Heartbeat } from "./heartbeat";
 
 export async function startMobServer(
   port: number
@@ -42,26 +43,13 @@ export function renderHomePage(port: number) {
   const server = app.listen(port, function () {
     const time = new Date().toLocaleTimeString();
     console.log(`[${time}] Server listening on PORT ${port}`);
-  });
-
-  startHeartbeat();
+  });  
 
   _addMobListeners(server);
 }
 
 const maxMinutesUp = parseFloat(process.env.MAX_MINUTES_UP || '0.2');  // todo: make 120 
 const serverStartTime = new Date().getTime(); // todo: make this server last pinged or started
-
-function startHeartbeat() {  
-  const heartbeatMinutes = parseFloat(process.env.HEARTBEAT_MINUTES || '0.0333333');  
-  const keepAliveInterval = setInterval(() => {
-    const elapsedSeconds = TimeUtils.millisecondsToSeconds(new Date().getTime() - serverStartTime);
-    console.log("Heartbeat: " + new Date().toLocaleTimeString() + ", Elapsed Seconds: " + elapsedSeconds);
-    if (TimeUtils.secondsToMinutes(elapsedSeconds) > maxMinutesUp) {
-      clearInterval(keepAliveInterval);
-    }
-  }, TimeUtils.minutesToMilliseconds(heartbeatMinutes));
-}
 
 function _processRequest(
   parsedRequest: MobTimerRequests.MobTimerRequest,
@@ -149,13 +137,14 @@ function _processRequest(
 function _addMobListeners(server: http.Server): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
 
-  wss.on("connection", async function (webSocket: WebSocket) {
+  wss.on("connection", async function (webSocket: WebSocket) {    
     // 2nd paramater for mrozbarry, request2: any
     // const url = new URL(request2.url, `http://${request2.headers.host}`);
     // let mobName = url.pathname.replace("/", "");
     // if (mobName) {
     //   _initialize(webSocket);
     // }
+    const heartbeat = new Heartbeat(15, 60, () => {console.log("Heartbeat: " + new Date().toLocaleTimeString())});
 
     webSocket.on("message", function (request) {
       // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
