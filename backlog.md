@@ -32,6 +32,7 @@ Ethan:
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
 - [ ] **Heartbeat for Backend** 
    - WIP: 
+      - [ ] See TODO comment in mobClientServer.ts (heartbeat integration tests)
       - [ ] Stay awake without ever timing out (requires doing something every 14 minutes) 
       - [ ] Go to sleep (i.e., kill stay awake interval) after a certain amt. of inactivity (e.g., 2 hours)      
             - [ ] After server starts (i.e., start Sleep timer which will kill stay awake timer)

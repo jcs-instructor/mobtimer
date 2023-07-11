@@ -26,6 +26,19 @@ describe("WebSocket Server", () => {
     await _server.httpServer.close();
   });
 
+  /* todo: Create heartbeat integration test, e.g.: 
+  look at the heartbeat.test.ts file & just replace direct 
+  calls to the heartbeat object with client calls
+  1. instead of heartbeat.start(), do:
+  - client.joinMob
+  - client.start
+  2. advance time 120 min
+  3. instead of heartbeat.restart(), do:
+  - client.start
+  4. advance time 30 min
+  5. expect 6 heartbeats
+  */
+
   test("Create mob with alternative websocket", async () => {
     const client = await openSocketAlternative(url);
     await client.joinMob(_mobName1);
