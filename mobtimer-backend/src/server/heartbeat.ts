@@ -21,7 +21,7 @@ export class Heartbeat {
 
   start() {
     this._interval = setInterval(
-      this.func,
+      () => {this.func(); this.count++;},
       TimeUtils.minutesToMilliseconds(this.durationMinutes)
     );
     this._timeout = setTimeout(
