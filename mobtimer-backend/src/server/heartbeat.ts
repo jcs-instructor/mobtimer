@@ -5,6 +5,7 @@ export class Heartbeat {
   durationMinutes: number;
   maxInactivityMinutes: number;
   _interval: NodeJS.Timer | undefined;
+  _timeout: NodeJS.Timeout | undefined;
 
   constructor(
     durationMinutes: number,
@@ -22,7 +23,7 @@ export class Heartbeat {
       this.func,
       TimeUtils.minutesToMilliseconds(this.durationMinutes)
     );
-    setTimeout(
+    this._timeout = setTimeout(
       () => clearInterval(this._interval),
       TimeUtils.minutesToMilliseconds(this.maxInactivityMinutes)
     );
@@ -30,6 +31,7 @@ export class Heartbeat {
 
   restart() {
     clearInterval(this._interval);    
+    clearTimeout(this._timeout);
     this.start();
   }
 }
