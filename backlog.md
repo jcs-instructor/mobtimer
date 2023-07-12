@@ -34,6 +34,7 @@ Ethan:
    - WIP: 
       - [ ] Rename func to onHeartbeatFunc
       - [ ] See TODO comment in mobClientServer.ts (heartbeat integration tests)
+      - [ ] Change hard coded interval / timeout length when calling to read from env var
       - [ ] Stay awake without ever timing out (requires doing something every 14 minutes) 
       - [ ] Go to sleep (i.e., kill stay awake interval) after a certain amt. of inactivity (e.g., 2 hours)      
             - [ ] After server starts (i.e., start Sleep timer which will kill stay awake timer)
