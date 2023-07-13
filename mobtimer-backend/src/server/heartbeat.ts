@@ -37,6 +37,8 @@ export class Heartbeat {
   restart() {
     clearInterval(this._interval);    
     clearTimeout(this._timeout);
+    this._timeout?.unref();
+    this._timeout?.unref();
     this.start();
   }
 }

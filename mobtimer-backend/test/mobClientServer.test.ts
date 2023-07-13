@@ -7,20 +7,16 @@ import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient, MobSocketClient } from "mobtimer-api";
 import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
 
-//jest.useFakeTimers();
-
-describe.only("WebSocket Server", () => {
+describe("WebSocket Server", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
   const port = 4000 + Number(process.env.JEST_WORKER_ID);
   const url = `ws://localhost:${port}`;
   const toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
-  let hearbeatCallbackFunc = () => {};
 
   beforeEach(async () => {
-    hearbeatCallbackFunc = jest.fn();
-    _server = await startMobServer(port, hearbeatCallbackFunc);
+    _server = await startMobServer(port);
   });
 
   afterEach(async () => {
@@ -33,30 +29,15 @@ describe.only("WebSocket Server", () => {
   /* todo: Create heartbeat integration test, e.g.: 
   look at the heartbeat.test.ts file & just replace direct 
   calls to the heartbeat object with client calls
-  x1. instead of heartbeat.start(), do:
-  x- client.joinMob
-  x- client.start  
-  x2. advance time 120 min
-  x3. instead of heartbeat.restart(), do:
-  x- client.pause  
-  x4. advance time 30 min
-
+  1. instead of heartbeat.start(), do:
+  - client.joinMob
+  - client.start
+  2. advance time 120 min
+  3. instead of heartbeat.restart(), do:
+  - client.start
+  4. advance time 30 min
   5. expect 6 heartbeats
   */
-  test.only("Heartbeat integration test", async () => {
-    jest.useRealTimers();
-    const client = await openSocketAlternative(url);
-    await client.joinMob(_mobName1);
-    await client.start();
-    jest.useFakeTimers();
-    advanceTimersByMinutes(120);    
-    await client.pause();
-    advanceTimersByMinutes(30);
-    jest.useRealTimers();
-    await cleanUp(client);
-    jest.useFakeTimers();
-    expect(hearbeatCallbackFunc).toBeCalledTimes(6);
-  });
 
   test("Create mob with alternative websocket", async () => {
     const client = await openSocketAlternative(url);
@@ -133,7 +114,7 @@ describe.only("WebSocket Server", () => {
     await client.update(1);
     client.start();
     const delaySeconds = 0.2;
-    await advanceTimersBySeconds(delaySeconds);
+    await TimeUtils.delaySeconds(delaySeconds);
     client.pause();
     await cleanUp(client);
 
@@ -208,7 +189,7 @@ describe.only("WebSocket Server", () => {
       await client.update(TimeUtils.secondsToMinutes(durationSeconds));
       await client.start();
       const now = Date.now();
-      await advanceTimersBySeconds(durationSeconds + toleranceSeconds);
+      await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
       await cleanUp(client);
       expect(client.lastSuccessfulAction).toEqual(Action.Expired);
       expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
@@ -220,7 +201,7 @@ describe.only("WebSocket Server", () => {
     const client = await openMobSocket(url);
     await client.joinMob(_mobName1);
     await client.start();
-    await advanceTimersBySeconds(0.2);
+    await TimeUtils.delaySeconds(0.2);
     await client.reset();
     await cleanUp(client);
     expect(client.lastSuccessfulAction).toEqual(Action.Reset);
@@ -236,7 +217,7 @@ describe.only("WebSocket Server", () => {
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
     await client.pause();
-    await advanceTimersBySeconds(durationSeconds + toleranceSeconds);
+    await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
     await cleanUp(client);
     const numDigits = 1;
     expect(client.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
@@ -255,7 +236,7 @@ describe.only("WebSocket Server", () => {
     await client.start();
     await client.pause();
     await client.start();
-    await advanceTimersBySeconds(durationSeconds + toleranceSeconds);
+    await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
     await cleanUp(client);
     const numDigits = 1;
     expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
@@ -404,11 +385,6 @@ function getNewState(mobName: string): MobState {
 
 function getDefaultDurationMinutes(): number {
   return new MobTimer("name-doesnt-matter-here").durationMinutes;
-}
-
-function advanceTimersByMinutes(delayMinutes: number): number {
-  jest.advanceTimersByTime(TimeUtils.minutesToMilliseconds(delayMinutes));
-  return delayMinutes;
 }
 
 function advanceTimersBySeconds(delaySeconds: number): number {

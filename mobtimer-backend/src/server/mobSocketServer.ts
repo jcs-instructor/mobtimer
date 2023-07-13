@@ -13,11 +13,28 @@ import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Heartbeat } from "./heartbeat";
 
+const defaultHeartbeatValues = { heartbeatDurationMinutes : Number.parseInt(
+      process.env.HEARTBEAT_DURATION_MINUTES || ""
+    ) || 12,
+    heartbeatMaxInactivityMinutes: Number.parseInt(
+      process.env.HEARTBEAT_MAX_INACTIVITY_MINUTES || ""
+    ) || 120
+}
+
 export async function startMobServer(
-  port: number, onHeartbeatFunc = () => {}
+  port: number,
+  onHeartbeatFunc = () => {},
+  {
+    heartbeatDurationMinutes,
+    heartbeatMaxInactivityMinutes
+  } = defaultHeartbeatValues
 ): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
   const server = http.createServer();
-  const wss = _addMobListeners(server, onHeartbeatFunc);
+  const wss = _addMobListeners(server, onHeartbeatFunc,   {
+    heartbeatDurationMinutes,
+    heartbeatMaxInactivityMinutes
+  } 
+  );
   return new Promise((resolve) => {
     server.listen(port, () => resolve({ httpServer: server, wss }));
   });
@@ -43,12 +60,12 @@ export function renderHomePage(port: number) {
   const server = app.listen(port, function () {
     const time = new Date().toLocaleTimeString();
     console.log(`[${time}] Server listening on PORT ${port}`);
-  });  
+  });
 
   _addMobListeners(server);
 }
 
-const maxMinutesUp = parseFloat(process.env.MAX_MINUTES_UP || '0.2');  // todo: make 120 
+const maxMinutesUp = parseFloat(process.env.MAX_MINUTES_UP || "0.2"); // todo: make 120
 const serverStartTime = new Date().getTime(); // todo: make this server last pinged or started
 
 function _processRequest(
@@ -134,20 +151,28 @@ function _processRequest(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function _addMobListeners(server: http.Server, onHeartbeatFunc: () => void): WebSocket.Server {
+function _addMobListeners(
+  server: http.Server,
+  onHeartbeatFunc = () => {},
+{
+    heartbeatDurationMinutes,
+    heartbeatMaxInactivityMinutes
+} = defaultHeartbeatValues
+): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
+  const heartbeat = new Heartbeat(heartbeatDurationMinutes, heartbeatMaxInactivityMinutes, () => {
+    console.log("Heartbeat: " + new Date().toLocaleTimeString());
+    onHeartbeatFunc();
+  });
+  heartbeat.start();
 
-  wss.on("connection", async function (webSocket: WebSocket) {    
+  wss.on("connection", async function (webSocket: WebSocket) {
     // 2nd paramater for mrozbarry, request2: any
     // const url = new URL(request2.url, `http://${request2.headers.host}`);
     // let mobName = url.pathname.replace("/", "");
     // if (mobName) {
     //   _initialize(webSocket);
     // }
-    const heartbeat = new Heartbeat(15, 60, () => {
-      console.log("Heartbeat: " + new Date().toLocaleTimeString());
-      onHeartbeatFunc();
-    });
 
     webSocket.on("message", function (request) {
       // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
