@@ -7,7 +7,7 @@ import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient, MobSocketClient } from "mobtimer-api";
 import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
 
-describe("WebSocket Server", () => {
+describe("Client WebSocket Server Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
@@ -26,19 +26,6 @@ describe("WebSocket Server", () => {
     await _server.httpServer.close();
   });
 
-  /* todo: Create heartbeat integration test, e.g.: 
-  look at the heartbeat.test.ts file & just replace direct 
-  calls to the heartbeat object with client calls
-  1. instead of heartbeat.start(), do:
-  - client.joinMob
-  - client.start
-  2. advance time 120 min
-  3. instead of heartbeat.restart(), do:
-  - client.start
-  4. advance time 30 min
-  5. expect 6 heartbeats
-  */
-
   test("Create mob with alternative websocket", async () => {
     const client = await openSocketAlternative(url);
     await client.joinMob(_mobName1);
@@ -49,7 +36,7 @@ describe("WebSocket Server", () => {
 
   test("Create mob", async () => {
     const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    await client.joinMob(_mobName1); // const _mobName1 = await client.joinMob(); // let mobCount = 0; // mobCount; return "mob"+mobCount;
     await cleanUp(client);
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(client.lastSuccessfulAction).toEqual(Action.Join);

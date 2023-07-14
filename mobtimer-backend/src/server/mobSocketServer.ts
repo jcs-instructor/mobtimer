@@ -15,10 +15,10 @@ import { Heartbeat } from "./heartbeat";
 
 const defaultHeartbeatValues = { heartbeatDurationMinutes : Number.parseInt(
       process.env.HEARTBEAT_DURATION_MINUTES || ""
-    ) || 12,
+    ) || 12, // e.g., render.com has a 15 minute timeout, so 12 minutes is a safe value
     heartbeatMaxInactivityMinutes: Number.parseInt(
       process.env.HEARTBEAT_MAX_INACTIVITY_MINUTES || ""
-    ) || 120
+    ) || 120 // e.g., people mobbing together with a break of up to 2 hours won't experience an inactivity timeout
 }
 
 export async function startMobServer(
@@ -64,9 +64,6 @@ export function renderHomePage(port: number) {
 
   _addMobListeners(server);
 }
-
-const maxMinutesUp = parseFloat(process.env.MAX_MINUTES_UP || "0.2"); // todo: make 120
-const serverStartTime = new Date().getTime(); // todo: make this server last pinged or started
 
 function _processRequest(
   parsedRequest: MobTimerRequests.MobTimerRequest,
@@ -184,7 +181,6 @@ function _addMobListeners(
       // client.on('close', () => {
       //   log('websocket.disconnect', timerId);
       // });
-      const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
 
       heartbeat.restart();
 
@@ -218,6 +214,7 @@ function _addMobListeners(
   return wss;
 }
 
+// todo: consider:
 // function _initialize(webSocket: WebSocket) {
 //   webSocket.send(
 //     JSON.stringify({

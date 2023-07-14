@@ -1,16 +1,12 @@
 import { startMobServer } from "../src/server/mobSocketServer";
-import { Counter } from "../src/Counter";
-import { MobState, MobTimer } from "mobtimer-api";
-import { Status, TimeUtils, Action } from "mobtimer-api";
+import { TimeUtils } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { MobSocketTestClient, MobSocketClient } from "mobtimer-api";
-import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
+import { MobSocketTestClient } from "mobtimer-api";
+import { WSWebSocketWrapper } from "mobtimer-api";
 
-//jest.useFakeTimers();
-
-describe.only("WebSocket Server", () => {
+describe.only("Heartbeat Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
@@ -18,14 +14,16 @@ describe.only("WebSocket Server", () => {
   const url = `ws://localhost:${port}`;
   const toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
   let heartbeatCallbackFunc = () => {};
-  const counter = new Counter();
+  const heartbeatDurationSeconds = 0.4; // 0.2 didn't work, 0.24 worked sometimes, 0.25 worked for the few times we tried
+  const heartbeatMaxInactivitySeconds = (heartbeatDurationSeconds * 3) + toleranceSeconds; // after 3 heartbeats with no activity, the heartbeat will stop
+  const counter = { value: 0 };
 
   beforeEach(async () => {
-    counter.counter = 0;
-    heartbeatCallbackFunc = () => counter.counter++;
+    counter.value = 0;
+    heartbeatCallbackFunc = () => counter.value++;
     _server = await startMobServer(port, heartbeatCallbackFunc, 
-      { heartbeatDurationMinutes: TimeUtils.secondsToMinutes(0.25), 
-        heartbeatMaxInactivityMinutes: TimeUtils.secondsToMinutes(0.6)
+      { heartbeatDurationMinutes: TimeUtils.secondsToMinutes(heartbeatDurationSeconds), 
+        heartbeatMaxInactivityMinutes: TimeUtils.secondsToMinutes(heartbeatMaxInactivitySeconds)
       }
     );
   });
@@ -37,30 +35,17 @@ describe.only("WebSocket Server", () => {
     await _server.httpServer.close();
   });
 
-  /* todo: Create heartbeat integration test, e.g.: 
-  look at the heartbeat.test.ts file & just replace direct 
-  calls to the heartbeat object with client calls
-  x1. instead of heartbeat.start(), do:
-  x- client.joinMob
-  x- client.start  
-  x2. advance time 120 min
-  x3. instead of heartbeat.restart(), do:
-  x- client.pause  
-  x4. advance time 30 min
-
-  5. expect 6 heartbeats
-  */
-  test.only("Heartbeat integration test", async () => {
-
+  test("Heartbeat integration test", async () => {
     const client = await openSocketAlternative(url);
     await client.joinMob(_mobName1);
     await client.start();
-    await TimeUtils.delaySeconds(0.9);
+    await TimeUtils.delaySeconds(heartbeatDurationSeconds * 4 + toleranceSeconds);
+    // By now we should have 3 heartbeats only (not 4) since we reached the max inactivity timeout
     await client.pause();
-    await TimeUtils.delaySeconds(0.4);
+    await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
+    // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
     await cleanUp(client);
-
-    expect (counter.counter).toEqual(3);
+    expect(counter.value).toEqual(5);
   });
 
 });
