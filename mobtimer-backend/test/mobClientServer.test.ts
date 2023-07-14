@@ -7,19 +7,40 @@ import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient, MobSocketClient } from "mobtimer-api";
 import { W3CWebSocketWrapper, WSWebSocketWrapper } from "mobtimer-api";
 
-describe.skip("Client WebSocket Server Integration", () => {
+describe("Client WebSocket Server Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
   const _mobName1 = "awesome-team";
-  const _mobName2 = "good-team";
+  const startMilliseconds = Date.now();
   const port = 4000 + Number(process.env.JEST_WORKER_ID);
   const url = `ws://localhost:${port}`;
   const toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
-  
-  beforeEach(async () => {
+  let client: MobSocketTestClient;
+  let client2: MobSocketTestClient;
+
+  beforeAll(async () => {
     _server = await startMobServer(port);
+    client = await openMobSocket(url);
+    client2 = await openMobSocket(url);
   });
 
-  afterEach(async () => {
+  beforeEach( () => {
+    console.log(
+      "Start: time",
+      startMilliseconds - Date.now(),
+      expect.getState().currentTestName
+    );
+  });
+
+
+  afterEach(() => {
+    console.log(
+      "End: time",
+      startMilliseconds - Date.now(),
+      expect.getState().currentTestName
+    );
+  });
+
+  afterAll(async () => {
     RoomManager.resetRooms();
     // todo: Refactor to change return type for the startMobServer method to be a class with one exposed close method (so don't have to close both httpServer and wss separately from the consumer).
     await _server.wss.close();
@@ -27,6 +48,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Create mob with alternative websocket", async () => {
+
     const client = await openSocketAlternative(url);
     await client.joinMob(_mobName1);
     await cleanUp(client);
@@ -34,20 +56,17 @@ describe.skip("Client WebSocket Server Integration", () => {
     expect(client.lastSuccessfulAction).toEqual(Action.Join);
   });
 
-  test("Create mob", async () => {    
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+  test("Create mob", async () => {
+    const _mobName1 = await joinMob(client);
     await cleanUp(client);
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(client.lastSuccessfulAction).toEqual(Action.Join);
   });
 
   test("Create 2 mobs", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
 
-    const client2 = await openMobSocket(url);
-    await client2.joinMob(_mobName2);
+    const _mobName2 = await joinMob(client2, "1");
 
     await cleanUp(client);
     await cleanUp(client2);
@@ -57,11 +76,8 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Modify one of two mob timers", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
-
-    const client2 = await openMobSocket(url);
-    await client2.joinMob(_mobName2);
+    const _mobName1 = await joinMob(client);
+    const _mobName2 = await joinMob(client2, "1");
     await client2.update(17);
     await cleanUp(client);
     await cleanUp(client2);
@@ -94,10 +110,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Second client joins shared mob in paused state", async () => {
-    const mobNameForBothTeams = "super-team";
-
-    const client = await openMobSocket(url);
-    await client.joinMob(mobNameForBothTeams);
+    const mobNameForBothTeams = await joinMob(client, "super-team");
     await client.update(1);
     client.start();
     const delaySeconds = 0.2;
@@ -128,8 +141,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Start timer", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.start();
     await cleanUp(client);
     expect(client.lastSuccessfulAction).toEqual(Action.Start);
@@ -137,8 +149,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Pause timer", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.start();
     await client.pause();
     await cleanUp(client);
@@ -147,8 +158,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Resume timer", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.start();
     await client.pause();
     await client.start();
@@ -158,8 +168,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Update timer", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.start();
     await client.update(40);
     await cleanUp(client);
@@ -185,8 +194,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   );
 
   test("Reset (Cancel) timer", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.start();
     await TimeUtils.delaySeconds(0.2);
     await client.reset();
@@ -199,8 +207,7 @@ describe.skip("Client WebSocket Server Integration", () => {
 
   test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
     const durationSeconds = 1;
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
     await client.pause();
@@ -217,8 +224,7 @@ describe.skip("Client WebSocket Server Integration", () => {
 
   test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
     const durationSeconds = 1;
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
     await client.start();
     await client.pause();
@@ -234,8 +240,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Check got expected number of messages", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await client.update(TimeUtils.secondsToMinutes(0.2));
     await client.start();
     await client.pause();
@@ -261,22 +266,20 @@ describe.skip("Client WebSocket Server Integration", () => {
   test("Handle bad message and subsequent request succeeds", async () => {
     const client = await openMobSocket(url);
     await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await cleanUp(client);
     expect(client.successfulResponses.length).toEqual(1); // join
     expect(client.errorReceived).toEqual(true);
   });
 
   test("New mob timer has no participants", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
   test("Add 1st participant", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.addParticipant("Bob");
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(1);
@@ -284,8 +287,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Add 2nd participant", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.addParticipant("Alice");
     client.addParticipant("Bob");
     await cleanUp(client);
@@ -297,24 +299,21 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Don't add blank participant", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.addParticipant("");
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
   test("Don't add participant with spaces only", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.addParticipant("   ");
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
   test("Rotate participants", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.addParticipant("Alice");
     client.addParticipant("Bob");
     client.rotateParticipants();
@@ -326,8 +325,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Edit participants", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.addParticipant("Alice");
     client.addParticipant("Bob");
     client.editParticipants(["Chris", "Danielle"]);
@@ -339,8 +337,7 @@ describe.skip("Client WebSocket Server Integration", () => {
   });
 
   test("Edit roles", async () => {
-    const client = await openMobSocket(url);
-    await client.joinMob(_mobName1);
+    const _mobName1 = await joinMob(client);
     client.editRoles(["Talker"]);
     await cleanUp(client);
     expect(client.lastSuccessfulMobState.roles).toStrictEqual(["Talker"]);
@@ -348,6 +345,17 @@ describe.skip("Client WebSocket Server Integration", () => {
 
   // todo: Add test for shuffling participants (i.e., randomizing). We alreay have a test for it in mobTimer.test.ts, but we should also test it here.
 });
+
+let mobCounter = 0;
+
+async function joinMob(client: MobSocketTestClient, suffix = "") {
+  mobCounter++;
+  const mobName = `autogenerated-mob${suffix}-${mobCounter}`;
+  client.resetEcho();
+  client.resetClient();
+  await client.joinMob(mobName);
+  return mobName;
+}
 
 async function openMobSocket(url: string) {
   return await MobSocketTestClient.waitForOpenSocket(
@@ -363,7 +371,6 @@ async function openSocketAlternative(url: string) {
 
 async function cleanUp(client: MobSocketTestClient) {
   await client.waitForLastResponse();
-  await client.closeSocket();
 }
 
 function getNewState(mobName: string): MobState {

@@ -6,7 +6,7 @@ import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient } from "mobtimer-api";
 import { WSWebSocketWrapper } from "mobtimer-api";
 
-describe.only("Heartbeat Integration", () => {
+describe("Heartbeat Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
   const _mobName1 = "awesome-team";
   const _mobName2 = "good-team";
