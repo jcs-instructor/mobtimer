@@ -63,7 +63,7 @@ class MobSocketTestClient extends MobSocketClient {
     const client = this;
     return new Promise(function (resolve) {
       const timeout = setTimeout(function () {
-        if (client.echoReceived) {
+        if (client.echoReceived) {          
           resolve();
         }
         client.waitForEcho().then(resolve);
@@ -93,6 +93,10 @@ class MobSocketTestClient extends MobSocketClient {
     return [...this._successfulResponses];
   }
 
+  public resetEcho() {
+    this._echoReceived = false;
+  }
+  
   public get echoReceived(): boolean {
     return this._echoReceived;
   }
