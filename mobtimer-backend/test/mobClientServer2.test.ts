@@ -28,331 +28,306 @@ describe.only("Client WebSocket Server Integration", () => {
     await _server.httpServer.close();
   });
 
-  // test("Create mob with alternative websocket", async () => {
-  //   const client = await openSocketAlternative(url);
-  //   await client.joinMob(_mobName1);
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Join);
-  // });
+  test("Create mob with alternative websocket", async () => {
+    const client = await openSocketAlternative(url);
+    await client.joinMob(_mobName1);
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
+    expect(client.lastSuccessfulAction).toEqual(Action.Join);
+  });
 
   test("Create mob", async () => {    
-    const _mobName1 = await joinMob(client); 
+   const _mobName1 = await joinMob(client); 
     await cleanUp(client);
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(client.lastSuccessfulAction).toEqual(Action.Join);
   });
 
-  test("Create mob (2)", async () => {    
-    const _mobName1 = await joinMob(client); 
+  test("Create 2 mobs", async () => {
+   const _mobName1 = await joinMob(client); 
+
+    const client2 = await openMobSocket(url);
+    await client2.joinMob(_mobName2);
+
     await cleanUp(client);
+    await cleanUp(client2);
+
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
-    expect(client.lastSuccessfulAction).toEqual(Action.Join);
+    expect(client2.lastSuccessfulMobState).toEqual(getNewState(_mobName2));
   });
 
-  // test("Create 2 mobs", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
+  test("Modify one of two mob timers", async () => {
+   const _mobName1 = await joinMob(client); 
 
-  //   const client2 = await openMobSocket(url);
-  //   await client2.joinMob(_mobName2);
+    const client2 = await openMobSocket(url);
+    await client2.joinMob(_mobName2);
+    await client2.update(17);
+    await cleanUp(client);
+    await cleanUp(client2);
 
-  //   await cleanUp(client);
-  //   await cleanUp(client2);
+    expect(client.lastSuccessfulMobState.durationMinutes).toEqual(
+      getDefaultDurationMinutes()
+    );
+    expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
+  });
 
-  //   expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
-  //   expect(client2.lastSuccessfulMobState).toEqual(getNewState(_mobName2));
-  // });
+  // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
+  test("Modify one shared mob timer", async () => {
+    const mobNameForBothTeams = "super-team";
 
-  // test("Modify one of two mob timers", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
+    const client = await openMobSocket(url);
+    await client.joinMob(mobNameForBothTeams);
 
-  //   const client2 = await openMobSocket(url);
-  //   await client2.joinMob(_mobName2);
-  //   await client2.update(17);
-  //   await cleanUp(client);
-  //   await cleanUp(client2);
+    const client2 = await openMobSocket(url);
+    await client2.joinMob(mobNameForBothTeams);
+    await client2.update(17);
 
-  //   expect(client.lastSuccessfulMobState.durationMinutes).toEqual(
-  //     getDefaultDurationMinutes()
-  //   );
-  //   expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
-  // });
+    await cleanUp(client);
+    await cleanUp(client2);
 
-  // // todo: maybe split into two tests: one for the length of the responses array, and one for the last response.
-  // test("Modify one shared mob timer", async () => {
-  //   const mobNameForBothTeams = "super-team";
+    expect(client.lastSuccessfulMobState.durationMinutes).toEqual(17);
+    expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
 
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(mobNameForBothTeams);
+    expect(client.successfulResponses.length).toEqual(3); // join, join, update
+    expect(client2.successfulResponses.length).toEqual(2); // join, update
+  });
 
-  //   const client2 = await openMobSocket(url);
-  //   await client2.joinMob(mobNameForBothTeams);
-  //   await client2.update(17);
+  test("Second client joins shared mob in paused state", async () => {
+    const mobNameForBothTeams = "super-team";
 
-  //   await cleanUp(client);
-  //   await cleanUp(client2);
+    const client = await openMobSocket(url);
+    await client.joinMob(mobNameForBothTeams);
+    await client.update(1);
+    client.start();
+    const delaySeconds = 0.2;
+    await TimeUtils.delaySeconds(delaySeconds);
+    client.pause();
+    await cleanUp(client);
 
-  //   expect(client.lastSuccessfulMobState.durationMinutes).toEqual(17);
-  //   expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
+    const client2 = await openMobSocket(url);
+    await client2.joinMob(mobNameForBothTeams);
 
-  //   expect(client.successfulResponses.length).toEqual(3); // join, join, update
-  //   expect(client2.successfulResponses.length).toEqual(2); // join, update
-  // });
+    await cleanUp(client2);
 
-  // test("Second client joins shared mob in paused state", async () => {
-  //   const mobNameForBothTeams = "super-team";
+    const numDigits = 1;
+    const expected = 60 - delaySeconds;
+    console.log(
+      "mobstate",
+      client.lastSuccessfulMobState,
+      client2.lastSuccessfulMobState
+    );
+    expect(client.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
+      expected,
+      numDigits
+    );
+    expect(client2.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
+      expected,
+      numDigits
+    );
+  });
 
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(mobNameForBothTeams);
-  //   await client.update(1);
-  //   client.start();
-  //   const delaySeconds = 0.2;
-  //   await TimeUtils.delaySeconds(delaySeconds);
-  //   client.pause();
-  //   await cleanUp(client);
+  test("Start timer", async () => {
+   const _mobName1 = await joinMob(client); 
+    await client.start();
+    await cleanUp(client);
+    expect(client.lastSuccessfulAction).toEqual(Action.Start);
+    expect(client.lastSuccessfulMobState.status).toEqual(Status.Running);
+  });
 
-  //   const client2 = await openMobSocket(url);
-  //   await client2.joinMob(mobNameForBothTeams);
+  test("Pause timer", async () => {
+   const _mobName1 = await joinMob(client); 
+    await client.start();
+    await client.pause();
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.status).toEqual(Status.Paused);
+    expect(client.lastSuccessfulAction).toEqual(Action.Pause);
+  });
 
-  //   await cleanUp(client2);
+  test("Resume timer", async () => {
+   const _mobName1 = await joinMob(client); 
+    await client.start();
+    await client.pause();
+    await client.start();
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.status).toEqual(Status.Running);
+    expect(client.lastSuccessfulAction).toEqual(Action.Start);
+  });
 
-  //   const numDigits = 1;
-  //   const expected = 60 - delaySeconds;
-  //   console.log(
-  //     "mobstate",
-  //     client.lastSuccessfulMobState,
-  //     client2.lastSuccessfulMobState
-  //   );
-  //   expect(client.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
-  //     expected,
-  //     numDigits
-  //   );
-  //   expect(client2.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
-  //     expected,
-  //     numDigits
-  //   );
-  // });
+  test("Update timer", async () => {
+   const _mobName1 = await joinMob(client); 
+    await client.start();
+    await client.update(40);
+    await cleanUp(client);
 
-  // test("Start timer", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.start();
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Start);
-  //   expect(client.lastSuccessfulMobState.status).toEqual(Status.Running);
-  // });
+    expect(client.lastSuccessfulMobState.durationMinutes).toEqual(40);
+    expect(client.lastSuccessfulAction).toEqual("update");
+  });
 
-  // test("Pause timer", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.start();
-  //   await client.pause();
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.status).toEqual(Status.Paused);
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Pause);
-  // });
+  test.each([0.2])(
+    "Start timer with duration %p and elapse time sends message to all",
+    async (durationSeconds: number) => {
+      const client = await openMobSocket(url);
+      await client.joinMob(_mobName1);
+      await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+      await client.start();
+      const now = Date.now();
+      await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+      await cleanUp(client);
+      expect(client.lastSuccessfulAction).toEqual(Action.Expired);
+      expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
+      expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
+    }
+  );
 
-  // test("Resume timer", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.start();
-  //   await client.pause();
-  //   await client.start();
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.status).toEqual(Status.Running);
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Start);
-  // });
+  test("Reset (Cancel) timer", async () => {
+   const _mobName1 = await joinMob(client); 
+    await client.start();
+    await TimeUtils.delaySeconds(0.2);
+    await client.reset();
+    await cleanUp(client);
+    expect(client.lastSuccessfulAction).toEqual(Action.Reset);
+    expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
+    expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
+    // todo: expect participants don't rotate
+  });
 
-  // test("Update timer", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.start();
-  //   await client.update(40);
-  //   await cleanUp(client);
+  test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
+    const durationSeconds = 1;
+   const _mobName1 = await joinMob(client); 
+    await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+    await client.start();
+    await client.pause();
+    await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+    await cleanUp(client);
+    const numDigits = 1;
+    expect(client.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
+      durationSeconds,
+      numDigits
+    );
+    expect(client.lastSuccessfulAction).toEqual(Action.Pause);
+    expect(client.lastSuccessfulMobState.status).toEqual(Status.Paused);
+  });
 
-  //   expect(client.lastSuccessfulMobState.durationMinutes).toEqual(40);
-  //   expect(client.lastSuccessfulAction).toEqual("update");
-  // });
+  test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
+    const durationSeconds = 1;
+   const _mobName1 = await joinMob(client); 
+    await client.update(TimeUtils.secondsToMinutes(durationSeconds));
+    await client.start();
+    await client.pause();
+    await client.start();
+    await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
+    await cleanUp(client);
+    const numDigits = 1;
+    expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
+    expect(client.lastSuccessfulAction).toEqual(Action.Expired);
+    expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
+    // todo: expect participants rotate - maybe in a separate test
+    // todo: make a simpler expired test (no pausing, etc.)
+  });
 
-  // test.each([0.2])(
-  //   "Start timer with duration %p and elapse time sends message to all",
-  //   async (durationSeconds: number) => {
-  //     const client = await openMobSocket(url);
-  //     await client.joinMob(_mobName1);
-  //     await client.update(TimeUtils.secondsToMinutes(durationSeconds));
-  //     await client.start();
-  //     const now = Date.now();
-  //     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-  //     await cleanUp(client);
-  //     expect(client.lastSuccessfulAction).toEqual(Action.Expired);
-  //     expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
-  //     expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
-  //   }
-  // );
+  test("Check got expected number of messages", async () => {
+   const _mobName1 = await joinMob(client); 
+    await client.update(TimeUtils.secondsToMinutes(0.2));
+    await client.start();
+    await client.pause();
+    await client.start(); // i.e., resume
+    await cleanUp(client);
+    expect(client.successfulResponses.length).toEqual(5); // join, update, start, pause, start (resume)
+  });
 
-  // test("Reset (Cancel) timer", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.start();
-  //   await TimeUtils.delaySeconds(0.2);
-  //   await client.reset();
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Reset);
-  //   expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
-  //   expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
-  //   // todo: expect participants don't rotate
-  // });
+  test("Echo request and response", async () => {
+    const client = await openMobSocket(url);
+    await cleanUp(client);
+    expect(client.echoReceived).toEqual(true);
+  });
 
-  // test("Start timer, pause, and verify no message sent when timer would have expired", async () => {
-  //   const durationSeconds = 1;
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.update(TimeUtils.secondsToMinutes(durationSeconds));
-  //   await client.start();
-  //   await client.pause();
-  //   await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-  //   await cleanUp(client);
-  //   const numDigits = 1;
-  //   expect(client.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
-  //     durationSeconds,
-  //     numDigits
-  //   );
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Pause);
-  //   expect(client.lastSuccessfulMobState.status).toEqual(Status.Paused);
-  // });
+  test("Handle bad message and get good error message", async () => {
+    const client = await openMobSocket(url);
+    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
+    await cleanUp(client);
+    expect(client.successfulResponses.length).toEqual(0);
+    expect(client.errorReceived).toEqual(true);
+  });
 
-  // test("Start timer, pause, resume, and verify message sent to all when expires", async () => {
-  //   const durationSeconds = 1;
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.update(TimeUtils.secondsToMinutes(durationSeconds));
-  //   await client.start();
-  //   await client.pause();
-  //   await client.start();
-  //   await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-  //   await cleanUp(client);
-  //   const numDigits = 1;
-  //   expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
-  //   expect(client.lastSuccessfulAction).toEqual(Action.Expired);
-  //   expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
-  //   // todo: expect participants rotate - maybe in a separate test
-  //   // todo: make a simpler expired test (no pausing, etc.)
-  // });
+  test("Handle bad message and subsequent request succeeds", async () => {
+    const client = await openMobSocket(url);
+    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
+   const _mobName1 = await joinMob(client); 
+    await cleanUp(client);
+    expect(client.successfulResponses.length).toEqual(1); // join
+    expect(client.errorReceived).toEqual(true);
+  });
 
-  // test("Check got expected number of messages", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await client.update(TimeUtils.secondsToMinutes(0.2));
-  //   await client.start();
-  //   await client.pause();
-  //   await client.start(); // i.e., resume
-  //   await cleanUp(client);
-  //   expect(client.successfulResponses.length).toEqual(5); // join, update, start, pause, start (resume)
-  // });
+  test("New mob timer has no participants", async () => {
+   const _mobName1 = await joinMob(client); 
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
 
-  // test("Echo request and response", async () => {
-  //   const client = await openMobSocket(url);
-  //   await cleanUp(client);
-  //   expect(client.echoReceived).toEqual(true);
-  // });
+  test("Add 1st participant", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.addParticipant("Bob");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(1);
+    expect(client.lastSuccessfulMobState.participants[0]).toBe("Bob");
+  });
 
-  // test("Handle bad message and get good error message", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
-  //   await cleanUp(client);
-  //   expect(client.successfulResponses.length).toEqual(0);
-  //   expect(client.errorReceived).toEqual(true);
-  // });
+  test("Add 2nd participant", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.addParticipant("Alice");
+    client.addParticipant("Bob");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(2);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual([
+      "Alice",
+      "Bob",
+    ]);
+  });
 
-  // test("Handle bad message and subsequent request succeeds", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
-  //   await client.joinMob(_mobName1);
-  //   await cleanUp(client);
-  //   expect(client.successfulResponses.length).toEqual(1); // join
-  //   expect(client.errorReceived).toEqual(true);
-  // });
+  test("Don't add blank participant", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.addParticipant("");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
 
-  // test("New mob timer has no participants", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants.length).toBe(0);
-  // });
+  test("Don't add participant with spaces only", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.addParticipant("   ");
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants.length).toBe(0);
+  });
 
-  // test("Add 1st participant", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.addParticipant("Bob");
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants.length).toBe(1);
-  //   expect(client.lastSuccessfulMobState.participants[0]).toBe("Bob");
-  // });
+  test("Rotate participants", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.addParticipant("Alice");
+    client.addParticipant("Bob");
+    client.rotateParticipants();
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual([
+      "Bob",
+      "Alice",
+    ]);
+  });
 
-  // test("Add 2nd participant", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.addParticipant("Alice");
-  //   client.addParticipant("Bob");
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants.length).toBe(2);
-  //   expect(client.lastSuccessfulMobState.participants).toStrictEqual([
-  //     "Alice",
-  //     "Bob",
-  //   ]);
-  // });
+  test("Edit participants", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.addParticipant("Alice");
+    client.addParticipant("Bob");
+    client.editParticipants(["Chris", "Danielle"]);
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.participants).toStrictEqual([
+      "Chris",
+      "Danielle",
+    ]);
+  });
 
-  // test("Don't add blank participant", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.addParticipant("");
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants.length).toBe(0);
-  // });
-
-  // test("Don't add participant with spaces only", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.addParticipant("   ");
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants.length).toBe(0);
-  // });
-
-  // test("Rotate participants", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.addParticipant("Alice");
-  //   client.addParticipant("Bob");
-  //   client.rotateParticipants();
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants).toStrictEqual([
-  //     "Bob",
-  //     "Alice",
-  //   ]);
-  // });
-
-  // test("Edit participants", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.addParticipant("Alice");
-  //   client.addParticipant("Bob");
-  //   client.editParticipants(["Chris", "Danielle"]);
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.participants).toStrictEqual([
-  //     "Chris",
-  //     "Danielle",
-  //   ]);
-  // });
-
-  // test("Edit roles", async () => {
-  //   const client = await openMobSocket(url);
-  //   await client.joinMob(_mobName1);
-  //   client.editRoles(["Talker"]);
-  //   await cleanUp(client);
-  //   expect(client.lastSuccessfulMobState.roles).toStrictEqual(["Talker"]);
-  // });
+  test("Edit roles", async () => {
+   const _mobName1 = await joinMob(client); 
+    client.editRoles(["Talker"]);
+    await cleanUp(client);
+    expect(client.lastSuccessfulMobState.roles).toStrictEqual(["Talker"]);
+  });
 
   // todo: Add test for shuffling participants (i.e., randomizing). We alreay have a test for it in mobTimer.test.ts, but we should also test it here.
 });
@@ -382,6 +357,10 @@ async function cleanUp(client: MobSocketTestClient) {
   await client.waitForLastResponse();
   client.resetEcho();
   // await client.closeSocket();
+}
+
+function getNewState(mobName: string): MobState {
+  return new MobTimer(mobName).state;
 }
 
 function getDefaultDurationMinutes(): number {

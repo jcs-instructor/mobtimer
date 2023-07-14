@@ -44,6 +44,11 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
+  resetClient() {
+    this._echoReceived = false;
+    this._successfulResponses = [];
+  }
+
   static async waitForOpenSocket(
     webSocket: IWebSocketWrapper
   ): Promise<MobSocketTestClient> {
