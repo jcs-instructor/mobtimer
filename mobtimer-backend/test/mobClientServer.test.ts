@@ -17,6 +17,14 @@ describe("Client WebSocket Server Integration", () => {
   let _client1: MobSocketTestClient;
   let _client2: MobSocketTestClient;
 
+  function getTimeSinceBeforeAll(): any {
+    return Date.now() - startMilliseconds;
+  }  
+
+  function getTestName(): any {
+    return expect.getState().currentTestName;
+  }
+
   beforeAll(async () => {
     _server = await startMobServer(port);
     _client1 = await openMobSocket(url);
@@ -24,20 +32,12 @@ describe("Client WebSocket Server Integration", () => {
   });
 
   beforeEach( () => {
-    console.log(
-      "Start: time",
-      startMilliseconds - Date.now(),
-      expect.getState().currentTestName
-    );
+    console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
   });
 
 
   afterEach(() => {
-    console.log(
-      "End: time",
-      startMilliseconds - Date.now(),
-      expect.getState().currentTestName
-    );
+    console.log("End: time", getTimeSinceBeforeAll(), getTestName());
   });
 
   afterAll(async () => {
@@ -56,7 +56,7 @@ describe("Client WebSocket Server Integration", () => {
     expect(client.lastSuccessfulAction).toEqual(Action.Join);
   });
 
-  test("Create mob", async () => {
+  test.only("Create mob", async () => {
     const _mobName1 = await joinMob(_client1);
     await cleanUp(_client1);
     expect(_client1.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
