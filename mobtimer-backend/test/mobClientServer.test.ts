@@ -262,12 +262,12 @@ describe("Client WebSocket Server Integration", () => {
   });
 
   test("Handle bad message and subsequent request succeeds", async () => {
-    const client = await openMobSocket(url);
-    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
-    const _mobName1 = await joinMob(client);
-    await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(1); // join
-    expect(client.errorReceived).toEqual(true);
+    const anotherClient = await openMobSocket(url);
+    await anotherClient.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
+    await joinMob(anotherClient);
+    await cleanUp(anotherClient);
+    expect(anotherClient.successfulResponses.length).toEqual(1); // join
+    expect(anotherClient.errorReceived).toEqual(true);
   });
 
   test("New mob timer has no participants", async () => {
