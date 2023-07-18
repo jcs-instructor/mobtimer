@@ -97,10 +97,6 @@ class MobSocketTestClient extends MobSocketClient {
   public get successfulResponses(): string[] {
     return [...this._successfulResponses];
   }
-
-  public resetEcho() {
-    this._echoReceived = false;
-  }
   
   public get echoReceived(): boolean {
     return this._echoReceived;
