@@ -180,16 +180,14 @@ describe("Client WebSocket Server Integration", () => {
   test.each([0.2])(
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
-      const client = await openMobSocket(url);
-      await client.joinMob(_mobName1);
-      await client.update(TimeUtils.secondsToMinutes(durationSeconds));
-      await client.start();
-      const now = Date.now();
+      await joinMob(_client);
+      await _client.update(TimeUtils.secondsToMinutes(durationSeconds));
+      await _client.start();      
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-      await cleanUp(client);
-      expect(client.lastSuccessfulAction).toEqual(Action.Expired);
-      expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
-      expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
+      await cleanUp(_client);
+      expect(_client.lastSuccessfulAction).toEqual(Action.Expired);
+      expect(_client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
+      expect(_client.lastSuccessfulMobState.status).toEqual(Status.Ready);
     }
   );
 
