@@ -248,17 +248,17 @@ describe("Client WebSocket Server Integration", () => {
   });
 
   test("Echo request and response", async () => {
-    const client = await openMobSocket(url);
-    await cleanUp(client);
-    expect(client.echoReceived).toEqual(true);
+    const anotherClient = await openMobSocket(url);
+    await cleanUp(anotherClient);
+    expect(anotherClient.echoReceived).toEqual(true);
   });
 
   test("Handle bad message and get good error message", async () => {
-    const client = await openMobSocket(url);
-    await client.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
-    await cleanUp(client);
-    expect(client.successfulResponses.length).toEqual(0);
-    expect(client.errorReceived).toEqual(true);
+    const anotherClient = await openMobSocket(url);
+    await anotherClient.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
+    await cleanUp(anotherClient);
+    expect(anotherClient.successfulResponses.length).toEqual(0);
+    expect(anotherClient.errorReceived).toEqual(true);
   });
 
   test("Handle bad message and subsequent request succeeds", async () => {
