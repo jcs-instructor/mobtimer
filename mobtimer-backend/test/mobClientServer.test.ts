@@ -19,7 +19,7 @@ describe("Client WebSocket Server Integration", () => {
 
   function getTimeSinceBeforeAll(): any {
     return Date.now() - startMilliseconds;
-  }  
+  }
 
   function getTestName(): any {
     return expect.getState().currentTestName;
@@ -31,13 +31,13 @@ describe("Client WebSocket Server Integration", () => {
     _client2 = await openMobSocket(url);
   });
 
-  beforeEach( () => {
+  beforeEach(() => {
     console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
   });
 
-
   afterEach(() => {
     console.log("End: time", getTimeSinceBeforeAll(), getTestName());
+    // todo: client cleanup here......
   });
 
   afterAll(async () => {
@@ -48,17 +48,16 @@ describe("Client WebSocket Server Integration", () => {
   });
 
   test("Create mob with alternative websocket", async () => {
-
     const client = await openSocketAlternative(url);
     await client.joinMob(_mobName1);
-    await cleanUp(client);
+    await client.waitForLastResponse();
     expect(client.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(client.lastSuccessfulAction).toEqual(Action.Join);
   });
 
-  test.only("Create mob", async () => {
+  test("Create mob", async () => {
     const _mobName1 = await joinMob(_client1);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(_client1.lastSuccessfulAction).toEqual(Action.Join);
   });
@@ -68,8 +67,8 @@ describe("Client WebSocket Server Integration", () => {
 
     const _mobName2 = await joinMob(_client2, "1");
 
-    await cleanUp(_client1);
-    await cleanUp(_client2);
+    await _client1.waitForLastResponse();
+    await _client2.waitForLastResponse();
 
     expect(_client1.lastSuccessfulMobState).toEqual(getNewState(_mobName1));
     expect(_client2.lastSuccessfulMobState).toEqual(getNewState(_mobName2));
@@ -79,8 +78,8 @@ describe("Client WebSocket Server Integration", () => {
     const _mobName1 = await joinMob(_client1);
     const _mobName2 = await joinMob(_client2, "1");
     await _client2.update(17);
-    await cleanUp(_client1);
-    await cleanUp(_client2);
+    await _client1.waitForLastResponse();
+    await _client2.waitForLastResponse();
 
     expect(_client1.lastSuccessfulMobState.durationMinutes).toEqual(
       getDefaultDurationMinutes()
@@ -99,8 +98,8 @@ describe("Client WebSocket Server Integration", () => {
     await client2.joinMob(mobNameForBothTeams);
     await client2.update(17);
 
-    await cleanUp(client);
-    await cleanUp(client2);
+    await client.waitForLastResponse();
+    await client2.waitForLastResponse();
 
     expect(client.lastSuccessfulMobState.durationMinutes).toEqual(17);
     expect(client2.lastSuccessfulMobState.durationMinutes).toEqual(17);
@@ -116,12 +115,12 @@ describe("Client WebSocket Server Integration", () => {
     const delaySeconds = 0.2;
     await TimeUtils.delaySeconds(delaySeconds);
     _client1.pause();
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
 
     const client2 = await openMobSocket(url);
     await client2.joinMob(mobNameForBothTeams);
 
-    await cleanUp(client2);
+    await client2.waitForLastResponse();
 
     const numDigits = 1;
     const expected = 60 - delaySeconds;
@@ -143,7 +142,7 @@ describe("Client WebSocket Server Integration", () => {
   test("Start timer", async () => {
     const _mobName1 = await joinMob(_client1);
     await _client1.start();
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulAction).toEqual(Action.Start);
     expect(_client1.lastSuccessfulMobState.status).toEqual(Status.Running);
   });
@@ -152,7 +151,7 @@ describe("Client WebSocket Server Integration", () => {
     const _mobName1 = await joinMob(_client1);
     await _client1.start();
     await _client1.pause();
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.status).toEqual(Status.Paused);
     expect(_client1.lastSuccessfulAction).toEqual(Action.Pause);
   });
@@ -162,7 +161,7 @@ describe("Client WebSocket Server Integration", () => {
     await _client1.start();
     await _client1.pause();
     await _client1.start();
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.status).toEqual(Status.Running);
     expect(_client1.lastSuccessfulAction).toEqual(Action.Start);
   });
@@ -171,7 +170,7 @@ describe("Client WebSocket Server Integration", () => {
     const _mobName1 = await joinMob(_client1);
     await _client1.start();
     await _client1.update(40);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
 
     expect(_client1.lastSuccessfulMobState.durationMinutes).toEqual(40);
     expect(_client1.lastSuccessfulAction).toEqual("update");
@@ -182,9 +181,9 @@ describe("Client WebSocket Server Integration", () => {
     async (durationSeconds: number) => {
       await joinMob(_client1);
       await _client1.update(TimeUtils.secondsToMinutes(durationSeconds));
-      await _client1.start();      
+      await _client1.start();
       await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-      await cleanUp(_client1);
+      await _client1.waitForLastResponse();
       expect(_client1.lastSuccessfulAction).toEqual(Action.Expired);
       expect(_client1.lastSuccessfulMobState.secondsRemaining).toEqual(0);
       expect(_client1.lastSuccessfulMobState.status).toEqual(Status.Ready);
@@ -196,7 +195,7 @@ describe("Client WebSocket Server Integration", () => {
     await _client1.start();
     await TimeUtils.delaySeconds(0.2);
     await _client1.reset();
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulAction).toEqual(Action.Reset);
     expect(_client1.lastSuccessfulMobState.secondsRemaining).toEqual(0);
     expect(_client1.lastSuccessfulMobState.status).toEqual(Status.Ready);
@@ -210,7 +209,7 @@ describe("Client WebSocket Server Integration", () => {
     await _client1.start();
     await _client1.pause();
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     const numDigits = 1;
     expect(_client1.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
       durationSeconds,
@@ -228,7 +227,7 @@ describe("Client WebSocket Server Integration", () => {
     await _client1.pause();
     await _client1.start();
     await TimeUtils.delaySeconds(durationSeconds + toleranceSeconds);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     const numDigits = 1;
     expect(_client1.lastSuccessfulMobState.secondsRemaining).toEqual(0);
     expect(_client1.lastSuccessfulAction).toEqual(Action.Expired);
@@ -243,43 +242,47 @@ describe("Client WebSocket Server Integration", () => {
     await _client1.start();
     await _client1.pause();
     await _client1.start(); // i.e., resume
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.successfulResponses.length).toEqual(5); // join, update, start, pause, start (resume)
   });
 
   test("Echo request and response", async () => {
     const anotherClient = await openMobSocket(url);
-    await cleanUp(anotherClient);
+    await anotherClient.waitForLastResponse();
     expect(anotherClient.echoReceived).toEqual(true);
   });
 
   test("Handle bad message and get good error message", async () => {
     const anotherClient = await openMobSocket(url);
-    await anotherClient.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
-    await cleanUp(anotherClient);
+    await anotherClient.webSocket.sendMessage(
+      "some-bad-garbage-not-a-real-request"
+    );
+    await anotherClient.waitForLastResponse();
     expect(anotherClient.successfulResponses.length).toEqual(0);
     expect(anotherClient.errorReceived).toEqual(true);
   });
 
   test("Handle bad message and subsequent request succeeds", async () => {
     const anotherClient = await openMobSocket(url);
-    await anotherClient.webSocket.sendMessage("some-bad-garbage-not-a-real-request");
+    await anotherClient.webSocket.sendMessage(
+      "some-bad-garbage-not-a-real-request"
+    );
     await joinMob(anotherClient);
-    await cleanUp(anotherClient);
+    await anotherClient.waitForLastResponse();
     expect(anotherClient.successfulResponses.length).toEqual(1); // join
     expect(anotherClient.errorReceived).toEqual(true);
   });
 
   test("New mob timer has no participants", async () => {
     const _mobName1 = await joinMob(_client1);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
   test("Add 1st participant", async () => {
     const _mobName1 = await joinMob(_client1);
     _client1.addParticipant("Bob");
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants.length).toBe(1);
     expect(_client1.lastSuccessfulMobState.participants[0]).toBe("Bob");
   });
@@ -288,7 +291,7 @@ describe("Client WebSocket Server Integration", () => {
     const _mobName1 = await joinMob(_client1);
     _client1.addParticipant("Alice");
     _client1.addParticipant("Bob");
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants.length).toBe(2);
     expect(_client1.lastSuccessfulMobState.participants).toStrictEqual([
       "Alice",
@@ -299,14 +302,14 @@ describe("Client WebSocket Server Integration", () => {
   test("Don't add blank participant", async () => {
     const _mobName1 = await joinMob(_client1);
     _client1.addParticipant("");
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
   test("Don't add participant with spaces only", async () => {
     const _mobName1 = await joinMob(_client1);
     _client1.addParticipant("   ");
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
@@ -315,7 +318,7 @@ describe("Client WebSocket Server Integration", () => {
     _client1.addParticipant("Alice");
     _client1.addParticipant("Bob");
     _client1.rotateParticipants();
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants).toStrictEqual([
       "Bob",
       "Alice",
@@ -327,7 +330,7 @@ describe("Client WebSocket Server Integration", () => {
     _client1.addParticipant("Alice");
     _client1.addParticipant("Bob");
     _client1.editParticipants(["Chris", "Danielle"]);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.participants).toStrictEqual([
       "Chris",
       "Danielle",
@@ -337,7 +340,7 @@ describe("Client WebSocket Server Integration", () => {
   test("Edit roles", async () => {
     const _mobName1 = await joinMob(_client1);
     _client1.editRoles(["Talker"]);
-    await cleanUp(_client1);
+    await _client1.waitForLastResponse();
     expect(_client1.lastSuccessfulMobState.roles).toStrictEqual(["Talker"]);
   });
 
@@ -364,10 +367,6 @@ async function openSocketAlternative(url: string) {
   return await MobSocketTestClient.waitForOpenSocket(
     new WSWebSocketWrapper(url)
   );
-}
-
-async function cleanUp(client: MobSocketTestClient) {
-  await client.waitForLastResponse();
 }
 
 function getNewState(mobName: string): MobState {
