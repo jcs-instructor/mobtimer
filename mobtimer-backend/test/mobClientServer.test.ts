@@ -116,23 +116,21 @@ describe("Client WebSocket Server Integration", () => {
     _client1.pause();
     await _client1.waitForLastResponse();
 
-    const client2 = await openMobSocket(url);
-    await client2.joinMob(mobNameForBothTeams);
-
-    await client2.waitForLastResponse();
+    await _client2.joinMob(mobNameForBothTeams);
+    await _client2.waitForLastResponse();
 
     const numDigits = 1;
     const expected = 60 - delaySeconds;
     console.log(
       "mobstate",
       _client1.lastSuccessfulMobState,
-      client2.lastSuccessfulMobState
+      _client2.lastSuccessfulMobState
     );
     expect(_client1.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
       expected,
       numDigits
     );
-    expect(client2.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
+    expect(_client2.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
       expected,
       numDigits
     );
