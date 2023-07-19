@@ -9,6 +9,7 @@ class MobSocketTestClient extends MobSocketClient {
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
   private _socket: IWebSocketWrapper;
+  private _mobName: string = "";
 
   constructor(webSocket: IWebSocketWrapper) {
     super(webSocket);
@@ -16,6 +17,15 @@ class MobSocketTestClient extends MobSocketClient {
     this._socket.onmessageReceived = (message) => {
       this.trackMessage(message);
     };
+  }
+
+  override joinMob(mobName: string) {
+    this._mobName = mobName;
+    super.joinMob(mobName);
+  }
+
+  public get mobName(): string {
+    return this._mobName;
   }
 
   private trackMessage(message: { data: any }) {
