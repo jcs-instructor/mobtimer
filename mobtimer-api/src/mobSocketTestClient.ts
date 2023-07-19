@@ -8,8 +8,8 @@ class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-  private _socket: IWebSocketWrapper;
   private _mobName: string = "";
+  private _socket: IWebSocketWrapper;
 
   constructor(webSocket: IWebSocketWrapper) {
     super(webSocket);
@@ -19,6 +19,13 @@ class MobSocketTestClient extends MobSocketClient {
     };
   }
 
+  resetClient() {
+    this._echoReceived = false;
+    this._successfulResponses = [];
+    this._errorReceived = false;
+    this._mobName = "";
+  }
+  
   override joinMob(mobName: string) {
     this._mobName = mobName;
     super.joinMob(mobName);
@@ -52,11 +59,6 @@ class MobSocketTestClient extends MobSocketClient {
 
   private convertToMobTimerResponse(response: string): MobTimerResponse {
     return JSON.parse(response) as MobTimerResponse;
-  }
-
-  resetClient() {
-    this._echoReceived = false;
-    this._successfulResponses = [];
   }
 
   static async waitForOpenSocket(
