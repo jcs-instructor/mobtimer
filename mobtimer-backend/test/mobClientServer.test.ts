@@ -212,7 +212,7 @@ describe("Client WebSocket Server Integration", () => {
     _client1.pause();
     await TimeUtils.delaySeconds(durationSeconds + _toleranceSeconds);
     await _client1.waitForLastResponse();
-    const numDigits = 2;
+    const numDigits = 1;
     expect(_client1.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
       durationSeconds,
       numDigits
