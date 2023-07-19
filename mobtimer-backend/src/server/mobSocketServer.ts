@@ -164,7 +164,7 @@ function _addMobListeners(
   heartbeat.start();
 
   wss.on("connection", async function (webSocket: WebSocket) {
-    // 2nd paramater for mrozbarry, request2: any
+    // 2nd parameter for mrozbarry, request2: any
     // const url = new URL(request2.url, `http://${request2.headers.host}`);
     // let mobName = url.pathname.replace("/", "");
     // if (mobName) {
@@ -185,6 +185,11 @@ function _addMobListeners(
       heartbeat.restart();
 
       let requestString: string = _requestToString(request);
+
+      // todo: extract function with 1 input parameter - request: string, and 
+      // 2 outputs - 
+      // 1. response : string (or maybe ErrorResponse | EchoResponse | SuccessfulResponse) and 
+      // 2. broadcast: boolean
       let parsedRequest: MobTimerRequests.MobTimerRequest;
       try {
         parsedRequest = JSON.parse(
