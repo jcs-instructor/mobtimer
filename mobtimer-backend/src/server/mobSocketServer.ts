@@ -65,7 +65,7 @@ export function renderHomePage(port: number) {
   _addMobListeners(server);
 }
 
-function _processRequest(
+function _processMobTimerRequest(
   parsedRequest: MobTimerRequests.MobTimerRequest,
   socket: WebSocket
 ) {
@@ -164,7 +164,7 @@ function _addMobListeners(
   heartbeat.start();
 
   wss.on("connection", async function (webSocket: WebSocket) {
-    // 2nd paramater for mrozbarry, request2: any
+    // 2nd parameter for mrozbarry, request2: any
     // const url = new URL(request2.url, `http://${request2.headers.host}`);
     // let mobName = url.pathname.replace("/", "");
     // if (mobName) {
@@ -185,33 +185,66 @@ function _addMobListeners(
       heartbeat.restart();
 
       let requestString: string = _requestToString(request);
-      let parsedRequest: MobTimerRequests.MobTimerRequest;
-      try {
-        parsedRequest = JSON.parse(
-          requestString
-        ) as MobTimerRequests.MobTimerRequest;
-      } catch (e) {
-        const errorResponse = {
-          actionInfo: { action: Action.InvalidRequestError },
-        } as MobTimerResponses.ErrorResponse;
-        _sendJSON(webSocket, errorResponse);
-        return;
-      }
-      if (parsedRequest.action === Action.Echo) {
-        const echoResponse = {
-          actionInfo: { action: Action.Echo },
-        } as MobTimerResponses.EchoResponse;
-        _sendJSON(webSocket, echoResponse);
-        return;
-      }
-      let mobTimer = _processRequest(parsedRequest, webSocket);
-      if (!mobTimer) {
-        return;
-      }
-      RoomManager.broadcastToMob(mobTimer, parsedRequest.action); // todo consider moving mobName up a level
+
+      // Process raw request.
+      let { isMobTimerRequest, response, mobTimer }: { isMobTimerRequest: boolean; response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
+        = processRawRequest(requestString, webSocket); 
+
+      // Send a response. Either:
+      // - Broadcast to all clients if we have a successful MobTimer response, or
+      // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
+      if (isMobTimerRequest && response && mobTimer) {
+        // Broadcast:
+        RoomManager.broadcastResponseToMob(
+          response as MobTimerResponses.SuccessfulResponse, 
+          mobTimer.state.mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
+      } else if (!isMobTimerRequest && response) {
+        // Send only to requesting client:
+        _sendJSON(webSocket, response);        
+      } 
     });
   });
   return wss;
+}
+
+function processRawRequest(requestString: string, webSocket: WebSocket) {
+  let isMobTimerRequest = false;
+  let response: MobTimerResponses.MobTimerResponse | undefined;
+  let parsedRequest: MobTimerRequests.MobTimerRequest | undefined;
+
+  // Validate and parse the request  
+  try {
+    parsedRequest = JSON.parse(
+      requestString
+    ) as MobTimerRequests.MobTimerRequest;
+    isMobTimerRequest = true;
+  } catch (e) {
+    const errorResponse = {
+      actionInfo: { action: Action.InvalidRequestError },
+    } as MobTimerResponses.ErrorResponse;
+    response = errorResponse;
+  }
+
+  // Check if it's an echo request (echo requests don't use the mobTimer)
+  if (parsedRequest && parsedRequest.action === Action.Echo) {
+    const echoResponse = {
+      actionInfo: { action: Action.Echo },
+    } as MobTimerResponses.EchoResponse;
+    response = echoResponse;
+  }
+
+  let mobTimer: MobTimer | undefined;
+  if (isMobTimerRequest && parsedRequest) {
+    mobTimer = _processMobTimerRequest(parsedRequest, webSocket);
+    if (mobTimer) {
+      response = {
+        actionInfo: { action: parsedRequest.action },
+        mobState: mobTimer.state,
+        //logInfo: mobTimer.getLogInfo(),
+      } as MobTimerResponses.SuccessfulResponse;
+    }
+  }
+  return { isMobTimerRequest, response, mobTimer };
 }
 
 // todo: consider:
