@@ -1,37 +1,34 @@
 Flow
 
-App.tsx
-
-
 # Client - Establish connection
+mobClientServer.test.ts:
+
 beforeAll
 
 ``` 
+// 2 types of new mocks: 1. mock server, 2. mock socket
 - const server = new MockMobSocketServer();
-- const clientWrapperSocket = new MockWebSocketWrapper(server) as IWebSocketWrapper; =>
-- Controller.client = new MobSocketClient(wrapperSocket);
+- const clientWrapperSocket1 = new MockWebSocketWrapper(server) as IWebSocketWrapper; =>
+- const client1 = new MobSocketClient(wrapperSocket);
+- const clientWrapperSocket2 = new MockWebSocketWrapper(server) as IWebSocketWrapper; =>
+- const client2 = new MobSocketClient(wrapperSocket);
 ```
 
 # Client - Send request
 ```
-- Controller.client._sendJson({action,message}) => 
-- mockRequest = { { action, message },  clientSocket (Controller.client) }
-- this.server.extractedOnReceiveFunc(mockRequest))
+- client._sendJson() => 
+- this.server.extractedOnReceiveFunc()
 ```
 
 # Server - Receive request, send response
 ```
-- this.server.extractedOnRequestReceivedFunc(mockRequest)) from previous => 
-= if join mob, add "this" (clientSocket) and mob name to array ( only necessary if testing how client handles response) =>
+- this.server.extractedOnRequestReceivedFunc(socket, message) from previous => 
+= if join mob, store or retrieve from socket arrays (using mock sockets) =>
 = modify mobtimer =>
-- RoomManager.broadcastToMob( { mobTimer.state, parsedRequest.action }) => 
-
-  could do an assertsion here that we get the right mobTimer and parsedRequest.action and skip the rest OR
-
-- for each clientWebSocket  in the array, clientWebsocket.messageReceived( {action, mobtimer.state}) 
+- RoomManager.broadcastToMob(mobTimer, parsedRequest.action) // or if echo or error, just send to requester; note: in addition to the below section, we also might do an assertion of the broadcasted message directly =>
+- for each socket for this mob: socket.extractedOnResponseReceived({action, mobtimer.state}) 
 ```
 
 # Client receives
-- extractedOnResponseReceived( {action, message}) =>
-- update mobtimer using mobtimer state
+- extractedOnResponseReceived({action, message}) =>
 - do stuff based on the action

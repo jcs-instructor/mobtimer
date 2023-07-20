@@ -32,7 +32,7 @@ Joel:
 - [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Speed up tests** - WIP / Broken
-      - [ ] **Mock** - mock client and/or server; and maybe keep a minimum number of non-mocked tests 
+      - [ ] **Mock** - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios)
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
