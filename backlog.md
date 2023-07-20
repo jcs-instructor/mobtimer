@@ -26,13 +26,17 @@ Joel:
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [x] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
-      - [x] Add participants & roles to VSCode statusbar
-      - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
-- [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
 - [x] **Deploy to onrender so can dogfood**
-- [ ] **Speed up tests** - WIP / Broken
-      - [ ] **Mock** - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios)
+- [ ] **Speed up tests** - WIP / Broken   
+      - [ ] **Mock** - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
+      - Split into 2 test files - one for mocks and one for the integration tests
+      - Functions to mock:
+            - Server:
+                  - RoomManager.broadcastResponseToMob
+                  - _sendJson
+            - MockWebSocketWrapper implements IWebSocketWrapper
+            - mobClientServer.test.ts
+                  - Replace new W3CWebSocketWrapper(url) with new MockWebSocketWrapper(url)
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
