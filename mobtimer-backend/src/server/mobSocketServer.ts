@@ -231,10 +231,10 @@ async function _sendJSON(
   request: MobTimerResponses.MobTimerResponse
 ) {
   const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
-  await MobSocketClient.waitForSocketState(
-    webSocketWrapper,
-    webSocketWrapper.OPEN_CODE
-  );
+  // await MobSocketClient.waitForSocketState(
+  //   webSocketWrapper,
+  //   webSocketWrapper.OPEN_CODE
+  // );
   console.log("state: " + webSocketWrapper.socketState);
   webSocketWrapper.sendMessage(JSON.stringify(request));
 }
