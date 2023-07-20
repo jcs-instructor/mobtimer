@@ -21,7 +21,7 @@ beforeAll
 
 # Server - Receive request, send response
 ```
-- this.server.extractedOnReceiveFunc(mockRequest)) from previous => 
+- this.server.extractedOnRequestReceivedFunc(mockRequest)) from previous => 
 = if join mob, add "this" (clientSocket) and mob name to array ( only necessary if testing how client handles response) =>
 = modify mobtimer =>
 - RoomManager.broadcastToMob( { mobTimer.state, parsedRequest.action }) => 
@@ -32,6 +32,6 @@ beforeAll
 ```
 
 # Client receives
-- extractedOnMessageReceived( {action, message}) =>
+- extractedOnResponseReceived( {action, message}) =>
 - update mobtimer using mobtimer state
 - do stuff based on the action

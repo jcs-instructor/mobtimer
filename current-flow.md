@@ -21,7 +21,7 @@ _clientSocket.send ( request: {action, message })
 # Server - Receive request, send response
 ```
   serverWebsocket.on => 
-  processRequest(serverWebSocket, message) => 
+  extractedOnRequestReceivedFunc(serverWebSocket, message) => 
   if join mob, add serverWebsocket and mob name to array =>
   modify mobtimer =>
   RoomManager.broadcastToMob(mobTimer, parsedRequest.action) => 
@@ -29,6 +29,6 @@ _clientSocket.send ( request: {action, message })
 ```
 
 # Client receives
-client.websocket.onMessageReceived =>
+client.websocket.extractedonResponseReceived =>
 - update mobtimer using mobtimer state
 - do stuff based on the action
