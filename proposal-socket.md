@@ -13,6 +13,12 @@ beforeAll
 - const clientWrapperSocket2 = new MockWebSocketWrapper(server) as IWebSocketWrapper; =>
 - const client2 = new MobSocketClient(wrapperSocket);
 ```
+# Inject functions into controoler
+- to test the set functions, at the beginning of the test or in beforeEach:
+  - for each set<something> function,
+    - set<something> = jest.fn()
+    - inject set<something> function.  This controls the <something> in the UI 
+`
 
 # Client - Send request
 ```
@@ -30,5 +36,8 @@ beforeAll
 ```
 
 # Client receives
-- extractedOnResponseReceived({action, message}) =>
+ client.websocket.extractedonResponseReceived =>
+- update frontend mobtimer using mobtimer state
+- execute set<something> for each mobtimer state value changed
 - do stuff based on the action
+[

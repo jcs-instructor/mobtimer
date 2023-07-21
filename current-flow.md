@@ -4,29 +4,38 @@ Flow
 App.tsx:
 
 ``` 
-const clientWrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; =>
-Controller.client = new MobSocketClient(clientWrapperSocket);
+- const clientWrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; =>
+- Controller.client = new MobSocketClient(clientWrapperSocket);
+
+# Inject functions into controoler
+App.tsx
+- for each set<something> function, inject set<something> function.  This controls the <something> in the UI 
 ```
 
 # Client - Send request
 ```
-Controller.client._sendJson() => 
-this._clientSocket.sendMessage() => 
-_clientSocket.send()
+- Controller.client.<convenience func> =>
+- Construct JSON to send to server =>
+- Create request =>
+- Controller.client._sendJson(request) => 
+- this._clientSocket.sendMessage(request) => 
+- _clientSocket.send()
 ```
 
 # Server - Receive request, send response
 ```
-  serverWebsocket.on => 
-  extractedOnRequestReceivedFunc(serverWebSocket, message) => 
-  if join mob, store or retrieve from serverWebSocket arrays =>
-  modify mobtimer =>
-  RoomManager.broadcastToMob(mobTimer, parsedRequest.action) // or if echo or error, just send to requester => 
-  for each socket for this mob: serverWebsocket.sendMessage( {action, mobtimer.state}) 
+- serverWebsocket.on => 
+- extractedOnRequestReceivedFunc(serverWebSocket, request) => 
+- if join mob, store or retrieve from serverWebSocket arrays =>
+- modify mobtimer based on request =>
+- RoomManager.broadcastToMob(mobTimer, parsedRequest.action) // or if echo or error, just send to requester => 
+- for each socket for this mob: serverWebsocket.sendMessage( {action, mobtimer.state}) 
 ```
 
 # Client receives
 App.tsx:
-client.websocket.extractedonResponseReceived =>
+- client.websocket.extractedonResponseReceived =>
 - update frontend mobtimer using mobtimer state
+- execute set<something> for each mobtimer state value changed
 - do stuff based on the action
+[Title](backlog.md)

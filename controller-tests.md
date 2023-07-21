@@ -1,0 +1,11 @@
+- Change controller to be a multiton (vs singleton)
+- After _client1 has been set:
+  - Set controller1 = new Controller()
+  - Set controller1.client = _client1
+  - For each set<something> function that needs to be defined, 
+   - in before all, set<something> = jest.fn()
+   - create a test that 
+     - updates <something>
+     - assert set<something> function is called once
+     - assert that set<something> is called with the expected value(s)
+
