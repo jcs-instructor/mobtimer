@@ -1,3 +1,4 @@
+import { Action } from "mobtimer-api";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 export class MockWebSocketWrapper implements IWebSocketWrapper {
@@ -13,6 +14,13 @@ export class MockWebSocketWrapper implements IWebSocketWrapper {
   public sendMessage(message: string): void {
     // TODO: hand message to server
     console.log("message", message);
+    // const response = {
+    //   actionInfo: { action: Action.Join },
+    //   mobState: { mobName: "test", durationMinutes: 5, participants: [] }},
+    //   //logInfo: mobTimer.getLogInfo(),
+    // } as MobTimerResponses.SuccessfulResponse;
+    // this.extractedOnResponseReceived({action, mobtimer.state});
+    //this._handler(responseMessage);    
   }
 
   public closeSocket(): void {
