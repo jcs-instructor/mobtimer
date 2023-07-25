@@ -1,34 +1,33 @@
-// import { w3cwebsocket as W3CWebSocket } from "websocket";
-// import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
-// export class MockWebSocketWrapper implements IWebSocketWrapper {
-//   private _webSocket: W3CWebSocket | undefined;
+export class MockWebSocketWrapper implements IWebSocketWrapper {
+  private _socketState = 0;
+  private _handler = (message: { data: any }) => console.log(message);
 
-//   constructor() {
-//     this._webSocket = undefined;
-//   }
+  constructor() {}
 
-//   public get socketState(): number {
-//     return this._webSocket.readyState;
-//   }
+  public get socketState(): number {
+    return this._socketState;
+  }
 
-//   public sendMessage(message: string): void {
-//     this._webSocket.send(message);
-//   }
+  public sendMessage(message: string): void {
+    // TODO: hand message to server
+    console.log("message", message);
+  }
 
-//   public closeSocket(): void {
-//     this._webSocket.close();
-//   }
+  public closeSocket(): void {
+    this._socketState = this.CLOSED_CODE;
+  }
 
-//   public get OPEN_CODE(): number {
-//     return this._webSocket.OPEN;
-//   }
+  public get OPEN_CODE(): number {
+    return 1;
+  }
 
-//   public get CLOSED_CODE(): number {
-//     return this._webSocket.CLOSED;
-//   }
+  public get CLOSED_CODE(): number {
+    return 0;
+  }
 
-//   public set onmessageReceived(handler: (message: { data: any }) => void) {
-//     this._webSocket.onmessage = handler;
-//   }
-// }
+  public set onmessageReceived(handler: (message: { data: any }) => void) {
+    this._handler = handler;
+  }
+}
