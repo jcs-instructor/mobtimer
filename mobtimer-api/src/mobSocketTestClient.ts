@@ -8,6 +8,7 @@ class MobSocketTestClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
+  private _mobName: string = "";
   private _socket: IWebSocketWrapper;
 
   constructor(webSocket: IWebSocketWrapper) {
@@ -16,6 +17,22 @@ class MobSocketTestClient extends MobSocketClient {
     this._socket.onmessageReceived = (message) => {
       this.trackMessage(message);
     };
+  }
+
+  resetClient() {
+    this._echoReceived = false;
+    this._successfulResponses = [];
+    this._errorReceived = false;
+    this._mobName = "";
+  }
+  
+  override joinMob(mobName: string) {
+    this._mobName = mobName;
+    super.joinMob(mobName);
+  }
+
+  public get mobName(): string {
+    return this._mobName;
   }
 
   private trackMessage(message: { data: any }) {
@@ -63,7 +80,7 @@ class MobSocketTestClient extends MobSocketClient {
     const client = this;
     return new Promise(function (resolve) {
       const timeout = setTimeout(function () {
-        if (client.echoReceived) {
+        if (client.echoReceived) {          
           resolve();
         }
         client.waitForEcho().then(resolve);
@@ -92,7 +109,7 @@ class MobSocketTestClient extends MobSocketClient {
   public get successfulResponses(): string[] {
     return [...this._successfulResponses];
   }
-
+  
   public get echoReceived(): boolean {
     return this._echoReceived;
   }

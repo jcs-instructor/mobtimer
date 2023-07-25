@@ -24,7 +24,7 @@ class MobSocketClient {
         } else {
           MobSocketClient.waitForSocketState(socket, state).then(resolve);
         }
-      });
+      }, 5);
       // todo: timeout.unref() fails when running from frontend; why?
       // timeout.unref();
     });

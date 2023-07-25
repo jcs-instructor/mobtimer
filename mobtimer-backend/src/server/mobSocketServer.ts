@@ -13,11 +13,28 @@ import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Heartbeat } from "./heartbeat";
 
+const defaultHeartbeatValues = { heartbeatDurationMinutes : Number.parseInt(
+      process.env.HEARTBEAT_DURATION_MINUTES || ""
+    ) || 12, // e.g., render.com has a 15 minute timeout, so 12 minutes is a safe value
+    heartbeatMaxInactivityMinutes: Number.parseInt(
+      process.env.HEARTBEAT_MAX_INACTIVITY_MINUTES || ""
+    ) || 120 // e.g., people mobbing together with a break of up to 2 hours won't experience an inactivity timeout
+}
+
 export async function startMobServer(
-  port: number
+  port: number,
+  onHeartbeatFunc = () => {},
+  {
+    heartbeatDurationMinutes,
+    heartbeatMaxInactivityMinutes
+  } = defaultHeartbeatValues
 ): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
   const server = http.createServer();
-  const wss = _addMobListeners(server);
+  const wss = _addMobListeners(server, onHeartbeatFunc,   {
+    heartbeatDurationMinutes,
+    heartbeatMaxInactivityMinutes
+  } 
+  );
   return new Promise((resolve) => {
     server.listen(port, () => resolve({ httpServer: server, wss }));
   });
@@ -43,15 +60,12 @@ export function renderHomePage(port: number) {
   const server = app.listen(port, function () {
     const time = new Date().toLocaleTimeString();
     console.log(`[${time}] Server listening on PORT ${port}`);
-  });  
+  });
 
   _addMobListeners(server);
 }
 
-const maxMinutesUp = parseFloat(process.env.MAX_MINUTES_UP || '0.2');  // todo: make 120 
-const serverStartTime = new Date().getTime(); // todo: make this server last pinged or started
-
-function _processRequest(
+function _processMobTimerRequest(
   parsedRequest: MobTimerRequests.MobTimerRequest,
   socket: WebSocket
 ) {
@@ -134,17 +148,28 @@ function _processRequest(
  * be started externally.
  * @param server The http server from which to create the WebSocket server
  */
-function _addMobListeners(server: http.Server): WebSocket.Server {
+function _addMobListeners(
+  server: http.Server,
+  onHeartbeatFunc = () => {},
+{
+    heartbeatDurationMinutes,
+    heartbeatMaxInactivityMinutes
+} = defaultHeartbeatValues
+): WebSocket.Server {
   const wss = new WebSocket.Server({ server });
+  const heartbeat = new Heartbeat(heartbeatDurationMinutes, heartbeatMaxInactivityMinutes, () => {
+    console.log("Heartbeat: " + new Date().toLocaleTimeString());
+    onHeartbeatFunc();
+  });
+  heartbeat.start();
 
-  wss.on("connection", async function (webSocket: WebSocket) {    
-    // 2nd paramater for mrozbarry, request2: any
+  wss.on("connection", async function (webSocket: WebSocket) {
+    // 2nd parameter for mrozbarry, request2: any
     // const url = new URL(request2.url, `http://${request2.headers.host}`);
     // let mobName = url.pathname.replace("/", "");
     // if (mobName) {
     //   _initialize(webSocket);
     // }
-    const heartbeat = new Heartbeat(15, 60, () => {console.log("Heartbeat: " + new Date().toLocaleTimeString())});
 
     webSocket.on("message", function (request) {
       // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
@@ -156,40 +181,73 @@ function _addMobListeners(server: http.Server): WebSocket.Server {
       // client.on('close', () => {
       //   log('websocket.disconnect', timerId);
       // });
-      const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
 
       heartbeat.restart();
 
       let requestString: string = _requestToString(request);
-      let parsedRequest: MobTimerRequests.MobTimerRequest;
-      try {
-        parsedRequest = JSON.parse(
-          requestString
-        ) as MobTimerRequests.MobTimerRequest;
-      } catch (e) {
-        const errorResponse = {
-          actionInfo: { action: Action.InvalidRequestError },
-        } as MobTimerResponses.ErrorResponse;
-        _sendJSON(webSocket, errorResponse);
-        return;
-      }
-      if (parsedRequest.action === Action.Echo) {
-        const echoResponse = {
-          actionInfo: { action: Action.Echo },
-        } as MobTimerResponses.EchoResponse;
-        _sendJSON(webSocket, echoResponse);
-        return;
-      }
-      let mobTimer = _processRequest(parsedRequest, webSocket);
-      if (!mobTimer) {
-        return;
-      }
-      RoomManager.broadcastToMob(mobTimer, parsedRequest.action); // todo consider moving mobName up a level
+
+      // Process raw request.
+      let { isMobTimerRequest, response, mobTimer }: { isMobTimerRequest: boolean; response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
+        = processRawRequest(requestString, webSocket); 
+
+      // Send a response. Either:
+      // - Broadcast to all clients if we have a successful MobTimer response, or
+      // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
+      if (isMobTimerRequest && response && mobTimer) {
+        // Broadcast:
+        RoomManager.broadcastResponseToMob(
+          response as MobTimerResponses.SuccessfulResponse, 
+          mobTimer.state.mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
+      } else if (!isMobTimerRequest && response) {
+        // Send only to requesting client:
+        _sendJSON(webSocket, response);        
+      } 
     });
   });
   return wss;
 }
 
+function processRawRequest(requestString: string, webSocket: WebSocket) {
+  let isMobTimerRequest = false;
+  let response: MobTimerResponses.MobTimerResponse | undefined;
+  let parsedRequest: MobTimerRequests.MobTimerRequest | undefined;
+
+  // Validate and parse the request  
+  try {
+    parsedRequest = JSON.parse(
+      requestString
+    ) as MobTimerRequests.MobTimerRequest;
+    isMobTimerRequest = true;
+  } catch (e) {
+    const errorResponse = {
+      actionInfo: { action: Action.InvalidRequestError },
+    } as MobTimerResponses.ErrorResponse;
+    response = errorResponse;
+  }
+
+  // Check if it's an echo request (echo requests don't use the mobTimer)
+  if (parsedRequest && parsedRequest.action === Action.Echo) {
+    const echoResponse = {
+      actionInfo: { action: Action.Echo },
+    } as MobTimerResponses.EchoResponse;
+    response = echoResponse;
+  }
+
+  let mobTimer: MobTimer | undefined;
+  if (isMobTimerRequest && parsedRequest) {
+    mobTimer = _processMobTimerRequest(parsedRequest, webSocket);
+    if (mobTimer) {
+      response = {
+        actionInfo: { action: parsedRequest.action },
+        mobState: mobTimer.state,
+        //logInfo: mobTimer.getLogInfo(),
+      } as MobTimerResponses.SuccessfulResponse;
+    }
+  }
+  return { isMobTimerRequest, response, mobTimer };
+}
+
+// todo: consider:
 // function _initialize(webSocket: WebSocket) {
 //   webSocket.send(
 //     JSON.stringify({
@@ -206,10 +264,10 @@ async function _sendJSON(
   request: MobTimerResponses.MobTimerResponse
 ) {
   const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
-  await MobSocketClient.waitForSocketState(
-    webSocketWrapper,
-    webSocketWrapper.OPEN_CODE
-  );
+  // await MobSocketClient.waitForSocketState(
+  //   webSocketWrapper,
+  //   webSocketWrapper.OPEN_CODE
+  // );
   console.log("state: " + webSocketWrapper.socketState);
   webSocketWrapper.sendMessage(JSON.stringify(request));
 }

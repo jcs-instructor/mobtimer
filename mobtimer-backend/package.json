@@ -25,7 +25,7 @@
     "start": "node .",
     "launch": "echo todo: doesn't work & cd ./src/server & ls & ls *.json & ts-node . & open http://localhost:3000",
     "build": "tsc && cp -r ./src/server/views ./dist/server/views",
-    "test": "jest --watch --verbose",
+    "test": "jest --watch --verbose --runInBand",
     "debug": "node --debug-brk --inspect ./node_modules/jest/bin/jest -i",
     "dev": "nodemon",
     "prepare": "husky install"
