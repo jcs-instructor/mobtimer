@@ -42,52 +42,52 @@ class MobSocketClient {
   }
 
   sendEchoRequest() {
-    this._sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
+    this.sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
   }
 
   joinMob(mobName: string) {
     console.log("sending join request", mobName);
-    this._sendJSON({
+    this.sendJSON({
       action: Action.Join,
       mobName,
     } as MobTimerRequests.JoinRequest);
   }
 
   update(durationMinutes: number) {
-    this._sendJSON({
+    this.sendJSON({
       action: Action.Update,
       value: { durationMinutes },
     } as MobTimerRequests.UpdateRequest);
   }
 
   addParticipant(name: string) {
-    this._sendJSON({
+    this.sendJSON({
       action: Action.AddParticipant,
       name: name,
     } as MobTimerRequests.AddParticipantRequest);
   }
 
   rotateParticipants() {
-    this._sendJSON({
+    this.sendJSON({
       action: Action.RotateParticipants,
     } as MobTimerRequests.RotateParticipantsRequest);
   }
 
   shuffleParticipants() {
-    this._sendJSON({
+    this.sendJSON({
       action: Action.ShuffleParticipants,
     } as MobTimerRequests.ShuffleParticipantsRequest);
   }
 
   editParticipants(participants: string[]) {
-    this._sendJSON({
+    this.sendJSON({
       action: Action.EditParticipants,
       participants: participants,
     } as MobTimerRequests.EditParticipantsRequest);
   }
 
   editRoles(roles: string[]) {
-    this._sendJSON({
+    this.sendJSON({
       action: Action.EditRoles,
       roles: roles,
     } as MobTimerRequests.EditRolesRequest);
@@ -95,20 +95,20 @@ class MobSocketClient {
 
   start() {
     console.log("sending start request");
-    this._sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
+    this.sendJSON({ action: Action.Start } as MobTimerRequests.StartRequest);
   }
 
   pause() {
     console.log("sending pause request");
-    this._sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
+    this.sendJSON({ action: Action.Pause } as MobTimerRequests.PauseRequest);
   }
 
   reset() {
     console.log("sending reset request");
-    this._sendJSON({ action: Action.Reset } as MobTimerRequests.ResetRequest);
+    this.sendJSON({ action: Action.Reset } as MobTimerRequests.ResetRequest);
   }
 
-  private async _sendJSON(request: MobTimerRequests.MobTimerRequest) {
+  protected async sendJSON(request: MobTimerRequests.MobTimerRequest) {
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {

@@ -3,6 +3,7 @@ import { Action } from "./action";
 import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { MobTimerRequests } from "mobtimer-api";
 
 class MockClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
@@ -84,6 +85,12 @@ class MockClient extends MobSocketClient {
 
   public get errorReceived(): boolean {
     return this._errorReceived;
+  }
+
+  protected override async sendJSON(request: MobTimerRequests.MobTimerRequest) {
+    this._successfulResponses = [
+      "{\"actionInfo\":{\"action\":\"join\"},\"mobState\":{\"mobName\":\"test-mob\",\"status\":\"READY\",\"durationMinutes\":5,\"participants\":[],\"roles\":[\"🗣️ Navigator\",\"🛞 Driver\"],\"secondsRemaining\":0}}",
+    ];
   }
 }
 
