@@ -88,10 +88,9 @@ class MockClient extends MobSocketClient {
   }
 
   protected override async sendJSON(request: MobTimerRequests.MobTimerRequest) {
-    this._successfulResponses = [
-      "{\"actionInfo\":{\"action\":\"join\"},\"mobState\":{\"mobName\":\"test-mob\",\"status\":\"READY\",\"durationMinutes\":5,\"participants\":[],\"roles\":[\"🗣️ Navigator\",\"🛞 Driver\"],\"secondsRemaining\":0}}",
-    ];
+    this.trackMessage({ data: "{\"actionInfo\":{\"action\":\"join\"},\"mobState\":{\"mobName\":\"test-mob\",\"status\":\"READY\",\"durationMinutes\":5,\"participants\":[],\"roles\":[\"🗣️ Navigator\",\"🛞 Driver\"],\"secondsRemaining\":0}}" });
   }
+
 }
 
 export { MockClient };
