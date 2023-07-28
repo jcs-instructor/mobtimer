@@ -1,10 +1,11 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
+const noSocketErrorMessage = "No socket";
 class MobSocketClient {
-  private _webSocket: IWebSocketWrapper;
+  private _webSocket: IWebSocketWrapper | undefined;
 
-  constructor(webSocket: IWebSocketWrapper) {
+  constructor(webSocket: IWebSocketWrapper | undefined = undefined) {
     this._webSocket = webSocket;
   }
 
@@ -14,9 +15,12 @@ class MobSocketClient {
    * @param state The desired `readyState` for the socket
    */
   static async waitForSocketState(
-    socket: IWebSocketWrapper,
-    state: number
+    socket: IWebSocketWrapper | undefined,
+    state: number | undefined
   ): Promise<void> {
+    if (!socket) {
+      throw new Error(noSocketErrorMessage)
+    }
     return new Promise(function (resolve) {
       const timeout = setTimeout(function () {
         if (socket.socketState === state) {
@@ -30,7 +34,10 @@ class MobSocketClient {
     });
   }
 
-  public async waitForSocketState(state: number): Promise<void> {
+  public async waitForSocketState(state: number | undefined): Promise<void> {
+    if (!this._webSocket) {
+      return Promise.reject("No socket to wait for");
+    }
     return MobSocketClient.waitForSocketState(this._webSocket, state);
   }
 
@@ -102,18 +109,25 @@ class MobSocketClient {
   }
 
   private async _sendJSON(request: MobTimerRequests.MobTimerRequest) {
-    await MobSocketClient.waitForSocketState(
-      this.webSocket,
-      this.webSocket.OPEN_CODE
-    );
-    this._webSocket.sendMessage(JSON.stringify(request));
+    if (!this._webSocket) {
+      throw new Error(noSocketErrorMessage);
+    } else {
+      await MobSocketClient.waitForSocketState(
+        this.webSocket,
+        this.webSocket?.OPEN_CODE
+      );
+      this._webSocket.sendMessage(JSON.stringify(request));
+    }
   }
 
-  public get webSocket(): IWebSocketWrapper {
+  public get webSocket(): IWebSocketWrapper | undefined {
     return this._webSocket;
   }
 
   async closeSocket() {
+    if (!this.webSocket) {
+      throw new Error(noSocketErrorMessage)
+    }
     this.webSocket.closeSocket();
     await this.waitForSocketState(this.webSocket.CLOSED_CODE);
   }

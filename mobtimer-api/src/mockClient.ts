@@ -4,19 +4,15 @@ import { MobSocketClient } from "./mobSocketClient";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
-class MobSocketTestClient extends MobSocketClient {
+class MockClient extends MobSocketClient {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
   private _mobName: string = "";
-  private _socket: IWebSocketWrapper;
 
-  constructor(webSocket: IWebSocketWrapper) {
-    super(webSocket);
-    this._socket = webSocket;
-    this._socket.onmessageReceived = (message) => {
-      this.trackMessage(message);
-    };
+  constructor() {
+    super();
+    //todo: how to track message? --- this.trackMessage(message);
   }
 
   resetClient() {
@@ -61,37 +57,6 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
-  static async waitForOpenSocket(
-    webSocket: IWebSocketWrapper
-  ): Promise<MobSocketTestClient> {
-    if (!webSocket) {
-      throw new Error("No socket"); // todo: use constant from superclass
-    }
-    const mobSocketTestClient = new MobSocketTestClient(webSocket);
-    await mobSocketTestClient.waitForSocketState(
-      mobSocketTestClient.webSocket?.OPEN_CODE
-    );
-    return mobSocketTestClient;
-  }
-
-  public async waitForLastResponse() {
-    await super.sendEchoRequest();
-    await this.waitForEcho();
-  }
-
-  async waitForEcho(): Promise<void> {
-    const client = this;
-    return new Promise(function (resolve) {
-      const timeout = setTimeout(function () {
-        if (client.echoReceived) {          
-          resolve();
-        }
-        client.waitForEcho().then(resolve);
-      }, 10);
-      timeout.unref();
-    });
-  }
-
   public get lastSuccessfulResponse(): SuccessfulResponse {
     return JSON.parse(
       this._successfulResponses.at(-1) || ""
@@ -122,4 +87,4 @@ class MobSocketTestClient extends MobSocketClient {
   }
 }
 
-export { MobSocketTestClient };
+export { MockClient };
