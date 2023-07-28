@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import './App.css';
-import Room from './components/Room';
-import { Action, Command, IWebSocketWrapper, MobSocketClient, MobTimer, MobTimerResponses, TimeUtils, W3CWebSocketWrapper } from 'mobtimer-api';
-import { Controller } from 'mobtimer-api';
-import Launch from './components/Launch';
+import "./App.css";
+import Room from "./components/Room";
+import {
+  Action,
+  Command,
+  IWebSocketWrapper,
+  MobSocketClient,
+  MobTimer,
+  MobTimerResponses,
+  TimeUtils,
+  W3CWebSocketWrapper,
+} from "mobtimer-api";
+import { Controller } from "mobtimer-api";
+import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 
-const useLocalHost = window.location.href.includes('localhost');
+const useLocalHost = window.location.href.includes("localhost");
 const url = Controller.getUrl(useLocalHost);
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
@@ -44,23 +53,37 @@ function getActionButtonLabel() {
 }
 
 function setSocketListener(
-  setDurationMinutes: React.Dispatch<React.SetStateAction<number>>, 
-  setParticipants: React.Dispatch<React.SetStateAction<string[]>>, 
-  setRoles: React.Dispatch<React.SetStateAction<string[]>>, 
-  setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>, 
-  setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>) {
-  client.webSocket.onmessageReceived = (message: { data: any; }) => {
-
+  setDurationMinutes: React.Dispatch<React.SetStateAction<number>>,
+  setParticipants: React.Dispatch<React.SetStateAction<string[]>>,
+  setRoles: React.Dispatch<React.SetStateAction<string[]>>,
+  setSecondsRemainingString: React.Dispatch<React.SetStateAction<string>>,
+  setActionButtonLabel: React.Dispatch<React.SetStateAction<string>>
+) {
+  if (!client.webSocket) {
+    throw new Error("WebSocket is undefined");
+  }
+  client.webSocket.onmessageReceived = (message: { data: any }) => {
     // Get response from server
-    const response = JSON.parse(message.data) as MobTimerResponses.SuccessfulResponse;
+    const response = JSON.parse(
+      message.data
+    ) as MobTimerResponses.SuccessfulResponse;
 
     // todo: handle if response is not successful
     consoleLogResponse(response);
 
-    // Read response data 
-    const { mobStatus, durationMinutes, participants, roles, secondsRemaining } = Controller.translateResponseData(response);
+    // Read response data
+    const {
+      mobStatus,
+      durationMinutes,
+      participants,
+      roles,
+      secondsRemaining,
+    } = Controller.translateResponseData(response);
 
-    if (response.actionInfo.action === Action.Expired || response.actionInfo.action === Action.Reset) {
+    if (
+      response.actionInfo.action === Action.Expired ||
+      response.actionInfo.action === Action.Reset
+    ) {
       playAudio();
     }
 
@@ -71,7 +94,6 @@ function setSocketListener(
     Controller.frontendMobTimer.editParticipants(participants);
     Controller.frontendMobTimer.editRoles(roles);
 
-
     // Derive mob label from response status
     const label = getActionButtonLabel();
 
@@ -79,35 +101,57 @@ function setSocketListener(
     setDurationMinutes(durationMinutes);
     setParticipants(participants);
     setRoles(roles);
-    setSecondsRemainingString(Controller.frontendMobTimer.secondsRemainingString);
+    setSecondsRemainingString(
+      Controller.frontendMobTimer.secondsRemainingString
+    );
     setActionButtonLabel(label);
 
     // Update browser tab title text
     Controller.updateSummary();
 
     if (response.mobState.status !== Controller.frontendMobTimer.status) {
-      console.log("PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
-        "Frontend Status: " + Controller.frontendMobTimer.status + ", " +
-        "Backend Status:" + response.mobState.status);
-    };
+      console.log(
+        "PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
+          "Frontend Status: " +
+          Controller.frontendMobTimer.status +
+          ", " +
+          "Backend Status:" +
+          response.mobState.status
+      );
+    }
   };
 }
 
 function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
-  console.log("Mob: " + response.mobState.mobName +
-    " (" + response.mobState.participants.length + " Participant(s):" + response.mobState.participants.join(",") + "), " +
-    "Action:" + response.actionInfo.action + ", " +
-    "Status:" + response.mobState.status + ", DurationMin:" + response.mobState.durationMinutes + ", " +
-    "RemainingSec:" + response.mobState.secondsRemaining + " (" + TimeUtils.getTimeString(response.mobState.secondsRemaining) + ") "
+  console.log(
+    "Mob: " +
+      response.mobState.mobName +
+      " (" +
+      response.mobState.participants.length +
+      " Participant(s):" +
+      response.mobState.participants.join(",") +
+      "), " +
+      "Action:" +
+      response.actionInfo.action +
+      ", " +
+      "Status:" +
+      response.mobState.status +
+      ", DurationMin:" +
+      response.mobState.durationMinutes +
+      ", " +
+      "RemainingSec:" +
+      response.mobState.secondsRemaining +
+      " (" +
+      TimeUtils.getTimeString(response.mobState.secondsRemaining) +
+      ") "
   );
 }
 
 const App = () => {
-
   // State variables - todo: consider grouping two or more of these into a single object, e.g., see the "Group Related State" section of https://blog.bitsrc.io/5-best-practices-for-handling-state-structure-in-react-f011e842076e
-  const [mobName, setMobName] = useState('');
-  const [secondsRemainingString, setSecondsRemainingString] = useState('');
-  const [actionButtonLabel, setActionButtonLabel] = useState('');
+  const [mobName, setMobName] = useState("");
+  const [secondsRemainingString, setSecondsRemainingString] = useState("");
+  const [actionButtonLabel, setActionButtonLabel] = useState("");
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [participants, setParticipants] = useState([] as string[]);
   const [roles, setRoles] = useState([] as string[]);
@@ -119,22 +163,27 @@ const App = () => {
   Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
 
   // Set socket listener
-  setSocketListener(setDurationMinutes, setParticipants, setRoles, setSecondsRemainingString, setActionButtonLabel);
+  setSocketListener(
+    setDurationMinutes,
+    setParticipants,
+    setRoles,
+    setSecondsRemainingString,
+    setActionButtonLabel
+  );
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
-
     const alreadyJoined = Controller.frontendMobTimer.state.mobName === mobName;
     if (!mobName || alreadyJoined) {
       return;
-    };
+    }
 
     Controller.frontendMobTimer = new MobTimer(mobName);
 
     await client.waitForSocketState(WebSocket.OPEN);
     client.joinMob(mobName);
-    console.log('joined mob', mobName, client);
-  }
+    console.log("joined mob", mobName, client);
+  };
 
   // Submit action
   const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -142,25 +191,31 @@ const App = () => {
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
     Controller.toggleStatus(client, Controller.frontendMobTimer);
-  }
+  };
 
   // Browser router
-  return <HashRouter>
-    <Routes>
-      <Route path="/" element={<Launch />} />
-      <Route path="/:mobNameUrlParam"
-        element={<Room
-          durationMinutes={durationMinutes}
-          participants={participants}
-          roles={roles}
-          actionButtonLabel={actionButtonLabel}
-          setMobName={setMobName}
-          timeString={secondsRemainingString}
-          submitAction={submitAction}
-          submitJoinMobRequest={submitJoinMobRequest} />} />
-    </Routes>
-
-  </HashRouter >;
-}
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Launch />} />
+        <Route
+          path="/:mobNameUrlParam"
+          element={
+            <Room
+              durationMinutes={durationMinutes}
+              participants={participants}
+              roles={roles}
+              actionButtonLabel={actionButtonLabel}
+              setMobName={setMobName}
+              timeString={secondsRemainingString}
+              submitAction={submitAction}
+              submitJoinMobRequest={submitJoinMobRequest}
+            />
+          }
+        />
+      </Routes>
+    </HashRouter>
+  );
+};
 
 export default App;
