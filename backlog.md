@@ -28,7 +28,9 @@ Joel:
 
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Speed up tests** - WIP / Broken   
-      - [ ] **Mock** - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
+      - [ ] **Mock** 
+      - RESUME HERE: in mockClient.ts in sendJSON func: See TODO for calling server's process function (which has to be made public, etc.)
+      - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
       - Split into 2 test files - one for mocks and one for the integration tests
       - Functions to mock:
             - Server:

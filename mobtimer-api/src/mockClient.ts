@@ -88,6 +88,10 @@ class MockClient extends MobSocketClient {
   }
 
   protected override async sendJSON(request: MobTimerRequests.MobTimerRequest) {
+    // todo: const response = server.processRawRequest(request, this); // i.e., use this as the object for server storage/retrieval key
+    // currently calls look like this: 
+    //    let { isMobTimerRequest, response, mobTimer }: { isMobTimerRequest: boolean; response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
+    //    = processRawRequest(requestString, webSocketOrAny);     
     this.trackMessage({ data: "{\"actionInfo\":{\"action\":\"join\"},\"mobState\":{\"mobName\":\"test-mob\",\"status\":\"READY\",\"durationMinutes\":5,\"participants\":[],\"roles\":[\"🗣️ Navigator\",\"🛞 Driver\"],\"secondsRemaining\":0}}" });
   }
 
