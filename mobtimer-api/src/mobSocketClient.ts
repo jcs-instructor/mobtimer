@@ -45,12 +45,16 @@ class MobSocketClient {
     this.sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
   }
 
-  joinMob(mobName: string) {
-    console.log("sending join request", mobName);
-    this.sendJSON({
+  static createJoinMobRequest(mobName: string): MobTimerRequests.MobTimerRequest {
+    return {
       action: Action.Join,
       mobName,
-    } as MobTimerRequests.JoinRequest);
+    } as MobTimerRequests.JoinRequest;
+  }
+
+  joinMob(mobName: string) {
+    console.log("sending join request", mobName);
+    this.sendJSON(MobSocketClient.createJoinMobRequest(mobName));
   }
 
   update(durationMinutes: number) {
