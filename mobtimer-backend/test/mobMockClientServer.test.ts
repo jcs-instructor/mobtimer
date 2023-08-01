@@ -1,5 +1,5 @@
 import { processRawRequest, startMobServer } from "../src/server/mobSocketServer";
-import { MobState, MobTimer, MobTimerRequests, MobTimerResponses, MockClient } from "mobtimer-api";
+import { MobState, MobTimer, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
@@ -13,9 +13,7 @@ describe("Client WebSocket Server Integration", () => {
   const _port = 4000 + Number(process.env.JEST_WORKER_ID);
   const _url = `ws://localhost:${_port}`;
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
-  let _client1: MockClient;
-  let _client2: MobSocketTestClient;
-
+  
   function getTimeSinceBeforeAll(): any {
     return Date.now() - _startMilliseconds;
   }
@@ -24,42 +22,23 @@ describe("Client WebSocket Server Integration", () => {
     return expect.getState().currentTestName;
   }
 
-  beforeAll(async () => {
-    _server = await startMobServer(_port);
-    //_client1 = new MobSocketTestClient(new MockWebSocketWrapper());
-    _client1 = new MockClient();
-    _client2 = new MobSocketTestClient(new MockWebSocketWrapper());
-  });
-
   beforeEach(() => {
     console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
   });
 
   afterEach(() => {
     console.log("End: time", getTimeSinceBeforeAll(), getTestName());
-    _client1.resetClient();
-    _client2.resetClient();
-  });
-
-  afterAll(() => {
     RoomManager.resetRooms();
-    // todo: Refactor to change return type for the startMobServer method to be a class with one exposed close method (so don't have to close both httpServer and wss separately from the consumer).
-    _server.wss.close();
-    _server.httpServer.close();
   });
 
   test.only("Create mob", () => {
-    //processRawRequest
     const request = { action: Action.Join, mobName: "test-mob" } as MobTimerRequests.JoinRequest;    
-    //_client1.joinMob("test-mob");
     const mobName = request.mobName;
     let { isMobTimerRequest, response, mobTimer }: { isMobTimerRequest: boolean; response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
     = processRawRequest(JSON.stringify(request), {}); 
     console.log("debug response", response);
     const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
     expect(successfulResponse?.mobState.mobName).toEqual(mobName);
-    // expect(_client1.lastSuccessfulMobState).toEqual(getNewState(mobName));
-    // expect(_client1.lastSuccessfulAction).toEqual(Action.Join);
   });
 
   // test("Create 2 mobs", () => {
