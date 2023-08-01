@@ -6,11 +6,12 @@ import { IWebSocketWrapper } from "./iWebSocketWrapper";
 import { MobTimerRequests } from "mobtimer-api";
 
 class MobRequestBuilder {
-  static joinMob(mobName: string): MobTimerRequests.MobTimerRequest {
-    return {
+  static joinMob(mobName: string): string {
+    const request = {
       action: Action.Join,
       mobName,
     } as MobTimerRequests.JoinRequest;
+    return JSON.stringify(request);
   }
 }
 
