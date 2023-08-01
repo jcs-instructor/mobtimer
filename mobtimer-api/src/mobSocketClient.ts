@@ -1,6 +1,7 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { MobRequestBuilder } from "./mobRequestBuilder";
 const noSocketErrorMessage = "No socket";
 class MobSocketClient {
   private _webSocket: IWebSocketWrapper | undefined;
@@ -45,16 +46,9 @@ class MobSocketClient {
     this.sendJSON({ action: Action.Echo } as MobTimerRequests.EchoRequest);
   }
 
-  static createJoinMobRequest(mobName: string): MobTimerRequests.MobTimerRequest {
-    return {
-      action: Action.Join,
-      mobName,
-    } as MobTimerRequests.JoinRequest;
-  }
-
   joinMob(mobName: string) {
     console.log("sending join request", mobName);
-    this.sendJSON(MobSocketClient.createJoinMobRequest(mobName));
+    this.sendJSON(MobRequestBuilder.joinMob(mobName));
   }
 
   update(durationMinutes: number) {

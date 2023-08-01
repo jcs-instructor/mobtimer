@@ -3,6 +3,7 @@ import {
   startMobServer,
 } from "../src/server/mobSocketServer";
 import {
+  MobRequestBuilder,
   MobSocketClient,
   MobState,
   MobTimer,
@@ -38,7 +39,7 @@ describe("Client WebSocket Server Integration", () => {
     // todo: once we've created a RequestStringBuilder, we can use it here and from the client, and in the client
     // the sendJSON won't need to stringify the request any more (it will be done in the RequestStringBuilder).
     // const requestString = RequestStringBuilder.joinRequest(mobName); 
-    const request = MobSocketClient.createJoinMobRequest(mobName); // createJoinRequestString(mobName);
+    const request = MobRequestBuilder.joinMob(mobName); // createJoinRequestString(mobName);
     const requestString = JSON.stringify(request);
     const response = processGoodRequest(requestString);
     expect(response.mobState.mobName).toEqual(mobName);
