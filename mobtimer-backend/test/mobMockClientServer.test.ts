@@ -53,7 +53,8 @@ describe("Client WebSocket Server Integration", () => {
     } = processRawRequest(requestString, {});
     console.log("debug response", response);
     const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
-    expect(successfulResponse?.mobState.mobName).toEqual(mobName);
+    expect(successfulResponse.mobState.mobName).toEqual(mobName);
+    expect(successfulResponse.actionInfo.action).toEqual(Action.Join);
   });
 
   // test("Create 2 mobs", () => {
