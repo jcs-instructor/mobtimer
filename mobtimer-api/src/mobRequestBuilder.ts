@@ -1,8 +1,4 @@
-import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { MobSocketClient } from "./mobSocketClient";
-import { MobState } from "./mobState";
-import { IWebSocketWrapper } from "./iWebSocketWrapper";
 import { MobTimerRequests } from "mobtimer-api";
 
 class MobRequestBuilder {
@@ -67,19 +63,16 @@ class MobRequestBuilder {
   }
 
   static start() {
-    console.log("sending start request");
     const request = { action: Action.Start } as MobTimerRequests.StartRequest;
     return JSON.stringify(request);
   }
 
-  pause() {
-    console.log("sending pause request");
+  static pause() {
     const request = { action: Action.Pause } as MobTimerRequests.PauseRequest;
     return JSON.stringify(request);
   }
 
-  reset() {
-    console.log("sending reset request");
+  static reset() {
     const request = { action: Action.Reset } as MobTimerRequests.ResetRequest;
     return JSON.stringify(request);
   }

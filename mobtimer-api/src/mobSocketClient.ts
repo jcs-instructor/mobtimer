@@ -43,82 +43,54 @@ class MobSocketClient {
   }
 
   sendEchoRequest() {
-    this.sendJSON1({ action: Action.Echo } as MobTimerRequests.EchoRequest);
+    this.sendJSON(MobRequestBuilder.sendEchoRequest());
   }
 
   joinMob(mobName: string) {
     console.log("sending join request", mobName);
-    this.sendJSON2(MobRequestBuilder.joinMob(mobName));
+    this.sendJSON(MobRequestBuilder.joinMob(mobName));
   }
 
   update(durationMinutes: number) {
-    this.sendJSON1({
-      action: Action.Update,
-      value: { durationMinutes },
-    } as MobTimerRequests.UpdateRequest);
+    this.sendJSON(MobRequestBuilder.update(durationMinutes));
   }
 
   addParticipant(name: string) {
-    this.sendJSON1({
-      action: Action.AddParticipant,
-      name: name,
-    } as MobTimerRequests.AddParticipantRequest);
+    this.sendJSON(MobRequestBuilder.addParticipant(name));
   }
 
   rotateParticipants() {
-    this.sendJSON1({
-      action: Action.RotateParticipants,
-    } as MobTimerRequests.RotateParticipantsRequest);
+    this.sendJSON(MobRequestBuilder.rotateParticipants());
   }
 
   shuffleParticipants() {
-    this.sendJSON1({
-      action: Action.ShuffleParticipants,
-    } as MobTimerRequests.ShuffleParticipantsRequest);
+    this.sendJSON(MobRequestBuilder.shuffleParticipants());
   }
 
   editParticipants(participants: string[]) {
-    this.sendJSON1({
-      action: Action.EditParticipants,
-      participants: participants,
-    } as MobTimerRequests.EditParticipantsRequest);
+    this.sendJSON(MobRequestBuilder.editParticipants(participants));
   }
 
   editRoles(roles: string[]) {
-    this.sendJSON1({
-      action: Action.EditRoles,
-      roles: roles,
-    } as MobTimerRequests.EditRolesRequest);
+    this.sendJSON(MobRequestBuilder.editRoles(roles));
   }
 
   start() {
     console.log("sending start request");
-    this.sendJSON1({ action: Action.Start } as MobTimerRequests.StartRequest);
+    this.sendJSON(MobRequestBuilder.start());
   }
 
   pause() {
     console.log("sending pause request");
-    this.sendJSON1({ action: Action.Pause } as MobTimerRequests.PauseRequest);
+    this.sendJSON(MobRequestBuilder.pause());
   }
 
   reset() {
     console.log("sending reset request");
-    this.sendJSON1({ action: Action.Reset } as MobTimerRequests.ResetRequest);
+    this.sendJSON(MobRequestBuilder.reset());
   }
 
-  async sendJSON1(request: MobTimerRequests.MobTimerRequest) {
-    if (!this._webSocket) {
-      throw new Error(noSocketErrorMessage);
-    } else {
-      await MobSocketClient.waitForSocketState(
-        this.webSocket,
-        this.webSocket?.OPEN_CODE
-      );
-      this._webSocket.sendMessage(JSON.stringify(request));
-    }
-  }
-
-  async sendJSON2(requestString: string) {
+  async sendJSON(requestString: string) {
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {

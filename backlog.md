@@ -29,7 +29,7 @@ Joel:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Speed up tests**
       - [ ] **Mock** 
-      - RESUME HERE: In mobSocketClient, modify all request-maker functions to be like joinMob (i.e., use builder & sendJSON2)...
+      - RESUME HERE: REVIEW THIS - JOEL FINISHED IT AFTER SESSION 5:45PM 8/1/23: In mobSocketClient, modify all request-maker functions to be like joinMob (i.e., use builder & sendJSON2)...
       - DEDUPE CODE: lots in mockClient & mobTestClient files
       - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
       - Reduce integration tests; instead do most of that test logic in the tests that calls processRawRequest directly
