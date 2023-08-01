@@ -208,7 +208,7 @@ function _addMobListeners(
   return wss;
 }
 
-function processRawRequest(requestString: string, webSocket: any ) { //WebSocket
+export function processRawRequest(requestString: string, webSocket: any ) { //WebSocket
   let isMobTimerRequest = false;
   let response: MobTimerResponses.MobTimerResponse | undefined;
   let parsedRequest: MobTimerRequests.MobTimerRequest | undefined;

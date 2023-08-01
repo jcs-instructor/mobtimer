@@ -27,7 +27,7 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
-- [ ] **Speed up tests** - WIP / Broken   
+- [ ] **Speed up tests**
       - [ ] **Mock** 
       - RESUME HERE: in mockClient.ts in sendJSON func: See TODO for calling server's process function (which has to be made public, etc.)
       - DEDUPE CODE: lots in mockClient & mobTestClient files

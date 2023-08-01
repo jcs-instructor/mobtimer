@@ -1,5 +1,5 @@
-import { startMobServer } from "../src/server/mobSocketServer";
-import { MobState, MobTimer, MockClient } from "mobtimer-api";
+import { processRawRequest, startMobServer } from "../src/server/mobSocketServer";
+import { MobState, MobTimer, MobTimerRequests, MobTimerResponses, MockClient } from "mobtimer-api";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
@@ -49,10 +49,17 @@ describe("Client WebSocket Server Integration", () => {
   });
 
   test.only("Create mob", () => {
-    _client1.joinMob("test-mob");
-    const mobName = _client1.mobName;
-    expect(_client1.lastSuccessfulMobState).toEqual(getNewState(mobName));
-    expect(_client1.lastSuccessfulAction).toEqual(Action.Join);
+    //processRawRequest
+    const request = { action: Action.Join, mobName: "test-mob" } as MobTimerRequests.JoinRequest;    
+    //_client1.joinMob("test-mob");
+    const mobName = request.mobName;
+    let { isMobTimerRequest, response, mobTimer }: { isMobTimerRequest: boolean; response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
+    = processRawRequest(JSON.stringify(request), {}); 
+    console.log("debug response", response);
+    const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
+    expect(successfulResponse?.mobState.mobName).toEqual(mobName);
+    // expect(_client1.lastSuccessfulMobState).toEqual(getNewState(mobName));
+    // expect(_client1.lastSuccessfulAction).toEqual(Action.Join);
   });
 
   // test("Create 2 mobs", () => {
