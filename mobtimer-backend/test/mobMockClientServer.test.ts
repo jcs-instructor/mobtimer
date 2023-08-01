@@ -36,9 +36,8 @@ describe("Client WebSocket Server Integration", () => {
     const mobName = "test-mob";
     const requestString = createJoinRequestString(mobName);
     const response = processGoodRequest(requestString);
-    const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
-    expect(successfulResponse.mobState.mobName).toEqual(mobName);
-    expect(successfulResponse.actionInfo.action).toEqual(Action.Join);
+    expect(response.mobState.mobName).toEqual(mobName);
+    expect(response.actionInfo.action).toEqual(Action.Join);
   });
 
   // test("Create 2 mobs", () => {
