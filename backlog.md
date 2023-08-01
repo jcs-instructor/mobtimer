@@ -29,10 +29,10 @@ Joel:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Speed up tests**
       - [ ] **Mock** 
-      - RESUME HERE: in mockClient.ts in sendJSON func: See TODO for calling server's process function (which has to be made public, etc.)
+      - RESUME HERE: In mobSocketClient, modify all request-maker functions to be like joinMob (i.e., use builder & sendJSON2)...
       - DEDUPE CODE: lots in mockClient & mobTestClient files
       - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
-      - Split into 2 test files - one for mocks and one for the integration tests
+      - Reduce integration tests; instead do most of that test logic in the tests that calls processRawRequest directly
       - Functions to mock:
             - Server:
                   - RoomManager.broadcastResponseToMob
