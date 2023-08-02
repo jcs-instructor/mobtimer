@@ -27,21 +27,8 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
-- [ ] **Speed up tests**
-      - [ ] **Mock** 
-      - RESUME HERE: REVIEW THIS - JOEL FINISHED IT AFTER SESSION 5:45PM 8/1/23: In mobSocketClient, modify all request-maker functions to be like joinMob (i.e., use builder & sendJSON2)...
-      - DEDUPE CODE: lots in mockClient & mobTestClient files
-      - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
-      - Reduce integration tests; instead do most of that test logic in the tests that calls processRawRequest directly
-      - Functions to mock:
-            - Server:
-                  - RoomManager.broadcastResponseToMob
-                  - _sendJson
-            - MockWebSocketWrapper implements IWebSocketWrapper
-            - mobClientServer.test.ts
-                  - Replace new W3CWebSocketWrapper(url) with new MockWebSocketWrapper(url)
-- [ ] **Refactor Socket Files**       
-      - Move unrelated functions out of backendSocket and consider making classes with static functions
+- [ ] **Speed up tests** - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
+- [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
