@@ -28,6 +28,7 @@ Joel:
 
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Speed up tests** - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
+      (initial intent: keep in integration: alternative websocket & all 2 mob tests)
 - [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
