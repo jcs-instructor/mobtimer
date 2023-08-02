@@ -27,7 +27,9 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
-- [ ] **Speed up tests** - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
+- [ ] **Speed up tests** 
+      - refactor processRawRequest to just return the response and mobName (don't need others)
+      - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
       (initial intent: keep in integration: alternative websocket & all 2 mob tests)
 - [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 

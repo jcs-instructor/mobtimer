@@ -1,7 +1,4 @@
-import {
-  processRawRequest,
-  startMobServer,
-} from "../src/server/backendSocket";
+import { processRawRequest, startMobServer } from "../src/server/backendSocket";
 import {
   MobRequestBuilder,
   MobState,
@@ -11,6 +8,7 @@ import {
 } from "mobtimer-api";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
+import { SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
 
 describe("Client WebSocket Server Integration", () => {
   const _startMilliseconds = Date.now();
@@ -59,6 +57,17 @@ describe("Client WebSocket Server Integration", () => {
     const mobName = "test-mob-3";
     const mockSocket = {};
 
+    /*
+    maybe use an array of requests
+    join
+    start
+    pause
+    */
+
+    // processRawRequest(MobRequestBuilder.joinMob(mobName), mockSocket);
+    // processRawRequest(MobRequestBuilder.start(), mockSocket);
+    // const response3  = processRawRequest(MobRequestBuilder.pause(), mockSocket) ; 
+
     const requestString1 = MobRequestBuilder.joinMob(mobName);
     processGoodRequest(requestString1, mockSocket);
 
@@ -66,7 +75,10 @@ describe("Client WebSocket Server Integration", () => {
     processGoodRequest(requestString2, mockSocket);
 
     const requestString3 = MobRequestBuilder.pause();
-    const response3 = processGoodRequest(requestString3, mockSocket);
+    const response3 = processGoodRequest(
+      requestString3,
+      mockSocket
+    ) as SuccessfulResponse;
 
     expect(response3.actionInfo.action).toEqual(Action.Pause);
     expect(response3.mobState.status).toEqual(Status.Paused);
@@ -263,7 +275,7 @@ let mobCounter = 0;
 
 function processGoodRequest(requestString: string, mockSocket: any) {
   const { response } = processRawRequest(requestString, mockSocket);
-  return response as MobTimerResponses.SuccessfulResponse;
+  return response as SuccessfulResponse;
 }
 
 function getNewState(mobName: string): MobState {
