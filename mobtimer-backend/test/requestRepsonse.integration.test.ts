@@ -1,4 +1,4 @@
-import { startMobServer } from "../src/server/mobSocketServer";
+import { startMobServer } from "../src/server/backendSocket";
 import { MobState, MobTimer } from "mobtimer-api";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import * as http from "http";

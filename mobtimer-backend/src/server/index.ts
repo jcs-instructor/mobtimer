@@ -1,4 +1,4 @@
-import { renderHomePage } from "./mobSocketServer";
+import { renderHomePage } from "./backendSocket";
 
 export const port = parseInt(process.env.PORT || "") || 4000;
 

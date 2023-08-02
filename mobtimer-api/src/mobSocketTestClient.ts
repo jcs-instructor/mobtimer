@@ -1,6 +1,6 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { MobSocketClient } from "./mobSocketClient";
+import { MobSocketClient } from "./frontendSocket";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 

@@ -25,7 +25,7 @@ Goal: Use mrozzbarry with minimal edits
 - [ ] See if can run Hello World when extension loads instead of having to run it as a task
 - [ ] WIP: CONTRIBUTING.md - Review [here](./CONTRIBUTING.md)
 - [ ] Rename hello world everywhere
-- [ ] Refactor/Cleanup: Remove code that was added just for mrozbarry (currently commented out - in mobSocketServer.ts in 2 places: _initialize, etc.)
+- [ ] Refactor/Cleanup: Remove code that was added just for mrozbarry (currently commented out - in backendSocket.ts in 2 places: _initialize, etc.)
 
 ## Must Haves for Other People
 - [ ] Specify Mob Names

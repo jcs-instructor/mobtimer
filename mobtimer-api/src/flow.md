@@ -19,7 +19,17 @@ mobSocketClient (2) - could be eliminated, it is sample code. resume() calls fun
 - resume
   - MobTimerRequests.resume
 
-mobSocketServer (2)
+backendSocket (2)
 
 - case Action.Resume
   - mobtimer.resume()
+
+Appendix: Tests
+
+- mobTimer.test.ts - tests the mobTimer directly
+- requestRepsonse.test.ts - tests the mobTimer wrapped in a request/response pair
+- requestRepsonse.integration.test.ts - tests the mobTimer wrapped in a request/response pair, going through a real socket
+- heartbeat.test.ts
+- heartbeat.integration.test.ts
+- App.test.ts
+- controller.test.ts

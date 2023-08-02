@@ -1,4 +1,4 @@
-import { startMobServer } from "../src/server/mobSocketServer";
+import { startMobServer } from "../src/server/backendSocket";
 import { TimeUtils } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";

@@ -40,6 +40,8 @@ Joel:
             - MockWebSocketWrapper implements IWebSocketWrapper
             - mobClientServer.test.ts
                   - Replace new W3CWebSocketWrapper(url) with new MockWebSocketWrapper(url)
+- [ ] **Refactor Socket Files**       
+      - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
@@ -52,7 +54,7 @@ Joel:
       - [ ] Go to sleep (i.e., kill stay awake interval) after a certain amt. of inactivity (e.g., 2 hours)      
             - [ ] After server starts (i.e., start Sleep timer which will kill stay awake timer)
             - [ ] After any activity (i.e., kill and restart Go to sleep timer)
-      - [ ] See todo comments in mobSocketServer.ts
+      - [ ] See todo comments in backendSocket.ts
    - Limits:
      - 750 hours running across all onrender services and 15 minutes of inactivity.  See [here](https://render.com/docs/free#free-web-services),  This is 31.25 days, so if you only
      have one service you could be up all the time, with two services you would have to do

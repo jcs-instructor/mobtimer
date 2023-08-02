@@ -1,4 +1,4 @@
-import { startMobServer } from "./mobSocketServer";
+import { startMobServer } from "./backendSocket";
 const port = parseInt(process.env.PORT || "") || 4000;
 
 console.log("Backend redeployed 1");
