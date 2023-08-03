@@ -3,6 +3,7 @@ import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 export class WSWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: WebSocket;
+  private _timeCreated: Date;
 
   constructor(url: string, webSocket?: WebSocket) {
     if (url) {
@@ -10,8 +11,12 @@ export class WSWebSocketWrapper implements IWebSocketWrapper {
     } else {
       this._webSocket = webSocket!;
     }
+    this._timeCreated = new Date();
   }
 
+  public get timeCreated() {
+    return this._timeCreated;
+  }
   public get socketState(): number {
     return this._webSocket.readyState;
   }

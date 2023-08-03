@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Room from "./components/Room";
@@ -16,6 +16,7 @@ import { Controller } from "mobtimer-api";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
+import { client } from "websocket";
 
 const useLocalHost = window.location.href.includes("localhost");
 const url = Controller.getUrl(useLocalHost);
@@ -23,11 +24,6 @@ console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
 console.log("App.tsx redeployed 3 on", new Date());
-
-const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
-// todo: test if connected and retry if not
-Controller.client = new MobSocketClient(wrapperSocket);
-const client = Controller.client;
 
 function playAudio() {
   console.log("timer expired on front end");
@@ -53,6 +49,7 @@ function getActionButtonLabel() {
 }
 
 function setSocketListener(
+  client: MobSocketClient,
   setDurationMinutes: React.Dispatch<React.SetStateAction<number>>,
   setParticipants: React.Dispatch<React.SetStateAction<string[]>>,
   setRoles: React.Dispatch<React.SetStateAction<string[]>>,
@@ -62,6 +59,7 @@ function setSocketListener(
   if (!client.webSocket) {
     throw new Error("WebSocket is undefined");
   }
+
   client.webSocket.onmessageReceived = (message: { data: any }) => {
     // Get response from server
     const response = JSON.parse(
@@ -112,11 +110,11 @@ function setSocketListener(
     if (response.mobState.status !== Controller.frontendMobTimer.status) {
       console.log(
         "PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
-          "Frontend Status: " +
-          Controller.frontendMobTimer.status +
-          ", " +
-          "Backend Status:" +
-          response.mobState.status
+        "Frontend Status: " +
+        Controller.frontendMobTimer.status +
+        ", " +
+        "Backend Status:" +
+        response.mobState.status
       );
     }
   };
@@ -125,25 +123,25 @@ function setSocketListener(
 function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
   console.log(
     "Mob: " +
-      response.mobState.mobName +
-      " (" +
-      response.mobState.participants.length +
-      " Participant(s):" +
-      response.mobState.participants.join(",") +
-      "), " +
-      "Action:" +
-      response.actionInfo.action +
-      ", " +
-      "Status:" +
-      response.mobState.status +
-      ", DurationMin:" +
-      response.mobState.durationMinutes +
-      ", " +
-      "RemainingSec:" +
-      response.mobState.secondsRemaining +
-      " (" +
-      TimeUtils.getTimeString(response.mobState.secondsRemaining) +
-      ") "
+    response.mobState.mobName +
+    " (" +
+    response.mobState.participants.length +
+    " Participant(s):" +
+    response.mobState.participants.join(",") +
+    "), " +
+    "Action:" +
+    response.actionInfo.action +
+    ", " +
+    "Status:" +
+    response.mobState.status +
+    ", DurationMin:" +
+    response.mobState.durationMinutes +
+    ", " +
+    "RemainingSec:" +
+    response.mobState.secondsRemaining +
+    " (" +
+    TimeUtils.getTimeString(response.mobState.secondsRemaining) +
+    ") "
   );
 }
 
@@ -161,15 +159,35 @@ const App = () => {
   Controller.injectSetParticipants(setParticipants);
   Controller.injectSetRoles(setRoles);
   Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
+  let client: MobSocketClient;
+  client = Controller.client;
+
+  useEffect(() => {
+    if (Controller.client && Controller.client.webSocket?.socketState === Controller.client.webSocket?.OPEN_CODE) {
+      return;
+    }
+    const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+    // todo: test if connected and retry if not
+    Controller.client = new MobSocketClient(wrapperSocket);
+    const w = Controller.client.webSocket as any;
+    w.timeCreated = new Date();
+    console.log("websocket timeCreated", w.timeCreated);
+    setSocketListener(
+      Controller.client,
+      setDurationMinutes,
+      setParticipants,
+      setRoles,
+      setSecondsRemainingString,
+      setActionButtonLabel
+    );
+    Controller.client.waitForSocketState(1).then ( retVal =>
+      { console.log("Completed", retVal); }
+    )
+      
+  }, [client])
 
   // Set socket listener
-  setSocketListener(
-    setDurationMinutes,
-    setParticipants,
-    setRoles,
-    setSecondsRemainingString,
-    setActionButtonLabel
-  );
+
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -192,7 +210,6 @@ const App = () => {
     event.preventDefault();
     Controller.toggleStatus(client, Controller.frontendMobTimer);
   };
-
   // Browser router
   return (
     <HashRouter>
