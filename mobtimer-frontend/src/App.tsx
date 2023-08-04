@@ -19,6 +19,8 @@ import { soundSource } from "./assets/soundSource";
 
 const useLocalHost = window.location.href.includes("localhost");
 const url = Controller.getUrl(useLocalHost);
+const MAX_RETRIES = Number.parseInt(process.env.MAX_RETRIES || '') || 600
+const RETRY_MILLISECONDS = Number.parseInt(process.env.RETRY_SECONDS || '') * 1000 || 1000;
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
@@ -172,33 +174,33 @@ const App = () => {
     console.log("Created");
     console.log("Creating MobSocket");
     // todo: test if connected and retry if not
-    const timeout = setTimeout( () => {
-        if ( retries > 360) {
-          console.log("Stopping");
-        } else if ( wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
-          console.log("Connecting", new Date());
-          wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
-          setRetries(retries+1);
-        } else {
-          console.log("Connected");
-          setConnected(true);
-          clearTimeout(timeout);
-        }
-    }, 1000 )
-    Controller.client = new MobSocketClient(wrapperSocket);
-    const w = Controller.client.webSocket as any;
-    console.log("MobSocket timeCreated", w.timeCreated);
-    // setTimeCreated(new Date());
-    setSocketListener(
-      Controller.client,
-      setDurationMinutes,
-      setParticipants,
-      setRoles,
-      setSecondsRemainingString,
-      setActionButtonLabel
-    );
-      
-  }, [connected, retries])
+    const timeout = setTimeout(() => {
+      if (retries > MAX_RETRIES) {
+        console.log("Stopping");
+      } else if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
+        console.log("Connecting", new Date());
+        wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+        setRetries(retries + 1);
+      } else {
+        console.log("Connected");
+        setConnected(true);
+        clearTimeout(timeout);
+      }
+      Controller.client = new MobSocketClient(wrapperSocket);
+      const w = Controller.client.webSocket as any;
+      console.log("MobSocket timeCreated", w.timeCreated);
+      // setTimeCreated(new Date());
+      setSocketListener(
+        Controller.client,
+        setDurationMinutes,
+        setParticipants,
+        setRoles,
+        setSecondsRemainingString,
+        setActionButtonLabel
+      );
+
+
+    }, RETRY_MILLISECONDS)}, [connected, retries])
 
   // Set socket listener
 
@@ -228,7 +230,7 @@ const App = () => {
   // Browser router
   return (
     <HashRouter>
-      { !connected && retries > 6 && <h1>Trying to connect</h1>}
+      {!connected && retries > 6 && <h1>Trying to connect</h1>}
       <Routes>
         <Route path="/" element={<Launch />} />
         <Route
