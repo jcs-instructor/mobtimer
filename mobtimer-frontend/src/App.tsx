@@ -16,11 +16,13 @@ import { Controller } from "mobtimer-api";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
+import AlertBox from "./components/Alert";
 
 const useLocalHost = window.location.href.includes("localhost");
 const url = Controller.getUrl(useLocalHost);
-const MAX_RETRIES = Number.parseInt(process.env.MAX_RETRIES || '') || 600
-const RETRY_MILLISECONDS = Number.parseInt(process.env.RETRY_SECONDS || '') * 1000 || 1000;
+const MAX_RETRIES = Number.parseInt(process.env.REACT_APP_MAX_RETRIES || '') || 600
+const MESSAGE_AFTER_RETRIES = Number.parseInt(process.env.REACT_APP_MESSAGE_AFTER_RETRIES || '') || 3
+const RETRY_MILLISECONDS = Number.parseInt(process.env.REACT_APP_RETRY_SECONDS || '') * 1000 || 1000;
 console.log("App.tsx: url = " + url);
 console.log("process.env", process.env);
 console.log("url", url);
@@ -173,10 +175,9 @@ const App = () => {
     let wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
     console.log("Created");
     console.log("Creating MobSocket");
-    // todo: test if connected and retry if not
-    const timeout = setTimeout(() => {
+    const initialize = () => {
       if (retries > MAX_RETRIES) {
-        console.log("Stopping");
+        console.log(`Could not connect after ${MAX_RETRIES}`);
       } else if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
         console.log("Connecting", new Date());
         wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
@@ -187,8 +188,6 @@ const App = () => {
         clearTimeout(timeout);
       }
       Controller.client = new MobSocketClient(wrapperSocket);
-      const w = Controller.client.webSocket as any;
-      console.log("MobSocket timeCreated", w.timeCreated);
       // setTimeCreated(new Date());
       setSocketListener(
         Controller.client,
@@ -198,9 +197,13 @@ const App = () => {
         setSecondsRemainingString,
         setActionButtonLabel
       );
+    };
 
-
-    }, RETRY_MILLISECONDS)}, [connected, retries])
+    // todo: test if connected and retry if not
+    if (retries === 0) {
+      initialize();
+    }
+    const timeout = setTimeout(initialize, RETRY_MILLISECONDS)}, [connected, retries])
 
   // Set socket listener
 
@@ -216,7 +219,7 @@ const App = () => {
     console.log("here");
     Controller.frontendMobTimer = new MobTimer(mobName);
     console.log("done");
-    client.joinMob(mobName);
+    Controller.client.joinMob(mobName);
     console.log("joined mob", mobName, client);
   };
 
@@ -228,9 +231,13 @@ const App = () => {
     Controller.toggleStatus(client, Controller.frontendMobTimer);
   };
   // Browser router
+  const showConnecting = !connected && retries < MAX_RETRIES && retries > MESSAGE_AFTER_RETRIES;
+  const showFailedToConnect = !connected && retries >= MAX_RETRIES;
+  console.log("here",retries, MAX_RETRIES, connected, showConnecting, showFailedToConnect);
   return (
     <HashRouter>
-      {!connected && retries > 6 && <h1>Trying to connect</h1>}
+      { showConnecting && <AlertBox message="Connecting......" />}
+      { showFailedToConnect && <AlertBox message="Failed to connect.  Check server or reload." />}
       <Routes>
         <Route path="/" element={<Launch />} />
         <Route
