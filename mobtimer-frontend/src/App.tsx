@@ -16,7 +16,6 @@ import { Controller } from "mobtimer-api";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
-import { client } from "websocket";
 
 const useLocalHost = window.location.href.includes("localhost");
 const url = Controller.getUrl(useLocalHost);
@@ -166,12 +165,15 @@ const App = () => {
     if (Controller.client && Controller.client.webSocket?.socketState === Controller.client.webSocket?.OPEN_CODE) {
       return;
     }
+    console.log("Creating websocket");
     const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+    console.log("Created");
+    console.log("Creating MobSocket");
     // todo: test if connected and retry if not
     Controller.client = new MobSocketClient(wrapperSocket);
     const w = Controller.client.webSocket as any;
-    w.timeCreated = new Date();
-    console.log("websocket timeCreated", w.timeCreated);
+    console.log("MobSocket timeCreated", w.timeCreated);
+    // setTimeCreated(new Date());
     setSocketListener(
       Controller.client,
       setDurationMinutes,
@@ -184,7 +186,7 @@ const App = () => {
       { console.log("Completed", retVal); }
     )
       
-  }, [client])
+  }, [])
 
   // Set socket listener
 
@@ -192,13 +194,16 @@ const App = () => {
   // Submit join mob request
   const submitJoinMobRequest = async () => {
     const alreadyJoined = Controller.frontendMobTimer.state.mobName === mobName;
+    console.log("button pressed", alreadyJoined, Controller.frontendMobTimer.state.mobName, "x", mobName);
     if (!mobName || alreadyJoined) {
+      console.log("returning");
       return;
     }
-
+    console.log("here");
     Controller.frontendMobTimer = new MobTimer(mobName);
 
     await client.waitForSocketState(WebSocket.OPEN);
+    console.log("done");
     client.joinMob(mobName);
     console.log("joined mob", mobName, client);
   };
