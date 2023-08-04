@@ -152,6 +152,8 @@ const App = () => {
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [participants, setParticipants] = useState([] as string[]);
   const [roles, setRoles] = useState([] as string[]);
+  const [retries, setRetries] = useState(0);
+  const [connected, setConnected] = useState(false);
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
@@ -166,10 +168,23 @@ const App = () => {
       return;
     }
     console.log("Creating websocket");
-    const wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+    let wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
     console.log("Created");
     console.log("Creating MobSocket");
     // todo: test if connected and retry if not
+    const timeout = setTimeout( () => {
+        if ( retries > 360) {
+          console.log("Stopping");
+        } else if ( wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
+          console.log("Connecting", new Date());
+          wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+          setRetries(retries+1);
+        } else {
+          console.log("Connected");
+          setConnected(true);
+          clearTimeout(timeout);
+        }
+    }, 1000 )
     Controller.client = new MobSocketClient(wrapperSocket);
     const w = Controller.client.webSocket as any;
     console.log("MobSocket timeCreated", w.timeCreated);
@@ -182,11 +197,8 @@ const App = () => {
       setSecondsRemainingString,
       setActionButtonLabel
     );
-    Controller.client.waitForSocketState(1).then ( retVal =>
-      { console.log("Completed", retVal); }
-    )
       
-  }, [])
+  }, [connected, retries])
 
   // Set socket listener
 
@@ -201,8 +213,6 @@ const App = () => {
     }
     console.log("here");
     Controller.frontendMobTimer = new MobTimer(mobName);
-
-    await client.waitForSocketState(WebSocket.OPEN);
     console.log("done");
     client.joinMob(mobName);
     console.log("joined mob", mobName, client);
@@ -218,6 +228,7 @@ const App = () => {
   // Browser router
   return (
     <HashRouter>
+      { !connected && retries > 6 && <h1>Trying to connect</h1>}
       <Routes>
         <Route path="/" element={<Launch />} />
         <Route
