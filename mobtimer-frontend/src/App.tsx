@@ -20,16 +20,14 @@ import AlertBox from "./components/Alert";
 
 const useLocalHost = window.location.href.includes("localhost");
 const url = Controller.getUrl(useLocalHost);
-const MAX_RETRIES = Number.parseInt(process.env.REACT_APP_MAX_RETRIES || '') || 600
-const MESSAGE_AFTER_RETRIES = Number.parseInt(process.env.REACT_APP_MESSAGE_AFTER_RETRIES || '') || 3
-const RETRY_MILLISECONDS = Number.parseInt(process.env.REACT_APP_RETRY_SECONDS || '') * 1000 || 1000;
-console.log("App.tsx: url = " + url);
-console.log("process.env", process.env);
-console.log("url", url);
-console.log("App.tsx redeployed 3 on", new Date());
+const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || '') || 2;
+const RETRY_MILLISECONDS = TimeUtils.secondsToMilliseconds(RETRY_SECONDS);
+console.info("App.tsx: url = " + url);
+console.info("process.env", process.env);
+console.info("url", url);
+console.info("App.tsx redeployed 3 on", new Date());
 
 function playAudio() {
-  console.log("timer expired on front end");
   const audio = new Audio(soundSource);
   audio.play();
 }
@@ -111,7 +109,7 @@ function setSocketListener(
     Controller.updateSummary();
 
     if (response.mobState.status !== Controller.frontendMobTimer.status) {
-      console.log(
+      console.error(
         "PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
         "Frontend Status: " +
         Controller.frontendMobTimer.status +
@@ -124,7 +122,7 @@ function setSocketListener(
 }
 
 function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
-  console.log(
+  console.info(
     "Mob: " +
     response.mobState.mobName +
     " (" +
@@ -156,8 +154,9 @@ const App = () => {
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [participants, setParticipants] = useState([] as string[]);
   const [roles, setRoles] = useState([] as string[]);
-  const [retries, setRetries] = useState(0);
   const [connected, setConnected] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+
 
   // Injections
   Controller.injectSetDurationMinutes(setDurationMinutes);
@@ -168,24 +167,16 @@ const App = () => {
   client = Controller.client;
 
   useEffect(() => {
-    if (Controller.client && Controller.client.webSocket?.socketState === Controller.client.webSocket?.OPEN_CODE) {
-      return;
-    }
-    console.log("Creating websocket");
-    let wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
-    console.log("Created");
-    console.log("Creating MobSocket");
+    // initialize function
     const initialize = () => {
-      if (retries > MAX_RETRIES) {
-        console.log(`Could not connect after ${MAX_RETRIES}`);
-      } else if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
-        console.log("Connecting", new Date());
+      if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
+        setConnecting(true);
         wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
-        setRetries(retries + 1);
       } else {
-        console.log("Connected");
+        console.info("Connected");
         setConnected(true);
-        clearTimeout(timeout);
+        setConnecting(false);
+        clearInterval(interval);
       }
       Controller.client = new MobSocketClient(wrapperSocket);
       // setTimeCreated(new Date());
@@ -199,11 +190,21 @@ const App = () => {
       );
     };
 
-    // todo: test if connected and retry if not
-    if (retries === 0) {
+    // useEffect code
+    if (Controller.client && Controller.client.webSocket?.socketState === Controller.client.webSocket?.OPEN_CODE) {
+      return;
+    }
+    let wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+    if (!connecting) {
       initialize();
     }
-    const timeout = setTimeout(initialize, RETRY_MILLISECONDS)}, [connected, retries])
+    const interval = setInterval(initialize, RETRY_MILLISECONDS);
+    // required syntax for setInterval inside useEffect
+    // see https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
+    // Many articles say the same thing
+    return () => clearInterval(interval);
+
+  }, [connecting, connected])
 
   // Set socket listener
 
@@ -211,33 +212,24 @@ const App = () => {
   // Submit join mob request
   const submitJoinMobRequest = async () => {
     const alreadyJoined = Controller.frontendMobTimer.state.mobName === mobName;
-    console.log("button pressed", alreadyJoined, Controller.frontendMobTimer.state.mobName, "x", mobName);
     if (!mobName || alreadyJoined) {
-      console.log("returning");
       return;
     }
-    console.log("here");
     Controller.frontendMobTimer = new MobTimer(mobName);
-    console.log("done");
     Controller.client.joinMob(mobName);
-    console.log("joined mob", mobName, client);
   };
 
   // Submit action
-  const submitAction = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submitToggleAction = async (event: React.FormEvent<HTMLFormElement>) => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
     Controller.toggleStatus(client, Controller.frontendMobTimer);
   };
   // Browser router
-  const showConnecting = !connected && retries < MAX_RETRIES && retries > MESSAGE_AFTER_RETRIES;
-  const showFailedToConnect = !connected && retries >= MAX_RETRIES;
-  console.log("here",retries, MAX_RETRIES, connected, showConnecting, showFailedToConnect);
   return (
     <HashRouter>
-      { showConnecting && <AlertBox message="Connecting......" />}
-      { showFailedToConnect && <AlertBox message="Failed to connect.  Check server or reload." />}
+      {!connected && <AlertBox message="Connecting......" />}
       <Routes>
         <Route path="/" element={<Launch />} />
         <Route
@@ -250,7 +242,7 @@ const App = () => {
               actionButtonLabel={actionButtonLabel}
               setMobName={setMobName}
               timeString={secondsRemainingString}
-              submitAction={submitAction}
+              submitToggleAction={submitToggleAction}
               submitJoinMobRequest={submitJoinMobRequest}
             />
           }

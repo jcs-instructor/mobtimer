@@ -17,11 +17,11 @@ type FormParameters = {
     actionButtonLabel: string;
     setMobName: (mobName: string) => void;
     timeString: string;
-    submitAction: (event: React.FormEvent<HTMLFormElement>) => void;
+    submitToggleAction: (event: React.FormEvent<HTMLFormElement>) => void;
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitAction, submitJoinMobRequest }: FormParameters) => {    
+const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitToggleAction, submitJoinMobRequest }: FormParameters) => {    
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();    
     // todo: refactor reduncant code for debug boolean (also in App.tsx)
@@ -49,7 +49,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
                     <tbody>
                         <tr>
                             <td>
-                                <form onSubmit={(e) => submitAction(e)}>
+                                <form onSubmit={(e) => submitToggleAction(e)}>
                                     <button type="submit">{actionButtonLabel || "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}</button>
                                 </form>
                             </td>
