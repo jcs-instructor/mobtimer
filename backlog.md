@@ -27,6 +27,7 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
+- [ ] **Merge to dev**
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
       - refactor processRawRequest to just return the response and mobName (don't need others)
