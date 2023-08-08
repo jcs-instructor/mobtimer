@@ -40,6 +40,9 @@ export class VscodeMobTimer {
     Controller.frontendMobTimer = new MobTimer(mobName);
     client.joinMob(mobName);
     client.update(8);
+    if (!client.webSocket) {
+      return;
+    }
     client.webSocket.onmessageReceived = async (message: { data: string }) => {
       // Get response from server
       console.log("message received");

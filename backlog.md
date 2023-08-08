@@ -27,16 +27,13 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
-- [ ] **Speed up tests** - WIP / Broken   
-      - [ ] **Mock** - mock client and/or server; and maybe keep a minimum number of non-mocked tests (e.g., include: broadcast to all clients, send to one client, all storage/retrieval scenarios) 
-      - Split into 2 test files - one for mocks and one for the integration tests
-      - Functions to mock:
-            - Server:
-                  - RoomManager.broadcastResponseToMob
-                  - _sendJson
-            - MockWebSocketWrapper implements IWebSocketWrapper
-            - mobClientServer.test.ts
-                  - Replace new W3CWebSocketWrapper(url) with new MockWebSocketWrapper(url)
+- [ ] **Merge to dev**
+- [ ] **Fix failing Heartbeat integration test**
+- [ ] **Speed up tests** WIP
+      - refactor processRawRequest to just return the response and mobName (don't need others)
+      - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
+      (initial intent: keep in integration: alternative websocket & all 2 mob tests)
+- [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
 - [ ] **Deploy** Try deploying to onrender and set new environment variable
@@ -49,7 +46,7 @@ Joel:
       - [ ] Go to sleep (i.e., kill stay awake interval) after a certain amt. of inactivity (e.g., 2 hours)      
             - [ ] After server starts (i.e., start Sleep timer which will kill stay awake timer)
             - [ ] After any activity (i.e., kill and restart Go to sleep timer)
-      - [ ] See todo comments in mobSocketServer.ts
+      - [ ] See todo comments in backendSocket.ts
    - Limits:
      - 750 hours running across all onrender services and 15 minutes of inactivity.  See [here](https://render.com/docs/free#free-web-services),  This is 31.25 days, so if you only
      have one service you could be up all the time, with two services you would have to do
@@ -79,7 +76,7 @@ Joel:
 
 - **SOCKET CONNECTION BUGS**
   - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-  - [ ] **Retry if connection fails**
+  - [ ] **Gray out UI controls while connecting** 
       - Background:
             Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
             join a mob for the first time, we get this error messag 

@@ -1,6 +1,6 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { MobSocketClient } from "./mobSocketClient";
+import { MobSocketClient } from "./frontendSocket";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
@@ -64,9 +64,12 @@ class MobSocketTestClient extends MobSocketClient {
   static async waitForOpenSocket(
     webSocket: IWebSocketWrapper
   ): Promise<MobSocketTestClient> {
+    if (!webSocket) {
+      throw new Error("No socket"); // todo: use constant from superclass
+    }
     const mobSocketTestClient = new MobSocketTestClient(webSocket);
     await mobSocketTestClient.waitForSocketState(
-      mobSocketTestClient.webSocket.OPEN_CODE
+      mobSocketTestClient.webSocket?.OPEN_CODE
     );
     return mobSocketTestClient;
   }

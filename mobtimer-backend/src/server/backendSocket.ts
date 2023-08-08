@@ -12,6 +12,7 @@ import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Heartbeat } from "./heartbeat";
+import { Broadcaster } from "./broadcaster";
 
 const defaultHeartbeatValues = { heartbeatDurationMinutes : Number.parseInt(
       process.env.HEARTBEAT_DURATION_MINUTES || ""
@@ -67,7 +68,7 @@ export function renderHomePage(port: number) {
 
 function _processMobTimerRequest(
   parsedRequest: MobTimerRequests.MobTimerRequest,
-  socket: WebSocket
+  socket: any // WebSocket
 ) {
   let mobName: string | undefined;
   let mobTimer: MobTimer | undefined;
@@ -195,7 +196,7 @@ function _addMobListeners(
       // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
       if (isMobTimerRequest && response && mobTimer) {
         // Broadcast:
-        RoomManager.broadcastResponseToMob(
+        Broadcaster.broadcastResponseToMob(
           response as MobTimerResponses.SuccessfulResponse, 
           mobTimer.state.mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
       } else if (!isMobTimerRequest && response) {
@@ -207,7 +208,7 @@ function _addMobListeners(
   return wss;
 }
 
-function processRawRequest(requestString: string, webSocket: WebSocket) {
+export function processRawRequest(requestString: string, webSocket: any ) { //WebSocket
   let isMobTimerRequest = false;
   let response: MobTimerResponses.MobTimerResponse | undefined;
   let parsedRequest: MobTimerRequests.MobTimerRequest | undefined;

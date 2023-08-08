@@ -100,7 +100,7 @@ Files to change:
     - mobClientServer.test.ts
   - src:
     - server:
-      - mobSocketServer.ts
+      - backendSocket.ts
 
 #### Frontend Changes
 
