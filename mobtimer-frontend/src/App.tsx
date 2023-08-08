@@ -171,6 +171,7 @@ const App = () => {
     const initialize = () => {
       if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
         setConnecting(true);
+        setConnected(false);
         wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
       } else {
         console.info("Connected");
@@ -191,7 +192,7 @@ const App = () => {
     };
 
     // useEffect code
-    if (Controller.client && Controller.client.webSocket?.socketState === Controller.client.webSocket?.OPEN_CODE) {
+    if (connected) {
       return;
     }
     let wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;

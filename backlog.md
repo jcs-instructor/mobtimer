@@ -27,7 +27,8 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
-- [ ] **Speed up tests** 
+- [ ] **Fix failing Heartbeat integration test**
+- [ ] **Speed up tests** WIP
       - refactor processRawRequest to just return the response and mobName (don't need others)
       - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
       (initial intent: keep in integration: alternative websocket & all 2 mob tests)
@@ -74,7 +75,7 @@ Joel:
 
 - **SOCKET CONNECTION BUGS**
   - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-  - [ ] **Retry if connection fails**
+  - [ ] **Gray out UI controls while connecting** 
       - Background:
             Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
             join a mob for the first time, we get this error messag 

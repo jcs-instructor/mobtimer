@@ -1,5 +1,9 @@
 ## Completed (Done)
 
+2023-08-03
+
+- [x] Show "Connecting..." in UI when socket isn't connected (including when starting up and when retrying)
+
 2023-07-??
 
 - [x] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  

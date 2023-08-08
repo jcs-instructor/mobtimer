@@ -3,18 +3,12 @@ import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
 export class W3CWebSocketWrapper implements IWebSocketWrapper {
   private _webSocket: W3CWebSocket;
-  private _timeCreated: Date;
 
   constructor(url: string, webSocket?: W3CWebSocket) {
     if (url) this._webSocket = new W3CWebSocket(url);
     else {
       this._webSocket = webSocket!;
     }
-    this._timeCreated = new Date();
-  }
-
-  public get timeCreated() {
-    return this._timeCreated;
   }
 
   public get socketState(): number {

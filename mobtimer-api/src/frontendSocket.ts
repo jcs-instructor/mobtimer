@@ -19,7 +19,6 @@ class MobSocketClient {
     socket: IWebSocketWrapper | undefined,
     state: number | undefined
   ): Promise<void> {
-    console.log("waiting for socket state");
     if (!socket) {
       throw new Error(noSocketErrorMessage)
     }
@@ -28,7 +27,6 @@ class MobSocketClient {
         if (socket.socketState === state) {
           resolve();
         } else {
-          console.log("calling wait for socket state", socket.socketState, state);
           MobSocketClient.waitForSocketState(socket, state).then(resolve);
         }
       }, 500);
