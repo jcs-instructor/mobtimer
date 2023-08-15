@@ -274,8 +274,7 @@ describe("Client WebSocket Server Integration", () => {
 let mobCounter = 0;
 
 function processGoodRequest(requestString: string, mockSocket: any) {
-  const response = processRawRequest(requestString, mockSocket);
-  return response as SuccessfulResponse;
+  return processRawRequest(requestString, mockSocket) as SuccessfulResponse;
 }
 
 function getNewState(mobName: string): MobState {
