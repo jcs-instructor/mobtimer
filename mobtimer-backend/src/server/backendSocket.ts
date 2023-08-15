@@ -192,7 +192,7 @@ function _addMobListeners(
       // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
       const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
       const mobName = successfulResponse?.mobState?.mobName;
-      if (successfulResponse && mobName) {
+      if (successfulResponse?.mobState) {
         // Broadcast:
         Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
       } else if (response) {
