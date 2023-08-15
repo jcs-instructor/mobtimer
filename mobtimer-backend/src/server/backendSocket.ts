@@ -185,7 +185,7 @@ function _addMobListeners(
       let requestString: string = _requestToString(request);
 
       // Process raw request.
-      let { isMobTimerRequest, response, mobTimer }: { isMobTimerRequest: boolean; response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
+      let { response, mobTimer }: { response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
         = processRawRequest(requestString, webSocket); 
 
       // Send a response. Either:
@@ -196,7 +196,7 @@ function _addMobListeners(
         Broadcaster.broadcastResponseToMob(
           response as MobTimerResponses.SuccessfulResponse, 
           mobTimer.state.mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
-      } else if (!isMobTimerRequest && response) {
+      } else if (response) {
         // Send only to requesting client:
         _sendJSON(webSocket, response);        
       } 
@@ -242,7 +242,7 @@ export function processRawRequest(requestString: string, webSocket: any ) { //We
       } as MobTimerResponses.SuccessfulResponse;
     }
   }
-  return { isMobTimerRequest, response, mobTimer };
+  return { response, mobTimer };
 }
 
 // todo: consider:
