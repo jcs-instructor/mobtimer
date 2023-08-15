@@ -30,8 +30,13 @@ Joel:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
-      - refactor processRawRequest to just return the response and mobName (don't need others)
-      - Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
+      - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
+      - [ ] Fix inconsistent names (class / file): 
+            - MobSocketClient class in frontendSocket.ts
+            - MobSocketTestClient class in mobSocketTestClient.ts
+            - TestClient class in TestClient.ts
+      - [ ] Move TestClient into mobtimer-api
+      - [ ] Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly
       (initial intent: keep in integration: alternative websocket & all 2 mob tests)
 - [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 
