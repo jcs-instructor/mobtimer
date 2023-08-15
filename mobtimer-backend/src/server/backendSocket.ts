@@ -185,17 +185,17 @@ function _addMobListeners(
       let requestString: string = _requestToString(request);
 
       // Process raw request.
-      let { response, mobTimer }: { response: MobTimerResponses.MobTimerResponse | undefined; mobTimer: MobTimer | undefined; } 
+      let { response, mobName }: { response: MobTimerResponses.MobTimerResponse | undefined; mobName: string | undefined; } 
         = processRawRequest(requestString, webSocket); 
 
       // Send a response. Either:
       // - Broadcast to all clients if we have a successful MobTimer response, or
       // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
-      if (response as MobTimerResponses.SuccessfulResponse && mobTimer?.state?.mobName) {
+      if (response as MobTimerResponses.SuccessfulResponse && mobName) {
         // Broadcast:
         Broadcaster.broadcastResponseToMob(
           response as MobTimerResponses.SuccessfulResponse, 
-          mobTimer.state.mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
+          mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
       } else if (response) {
         // Send only to requesting client:
         _sendJSON(webSocket, response);        
@@ -242,7 +242,9 @@ export function processRawRequest(requestString: string, webSocket: any ) { //We
       } as MobTimerResponses.SuccessfulResponse;
     }
   }
-  return { response, mobTimer };
+
+  const mobName: string | undefined = mobTimer?.state.mobName;
+  return { response, mobName };
 }
 
 // todo: consider:
