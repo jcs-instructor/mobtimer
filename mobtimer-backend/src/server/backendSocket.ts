@@ -1,10 +1,7 @@
 import * as http from "http";
 import WebSocket from "ws";
 import {
-  IWebSocketWrapper,
-  MobSocketClient,
   MobTimer,
-  TimeUtils,
   WSWebSocketWrapper,
 } from "mobtimer-api";
 import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
@@ -194,7 +191,7 @@ function _addMobListeners(
       // Send a response. Either:
       // - Broadcast to all clients if we have a successful MobTimer response, or
       // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
-      if (isMobTimerRequest && response && mobTimer) {
+      if (response as MobTimerResponses.SuccessfulResponse && mobTimer?.state?.mobName) {
         // Broadcast:
         Broadcaster.broadcastResponseToMob(
           response as MobTimerResponses.SuccessfulResponse, 
