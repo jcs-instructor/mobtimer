@@ -3,7 +3,7 @@ import { Status, TimeUtils, Action } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 
-describe("Client WebSocket Server Integration", () => {
+describe("Request Response Tests", () => {
   const _startMilliseconds = Date.now();
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
 
