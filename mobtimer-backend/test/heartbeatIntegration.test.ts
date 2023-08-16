@@ -44,8 +44,8 @@ describe("Heartbeat Integration", () => {
     await client.pause();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
     // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
-    await cleanUp(client);
     expect(counter.value).toEqual(5);
+    await cleanUp(client);
   });
 
 });
