@@ -58,7 +58,7 @@ export class RoomManager {
     const mobTimer = new MobTimer(mobName);
     // todo: rename timerExpireFunc
     mobTimer.timerExpireFunc = () =>
-    Broadcaster.broadcastToMob(mobTimer as MobTimer, Action.Expired);
+      Broadcaster.broadcastToMob(mobTimer as MobTimer, Action.Expired);
     const room = { mobTimer, sockets: new Set<WebSocketOrAny>() };
     RoomManager._roomsByMobName.set(mobName, room);
     RoomManager._joinRoom(room, socket);

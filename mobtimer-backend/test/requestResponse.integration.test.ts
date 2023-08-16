@@ -133,8 +133,6 @@ describe("Client WebSocket Server Integration", () => {
     );
   });
 
-  // ----------------- 
-
   test.each([0.2])(
     "Start timer with duration %p and elapse time sends message to all",
     async (durationSeconds: number) => {
