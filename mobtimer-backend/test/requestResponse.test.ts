@@ -46,7 +46,6 @@ describe("Request Response Tests", () => {
   test("Pause timer", () => {
     const client = new TestClient({});
     const mobName = "test-mob-3";
-    const mockSocket = {};
     client.joinMob(mobName);
     client.start();
     client.pause();

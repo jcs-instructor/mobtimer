@@ -12,10 +12,7 @@ class TestClient {
   private _socket: any;
 
   constructor(webSocket: any) {
-    this._socket = webSocket;
-    this._socket.onmessageReceived = (message) => {
-      this.trackMessage(message);
-    };
+    this._socket = webSocket;    
   }
 
   resetClient() {
@@ -107,10 +104,6 @@ class TestClient {
         }      
         }
     }
-  }
-
-  private convertToMobTimerResponse(response: string): MobTimerResponse {
-    return JSON.parse(response) as MobTimerResponse;
   }
 
   public get lastSuccessfulResponse(): SuccessfulResponse {
