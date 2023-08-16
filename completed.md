@@ -1,5 +1,10 @@
 ## Completed (Done)
 
+2023-08-16
+
+- [x] Show "Connecting..." in a fixed position so that when it disappears, other elements on the page don't 
+      move, causing users to click on the wrong spot depending on the timing
+
 2023-08-03
 
 - [x] Show "Connecting..." in UI when socket isn't connected (including when starting up and when retrying)
