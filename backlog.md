@@ -31,7 +31,11 @@ Joel:
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
       - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
-      - [ ] In non-integration request repsonse tests use jest mock time
+      - [x] In non-integration request repsonse tests use jest mock time
+      - [ ] Organize integration tests: Separate some from other tests (either separate files or multiple describe blocks):
+            1. Expiration-related tests (including reset, which triggers an expiration)
+            2. Multi-mob tests
+            3. Other (not needed as integration - so move / delete as appropriate)
       - [ ] Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly            
       - [ ] Fix inconsistent names (class / file): 
             - MobSocketClient class in frontendSocket.ts

@@ -33,6 +33,7 @@ class TestClient {
 
   joinMob(mobName: string) {
     // console.log("sending join request", mobName);
+    this._mobName = mobName;
     const response = processRawRequest(MobRequestBuilder.joinMob(mobName), this._socket);
     this.trackMessage(response);
   }
