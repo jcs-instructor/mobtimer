@@ -35,7 +35,7 @@ class TestClient {
   }
 
   joinMob(mobName: string) {
-    console.log("sending join request", mobName);
+    // console.log("sending join request", mobName);
     const response = processRawRequest(MobRequestBuilder.joinMob(mobName), this._socket);
     this.trackMessage(response);
   }
@@ -71,25 +71,25 @@ class TestClient {
   }
 
   start() {
-    console.log("sending start request");
+    // console.log("sending start request");
     const response = processRawRequest(MobRequestBuilder.start(), this._socket);
     this.trackMessage(response);
   }
 
   pause() {
-    console.log("sending pause request");
+    // console.log("sending pause request");
     const response = processRawRequest(MobRequestBuilder.pause(), this._socket);
     this.trackMessage(response);
   }
 
   reset() {
-    console.log("sending reset request");
+    // console.log("sending reset request");
     const response = processRawRequest(MobRequestBuilder.reset(), this._socket);
     this.trackMessage(response);
   }
 
   private trackMessage(responseObject: MobTimerResponse | undefined) {
-    console.log("responseObject", responseObject);
+    // console.log("responseObject", responseObject);
     if (responseObject) {
         switch (responseObject.actionInfo.action) {
         case Action.Echo: {
@@ -101,7 +101,7 @@ class TestClient {
             break;
         }
         default: {
-            console.log("pushing responseObject", responseObject);
+            // console.log("pushing responseObject", responseObject);
             this._successfulResponses.push(JSON.stringify(responseObject));
             break;
         }      
@@ -125,7 +125,7 @@ class TestClient {
   }
 
   public get lastSuccessfulMobState(): MobState {
-    console.log("lastSuccessfulResponse", this.lastSuccessfulResponse.mobState);
+    // console.log("lastSuccessfulResponse", this.lastSuccessfulResponse.mobState);
     const lastSuccessfulResponse = this.lastSuccessfulResponse;
     return lastSuccessfulResponse.mobState;
   }
