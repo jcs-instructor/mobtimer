@@ -1,20 +1,18 @@
 import { TimeUtils } from "mobtimer-api";
 
 export class Heartbeat {
-
-  func: () => void;
-  durationMinutes: number;
+  onHeartbeatInterval: () => void;
+  heartbeatDurationMinutes: number;
   maxInactivityMinutes: number;
   _interval: NodeJS.Timer | undefined;
-  _timeout: NodeJS.Timeout | undefined;
   _count: number = 0;
 
   public get count(): number {
     return this._count;
-  }  
+  }
 
-  public get durationMilliseconds() {
-    return TimeUtils.minutesToMilliseconds(this.durationMinutes); 
+  public get heartbeatDurationMilliseconds() {
+    return TimeUtils.minutesToMilliseconds(this.heartbeatDurationMinutes);
   }
 
   public get maxInactivityMilliseconds() {
@@ -22,57 +20,37 @@ export class Heartbeat {
   }
 
   constructor(
-    durationMinutes: number,
+    heartbeatDurationMinutes: number,
     maxInactivityMinutes: number,
-    func = () => {}
+    onHeartbeatInterval = () => {}
   ) {
-    console.log(durationMinutes, func);
-    this.func = func;
-    this.durationMinutes = durationMinutes;
+    this.onHeartbeatInterval = onHeartbeatInterval;
+    this.heartbeatDurationMinutes = heartbeatDurationMinutes;
     this.maxInactivityMinutes = maxInactivityMinutes;
   }
 
   start() {
     const startTimeMilliseconds = TimeUtils.getNowInMilliseconds();
-    this._interval = setInterval(
-      () => {
-        const millisecondsElapsed =
-          TimeUtils.getNowInMilliseconds() - startTimeMilliseconds;
-                  console.log(
-                    "in interval",
-                    new Date(),
-                    millisecondsElapsed,
-                    this._count,
-                    this.maxInactivityMilliseconds
-                  );
-
-             if (millisecondsElapsed > this.maxInactivityMilliseconds) {
-              console.log("clearing");
-               clearInterval(this._interval);
-               return;
-             }
-        this.func(); this._count++;
-
- 
-    }
-      ,
-      this.durationMilliseconds
-    );
-
+    this._interval = setInterval(() => {
+      const millisecondsElapsed =
+        TimeUtils.getNowInMilliseconds() - startTimeMilliseconds;
+      if (millisecondsElapsed > this.maxInactivityMilliseconds) {
+        this.stop();
+        return;
+      }
+      this.onHeartbeatInterval();
+      this._count++;
+    }, this.heartbeatDurationMilliseconds);
   }
 
   restart() {
+    this.stop();
     console.log("restarting", new Date());
-    clearInterval(this._interval);    
-    this._interval?.unref();
-
-    clearTimeout(this._timeout);
-    this._timeout?.unref();
-
     this.start();
   }
 
   stop() {
+    console.log("clearing");
     clearInterval(this._interval);
     this._interval?.unref();
   }
