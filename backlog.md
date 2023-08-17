@@ -43,6 +43,7 @@ Joel:
             - TestClient class in TestClient.ts
       - [ ] Move TestClient into mobtimer-api
       (initial intent: keep in integration: alternative websocket & all 2 mob tests)
+- [ ] **Move heartbeat to frontend** Start a new heartbeat on frontend whenever a response is received, except for a heartbeat response. Action should be heartbeat and heartbeat should be sent to all sockets (could skip the sending socket)
 - [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
 - [ ] **Rename client.reset** to client.cancelTimer 
 - [ ] **Recreate VSIX** - can't dogfood extension until do this
