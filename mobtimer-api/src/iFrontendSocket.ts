@@ -1,4 +1,4 @@
-export interface IWebSocketWrapper {
+export interface IFrontendSocket {
   socketState: number;
   sendMessage: (message: string) => void;
   closeSocket: () => void;

@@ -8,9 +8,9 @@ beforeAll
 ``` 
 // 2 types of new mocks: 1. mock server, 2. mock socket
 - const server = new MockMobSocketServer();
-- const clientWrapperSocket1 = new MockWebSocketWrapper(server) as IWebSocketWrapper; =>
+- const clientWrapperSocket1 = new MockFrontendSocket(server) as IFrontendSocket; =>
 - const client1 = new FrontendMobSocket(wrapperSocket);
-- const clientWrapperSocket2 = new MockWebSocketWrapper(server) as IWebSocketWrapper; =>
+- const clientWrapperSocket2 = new MockFrontendSocket(server) as IFrontendSocket; =>
 - const client2 = new FrontendMobSocket(wrapperSocket);
 ```
 # Inject functions into controoler

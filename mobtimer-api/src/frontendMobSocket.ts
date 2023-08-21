@@ -1,12 +1,12 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
-import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { IFrontendSocket } from "./iFrontendSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
 const noSocketErrorMessage = "No socket";
 class FrontendMobSocket {
-  private _webSocket: IWebSocketWrapper | undefined;
+  private _webSocket: IFrontendSocket | undefined;
 
-  constructor(webSocket: IWebSocketWrapper | undefined = undefined) {
+  constructor(webSocket: IFrontendSocket | undefined = undefined) {
     this._webSocket = webSocket;
   }
 
@@ -16,7 +16,7 @@ class FrontendMobSocket {
    * @param state The desired `readyState` for the socket
    */
   static async waitForSocketState(
-    socket: IWebSocketWrapper | undefined,
+    socket: IFrontendSocket | undefined,
     state: number | undefined
   ): Promise<void> {
     if (!socket) {
@@ -102,7 +102,7 @@ class FrontendMobSocket {
     }
   }
 
-  public get webSocket(): IWebSocketWrapper | undefined {
+  public get webSocket(): IFrontendSocket | undefined {
     return this._webSocket;
   }
 

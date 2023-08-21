@@ -2,7 +2,7 @@ import * as http from "http";
 import WebSocket from "ws";
 import {
   MobTimer,
-  WSWebSocketWrapper,
+  WSFrontendSocket,
 } from "mobtimer-api";
 import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import express from "express";
@@ -261,7 +261,7 @@ async function _sendJSON(
   webSocket: WebSocket,
   request: MobTimerResponses.MobTimerResponse
 ) {
-  const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
+  const webSocketWrapper = new WSFrontendSocket("", webSocket);
   // await FrontendMobSocket.waitForSocketState(
   //   webSocketWrapper,
   //   webSocketWrapper.OPEN_CODE

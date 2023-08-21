@@ -1,8 +1,8 @@
 import {
-  IWebSocketWrapper,
+  IFrontendSocket,
   FrontendMobSocket,
   Status,
-  W3CWebSocketWrapper,
+  W3CFrontendSocket,
 } from "../src";
 import { Controller } from "../src/controller";
 

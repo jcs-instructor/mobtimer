@@ -1,13 +1,12 @@
-import WebSocket from "ws";
-import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { IFrontendSocket } from "./iFrontendSocket";
 
-export class WSWebSocketWrapper implements IWebSocketWrapper {
-  private _webSocket: WebSocket;
+export class W3CFrontendSocket implements IFrontendSocket {
+  private _webSocket: W3CWebSocket;
 
-  constructor(url: string, webSocket?: WebSocket) {
-    if (url) {
-      this._webSocket = new WebSocket(url);
-    } else {
+  constructor(url: string, webSocket?: W3CWebSocket) {
+    if (url) this._webSocket = new W3CWebSocket(url);
+    else {
       this._webSocket = webSocket!;
     }
   }
@@ -33,8 +32,6 @@ export class WSWebSocketWrapper implements IWebSocketWrapper {
   }
 
   public set onmessageReceived(handler: (message: { data: any }) => void) {
-    this._webSocket.on("message", (message) => {
-      handler({ data: message });
-    });
+    this._webSocket.onmessage = handler;
   }
 }

@@ -4,7 +4,7 @@ Flow
 App.tsx:
 
 ``` 
-- const clientWrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; =>
+- const clientWrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket; =>
 - Controller.client = new FrontendMobSocket(clientWrapperSocket);
 
 # Inject functions into controoler

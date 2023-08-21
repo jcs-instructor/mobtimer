@@ -5,12 +5,12 @@ import Room from "./components/Room";
 import {
   Action,
   Command,
-  IWebSocketWrapper,
+  IFrontendSocket,
   FrontendMobSocket,
   MobTimer,
   MobTimerResponses,
   TimeUtils,
-  W3CWebSocketWrapper,
+  W3CFrontendSocket,
 } from "mobtimer-api";
 import { Controller } from "mobtimer-api";
 import Launch from "./components/Launch";
@@ -172,7 +172,7 @@ const App = () => {
       if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
         setConnecting(true);
         setConnected(false);
-        wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+        wrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket;
       } else {
         console.info("Connected");
         setConnected(true);
@@ -195,7 +195,7 @@ const App = () => {
     if (connected) {
       return;
     }
-    let wrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper;
+    let wrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket;
     if (!connecting) {
       initialize();
     }

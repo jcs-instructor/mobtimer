@@ -4,7 +4,7 @@ import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient } from "mobtimer-api";
-import { WSWebSocketWrapper } from "mobtimer-api";
+import { WSFrontendSocket } from "mobtimer-api";
 
 describe("Heartbeat Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -52,7 +52,7 @@ describe("Heartbeat Integration", () => {
 
 async function openSocketAlternative(url: string) {
   return await MobSocketTestClient.waitForOpenSocket(
-    new WSWebSocketWrapper(url)
+    new WSFrontendSocket(url)
   );
 }
 
