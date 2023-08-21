@@ -43,54 +43,54 @@ class FrontendMobSocket {
   }
 
   sendEchoRequest() {
-    this.sendJSON(MobRequestBuilder.sendEchoRequest());
+    this.sendToServer(MobRequestBuilder.sendEchoRequest());
   }
 
   joinMob(mobName: string) {
     console.log("sending join request", mobName);
-    this.sendJSON(MobRequestBuilder.joinMob(mobName));
+    this.sendToServer(MobRequestBuilder.joinMob(mobName));
   }
 
   update(durationMinutes: number) {
-    this.sendJSON(MobRequestBuilder.update(durationMinutes));
+    this.sendToServer(MobRequestBuilder.update(durationMinutes));
   }
 
   addParticipant(name: string) {
-    this.sendJSON(MobRequestBuilder.addParticipant(name));
+    this.sendToServer(MobRequestBuilder.addParticipant(name));
   }
 
   rotateParticipants() {
-    this.sendJSON(MobRequestBuilder.rotateParticipants());
+    this.sendToServer(MobRequestBuilder.rotateParticipants());
   }
 
   shuffleParticipants() {
-    this.sendJSON(MobRequestBuilder.shuffleParticipants());
+    this.sendToServer(MobRequestBuilder.shuffleParticipants());
   }
 
   editParticipants(participants: string[]) {
-    this.sendJSON(MobRequestBuilder.editParticipants(participants));
+    this.sendToServer(MobRequestBuilder.editParticipants(participants));
   }
 
   editRoles(roles: string[]) {
-    this.sendJSON(MobRequestBuilder.editRoles(roles));
+    this.sendToServer(MobRequestBuilder.editRoles(roles));
   }
 
   start() {
     console.log("sending start request");
-    this.sendJSON(MobRequestBuilder.start());
+    this.sendToServer(MobRequestBuilder.start());
   }
 
   pause() {
     console.log("sending pause request");
-    this.sendJSON(MobRequestBuilder.pause());
+    this.sendToServer(MobRequestBuilder.pause());
   }
 
   reset() {
     console.log("sending reset request");
-    this.sendJSON(MobRequestBuilder.reset());
+    this.sendToServer(MobRequestBuilder.reset());
   }
 
-  async sendJSON(requestString: string) {
+  async sendToServer(requestString: string) {
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {

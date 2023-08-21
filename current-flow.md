@@ -17,7 +17,7 @@ App.tsx
 - Controller.client.<convenience func> =>
 - Construct JSON to send to server =>
 - Create request =>
-- Controller.client._sendJson(request) => 
+- Controller.client._sendToServer(request) => 
 - this._clientSocket.sendMessage(request) => 
 - _clientSocket.send()
 ```

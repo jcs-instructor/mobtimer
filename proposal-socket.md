@@ -22,7 +22,7 @@ beforeAll
 
 # Client - Send request
 ```
-- client._sendJson() => 
+- client._sendToServer() => 
 - this.server.extractedOnReceiveFunc()
 ```
 
