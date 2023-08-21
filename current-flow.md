@@ -18,7 +18,7 @@ App.tsx
 - Construct JSON to send to server =>
 - Create request =>
 - Controller.client._sendToServer(request) => 
-- this._clientSocket.sendMessage(request) => 
+- this._clientSocket.sendToServer(request) => 
 - _clientSocket.send()
 ```
 
@@ -29,7 +29,7 @@ App.tsx
 - if join mob, store or retrieve from serverWebSocket arrays =>
 - modify mobtimer based on request =>
 - RoomManager.broadcastToMob(mobTimer, parsedRequest.action) // or if echo or error, just send to requester => 
-- for each socket for this mob: serverWebsocket.sendMessage( {action, mobtimer.state}) 
+- for each socket for this mob: serverWebsocket.sendToServer( {action, mobtimer.state}) 
 ```
 
 # Client receives

@@ -98,7 +98,7 @@ class FrontendMobSocket {
         this.webSocket,
         this.webSocket?.OPEN_CODE
       );
-      this._webSocket.sendMessage(requestString);
+      this._webSocket.sendToServer(requestString);
     }
   }
 

@@ -1,4 +1,4 @@
-import { startMobServer } from "../src/server/backendSocket";
+import { backendUtils } from "../src/server/backendSocket";
 import { TimeUtils } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
@@ -21,7 +21,7 @@ describe("Heartbeat Integration", () => {
   beforeEach(async () => {
     counter.value = 0;
     heartbeatCallbackFunc = () => counter.value++;
-    _server = await startMobServer(port, heartbeatCallbackFunc, 
+    _server = await backendUtils.startMobServer(port, heartbeatCallbackFunc, 
       { heartbeatDurationMinutes: TimeUtils.secondsToMinutes(heartbeatDurationSeconds), 
         heartbeatMaxInactivityMinutes: TimeUtils.secondsToMinutes(heartbeatMaxInactivitySeconds)
       }

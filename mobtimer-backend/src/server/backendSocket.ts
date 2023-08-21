@@ -19,7 +19,8 @@ const defaultHeartbeatValues = { heartbeatDurationMinutes : Number.parseInt(
     ) || 120 // e.g., people mobbing together with a break of up to 2 hours won't experience an inactivity timeout
 }
 
-export async function startMobServer(
+export class backendUtils {
+ static async startMobServer(
   port: number,
   onHeartbeatFunc = () => {},
   {
@@ -36,6 +37,7 @@ export async function startMobServer(
   return new Promise((resolve) => {
     server.listen(port, () => resolve({ httpServer: server, wss }));
   });
+}
 }
 
 export function renderHomePage(port: number) {
@@ -197,7 +199,7 @@ function _addMobListeners(
         Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level        
       } else if (response) {
         // Send only to requesting client:
-        _sendToSocket(webSocket, response);        
+        sendToSocket(webSocket, response);        
       } 
     });
   });
@@ -257,7 +259,7 @@ export function processRawRequest(requestString: string, webSocket: any ) { //We
 //   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
 // }
 
-async function _sendToSocket(
+async function sendToSocket(
   webSocket: WebSocket,
   request: MobTimerResponses.MobTimerResponse
 ) {
@@ -267,7 +269,7 @@ async function _sendToSocket(
   //   webSocketWrapper.OPEN_CODE
   // );
   console.log("state: " + webSocketWrapper.socketState);
-  webSocketWrapper.sendMessage(JSON.stringify(request));
+  webSocketWrapper.sendToServer(JSON.stringify(request));
 }
 
 function _requestToString(request: WebSocket.RawData) {

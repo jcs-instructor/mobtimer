@@ -16,7 +16,7 @@ export class WSFrontendSocket implements IFrontendSocket {
     return this._webSocket.readyState;
   }
 
-  public sendMessage(message: string): void {
+  public sendToServer(message: string): void {
     this._webSocket.send(message);
   }
 
