@@ -6,7 +6,7 @@ import { commands } from "vscode";
 import {
   Command,
   IWebSocketWrapper,
-  MobSocketClient,
+  FrontendMobSocket,
   MobTimer,
   MobTimerResponses,
 } from "mobtimer-api";
@@ -29,7 +29,7 @@ export class VscodeMobTimer {
 
     
     const wrapperSocket = new WSWebSocketWrapper(url) as IWebSocketWrapper;
-    Controller.client = new MobSocketClient(wrapperSocket);
+    Controller.client = new FrontendMobSocket(wrapperSocket);
     console.log(
       "Debug Controller.client",
       Controller.client.webSocket ? "exists" : "does not exist"

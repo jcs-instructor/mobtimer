@@ -5,7 +5,7 @@ App.tsx:
 
 ``` 
 - const clientWrapperSocket = new W3CWebSocketWrapper(url) as IWebSocketWrapper; =>
-- Controller.client = new MobSocketClient(clientWrapperSocket);
+- Controller.client = new FrontendMobSocket(clientWrapperSocket);
 
 # Inject functions into controoler
 App.tsx

@@ -1,5 +1,5 @@
 // import { MobTimerResponses } from "mobtimer-api";
-import { MobSocketClient } from "mobtimer-api";
+import { FrontendMobSocket } from "mobtimer-api";
 export declare function waitForSocketState(
   socket: {
     readyState: number;
@@ -7,7 +7,7 @@ export declare function waitForSocketState(
   state: number
 ): Promise<void>;
 export declare function waitForLastResponse(
-  socket: MobSocketClient
+  socket: FrontendMobSocket
 ): Promise<void>;
 // export declare function convertToMobTimerResponse(
 //   response: string

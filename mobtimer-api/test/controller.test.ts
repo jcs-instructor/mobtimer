@@ -1,6 +1,6 @@
 import {
   IWebSocketWrapper,
-  MobSocketClient,
+  FrontendMobSocket,
   Status,
   W3CWebSocketWrapper,
 } from "../src";

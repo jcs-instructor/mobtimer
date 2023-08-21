@@ -262,7 +262,7 @@ async function _sendJSON(
   request: MobTimerResponses.MobTimerResponse
 ) {
   const webSocketWrapper = new WSWebSocketWrapper("", webSocket);
-  // await MobSocketClient.waitForSocketState(
+  // await FrontendMobSocket.waitForSocketState(
   //   webSocketWrapper,
   //   webSocketWrapper.OPEN_CODE
   // );

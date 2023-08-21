@@ -3,7 +3,7 @@ import * as MobTimerRequests from "./mobTimerRequests";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 import { MobRequestBuilder } from "./mobRequestBuilder";
 const noSocketErrorMessage = "No socket";
-class MobSocketClient {
+class FrontendMobSocket {
   private _webSocket: IWebSocketWrapper | undefined;
 
   constructor(webSocket: IWebSocketWrapper | undefined = undefined) {
@@ -27,7 +27,7 @@ class MobSocketClient {
         if (socket.socketState === state) {
           resolve();
         } else {
-          MobSocketClient.waitForSocketState(socket, state).then(resolve);
+          FrontendMobSocket.waitForSocketState(socket, state).then(resolve);
         }
       }, 500);
       // todo: timeout.unref() fails when running from frontend; why?
@@ -39,7 +39,7 @@ class MobSocketClient {
     if (!this._webSocket) {
       return Promise.reject("No socket to wait for");
     }
-    return MobSocketClient.waitForSocketState(this._webSocket, state);
+    return FrontendMobSocket.waitForSocketState(this._webSocket, state);
   }
 
   sendEchoRequest() {
@@ -94,7 +94,7 @@ class MobSocketClient {
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {
-      await MobSocketClient.waitForSocketState(
+      await FrontendMobSocket.waitForSocketState(
         this.webSocket,
         this.webSocket?.OPEN_CODE
       );
@@ -115,4 +115,4 @@ class MobSocketClient {
   }
 }
 
-export { MobSocketClient };
+export { FrontendMobSocket };

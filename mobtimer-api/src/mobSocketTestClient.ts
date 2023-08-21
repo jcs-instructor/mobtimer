@@ -1,10 +1,10 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { MobSocketClient } from "./frontendSocket";
+import { FrontendMobSocket } from "./frontendMobSocket";
 import { MobState } from "./mobState";
 import { IWebSocketWrapper } from "./iWebSocketWrapper";
 
-class MobSocketTestClient extends MobSocketClient {
+class MobSocketTestClient extends FrontendMobSocket {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;

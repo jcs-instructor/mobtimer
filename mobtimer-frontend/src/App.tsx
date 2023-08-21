@@ -6,7 +6,7 @@ import {
   Action,
   Command,
   IWebSocketWrapper,
-  MobSocketClient,
+  FrontendMobSocket,
   MobTimer,
   MobTimerResponses,
   TimeUtils,
@@ -50,7 +50,7 @@ function getActionButtonLabel() {
 }
 
 function setSocketListener(
-  client: MobSocketClient,
+  client: FrontendMobSocket,
   setDurationMinutes: React.Dispatch<React.SetStateAction<number>>,
   setParticipants: React.Dispatch<React.SetStateAction<string[]>>,
   setRoles: React.Dispatch<React.SetStateAction<string[]>>,
@@ -163,7 +163,7 @@ const App = () => {
   Controller.injectSetParticipants(setParticipants);
   Controller.injectSetRoles(setRoles);
   Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
-  let client: MobSocketClient;
+  let client: FrontendMobSocket;
   client = Controller.client;
 
   useEffect(() => {
@@ -179,7 +179,7 @@ const App = () => {
         setConnecting(false);
         clearInterval(interval);
       }
-      Controller.client = new MobSocketClient(wrapperSocket);
+      Controller.client = new FrontendMobSocket(wrapperSocket);
       // setTimeCreated(new Date());
       setSocketListener(
         Controller.client,

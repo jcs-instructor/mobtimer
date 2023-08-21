@@ -38,7 +38,7 @@ Joel:
             3. Other (not needed as integration - so move / delete as appropriate)
       - [ ] Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly            
       - [ ] Fix inconsistent names (class / file): 
-            - MobSocketClient class in frontendSocket.ts
+            - FrontendMobSocket class in frontendSocket.ts
             - MobSocketTestClient class in mobSocketTestClient.ts
             - TestClient class in TestClient.ts
       - [ ] Move TestClient into mobtimer-api
