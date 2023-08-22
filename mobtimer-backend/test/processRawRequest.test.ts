@@ -1,4 +1,4 @@
-import { processRawRequest } from "../src/server/backendSocket";
+import { backendUtils } from "../src/server/backendSocket";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
@@ -101,7 +101,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   });
 
   test("Handle bad message and get good error message", () => {    
-    const response = processRawRequest("some-bad-garbage-not-a-real-request", {});
+    const response = backendUtils.processRawRequest("some-bad-garbage-not-a-real-request", {});
     expect(response?.actionInfo?.action).toEqual(Action.InvalidRequestError);
   });
 
