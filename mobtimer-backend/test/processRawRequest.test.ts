@@ -1,4 +1,4 @@
-import { backendUtils } from "../src/server/backendSocket";
+import { backendUtils } from "../src/server/backendUtils";
 import { Status, TimeUtils, Action } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";

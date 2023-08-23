@@ -1,4 +1,4 @@
-import { backendUtils } from "../src/server/backendSocket";
+import { backendUtils } from "../src/server/backendUtils";
 import { TimeUtils } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";

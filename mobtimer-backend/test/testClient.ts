@@ -1,6 +1,6 @@
 import { Action } from "mobtimer-api";
 import { MobState } from "mobtimer-api";
-import { backendUtils } from "../src/server/backendSocket";
+import { backendUtils } from "../src/server/backendUtils";
 import { MobRequestBuilder } from "mobtimer-api";
 import { MobTimerResponse, SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
 
