@@ -31,9 +31,15 @@ export class Broadcaster {
     }
     console.log(`broadcasting message: ${Date.now()} ${message}`);
     sockets.forEach((socketClient: WebSocket) => {
-      if (socketClient?.send) {
-        socketClient.send(message);
-      }
+      Broadcaster.sendToSocket(socketClient, message);
     });
+  }
+
+  static what () {
+    console.log("what");
+  }
+
+  static sendToSocket(socketClient: WebSocket, message: string) {
+    socketClient.send(message);
   }
 }
