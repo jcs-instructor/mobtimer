@@ -2,7 +2,6 @@ import { Room } from "./room";
 import WebSocket from "ws";
 import { MobTimer } from "mobtimer-api";
 import { Action } from "mobtimer-api";
-import { MobTimerResponses } from "mobtimer-api";
 import { Broadcaster } from "./broadcaster";
 
 type WebSocketOrAny = WebSocket | any;

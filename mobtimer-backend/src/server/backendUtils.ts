@@ -180,29 +180,32 @@ export class backendUtils {
         //   log('websocket.disconnect', timerId);
         // });
 
-        heartbeat.restart();
-
-        let requestString: string = backendUtils._requestToString(request);
-
-        // Process raw request.
-        let response = backendUtils.processRawRequest(requestString, webSocket);
-
-        // Send a response. Either:
-        // - Broadcast to all clients if we have a successful MobTimer response, or
-        // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
-        const successfulResponse =
-          response as MobTimerResponses.SuccessfulResponse;
-        const mobName = successfulResponse?.mobState?.mobName;
-        if (successfulResponse?.mobState) {
-          // Broadcast:
-          Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level
-        } else if (response) {
-          // Send only to requesting client:
-          backendUtils.sendToSocket(webSocket, response);
-        }
+        backendUtils.onMessage(heartbeat, request, webSocket);
       });
     });
     return wss;
+  }
+
+  private static onMessage(heartbeat: Heartbeat, request: WebSocket.RawData, webSocket: WebSocket) {
+    heartbeat.restart();
+
+    let requestString: string = backendUtils._requestToString(request);
+
+    // Process raw request.
+    let response = backendUtils.processRawRequest(requestString, webSocket);
+
+    // Send a response. Either:
+    // - Broadcast to all clients if we have a successful MobTimer response, or
+    // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
+    const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
+    const mobName = successfulResponse?.mobState?.mobName;
+    if (successfulResponse?.mobState) {
+      // Broadcast:
+      Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level
+    } else if (response) {
+      // Send only to requesting client:
+      backendUtils.sendToSocket(webSocket, response);
+    }
   }
 
   static processRawRequest(requestString: string, webSocket: any) {
@@ -259,7 +262,7 @@ export class backendUtils {
   //   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
   // }
 
-  static async sendToSocket(
+  static sendToSocket(
     webSocket: WebSocket,
     request: MobTimerResponses.MobTimerResponse
   ) {
