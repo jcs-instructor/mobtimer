@@ -10,7 +10,7 @@ export class testBackendUtils extends backendUtils {
   }
 
   static getLastMessage(webSocket: WebSocket | any ) {
-    return testBackendUtils.getMessages(webSocket)?[-1];
+    return testBackendUtils.getMessages(webSocket)?.splice(-1);
   }
   
   static override sendToSocket(
