@@ -2,7 +2,7 @@ import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { IFrontendSocket } from "./iFrontendSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
-import { Heartbeat } from '../../mobtimer-backend/src/server/heartbeat';
+import { Heartbeat } from './index';
 const noSocketErrorMessage = "No socket";
 class FrontendMobSocket {
   private _webSocket: IFrontendSocket | undefined;

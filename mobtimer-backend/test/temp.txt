@@ -1,0 +1,5 @@
+    onHeartbeatFunc = () => {},
+    {
+      heartbeatDurationMinutes,
+      heartbeatMaxInactivityMinutes,
+    } = defaultHeartbeatValues

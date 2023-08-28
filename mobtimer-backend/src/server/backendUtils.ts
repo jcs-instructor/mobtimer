@@ -5,30 +5,14 @@ import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
-import { Heartbeat } from "./heartbeat";
 import { Broadcaster } from "./broadcaster";
-
-const defaultHeartbeatValues = {
-  heartbeatDurationMinutes:
-    Number.parseInt(process.env.HEARTBEAT_DURATION_MINUTES || "") || 12, // e.g., render.com has a 15 minute timeout, so 12 minutes is a safe value
-  heartbeatMaxInactivityMinutes:
-    Number.parseInt(process.env.HEARTBEAT_MAX_INACTIVITY_MINUTES || "") || 120, // e.g., people mobbing together with a break of up to 2 hours won't experience an inactivity timeout
-};
 
 export class backendUtils {
   static async startMobServer(
     port: number,
-    onHeartbeatFunc = () => {},
-    {
-      heartbeatDurationMinutes,
-      heartbeatMaxInactivityMinutes,
-    } = defaultHeartbeatValues
   ): Promise<{ httpServer: http.Server; wss: WebSocket.Server }> {
     const server = http.createServer();
-    const wss = backendUtils._addMobListeners(server, onHeartbeatFunc, {
-      heartbeatDurationMinutes,
-      heartbeatMaxInactivityMinutes,
-    });
+    const wss = backendUtils._addMobListeners(server);
     return new Promise((resolve) => {
       server.listen(port, () => resolve({ httpServer: server, wss }));
     });
@@ -143,22 +127,9 @@ export class backendUtils {
    * @param server The http server from which to create the WebSocket server
    */
   static _addMobListeners(
-    server: http.Server,
-    onHeartbeatFunc = () => {},
-    {
-      heartbeatDurationMinutes,
-      heartbeatMaxInactivityMinutes,
-    } = defaultHeartbeatValues
+    server: http.Server
   ): WebSocket.Server {
     const wss = new WebSocket.Server({ server });
-    const heartbeat = new Heartbeat(
-      heartbeatDurationMinutes,
-      heartbeatMaxInactivityMinutes,
-      () => {
-        console.log("Heartbeat: " + new Date().toLocaleTimeString());
-        onHeartbeatFunc();
-      }
-    );
 
     wss.on("connection", async function (webSocket: WebSocket) {
       // 2nd parameter for mrozbarry, request2: any

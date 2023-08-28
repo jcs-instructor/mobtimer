@@ -13,7 +13,7 @@ export class TimeUtils {
   static getNowInMilliseconds(): number {
     return new Date().getTime();
   }
-  
+
   static getNowInSeconds(): number {
     const currentMilliseconds = new Date().getTime();
     return TimeUtils.millisecondsToSeconds(currentMilliseconds);

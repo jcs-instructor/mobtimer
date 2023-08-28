@@ -1,5 +1,5 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { TimeUtils } from "mobtimer-api";
+import { Heartbeat, TimeUtils } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
@@ -21,10 +21,7 @@ describe("Heartbeat Integration", () => {
   beforeEach(async () => {
     counter.value = 0;
     heartbeatCallbackFunc = () => counter.value++;
-    _server = await backendUtils.startMobServer(port, heartbeatCallbackFunc, 
-      { heartbeatDurationMinutes: TimeUtils.secondsToMinutes(heartbeatDurationSeconds), 
-        heartbeatMaxInactivityMinutes: TimeUtils.secondsToMinutes(heartbeatMaxInactivitySeconds)
-      }
+    _server = await backendUtils.startMobServer(port
     );
   });
 
@@ -37,16 +34,23 @@ describe("Heartbeat Integration", () => {
 
   test("Heartbeat integration test", async () => {
     const client = await openSocketAlternative(url);
-    await client.joinMob(_mobName1);
-    await client.start();
+    const heartbeatFunc = jest.fn();
+    client.heartBeat = new Heartbeat(
+     heartbeatDurationSeconds,
+     heartbeatMaxInactivitySeconds,
+     heartbeatFunc
+    )
+     
+    client.joinMob(_mobName1);
+    client.start();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 4 + toleranceSeconds);
     // By now we should have 3 heartbeats only (not 4) since we reached the max inactivity timeout
-    await client.pause();
+    client.pause();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
     console.log("debug heartbeat");
     client.successfulResponses.forEach ( (response)=> console.log(JSON.parse(response)))
     // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
-    expect(counter.value).toEqual(5);
+    expect(heartbeatFunc).toBeCalledTimes(5);
     await cleanUp(client);
   });
 

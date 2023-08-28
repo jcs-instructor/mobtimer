@@ -1,4 +1,4 @@
-import { TimeUtils } from "mobtimer-api";
+import { TimeUtils } from "./timeUtils";
 
 export class Heartbeat {
   onHeartbeatInterval: () => void;
