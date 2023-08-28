@@ -38,19 +38,21 @@ describe("Heartbeat Integration", () => {
     client.heartBeat = new Heartbeat(
      heartbeatDurationSeconds,
      heartbeatMaxInactivitySeconds,
-     heartbeatFunc
+     () => { counter.value++ }
     )
+    client.heartBeat.start();
      
-    client.joinMob(_mobName1);
-    client.start();
+    await client.joinMob(_mobName1);
+    await client.start();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 4 + toleranceSeconds);
     // By now we should have 3 heartbeats only (not 4) since we reached the max inactivity timeout
-    client.pause();
+    await client.pause();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
+    client.heartBeat.stop();
     console.log("debug heartbeat");
     client.successfulResponses.forEach ( (response)=> console.log(JSON.parse(response)))
     // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
-    expect(heartbeatFunc).toBeCalledTimes(5);
+    expect(counter.value).toEqual(5);
     await cleanUp(client);
   });
 

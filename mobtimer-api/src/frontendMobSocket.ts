@@ -12,6 +12,10 @@ class FrontendMobSocket {
     this._webSocket = webSocket;
   }
 
+  get heartBeat () {
+    return this._heartbeat as Heartbeat;
+  }
+
   set heartBeat (heartbeat: Heartbeat) {
     this._heartbeat = heartbeat;
     heartbeat.start();

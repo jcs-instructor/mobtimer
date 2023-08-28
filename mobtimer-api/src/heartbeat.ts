@@ -31,7 +31,9 @@ export class Heartbeat {
 
   start() {
     const startTimeMilliseconds = TimeUtils.getNowInMilliseconds();
+    console.log("debug heartbeat start", startTimeMilliseconds)
     this._interval = setInterval(() => {
+      console.log("debug heartbeat executing interval", this._count)
       const millisecondsElapsed =
         TimeUtils.getNowInMilliseconds() - startTimeMilliseconds;
       if (millisecondsElapsed > this.maxInactivityMilliseconds) {
