@@ -43,6 +43,8 @@ describe("Heartbeat Integration", () => {
     // By now we should have 3 heartbeats only (not 4) since we reached the max inactivity timeout
     await client.pause();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
+    console.log("debug heartbeat");
+    client.successfulResponses.forEach ( (response)=> console.log(JSON.parse(response)))
     // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
     expect(counter.value).toEqual(5);
     await cleanUp(client);

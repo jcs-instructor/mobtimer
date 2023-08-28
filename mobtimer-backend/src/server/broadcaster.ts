@@ -2,9 +2,9 @@ import { Action, MobTimer, MobTimerResponses } from "mobtimer-api";
 import { RoomManager } from "./roomManager";
 
 export class Broadcaster {
-  static broadcastToMob(mobTimer: MobTimer, action: Action) {
+  static broadcastExpireToMob(mobTimer: MobTimer) {
     const mobTimerResponse = {
-      actionInfo: { action: action },
+      actionInfo: { action: Action.Expired },
       mobState: mobTimer.state,
       //logInfo: mobTimer.getLogInfo(),
     } as MobTimerResponses.SuccessfulResponse;
@@ -33,10 +33,6 @@ export class Broadcaster {
     sockets.forEach((socketClient: WebSocket) => {
       Broadcaster.sendToSocket(socketClient, message);
     });
-  }
-
-  static what () {
-    console.log("what");
   }
 
   static sendToSocket(socketClient: WebSocket, message: string) {

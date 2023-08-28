@@ -100,7 +100,7 @@ class TestClient {
         }
         default: {
             // console.log("pushing responseObject", responseObject);
-            this._successfulResponses.push(JSON.stringify(responseObject));
+            this._successfulResponses.push(JSON.stringify(JSON.parse(JSON.stringify(responseObject))));
             break;
         }      
         }

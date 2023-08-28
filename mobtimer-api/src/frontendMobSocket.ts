@@ -2,14 +2,20 @@ import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
 import { IFrontendSocket } from "./iFrontendSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
+import { Heartbeat } from '../../mobtimer-backend/src/server/heartbeat';
 const noSocketErrorMessage = "No socket";
 class FrontendMobSocket {
   private _webSocket: IFrontendSocket | undefined;
+  private _heartbeat?: Heartbeat;
 
   constructor(webSocket: IFrontendSocket | undefined = undefined) {
     this._webSocket = webSocket;
   }
 
+  set heartBeat (heartbeat: Heartbeat) {
+    this._heartbeat = heartbeat;
+    heartbeat.start();
+  }
   /**
    * Forces a process to wait until the socket's `readyState` becomes the specified value.
    * @param socket The socket whose `readyState` is being watched

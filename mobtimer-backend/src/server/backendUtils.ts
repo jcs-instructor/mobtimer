@@ -159,7 +159,6 @@ export class backendUtils {
         onHeartbeatFunc();
       }
     );
-    heartbeat.start();
 
     wss.on("connection", async function (webSocket: WebSocket) {
       // 2nd parameter for mrozbarry, request2: any
@@ -206,7 +205,7 @@ export class backendUtils {
       Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level
     } else if (response) {
       // Send only to requesting client:
-      backendUtils.sendToSocket(webSocket, response);
+      Broadcaster.sendToSocket(webSocket, JSON.stringify(response));
     }
   }
 
@@ -263,19 +262,6 @@ export class backendUtils {
   //   webSocket.send(JSON.stringify({ type: "mob:update", mob: [] }));
   //   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
   // }
-
-  static sendToSocket(
-    webSocket: WebSocket,
-    request: MobTimerResponses.MobTimerResponse
-  ) {
-    const webSocketWrapper = new WSFrontendSocket("", webSocket);
-    // await FrontendMobSocket.waitForSocketState(
-    //   webSocketWrapper,
-    //   webSocketWrapper.OPEN_CODE
-    // );
-    console.log("state: " + webSocketWrapper.socketState);
-    webSocketWrapper.sendToServer(JSON.stringify(request));
-  }
 
   static _requestToString(request: WebSocket.RawData) {
     let isString = typeof request == "string";
