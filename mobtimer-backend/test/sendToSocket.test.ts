@@ -1,9 +1,9 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { Status, TimeUtils, Action, FrontendMobSocket, Controller, setSocketListener, fakeFrontendSocket, IFrontendSocket } from "mobtimer-api";
+import { Status, TimeUtils, Action, FrontendMobSocket, Controller, setSocketListener, IFrontendSocket } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
-import { MockFrontendMobSocket } from "./mockFrontendMobSocket";
+import { MockRoundTripSocket } from "./mockRoundTripSocket";
 // import { setSocketListener } from 
 
 jest.useFakeTimers();
@@ -29,7 +29,9 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     const playAudio = jest.fn();
     const getActionButtonLabel = jest.fn();
     console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
-          Controller.client = new MockFrontendMobSocket((message: string, socket: IFrontendSocket) => backendUtils.onStringMessage(message, socket));
+          Controller.client = new FrontendMobSocket(new MockRoundTripSocket());
+          const socket = Controller.client.webSocket as MockRoundTripSocket;
+          socket.frontendMobSocket = Controller.client;
           // setTimeCreated(new Date());
           setSocketListener(
             Controller.client,
@@ -43,11 +45,19 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
           );
  
     jest
-        .spyOn(Broadcaster, "sendToSocket")
-        .mockImplementation((socketClient: WebSocket, message: String) => {
-          const mobSocket = socketClient as unknown as FrontendMobSocket;
-          
+      .spyOn(Broadcaster, "sendToSocket")
+      .mockImplementation((socketClient: WebSocket, message: string) => {
+        const roundTripSocket = socketClient as unknown as MockRoundTripSocket;
+        roundTripSocket.frontendMobSocket?.webSocket?.onmessageReceived({
+          data: message,
         });
+      });
+          jest
+            .spyOn(Controller, "updateSummary")
+            .mockImplementation(() => {
+
+            });
+
   });
 
   afterEach(() => {

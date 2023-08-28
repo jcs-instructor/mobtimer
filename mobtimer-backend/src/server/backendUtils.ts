@@ -190,10 +190,10 @@ export class backendUtils {
    let requestString: string = backendUtils._requestToString(request);
 
     // Process raw request.
-    backendUtils.onStringMessage(requestString, webSocket);
+    backendUtils.onStringRequest(requestString, webSocket);
   }
 
-  static onStringMessage(requestString: string, webSocket: WebSocket) {
+  static onStringRequest(requestString: string, webSocket: WebSocket | any) {
     let response = backendUtils.processRawRequest(requestString, webSocket);
 
     // Send a response. Either:
