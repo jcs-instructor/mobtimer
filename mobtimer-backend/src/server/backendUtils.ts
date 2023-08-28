@@ -180,18 +180,20 @@ export class backendUtils {
         //   log('websocket.disconnect', timerId);
         // });
 
-        backendUtils.onMessage(heartbeat, request, webSocket);
+        backendUtils._onMessage(request, webSocket);
       });
     });
     return wss;
   }
 
-  private static onMessage(heartbeat: Heartbeat, request: WebSocket.RawData, webSocket: WebSocket) {
-    heartbeat.restart();
-
-    let requestString: string = backendUtils._requestToString(request);
+  static _onMessage(request: WebSocket.RawData, webSocket: WebSocket) {
+   let requestString: string = backendUtils._requestToString(request);
 
     // Process raw request.
+    backendUtils.onStringMessage(requestString, webSocket);
+  }
+
+  static onStringMessage(requestString: string, webSocket: WebSocket) {
     let response = backendUtils.processRawRequest(requestString, webSocket);
 
     // Send a response. Either:

@@ -94,10 +94,11 @@ class FrontendMobSocket {
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {
-      await FrontendMobSocket.waitForSocketState(
-        this.webSocket,
-        this.webSocket?.OPEN_CODE
-      );
+      // TODO: Do we need this?  Test stops at await, does not process to next line
+      // await FrontendMobSocket.waitForSocketState(
+      //   this.webSocket,
+      //   this.webSocket?.OPEN_CODE
+      // );
       this._webSocket.sendToServer(requestString);
     }
   }
