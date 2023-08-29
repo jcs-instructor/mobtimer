@@ -1,50 +1,30 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { Status, TimeUtils, Action, FrontendMobSocket, Controller, setSocketListener, Controller2, IFrontendSocket } from "mobtimer-api";
+import {
+  Status,
+  TimeUtils,
+  Action,
+  FrontendMobSocket,
+  setSocketListener2,
+  Controller2,
+  IFrontendSocket,
+} from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
-// import { setSocketListener } from 
+// import { setSocketListener } from
 
 jest.useFakeTimers();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
-  const _startMilliseconds = Date.now();
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
 
-  function getTimeSinceBeforeAll(): any {
-    return Date.now() - _startMilliseconds;
-  }
-
-  function getTestName(): any {
-    return expect.getState().currentTestName;
-  }
   let controller1: Controller2;
+  let controller2: Controller2;
   beforeEach(() => {
-    const setDurationMinutes = jest.fn();
-    const setParticipants = jest.fn();
-    const setRoles = jest.fn();
-    const setSecondsRemainingString = jest.fn();
-    const setActionButtonLabel = jest.fn();
-    const playAudio = jest.fn();
-    const getActionButtonLabel = jest.fn();
-    console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
-    controller1 = new Controller2();
-          controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
-          const socket = controller1.client.webSocket as MockRoundTripSocket;
-          socket.frontendMobSocket = controller1.client;
-          // setTimeCreated(new Date());
-          setSocketListener(
-            controller1.client,
-            setDurationMinutes,
-            setParticipants,
-            setRoles,
-            setSecondsRemainingString,
-            setActionButtonLabel,
-            playAudio,
-            getActionButtonLabel
-          );
- 
+    controller1 = setupController(controller1);
+    controller2 = setupController(controller2);
+
     jest
       .spyOn(Broadcaster, "sendToSocket")
       .mockImplementation((socketClient: WebSocket, message: string) => {
@@ -53,16 +33,10 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
           data: message,
         });
       });
-          jest
-            .spyOn(Controller, "updateSummary")
-            .mockImplementation(() => {
-
-            });
-
+    jest.spyOn(Controller2.prototype, "updateSummary").mockImplementation(() => {});
   });
 
   afterEach(() => {
-    console.log("End: time", getTimeSinceBeforeAll(), getTestName());
     RoomManager.resetRooms();
   });
 
@@ -70,17 +44,35 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     const client = controller1.client as FrontendMobSocket;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
+    expect(controller1.frontendMobTimer.durationMinutes).toEqual(5);
     // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
     // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
   });
 
-  test("Start timer", () => {    
+    test.only("Two mob", async () => {
+      const client = controller1.client as FrontendMobSocket;
+      const mobName = "test-mob-1";
+      client.joinMob(mobName);
+      const client2 = controller2.client as FrontendMobSocket;
+      client2.joinMob(mobName);
+      client.update(10);
+      expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
+      expect(controller2.frontendMobTimer.durationMinutes).toEqual(10);
+      // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
+      // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
+    });
+
+  test("Start timer", () => {
     const client = new TestClient({});
     const mobName = "test-mob-2";
     client.joinMob(mobName);
     client.start();
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Start);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Running);
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Start
+    );
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Running
+    );
   });
 
   test("Pause timer", () => {
@@ -89,8 +81,12 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     client.joinMob(mobName);
     client.start();
     client.pause();
-    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Pause);
-    expect(client.lastSuccessfulResponse.mobState.status).toEqual(Status.Paused);
+    expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(
+      Action.Pause
+    );
+    expect(client.lastSuccessfulResponse.mobState.status).toEqual(
+      Status.Paused
+    );
   });
 
   test("Resume timer", () => {
@@ -98,7 +94,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     joinMobWithAutogeneratedName(client);
     client.start();
     client.pause();
-    client.start();    
+    client.start();
     expect(client.lastSuccessfulMobState.status).toEqual(Status.Running);
     expect(client.lastSuccessfulAction).toEqual(Action.Start);
   });
@@ -107,7 +103,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     const client = new TestClient({});
     joinMobWithAutogeneratedName(client);
     client.start();
-    client.update(40);  
+    client.update(40);
     expect(client.lastSuccessfulMobState.durationMinutes).toEqual(40);
     expect(client.lastSuccessfulAction).toEqual("update");
   });
@@ -123,7 +119,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     joinMobWithAutogeneratedName(client);
     client.start();
     advanceTimersBySeconds(0.2);
-    client.reset();    
+    client.reset();
     expect(client.lastSuccessfulAction).toEqual(Action.Reset);
     expect(client.lastSuccessfulMobState.secondsRemaining).toEqual(0);
     expect(client.lastSuccessfulMobState.status).toEqual(Status.Ready);
@@ -146,14 +142,17 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     expect(client.echoReceived).toEqual(true);
   });
 
-  test("Handle bad message and get good error message", () => {    
-    const response = backendUtils.processRawRequest("some-bad-garbage-not-a-real-request", {});
+  test("Handle bad message and get good error message", () => {
+    const response = backendUtils.processRawRequest(
+      "some-bad-garbage-not-a-real-request",
+      {}
+    );
     expect(response?.actionInfo?.action).toEqual(Action.InvalidRequestError);
   });
 
   test("New mob timer has no participants", () => {
     const client = new TestClient({});
-    joinMobWithAutogeneratedName(client);    
+    joinMobWithAutogeneratedName(client);
     expect(client.lastSuccessfulMobState.participants.length).toBe(0);
   });
 
@@ -227,6 +226,32 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
 let mobCounter = 0;
 
+function setupController(controller1: Controller2) {
+  const setDurationMinutes = jest.fn();
+  const setParticipants = jest.fn();
+  const setRoles = jest.fn();
+  const setSecondsRemainingString = jest.fn();
+  const setActionButtonLabel = jest.fn();
+  const playAudio = jest.fn();
+  const getActionButtonLabel = jest.fn();
+  controller1 = new Controller2();
+  controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
+  const socket = controller1.client.webSocket as MockRoundTripSocket;
+  socket.frontendMobSocket = controller1.client;
+  // setTimeCreated(new Date());
+  setSocketListener2(
+    controller1,
+    setDurationMinutes,
+    setParticipants,
+    setRoles,
+    setSecondsRemainingString,
+    setActionButtonLabel,
+    playAudio,
+    getActionButtonLabel
+  );
+  return controller1;
+}
+
 function advanceTimersBySeconds(delaySeconds: number): number {
   jest.advanceTimersByTime(TimeUtils.secondsToMilliseconds(delaySeconds));
   return delaySeconds;
@@ -235,5 +260,5 @@ function advanceTimersBySeconds(delaySeconds: number): number {
 function joinMobWithAutogeneratedName(client: TestClient) {
   mobCounter++;
   const mobName = `autogenerated-mob-${mobCounter}`;
-  client.joinMob(mobName);  
+  client.joinMob(mobName);
 }

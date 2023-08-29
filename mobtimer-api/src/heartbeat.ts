@@ -4,7 +4,7 @@ export class Heartbeat {
   onHeartbeatInterval: () => void;
   heartbeatDurationMinutes: number;
   maxInactivityMinutes: number;
-  _interval: NodeJS.Timer | undefined;
+  _interval: NodeJS.Timeout | undefined;
   _count: number = 0;
 
   public get count(): number {
