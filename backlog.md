@@ -8,9 +8,9 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
+- [ ] **Make yarn build scripts run sequentially**
+- [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
 - [ ] **Reset npmjs password**
-- [x] **Generate exports watch** doesn't seem to be refreshing on change
-- [x] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
 - [ ] **Document when to use console.info vs console.log** in CONTRIBUTING.md
