@@ -4,7 +4,7 @@ export class Heartbeat {
   onHeartbeatInterval: () => void;
   heartbeatDurationMinutes: number;
   maxInactivityMinutes: number;
-  _interval: NodeJS.Timer | undefined;
+  _interval: NodeJS.Timeout | undefined;
   _count: number = 0;
 
   public get count(): number {
@@ -51,7 +51,9 @@ export class Heartbeat {
 
   stop() {
     console.log("clearing");
-    clearInterval(this._interval);
+    if (this._interval) {
+      clearInterval(this._interval);
+    }
     this._interval?.unref();
   }
 }
