@@ -2,6 +2,7 @@
 export * from "./action"
 export * from "./commands"
 export * from "./controller"
+export * from "./controller2"
 export * from "./frontendMobSocket"
 export * from "./heartbeat"
 export * from "./iBackendSocket"

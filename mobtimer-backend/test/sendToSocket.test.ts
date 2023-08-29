@@ -1,5 +1,5 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { Status, TimeUtils, Action, FrontendMobSocket, Controller, setSocketListener, IFrontendSocket } from "mobtimer-api";
+import { Status, TimeUtils, Action, FrontendMobSocket, Controller, setSocketListener, Controller2, IFrontendSocket } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
@@ -19,7 +19,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   function getTestName(): any {
     return expect.getState().currentTestName;
   }
-
+  let controller1: Controller2;
   beforeEach(() => {
     const setDurationMinutes = jest.fn();
     const setParticipants = jest.fn();
@@ -29,12 +29,13 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     const playAudio = jest.fn();
     const getActionButtonLabel = jest.fn();
     console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
-          Controller.client = new FrontendMobSocket(new MockRoundTripSocket());
-          const socket = Controller.client.webSocket as MockRoundTripSocket;
-          socket.frontendMobSocket = Controller.client;
+    controller1 = new Controller2();
+          controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
+          const socket = controller1.client.webSocket as MockRoundTripSocket;
+          socket.frontendMobSocket = controller1.client;
           // setTimeCreated(new Date());
           setSocketListener(
-            Controller.client,
+            controller1.client,
             setDurationMinutes,
             setParticipants,
             setRoles,
@@ -66,7 +67,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   });
 
   test.only("Create mob", async () => {
-    const client = Controller.client;
+    const client = controller1.client as FrontendMobSocket;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
     // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
