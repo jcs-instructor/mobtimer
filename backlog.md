@@ -21,7 +21,7 @@ Joel:
 ----
 
 # To be prioritized / refined
-- ...
+- **Conditionally ignore integration tests** using jest parameter testPathIgnorePatterns: [  process.env.EXCLUDE_TEST === 'true' ? "^.+integration\\.test\\.ts$" : ""] ,
 
 -----------------------------------------------------------------------------------------------------------------------
 
