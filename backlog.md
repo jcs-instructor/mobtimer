@@ -28,6 +28,8 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
+- [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
+- [ ] **Move const defaultHeartbeatValues into class** right below it
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
       - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
