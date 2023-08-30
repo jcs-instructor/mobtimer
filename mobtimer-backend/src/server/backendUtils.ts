@@ -43,7 +43,7 @@ export class backendUtils {
     backendUtils._addMobListeners(server);
   }
 
-  static _processMobTimerRequest(
+  private static _processMobTimerRequest(
     parsedRequest: MobTimerRequests.MobTimerRequest,
     socket: any // WebSocket
   ) {
@@ -126,51 +126,32 @@ export class backendUtils {
    * be started externally.
    * @param server The http server from which to create the WebSocket server
    */
-  static _addMobListeners(
+  private static _addMobListeners(
     server: http.Server
   ): WebSocket.Server {
     const wss = new WebSocket.Server({ server });
 
     wss.on("connection", async function (webSocket: WebSocket) {
-      // 2nd parameter for mrozbarry, request2: any
-      // const url = new URL(request2.url, `http://${request2.headers.host}`);
-      // let mobName = url.pathname.replace("/", "");
-      // if (mobName) {
-      //   _initialize(webSocket);
-      // }
-
       webSocket.on("message", function (request) {
-        // TODO: when coming from vscode extension, mobname is in the wss url, e.g., wss://localhost:3000/mymob
-        // SAMPLE CODE FROM MROZZBARRY
-        //    wss.on('connection', async (client, request) => {
-        // const url = new URL(request.url, `http://${request.headers.host}`);
-        // const timerId = url.pathname.replace('/', '');
-        // log('websocket.connect', timerId);
-        // client.on('close', () => {
-        //   log('websocket.disconnect', timerId);
-        // });
-
-        backendUtils._onMessage(request, webSocket);
+        let requestString: string = backendUtils._requestToString(request);
+        backendUtils.processRequest(requestString, webSocket);
       });
     });
     return wss;
   }
 
-  static _onMessage(request: WebSocket.RawData, webSocket: WebSocket) {
-   let requestString: string = backendUtils._requestToString(request);
-
-    // Process raw request.
-    backendUtils.onStringRequest(requestString, webSocket);
+  static processRequest(requestString: string, webSocket: WebSocket | any) {    
+    let response = backendUtils.getResponse(requestString, webSocket);
+    backendUtils._sendResponse(response, webSocket);
   }
 
-  static onStringRequest(requestString: string, webSocket: WebSocket | any) {
-    let response = backendUtils.processRawRequest(requestString, webSocket);
-
-    // Send a response. Either:
-    // - Broadcast to all clients if we have a successful MobTimer response, or
-    // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
+  private static _sendResponse(response: MobTimerResponses.MobTimerResponse | undefined, webSocket: any) {
     const successfulResponse = response as MobTimerResponses.SuccessfulResponse;
     const mobName = successfulResponse?.mobState?.mobName;
+
+    // Send the response. Either:
+    // - Broadcast to all clients if we have a successful MobTimer response, or
+    // - Send the response only to the client that made the request (e.g., when it's an error or echo response).
     if (successfulResponse?.mobState) {
       // Broadcast:
       Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level
@@ -180,7 +161,7 @@ export class backendUtils {
     }
   }
 
-  static processRawRequest(requestString: string, webSocket: any) {
+  static getResponse(requestString: string, webSocket: any) {
     //WebSocket
     let isMobTimerRequest = false;
     let response: MobTimerResponses.MobTimerResponse | undefined;
@@ -234,7 +215,7 @@ export class backendUtils {
   //   webSocket.send(JSON.stringify({ type: "goals:update", goals: [] }));
   // }
 
-  static _requestToString(request: WebSocket.RawData) {
+  private static _requestToString(request: WebSocket.RawData) {
     let isString = typeof request == "string";
     let requestString: string = (
       isString ? request : request.toString()

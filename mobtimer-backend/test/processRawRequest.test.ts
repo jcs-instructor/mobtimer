@@ -108,7 +108,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   });
 
   test("Handle bad message and get good error message", () => {    
-    const response = backendUtils.processRawRequest("some-bad-garbage-not-a-real-request", {});
+    const response = backendUtils.getResponse("some-bad-garbage-not-a-real-request", {});
     expect(response?.actionInfo?.action).toEqual(Action.InvalidRequestError);
   });
 

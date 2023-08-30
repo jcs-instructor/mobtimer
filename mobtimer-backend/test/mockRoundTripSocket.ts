@@ -6,7 +6,7 @@ import { FrontendMobSocket } from 'mobtimer-api';
 export class MockRoundTripSocket implements IFrontendSocket {
   frontendMobSocket?: FrontendMobSocket;
   sendToServer = (message: string) => {
-    backendUtils.onStringRequest(message, this);
+    backendUtils.processRequest(message, this);
   };
   closeSocket = () => (this.socketState = this.CLOSED_CODE);
   OPEN_CODE = 1;

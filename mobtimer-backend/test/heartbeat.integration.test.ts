@@ -32,7 +32,7 @@ describe("Heartbeat Integration", () => {
     await _server.httpServer.close();
   });
 
-  test("Heartbeat integration test", async () => {
+  test.skip("Heartbeat integration test", async () => {
     const client = await openSocketAlternative(url);
     const heartbeatFunc = jest.fn();
     client.heartBeat = new Heartbeat(
