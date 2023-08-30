@@ -65,11 +65,11 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       234 |   const playAudio = jest.fn();
       235 |   const getActionButtonLabel = jest.fn();
-    > 236 |   controller1 = new Controller2();
+    > 236 |   controller1 = new Controller();
           |   ^
       237 |   controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
@@ -80,11 +80,11 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       234 |   const playAudio = jest.fn();
       235 |   const getActionButtonLabel = jest.fn();
-    > 236 |   controller1 = new Controller2();
+    > 236 |   controller1 = new Controller();
           |   ^
       237 |   controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
@@ -885,11 +885,11 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       234 |   const playAudio = jest.fn();
       235 |   const getActionButtonLabel = jest.fn();
-    > 236 |   controller1 = new Controller2();
+    > 236 |   controller1 = new Controller();
           |   ^
       237 |   controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
@@ -900,11 +900,11 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       234 |   const playAudio = jest.fn();
       235 |   const getActionButtonLabel = jest.fn();
-    > 236 |   controller1 = new Controller2();
+    > 236 |   controller1 = new Controller();
           |   ^
       237 |   controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
@@ -3219,31 +3219,31 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       33 |         });
       34 |       });
-    > 35 |     jest.spyOn(Controller2.prototype, "updateSummary").mockImplementation(() => {});
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
          |                ^
       36 |   });
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller2 (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       33 |         });
       34 |       });
-    > 35 |     jest.spyOn(Controller2.prototype, "updateSummary").mockImplementation(() => {});
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
          |                ^
       36 |   });
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller2 (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
 
 
 > Test run finished at 8/30/2023, 2:26:49 PM <
@@ -3282,31 +3282,31 @@ Ran all test suites related to changed files.
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       33 |         });
       34 |       });
-    > 35 |     jest.spyOn(Controller2.prototype, "updateSummary").mockImplementation(() => {});
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
          |                ^
       36 |   });
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller2 (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
-    ReferenceError: Controller2 is not defined
+    ReferenceError: Controller is not defined
 
       33 |         });
       34 |       });
-    > 35 |     jest.spyOn(Controller2.prototype, "updateSummary").mockImplementation(() => {});
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
          |                ^
       36 |   });
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller2 (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
 
 
 > Test run finished at 8/30/2023, 2:26:50 PM <

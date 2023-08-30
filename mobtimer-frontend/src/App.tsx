@@ -10,13 +10,13 @@ import {
   TimeUtils,
   W3CFrontendSocket,
 } from "mobtimer-api";
-import { Controller2, setSocketListener2 } from "mobtimer-api";
+import { Controller, setSocketListener } from "mobtimer-api";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 import AlertBox from "./components/Alert";
 
-const controller = Controller2.staticController;
+const controller = Controller.staticController;
 const useLocalHost = window.location.href.includes("localhost");
 const url = controller.getUrl(useLocalHost);
 const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || '') || 2;
@@ -83,7 +83,7 @@ const App = () => {
       }
       controller.client = new FrontendMobSocket(wrapperSocket);
       // setTimeCreated(new Date());
-      setSocketListener2(
+      setSocketListener(
         controller,
         playAudio,
         getActionButtonLabel

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Controller2 } from 'mobtimer-api';
+import { Controller } from 'mobtimer-api';
 import { TimeUtils } from 'mobtimer-api';
-const controller = Controller2.staticController as Controller2;
+const controller = Controller.staticController as Controller;
 
 type FormParameters = {
     durationMinutes: number;

@@ -1,9 +1,9 @@
-import { Controller2, FrontendMobSocket } from "mobtimer-api";
+import { Controller, FrontendMobSocket } from "mobtimer-api";
 import { IFrontendSocket } from "../../mobtimer-api/src/iFrontendSocket";
 
 export class FakeFrontendSocket implements IFrontendSocket {
   frontendMobSocket?: FrontendMobSocket;
-  controller?: Controller2;
+  controller?: Controller;
   sendToServer = (message: string) => {
     throw new Error(`${message} not sent.  sendToServer not implemented.`);
    };

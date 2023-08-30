@@ -8,7 +8,7 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
-- [ ] **Recover lost Controller2 code** on heartbeat2 branch
+- [ ] **Recover lost Controller code** on heartbeat2 branch
 - [ ] **Reset npmjs password**
 - [x] **Generate exports watch** doesn't seem to be refreshing on change
 - [x] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
