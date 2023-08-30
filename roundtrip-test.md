@@ -20,12 +20,8 @@
   - change Controller to non-static (strangler?), then revise sendToSocket.test.ts to test two mobs
 
 - desirable refactorings:
-  - make controller non-static
-  - if only updating data, use same action "update"
+  - change "frontendMobSocket" to "frontendMobAndSocket"
+  - change "client" to "frontendMobSocket"
+  - if only updating data, change to action "update"
   - currently sending entire state, not clean?
-
-- refactor: extracted new proc onStringMessage
-
-- If only updating data, change to action "update"
-- move sendToSocket to Broadcast
 - change to use lookup rather than add to websocket

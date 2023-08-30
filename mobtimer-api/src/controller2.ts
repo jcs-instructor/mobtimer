@@ -5,6 +5,9 @@ import { MobTimer } from "./mobTimer";
 console.log("Controller redeployed 3");
 
 export class Controller2 {
+  
+  static staticController: Controller2 = new Controller2();
+
   updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =

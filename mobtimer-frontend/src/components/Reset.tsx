@@ -1,11 +1,12 @@
 import React from 'react';
-import { Controller } from 'mobtimer-api';
+import { Controller2 } from 'mobtimer-api';
 
+const controller = Controller2.staticController;
 const Reset = () => {
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        Controller.client.reset();
+        controller.client?.reset();
     }
 
     return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Controller } from 'mobtimer-api';
-
+import { Controller2 } from 'mobtimer-api';
+const controller = Controller2.staticController as Controller2;
 const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');
     
@@ -8,7 +8,7 @@ const AddParticipant = () => {
         event.preventDefault();
         const trimmedName = participantName.trim();
         if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
-            Controller.client.addParticipant(trimmedName);
+            controller.client?.addParticipant(trimmedName);
         }            
         setParticipantName('');
     }

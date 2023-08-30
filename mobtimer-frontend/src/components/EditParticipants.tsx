@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Controller } from 'mobtimer-api';
+import { Controller2 } from 'mobtimer-api';
+const controller = Controller2.staticController as Controller2;
 
 const EditParticipants = () => {
 
-    // const [participantsNames, setParticipantsNames] = useState(Controller.frontendMobTimer.participants.join(","));
+    // const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
     const [participantsNames, setParticipantsNames] = useState("");
 
     // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -18,10 +19,10 @@ const EditParticipants = () => {
             <input
                 // value={participants.join(",")}                                
                 value={participantsNames}
-                //onChange={(e) => Controller.setParticipants((e.target.value as string).split(",").map((name) => name.trim()))}
-                //onChange={(e) => Controller.client.editParticipants((e.target.value as string).split(",").map((name) => name.trim()))}                                
+                //onChange={(e) => controller.setParticipants((e.target.value as string).split(",").map((name) => name.trim()))}
+                //onChange={(e) => controller.client?.editParticipants((e.target.value as string).split(",").map((name) => name.trim()))}                                
                 //onChange={(e) => setParticipantsString(e.target.value as string)}
-                onFocus={(e) => e.target.value = Controller.frontendMobTimer.participants.join(",")}
+                onFocus={(e) => e.target.value = controller.frontendMobTimer.participants.join(",")}
                 // onBlur={(e) => update(e.target.value, setParticipantsNames)}                    
                 // todo: replace window.confirm with a modal
                 onBlur={(e) => handleBlur(e)}
@@ -47,7 +48,7 @@ const EditParticipants = () => {
 
     function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
         const newValue = splitTrimAndRejoin(e.target.value as string);
-        const oldValue = Controller.frontendMobTimer.participants.join(",");
+        const oldValue = controller.frontendMobTimer.participants.join(",");
         confirmUpdate(newValue, oldValue);
     }
 
@@ -58,7 +59,7 @@ const EditParticipants = () => {
     // }
 
     function update(participantsNames: string, setParticipantsNames: React.Dispatch<React.SetStateAction<string>>) {
-        Controller.client.editParticipants(participantsNames.split(",").map((name) => name.trim()));
+        controller.client?.editParticipants(participantsNames.split(",").map((name) => name.trim()));
         setParticipantsNames("");
     }
 

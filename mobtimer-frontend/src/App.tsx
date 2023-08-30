@@ -10,14 +10,15 @@ import {
   TimeUtils,
   W3CFrontendSocket,
 } from "mobtimer-api";
-import { Controller, setSocketListener } from "mobtimer-api";
+import { Controller2, setSocketListener2 } from "mobtimer-api";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 import AlertBox from "./components/Alert";
 
+const controller = Controller2.staticController;
 const useLocalHost = window.location.href.includes("localhost");
-const url = Controller.getUrl(useLocalHost);
+const url = controller.getUrl(useLocalHost);
 const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || '') || 2;
 const RETRY_MILLISECONDS = TimeUtils.secondsToMilliseconds(RETRY_SECONDS);
 console.info("App.tsx: url = " + url);
@@ -31,7 +32,7 @@ function playAudio() {
 }
 
 function getActionButtonLabel() {
-  switch (Controller.frontendMobTimer.nextCommand) {
+  switch (controller.frontendMobTimer.nextCommand) {
     case Command.Pause: {
       return "⏸️ Pause";
     }
@@ -60,12 +61,12 @@ const App = () => {
 
 
   // Injections
-  Controller.injectSetDurationMinutes(setDurationMinutes);
-  Controller.injectSetParticipants(setParticipants);
-  Controller.injectSetRoles(setRoles);
-  Controller.injectSetSecondsRemainingString(setSecondsRemainingString);
+  controller.injectSetDurationMinutes(setDurationMinutes);
+  controller.injectSetParticipants(setParticipants);
+  controller.injectSetRoles(setRoles);
+  controller.injectSetSecondsRemainingString(setSecondsRemainingString);
   let client: FrontendMobSocket;
-  client = Controller.client;
+  client = controller.client as FrontendMobSocket;
 
   useEffect(() => {
     // initialize function
@@ -80,19 +81,19 @@ const App = () => {
         setConnecting(false);
         clearInterval(interval);
       }
-      Controller.client = new FrontendMobSocket(wrapperSocket);
+      controller.client = new FrontendMobSocket(wrapperSocket);
       // setTimeCreated(new Date());
-      setSocketListener(
-        Controller.client,
-        setDurationMinutes,
-        setParticipants,
-        setRoles,
-        setSecondsRemainingString,
-        setActionButtonLabel,
+      setSocketListener2(
+        controller,
         playAudio,
         getActionButtonLabel
       );
    };
+   controller.injectSetActionButtonLabel(setActionButtonLabel);
+   controller.injectSetDurationMinutes(setDurationMinutes);
+   controller.injectSetParticipants(setParticipants);
+   controller.injectSetRoles(setRoles);
+   controller.injectSetSecondsRemainingString(setSecondsRemainingString);
 
     // useEffect code
     if (connected) {
@@ -115,12 +116,12 @@ const App = () => {
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
-    const alreadyJoined = Controller.frontendMobTimer.state.mobName === mobName;
+    const alreadyJoined = controller.frontendMobTimer.state.mobName === mobName;
     if (!mobName || alreadyJoined) {
       return;
     }
-    Controller.frontendMobTimer = new MobTimer(mobName);
-    Controller.client.joinMob(mobName);
+    controller.frontendMobTimer = new MobTimer(mobName);
+    controller.client?.joinMob(mobName);
   };
 
   // Submit action
@@ -128,7 +129,7 @@ const App = () => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
-    Controller.toggleStatus(client, Controller.frontendMobTimer);
+    controller.toggleStatus(client, controller.frontendMobTimer);
   };
   // Browser router
   return (
