@@ -1,6 +1,6 @@
-import { FrontendMobSocket, MobTimerResponses, Action, TimeUtils, Controller2 } from "./index";
-export function setSocketListener2(
-  controller: Controller2,
+import { FrontendMobSocket, MobTimerResponses, Action, TimeUtils, Controller } from "./index";
+export function setSocketListener(
+  controller: Controller,
   playAudio: () => void,
   getActionButtonLabel: () => string
 ) {
@@ -17,7 +17,7 @@ export function setSocketListener2(
  }
 
   export const onmessageReceivedFunc = (
-    controller: Controller2,
+    controller: Controller,
     message: { data: any },
     playAudio: () => void,
     getActionButtonLabel: () => string

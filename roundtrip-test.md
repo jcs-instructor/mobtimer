@@ -20,6 +20,7 @@
   - change Controller to non-static (strangler?), then revise sendToSocket.test.ts to test two mobs
 
 - desirable refactorings:
+  - consistent naming: heartbeatIntegration.test.ts or heartbeat.integration.test.ts
   - change "frontendMobSocket" to "frontendMobAndSocket"
   - change "client" to "frontendMobSocket"
   - if only updating data, change to action "update"

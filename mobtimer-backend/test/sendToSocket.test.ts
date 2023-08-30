@@ -4,23 +4,22 @@ import {
   TimeUtils,
   Action,
   FrontendMobSocket,
-  setSocketListener2,
-  Controller2,
+  setSocketListener,
+  Controller,
   IFrontendSocket,
 } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
-// import { setSocketListener } from
 
 jest.useFakeTimers();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
 
-  let controller1: Controller2;
-  let controller2: Controller2;
+  let controller1: Controller;
+  let controller2: Controller;
   beforeEach(() => {
     controller1 = setupController(controller1);
     controller2 = setupController(controller2);
@@ -33,7 +32,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
           data: message,
         });
       });
-    jest.spyOn(Controller2.prototype, "updateSummary").mockImplementation(() => {});
+    jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -226,7 +225,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
 let mobCounter = 0;
 
-function setupController(controller1: Controller2) {
+function setupController(controller1: Controller) {
   const setDurationMinutes = jest.fn();
   const setParticipants = jest.fn();
   const setRoles = jest.fn();
@@ -234,12 +233,12 @@ function setupController(controller1: Controller2) {
   const setActionButtonLabel = jest.fn();
   const playAudio = jest.fn();
   const getActionButtonLabel = jest.fn();
-  controller1 = new Controller2();
+  controller1 = new Controller();
   controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
   const socket = controller1.client.webSocket as MockRoundTripSocket;
   socket.frontendMobSocket = controller1.client;
   // setTimeCreated(new Date());
-  setSocketListener2(
+  setSocketListener(
     controller1,
     playAudio,
     getActionButtonLabel
