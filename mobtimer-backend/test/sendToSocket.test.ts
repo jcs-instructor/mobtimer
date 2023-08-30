@@ -241,11 +241,6 @@ function setupController(controller1: Controller2) {
   // setTimeCreated(new Date());
   setSocketListener2(
     controller1,
-    setDurationMinutes,
-    setParticipants,
-    setRoles,
-    setSecondsRemainingString,
-    setActionButtonLabel,
     playAudio,
     getActionButtonLabel
   );

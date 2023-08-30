@@ -1,6 +1,9 @@
+import { Controller2, FrontendMobSocket } from "mobtimer-api";
 import { IFrontendSocket } from "../../mobtimer-api/src/iFrontendSocket";
 
 export class fakeFrontendSocket implements IFrontendSocket {
+  frontendMobSocket?: FrontendMobSocket;
+  controller?: Controller2;
   sendToServer = (message: string) => {
     throw new Error(`${message} not sent.  sendToServer not implemented.`);
    };
@@ -8,10 +11,8 @@ export class fakeFrontendSocket implements IFrontendSocket {
   OPEN_CODE = 1;
   CLOSED_CODE = 2;
   socketState = this.OPEN_CODE;
+  onmessageReceived: (message: { data: any; }) => void;
 
-   public set onmessageReceived(func: any) {
-    throw new Error("onmessageReceived not implemented.");    
-  }
 }
 
 

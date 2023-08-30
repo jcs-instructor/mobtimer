@@ -5,7 +5,6 @@ import { MobTimer } from "./mobTimer";
 console.log("Controller redeployed 3");
 
 export class Controller2 {
-
   updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
@@ -24,7 +23,9 @@ export class Controller2 {
     if (minCount > 0) {
       // build up a participant string with the role emoji prefix
       for (let i = 0; i < minCount; i++) {
-        const rolePrefix = this.extractFirstEmoji(this.frontendMobTimer.roles[i]);
+        const rolePrefix = this.extractFirstEmoji(
+          this.frontendMobTimer.roles[i]
+        );
         const participant = this.frontendMobTimer.participants[i];
         const combo = `${rolePrefix}${participant}`;
         participants.push(combo);
@@ -49,8 +50,7 @@ export class Controller2 {
   }
 
   get secondsRemainingStringWithoutLeadingZero() {
-    const secondsRemainingString =
-      this.frontendMobTimer.secondsRemainingString;
+    const secondsRemainingString = this.frontendMobTimer.secondsRemainingString;
     return secondsRemainingString.startsWith("0")
       ? secondsRemainingString.substring(1)
       : secondsRemainingString;
@@ -88,6 +88,13 @@ export class Controller2 {
     setDurationMinutesFunction: (durationMinutes: number) => void
   ) {
     this.setDurationMinutes = setDurationMinutesFunction;
+  }
+
+  setActionButtonLabel = (_label: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  injectSetActionButtonLabel(
+    setActionButtonLabel: (label: string) => void
+  ) {
+    this.setActionButtonLabel = setActionButtonLabel;
   }
 
   // inject time string
@@ -133,7 +140,7 @@ export class Controller2 {
       secondsRemaining,
     };
   }
-  
+
   getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
       case Status.Running: {
@@ -181,8 +188,9 @@ export class Controller2 {
       process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL
     );
     return useLocalHost
-        ? process.env.REACT_APP_LOCAL_WEBSOCKET_URL || "ws://localhost:4000"
-        : process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL || "ws://mobtimer-backend-pj2v.onrender.com"
+      ? process.env.REACT_APP_LOCAL_WEBSOCKET_URL || "ws://localhost:4000"
+      : process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL ||
+          "ws://mobtimer-backend-pj2v.onrender.com";
   }
 
   changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {

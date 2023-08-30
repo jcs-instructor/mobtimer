@@ -1,21 +1,27 @@
 import { FrontendMobSocket, MobTimerResponses, Action, TimeUtils, Controller2 } from "./index";
 export function setSocketListener2(
   controller: Controller2,
-  setDurationMinutes: (x: number) => void,
-  setParticipants: (x: string[]) => void,
-  setRoles: (x: string[]) => void,
-  setSecondsRemainingString: (x: string) => void,
-  setActionButtonLabel: (x: string) => void, 
   playAudio: () => void,
   getActionButtonLabel: () => string
 ) {
-  const frontendMobSocket = controller.client as FrontendMobSocket; 
+    const frontendMobSocket = controller.client as FrontendMobSocket; 
   if (!frontendMobSocket.webSocket) {
     throw new Error("WebSocket is undefined");
   }
 
   frontendMobSocket.webSocket.onmessageReceived = (message: { data: any }) => {
     // Get response from server
+    onmessageReceivedFunc(controller, message, playAudio, getActionButtonLabel);
+  };
+
+ }
+
+  export const onmessageReceivedFunc = (
+    controller: Controller2,
+    message: { data: any },
+    playAudio: () => void,
+    getActionButtonLabel: () => string
+  ) => {
     const response = JSON.parse(
       message.data
     ) as MobTimerResponses.SuccessfulResponse;
@@ -50,13 +56,13 @@ export function setSocketListener2(
     const label = getActionButtonLabel();
 
     // update React state variables
-    setDurationMinutes(durationMinutes);
-    setParticipants(participants);
-    setRoles(roles);
-    setSecondsRemainingString(
+    controller.setDurationMinutes(durationMinutes);
+    controller.setParticipants(participants);
+    controller.setRoles(roles);
+    controller.setSecondsRemainingString(
       controller.frontendMobTimer.secondsRemainingString
     );
-    setActionButtonLabel(label);
+    controller.setActionButtonLabel(label);
 
     // Update browser tab title text
     controller.updateSummary();
@@ -72,7 +78,6 @@ export function setSocketListener2(
       );
     }
   };
-}
 
 function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
   console.info(
