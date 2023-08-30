@@ -1,6 +1,5 @@
 import { IFrontendSocket } from "../../mobtimer-api/src/iFrontendSocket";
 import { backendUtils } from "../src/server/backendUtils";
-import { FakeFrontendSocket } from './fakeFrontendSocket';
 import { FrontendMobSocket } from 'mobtimer-api';
 
 export class MockRoundTripSocket implements IFrontendSocket {

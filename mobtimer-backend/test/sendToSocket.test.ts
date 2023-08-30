@@ -6,7 +6,6 @@ import {
   FrontendMobSocket,
   setSocketListener,
   Controller,
-  IFrontendSocket,
 } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
@@ -14,6 +13,7 @@ import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
 
 jest.useFakeTimers();
+let socketMobSocketMap: Map<MockRoundTripSocket, FrontendMobSocket> =new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
@@ -28,7 +28,8 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
       .spyOn(Broadcaster, "sendToSocket")
       .mockImplementation((socketClient: WebSocket, message: string) => {
         const roundTripSocket = socketClient as unknown as MockRoundTripSocket;
-        roundTripSocket.frontendMobSocket?.webSocket?.onmessageReceived({
+        const frontendMobSocket = socketMobSocketMap.get(roundTripSocket);
+        frontendMobSocket?.webSocket?.onmessageReceived({
           data: message,
         });
       });
@@ -225,7 +226,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
 let mobCounter = 0;
 
-function setupController(controller1: Controller) {
+function setupController(controller: Controller) {
   const setDurationMinutes = jest.fn();
   const setParticipants = jest.fn();
   const setRoles = jest.fn();
@@ -233,17 +234,19 @@ function setupController(controller1: Controller) {
   const setActionButtonLabel = jest.fn();
   const playAudio = jest.fn();
   const getActionButtonLabel = jest.fn();
-  controller1 = new Controller();
-  controller1.client = new FrontendMobSocket(new MockRoundTripSocket());
-  const socket = controller1.client.webSocket as MockRoundTripSocket;
-  socket.frontendMobSocket = controller1.client;
+  controller = new Controller();
+  controller.client = new FrontendMobSocket(new MockRoundTripSocket());
+  const socket = controller.client.webSocket as MockRoundTripSocket;
+  socket.frontendMobSocket = controller.client;
+  socketMobSocketMap.set(socket, socket.frontendMobSocket);
+
   // setTimeCreated(new Date());
   setSocketListener(
-    controller1,
+    controller,
     playAudio,
     getActionButtonLabel
   );
-  return controller1;
+  return controller;
 }
 
 function advanceTimersBySeconds(delaySeconds: number): number {
