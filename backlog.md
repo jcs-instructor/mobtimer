@@ -29,6 +29,9 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
+- [ ] **Reconsider test names** to make clear integration vs. what mocked,... (maybe not use term round-trip?)
+      - Use ".network.integration.test.ts" pattern if making a network call
+      - ...
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
       - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
