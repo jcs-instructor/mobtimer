@@ -15,14 +15,16 @@
 
 - other ideas for tests
   - check Controller.client.<action> calls sendToServer with specific values
-  - check backendUtils.onStringRequest calls sendToSocket with specific values
-  - check onmessageReceived 
-  - change Controller to non-static (strangler?), then revise sendToSocket.test.ts to test two mobs
+  - check backendUtils.processRequest calls sendToSocket with specific values
+  - check onmessageReceived makes changes to the frontend and calls set functions
+
 
 - desirable refactorings:
   - consistent naming: heartbeatIntegration.test.ts or heartbeat.integration.test.ts
-  - change "frontendMobSocket" to "frontendMobAndSocket"
-  - change "client" to "frontendMobSocket"
+  - change "frontendMobSocket" to "frontendMobAndSocket" (and FrontendMobSocket)
+  - change "controller.client" to "controller.frontendMobAndSocket"
+  - change "client =" to "frontendMobAndSocket =" 
+  - change "socketClient" to "backendSocket"
   - if only updating data, change to action "update"
   - currently sending entire state, not clean?
 - change to use lookup rather than add to websocket
