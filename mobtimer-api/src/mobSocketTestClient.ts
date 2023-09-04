@@ -49,7 +49,6 @@ class MobSocketTestClient extends FrontendMobSocket {
         break;
       }
       default: {
-        console.log("pushing message.data", message.data);
         this._successfulResponses.push(message.data);
         break;
       }

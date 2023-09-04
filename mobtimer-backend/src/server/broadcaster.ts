@@ -29,7 +29,6 @@ export class Broadcaster {
     if (!sockets) {
       return;
     }
-    console.log(`broadcasting message: ${Date.now()} ${message}`);
     sockets.forEach((socketClient: WebSocket) => {
       Broadcaster.sendToSocket(socketClient, message);
     });
