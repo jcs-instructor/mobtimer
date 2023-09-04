@@ -18,15 +18,6 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     return expect.getState().currentTestName;
   }
 
-  beforeEach(() => {
-    console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
-  });
-
-  afterEach(() => {
-    console.log("End: time", getTimeSinceBeforeAll(), getTestName());
-    RoomManager.resetRooms();
-  });
-
   test("Create mob", () => {
     const client = new TestClient({});
     const mobName = "test-mob-1";

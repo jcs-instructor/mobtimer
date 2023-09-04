@@ -4,11 +4,9 @@
   - later discussion: processRawRequest could be simplified and maybe is too simple
 
 - sendToSocket.test.ts: tests Controller=>backendUtils=>sendToSocket (mocks)
-  - removed async from sendToServer
-  - moved `setSocketListener` to mobtimer-api
-  - `client = new FrontendMobSocket(`**new mockRoundTripSocket**`)` which replaces sendToServer with `backendUtils.onStringRequest(message, this);`
-  - associate client (frontendMobSocket) with webSocket so backend can access it: `client.webSocket.frontendMobSocket = client;` 
-  - mock backendUtils to sendToSocket to call `backendSocket.frontendMobSocket?.frontendSocket?.onmessageReceived({data: message,});`.  This puts backendSocket and mob name into dictionaries.
+  - MockRoundTripSocket extends FrontendSocket: overrides sendServer: backendUtils.processRequest(message, this);`
+  - frontendMobsocket = new FrontendMobSocket(new MockRoundtripSocket)
+
 
 - processRawRequest.ts
   - basically testing MobRequestBuilder - don't need to track message in client, can look at it directly

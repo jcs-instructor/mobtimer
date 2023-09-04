@@ -6,6 +6,7 @@ import {
   FrontendMobSocket,
   setSocketListener,
   Controller,
+  IFrontendSocket,
 } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
@@ -13,7 +14,7 @@ import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
 
 jest.useFakeTimers();
-let socketMobSocketMap: Map<MockRoundTripSocket, FrontendMobSocket> =new Map();
+let socketMobSocketMap: Map<IFrontendSocket, FrontendMobSocket> =new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
@@ -26,14 +27,16 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
     jest
       .spyOn(Broadcaster, "sendToSocket")
-      .mockImplementation((socketClient: WebSocket, message: string) => {
-        const roundTripSocket = socketClient as unknown as MockRoundTripSocket;
+      .mockImplementation((comboSocket: WebSocket, message: string) => {
+        const roundTripSocket = comboSocket as unknown as MockRoundTripSocket;
         const frontendMobSocket = socketMobSocketMap.get(roundTripSocket);
         frontendMobSocket?.webSocket?.onmessageReceived({
           data: message,
         });
       });
-    jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
+    jest
+      .spyOn(Controller.prototype, "updateSummary")
+      .mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -49,19 +52,32 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
   });
 
-    test.only("Two mob", async () => {
-      const client = controller1.client as FrontendMobSocket;
-      const mobName = "test-mob-1";
-      client.joinMob(mobName);
-      const client2 = controller2.client as FrontendMobSocket;
-      client2.joinMob(mobName);
-      client.update(10);
-      expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
-      expect(controller2.frontendMobTimer.durationMinutes).toEqual(10);
-      // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
-      // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
-    });
+  test.only("Two mob", async () => {
+    const client = controller1.client as FrontendMobSocket;
+    const mobName = "test-mob-1";
+    client.joinMob(mobName);
+    const client2 = controller2.client as FrontendMobSocket;
+    client2.joinMob(mobName);
+    client.update(10);
+    expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
+    expect(controller2.frontendMobTimer.durationMinutes).toEqual(10);
+    // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
+    // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
+  });
 
+  // interval.test.js
+
+  function startInterval(callback, intervalTime) {
+    function loop() {
+      callback();
+      setTimeout(loop, intervalTime);
+    }
+
+    loop();
+  }
+
+  // Your interval function
+  // Test case
   test("Start timer", () => {
     const client = new TestClient({});
     const mobName = "test-mob-2";
@@ -237,8 +253,7 @@ function setupController(controller: Controller) {
   controller = new Controller();
   controller.client = new FrontendMobSocket(new MockRoundTripSocket());
   const socket = controller.client.webSocket as MockRoundTripSocket;
-  socket.frontendMobSocket = controller.client;
-  socketMobSocketMap.set(socket, socket.frontendMobSocket);
+  socketMobSocketMap.set(socket, controller.client);
 
   // setTimeCreated(new Date());
   setSocketListener(

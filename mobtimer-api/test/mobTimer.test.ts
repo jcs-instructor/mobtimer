@@ -307,10 +307,8 @@ describe("MobTime", () => {
         mobTimer.shuffleParticipants();
         let currentOrder = JSON.stringify(mobTimer.participants);
         if (currentOrder === originalOrder) {
-          console.log("got original order", mobTimer.participants);
           gotOriginalOrder = true;
         } else if (currentOrder === differentOrder) {
-          console.log("got different order", mobTimer.participants);
           gotDifferentOrder = true;
         }
       } while (!gotBoth());

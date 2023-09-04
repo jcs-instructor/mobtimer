@@ -30,12 +30,7 @@ describe("Client WebSocket Server Integration", () => {
     _client2 = await openMobSocket(_url);
   });
 
-  beforeEach(() => {
-    console.log("Start: time", getTimeSinceBeforeAll(), getTestName());
-  });
-
   afterEach(() => {
-    console.log("End: time", getTimeSinceBeforeAll(), getTestName());
     _client1.resetClient();
     _client2.resetClient();
   });
@@ -118,11 +113,6 @@ describe("Client WebSocket Server Integration", () => {
 
     const numDigits = 1;
     const expected = 60 - delaySeconds;
-    console.log(
-      "mobstate",
-      _client1.lastSuccessfulMobState,
-      _client2.lastSuccessfulMobState
-    );
     expect(_client1.lastSuccessfulMobState.secondsRemaining).toBeCloseTo(
       expected,
       numDigits

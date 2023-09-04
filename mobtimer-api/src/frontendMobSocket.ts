@@ -101,6 +101,7 @@ class FrontendMobSocket {
   }
 
   sendToServer(requestString: string) {
+    this.heartBeat?.restart();
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {

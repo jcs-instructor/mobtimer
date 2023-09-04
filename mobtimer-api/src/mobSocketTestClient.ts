@@ -25,7 +25,7 @@ class MobSocketTestClient extends FrontendMobSocket {
     this._errorReceived = false;
     this._mobName = "";
   }
-  
+
   override joinMob(mobName: string) {
     this._mobName = mobName;
     super.joinMob(mobName);
@@ -39,7 +39,6 @@ class MobSocketTestClient extends FrontendMobSocket {
     const responseObject = this.convertToMobTimerResponse(
       message.data as string
     );
-    console.log("responseObject", responseObject);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -59,6 +58,19 @@ class MobSocketTestClient extends FrontendMobSocket {
 
   private convertToMobTimerResponse(response: string): MobTimerResponse {
     return JSON.parse(response) as MobTimerResponse;
+  }
+
+  async waitForAction(action: Action): Promise<void> {
+    const client = this;
+    return new Promise(function (resolve) {
+      const timeout = setTimeout(function () {
+        if (client.lastSuccessfulAction === action){
+          resolve();
+        }
+        client.waitForAction(action).then(resolve);
+      }, 10);
+      timeout.unref();
+    });
   }
 
   static async waitForOpenSocket(
@@ -83,7 +95,7 @@ class MobSocketTestClient extends FrontendMobSocket {
     const client = this;
     return new Promise(function (resolve) {
       const timeout = setTimeout(function () {
-        if (client.echoReceived) {          
+        if (client.echoReceived) {
           resolve();
         }
         client.waitForEcho().then(resolve);
@@ -104,7 +116,6 @@ class MobSocketTestClient extends FrontendMobSocket {
   }
 
   public get lastSuccessfulMobState(): MobState {
-    console.log("lastSuccessfulResponse", this.lastSuccessfulResponse.mobState);
     const lastSuccessfulResponse = this.lastSuccessfulResponse;
     return lastSuccessfulResponse.mobState;
   }
@@ -112,7 +123,7 @@ class MobSocketTestClient extends FrontendMobSocket {
   public get successfulResponses(): string[] {
     return [...this._successfulResponses];
   }
-  
+
   public get echoReceived(): boolean {
     return this._echoReceived;
   }

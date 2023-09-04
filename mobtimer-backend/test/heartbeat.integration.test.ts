@@ -1,10 +1,11 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { Heartbeat, TimeUtils } from "mobtimer-api";
+import { Action, Heartbeat, TimeUtils } from "mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
 import { MobSocketTestClient } from "mobtimer-api";
 import { WSFrontendSocket } from "mobtimer-api";
+
 
 describe("Heartbeat Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };
@@ -14,8 +15,9 @@ describe("Heartbeat Integration", () => {
   const url = `ws://localhost:${port}`;
   const toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
   let heartbeatCallbackFunc = () => {};
-  const heartbeatDurationSeconds = 0.4; // 0.2 didn't work, 0.24 worked sometimes, 0.25 worked for the few times we tried
-  const heartbeatMaxInactivitySeconds = (heartbeatDurationSeconds * 3) + toleranceSeconds; // after 3 heartbeats with no activity, the heartbeat will stop
+  const heartbeatDurationMinutes = TimeUtils.secondsToMinutes(0.4); // 0.2 didn't work, 0.24 worked sometimes, 0.25 worked for the few times we tried
+  const heartbeatDurationSeconds = 0.4;
+  const heartbeatMaxInactivityMinutes = (heartbeatDurationMinutes * 3) + TimeUtils.secondsToMinutes(toleranceSeconds); // after 3 heartbeats with no activity, the heartbeat will stop
   const counter = { value: 0 };
 
   beforeEach(async () => {
@@ -33,23 +35,27 @@ describe("Heartbeat Integration", () => {
   });
 
   test.skip("Heartbeat integration test", async () => {
+    jest.spyOn(MobSocketTestClient.prototype,'start');
     const client = await openSocketAlternative(url);
     const heartbeatFunc = jest.fn();
     client.heartBeat = new Heartbeat(
-     heartbeatDurationSeconds,
-     heartbeatMaxInactivitySeconds,
-     () => { counter.value++ }
-    )
-    client.heartBeat.start();
-     
-    await client.joinMob(_mobName1);
-    await client.start();
+     heartbeatDurationMinutes,
+     heartbeatMaxInactivityMinutes,
+     () => { console.log("inside heartbeat"); heartbeatFunc()}
+    );
+    client.joinMob(_mobName1);
+    client.start();
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 4 + toleranceSeconds);
     // By now we should have 3 heartbeats only (not 4) since we reached the max inactivity timeout
-    await client.pause();
+    setTimeout(()=>client.pause(),0);
+    await client.waitForAction(Action.Pause);
+    expect(heartbeatFunc).toBeCalledTimes(3);
+
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
+    setTimeout( () => client.reset(), 1000);
+    await client.waitForAction(Action.Reset);
+    expect(heartbeatFunc).toBeCalledTimes(5);
     client.heartBeat.stop();
-    console.log("debug heartbeat");
     client.successfulResponses.forEach ( (response)=> console.log(JSON.parse(response)))
     // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
     expect(counter.value).toEqual(5);
@@ -68,4 +74,5 @@ async function cleanUp(client: MobSocketTestClient) {
   await client.waitForLastResponse();
   await client.closeSocket();
 }
+
 
