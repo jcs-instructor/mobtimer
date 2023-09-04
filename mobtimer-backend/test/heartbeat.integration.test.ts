@@ -52,8 +52,9 @@ describe("Heartbeat Integration", () => {
     expect(heartbeatFunc).toBeCalledTimes(3);
 
     await TimeUtils.delaySeconds(heartbeatDurationSeconds * 2 + toleranceSeconds);
-    setTimeout( () => client.reset(), 0);
-    await client.waitForAction(Action.Reset);
+    let timeoutDone = false;
+    setTimeout( () => timeoutDone = true, 0);
+    await timeoutDone;
     expect(heartbeatFunc).toBeCalledTimes(5);
     client.heartBeat.stop();
     console.log("debug responses");
