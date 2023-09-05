@@ -29,12 +29,12 @@ export class Broadcaster {
     if (!sockets) {
       return;
     }
-    sockets.forEach((socketClient: WebSocket) => {
-      Broadcaster.sendToSocket(socketClient, message);
+    sockets.forEach((backendSocket: WebSocket) => {
+      Broadcaster.sendToClient(backendSocket, message);
     });
   }
 
-  static sendToSocket(socketClient: WebSocket, message: string) {
-    socketClient.send(message);
+  static sendToClient(backendSocket: WebSocket, message: string) {
+    backendSocket.send(message);
   }
 }

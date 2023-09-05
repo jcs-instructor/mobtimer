@@ -26,10 +26,6 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
-- [X] **Reconsider test names** to make clear integration vs. what mocked,... (maybe not use term round-trip?)
-      - Use ".network.integration.test.ts" pattern if making a network call (or maybe "socket" / "fakeSocket" instead of 
-      "network" / "nonNetwork")
-      - ...
 - [ ] **Review flow.md**
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP

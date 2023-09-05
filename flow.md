@@ -1,9 +1,11 @@
 Mobtimer Project Flow
 
-```
+# App.tsx
+
+## Start aplication
 - wrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket;
 - controller.client = new FrontendMobSocket(wrapperSocket);
-    - constructor(webSocket: IFrontendSocket | undefined = undefined) {
+    - constructor(webSocket: IFrontendSocket | undefined = undefined) 
       - this._webSocket = webSocket;
       - methods to send to server
 - setSocketListener(controller, playAudio,getActionButtonLabel); - sets onMessageReceived for wrapperSocket **Could change parameter to socket and inline getActionButtonLabel**
@@ -14,10 +16,9 @@ Mobtimer Project Flow
     - React "set" functions (set below)
 - controller.injectSetActionButtonLabel(setActionButtonLabel);
 
+## User joins a mob
 
-User joins a mob
-
-Client sends
+### Client sends
 - submitJoinMobRequest
   - controller.frontendMobTimer = new mobTimer(mobName);
   - controller.client?.joinMob(mobName);
@@ -25,7 +26,8 @@ Client sends
     - frontendMobSocket.joinMob =>
       - sendToSever (overridden in mock class)
       - webSocket.send
-Server receives
+
+### Server receives
 - webSocket.on
   - BackendUtils.processRequest
     - BackendUtils._sendResponse
@@ -34,13 +36,10 @@ Server receives
         - Broadcaster.sendToSocket (mocked in test to look up associated mob timer)
            - socket.send
 
+# Tests 
 
-
-  - frontendMobSocket
-    
-```
-
-- sendToSocket.test.ts: tests Controller=>backendUtils=>sendToSocket (mocks)
+## requestResponse.mockSocket.integration.test.ts
+- Tests Controller=>backendUtils=>sendToSocket (mocks)
   - MockRoundTripSocket extends FrontendSocket: overrides sendServer: backendUtils.processRequest(message, this);`
   - frontendMobsocket = new FrontendMobSocket(new MockRoundtripSocket)
 
@@ -53,14 +52,11 @@ Server receives
   - check BackendUtils.processRequest calls sendToSocket with specific values
   - check onmessageReceived makes changes to the frontend and calls set functions
 
+# Refactorings
 
 - renamings:
-  - consistent naming: heartbeatIntegration.test.ts or heartbeat.integration.test.ts
-  - change "frontendMobSocket" to "(mob?)requestSender" (and FrontendMobSocket)
-  - change "controller.client" to "controller.requestSender"
-  - change "client =" to "requestSender =" 
-  - change "socketClient" to "backendSocket" in Broadcaster
   - change "webSocket" in backend code to "backendSocket"
+
 - other refactorings
   - extract code in frontendMobSocket. sendToServer to  FrontendBroadcast.sendToServer so easier to mock
   - if only updating data, change to action "update"

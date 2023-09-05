@@ -1,10 +1,10 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { FrontendMobSocket } from "./frontendMobSocket";
+import { FrontendMobSocket as Client } from "./client";
 import { MobState } from "./mobState";
 import { IFrontendSocket } from "./iFrontendSocket";
 
-class MobSocketTestClient extends FrontendMobSocket {
+class TestClient extends Client {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
@@ -74,11 +74,11 @@ class MobSocketTestClient extends FrontendMobSocket {
 
   static async waitForOpenSocket(
     webSocket: IFrontendSocket
-  ): Promise<MobSocketTestClient> {
+  ): Promise<TestClient> {
     if (!webSocket) {
       throw new Error("No socket"); // todo: use constant from superclass
     }
-    const mobSocketTestClient = new MobSocketTestClient(webSocket);
+    const mobSocketTestClient = new TestClient(webSocket);
     await mobSocketTestClient.waitForSocketState(
       mobSocketTestClient.webSocket?.OPEN_CODE
     );
@@ -132,4 +132,4 @@ class MobSocketTestClient extends FrontendMobSocket {
   }
 }
 
-export { MobSocketTestClient };
+export { TestClient as MobSocketTestClient };

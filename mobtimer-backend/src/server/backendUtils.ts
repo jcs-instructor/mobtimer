@@ -157,7 +157,7 @@ export class backendUtils {
       Broadcaster.broadcastResponseToMob(successfulResponse, mobName); // todo: RoomManager.broadcast(message)) // todo consider moving mobName up a level
     } else if (response) {
       // Send only to requesting client:
-      Broadcaster.sendToSocket(webSocket, JSON.stringify(response));
+      Broadcaster.sendToClient(webSocket, JSON.stringify(response));
     }
   }
 

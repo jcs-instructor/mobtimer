@@ -1,6 +1,6 @@
 import { Status } from "./status";
 import * as MobTimerResponses from "./mobTimerResponse";
-import { FrontendMobSocket } from "./frontendMobSocket";
+import { FrontendMobSocket } from "./client";
 import { MobTimer } from "./mobTimer";
 console.log("Controller redeployed 3");
 
