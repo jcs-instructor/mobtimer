@@ -8,10 +8,7 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
-- [ ] **Recover lost Controller code** on heartbeat2 branch
 - [ ] **Reset npmjs password**
-- [x] **Generate exports watch** doesn't seem to be refreshing on change
-- [x] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
 - [ ] **Document when to use console.info vs console.log** in CONTRIBUTING.md
@@ -32,6 +29,7 @@ Joel:
 - [ ] **Reconsider test names** to make clear integration vs. what mocked,... (maybe not use term round-trip?)
       - Use ".network.integration.test.ts" pattern if making a network call
       - ...
+- [ ] **Review roundtrip-test.md**
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
       - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
