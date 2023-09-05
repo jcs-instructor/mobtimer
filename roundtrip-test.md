@@ -58,7 +58,10 @@ Server receives
   - change "controller.client" to "controller.requestSender"
   - change "client =" to "requestSender =" 
   - change "socketClient" to "backendSocket" in Broadcaster
+  - change "webSocket" in backend code to "backendSocket"
 - other refactorings
   - extract code in frontendMobSocket. sendToServer to  FrontendBroadcast.sendToServer so easier to mock
   - if only updating data, change to action "update"
   - currently sending entire state, not clean?
+  - move BackendUtils._sendResponse into Broadcaster
+
