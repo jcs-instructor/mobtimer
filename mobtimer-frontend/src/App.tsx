@@ -4,11 +4,11 @@ import "./App.css";
 import Room from "./components/Room";
 import {
   Command,
-  IFrontendSocket,
+  IClientSocket,
   Client,
   MobTimer,
   TimeUtils,
-  W3CFrontendSocket,
+  W3CClientSocket,
 } from "mobtimer-api";
 import { Controller, setSocketListener } from "mobtimer-api";
 import Launch from "./components/Launch";
@@ -74,7 +74,7 @@ const App = () => {
       if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
         setConnecting(true);
         setConnected(false);
-        wrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket;
+        wrapperSocket = new W3CClientSocket(url) as IClientSocket;
       } else {
         console.info("Connected");
         setConnected(true);
@@ -99,7 +99,7 @@ const App = () => {
     if (connected) {
       return;
     }
-    let wrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket;
+    let wrapperSocket = new W3CClientSocket(url) as IClientSocket;
     if (!connecting) {
       initialize();
     }
