@@ -1,15 +1,15 @@
-import { FrontendMobSocket, MobTimerResponses, Action, TimeUtils, Controller } from "./index";
+import { Client, MobTimerResponses, Action, TimeUtils, Controller } from "./index";
 export function setSocketListener(
   controller: Controller,
   playAudio: () => void,
   getActionButtonLabel: () => string
 ) {
-    const frontendMobSocket = controller.client as FrontendMobSocket; 
-  if (!frontendMobSocket.webSocket) {
+    const client = controller.client as Client; 
+  if (!client.webSocket) {
     throw new Error("WebSocket is undefined");
   }
 
-  frontendMobSocket.webSocket.onmessageReceived = (message: { data: any }) => {
+  client.webSocket.onmessageReceived = (message: { data: any }) => {
     // Get response from server
     onmessageReceivedFunc(controller, message, playAudio, getActionButtonLabel);
   };

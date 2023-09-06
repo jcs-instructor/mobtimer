@@ -5,7 +5,7 @@ import Room from "./components/Room";
 import {
   Command,
   IFrontendSocket,
-  FrontendMobSocket,
+  Client,
   MobTimer,
   TimeUtils,
   W3CFrontendSocket,
@@ -65,8 +65,8 @@ const App = () => {
   controller.injectSetParticipants(setParticipants);
   controller.injectSetRoles(setRoles);
   controller.injectSetSecondsRemainingString(setSecondsRemainingString);
-  let client: FrontendMobSocket;
-  client = controller.client as FrontendMobSocket;
+  let client: Client;
+  client = controller.client as Client;
 
   useEffect(() => {
     // initialize function
@@ -81,7 +81,7 @@ const App = () => {
         setConnecting(false);
         clearInterval(interval);
       }
-      controller.client = new FrontendMobSocket(wrapperSocket);
+      controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
       setSocketListener(
         controller,

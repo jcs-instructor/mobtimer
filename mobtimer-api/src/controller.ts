@@ -1,6 +1,6 @@
 import { Status } from "./status";
 import * as MobTimerResponses from "./mobTimerResponse";
-import { FrontendMobSocket } from "./client";
+import { Client } from "./client";
 import { MobTimer } from "./mobTimer";
 console.log("Controller redeployed 3");
 
@@ -77,7 +77,7 @@ export class Controller {
   }
 
   frontendMobTimer: MobTimer = new MobTimer("");
-  client?: FrontendMobSocket;
+  client?: Client;
 
   getAppTitle() {
     return "Mob Timer";
@@ -161,7 +161,7 @@ export class Controller {
     }
   }
 
-  toggleStatus(client: FrontendMobSocket, frontendMobtimer: MobTimer) {
+  toggleStatus(client: Client, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: {
         client.pause();

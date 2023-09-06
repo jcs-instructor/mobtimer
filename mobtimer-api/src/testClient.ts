@@ -1,6 +1,6 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { FrontendMobSocket as Client } from "./client";
+import { Client as Client } from "./client";
 import { MobState } from "./mobState";
 import { IFrontendSocket } from "./iFrontendSocket";
 

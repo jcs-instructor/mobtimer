@@ -4,7 +4,7 @@ import { IFrontendSocket } from "./iFrontendSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
 import { Heartbeat } from './index';
 const noSocketErrorMessage = "No socket";
-class FrontendMobSocket {
+class Client {
   private _webSocket: IFrontendSocket | undefined;
   private _heartbeat?: Heartbeat;
 
@@ -37,7 +37,7 @@ class FrontendMobSocket {
         if (socket.socketState === state) {
           resolve();
         } else {
-          FrontendMobSocket.waitForSocketState(socket, state).then(resolve);
+          Client.waitForSocketState(socket, state).then(resolve);
         }
       }, 500);
       // todo: timeout.unref() fails when running from frontend; why?
@@ -49,7 +49,7 @@ class FrontendMobSocket {
     if (!this._webSocket) {
       return Promise.reject("No socket to wait for");
     }
-    return FrontendMobSocket.waitForSocketState(this._webSocket, state);
+    return Client.waitForSocketState(this._webSocket, state);
   }
 
   sendEchoRequest() {
@@ -122,4 +122,4 @@ class FrontendMobSocket {
   }
 }
 
-export { FrontendMobSocket };
+export { Client };

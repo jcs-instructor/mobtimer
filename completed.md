@@ -224,7 +224,7 @@
 
 2022-12-15
 
-- [x] Refactor. Extend MobSocketTestClient from FrontendMobSocket, remove boolean for tracking, move onMessage and related code (lastResponse etc) from FrontendMobSocket to MobSocketTestClient
+- [x] Refactor. Extend MobSocketTestClient from Client, remove boolean for tracking, move onMessage and related code (lastResponse etc) from Client to MobSocketTestClient
 
 2022-12-15 (completed before this date)
 

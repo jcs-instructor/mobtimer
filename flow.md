@@ -4,7 +4,7 @@ Mobtimer Project Flow
 
 ## Start aplication
 - wrapperSocket = new W3CFrontendSocket(url) as IFrontendSocket;
-- controller.client = new FrontendMobSocket(wrapperSocket);
+- controller.client = new Client(wrapperSocket);
     - constructor(webSocket: IFrontendSocket | undefined = undefined) 
       - this._webSocket = webSocket;
       - methods to send to server
@@ -43,7 +43,7 @@ Mobtimer Project Flow
 ## requestResponse.mockSocket.integration.test.ts
 - Tests Controller=>backendUtils=>sendToSocket (mocks)
   - MockRoundTripSocket extends FrontendSocket: overrides sendServer: backendUtils.processRequest(message, this);`
-  - frontendMobsocket = new FrontendMobSocket(new MockRoundtripSocket)
+  - frontendMobsocket = new Client(new MockRoundtripSocket)
 
 ## backendutils-getresponse.ts
   - basically testing MobRequestBuilder (getResponse simply converts to ) - don't need to track message in client, can look at it directly
@@ -59,7 +59,7 @@ Mobtimer Project Flow
   - change "webSocket" in backend code to "backendSocket"
 
 - other refactorings
-  - extract code in frontendMobSocket. sendToServer to  FrontendBroadcast.sendToServer so easier to mock
+  - extract code in client. sendToServer to  FrontendBroadcast.sendToServer so easier to mock
   - if only updating data, change to action "update"
   - currently sending entire state, not clean?
   - move BackendUtils._sendResponse into Broadcaster

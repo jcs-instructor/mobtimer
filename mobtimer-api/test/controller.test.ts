@@ -1,6 +1,6 @@
 import {
   IFrontendSocket,
-  FrontendMobSocket,
+  Client,
   Status,
   W3CFrontendSocket,
 } from "../src";

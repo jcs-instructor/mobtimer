@@ -3,7 +3,7 @@ import {
   Status,
   TimeUtils,
   Action,
-  FrontendMobSocket,
+  Client,
   setSocketListener,
   Controller,
   IFrontendSocket,
@@ -14,7 +14,7 @@ import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
 
 jest.useFakeTimers();
-let socketMobSocketMap: Map<IFrontendSocket, FrontendMobSocket> =new Map();
+let socketMobSocketMap: Map<IFrontendSocket, Client> =new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
@@ -29,8 +29,8 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
       .spyOn(Broadcaster, "sendToClient")
       .mockImplementation((comboSocket: WebSocket, message: string) => {
         const roundTripSocket = comboSocket as unknown as MockRoundTripSocket;
-        const frontendMobSocket = socketMobSocketMap.get(roundTripSocket);
-        frontendMobSocket?.webSocket?.onmessageReceived({
+        const client = socketMobSocketMap.get(roundTripSocket);
+        client?.webSocket?.onmessageReceived({
           data: message,
         });
       });
@@ -44,7 +44,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   });
 
   test.only("Create mob", async () => {
-    const client = controller1.client as FrontendMobSocket;
+    const client = controller1.client as Client;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
     expect(controller1.frontendMobTimer.durationMinutes).toEqual(5);
@@ -53,10 +53,10 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   });
 
   test.only("Two mob", async () => {
-    const client = controller1.client as FrontendMobSocket;
+    const client = controller1.client as Client;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
-    const client2 = controller2.client as FrontendMobSocket;
+    const client2 = controller2.client as Client;
     client2.joinMob(mobName);
     client.update(10);
     expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
@@ -251,7 +251,7 @@ function setupController(controller: Controller) {
   const playAudio = jest.fn();
   const getActionButtonLabel = jest.fn();
   controller = new Controller();
-  controller.client = new FrontendMobSocket(new MockRoundTripSocket());
+  controller.client = new Client(new MockRoundTripSocket());
   const socket = controller.client.webSocket as MockRoundTripSocket;
   socketMobSocketMap.set(socket, controller.client);
 
