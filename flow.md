@@ -9,11 +9,7 @@ Mobtimer Project Flow
       - this._webSocket = webSocket;
       - methods to send to server
 - setSocketListener(controller, playAudio,getActionButtonLabel); - sets onMessageReceived for wrapperSocket **Could change parameter to socket and inline getActionButtonLabel**
-  - onMessageReceived => 
-    - playAudio
-    - translateResponseData
-    - set frontendMobtimer values
-    - React "set" functions (set below)
+  - sets onMessageReceived => see Client receives below 
 - controller.injectSetActionButtonLabel(setActionButtonLabel);
 
 ## User joins a mob
@@ -22,12 +18,10 @@ Mobtimer Project Flow
 - submitJoinMobRequest
   - controller.frontendMobTimer = new mobTimer(mobName);
   - controller.client?.joinMob(mobName);
-    - client is frontendMobSocket
-    - frontendMobSocket.joinMob =>
-      - sendToSever (overridden in mock class)
-      - webSocket.send
+    - sendToSever (overridden in mock class)
+    - webSocket.send
 
-### Server receives
+### Server receives and sends
 - webSocket.on
   - BackendUtils.processRequest
     - BackendUtils._sendResponse
@@ -36,6 +30,14 @@ Mobtimer Project Flow
         - Broadcaster.sendToSocket (mocked in test to look up associated mob timer)
            - socket.send
 
+### Client receives
+- webSocket.on
+  - onMessageReceived
+    - playAudio
+    - translateResponseData
+    - set frontendMobtimer values
+    - React "set" functions (set below)  
+
 # Tests 
 
 ## requestResponse.mockSocket.integration.test.ts
@@ -43,9 +45,8 @@ Mobtimer Project Flow
   - MockRoundTripSocket extends FrontendSocket: overrides sendServer: backendUtils.processRequest(message, this);`
   - frontendMobsocket = new FrontendMobSocket(new MockRoundtripSocket)
 
-
-- processRawRequest.ts
-  - basically testing MobRequestBuilder - don't need to track message in client, can look at it directly
+## backendutils-getresponse.ts
+  - basically testing MobRequestBuilder (getResponse simply converts to ) - don't need to track message in client, can look at it directly
 
 - other ideas for tests
   - check Controller.client.<action> calls sendToServer with specific values

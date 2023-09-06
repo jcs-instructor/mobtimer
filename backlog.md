@@ -27,7 +27,6 @@ Joel:
 
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Review flow.md**
-- [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
       - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
       - [x] In non-integration request repsonse tests use jest mock time

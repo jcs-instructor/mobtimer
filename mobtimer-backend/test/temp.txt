@@ -42,7 +42,7 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
     ✓ Running to Paused (9 ms)
     ✓ Running to Ready (6 ms)
 
- FAIL  mobtimer-backend/test/sendToSocket.test.ts
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
   Process Raw Request tests (no socket communication, so no expiration tests here)
     ✕ Create mob (18 ms)
     ✕ Two mob (2 ms)
@@ -75,8 +75,8 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
       239 |   socket.frontendMobSocket = controller1.client;
 
-      at controller1 (mobtimer-backend/test/sendToSocket.test.ts:236:3)
-      at Object.setupController (mobtimer-backend/test/sendToSocket.test.ts:24:19)
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
@@ -90,8 +90,8 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
       239 |   socket.frontendMobSocket = controller1.client;
 
-      at controller1 (mobtimer-backend/test/sendToSocket.test.ts:236:3)
-      at Object.setupController (mobtimer-backend/test/sendToSocket.test.ts:24:19)
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
 
 
 > Test run finished at 8/30/2023, 2:25:21 PM <
@@ -862,7 +862,7 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
       at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
 
- FAIL  mobtimer-backend/test/sendToSocket.test.ts
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
   Process Raw Request tests (no socket communication, so no expiration tests here)
     ✕ Create mob (20 ms)
     ✕ Two mob (2 ms)
@@ -895,8 +895,8 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
       239 |   socket.frontendMobSocket = controller1.client;
 
-      at controller1 (mobtimer-backend/test/sendToSocket.test.ts:236:3)
-      at Object.setupController (mobtimer-backend/test/sendToSocket.test.ts:24:19)
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
@@ -910,8 +910,8 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
       239 |   socket.frontendMobSocket = controller1.client;
 
-      at controller1 (mobtimer-backend/test/sendToSocket.test.ts:236:3)
-      at Object.setupController (mobtimer-backend/test/sendToSocket.test.ts:24:19)
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
 
   console.log
     End: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Resume timer
@@ -3161,7 +3161,7 @@ Done in 8.49s.
 > Test run started at 8/30/2023, 2:26:47 PM <
 
 yarn run v1.22.19
-$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false --testPathPattern '/Users/ethanadmin/projects/mobtimer/mobtimer-backend/test/sendToSocket\.test\.ts'
+$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false --testPathPattern '/Users/ethanadmin/projects/mobtimer/mobtimer-backend/test/sendToClient\.test\.ts'
   console.log
     Controller redeployed 3
 
@@ -3196,7 +3196,7 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
 
 > Test run started at 8/30/2023, 2:26:49 PM <
 
- FAIL  mobtimer-backend/test/sendToSocket.test.ts
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
   Process Raw Request tests (no socket communication, so no expiration tests here)
     ✕ Create mob (9 ms)
     ✕ Two mob (1 ms)
@@ -3229,7 +3229,7 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
@@ -3243,7 +3243,7 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
 
 
 > Test run finished at 8/30/2023, 2:26:49 PM <
@@ -3259,7 +3259,7 @@ Ran all test suites related to changed files.
 
       at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
 
- FAIL  mobtimer-backend/test/sendToSocket.test.ts
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
   Process Raw Request tests (no socket communication, so no expiration tests here)
     ✕ Create mob (4 ms)
     ✕ Two mob (1 ms)
@@ -3292,7 +3292,7 @@ Ran all test suites related to changed files.
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
 
   ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
 
@@ -3306,7 +3306,7 @@ Ran all test suites related to changed files.
       37 |
       38 |   afterEach(() => {
 
-      at Object.Controller (mobtimer-backend/test/sendToSocket.test.ts:35:16)
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
 
 
 > Test run finished at 8/30/2023, 2:26:50 PM <
@@ -3315,7 +3315,7 @@ Test Suites: 1 failed, 1 total
 Tests:       2 failed, 16 skipped, 18 total
 Snapshots:   0 total
 Time:        0.923 s, estimated 3 s
-Ran all test suites matching /\/Users\/ethanadmin\/projects\/mobtimer\/mobtimer-backend\/test\/sendToSocket\.test\.ts/i.
+Ran all test suites matching /\/Users\/ethanadmin\/projects\/mobtimer\/mobtimer-backend\/test\/sendToClient\.test\.ts/i.
 Done in 2.39s.
 
 > Test run exited at 8/30/2023, 2:26:50 PM <
@@ -3324,7 +3324,7 @@ yarn run v1.22.19
 
 > Test run started at 8/30/2023, 2:27:20 PM <
 
-$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --testNamePattern 'Process Raw Request tests \(no socket communication, so no expiration tests here\) Create mob' --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false --testPathPattern '/Users/ethanadmin/projects/mobtimer/mobtimer-backend/test/sendToSocket\.test\.ts'
+$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --testNamePattern 'Process Raw Request tests \(no socket communication, so no expiration tests here\) Create mob' --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false --testPathPattern '/Users/ethanadmin/projects/mobtimer/mobtimer-backend/test/sendToClient\.test\.ts'
   console.log
     Controller redeployed 3
 
@@ -3430,7 +3430,7 @@ $ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile
       at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
           at Set.forEach (<anonymous>)
 
- PASS  mobtimer-backend/test/sendToSocket.test.ts
+ PASS  mobtimer-backend/test/sendToClient.test.ts
   Process Raw Request tests (no socket communication, so no expiration tests here)
     ✓ Create mob (24 ms)
     ✓ Two mob (37 ms)
@@ -3481,7 +3481,7 @@ Ran all test suites related to changed files.
       at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
           at Set.forEach (<anonymous>)
 
- PASS  mobtimer-backend/test/sendToSocket.test.ts
+ PASS  mobtimer-backend/test/sendToClient.test.ts
   Process Raw Request tests (no socket communication, so no expiration tests here)
     ✓ Create mob (24 ms)
     ○ skipped Two mob
@@ -3509,7 +3509,7 @@ Test Suites: 1 passed, 1 total
 Tests:       17 skipped, 1 passed, 18 total
 Snapshots:   0 total
 Time:        0.734 s, estimated 1 s
-Ran all test suites matching /\/Users\/ethanadmin\/projects\/mobtimer\/mobtimer-backend\/test\/sendToSocket\.test\.ts/i with tests matching "Process Raw Request tests \(no socket communication, so no expiration tests here\) Create mob".
+Ran all test suites matching /\/Users\/ethanadmin\/projects\/mobtimer\/mobtimer-backend\/test\/sendToClient\.test\.ts/i with tests matching "Process Raw Request tests \(no socket communication, so no expiration tests here\) Create mob".
 Done in 1.84s.
 
 > Test run exited at 8/30/2023, 2:27:22 PM <
