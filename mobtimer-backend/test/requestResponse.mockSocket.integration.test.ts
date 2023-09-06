@@ -6,7 +6,7 @@ import {
   Client,
   setSocketListener,
   Controller,
-  IFrontendSocket,
+  IClientSocket,
 } from "mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
@@ -14,7 +14,7 @@ import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
 
 jest.useFakeTimers();
-let socketMobSocketMap: Map<IFrontendSocket, Client> =new Map();
+let socketMobSocketMap: Map<IClientSocket, Client> =new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired

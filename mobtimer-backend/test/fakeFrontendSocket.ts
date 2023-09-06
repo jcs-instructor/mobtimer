@@ -1,7 +1,7 @@
 import { Controller, Client } from "mobtimer-api";
-import { IFrontendSocket } from "../../mobtimer-api/src/iFrontendSocket";
+import { IClientSocket } from "../../mobtimer-api/src/iClientSocket";
 
-export class FakeFrontendSocket implements IFrontendSocket {
+export class FakeClientSocket implements IClientSocket {
   client?: Client;
   controller?: Controller;
   sendToServer = (message: string) => {

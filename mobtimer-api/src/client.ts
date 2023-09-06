@@ -1,14 +1,14 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
-import { IFrontendSocket } from "./iFrontendSocket";
+import { IClientSocket } from "./iClientSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
 import { Heartbeat } from './index';
 const noSocketErrorMessage = "No socket";
 class Client {
-  private _webSocket: IFrontendSocket | undefined;
+  private _webSocket: IClientSocket | undefined;
   private _heartbeat?: Heartbeat;
 
-  constructor(webSocket: IFrontendSocket | undefined = undefined) {
+  constructor(webSocket: IClientSocket | undefined = undefined) {
     this._webSocket = webSocket;
   }
 
@@ -26,7 +26,7 @@ class Client {
    * @param state The desired `readyState` for the socket
    */
   static async waitForSocketState(
-    socket: IFrontendSocket | undefined,
+    socket: IClientSocket | undefined,
     state: number | undefined
   ): Promise<void> {
     if (!socket) {
@@ -109,7 +109,7 @@ class Client {
     }
   }
 
-  public get webSocket(): IFrontendSocket | undefined {
+  public get webSocket(): IClientSocket | undefined {
     return this._webSocket;
   }
 

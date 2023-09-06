@@ -1,8 +1,8 @@
 import {
-  IFrontendSocket,
+  IClientSocket,
   Client,
   Status,
-  W3CFrontendSocket,
+  W3CClientSocket,
 } from "../src";
 import { Controller } from "../src/controller";
 const controller = Controller.staticController;

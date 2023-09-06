@@ -2,16 +2,16 @@ import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
 import { Client as Client } from "./client";
 import { MobState } from "./mobState";
-import { IFrontendSocket } from "./iFrontendSocket";
+import { IClientSocket } from "./iClientSocket";
 
 class TestClient extends Client {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
   private _mobName: string = "";
-  private _socket: IFrontendSocket;
+  private _socket: IClientSocket;
 
-  constructor(webSocket: IFrontendSocket) {
+  constructor(webSocket: IClientSocket) {
     super(webSocket);
     this._socket = webSocket;
     this._socket.onmessageReceived = (message) => {
@@ -73,7 +73,7 @@ class TestClient extends Client {
   }
 
   static async waitForOpenSocket(
-    webSocket: IFrontendSocket
+    webSocket: IClientSocket
   ): Promise<TestClient> {
     if (!webSocket) {
       throw new Error("No socket"); // todo: use constant from superclass

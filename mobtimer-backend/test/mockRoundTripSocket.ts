@@ -1,8 +1,8 @@
-import { IFrontendSocket } from "../../mobtimer-api/src/iFrontendSocket";
+import { IClientSocket } from "../../mobtimer-api/src/iClientSocket";
 import { backendUtils } from "../src/server/backendUtils";
 import { Client } from 'mobtimer-api';
 
-export class MockRoundTripSocket implements IFrontendSocket {
+export class MockRoundTripSocket implements IClientSocket {
   client?: Client;
   sendToServer = (message: string) => {
     backendUtils.processRequest(message, this);

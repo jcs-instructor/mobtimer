@@ -5,12 +5,12 @@ import { commands } from "vscode";
 
 import {
   Command,
-  IFrontendSocket,
+  IClientSocket,
   Client,
   MobTimer,
   MobTimerResponses,
 } from "mobtimer-api";
-import { WSFrontendSocket } from "mobtimer-api";
+import { WSClientSocket } from "mobtimer-api";
 const controller = Controller.staticController;
 
 export class VscodeMobTimer {
@@ -28,7 +28,7 @@ export class VscodeMobTimer {
     console.log('"mobtimer.display" is now active!');
 
     
-    const wrapperSocket = new WSFrontendSocket(url) as IFrontendSocket;
+    const wrapperSocket = new WSClientSocket(url) as IClientSocket;
     controller.client = new Client(wrapperSocket);
     console.log(
       "Debug controller.client",
