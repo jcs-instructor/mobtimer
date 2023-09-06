@@ -26,6 +26,7 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [x] **Deploy to onrender so can dogfood**
+- [ ] **Docker** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM (and/or other solution)
 - [ ] **Review flow.md**
 - [ ] **Speed up tests** WIP
       - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
@@ -125,7 +126,6 @@ Joel:
 - [ ] Maybe: Add "localhost" to the text in browser (after "TEAM:") to make more obvious
 - [ ] Follow up on: "Detected presence of yarn.lock. Using 'yarn' instead of 'npm' (to override this pass '--no-yarn' on the command line)."
 - [ ] **VSIX script & task** - Add a script to update the vsix file, and call from tasks.json
-- [ ] **Docker?** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM
 - [ ] **UI / Manual tests** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
   - [ ] List out what needs to be tested manually (and automated if possible)
       - See completed.md for ideas, and...
