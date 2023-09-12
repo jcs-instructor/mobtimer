@@ -1,38 +1,42 @@
 import { Status } from "./status";
 import * as MobTimerResponses from "./mobTimerResponse";
-import { FrontendMobSocket } from "./frontendMobSocket";
+import { Client } from "./client";
 import { MobTimer } from "./mobTimer";
 console.log("Controller redeployed 3");
 
 export class Controller {
+  
+  static staticController: Controller = new Controller();
 
-  static updateSummary() {
+  updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
-      Controller.createListOfParticipantsWithRoleEmojisPrepended();
-    document.title = `${Controller.statusSymbolText()}${
-      Controller.secondsRemainingStringWithoutLeadingZero
-    } ${participantsString} - ${Controller.getAppTitle()}`;
+      this.createListOfParticipantsWithRoleEmojisPrepended();
+    document.title = `${this.statusSymbolText()}${
+      this.secondsRemainingStringWithoutLeadingZero
+    } ${participantsString} - ${this.getAppTitle()}`;
   }
 
-  public static createListOfParticipantsWithRoleEmojisPrepended(): string {
-    const participantsCount = Controller.frontendMobTimer.participants.length;
-    const rolesCount = Controller.frontendMobTimer.roles.length;
+  public createListOfParticipantsWithRoleEmojisPrepended(): string {
+    const participantsCount = this.frontendMobTimer.participants.length;
+    const rolesCount = this.frontendMobTimer.roles.length;
     const minCount = Math.min(participantsCount, rolesCount);
 
     let participants = [] as string[];
     if (minCount > 0) {
       // build up a participant string with the role emoji prefix
       for (let i = 0; i < minCount; i++) {
-        const rolePrefix = this.extractFirstEmoji(Controller.frontendMobTimer.roles[i]);
-        const participant = Controller.frontendMobTimer.participants[i];
+        const rolePrefix = this.extractFirstEmoji(
+          this.frontendMobTimer.roles[i]
+        );
+        const participant = this.frontendMobTimer.participants[i];
         const combo = `${rolePrefix}${participant}`;
         participants.push(combo);
       }
       // if there are more participants than roles, add the remaining participants without a role prefix
       if (participantsCount > rolesCount) {
         for (let i = rolesCount; i < participantsCount; i++) {
-          const participant = Controller.frontendMobTimer.participants[i];
+          const participant = this.frontendMobTimer.participants[i];
           participants.push(participant);
         }
       }
@@ -40,7 +44,7 @@ export class Controller {
     return participants.join(",");
   }
 
-  static extractFirstEmoji(str: string): string {
+  extractFirstEmoji(str: string): string {
     // Regex is copied from: https://unicode.org/reports/tr51/
     const emojiRegex =
       /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
@@ -48,17 +52,16 @@ export class Controller {
     return match ? match[0] : "";
   }
 
-  static get secondsRemainingStringWithoutLeadingZero() {
-    const secondsRemainingString =
-      Controller.frontendMobTimer.secondsRemainingString;
+  get secondsRemainingStringWithoutLeadingZero() {
+    const secondsRemainingString = this.frontendMobTimer.secondsRemainingString;
     return secondsRemainingString.startsWith("0")
       ? secondsRemainingString.substring(1)
       : secondsRemainingString;
   }
 
-  static statusSymbolText() {
+  statusSymbolText() {
     let symbol = "";
-    switch (Controller.frontendMobTimer.status) {
+    switch (this.frontendMobTimer.status) {
       case Status.Running:
         symbol = "▶️";
         break;
@@ -73,52 +76,59 @@ export class Controller {
     return symbol;
   }
 
-  static frontendMobTimer: MobTimer = new MobTimer("");
-  static client: FrontendMobSocket;
+  frontendMobTimer: MobTimer = new MobTimer("");
+  client?: Client;
 
-  static getAppTitle() {
+  getAppTitle() {
     return "Mob Timer";
   }
 
   // injections -----------------------
 
   // inject duration minutes
-  static setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetDurationMinutes(
+  setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  injectSetDurationMinutes(
     setDurationMinutesFunction: (durationMinutes: number) => void
   ) {
     this.setDurationMinutes = setDurationMinutesFunction;
   }
 
+  setActionButtonLabel = (_label: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  injectSetActionButtonLabel(
+    setActionButtonLabel: (label: string) => void
+  ) {
+    this.setActionButtonLabel = setActionButtonLabel;
+  }
+
   // inject time string
-  static setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetSecondsRemainingString(
+  setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  injectSetSecondsRemainingString(
     setSecondsRemainingStringFunction: (timeString: string) => void
   ): void {
     this.setSecondsRemainingString = (timeString: string) => {
       setSecondsRemainingStringFunction(timeString);
       // Time ticking is tracked on the front end, so we need to update the summary here
-      Controller.updateSummary();
+      this.updateSummary();
     };
   }
 
   // inject participants
-  static setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetParticipants(
+  setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  injectSetParticipants(
     setParticipantsFunction: (participants: string[]) => void
   ) {
     this.setParticipants = setParticipantsFunction;
   }
 
   // inject roles
-  static setRoles = (_roles: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  static injectSetRoles(setRolesFunction: (roles: string[]) => void) {
+  setRoles = (_roles: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
+  injectSetRoles(setRolesFunction: (roles: string[]) => void) {
     this.setRoles = setRolesFunction;
   }
 
   // other functions -----------------------
 
-  static translateResponseData(response: MobTimerResponses.SuccessfulResponse) {
+  translateResponseData(response: MobTimerResponses.SuccessfulResponse) {
     const mobState = response.mobState;
     const mobStatus = mobState.status;
     const durationMinutes = mobState.durationMinutes;
@@ -133,8 +143,8 @@ export class Controller {
       secondsRemaining,
     };
   }
-  
-  static getActionButtonLabel(backendStatus: Status) {
+
+  getActionButtonLabel(backendStatus: Status) {
     switch (backendStatus) {
       case Status.Running: {
         return "⏸️ Pause";
@@ -151,7 +161,7 @@ export class Controller {
     }
   }
 
-  static toggleStatus(client: FrontendMobSocket, frontendMobtimer: MobTimer) {
+  toggleStatus(client: Client, frontendMobtimer: MobTimer) {
     switch (frontendMobtimer.status) {
       case Status.Running: {
         client.pause();
@@ -171,7 +181,7 @@ export class Controller {
     }
   }
 
-  static getUrl(useLocalHost: boolean) {
+  getUrl(useLocalHost: boolean) {
     console.log(
       "REACT_APP_LOCAL_WEBSOCKET_URL",
       process.env.REACT_APP_LOCAL_WEBSOCKET_URL
@@ -181,11 +191,12 @@ export class Controller {
       process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL
     );
     return useLocalHost
-        ? process.env.REACT_APP_LOCAL_WEBSOCKET_URL || "ws://localhost:4000"
-        : process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL || "ws://mobtimer-backend-pj2v.onrender.com"
+      ? process.env.REACT_APP_LOCAL_WEBSOCKET_URL || "ws://localhost:4000"
+      : process.env.REACT_APP_DEPLOYED_WEBSOCKET_URL ||
+          "ws://mobtimer-backend-pj2v.onrender.com";
   }
 
-  static changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {
+  changeFrontendStatus(frontendMobtimer: MobTimer, newStatus: Status) {
     if (frontendMobtimer.status !== newStatus) {
       switch (newStatus) {
         case Status.Running: {

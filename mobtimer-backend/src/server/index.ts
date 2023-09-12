@@ -1,4 +1,4 @@
-import { backendUtils } from "./backendSocket";
+import { backendUtils } from "./backendUtils";
 
 export const port = parseInt(process.env.PORT || "") || 4000;
 

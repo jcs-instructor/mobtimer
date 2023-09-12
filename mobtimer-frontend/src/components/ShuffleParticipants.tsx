@@ -1,16 +1,17 @@
 import React from 'react';
 import { Controller } from 'mobtimer-api';
+const controller = Controller.staticController as Controller;
 
 const ShuffleParticipants = () => {
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
         // Todo: Provide some movement/animation before shuffle to make sure the user can see movement
-        Controller.client.shuffleParticipants();
+        controller.client?.shuffleParticipants();
     }
 
     function ableToShuffle(): boolean {
-        return Controller.frontendMobTimer.participants.length > 1;
+        return controller.frontendMobTimer.participants.length > 1;
     }
 
     return (

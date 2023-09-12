@@ -1,15 +1,16 @@
 import React from 'react';
 import { Controller } from 'mobtimer-api';
+const controller = Controller.staticController as Controller;
 
 const RotateParticipants = () => {
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        Controller.client.rotateParticipants();
+        controller.client?.rotateParticipants();
     }
 
     function ableToRotate(): boolean {
-        return Controller.frontendMobTimer.participants.length > 1;
+        return controller.frontendMobTimer.participants.length > 1;
     }
 
     return (

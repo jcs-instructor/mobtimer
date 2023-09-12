@@ -16,7 +16,7 @@
     "noImplicitReturns": true,
   },
   "include": [
-    "./src", 
+    "./src" 
   ],
   "exclude": [
     "./test",

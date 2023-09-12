@@ -10,6 +10,8 @@ Remember to review Improve Later and To be prioritized
 Ethan:
 - [ ] **Make yarn build scripts run sequentially**
 - [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
+- [ ] **Make yarn build scripts run sequentially**
+- [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
 - [ ] **Reset npmjs password**
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
@@ -21,7 +23,7 @@ Joel:
 ----
 
 # To be prioritized / refined
-- ...
+- **Conditionally ignore integration tests** using jest parameter testPathIgnorePatterns: [  process.env.EXCLUDE_TEST === 'true' ? "^.+integration\\.test\\.ts$" : ""] ,
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -40,7 +42,7 @@ Joel:
             3. Other (not needed as integration - so move / delete as appropriate)
       - [ ] Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly            
       - [ ] Fix inconsistent names (class / file): 
-            - FrontendMobSocket class in frontendSocket.ts
+            - Client class in frontendSocket.ts
             - MobSocketTestClient class in mobSocketTestClient.ts
             - TestClient class in TestClient.ts
       - [ ] Move TestClient into mobtimer-api
@@ -129,7 +131,6 @@ Joel:
 - [ ] Maybe: Add "localhost" to the text in browser (after "TEAM:") to make more obvious
 - [ ] Follow up on: "Detected presence of yarn.lock. Using 'yarn' instead of 'npm' (to override this pass '--no-yarn' on the command line)."
 - [ ] **VSIX script & task** - Add a script to update the vsix file, and call from tasks.json
-- [ ] **Docker?** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM
 - [ ] **UI / Manual tests** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
   - [ ] List out what needs to be tested manually (and automated if possible)
       - See completed.md for ideas, and...

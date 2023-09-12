@@ -1,6 +1,6 @@
 import { Action } from "mobtimer-api";
 import { MobState } from "mobtimer-api";
-import { backendUtils } from "../src/server/backendSocket";
+import { backendUtils } from "../src/server/backendUtils";
 import { MobRequestBuilder } from "mobtimer-api";
 import { MobTimerResponse, SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
 
@@ -27,62 +27,62 @@ class TestClient {
   }
 
   sendEchoRequest() {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.sendEchoRequest(), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.sendEchoRequest(), this._socket);
     this.trackMessage(response);
   }
 
   joinMob(mobName: string) {
     // console.log("sending join request", mobName);
     this._mobName = mobName;
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.joinMob(mobName), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.joinMob(mobName), this._socket);
     this.trackMessage(response);
   }
 
   update(durationMinutes: number) {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.update(durationMinutes), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.update(durationMinutes), this._socket);
     this.trackMessage(response);
   }
 
   addParticipant(name: string) {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.addParticipant(name), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.addParticipant(name), this._socket);
     this.trackMessage(response);
   }
 
   rotateParticipants() {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.rotateParticipants(), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.rotateParticipants(), this._socket);
     this.trackMessage(response);
   }
 
   shuffleParticipants() {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.shuffleParticipants(), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.shuffleParticipants(), this._socket);
     this.trackMessage(response);
   }
 
   editParticipants(participants: string[]) {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.editParticipants(participants), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.editParticipants(participants), this._socket);
     this.trackMessage(response);
   }
 
   editRoles(roles: string[]) {
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.editRoles(roles), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.editRoles(roles), this._socket);
     this.trackMessage(response);
   }
 
   start() {
     // console.log("sending start request");
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.start(), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.start(), this._socket);
     this.trackMessage(response);
   }
 
   pause() {
     // console.log("sending pause request");
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.pause(), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.pause(), this._socket);
     this.trackMessage(response);
   }
 
   reset() {
     // console.log("sending reset request");
-    const response =  backendUtils.processRawRequest(MobRequestBuilder.reset(), this._socket);
+    const response =  backendUtils.getResponse(MobRequestBuilder.reset(), this._socket);
     this.trackMessage(response);
   }
 
@@ -100,7 +100,7 @@ class TestClient {
         }
         default: {
             // console.log("pushing responseObject", responseObject);
-            this._successfulResponses.push(JSON.stringify(responseObject));
+            this._successfulResponses.push(JSON.stringify(JSON.parse(JSON.stringify(responseObject))));
             break;
         }      
         }

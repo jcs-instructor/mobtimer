@@ -1,4 +1,4 @@
-export interface IFrontendSocket {
+export interface IClientSocket {
   socketState: number;
   sendToServer: (message: string) => void;
   closeSocket: () => void;

@@ -5,13 +5,13 @@ import { commands } from "vscode";
 
 import {
   Command,
-  IFrontendSocket,
-  FrontendMobSocket,
+  IClientSocket,
+  Client,
   MobTimer,
   MobTimerResponses,
 } from "mobtimer-api";
-import { WSFrontendSocket } from "mobtimer-api";
-import { Console } from "console";
+import { WSClientSocket } from "mobtimer-api";
+const controller = Controller.staticController;
 
 export class VscodeMobTimer {
   private _statusBarItem: StatusBarItem;
@@ -23,21 +23,21 @@ export class VscodeMobTimer {
     this._playButton = window.createStatusBarItem(StatusBarAlignment.Left);
     this._playButton.text = getPlayButtonLabel();
     this._playButton.show();
-    const url = Controller.getUrl(useLocalHost);
+    const url = controller.getUrl(useLocalHost);
     console.log("In extension.ts, url = ", url);
     console.log('"mobtimer.display" is now active!');
 
     
-    const wrapperSocket = new WSFrontendSocket(url) as IFrontendSocket;
-    Controller.client = new FrontendMobSocket(wrapperSocket);
+    const wrapperSocket = new WSClientSocket(url) as IClientSocket;
+    controller.client = new Client(wrapperSocket);
     console.log(
-      "Debug Controller.client",
-      Controller.client.webSocket ? "exists" : "does not exist"
+      "Debug controller.client",
+      controller.client.webSocket ? "exists" : "does not exist"
     );
     const mobName = "hippo-time";
-    Controller.frontendMobTimer.timerExpireFunc = onExpire;
-    const client = Controller.client;
-    Controller.frontendMobTimer = new MobTimer(mobName);
+    controller.frontendMobTimer.timerExpireFunc = onExpire;
+    const client = controller.client;
+    controller.frontendMobTimer = new MobTimer(mobName);
     client.joinMob(mobName);
     client.update(8);
     if (!client.webSocket) {
@@ -51,14 +51,14 @@ export class VscodeMobTimer {
       this._playButton.show();
     };
     commands.registerCommand(TOGGLE_TIMER_COMMAND, () => {
-      if (Controller.frontendMobTimer.nextCommand === Command.Start) {
-        Controller.frontendMobTimer.start();
+      if (controller.frontendMobTimer.nextCommand === Command.Start) {
+        controller.frontendMobTimer.start();
         client.start();
-      } else if (Controller.frontendMobTimer.nextCommand === Command.Pause) {
-        Controller.frontendMobTimer.pause();
+      } else if (controller.frontendMobTimer.nextCommand === Command.Pause) {
+        controller.frontendMobTimer.pause();
         client.pause();
-      } else if (Controller.frontendMobTimer.nextCommand === Command.Resume) {
-        Controller.frontendMobTimer.start();
+      } else if (controller.frontendMobTimer.nextCommand === Command.Resume) {
+        controller.frontendMobTimer.start();
         client.start();
       }
     });
@@ -71,8 +71,8 @@ export class VscodeMobTimer {
     setInterval(() => {
       console.log("Clicking ");
       const text = `[${
-        Controller.frontendMobTimer.secondsRemainingString
-      } ${Controller.createListOfParticipantsWithRoleEmojisPrepended()} ]`; //$(clock)
+        controller.frontendMobTimer.secondsRemainingString
+      } ${controller.createListOfParticipantsWithRoleEmojisPrepended()} ]`; //$(clock)
       this._statusBarItem.text = text;
     }, 1000); // 1000 ms = 1 second
     this._statusBarItem.show();
@@ -91,11 +91,11 @@ function controllerOnMessage(message: { data: string }) {
   // todo: handle if response is not successful
   // Read response data
   const { mobStatus, secondsRemaining } =
-    Controller.translateResponseData(response);
+    controller.translateResponseData(response);
 
   // modify frontend mob timer
-  Controller.changeFrontendStatus(Controller.frontendMobTimer, mobStatus);
-  Controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
+  controller.changeFrontendStatus(controller.frontendMobTimer, mobStatus);
+  controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
 }
 
 // todo: in progress
@@ -111,7 +111,7 @@ function onExpire() {
 }
 
 function getPlayButtonLabel() {
-  switch (Controller.frontendMobTimer?.nextCommand) {
+  switch (controller.frontendMobTimer?.nextCommand) {
     case Command.Pause: {
       return "⏸️ Pause";
     }

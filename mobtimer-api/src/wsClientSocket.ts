@@ -1,7 +1,7 @@
 import WebSocket from "ws";
-import { IFrontendSocket } from "./iFrontendSocket";
+import { IClientSocket } from "./iClientSocket";
 
-export class WSFrontendSocket implements IFrontendSocket {
+export class WSClientSocket implements IClientSocket {
   private _webSocket: WebSocket;
 
   constructor(url: string, webSocket?: WebSocket) {

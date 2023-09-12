@@ -1,22 +1,32 @@
 import { Action } from "./action";
 import * as MobTimerRequests from "./mobTimerRequests";
-import { IFrontendSocket } from "./iFrontendSocket";
+import { IClientSocket } from "./iClientSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
+import { Heartbeat } from './index';
 const noSocketErrorMessage = "No socket";
-class FrontendMobSocket {
-  private _webSocket: IFrontendSocket | undefined;
+class Client {
+  private _webSocket: IClientSocket | undefined;
+  private _heartbeat?: Heartbeat;
 
-  constructor(webSocket: IFrontendSocket | undefined = undefined) {
+  constructor(webSocket: IClientSocket | undefined = undefined) {
     this._webSocket = webSocket;
   }
 
+  get heartBeat () {
+    return this._heartbeat as Heartbeat;
+  }
+
+  set heartBeat (heartbeat: Heartbeat) {
+    this._heartbeat = heartbeat;
+    heartbeat.start();
+  }
   /**
    * Forces a process to wait until the socket's `readyState` becomes the specified value.
    * @param socket The socket whose `readyState` is being watched
    * @param state The desired `readyState` for the socket
    */
   static async waitForSocketState(
-    socket: IFrontendSocket | undefined,
+    socket: IClientSocket | undefined,
     state: number | undefined
   ): Promise<void> {
     if (!socket) {
@@ -27,7 +37,7 @@ class FrontendMobSocket {
         if (socket.socketState === state) {
           resolve();
         } else {
-          FrontendMobSocket.waitForSocketState(socket, state).then(resolve);
+          Client.waitForSocketState(socket, state).then(resolve);
         }
       }, 500);
       // todo: timeout.unref() fails when running from frontend; why?
@@ -39,7 +49,7 @@ class FrontendMobSocket {
     if (!this._webSocket) {
       return Promise.reject("No socket to wait for");
     }
-    return FrontendMobSocket.waitForSocketState(this._webSocket, state);
+    return Client.waitForSocketState(this._webSocket, state);
   }
 
   sendEchoRequest() {
@@ -90,19 +100,16 @@ class FrontendMobSocket {
     this.sendToServer(MobRequestBuilder.reset());
   }
 
-  async sendToServer(requestString: string) {
+  sendToServer(requestString: string) {
+    this.heartBeat?.restart();
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {
-      await FrontendMobSocket.waitForSocketState(
-        this.webSocket,
-        this.webSocket?.OPEN_CODE
-      );
       this._webSocket.sendToServer(requestString);
     }
   }
 
-  public get webSocket(): IFrontendSocket | undefined {
+  public get webSocket(): IClientSocket | undefined {
     return this._webSocket;
   }
 
@@ -115,4 +122,4 @@ class FrontendMobSocket {
   }
 }
 
-export { FrontendMobSocket };
+export { Client };

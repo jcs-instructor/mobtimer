@@ -2,7 +2,6 @@ import { Room } from "./room";
 import WebSocket from "ws";
 import { MobTimer } from "mobtimer-api";
 import { Action } from "mobtimer-api";
-import { MobTimerResponses } from "mobtimer-api";
 import { Broadcaster } from "./broadcaster";
 
 type WebSocketOrAny = WebSocket | any;
@@ -58,7 +57,7 @@ export class RoomManager {
     const mobTimer = new MobTimer(mobName);
     // todo: rename timerExpireFunc
     mobTimer.timerExpireFunc = () =>
-      Broadcaster.broadcastToMob(mobTimer as MobTimer, Action.Expired);
+      Broadcaster.broadcastExpireToMob(mobTimer as MobTimer);
     const room = { mobTimer, sockets: new Set<WebSocketOrAny>() };
     RoomManager._roomsByMobName.set(mobName, room);
     RoomManager._joinRoom(room, socket);
