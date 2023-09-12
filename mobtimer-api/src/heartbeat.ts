@@ -53,7 +53,9 @@ export class Heartbeat {
 
   stop() {
     console.log("clearing");
-    clearInterval(this._interval);
+    if (this._interval) {
+      clearInterval(this._interval);
+    }
     this._interval?.unref();
   }
 }

@@ -8,6 +8,8 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
+- [ ] **Make yarn build scripts run sequentially**
+- [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
 - [ ] **Reset npmjs password**
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
