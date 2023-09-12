@@ -27,17 +27,7 @@ Joel:
 
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Docker** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM (and/or other solution)
-- [ ] **Link directly from src to mobtimer-api/src** to improve usability and flakiness
-  - mobtimer-frontend
-    - Manually remove existing symbolic links
-    - Modify package.json to get rid of mobtimer-api
-    - Modify and run mobtimer-api script
-      - Remove compilng mobtimer-api
-      - Create symbolic link from mobtimer-api/src to mobtimer-frontend/src/mobtimer-api in mobtimer-api script
-      - Run script
-    - Create a file index.ts to export mobtimerapi (without dash) from "./mobtimer-api"
-    - Change `import {...} from "mobtimer-api` to `import {...} from "./index"`
-    - Try making a change in both mobtimer-api/src and mobtimer-frontend/src/mobtimer-api dirs
+- [ ] **Link directly from src to mobtimer-api/src** to improve usability and flakiness.  See [proposal to change symlink]("./proposal-change-symlink.md")
 
   - Repeat for mobtimer-backend
 
