@@ -1,0 +1,13 @@
+  - rename mobtimer-api dir to mobtimerapi
+  - replace all occurences of mobtimer-api with mobtimerapi
+  - mobtimer-frontend
+    - Manually remove existing symbolic links
+    - Modify package.json to get rid of mobtimerapi
+    - Modify and run mobtimerapi scripts
+      - Remove compilng mobtimerapi
+      - Create symbolic link from mobtimerapi/src to mobtimer-frontend/src/mobtimerapi in mobtimer-api script
+      - Run script
+    - Confirm tests and UI work
+    - Try making a change in both mobtimer-api/src and mobtimer-frontend/src/mobtimer-api dirs
+- repeat for mobtimer-backend
+- clear caches
