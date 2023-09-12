@@ -1,7 +1,7 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { IClientSocket } from "./iClientSocket";
 
-export class W3CWebSocketWrapper implements IWebSocketWrapper {
+export class W3CClientSocket implements IClientSocket {
   private _webSocket: W3CWebSocket;
 
   constructor(url: string, webSocket?: W3CWebSocket) {
@@ -15,7 +15,7 @@ export class W3CWebSocketWrapper implements IWebSocketWrapper {
     return this._webSocket.readyState;
   }
 
-  public sendMessage(message: string): void {
+  public sendToServer(message: string): void {
     this._webSocket.send(message);
   }
 

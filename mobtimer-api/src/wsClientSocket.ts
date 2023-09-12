@@ -1,7 +1,7 @@
 import WebSocket from "ws";
-import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { IClientSocket } from "./iClientSocket";
 
-export class WSWebSocketWrapper implements IWebSocketWrapper {
+export class WSClientSocket implements IClientSocket {
   private _webSocket: WebSocket;
 
   constructor(url: string, webSocket?: WebSocket) {
@@ -16,7 +16,7 @@ export class WSWebSocketWrapper implements IWebSocketWrapper {
     return this._webSocket.readyState;
   }
 
-  public sendMessage(message: string): void {
+  public sendToServer(message: string): void {
     this._webSocket.send(message);
   }
 

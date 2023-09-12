@@ -8,45 +8,70 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
+- [ ] **Make yarn build scripts run sequentially**
+- [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
 - [ ] **Reset npmjs password**
-- [ ] **Generate exports watch** doesn't seem to be refreshing on change
-- [ ] **Session startup process** Change code so you don't have to run "code ." at startup, i.e. have second variable for REACT_APP...
 - [ ] **Listener performance**: Only execute setSocketListener if listener has not yet been defined
 - [ ] **Automate vscode ext. install steps** (see steps in CONTRIBUTING.md) (MAYBE ETHAN TO DO BETWEEN SESSIONS)
+- [ ] **Document when to use console.info vs console.log** in CONTRIBUTING.md
 
+Joel:
+- [ ] Refactor processRawRequest (decouple from socket and only return what's needed, i.e., mobName,...)
+- [ ] Refactor: booleans connecting, connected --> enum connectionStatus notStarted, connecting, connected
 ----
 
 # To be prioritized / refined
-- ...
+- **Conditionally ignore integration tests** using jest parameter testPathIgnorePatterns: [  process.env.EXCLUDE_TEST === 'true' ? "^.+integration\\.test\\.ts$" : ""] ,
 
 -----------------------------------------------------------------------------------------------------------------------
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [x] **VSCode statusbar participants & roles** - make vscode statusbar look like the browser window title  
-      - [x] Add participants & roles to VSCode statusbar
-      - [x] **Rename debug** boolean in App.tsx to runningLocal (but leave vscode extension bool as is)
-- [ ] Re-install & deploy vsix (this has to be done after each change to the extension to be able to dogfood it)
-- [x] **frontendMobTimer expires twice bug** (if 8 min. duration, it expires at 5 min. & 8 min.) - maybe work on this after Generate exports watch is fixed
-- [ ] **Deploy to onrender so can dogfood**
-- [ ] **Refactor Controller._roles** similar to what we did for ._participants, i.e.:
-      - Replace All: Controller._roles with Controller.frontendMobTimer.roles (and edit related code)
-- [ ] **Sync all frontendMobTimer properties**, not just those currently used
-      - Currently need to add these: participants, roles
-      - possibly do this by adding MobTimer public set state() (similar to existing get state() but with care about using setSecondsRemaining... and mobName; and what to do if secondsRemaining is passed in greater than durationMinutes)
-- [ ] **Heartbeat** to keep backend from sleeping. Ideas:
-      - Ping every ___ sec./min.
-      - Check render.com documentation for our level of subscription: 
-            - Backend Timeout? (probably 15 min.)
-            - Useage limit? (What if we ping/use too much?)
+- [x] **Deploy to onrender so can dogfood**
+- [ ] **Docker** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM (and/or other solution)
+- [ ] **Review flow.md**
+- [ ] **Speed up tests** WIP
+      - [x] Refactor processRawRequest to just return the response and mobName (don't need others)
+      - [x] In non-integration request repsonse tests use jest mock time
+      - [ ] Organize integration tests: Separate some from other tests (either separate files or multiple describe blocks):
+            1. Expiration-related tests (including reset, which triggers an expiration)
+            2. Multi-mob tests
+            3. Other (not needed as integration - so move / delete as appropriate)
+      - [ ] Reduce integration tests: instead do most of that test logic in the tests that calls processRawRequest directly            
+      - [ ] Fix inconsistent names (class / file): 
+            - Client class in frontendSocket.ts
+            - MobSocketTestClient class in mobSocketTestClient.ts
+            - TestClient class in TestClient.ts
+      - [ ] Move TestClient into mobtimer-api
+      (initial intent: keep in integration: alternative websocket & all 2 mob tests)
+- [ ] **Move heartbeat to frontend** Start a new heartbeat on frontend whenever a response is received, except for a heartbeat response. Action should be heartbeat and heartbeat should be sent to all sockets (could skip the sending socket)
+- [ ] **Refactor Socket Files** - Move unrelated functions out of backendSocket and consider making classes with static functions
+- [ ] **Rename client.reset** to client.cancelTimer 
+- [ ] **Recreate VSIX** - can't dogfood extension until do this
+- [ ] **Deploy** Try deploying to onrender and set new environment variable
+- [ ] **Heartbeat for Backend** 
+   - WIP: 
+      - [ ] Rename func to onHeartbeatFunc
+      - [ ] See TODO comment in mobClientServer.ts (heartbeat integration tests)
+      - [ ] Change hard coded interval / timeout length when calling to read from env var
+      - [ ] Stay awake without ever timing out (requires doing something every 14 minutes) 
+      - [ ] Go to sleep (i.e., kill stay awake interval) after a certain amt. of inactivity (e.g., 2 hours)      
+            - [ ] After server starts (i.e., start Sleep timer which will kill stay awake timer)
+            - [ ] After any activity (i.e., kill and restart Go to sleep timer)
+      - [ ] See todo comments in backendSocket.ts
+   - Limits:
+     - 750 hours running across all onrender services and 15 minutes of inactivity.  See [here](https://render.com/docs/free#free-web-services),  This is 31.25 days, so if you only
+     have one service you could be up all the time, with two services you would have to do
+     half time, unless you run them on separate accounts.
+     - 500 free build minutes (should not be an issue).  See [here](https://render.com/pricing)
+- [ ] **Heartbeat/Timeout Sniffing for Frontend** Maybe: Add clearInterval code to Timer.tsx (when timer is stopped, clear interval; when it's started, set interval). (Probably don't need a heartbeat, but investigate / sniff. May depend on browser caching.)
 - [ ] **CONTROLLER unit tests** Jest - WIP (created controller.test.ts but have no tests implemented yet)
       - [x] changeFrontendStatus tests
       - [ ] more...
+- [ ] **Sync all frontendMobTimer properties** differently:
+      - possibly do this by adding MobTimer public set state() (similar to existing get state() but with care about using setSecondsRemaining... and mobName; and what to do if secondsRemaining is passed in greater than durationMinutes)
 - [ ] **Manual tests (see below)**
 - [ ] **Extension stops connecting** When deployed mobtimer backend times out, our vscode extension doesn't seem to connect to it properly
-- [ ] **Rename autogenerated files**:
-      - [ ] exports.ts as exports-autogenerated.ts
-      - [ ] date.txt as date-autogenerated.txt
 - [ ] **Unhardcode Mobname in Extension** WIP: Ethan (on branch)
 - [ ] Consider - Bugs and easy refactoring in sections below (and watch out for tech debt):
 - [ ] **Refactor Extension**
@@ -63,7 +88,7 @@ Ethan:
 
 - **SOCKET CONNECTION BUGS**
   - [ ] **Disconnect/reconnect bug**: join a mob, disconnect backend server, restart without changing to home page, fails - may have to recreate the socket.
-  - [ ] **Retry if connection fails**
+  - [ ] **Gray out UI controls while connecting** 
       - Background:
             Message currently says "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes".  On a clean start hen start all tasks and 
             join a mob for the first time, we get this error messag 
@@ -103,7 +128,6 @@ Ethan:
 - [ ] Maybe: Add "localhost" to the text in browser (after "TEAM:") to make more obvious
 - [ ] Follow up on: "Detected presence of yarn.lock. Using 'yarn' instead of 'npm' (to override this pass '--no-yarn' on the command line)."
 - [ ] **VSIX script & task** - Add a script to update the vsix file, and call from tasks.json
-- [ ] **Docker?** - Address node flakiness - e.g., maybe use Docker or GitPod or other VM
 - [ ] **UI / Manual tests** (we are getting a lot of UI bugs, including repeat bugs that are fixed and then break again)
   - [ ] List out what needs to be tested manually (and automated if possible)
       - See completed.md for ideas, and...

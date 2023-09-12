@@ -2,7 +2,21 @@
 	"version": "2.0.0",
 	"tasks": [
     {
-      "label": "mobtimer step 1 and 2 - yarn and api setup", 
+      "label": "mobtimer vscode compile no watch (for debugger)",
+      "type": "shell",
+      "command": "./scripts/compile-vscode-no-watch.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mobtimer step 1 and 2 - yarn and api setup",
       "type": "shell",
       "command": "echo running front and back ends",
       "group": {
@@ -23,7 +37,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer step 2 - api setup", 
+      "label": "mobtimer step 2 - api setup",
       "type": "shell",
       "command": "./scripts/api-setup.sh",
       "group": {
@@ -37,7 +51,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer step 3 - start watch", 
+      "label": "mobtimer step 3 - start watch",
       "type": "shell",
       "command": "echo running front and back ends",
       "group": {
@@ -143,20 +157,6 @@
       "problemMatcher": []
     },
     {
-      "label": "mobtimer vscode compile no watch (for debugger)",
-      "type": "shell",
-      "command": "./scripts/compile-vscode-no-watch.sh",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "mobtimer frontend start watch",
       "type": "shell",
       "command": "./scripts/start-frontend-watch.sh",
@@ -185,7 +185,8 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "mobtimer step 1 and 2 - yarn and api setup",
-        "mobtimer step 3 - start watch"],
+        "mobtimer step 3 - start watch"
+      ],
       "problemMatcher": []
     },
     {
@@ -203,7 +204,8 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "mobtimer step 2 - api setup",
-        "mobtimer step 3 - start watch"],
+        "mobtimer step 3 - start watch"
+      ],
       "problemMatcher": []
     },
     {
@@ -260,6 +262,6 @@
         "panel": "new"
       },
       "problemMatcher": []
-    },
+    }
   ]
 }

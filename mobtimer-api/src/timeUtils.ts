@@ -10,6 +10,9 @@ export class TimeUtils {
       // timeout.unref();
     });
   }
+  static getNowInMilliseconds(): number {
+    return new Date().getTime();
+  }
 
   static getNowInSeconds(): number {
     const currentMilliseconds = new Date().getTime();
@@ -21,6 +24,10 @@ export class TimeUtils {
 
   static secondsToMilliseconds(seconds: number): number {
     return seconds * 1000;
+  }
+
+  static minutesToMilliseconds(minutes: number): number {
+    return minutes * 1000 * 60;
   }
 
   static secondsToMinutes(seconds: number): number {

@@ -1,16 +1,17 @@
 import { MobTimerResponse, SuccessfulResponse } from "./mobTimerResponse";
 import { Action } from "./action";
-import { MobSocketClient } from "./mobSocketClient";
+import { Client as Client } from "./client";
 import { MobState } from "./mobState";
-import { IWebSocketWrapper } from "./iWebSocketWrapper";
+import { IClientSocket } from "./iClientSocket";
 
-class MobSocketTestClient extends MobSocketClient {
+class TestClient extends Client {
   private _successfulResponses: string[] = [];
   private _echoReceived: boolean = false;
   private _errorReceived: boolean = false;
-  private _socket: IWebSocketWrapper;
+  private _mobName: string = "";
+  private _socket: IClientSocket;
 
-  constructor(webSocket: IWebSocketWrapper) {
+  constructor(webSocket: IClientSocket) {
     super(webSocket);
     this._socket = webSocket;
     this._socket.onmessageReceived = (message) => {
@@ -18,11 +19,26 @@ class MobSocketTestClient extends MobSocketClient {
     };
   }
 
+  resetClient() {
+    this._echoReceived = false;
+    this._successfulResponses = [];
+    this._errorReceived = false;
+    this._mobName = "";
+  }
+
+  override joinMob(mobName: string) {
+    this._mobName = mobName;
+    super.joinMob(mobName);
+  }
+
+  public get mobName(): string {
+    return this._mobName;
+  }
+
   private trackMessage(message: { data: any }) {
     const responseObject = this.convertToMobTimerResponse(
       message.data as string
     );
-    console.log("responseObject", responseObject);
     switch (responseObject.actionInfo.action) {
       case Action.Echo: {
         this._echoReceived = true;
@@ -33,7 +49,6 @@ class MobSocketTestClient extends MobSocketClient {
         break;
       }
       default: {
-        console.log("pushing message.data", message.data);
         this._successfulResponses.push(message.data);
         break;
       }
@@ -44,12 +59,28 @@ class MobSocketTestClient extends MobSocketClient {
     return JSON.parse(response) as MobTimerResponse;
   }
 
+  async waitForAction(action: Action): Promise<void> {
+    const client = this;
+    return new Promise(function (resolve) {
+      const timeout = setTimeout(function () {
+        if (client.lastSuccessfulAction === action){
+          resolve();
+        }
+        client.waitForAction(action).then(resolve);
+      }, 10);
+      timeout.unref();
+    });
+  }
+
   static async waitForOpenSocket(
-    webSocket: IWebSocketWrapper
-  ): Promise<MobSocketTestClient> {
-    const mobSocketTestClient = new MobSocketTestClient(webSocket);
+    webSocket: IClientSocket
+  ): Promise<TestClient> {
+    if (!webSocket) {
+      throw new Error("No socket"); // todo: use constant from superclass
+    }
+    const mobSocketTestClient = new TestClient(webSocket);
     await mobSocketTestClient.waitForSocketState(
-      mobSocketTestClient.webSocket.OPEN_CODE
+      mobSocketTestClient.webSocket?.OPEN_CODE
     );
     return mobSocketTestClient;
   }
@@ -84,7 +115,6 @@ class MobSocketTestClient extends MobSocketClient {
   }
 
   public get lastSuccessfulMobState(): MobState {
-    console.log("lastSuccessfulResponse", this.lastSuccessfulResponse.mobState);
     const lastSuccessfulResponse = this.lastSuccessfulResponse;
     return lastSuccessfulResponse.mobState;
   }
@@ -102,4 +132,4 @@ class MobSocketTestClient extends MobSocketClient {
   }
 }
 
-export { MobSocketTestClient };
+export { TestClient as MobSocketTestClient };

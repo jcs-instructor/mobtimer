@@ -1,6 +1,7 @@
 import React from 'react'
 import { Controller } from 'mobtimer-api';
 import { TimeUtils } from 'mobtimer-api';
+const controller = Controller.staticController as Controller;
 
 type FormParameters = {
     durationMinutes: number;
@@ -9,7 +10,7 @@ type FormParameters = {
 const Duration = ({ durationMinutes }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
-        Controller.client.update(durationMinutes);
+        controller.client?.update(durationMinutes);
     }
 
     function isDurationValid(): boolean {
@@ -21,7 +22,7 @@ const Duration = ({ durationMinutes }: FormParameters) => {
             <label>Turn Duration (minutes): </label>
             <input
                 value={durationMinutes}
-                onChange={(e) => Controller.setDurationMinutes(e.target.value as unknown as number)}
+                onChange={(e) => controller.setDurationMinutes(e.target.value as unknown as number)}
                 type="text"
                 placeholder="Enter a Turn Duration"
             />

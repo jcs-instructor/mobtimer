@@ -2,7 +2,9 @@ import { Room } from "./room";
 import WebSocket from "ws";
 import { MobTimer } from "mobtimer-api";
 import { Action } from "mobtimer-api";
-import { MobTimerResponses } from "mobtimer-api";
+import { Broadcaster } from "./broadcaster";
+
+type WebSocketOrAny = WebSocket | any;
 
 export class RoomManager {
   /*
@@ -12,13 +14,13 @@ export class RoomManager {
     */
 
   private static _roomsByMobName: Map<string, Room> = new Map();
-  private static _roomsBySocket: Map<WebSocket, Room> = new Map();
+  private static _roomsBySocketOrAny: Map<WebSocketOrAny, Room> = new Map();
 
-  private static _getRoom(key: string | WebSocket): Room | undefined {
+  private static _getRoom(key: string | WebSocketOrAny): Room | undefined {
     if (typeof key === "string") {
       return RoomManager._roomsByMobName.get(key);
     } else {
-      return RoomManager._roomsBySocket.get(key);
+      return RoomManager._roomsBySocketOrAny.get(key);
     }
   }
 
@@ -26,16 +28,16 @@ export class RoomManager {
     return this._getRoom(mobName)?.mobTimer;
   }
 
-  static getMobTimerFromSocket(socket: WebSocket) {
+  static getMobTimerFromSocket(socket: WebSocketOrAny) {
     const mobTimer = RoomManager._getRoom(socket)?.mobTimer;
     return mobTimer;
   }
 
-  static getSocketsForMob(mobName: string): Set<WebSocket> | undefined {
+  static getSocketsForMob(mobName: string): Set<WebSocketOrAny> | undefined {
     return RoomManager._getRoom(mobName)?.sockets;
   }
 
-  static getOrRegisterRoom(mobName: string, socket: WebSocket) {
+  static getOrRegisterRoom(mobName: string, socket: WebSocketOrAny) { 
     let room = RoomManager._getRoom(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
@@ -46,50 +48,24 @@ export class RoomManager {
     return room.mobTimer;
   }
 
-  private static _joinRoom(room: Room, socket: WebSocket) {
+  private static _joinRoom(room: Room, socket: WebSocketOrAny) {
     room.sockets.add(socket);
-    RoomManager._roomsBySocket.set(socket, room);
+    RoomManager._roomsBySocketOrAny.set(socket, room);
   }
 
-  private static _createAndJoinRoom(mobName: string, socket: WebSocket) {
+  private static _createAndJoinRoom(mobName: string, socket: WebSocketOrAny) {
     const mobTimer = new MobTimer(mobName);
     // todo: rename timerExpireFunc
     mobTimer.timerExpireFunc = () =>
-      RoomManager.broadcastToMob(mobTimer as MobTimer, Action.Expired);
-    const room = { mobTimer, sockets: new Set<WebSocket>() };
+      Broadcaster.broadcastExpireToMob(mobTimer as MobTimer);
+    const room = { mobTimer, sockets: new Set<WebSocketOrAny>() };
     RoomManager._roomsByMobName.set(mobName, room);
     RoomManager._joinRoom(room, socket);
     return room;
   }
 
-  // todo: consider if this really belongs here; it's pretty different from the other methods
-  static broadcastToMob(mobTimer: MobTimer, action: Action) {
-    const mobTimerResponse = {
-      actionInfo: { action: action },
-      mobState: mobTimer.state,
-      //logInfo: mobTimer.getLogInfo(),
-    } as MobTimerResponses.SuccessfulResponse;
-    let message = JSON.stringify(mobTimerResponse);
-    const sockets = RoomManager.getSocketsForMob(mobTimer.state.mobName);
-    RoomManager._broadcast(sockets, message);
-  }
-
-  // todo: consider changing sockets parameter to room (from which the sockets can be retrieved), or if making totally generic (something else)
-  private static _broadcast(
-    sockets: Set<WebSocket> | undefined,
-    message: string
-  ) {
-    if (!sockets) {
-      return;
-    }
-    console.log(`broadcasting message: ${Date.now()} ${message}`);
-    sockets.forEach((socketClient: WebSocket) => {
-      socketClient.send(message);
-    });
-  }
-
   static resetRooms() {
     RoomManager._roomsByMobName.clear();
-    RoomManager._roomsBySocket.clear();
+    RoomManager._roomsBySocketOrAny.clear();
   }
 }

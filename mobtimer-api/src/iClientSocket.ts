@@ -1,6 +1,6 @@
-export interface IWebSocketWrapper {
+export interface IClientSocket {
   socketState: number;
-  sendMessage: (message: string) => void;
+  sendToServer: (message: string) => void;
   closeSocket: () => void;
   OPEN_CODE: number;
   CLOSED_CODE: number;

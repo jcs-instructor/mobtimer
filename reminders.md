@@ -1,4 +1,6 @@
-Resource for retro: https://docs.google.com/document/d/1EKo20gHXQsAFqiAw56kNISPx170u0RLXiXBNqulV4Rg/edit#
+- [Google Form for Retro](https://forms.gle/1bksBsG2s821TR7d7)
+- [Retro Google Sheet (from form)](https://docs.google.com/spreadsheets/d/1XaRhtl_ixbnC1rIs9Lpr8xuL1LGDx19Jfd9VVkc_yp4/edit?resourcekey#gid=579042710)
+- [Google Doc Retro](https://docs.google.com/document/d/1EKo20gHXQsAFqiAw56kNISPx170u0RLXiXBNqulV4Rg/edit#)
 
 **Start of Session**
 Joel:
@@ -8,11 +10,6 @@ Joel:
 
 Joel & Ethan:
 
-- Open VSCode using outside terminal (GitBash)
-```
-cd C:/Users/Joel/source/repos/mobtimer/
-scripts/start-vscode.sh  
-```
 - Open our depoloyed web timer:
   - https://mobtimer-frontend-iwa7.onrender.com/#/hippo-time (or if that's not working, try: https://mobti.me/arrested-egg or http://mobtimer.zoeetrope.com/)
   - turn on Sounds

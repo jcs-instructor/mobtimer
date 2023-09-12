@@ -1,0 +1,3516 @@
+Jest (mobtimer)
+
+[info] auto config:
+
+found:
+  rootPath: /Users/ethanadmin/projects/mobtimer
+  jestCommandLine: yarn test
+
+yarn run v1.22.19
+$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502.json --watch --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors
+
+> Test run started at 8/30/2023, 2:25:17 PM <
+
+  console.log
+    Controller redeployed 3
+
+      at Object.log (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 299.9930000305176
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+ PASS  mobtimer-api/test/controller.test.ts
+  Change frontend status
+    ✓ Ready to Running (45 ms)
+    ✓ Running to Paused (9 ms)
+    ✓ Running to Ready (6 ms)
+
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✕ Create mob (18 ms)
+    ✕ Two mob (2 ms)
+    ○ skipped Start timer
+    ○ skipped Pause timer
+    ○ skipped Resume timer
+    ○ skipped Update timer
+    ○ skipped Reset (Cancel) timer
+    ○ skipped Check got expected number of messages
+    ○ skipped Echo request and response
+    ○ skipped Handle bad message and get good error message
+    ○ skipped New mob timer has no participants
+    ○ skipped Add 1st participant
+    ○ skipped Add 2nd participant
+    ○ skipped Don't add blank participant
+    ○ skipped Don't add participant with spaces only
+    ○ skipped Rotate participants
+    ○ skipped Edit participants
+    ○ skipped Edit roles
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
+
+    ReferenceError: Controller is not defined
+
+      234 |   const playAudio = jest.fn();
+      235 |   const getActionButtonLabel = jest.fn();
+    > 236 |   controller1 = new Controller();
+          |   ^
+      237 |   controller1.client = new Client(new MockRoundTripSocket());
+      238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
+      239 |   socket.client = controller1.client;
+
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
+
+    ReferenceError: Controller is not defined
+
+      234 |   const playAudio = jest.fn();
+      235 |   const getActionButtonLabel = jest.fn();
+    > 236 |   controller1 = new Controller();
+          |   ^
+      237 |   controller1.client = new Client(new MockRoundTripSocket());
+      238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
+      239 |   socket.client = controller1.client;
+
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
+
+
+> Test run finished at 8/30/2023, 2:25:21 PM <
+
+Test Suites: 1 failed, 1 passed, 2 total
+Tests:       2 failed, 16 skipped, 3 passed, 21 total
+Snapshots:   0 total
+Time:        3.791 s
+Ran all test suites related to changed files.
+
+yarn run v1.22.19
+$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false
+
+> Test run started at 8/30/2023, 2:25:48 PM <
+
+  console.log
+    This test passes
+
+      at Object.log (mobtimer-frontend/test/App.test.tsx:6:11)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.log (mobtimer-api/src/controller.ts:5:9)
+
+ PASS  mobtimer-frontend/test/App.test.tsx
+  ✓ A test that passes (134 ms)
+  ○ skipped renders mob
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 330
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 720
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 360
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 360
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 120
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.025
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 360
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 360
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 360
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 359
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 60
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 60
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 299.99900007247925
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 60
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 60
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 60
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 299.9949998855591
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+ PASS  mobtimer-api/test/controller.test.ts
+  Change frontend status
+    ✓ Ready to Running (40 ms)
+    ✓ Running to Paused (7 ms)
+    ✓ Running to Ready (5 ms)
+
+  console.log
+    debug heartbeat start 1693419950512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    got original order [ 'Alice', 'Bob' ]
+
+      at log (mobtimer-api/test/mobTimer.test.ts:310:19)
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    got original order [ 'Alice', 'Bob' ]
+
+      at log (mobtimer-api/test/mobTimer.test.ts:310:19)
+
+  console.log
+    got different order [ 'Bob', 'Alice' ]
+
+      at log (mobtimer-api/test/mobTimer.test.ts:313:19)
+
+  console.log
+    restarting 2023-08-30T18:35:50.512Z
+
+      at Heartbeat.restart (mobtimer-api/src/heartbeat.ts:50:13)
+
+  console.log
+    got original order [ 'Alice', 'Bob', 'Chris' ]
+
+      at log (mobtimer-api/test/mobTimer.test.ts:310:19)
+
+  console.log
+    got original order [ 'Alice', 'Bob', 'Chris' ]
+
+      at log (mobtimer-api/test/mobTimer.test.ts:310:19)
+
+  console.log
+    debug heartbeat start 1693420550512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    got different order [ 'Bob', 'Chris', 'Alice' ]
+
+      at log (mobtimer-api/test/mobTimer.test.ts:313:19)
+
+ PASS  mobtimer-api/test/mobTimer.test.ts
+  MobTime
+    ✓ Set duration to 3.5 minutes (21 ms)
+    ✓ Initial status - timer is Ready (1 ms)
+    ✓ Start timer (159 ms)
+    ✓ Get seconds remaining before start for turn duration with single digit minutes (2 ms)
+    ✓ Get seconds remaining string after start for turn duration with fractional minutes (6 ms)
+    ✓ Get seconds remaining string after start for turn duration with double digit minutes (6 ms)
+    ✓ Get seconds remaining 1 second after start (10 ms)
+    ✓ Get seconds remaining string 20 seconds after start (16 ms)
+    ✓ Get time remaining string 0.1 seconds after start (6 ms)
+    ✓ Ready status after mock time expires (9 ms)
+    ✓ Reset mock timer (7 ms)
+    ✓ Participants rotated after mock time expires (7 ms)
+    ✓ Start after time expires (9 ms)
+    ✓ Pause timer (6 ms)
+    ✓ Resume timer (12 ms)
+    ✓ Get mock seconds remaining after 1 second pause (5 ms)
+    ✓ Get seconds remaining after running 1 second and paused 1 (6 ms)
+    ✓ Get seconds remaining after running 1 second, paused 1 second, and resume 1 second (10 ms)
+    ✓ After time expires, state should be Ready (5 ms)
+    ✓ After time expires and timer is started, time remaining should be full amount of time (16 ms)
+    ✓ After time expires, seconds remaining should be 0 (5 ms)
+    ✓ After time expires, elapse time raises specified event (6 ms)
+    ✓ New mob timer has no participants (1 ms)
+    ✓ Add 1st participant (1 ms)
+    ✓ Add 2nd participant (2 ms)
+    ✓ Don't add blank participant (1 ms)
+    ✓ Don't add participant with spaces only (1 ms)
+    ✓ Rotate participants (2 ms)
+    ✓ Edit participants (2 ms)
+    ✓ Edit roles (2 ms)
+    ✓ Remove 1st participant (1 ms)
+    ✓ Remove 2nd participant (1 ms)
+    ✓ Randomize order of participants: "[\"Alice\",\"Bob\"]" (16 ms)
+    ✓ Randomize order of participants: "[\"Alice\",\"Bob\",\"Chris\"]" (11 ms)
+
+  console.log
+    debug heartbeat start 1693420910512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat start 1693420970512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat start 1693421930512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat start 1693423730512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat start 1693423790512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat start 1693424750512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat start 1693426550512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    restarting 2023-08-30T21:05:50.512Z
+
+      at Heartbeat.restart (mobtimer-api/src/heartbeat.ts:50:13)
+
+  console.log
+    debug heartbeat start 1693429550512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat start 1693431950512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 5
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 6
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 7
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    restarting 2023-08-30T23:45:50.512Z
+
+      at Heartbeat.restart (mobtimer-api/src/heartbeat.ts:50:13)
+
+  console.log
+    debug heartbeat start 1693439150512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 5
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat start 1693440950512
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat executing interval 6
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 0
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 7
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 1
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 8
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat executing interval 2
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 3
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    debug heartbeat executing interval 4
+
+      at mobtimer-api/src/heartbeat.ts:36:15
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+ PASS  mobtimer-backend/test/heartbeat.test.ts
+  Heartbeat tests
+    ✓ Restart heartbeat before first heartbeat (71 ms)
+    ✓ Callback Test - Duration: 14 min, Delay: 1 min => Calls: 0 (7 ms)
+    ✓ Callback Test - Duration: 14 min, Delay: 16 min => Calls: 1 (21 ms)
+    ✓ Callback Test - Duration: 14 min, Delay: 30 min => Calls: 2 (38 ms)
+    ✓ Counter Test - Duration: 14 min, Delay: 1 min => Count: 0 (7 ms)
+    ✓ Counter Test - Duration: 14 min, Delay: 16 min => Count: 1 (31 ms)
+    ✓ Counter Test - Duration: 14 min, Delay: 30 min => Count: 2 (95 ms)
+    ✓ Restart heartbeat after 3 heartbeats and let run for 2 heartbeats (with no timeout) (101 ms)
+    ✓ Restart heartbeat after inactivity timeout (80 ms)
+    ✓ MaxInactivity: 60 min, Duration: 15 min, Delay: 120 min => Calls: 4 (55 ms)
+
+  console.log
+    Start: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Create mob
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Create mob
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Start timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    End: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Start timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Pause timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    End: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Pause timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Resume timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✕ Create mob (20 ms)
+    ✕ Two mob (2 ms)
+    ○ skipped Start timer
+    ○ skipped Pause timer
+    ○ skipped Resume timer
+    ○ skipped Update timer
+    ○ skipped Reset (Cancel) timer
+    ○ skipped Check got expected number of messages
+    ○ skipped Echo request and response
+    ○ skipped Handle bad message and get good error message
+    ○ skipped New mob timer has no participants
+    ○ skipped Add 1st participant
+    ○ skipped Add 2nd participant
+    ○ skipped Don't add blank participant
+    ○ skipped Don't add participant with spaces only
+    ○ skipped Rotate participants
+    ○ skipped Edit participants
+    ○ skipped Edit roles
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
+
+    ReferenceError: Controller is not defined
+
+      234 |   const playAudio = jest.fn();
+      235 |   const getActionButtonLabel = jest.fn();
+    > 236 |   controller1 = new Controller();
+          |   ^
+      237 |   controller1.client = new Client(new MockRoundTripSocket());
+      238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
+      239 |   socket.client = controller1.client;
+
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
+
+    ReferenceError: Controller is not defined
+
+      234 |   const playAudio = jest.fn();
+      235 |   const getActionButtonLabel = jest.fn();
+    > 236 |   controller1 = new Controller();
+          |   ^
+      237 |   controller1.client = new Client(new MockRoundTripSocket());
+      238 |   const socket = controller1.client.webSocket as MockRoundTripSocket;
+      239 |   socket.client = controller1.client;
+
+      at controller1 (mobtimer-backend/test/sendToClient.test.ts:236:3)
+      at Object.setupController (mobtimer-backend/test/sendToClient.test.ts:24:19)
+
+  console.log
+    End: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Resume timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Update timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    End: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Update timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 0 Process Raw Request tests (no socket communication, so no expiration tests here) Reset (Cancel) timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419951239 {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-3","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    Parameters of mocked function {} {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-3","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log (mobtimer-backend/test/processRawRequest.test.ts:81:17)
+          at Set.forEach (<anonymous>)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Reset (Cancel) timer
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Check got expected number of messages
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Check got expected number of messages
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Echo request and response
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Echo request and response
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Handle bad message and get good error message
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Handle bad message and get good error message
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) New mob timer has no participants
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) New mob timer has no participants
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Add 1st participant
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Add 1st participant
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Add 2nd participant
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Add 2nd participant
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Don't add blank participant
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Don't add blank participant
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Don't add participant with spaces only
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Don't add participant with spaces only
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Rotate participants
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Rotate participants
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Edit participants
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Edit participants
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+  console.log
+    Start: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Edit roles
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:22:13)
+
+  console.log
+    End: time 200 Process Raw Request tests (no socket communication, so no expiration tests here) Edit roles
+
+      at Object.log (mobtimer-backend/test/processRawRequest.test.ts:26:13)
+
+ PASS  mobtimer-backend/test/processRawRequest.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✓ Create mob (47 ms)
+    ✓ Start timer (27 ms)
+    ✓ Pause timer (13 ms)
+    ✓ Resume timer (15 ms)
+    ✓ Update timer (13 ms)
+    ✓ Reset (Cancel) timer (28 ms)
+    ✓ Check got expected number of messages (14 ms)
+    ✓ Echo request and response (6 ms)
+    ✓ Handle bad message and get good error message (6 ms)
+    ✓ New mob timer has no participants (7 ms)
+    ✓ Add 1st participant (7 ms)
+    ✓ Add 2nd participant (14 ms)
+    ✓ Don't add blank participant (5 ms)
+    ✓ Don't add participant with spaces only (5 ms)
+    ✓ Rotate participants (6 ms)
+    ✓ Edit participants (6 ms)
+    ✓ Edit roles (8 ms)
+
+  console.log
+    debug heartbeat start 1693419951583
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    debug heartbeat start 1693419951601
+
+      at Heartbeat.start (mobtimer-api/src/heartbeat.ts:34:13)
+
+  console.log
+    sending join request awesome-team
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    broadcasting message: 1693419951617 {"actionInfo":{"action":"join"},"mobState":{"mobName":"awesome-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419951634 {"actionInfo":{"action":"start"},"mobState":{"mobName":"awesome-team","status":"RUNNING","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":299.99199986457825}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'awesome-team',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data <Buffer 7b 22 61 63 74 69 6f 6e 49 6e 66 6f 22 3a 7b 22 61 63 74 69 6f 6e 22 3a 22 6a 6f 69 6e 22 7d 2c 22 6d 6f 62 53 74 61 74 65 22 3a 7b 22 6d 6f 62 4e 61 ... 140 more bytes>
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'awesome-team',
+        status: 'RUNNING',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 299.99199986457825
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data <Buffer 7b 22 61 63 74 69 6f 6e 49 6e 66 6f 22 3a 7b 22 61 63 74 69 6f 6e 22 3a 22 73 74 61 72 74 22 7d 2c 22 6d 6f 62 53 74 61 74 65 22 3a 7b 22 6d 6f 62 4e ... 160 more bytes>
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    Start: time 1064 Client WebSocket Server Integration Create mob with alternative websocket
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-1
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending join request autogenerated-mob-1
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693419952608 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952619 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952623 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-1',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data <Buffer 7b 22 61 63 74 69 6f 6e 49 6e 66 6f 22 3a 7b 22 61 63 74 69 6f 6e 22 3a 22 6a 6f 69 6e 22 7d 2c 22 6d 6f 62 53 74 61 74 65 22 3a 7b 22 6d 6f 62 4e 61 ... 147 more bytes>
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-1',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data <Buffer 7b 22 61 63 74 69 6f 6e 49 6e 66 6f 22 3a 7b 22 61 63 74 69 6f 6e 22 3a 22 6a 6f 69 6e 22 7d 2c 22 6d 6f 62 53 74 61 74 65 22 3a 7b 22 6d 6f 62 4e 61 ... 147 more bytes>
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-1',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-1',
+      status: 'READY',
+      durationMinutes: 5,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 1653 Client WebSocket Server Integration Create mob with alternative websocket
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 1680 Client WebSocket Server Integration Create 2 mobs
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-2
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending join request autogenerated-mob-3
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693419952701 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-2","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952705 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-2","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952708 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-3","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-2',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-2","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-3',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-3","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-2',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    broadcasting message: 1693419952729 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-3","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-3',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-2',
+      status: 'READY',
+      durationMinutes: 5,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-3',
+      status: 'READY',
+      durationMinutes: 5,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 1738 Client WebSocket Server Integration Create 2 mobs
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 1743 Client WebSocket Server Integration Modify one of two mob timers
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-4
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending join request autogenerated-mob-5
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693419952761 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-4","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952764 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-4","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952769 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-5","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952772 {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-5","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-4',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-4","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-5',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-5","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-4',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'autogenerated-mob-5',
+        status: 'READY',
+        durationMinutes: 17,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-5","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    broadcasting message: 1693419952801 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-5","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-5',
+        status: 'READY',
+        durationMinutes: 17,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-4',
+      status: 'READY',
+      durationMinutes: 5,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-5',
+      status: 'READY',
+      durationMinutes: 17,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 1810 Client WebSocket Server Integration Modify one of two mob timers
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 1814 Client WebSocket Server Integration Modify one shared mob timer
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request super-team
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending join request super-team
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693419952830 {"actionInfo":{"action":"join"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952834 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952839 {"actionInfo":{"action":"join"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952842 {"actionInfo":{"action":"update"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 17,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    broadcasting message: 1693419952877 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 17,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"super-team","status":"READY","durationMinutes":17,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 17,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'super-team',
+        status: 'READY',
+        durationMinutes: 17,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'super-team',
+      status: 'READY',
+      durationMinutes: 17,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'super-team',
+      status: 'READY',
+      durationMinutes: 17,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 1915 Client WebSocket Server Integration Modify one shared mob timer
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 1920 Client WebSocket Server Integration Second client joins shared mob in paused state
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-6
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    broadcasting message: 1693419952947 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-6","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419952951 {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-6","status":"READY","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 60
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419952964 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-6","status":"RUNNING","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.99300003051758}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-6","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'READY',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-6","status":"READY","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'RUNNING',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.99300003051758
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-6","status":"RUNNING","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.99300003051758}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    sending pause request
+
+      at MobSocketTestClient.pause (mobtimer-api/src/client.ts:94:13)
+
+  console.log
+    broadcasting message: 1693419953149 {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953152 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'pause' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'PAUSED',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.807000160217285
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'PAUSED',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.807000160217285
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    sending join request autogenerated-mob-6
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693419953171 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953174 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'PAUSED',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.807000160217285
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'PAUSED',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.807000160217285
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-6","status":"PAUSED","durationMinutes":1,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":59.807000160217285}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'PAUSED',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.807000160217285
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-6',
+        status: 'PAUSED',
+        durationMinutes: 1,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 59.807000160217285
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-6',
+      status: 'PAUSED',
+      durationMinutes: 1,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 59.807000160217285
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-6',
+      status: 'PAUSED',
+      durationMinutes: 1,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 59.807000160217285
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    mobstate {
+      mobName: 'autogenerated-mob-6',
+      status: 'PAUSED',
+      durationMinutes: 1,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 59.807000160217285
+    } {
+      mobName: 'autogenerated-mob-6',
+      status: 'PAUSED',
+      durationMinutes: 1,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 59.807000160217285
+    }
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:121:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-6',
+      status: 'PAUSED',
+      durationMinutes: 1,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 59.807000160217285
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-6',
+      status: 'PAUSED',
+      durationMinutes: 1,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 59.807000160217285
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 2202 Client WebSocket Server Integration Second client joins shared mob in paused state
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 2205 Client WebSocket Server Integration Start timer with duration 0.2 and elapse time sends message to all
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-7
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    broadcasting message: 1693419953224 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953227 {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419953233 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-7","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19699997901916505}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-7',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'autogenerated-mob-7',
+        status: 'READY',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-7',
+        status: 'RUNNING',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.19699997901916505
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-7","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19699997901916505}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    sending pause request
+
+      at MobSocketTestClient.pause (mobtimer-api/src/client.ts:94:13)
+
+  console.log
+    broadcasting message: 1693419953267 {"actionInfo":{"action":"pause"},"mobState":{"mobName":"awesome-team","status":"PAUSED","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":298.3589999675751}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'pause' },
+      mobState: {
+        mobName: 'awesome-team',
+        status: 'PAUSED',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 298.3589999675751
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data <Buffer 7b 22 61 63 74 69 6f 6e 49 6e 66 6f 22 3a 7b 22 61 63 74 69 6f 6e 22 3a 22 70 61 75 73 65 22 7d 2c 22 6d 6f 62 53 74 61 74 65 22 3a 7b 22 6d 6f 62 4e ... 158 more bytes>
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    broadcasting message: 1693419953430 {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'expired' },
+      mobState: {
+        mobName: 'autogenerated-mob-7',
+        status: 'READY',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    broadcasting message: 1693419953474 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-7","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-7',
+        status: 'READY',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-7',
+      status: 'READY',
+      durationMinutes: 0.0033333333333333335,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-7',
+      status: 'READY',
+      durationMinutes: 0.0033333333333333335,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 2481 Client WebSocket Server Integration Start timer with duration 0.2 and elapse time sends message to all
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 2485 Client WebSocket Server Integration Reset (Cancel) timer
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-8
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    broadcasting message: 1693419953507 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419953514 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-8","status":"RUNNING","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":299.99699997901917}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-8',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-8',
+        status: 'RUNNING',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 299.99699997901917
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-8","status":"RUNNING","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":299.99699997901917}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    sending reset request
+
+      at MobSocketTestClient.reset (mobtimer-api/src/client.ts:99:13)
+
+  console.log
+    broadcasting message: 1693419953703 {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953706 {"actionInfo":{"action":"reset"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953708 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'expired' },
+      mobState: {
+        mobName: 'autogenerated-mob-8',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'reset' },
+      mobState: {
+        mobName: 'autogenerated-mob-8',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"reset"},"mobState":{"mobName":"autogenerated-mob-8","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-8',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-8',
+      status: 'READY',
+      durationMinutes: 5,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-8',
+      status: 'READY',
+      durationMinutes: 5,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 2727 Client WebSocket Server Integration Reset (Cancel) timer
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 2730 Client WebSocket Server Integration Start timer, pause, and verify no message sent when timer would have expired
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-9
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    sending pause request
+
+      at MobSocketTestClient.pause (mobtimer-api/src/client.ts:94:13)
+
+  console.log
+    broadcasting message: 1693419953747 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-9","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953750 {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-9","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.3
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419953755 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-9","status":"RUNNING","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29699997901916503}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419953758 {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-9","status":"PAUSED","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29400019645690917}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-9',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-9","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'autogenerated-mob-9',
+        status: 'READY',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-9","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-9',
+        status: 'RUNNING',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.29699997901916503
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-9","status":"RUNNING","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29699997901916503}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'pause' },
+      mobState: {
+        mobName: 'autogenerated-mob-9',
+        status: 'PAUSED',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.29400019645690917
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-9","status":"PAUSED","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29400019645690917}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    broadcasting message: 1693419954098 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-9","status":"PAUSED","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29400019645690917}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-9',
+        status: 'PAUSED',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.29400019645690917
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-9',
+      status: 'PAUSED',
+      durationMinutes: 0.005,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0.29400019645690917
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-9',
+      status: 'PAUSED',
+      durationMinutes: 0.005,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0.29400019645690917
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 3104 Client WebSocket Server Integration Start timer, pause, and verify no message sent when timer would have expired
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 3108 Client WebSocket Server Integration Start timer, pause, resume, and verify message sent to all when expires
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    clearing
+
+      at Heartbeat.stop (mobtimer-api/src/heartbeat.ts:55:13)
+
+  console.log
+    debug heartbeat
+
+      at Object.log (mobtimer-backend/test/heartbeatIntegration.test.ts:52:13)
+
+  console.log
+    sending join request autogenerated-mob-10
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'awesome-team',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at log (mobtimer-backend/test/heartbeatIntegration.test.ts:53:63)
+          at Array.forEach (<anonymous>)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'awesome-team',
+        status: 'RUNNING',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 299.99199986457825
+      }
+    }
+
+      at log (mobtimer-backend/test/heartbeatIntegration.test.ts:53:63)
+          at Array.forEach (<anonymous>)
+
+  console.log
+    sending pause request
+
+      at MobSocketTestClient.pause (mobtimer-api/src/client.ts:94:13)
+
+  console.log
+    {
+      actionInfo: { action: 'pause' },
+      mobState: {
+        mobName: 'awesome-team',
+        status: 'PAUSED',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 298.3589999675751
+      }
+    }
+
+      at log (mobtimer-backend/test/heartbeatIntegration.test.ts:53:63)
+          at Array.forEach (<anonymous>)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    broadcasting message: 1693419954137 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419954140 {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.3
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419954144 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-10","status":"RUNNING","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.297999906539917}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419954148 {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-10","status":"PAUSED","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29399995803833007}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.29399995803833007
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419954154 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-10","status":"RUNNING","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29000000953674315}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'READY',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'RUNNING',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.297999906539917
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-10","status":"RUNNING","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.297999906539917}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'pause' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'PAUSED',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.29399995803833007
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-10","status":"PAUSED","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29399995803833007}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'RUNNING',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.29000000953674315
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-10","status":"RUNNING","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.29000000953674315}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+ FAIL  mobtimer-backend/test/heartbeatIntegration.test.ts (5.353 s)
+  Heartbeat Integration
+    ✕ Heartbeat integration test (3097 ms)
+
+  ● Heartbeat Integration › Heartbeat integration test
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 5
+    Received: 0
+
+      53 |     client.successfulResponses.forEach ( (response)=> console.log(JSON.parse(response)))
+      54 |     // By now we should have 5 heartbeats, i.e., the 3 prior heartbeats plus another 2 after the client.pause woke up the heartbeat object
+    > 55 |     expect(counter.value).toEqual(5);
+         |                           ^
+      56 |     await cleanUp(client);
+      57 |   });
+      58 |
+
+      at Object.toEqual (mobtimer-backend/test/heartbeatIntegration.test.ts:55:27)
+
+  console.log
+    broadcasting message: 1693419954444 {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'expired' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'READY',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"expired"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    broadcasting message: 1693419954478 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-10","status":"READY","durationMinutes":0.005,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-10',
+        status: 'READY',
+        durationMinutes: 0.005,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-10',
+      status: 'READY',
+      durationMinutes: 0.005,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    lastSuccessfulResponse {
+      mobName: 'autogenerated-mob-10',
+      status: 'READY',
+      durationMinutes: 0.005,
+      participants: [],
+      roles: [ '🗣️ Navigator', '🛞 Driver' ],
+      secondsRemaining: 0
+    }
+
+      at MobSocketTestClient.get lastSuccessfulMobState [as lastSuccessfulMobState] (mobtimer-api/src/mobSocketTestClient.ts:107:13)
+
+  console.log
+    End: time 3486 Client WebSocket Server Integration Start timer, pause, resume, and verify message sent to all when expires
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+  console.log
+    Start: time 3490 Client WebSocket Server Integration Check got expected number of messages
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:34:13)
+
+  console.log
+    sending join request autogenerated-mob-11
+
+      at MobSocketTestClient.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    sending pause request
+
+      at MobSocketTestClient.pause (mobtimer-api/src/client.ts:94:13)
+
+  console.log
+    sending start request
+
+      at MobSocketTestClient.start (mobtimer-api/src/client.ts:89:13)
+
+  console.log
+    broadcasting message: 1693419954508 {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-11","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419954510 {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-11","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.2
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419954515 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-11","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19699997901916505}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419954518 {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-11","status":"PAUSED","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.1940001964569092}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 0.1940001964569092
+
+      at MobTimer.setExpireTimeout (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    broadcasting message: 1693419954523 {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-11","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19200010299682618}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    broadcasting message: 1693419954525 {"actionInfo":{"action":"echo"},"mobState":{"mobName":"autogenerated-mob-11","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19000000953674318}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'join' },
+      mobState: {
+        mobName: 'autogenerated-mob-11',
+        status: 'READY',
+        durationMinutes: 5,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"join"},"mobState":{"mobName":"autogenerated-mob-11","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'update' },
+      mobState: {
+        mobName: 'autogenerated-mob-11',
+        status: 'READY',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"update"},"mobState":{"mobName":"autogenerated-mob-11","status":"READY","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-11',
+        status: 'RUNNING',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.19699997901916505
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-11","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19699997901916505}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'pause' },
+      mobState: {
+        mobName: 'autogenerated-mob-11',
+        status: 'PAUSED',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.1940001964569092
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"pause"},"mobState":{"mobName":"autogenerated-mob-11","status":"PAUSED","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.1940001964569092}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'start' },
+      mobState: {
+        mobName: 'autogenerated-mob-11',
+        status: 'RUNNING',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.19200010299682618
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    pushing message.data {"actionInfo":{"action":"start"},"mobState":{"mobName":"autogenerated-mob-11","status":"RUNNING","durationMinutes":0.0033333333333333335,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0.19200010299682618}}
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:53:17)
+
+  console.log
+    responseObject {
+      actionInfo: { action: 'echo' },
+      mobState: {
+        mobName: 'autogenerated-mob-11',
+        status: 'RUNNING',
+        durationMinutes: 0.0033333333333333335,
+        participants: [],
+        roles: [ '🗣️ Navigator', '🛞 Driver' ],
+        secondsRemaining: 0.19000000953674318
+      }
+    }
+
+      at MobSocketTestClient.trackMessage (mobtimer-api/src/mobSocketTestClient.ts:42:13)
+
+  console.log
+    End: time 3546 Client WebSocket Server Integration Check got expected number of messages
+
+      at Object.log (mobtimer-backend/test/requestResponse.integration.test.ts:38:13)
+
+ PASS  mobtimer-backend/test/requestResponse.integration.test.ts (5.734 s)
+  Client WebSocket Server Integration
+    ✓ Create mob with alternative websocket (602 ms)
+    ✓ Create 2 mobs (60 ms)
+    ✓ Modify one of two mob timers (70 ms)
+    ✓ Modify one shared mob timer (105 ms)
+    ✓ Second client joins shared mob in paused state (285 ms)
+    ✓ Start timer with duration 0.2 and elapse time sends message to all (279 ms)
+    ✓ Reset (Cancel) timer (244 ms)
+    ✓ Start timer, pause, and verify no message sent when timer would have expired (377 ms)
+    ✓ Start timer, pause, resume, and verify message sent to all when expires (381 ms)
+    ✓ Check got expected number of messages (60 ms)
+    ○ skipped Handle bad message and subsequent request succeeds
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+
+> Test run finished at 8/30/2023, 2:25:55 PM <
+
+Test Suites: 2 failed, 6 passed, 8 total
+Tests:       3 failed, 18 skipped, 75 passed, 96 total
+Snapshots:   0 total
+Time:        6.964 s
+Ran all test suites.
+Done in 8.49s.
+
+> Test run exited at 8/30/2023, 2:25:55 PM <
+
+
+> Test run started at 8/30/2023, 2:26:47 PM <
+
+yarn run v1.22.19
+$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false --testPathPattern '/Users/ethanadmin/projects/mobtimer/mobtimer-backend/test/sendToClient\.test\.ts'
+  console.log
+    Controller redeployed 3
+
+      at Object.log (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 299.9960000514984
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+ PASS  mobtimer-api/test/controller.test.ts
+  Change frontend status
+    ✓ Ready to Running (19 ms)
+    ✓ Running to Paused (4 ms)
+    ✓ Running to Ready (4 ms)
+
+
+> Test run started at 8/30/2023, 2:26:49 PM <
+
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✕ Create mob (9 ms)
+    ✕ Two mob (1 ms)
+    ○ skipped Start timer
+    ○ skipped Pause timer
+    ○ skipped Resume timer
+    ○ skipped Update timer
+    ○ skipped Reset (Cancel) timer
+    ○ skipped Check got expected number of messages
+    ○ skipped Echo request and response
+    ○ skipped Handle bad message and get good error message
+    ○ skipped New mob timer has no participants
+    ○ skipped Add 1st participant
+    ○ skipped Add 2nd participant
+    ○ skipped Don't add blank participant
+    ○ skipped Don't add participant with spaces only
+    ○ skipped Rotate participants
+    ○ skipped Edit participants
+    ○ skipped Edit roles
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
+
+    ReferenceError: Controller is not defined
+
+      33 |         });
+      34 |       });
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
+         |                ^
+      36 |   });
+      37 |
+      38 |   afterEach(() => {
+
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
+
+    ReferenceError: Controller is not defined
+
+      33 |         });
+      34 |       });
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
+         |                ^
+      36 |   });
+      37 |
+      38 |   afterEach(() => {
+
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
+
+
+> Test run finished at 8/30/2023, 2:26:49 PM <
+
+Test Suites: 1 failed, 1 passed, 2 total
+Tests:       2 failed, 16 skipped, 3 passed, 21 total
+Snapshots:   0 total
+Time:        1.676 s, estimated 3 s
+Ran all test suites related to changed files.
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+ FAIL  mobtimer-backend/test/sendToClient.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✕ Create mob (4 ms)
+    ✕ Two mob (1 ms)
+    ○ skipped Start timer
+    ○ skipped Pause timer
+    ○ skipped Resume timer
+    ○ skipped Update timer
+    ○ skipped Reset (Cancel) timer
+    ○ skipped Check got expected number of messages
+    ○ skipped Echo request and response
+    ○ skipped Handle bad message and get good error message
+    ○ skipped New mob timer has no participants
+    ○ skipped Add 1st participant
+    ○ skipped Add 2nd participant
+    ○ skipped Don't add blank participant
+    ○ skipped Don't add participant with spaces only
+    ○ skipped Rotate participants
+    ○ skipped Edit participants
+    ○ skipped Edit roles
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Create mob
+
+    ReferenceError: Controller is not defined
+
+      33 |         });
+      34 |       });
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
+         |                ^
+      36 |   });
+      37 |
+      38 |   afterEach(() => {
+
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
+
+  ● Process Raw Request tests (no socket communication, so no expiration tests here) › Two mob
+
+    ReferenceError: Controller is not defined
+
+      33 |         });
+      34 |       });
+    > 35 |     jest.spyOn(Controller.prototype, "updateSummary").mockImplementation(() => {});
+         |                ^
+      36 |   });
+      37 |
+      38 |   afterEach(() => {
+
+      at Object.Controller (mobtimer-backend/test/sendToClient.test.ts:35:16)
+
+
+> Test run finished at 8/30/2023, 2:26:50 PM <
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 16 skipped, 18 total
+Snapshots:   0 total
+Time:        0.923 s, estimated 3 s
+Ran all test suites matching /\/Users\/ethanadmin\/projects\/mobtimer\/mobtimer-backend\/test\/sendToClient\.test\.ts/i.
+Done in 2.39s.
+
+> Test run exited at 8/30/2023, 2:26:50 PM <
+
+yarn run v1.22.19
+
+> Test run started at 8/30/2023, 2:27:20 PM <
+
+$ jest --watch --verbose --testLocationInResults --json --useStderr --outputFile /var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/jest_runner_mobtimer_502_2.json --testNamePattern 'Process Raw Request tests \(no socket communication, so no expiration tests here\) Create mob' --no-coverage --reporters default --reporters /Users/ethanadmin/.vscode/extensions/orta.vscode-jest-5.2.3/out/reporter.js --colors --watchAll=false --testPathPattern '/Users/ethanadmin/projects/mobtimer/mobtimer-backend/test/sendToClient\.test\.ts'
+  console.log
+    Controller redeployed 3
+
+      at Object.log (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 299.99900007247925
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 300
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+  console.log
+    setExpireTimeout, this.secondsRemaining: 299.9979999065399
+
+      at MobTimer.log [as setExpireTimeout] (mobtimer-api/src/mobTimer.ts:43:13)
+
+
+> Test run started at 8/30/2023, 2:27:21 PM <
+
+ PASS  mobtimer-api/test/controller.test.ts
+  Change frontend status
+    ✓ Ready to Running (19 ms)
+    ✓ Running to Paused (3 ms)
+    ✓ Running to Ready (2 ms)
+
+  console.log
+    sending join request test-mob-1
+
+      at Client.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693420041787 {"actionInfo":{"action":"join"},"mobState":{"mobName":"test-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:join, Status:READY, DurationMin:5, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+  console.log
+    sending join request test-mob-1
+
+      at Client.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693420041787 {"actionInfo":{"action":"join"},"mobState":{"mobName":"test-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:join, Status:READY, DurationMin:5, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+  console.log
+    sending join request test-mob-1
+
+      at Client.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693420041787 {"actionInfo":{"action":"join"},"mobState":{"mobName":"test-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:join, Status:READY, DurationMin:5, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:join, Status:READY, DurationMin:5, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+  console.log
+    broadcasting message: 1693420041787 {"actionInfo":{"action":"update"},"mobState":{"mobName":"test-mob-1","status":"READY","durationMinutes":10,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:update, Status:READY, DurationMin:10, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:update, Status:READY, DurationMin:10, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+ PASS  mobtimer-backend/test/sendToClient.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✓ Create mob (24 ms)
+    ✓ Two mob (37 ms)
+    ○ skipped Start timer
+    ○ skipped Pause timer
+    ○ skipped Resume timer
+    ○ skipped Update timer
+    ○ skipped Reset (Cancel) timer
+    ○ skipped Check got expected number of messages
+    ○ skipped Echo request and response
+    ○ skipped Handle bad message and get good error message
+    ○ skipped New mob timer has no participants
+    ○ skipped Add 1st participant
+    ○ skipped Add 2nd participant
+    ○ skipped Don't add blank participant
+    ○ skipped Don't add participant with spaces only
+    ○ skipped Rotate participants
+    ○ skipped Edit participants
+    ○ skipped Edit roles
+
+
+> Test run finished at 8/30/2023, 2:27:21 PM <
+
+Test Suites: 2 passed, 2 total
+Tests:       16 skipped, 5 passed, 21 total
+Snapshots:   0 total
+Time:        1.318 s, estimated 2 s
+Ran all test suites related to changed files.
+
+  console.log
+    Controller redeployed 3
+
+      at Object.<anonymous> (mobtimer-api/src/controller.ts:5:9)
+
+  console.log
+    sending join request test-mob-1
+
+      at Client.joinMob (mobtimer-api/src/client.ts:60:13)
+
+  console.log
+    broadcasting message: 1693420042274 {"actionInfo":{"action":"join"},"mobState":{"mobName":"test-mob-1","status":"READY","durationMinutes":5,"participants":[],"roles":["🗣️ Navigator","🛞 Driver"],"secondsRemaining":0}}
+
+      at Function.log [as _broadcastToSockets] (mobtimer-backend/src/server/broadcaster.ts:32:13)
+
+  console.info
+    Mob: test-mob-1 (0 Participant(s):), Action:join, Status:READY, DurationMin:5, RemainingSec:0 (00:00)
+
+      at consoleLogResponse (mobtimer-api/src/setSocketListener.ts:83:11)
+          at Set.forEach (<anonymous>)
+
+ PASS  mobtimer-backend/test/sendToClient.test.ts
+  Process Raw Request tests (no socket communication, so no expiration tests here)
+    ✓ Create mob (24 ms)
+    ○ skipped Two mob
+    ○ skipped Start timer
+    ○ skipped Pause timer
+    ○ skipped Resume timer
+    ○ skipped Update timer
+    ○ skipped Reset (Cancel) timer
+    ○ skipped Check got expected number of messages
+    ○ skipped Echo request and response
+    ○ skipped Handle bad message and get good error message
+    ○ skipped New mob timer has no participants
+    ○ skipped Add 1st participant
+    ○ skipped Add 2nd participant
+    ○ skipped Don't add blank participant
+    ○ skipped Don't add participant with spaces only
+    ○ skipped Rotate participants
+    ○ skipped Edit participants
+    ○ skipped Edit roles
+
+
+> Test run finished at 8/30/2023, 2:27:22 PM <
+
+Test Suites: 1 passed, 1 total
+Tests:       17 skipped, 1 passed, 18 total
+Snapshots:   0 total
+Time:        0.734 s, estimated 1 s
+Ran all test suites matching /\/Users\/ethanadmin\/projects\/mobtimer\/mobtimer-backend\/test\/sendToClient\.test\.ts/i with tests matching "Process Raw Request tests \(no socket communication, so no expiration tests here\) Create mob".
+Done in 1.84s.
+
+> Test run exited at 8/30/2023, 2:27:22 PM <
+

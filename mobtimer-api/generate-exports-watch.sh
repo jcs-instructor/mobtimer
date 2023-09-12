@@ -8,10 +8,9 @@
 # first run -- save last line on variable old
 old=$(ls -1 src/*.ts)
 
-echo Watching for new files to generate d.ts
-
 # infinite loop 
-echo Monitoring
+echo Monitoring for new or deleted mobtimer-api files
+echo When file is added or removed, automated exports will be regenerated.
 while : ; do
     sleep 1
     # read again last line

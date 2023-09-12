@@ -4,13 +4,10 @@ import * as vscode from "vscode";
 
 // The extension is activated the very first time the command is executed
 export async function activate(context: ExtensionContext) {
-  const debug = (context.extensionMode === vscode.ExtensionMode.Development);
-  if (debug) {
-    process.env.REACT_APP_WEBSOCKET_URL = `ws://localhost:${process.env.REACT_APP_WEBSOCKET_PORT || "4000"}`;
-  }
-  console.log("In extension.ts, process.env.REACT_APP_WEBSOCKET_URL = ", process.env.REACT_APP_WEBSOCKET_URL);
-  console.log('"mobtimer.display" is now active!');
-  let vscodeMobTimer = new VscodeMobTimer();
+  // When running in debug mode, we want to use localhost.
+  // When running the installed mobtimer-vscode extension, we want to use the deployed url.
+  const useLocalHost = (context.extensionMode === vscode.ExtensionMode.Development);
+  let vscodeMobTimer = new VscodeMobTimer(useLocalHost);
   console.log("Done");
 
   // The commandId parameter must match the command field in package.json
