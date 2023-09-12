@@ -31,7 +31,7 @@ Joel:
 
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Address build flakiness**
-      - [ ] **Symlink to src** instead of to node_modules
+      - [ ] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
       - [ ] **Docker**
 - [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
 - [ ] **Move const defaultHeartbeatValues into class** right below it

@@ -2,10 +2,11 @@
     - Manually remove existing symbolic links
     - Modify package.json to get rid of mobtimer-api
     - Modify and run mobtimer-api scripts
-      - Remove compilng mobtimer-api
+      - Remove compiling mobtimer-api
       - Create symbolic link from mobtimer-api/src to mobtimer-frontend/src/mobtimer-api in mobtimer-api script
       - Run script
     - Confirm tests and UI work
     - Try making a change in both mobtimer-api/src and mobtimer-frontend/src/mobtimer-api dirs
 - repeat for mobtimer-backend
 - clear caches
+- update CONTRIBUTING.md
