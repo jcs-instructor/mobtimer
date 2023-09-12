@@ -1,11 +1,11 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { MobState, MobTimer } from "mobtimer-api";
-import { Status, TimeUtils, Action } from "mobtimer-api";
+import { MobState, MobTimer } from "../src/mobtimer-api";
+import { Status, TimeUtils, Action } from "../src/mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { MobSocketTestClient } from "mobtimer-api";
-import { W3CClientSocket, WSClientSocket } from "mobtimer-api";
+import { MobSocketTestClient } from "../src/mobtimer-api";
+import { W3CClientSocket, WSClientSocket } from "../src/mobtimer-api";
 
 describe("Client WebSocket Server Integration", () => {
   let _server: { httpServer: http.Server; wss: WebSocket.Server };

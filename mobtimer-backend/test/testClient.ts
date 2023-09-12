@@ -1,7 +1,7 @@
-import { Action } from "mobtimer-api";
-import { MobState } from "mobtimer-api";
+import { Action } from "../src/mobtimer-api";
+import { MobState } from "../src/mobtimer-api";
 import { backendUtils } from "../src/server/backendUtils";
-import { MobRequestBuilder } from "mobtimer-api";
+import { MobRequestBuilder } from "../src/mobtimer-api";
 import { MobTimerResponse, SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
 
 class TestClient {

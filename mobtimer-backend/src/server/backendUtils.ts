@@ -1,7 +1,6 @@
 import * as http from "http";
 import WebSocket from "ws";
-import { MobTimer, WSClientSocket } from "mobtimer-api";
-import { Action, MobTimerRequests, MobTimerResponses } from "mobtimer-api";
+import { MobTimer, Action, MobTimerRequests, MobTimerResponses } from "../mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";

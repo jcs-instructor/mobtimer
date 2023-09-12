@@ -1,4 +1,4 @@
-import { Action, MobTimer, MobTimerResponses } from "mobtimer-api";
+import { Action, MobTimer, MobTimerResponses } from "../mobtimer-api";
 import { RoomManager } from "./roomManager";
 
 export class Broadcaster {

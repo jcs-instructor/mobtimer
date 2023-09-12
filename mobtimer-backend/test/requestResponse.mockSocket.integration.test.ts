@@ -7,7 +7,7 @@ import {
   setSocketListener,
   Controller,
   IClientSocket,
-} from "mobtimer-api";
+} from "../src/mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";

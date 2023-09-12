@@ -1,5 +1,5 @@
-import { TimeUtils } from "mobtimer-api";
-import { Heartbeat } from "mobtimer-api";
+import { TimeUtils } from "../src/mobtimer-api";
+import { Heartbeat } from "../src/mobtimer-api";
 
 jest.useFakeTimers();
 

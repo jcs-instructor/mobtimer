@@ -9,8 +9,9 @@ import {
   MobTimer,
   TimeUtils,
   W3CClientSocket,
-} from "mobtimer-api";
-import { Controller, setSocketListener } from "mobtimer-api";
+  Controller, 
+  setSocketListener
+} from "./mobtimer-api";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";

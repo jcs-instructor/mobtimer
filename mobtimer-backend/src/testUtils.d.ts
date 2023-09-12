@@ -1,5 +1,6 @@
 // import { MobTimerResponses } from "mobtimer-api";
 import { Client } from "mobtimer-api";
+
 export declare function waitForSocketState(
   socket: {
     readyState: number;

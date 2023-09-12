@@ -1,10 +1,11 @@
   - mobtimer-frontend
-    - Manually remove existing symbolic links
-    - Modify package.json to get rid of mobtimer-api
-    - Modify and run mobtimer-api scripts
-      - Remove compiling mobtimer-api
-      - Create symbolic link from mobtimer-api/src to mobtimer-frontend/src/mobtimer-api in mobtimer-api script
-      - Run script
+    - [x] Manually remove existing symbolic links from all 3 projects
+    - [x] Modify package.json files to get rid of mobtimer-api
+    - [] Modify and run mobtimer-api scripts
+      - [x] Remove compiling mobtimer-api
+      - [x] Create symbolic link from mobtimer-api/src to mobtimer-frontend/src/mobtimer-api in mobtimer-api script
+      - [...] Run "all steps" script
+      - [ ] Delete all *.d.ts files
     - Confirm tests and UI work
     - Try making a change in both mobtimer-api/src and mobtimer-frontend/src/mobtimer-api dirs
 - repeat for mobtimer-backend

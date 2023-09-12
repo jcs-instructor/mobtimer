@@ -1,10 +1,10 @@
 import { backendUtils } from "../src/server/backendUtils";
-import { Action, Heartbeat, TimeUtils } from "mobtimer-api";
+import { Action, Heartbeat, TimeUtils } from "../src/mobtimer-api";
 import * as http from "http";
 import WebSocket from "ws";
 import { RoomManager } from "../src/server/roomManager";
-import { MobSocketTestClient } from "mobtimer-api";
-import { WSClientSocket } from "mobtimer-api";
+import { MobSocketTestClient } from "../src/mobtimer-api";
+import { WSClientSocket } from "../src/mobtimer-api";
 
 
 describe("Heartbeat Integration", () => {

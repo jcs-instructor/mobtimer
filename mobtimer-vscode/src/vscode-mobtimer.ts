@@ -1,16 +1,17 @@
 import { StatusBarAlignment, StatusBarItem, window } from "vscode";
-import { Controller } from "mobtimer-api";
 import { TOGGLE_TIMER_COMMAND } from "./constants";
 import { commands } from "vscode";
 
 import {
+  Controller,
   Command,
   IClientSocket,
   Client,
   MobTimer,
   MobTimerResponses,
-} from "mobtimer-api";
-import { WSClientSocket } from "mobtimer-api";
+  WSClientSocket,
+} from "./mobtimer-api";
+
 const controller = Controller.staticController;
 
 export class VscodeMobTimer {
