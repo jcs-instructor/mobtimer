@@ -1,3 +1,3 @@
 date
-cd mobtimer-api
+cd mobtimer-frontend/src/mobtimer-api
 ./generate-exports-watch.sh

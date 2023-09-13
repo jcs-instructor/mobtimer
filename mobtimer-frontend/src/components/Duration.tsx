@@ -1,6 +1,5 @@
 import React from 'react'
-import { Controller } from 'mobtimer-api';
-import { TimeUtils } from 'mobtimer-api';
+import { Controller, TimeUtils } from '../mobtimer-api/src';
 const controller = Controller.staticController as Controller;
 
 type FormParameters = {

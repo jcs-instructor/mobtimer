@@ -33,6 +33,7 @@ Joel:
 - [ ] **Address build flakiness**
       - [ ] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
       - [ ] **Docker**
+      - [ ] **CI/CD** in GitHub, including clean git pull, run all scripts, run tests, etc.
 - [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
 - [ ] **Move const defaultHeartbeatValues into class** right below it
 - [ ] **Fix failing Heartbeat integration test**

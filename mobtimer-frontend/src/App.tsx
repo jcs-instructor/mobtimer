@@ -11,7 +11,7 @@ import {
   W3CClientSocket,
   Controller, 
   setSocketListener
-} from "./mobtimer-api";
+} from "./mobtimer-api/src";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";

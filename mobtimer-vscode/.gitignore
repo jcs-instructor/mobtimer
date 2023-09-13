@@ -2,3 +2,4 @@ Date*.txt
 .env
 dist
 *.vsix
+mobtimer-api

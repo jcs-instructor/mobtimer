@@ -64,7 +64,6 @@
       },
       "dependsOn": [
         "mobtimer api generate exports watch",
-        "mobtimer api compile watch",
         "mobtimer api symlink watch",
         "mobtimer frontend start watch",
         "mobtimer backend start watch",
@@ -90,20 +89,6 @@
       "label": "mobtimer api publish watch",
       "type": "shell",
       "command": "./scripts/publish-mobtimer-api-watch.sh",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "mobtimer api compile watch",
-      "type": "shell",
-      "command": "./scripts/compile-mobtimer-api-watch.sh",
       "group": {
         "kind": "build",
         "isDefault": true

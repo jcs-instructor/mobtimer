@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller } from 'mobtimer-api';
+import { Controller } from '../mobtimer-api/src';
 const controller = Controller.staticController as Controller;
 
 const RotateParticipants = () => {
