@@ -32,8 +32,10 @@ Joel:
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Address build flakiness**
       - [ ] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
-      - [ ] **Docker**
+            - [ ] Test on Ethan's PC
+            - [ ] Merge to dev
       - [ ] **CI/CD** in GitHub, including clean git pull, run all scripts, run tests, etc.
+      - [ ] **Docker** (maybe later, if needed/desired)
 - [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
 - [ ] **Move const defaultHeartbeatValues into class** right below it
 - [ ] **Fix failing Heartbeat integration test**
