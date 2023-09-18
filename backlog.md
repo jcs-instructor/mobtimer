@@ -31,9 +31,12 @@ Joel:
 
 - [x] **Deploy to onrender so can dogfood**
 - [ ] **Address build flakiness**
-      - [ ] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
-            - [ ] Test on Ethan's PC
-            - [ ] Merge to dev
+      - [x] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
+      - [ ] **Merge to dev**
+      - [ ] **Refactor mobtimer-api folders**:
+            - for symlinks, use "mobtimer-api-symlink"
+            - for actual source use "mobtimer-api" with no "src" subfolder
+      - [ ] **Simplify shell scripts** - esp. where have scripts that only cd and then call another script
       - [ ] **CI/CD** in GitHub, including clean git pull, run all scripts, run tests, etc.
       - [ ] **Docker** (maybe later, if needed/desired)
 - [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
