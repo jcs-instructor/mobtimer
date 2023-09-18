@@ -41,7 +41,10 @@ to ws://localhost:3000.  REACT_APP_DEPLOYED_WEBSOCKET_URL is not used when runni
    cp .env.EXAMPLE .env
    ```
 
-5. Run "mobtimer all steps"
+5. Define workspaceFolder env variable as follows
+- cp .vscode/settings.json 
+
+6. Run "mobtimer all steps"
 
   In VSCode:
 

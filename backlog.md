@@ -37,6 +37,7 @@ Joel:
       - [ ] **CI/CD** in GitHub, including clean git pull, run all scripts, run tests, etc.
       - [ ] **Docker** (maybe later, if needed/desired)
 - [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
+- [ ] Simplify scripts.  See [here](./proposal-scripts.md)
 - [ ] **Move const defaultHeartbeatValues into class** right below it
 - [ ] **Fix failing Heartbeat integration test**
 - [ ] **Speed up tests** WIP
