@@ -30,10 +30,10 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Merge to dev**
+- [ ] **Docker** 
 - [ ] **Address Edit Participants & Roles flakiness**
       - [ ] Make work like the Turn Duration input box with Update button
       - [ ] For all Update buttons, disable if contents are not dirty (diff. from current saved)
-- [ ] **Docker** 
 - [ ] **Heartbeat** (make sure you don't need to wait a long time if you take a break exceeding the timeout)
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
       - [ ] Show message
