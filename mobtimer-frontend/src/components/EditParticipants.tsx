@@ -13,8 +13,7 @@ const EditParticipants = () => {
     }
 
     function areChangesPending(): boolean {        
-        // todo: trim first
-        return participantsNames !== controller.frontendMobTimer.participants.join(",");
+        return areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
     };
 
     return (
@@ -71,6 +70,10 @@ const EditParticipants = () => {
 
     function splitTrimAndRejoin(string: string) {
         return splitAndTrim(string).join(",");
+    }
+
+    function areSameWhenTrim(commaSeparatedList1: string, commaSeparatedList2: string): boolean {
+        return splitTrimAndRejoin(commaSeparatedList1) !== splitTrimAndRejoin(commaSeparatedList2);
     }
 }
 
