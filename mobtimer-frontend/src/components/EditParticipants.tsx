@@ -5,15 +5,16 @@ const controller = Controller.staticController as Controller;
 const EditParticipants = () => {
 
     // const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
-    const [participantsNames, setParticipantsNames] = useState("");
+    const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
         controller.client?.editParticipants(participantsNames.split(","));
     }
 
-    function areChangesPending(): boolean {
-        return true; // todo: validate
+    function areChangesPending(): boolean {        
+        // todo: trim first
+        return participantsNames !== controller.frontendMobTimer.participants.join(",");
     };
 
     return (
@@ -21,7 +22,12 @@ const EditParticipants = () => {
         <label>Edit Participants: </label>
             <input
                 value={participantsNames}
-                onFocus={(e) => e.target.value = controller.frontendMobTimer.participants.join(",")}
+                onFocus={
+                    (e) => {
+                        e.target.value = controller.frontendMobTimer.participants.join(",");
+                        setParticipantsNames(controller.frontendMobTimer.participants.join(","));
+                    }
+                }
                 // onBlur={(e) => handleBlur(e)}
                 onChange={(e) => setParticipantsNames(e.target.value)}
                 type="text"
@@ -42,11 +48,11 @@ const EditParticipants = () => {
             : setParticipantsNames("");
     }
 
-    function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
-        const newValue = splitTrimAndRejoin(e.target.value as string);
-        const oldValue = controller.frontendMobTimer.participants.join(",");
-        confirmUpdate(newValue, oldValue);
-    }
+    // function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
+    //     const newValue = splitTrimAndRejoin(e.target.value as string);
+    //     const oldValue = controller.frontendMobTimer.participants.join(",");
+    //     confirmUpdate(newValue, oldValue);
+    // }
 
     // function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>): void {
     //     if (e.key === 'Enter') {
