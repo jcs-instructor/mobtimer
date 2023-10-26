@@ -39,6 +39,7 @@ Joel:
       - [ ] Show message
       - [ ] Don't start the timer 
       - [ ] No error message (e.g., if clicking around)
+- [ ] **Deploy to Production**
 
 = = STOP - EVALUATE FOR RELEASE (test, dogfood,...) = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
