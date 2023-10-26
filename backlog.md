@@ -29,16 +29,16 @@ Joel:
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [ ] **Merge to dev**
-- [ ] **Docker** 
 - [ ] **Address Edit Participants & Roles flakiness**
-      - [ ] Make work like the Turn Duration input box with Update button
-      - [ ] For all Update buttons, disable if contents are not dirty (diff. from current saved)
-- [ ] **Heartbeat** (make sure you don't need to wait a long time if you take a break exceeding the timeout)
+      - [ ] Create a Save button that saves any changes to either Edit Participants or Edit Roles
+      - [ ] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)
+      - [ ] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
       - [ ] Show message
       - [ ] Don't start the timer 
       - [ ] No error message (e.g., if clicking around)
+- [ ] **Heartbeat** (make sure you don't need to wait a long time if you take a break exceeding the timeout)
+- [ ] **Docker** 
 - [ ] **Deploy to Production**
 
 = = STOP - EVALUATE FOR RELEASE (test, dogfood,...) = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
