@@ -29,16 +29,26 @@ Joel:
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [x] **Deploy to onrender so can dogfood**
-- [ ] **Address build flakiness**
+- [ ] **Merge to dev**
+- [ ] **Docker** 
+- [ ] **Address Edit Participants & Roles flakiness**
+      - [ ] Make work like the Turn Duration input box with Update button
+      - [ ] For all Update buttons, disable if contents are not dirty (diff. from current saved)
+- [ ] **Heartbeat** (make sure you don't need to wait a long time if you take a break exceeding the timeout)
+- [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
+      - [ ] Show message
+      - [ ] Don't start the timer 
+      - [ ] No error message (e.g., if clicking around)
+
+= = STOP - EVALUATE FOR RELEASE (test, dogfood,...) = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+- [ ] **Address build flakiness** (if not addressed by Docker)
       - [x] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
-      - [ ] **Merge to dev**
       - [ ] **Refactor mobtimer-api folders**:
             - for symlinks, use "mobtimer-api-symlink"
             - for actual source use "mobtimer-api" with no "src" subfolder
       - [ ] **Simplify shell scripts** - esp. where have scripts that only cd and then call another script
       - [ ] **CI/CD** in GitHub, including clean git pull, run all scripts, run tests, etc.
-      - [ ] **Docker** (maybe later, if needed/desired)
 - [ ] **Delete unused file with IBackendSocket** & also run code coverage to see what else isn't needed
 - [ ] Simplify scripts.  See [here](./proposal-scripts.md)
 - [ ] **Move const defaultHeartbeatValues into class** right below it
