@@ -30,12 +30,15 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Address Edit Participants & Roles flakiness**
-      - [ ] Create a Save button that saves any changes to either Edit Participants or Edit Roles
       - [x] Skip empty list items
       - [x] Create a branch
       - [x] Refactor EditParticipants to pass in React variables & submit function            
       - [ ] Dedupe: splitAndTrim
-      - [ ] Fix bug: Navigating to existing room via the URL is broken (maybe changing to HashRouter broke it?) 
+      - [ ] Fix bug: Navigating to existing room via the URL is broken 
+            - Check history for HashRouter vs. BrowserRouter
+            - Dig into existing code
+            - Google related topics and error messages
+      - [ ] Create a Save button that saves any changes to either Edit Participants or Edit Roles
       - [ ] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)
       - [ ] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
       - [ ] Refactor other tsx forms to pass in React variables & submit function (similar to EditParticipants)
