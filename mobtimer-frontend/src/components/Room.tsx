@@ -9,7 +9,7 @@ import EditParticipants from './EditParticipants';
 import EditRoles from './EditRoles';
 import Reset from './Reset';
 import ShuffleParticipants from './ShuffleParticipants';
-import { Controller } from '../mobtimer-api/src';
+import { Controller, StringUtils } from '../mobtimer-api/src';
 
 type FormParameters = {
     durationMinutes: number;
@@ -27,15 +27,10 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
     const controller = Controller.staticController as Controller;
     const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();    
-    
-    // todo: this is a duplicate of the function in EditParticipants.tsx
-    function splitAndTrim(string: string) {
-        return string.split(",").map(x => x.trim()).filter(x => x !== "");
-    }
 
     const submitEditParticipantsRequest = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
-        controller.client?.editParticipants(splitAndTrim(participantsNames));
+        controller.client?.editParticipants(StringUtils.splitAndTrim(participantsNames));
     }
 
     // todo: refactor reduncant code for debug boolean (also in App.tsx)

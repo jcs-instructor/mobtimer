@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller } from '../mobtimer-api/src';
+import { Controller, StringUtils } from '../mobtimer-api/src';
 
 const controller = Controller.staticController as Controller;
 
@@ -12,7 +12,7 @@ type FormParameters = {
 const EditParticipants = ({ participantsNames, setParticipantsNames, submitEditParticipantsRequest }: FormParameters) => {
 
     function areChangesPending(): boolean {        
-        return areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
+        return StringUtils.areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
     };
 
     return (
@@ -62,18 +62,6 @@ const EditParticipants = ({ participantsNames, setParticipantsNames, submitEditP
     //     controller.client?.editParticipants(participantsNames.split(",").map((name) => name.trim()));
     //     setParticipantsNames("");
     // }
-
-    function splitAndTrim(string: string) {
-        return string.split(",").map(x => x.trim()).filter(x => x !== "");
-    }
-
-    function splitTrimAndRejoin(string: string) {
-        return splitAndTrim(string).join(",");
-    }
-
-    function areSameWhenTrim(commaSeparatedList1: string, commaSeparatedList2: string): boolean {
-        return splitTrimAndRejoin(commaSeparatedList1) !== splitTrimAndRejoin(commaSeparatedList2);
-    }
 }
 
 
