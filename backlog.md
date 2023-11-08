@@ -33,6 +33,8 @@ Joel:
       - [ ] Create a Save button that saves any changes to either Edit Participants or Edit Roles
       - [ ] Trim where needed (see todo comments, etc.)
       - [ ] Skip empty list items
+      - [ ] Create a branch
+      - [ ] Refactor to pass in React variables & submit function
       - [ ] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)
       - [ ] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);

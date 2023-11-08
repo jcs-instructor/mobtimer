@@ -36,16 +36,16 @@ const EditParticipants = () => {
         </form>
     )
 
-    function confirmUpdate(newValue: string, oldValue: string): void {
-        return (newValue) !== oldValue
-            && window.confirm("Update Participants from '"
-                + oldValue.replaceAll(",", ", ")
-                + "' to '"
-                + newValue.replaceAll(",", ", ")
-                + "'? (Click OK to confirm, or click Cancel to discard changes)")
-            ? update(newValue, setParticipantsNames)
-            : setParticipantsNames("");
-    }
+    // function confirmUpdate(newValue: string, oldValue: string): void {
+    //     return (newValue) !== oldValue
+    //         && window.confirm("Update Participants from '"
+    //             + oldValue.replaceAll(",", ", ")
+    //             + "' to '"
+    //             + newValue.replaceAll(",", ", ")
+    //             + "'? (Click OK to confirm, or click Cancel to discard changes)")
+    //         ? update(newValue, setParticipantsNames)
+    //         : setParticipantsNames("");
+    // }
 
     // function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
     //     const newValue = splitTrimAndRejoin(e.target.value as string);
@@ -59,10 +59,10 @@ const EditParticipants = () => {
     //     }
     // }
 
-    function update(participantsNames: string, setParticipantsNames: React.Dispatch<React.SetStateAction<string>>) {
-        controller.client?.editParticipants(participantsNames.split(",").map((name) => name.trim()));
-        setParticipantsNames("");
-    }
+    // function update(participantsNames: string, setParticipantsNames: React.Dispatch<React.SetStateAction<string>>) {
+    //     controller.client?.editParticipants(participantsNames.split(",").map((name) => name.trim()));
+    //     setParticipantsNames("");
+    // }
 
     function splitAndTrim(string: string) {
         return string.split(",").map(x => x.trim());
