@@ -5,24 +5,18 @@ const controller = Controller.staticController as Controller;
 
 type FormParameters = {
     participantsNames: string, 
-    setParticipantsNames: (participantsNames: string) => void
+    setParticipantsNames: (participantsNames: string) => void,
+    submitEditParticipantsRequest: (event: React.FormEvent<HTMLFormElement>) => void
 };
 
-const EditParticipants = ({ participantsNames, setParticipantsNames }: FormParameters) => {
-
-    // const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
-
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();        
-        controller.client?.editParticipants(splitAndTrim(participantsNames));
-    }
+const EditParticipants = ({ participantsNames, setParticipantsNames, submitEditParticipantsRequest }: FormParameters) => {
 
     function areChangesPending(): boolean {        
         return areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
     };
 
     return (
-        <form onSubmit={(event) => onSubmit(event)}>            
+        <form onSubmit={(event) => submitEditParticipantsRequest(event)}>            
         <label>Edit Participants: </label>
             <input
                 value={participantsNames}

@@ -34,6 +34,7 @@ Joel:
       - [x] Skip empty list items
       - [x] Create a branch
       - [ ] Refactor to pass in React variables & submit function
+      - [ ] Dedupe: splitAndTrim
       - [ ] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)
       - [ ] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
       - [ ] Merge to dev
