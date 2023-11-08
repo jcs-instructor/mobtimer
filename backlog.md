@@ -33,11 +33,14 @@ Joel:
       - [ ] Create a Save button that saves any changes to either Edit Participants or Edit Roles
       - [x] Skip empty list items
       - [x] Create a branch
-      - [ ] Refactor to pass in React variables & submit function
+      - [x] Refactor EditParticipants to pass in React variables & submit function            
       - [ ] Dedupe: splitAndTrim
+      - [ ] Fix bug: Navigating to existing room via the URL is broken (maybe changing to HashRouter broke it?) 
       - [ ] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)
       - [ ] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
+      - [ ] Refactor other tsx forms to pass in React variables & submit function (similar to EditParticipants)
       - [ ] Merge to dev
+- [ ] **Split toggle button into separate buttons**: 1. Pause, 2. Start/Resume
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
       - [ ] Show message
       - [ ] Don't start the timer 
