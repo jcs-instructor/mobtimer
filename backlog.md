@@ -31,8 +31,7 @@ Joel:
 
 - [ ] **Address Edit Participants & Roles flakiness**
       - [ ] Create a Save button that saves any changes to either Edit Participants or Edit Roles
-      - [ ] Trim where needed (see todo comments, etc.)
-      - [ ] Skip empty list items
+      - [x] Skip empty list items
       - [ ] Create a branch
       - [ ] Refactor to pass in React variables & submit function
       - [ ] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)

@@ -9,7 +9,7 @@ const EditParticipants = () => {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
-        controller.client?.editParticipants(participantsNames.split(","));
+        controller.client?.editParticipants(splitAndTrim(participantsNames));
     }
 
     function areChangesPending(): boolean {        
@@ -65,7 +65,7 @@ const EditParticipants = () => {
     // }
 
     function splitAndTrim(string: string) {
-        return string.split(",").map(x => x.trim());
+        return string.split(",").map(x => x.trim()).filter(x => x !== "");
     }
 
     function splitTrimAndRejoin(string: string) {
