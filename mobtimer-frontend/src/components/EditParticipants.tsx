@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller } from '../mobtimer-api/src';
+
 const controller = Controller.staticController as Controller;
 
-const EditParticipants = () => {
+type FormParameters = {
+    participantsNames: string, 
+    setParticipantsNames: (participantsNames: string) => void
+};
+
+const EditParticipants = ({ participantsNames, setParticipantsNames }: FormParameters) => {
 
     // const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
-    const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        

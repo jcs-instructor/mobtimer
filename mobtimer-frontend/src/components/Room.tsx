@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Timer from './Timer';
 import Duration from './Duration';
@@ -9,6 +9,7 @@ import EditParticipants from './EditParticipants';
 import EditRoles from './EditRoles';
 import Reset from './Reset';
 import ShuffleParticipants from './ShuffleParticipants';
+import { Controller } from '../mobtimer-api/src';
 
 type FormParameters = {
     durationMinutes: number;
@@ -23,6 +24,8 @@ type FormParameters = {
 
 const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitToggleAction, submitJoinMobRequest }: FormParameters) => {    
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
+    const controller = Controller.staticController as Controller;
+    const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
     const mobNameLowerCase = mobNameUrlParam.toLowerCase();    
     // todo: refactor reduncant code for debug boolean (also in App.tsx)
     const debug = window.location.href.includes('localhost');
@@ -74,7 +77,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
                 </table>
                 
                 <AddParticipant />
-                <EditParticipants />
+                <EditParticipants participantsNames={participantsNames} setParticipantsNames={setParticipantsNames} />
                 
                 <hr />
 
