@@ -1,16 +1,16 @@
 import React from 'react'
-import { Controller, TimeUtils } from '../mobtimer-api/src';
-const controller = Controller.staticController as Controller;
+import { TimeUtils } from '../mobtimer-api/src';
 
 type FormParameters = {
     durationMinutes: number;
     setDurationMinutes: (durationMinutes: number) => void;
+    broadcastDurationMinutes: (durationMinutes: number) => void;
 }
 
-const Duration = ({ durationMinutes, setDurationMinutes }: FormParameters) => {
+const Duration = ({ durationMinutes, setDurationMinutes, broadcastDurationMinutes }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();        
-        controller.client?.update(durationMinutes);
+        event.preventDefault();                
+        broadcastDurationMinutes(durationMinutes);
     }
 
     function isDurationValid(): boolean {

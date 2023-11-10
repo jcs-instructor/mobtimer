@@ -60,9 +60,11 @@ const App = () => {
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
 
-
+  // Broadcast functions (send to server)
+  const broadcastDurationMinutes = (durationMinutes: number) => client?.update(durationMinutes);
+  
   // Injections
-  controller.injectSetDurationMinutes(setDurationMinutes);
+  //controller.injectSetDurationMinutes(setDurationMinutes);
   controller.injectSetParticipants(setParticipants);
   controller.injectSetRoles(setRoles);
   controller.injectSetSecondsRemainingString(setSecondsRemainingString);
@@ -132,6 +134,7 @@ const App = () => {
     event.preventDefault();
     controller.toggleStatus(client, controller.frontendMobTimer);
   };
+  
   // Browser router
   return (
     <HashRouter>
@@ -144,6 +147,7 @@ const App = () => {
             <Room
               durationMinutes={durationMinutes} 
               setDurationMinutes={setDurationMinutes}
+              broadcastDurationMinutes={broadcastDurationMinutes}
               participants={participants}
               roles={roles}
               actionButtonLabel={actionButtonLabel}
