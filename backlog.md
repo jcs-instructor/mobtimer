@@ -34,6 +34,7 @@ Joel:
       - [x] Create a branch
       - [x] Refactor EditParticipants to pass in React variables & submit function            
       - [x] Dedupe: splitAndTrim
+      - [ ] Duration.tsx: remove business logic (pass in setDurationMinutes and updateServerWithDurationMinutes)
       - [ ] Fix bug: Navigating to existing room via the URL is broken 
             - Check history for HashRouter vs. BrowserRouter
             - Dig into existing code
