@@ -142,7 +142,8 @@ const App = () => {
           path="/:mobNameUrlParam"
           element={
             <Room
-              durationMinutes={durationMinutes}
+              durationMinutes={durationMinutes} 
+              setDurationMinutes={setDurationMinutes}
               participants={participants}
               roles={roles}
               actionButtonLabel={actionButtonLabel}

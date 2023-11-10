@@ -4,9 +4,10 @@ const controller = Controller.staticController as Controller;
 
 type FormParameters = {
     durationMinutes: number;
+    setDurationMinutes: (durationMinutes: number) => void;
 }
 
-const Duration = ({ durationMinutes }: FormParameters) => {
+const Duration = ({ durationMinutes, setDurationMinutes }: FormParameters) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();        
         controller.client?.update(durationMinutes);
@@ -21,7 +22,7 @@ const Duration = ({ durationMinutes }: FormParameters) => {
             <label>Turn Duration (minutes): </label>
             <input
                 value={durationMinutes}
-                onChange={(e) => controller.setDurationMinutes(e.target.value as unknown as number)}
+                onChange={(e) => setDurationMinutes(e.target.value as unknown as number)}
                 type="text"
                 placeholder="Enter a Turn Duration"
             />

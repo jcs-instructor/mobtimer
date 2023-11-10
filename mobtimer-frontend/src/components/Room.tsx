@@ -13,6 +13,7 @@ import { Controller, StringUtils } from '../mobtimer-api/src';
 
 type FormParameters = {
     durationMinutes: number;
+    setDurationMinutes: (durationMinutes: number) => void;
     participants: string[];
     roles: string[];
     actionButtonLabel: string;
@@ -22,7 +23,7 @@ type FormParameters = {
     submitJoinMobRequest: () => void;
 }
 
-const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitToggleAction, submitJoinMobRequest }: FormParameters) => {    
+const Room = ({ durationMinutes, setDurationMinutes, participants, roles, actionButtonLabel, setMobName, timeString, submitToggleAction, submitJoinMobRequest }: FormParameters) => {    
     const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
     const controller = Controller.staticController as Controller;
     const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
@@ -69,7 +70,7 @@ const Room = ({ durationMinutes, participants, roles, actionButtonLabel, setMobN
                     </tbody>
                 </table>                
                 
-                <Duration durationMinutes={durationMinutes} />
+                <Duration durationMinutes={durationMinutes} setDurationMinutes={setDurationMinutes} />
                 
                 <hr />
                 
