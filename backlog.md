@@ -34,7 +34,12 @@ Joel:
       - [x] Create a branch
       - [x] Refactor EditParticipants to pass in React variables & submit function            
       - [x] Dedupe: splitAndTrim
-      - [ ] Duration.tsx: remove business logic (pass in setDurationMinutes and updateServerWithDurationMinutes)
+      - [ ] Duration.tsx: 
+            - [x] Remove business logic from Duration.tsx (pass in setDurationMinutes and updateServerWithDurationMinutes)
+            - [ ] Remove  injection of setDurationMinutes from controller (original purpose was to avoid
+                  passing around this React variable, but now we pass it around anyway), and pass setDurationMinutes
+                  directly into setSocketListener
+            - [ ] Do this for other components, too (all react variables in App.tsx)
       - [ ] Fix bug: Navigating to existing room via the URL is broken 
             - Check history for HashRouter vs. BrowserRouter
             - Dig into existing code
