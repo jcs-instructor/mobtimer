@@ -8,7 +8,8 @@ export class Controller {
   
   static staticController: Controller = new Controller();
 
-  updateSummary() {
+  // todo: document.title shouldn't be here (it's a UI concern)
+  public updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
       this.createListOfParticipantsWithRoleEmojisPrepended();
