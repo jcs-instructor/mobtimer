@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { Controller } from '../mobtimer-api/src';
+import React from 'react';
+import { Controller, StringUtils } from '../mobtimer-api/src';
+
 const controller = Controller.staticController as Controller;
 
-const EditParticipants = () => {
+type FormParameters = {
+    participantsNames: string, 
+    setParticipantsNames: (participantsNames: string) => void,
+    submitEditParticipantsRequest: (event: React.FormEvent<HTMLFormElement>) => void
+};
 
-    // const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
-    const [participantsNames, setParticipantsNames] = useState(controller.frontendMobTimer.participants.join(","));
-
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();        
-        controller.client?.editParticipants(splitAndTrim(participantsNames));
-    }
+const EditParticipants = ({ participantsNames, setParticipantsNames, submitEditParticipantsRequest }: FormParameters) => {
 
     function areChangesPending(): boolean {        
-        return areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
+        return StringUtils.areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
     };
 
     return (
-        <form onSubmit={(event) => onSubmit(event)}>            
+        <form onSubmit={(event) => submitEditParticipantsRequest(event)}>            
         <label>Edit Participants: </label>
             <input
                 value={participantsNames}
@@ -63,18 +62,6 @@ const EditParticipants = () => {
     //     controller.client?.editParticipants(participantsNames.split(",").map((name) => name.trim()));
     //     setParticipantsNames("");
     // }
-
-    function splitAndTrim(string: string) {
-        return string.split(",").map(x => x.trim()).filter(x => x !== "");
-    }
-
-    function splitTrimAndRejoin(string: string) {
-        return splitAndTrim(string).join(",");
-    }
-
-    function areSameWhenTrim(commaSeparatedList1: string, commaSeparatedList2: string): boolean {
-        return splitTrimAndRejoin(commaSeparatedList1) !== splitTrimAndRejoin(commaSeparatedList2);
-    }
 }
 
 

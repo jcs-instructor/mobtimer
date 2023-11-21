@@ -60,12 +60,13 @@ const App = () => {
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
 
-
+  // Broadcast functions (send to server)
+  const broadcastDurationMinutes = (durationMinutes: number) => client?.update(durationMinutes);
+  
   // Injections
-  controller.injectSetDurationMinutes(setDurationMinutes);
+  //controller.injectSetDurationMinutes(setDurationMinutes);
   controller.injectSetParticipants(setParticipants);
   controller.injectSetRoles(setRoles);
-  controller.injectSetSecondsRemainingString(setSecondsRemainingString);
   let client: Client;
   client = controller.client as Client;
 
@@ -85,16 +86,16 @@ const App = () => {
       controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
       setSocketListener(
+        setSecondsRemainingString,
+        setDurationMinutes,
         controller,
         playAudio,
         getActionButtonLabel
       );
    };
-   controller.injectSetActionButtonLabel(setActionButtonLabel);
-   controller.injectSetDurationMinutes(setDurationMinutes);
+   controller.injectSetActionButtonLabel(setActionButtonLabel);   
    controller.injectSetParticipants(setParticipants);
    controller.injectSetRoles(setRoles);
-   controller.injectSetSecondsRemainingString(setSecondsRemainingString);
 
     // useEffect code
     if (connected) {
@@ -132,6 +133,7 @@ const App = () => {
     event.preventDefault();
     controller.toggleStatus(client, controller.frontendMobTimer);
   };
+  
   // Browser router
   return (
     <HashRouter>
@@ -142,11 +144,14 @@ const App = () => {
           path="/:mobNameUrlParam"
           element={
             <Room
-              durationMinutes={durationMinutes}
+              durationMinutes={durationMinutes} 
+              setDurationMinutes={setDurationMinutes}
+              broadcastDurationMinutes={broadcastDurationMinutes}
               participants={participants}
               roles={roles}
               actionButtonLabel={actionButtonLabel}
               setMobName={setMobName}
+              setSecondsRemainingString={setSecondsRemainingString}
               timeString={secondsRemainingString}
               submitToggleAction={submitToggleAction}
               submitJoinMobRequest={submitJoinMobRequest}

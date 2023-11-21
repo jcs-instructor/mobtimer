@@ -1,5 +1,7 @@
 import { Client, MobTimerResponses, Action, TimeUtils, Controller } from "./index";
 export function setSocketListener(
+  setSecondsRemainingString: (secondsRemainingString: string) => void,
+  setDurationMinutes: (durationMinutes: number) => void,
   controller: Controller,
   playAudio: () => void,
   getActionButtonLabel: () => string
@@ -11,12 +13,14 @@ export function setSocketListener(
 
   client.webSocket.onmessageReceived = (message: { data: any }) => {
     // Get response from server
-    onmessageReceivedFunc(controller, message, playAudio, getActionButtonLabel);
+    onmessageReceivedFunc(setSecondsRemainingString, setDurationMinutes, controller, message, playAudio, getActionButtonLabel);
   };
 
  }
 
   export const onmessageReceivedFunc = (
+    setSecondsRemainingString: (secondsRemainingString: string) => void,
+    setDurationMinutes: (durationMinutes: number) => void,
     controller: Controller,
     message: { data: any },
     playAudio: () => void,
@@ -56,12 +60,10 @@ export function setSocketListener(
     const label = getActionButtonLabel();
 
     // update React state variables
-    controller.setDurationMinutes(durationMinutes);
+    setDurationMinutes(durationMinutes);
     controller.setParticipants(participants);
     controller.setRoles(roles);
-    controller.setSecondsRemainingString(
-      controller.frontendMobTimer.secondsRemainingString
-    );
+    setSecondsRemainingString(controller.frontendMobTimer.secondsRemainingString);
     controller.setActionButtonLabel(label);
 
     // Update browser tab title text
