@@ -94,18 +94,6 @@ export class Controller {
     this.setActionButtonLabel = setActionButtonLabel;
   }
 
-  // inject time string
-  setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetSecondsRemainingString(
-    setSecondsRemainingStringFunction: (timeString: string) => void
-  ): void {
-    this.setSecondsRemainingString = (timeString: string) => {
-      setSecondsRemainingStringFunction(timeString);
-      // Time ticking is tracked on the front end, so we need to update the summary here
-      this.updateSummary();
-    };
-  }
-
   // inject participants
   setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   injectSetParticipants(

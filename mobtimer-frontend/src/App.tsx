@@ -67,7 +67,6 @@ const App = () => {
   //controller.injectSetDurationMinutes(setDurationMinutes);
   controller.injectSetParticipants(setParticipants);
   controller.injectSetRoles(setRoles);
-  controller.injectSetSecondsRemainingString(setSecondsRemainingString);
   let client: Client;
   client = controller.client as Client;
 
@@ -97,7 +96,6 @@ const App = () => {
    controller.injectSetActionButtonLabel(setActionButtonLabel);   
    controller.injectSetParticipants(setParticipants);
    controller.injectSetRoles(setRoles);
-   controller.injectSetSecondsRemainingString(setSecondsRemainingString);
 
     // useEffect code
     if (connected) {
