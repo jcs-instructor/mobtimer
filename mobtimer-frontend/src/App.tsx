@@ -87,13 +87,13 @@ const App = () => {
       controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
       setSocketListener(
+        setDurationMinutes,
         controller,
         playAudio,
         getActionButtonLabel
       );
    };
-   controller.injectSetActionButtonLabel(setActionButtonLabel);
-   controller.injectSetDurationMinutes(setDurationMinutes);
+   controller.injectSetActionButtonLabel(setActionButtonLabel);   
    controller.injectSetParticipants(setParticipants);
    controller.injectSetRoles(setRoles);
    controller.injectSetSecondsRemainingString(setSecondsRemainingString);

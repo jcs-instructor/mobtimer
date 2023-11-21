@@ -85,14 +85,7 @@ export class Controller {
 
   // injections -----------------------
 
-  // inject duration minutes
-  setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetDurationMinutes(
-    setDurationMinutesFunction: (durationMinutes: number) => void
-  ) {
-    this.setDurationMinutes = setDurationMinutesFunction;
-  }
-
+  // inject action button label
   setActionButtonLabel = (_label: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   injectSetActionButtonLabel(
     setActionButtonLabel: (label: string) => void
