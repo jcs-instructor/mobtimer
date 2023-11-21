@@ -85,12 +85,12 @@ const App = () => {
       }
       controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
-      setSocketListener(
+      setSocketListener({
         setSecondsRemainingString,
         setDurationMinutes,
         controller,
         playAudio,
-        getActionButtonLabel
+        getActionButtonLabel}
       );
    };
    controller.injectSetActionButtonLabel(setActionButtonLabel);   
