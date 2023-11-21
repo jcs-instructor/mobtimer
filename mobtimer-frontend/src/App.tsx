@@ -87,6 +87,7 @@ const App = () => {
       controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
       setSocketListener(
+        setSecondsRemainingString,
         setDurationMinutes,
         controller,
         playAudio,
@@ -152,6 +153,7 @@ const App = () => {
               roles={roles}
               actionButtonLabel={actionButtonLabel}
               setMobName={setMobName}
+              setSecondsRemainingString={setSecondsRemainingString}
               timeString={secondsRemainingString}
               submitToggleAction={submitToggleAction}
               submitJoinMobRequest={submitJoinMobRequest}

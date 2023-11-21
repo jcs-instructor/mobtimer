@@ -3,16 +3,18 @@ import { useEffect } from 'react';
 const controller = Controller.staticController as Controller;
 
 type FormParameters = {
+    setSecondsRemainingString: (secondsRemainingString: string) => void;
     timeString: string;
 }
 
-const Timer = ({ timeString }: FormParameters) => {
+const Timer = ({ setSecondsRemainingString, timeString }: FormParameters) => {
     
     const frontendMobTimer = controller.frontendMobTimer;
     
     useEffect(() => {
         function onTick() {
-            controller.setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
+            setSecondsRemainingString(frontendMobTimer.secondsRemainingString);
+            
         }
         // Continuously re-sync the interval to match the frontendMobTimer so that we display whole
         // seconds as accurately as possible in the UI. Otherwise, it can be choppy (off by 1 to 999 ms)
