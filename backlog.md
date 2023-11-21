@@ -39,8 +39,8 @@ Joel:
             - [x] Remove  injection of setDurationMinutes from controller (original purpose was to avoid
                   passing around this React variable, but now we pass it around anyway), and pass setDurationMinutes
                   directly into setSocketListener
-      - [ ] Move document.title related code to UI
       - [ ] Remove all controller injections of React set variables
+      - [ ] Move document.title related code to UI
       - [ ] Fix bug: Navigating to existing room via the URL is broken 
             - Check history for HashRouter vs. BrowserRouter
             - Dig into existing code
