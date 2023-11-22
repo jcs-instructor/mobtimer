@@ -40,6 +40,7 @@ Joel:
                   passing around this React variable, but now we pass it around anyway), and pass setDurationMinutes
                   directly into setSocketListener
       - [ ] Remove all controller injections of React set variables (adding parameters to the ListenerParameters type as appropriate)
+      - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Move document.title related code to UI
       - [ ] Fix bug: Navigating to existing room via the URL is broken 
             - Check history for HashRouter vs. BrowserRouter
