@@ -51,7 +51,7 @@ const Room = ({
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    controller.client?.editParticipants(StringUtils.splitAndTrim(participantsNames));
+    controller.client?.editParticipants(StringUtils.splitAndTrim(participantNames));
     controller.client?.editRoles(StringUtils.splitAndTrim(roleNames))
   };
 
