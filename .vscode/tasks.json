@@ -64,7 +64,7 @@
       },
       "dependsOn": [
         "mobtimer api generate exports watch",
-        "mobtimer api symlink watch",
+        // "mobtimer api symlink watch",
         "mobtimer frontend start watch",
         "mobtimer backend start watch",
         "mobtimer vscode compile watch"
@@ -99,20 +99,20 @@
       },
       "problemMatcher": []
     },
-    {
-      "label": "mobtimer api symlink watch",
-      "type": "shell",
-      "command": "./scripts/symlink-mobtimer-api-watch.sh",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "problemMatcher": []
-    },
+    // {
+    //   "label": "mobtimer api symlink watch",
+    //   "type": "shell",
+    //   "command": "./scripts/symlink-mobtimer-api-watch.sh",
+    //   "group": {
+    //     "kind": "build",
+    //     "isDefault": true
+    //   },
+    //   "presentation": {
+    //     "reveal": "always",
+    //     "panel": "new"
+    //   },
+    //   "problemMatcher": []
+    // },
     {
       "label": "mobtimer backend start watch",
       "type": "shell",
