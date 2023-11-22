@@ -63,10 +63,6 @@ const App = () => {
   // Broadcast functions (send to server)
   const broadcastDurationMinutes = (durationMinutes: number) => client?.update(durationMinutes);
   
-  // Injections
-  //controller.injectSetDurationMinutes(setDurationMinutes);
-  controller.injectSetParticipants(setParticipants);
-  controller.injectSetRoles(setRoles);
   let client: Client;
   client = controller.client as Client;
 
@@ -86,17 +82,16 @@ const App = () => {
       controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
       setSocketListener({
+        setRoles,
+        setParticipants,
         setSecondsRemainingString,
         setDurationMinutes,
+        setActionButtonLabel,
         controller,
         playAudio,
         getActionButtonLabel}
       );
    };
-   controller.injectSetActionButtonLabel(setActionButtonLabel);   
-   controller.injectSetParticipants(setParticipants);
-   controller.injectSetRoles(setRoles);
-
     // useEffect code
     if (connected) {
       return;

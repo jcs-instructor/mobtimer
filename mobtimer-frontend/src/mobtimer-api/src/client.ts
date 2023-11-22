@@ -39,7 +39,7 @@ class Client {
         } else {
           Client.waitForSocketState(socket, state).then(resolve);
         }
-      }, 500);
+      }, 100);
       // todo: timeout.unref() fails when running from frontend; why?
       // timeout.unref();
     });

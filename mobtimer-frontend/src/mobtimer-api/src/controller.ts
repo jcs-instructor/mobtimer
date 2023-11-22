@@ -84,29 +84,6 @@ export class Controller {
     return "Mob Timer";
   }
 
-  // injections -----------------------
-
-  // inject action button label
-  setActionButtonLabel = (_label: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetActionButtonLabel(
-    setActionButtonLabel: (label: string) => void
-  ) {
-    this.setActionButtonLabel = setActionButtonLabel;
-  }
-
-  // inject participants
-  setParticipants = (_participants: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetParticipants(
-    setParticipantsFunction: (participants: string[]) => void
-  ) {
-    this.setParticipants = setParticipantsFunction;
-  }
-
-  // inject roles
-  setRoles = (_roles: string[]) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetRoles(setRolesFunction: (roles: string[]) => void) {
-    this.setRoles = setRolesFunction;
-  }
 
   // other functions -----------------------
 
