@@ -40,6 +40,7 @@ Joel:
                   passing around this React variable, but now we pass it around anyway), and pass setDurationMinutes
                   directly into setSocketListener
       - [x] Remove all controller injections of React set variables (adding parameters to the ListenerParameters type as appropriate)
+      - [ ] Move/remove completed items from this backlog
       - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. We need to send more parameters in setSocketListener call in that file.
       - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants
       - [x] Delete EditRoles.tsx
