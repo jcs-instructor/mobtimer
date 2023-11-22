@@ -8,6 +8,6 @@ export class StringUtils {
     }
 
     static areSameWhenTrim(commaSeparatedList1: string, commaSeparatedList2: string): boolean {
-        return StringUtils.splitTrimAndRejoin(commaSeparatedList1) !== StringUtils.splitTrimAndRejoin(commaSeparatedList2);
+        return StringUtils.splitTrimAndRejoin(commaSeparatedList1) === StringUtils.splitTrimAndRejoin(commaSeparatedList2);
     }
 }
