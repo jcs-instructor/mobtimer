@@ -1,5 +1,12 @@
 ## Completed (Done)
 
+2022-11-22
+      - [x] Refactor EditParticipants to pass in React variables & submit function            
+      - [x] Remove all controller injections of React set variables (adding parameters to the ListenerParameters type as appropriate)
+      - [x] Fix bug: Navigating to existing room via the URL is broken 
+      - [x] Create a Save button that saves any changes to either Edit Participants or Edit Roles
+      - [x] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
+ 
 2023-08-16
 
 - [x] Show "Connecting..." in a fixed position so that when it disappears, other elements on the page don't 

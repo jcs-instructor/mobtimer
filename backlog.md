@@ -30,33 +30,12 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Address Edit Participants & Roles flakiness**
-      - [x] Skip empty list items
-      - [x] Create a branch
-      - [x] Refactor EditParticipants to pass in React variables & submit function            
-      - [x] Dedupe: splitAndTrim
-      - [x] Duration.tsx: 
-            - [x] Remove business logic from Duration.tsx (pass in setDurationMinutes and updateServerWithDurationMinutes)
-            - [x] Remove  injection of setDurationMinutes from controller (original purpose was to avoid
-                  passing around this React variable, but now we pass it around anyway), and pass setDurationMinutes
-                  directly into setSocketListener
-      - [x] Remove all controller injections of React set variables (adding parameters to the ListenerParameters type as appropriate)
-      - [ ] Move/remove completed items from this backlog
+     - [ ] Move/remove completed items from this backlog
       - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. We need to send more parameters in setSocketListener call in that file.
-      - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants
-      - [x] Delete EditRoles.tsx
-      - [x] Remove all controller injections of React set variables (adding parameters to the ListenerParameters type as appropriate)
+      - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate)
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Move document.title related code to UI
       - [ ] Change to BrowserRouter (to get "#" out of url)
-      - [x] Fix bug: Navigating to existing room via the URL is broken 
-            - Check history for HashRouter vs. BrowserRouter
-            - Dig into existing code
-            - Google related topics and error messages
-      - [x] Create a Save button that saves any changes to either Edit Participants or Edit Roles
-      - [x] Reposition Edit Participants & Save button to be below the line (grouped with Edit Roles)
-      - [x] For Save button, disable if contents of both Edit Participants and Edit Roles are not dirty (diff. from current saved)
-      - [x] Refactor other tsx forms to pass in React variables & submit function (similar to EditParticipants)
-      - [x] Merge to dev
 - [ ] **Split toggle button into separate buttons**: 1. Pause, 2. Start/Resume
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
       - [x] Show "Connecting..." message
