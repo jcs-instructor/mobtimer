@@ -4,64 +4,57 @@ import { Controller, StringUtils } from '../mobtimer-api/src';
 const controller = Controller.staticController as Controller;
 
 type FormParameters = {
-    participantsNames: string, 
-    setParticipantsNames: (participantsNames: string) => void,
+    participantNames: string,
+    setParticipantNames: (participantNames: string) => void,
+    roleNames: string,
+    setRoleNames: (roles: string) => void,
     submitEditParticipantsRequest: (event: React.FormEvent<HTMLFormElement>) => void
 };
 
-const EditParticipants = ({ participantsNames, setParticipantsNames, submitEditParticipantsRequest }: FormParameters) => {
+const EditParticipants = (formParameters: FormParameters) => {
 
-    function areChangesPending(): boolean {        
-        return StringUtils.areSameWhenTrim(participantsNames, controller.frontendMobTimer.participants.join(","));
+    function areChangesPending(): boolean {
+        const changeString = formParameters.participantNames + formParameters.roleNames;
+        const compareString = controller.frontendMobTimer.participants.join(",") + controller.frontendMobTimer.roles.join(",");
+        return StringUtils.areSameWhenTrim(changeString,compareString);
     };
 
     return (
-        <form onSubmit={(event) => submitEditParticipantsRequest(event)}>            
-        <label>Edit Participants: </label>
+        <form onSubmit={(event) => formParameters.submitEditParticipantsRequest(event)}>
+            <label>Edit Participants: 
             <input
-                value={participantsNames}
+                value={formParameters.participantNames}
                 onFocus={
                     (e) => {
                         e.target.value = controller.frontendMobTimer.participants.join(",");
-                        setParticipantsNames(controller.frontendMobTimer.participants.join(","));
+                        formParameters.setParticipantNames(controller.frontendMobTimer.participants.join(","));
                     }
                 }
                 // onBlur={(e) => handleBlur(e)}
-                onChange={(e) => setParticipantsNames(e.target.value)}
+                onChange={(e) => formParameters.setParticipantNames(e.target.value)}
                 type="text"
                 placeholder="Enter/Edit Participants"
             />
+            </label>
+            <label>Edit Roles: 
+            <input
+                value={formParameters.roleNames}
+                onFocus={
+                    (e) => {
+                        e.target.value = controller.frontendMobTimer.roles.join(",");
+                        formParameters.setRoleNames(controller.frontendMobTimer.roles.join(","));
+                    }
+                }
+                // onBlur={(e) => handleBlur(e)}
+                onChange={(e) => formParameters.setRoleNames(e.target.value)}
+                type="text"
+                placeholder="Enter/Edit Roles"
+            />
+            </label>
+
             <button type="submit" disabled={!areChangesPending()}>Save</button>
         </form>
     )
-
-    // function confirmUpdate(newValue: string, oldValue: string): void {
-    //     return (newValue) !== oldValue
-    //         && window.confirm("Update Participants from '"
-    //             + oldValue.replaceAll(",", ", ")
-    //             + "' to '"
-    //             + newValue.replaceAll(",", ", ")
-    //             + "'? (Click OK to confirm, or click Cancel to discard changes)")
-    //         ? update(newValue, setParticipantsNames)
-    //         : setParticipantsNames("");
-    // }
-
-    // function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>): void {
-    //     const newValue = splitTrimAndRejoin(e.target.value as string);
-    //     const oldValue = controller.frontendMobTimer.participants.join(",");
-    //     confirmUpdate(newValue, oldValue);
-    // }
-
-    // function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>): void {
-    //     if (e.key === 'Enter') {
-    //         handleBlur(e as any);
-    //     }
-    // }
-
-    // function update(participantsNames: string, setParticipantsNames: React.Dispatch<React.SetStateAction<string>>) {
-    //     controller.client?.editParticipants(participantsNames.split(",").map((name) => name.trim()));
-    //     setParticipantsNames("");
-    // }
 }
 
 

@@ -6,7 +6,6 @@ import Participants from "./Participants";
 import AddParticipant from "./AddParticipant";
 import RotateParticipants from "./RotateParticipants";
 import EditParticipants from "./EditParticipants";
-import EditRoles from "./EditRoles";
 import Reset from "./Reset";
 import ShuffleParticipants from "./ShuffleParticipants";
 import { Controller, StringUtils } from "../mobtimer-api/src";
@@ -40,8 +39,11 @@ const Room = ({
 }: FormParameters) => {
   const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
   const controller = Controller.staticController as Controller;
-  const [participantsNames, setParticipantsNames] = useState(
+  const [participantNames, setParticipantNames] = useState(
     controller.frontendMobTimer.participants.join(",")
+  );
+  const [roleNames, setRoleNames] = useState(
+    controller.frontendMobTimer.roles.join(",")
   );
   const mobNameLowerCase = mobNameUrlParam.toLowerCase();
 
@@ -49,9 +51,8 @@ const Room = ({
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    controller.client?.editParticipants(
-      StringUtils.splitAndTrim(participantsNames)
-    );
+    controller.client?.editParticipants(StringUtils.splitAndTrim(participantsNames));
+    controller.client?.editRoles(StringUtils.splitAndTrim(roleNames))
   };
 
   // todo: refactor reduncant code for debug boolean (also in App.tsx)
@@ -118,15 +119,16 @@ const Room = ({
         </table>
 
         <AddParticipant />
+        <hr />
         <EditParticipants
-          participantsNames={participantsNames}
-          setParticipantsNames={setParticipantsNames}
+          participantNames={participantNames}
+          setParticipantNames={setParticipantNames}
           submitEditParticipantsRequest={submitEditParticipantsRequest}
+          roleNames={roleNames}
+          setRoleNames={setRoleNames}
         />
 
-        <hr />
 
-        <EditRoles />
       </div>
     </>
   );
