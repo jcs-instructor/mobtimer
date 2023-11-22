@@ -8,7 +8,8 @@ export class Controller {
   
   static staticController: Controller = new Controller();
 
-  updateSummary() {
+  // todo: document.title shouldn't be here (it's a UI concern)
+  public updateSummary() {
     // todo: Unhardcode refactor roles to be a class with a name and emoji in separate properties; also don't assume just 2 roles
     let participantsString =
       this.createListOfParticipantsWithRoleEmojisPrepended();
@@ -85,31 +86,12 @@ export class Controller {
 
   // injections -----------------------
 
-  // inject duration minutes
-  setDurationMinutes = (_durationMinutes: number) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetDurationMinutes(
-    setDurationMinutesFunction: (durationMinutes: number) => void
-  ) {
-    this.setDurationMinutes = setDurationMinutesFunction;
-  }
-
+  // inject action button label
   setActionButtonLabel = (_label: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
   injectSetActionButtonLabel(
     setActionButtonLabel: (label: string) => void
   ) {
     this.setActionButtonLabel = setActionButtonLabel;
-  }
-
-  // inject time string
-  setSecondsRemainingString = (_timeString: string) => {}; // todo: consider alternatives to putting an underscore in the name; e.g., try abstract method/class, or interface
-  injectSetSecondsRemainingString(
-    setSecondsRemainingStringFunction: (timeString: string) => void
-  ): void {
-    this.setSecondsRemainingString = (timeString: string) => {
-      setSecondsRemainingStringFunction(timeString);
-      // Time ticking is tracked on the front end, so we need to update the summary here
-      this.updateSummary();
-    };
   }
 
   // inject participants

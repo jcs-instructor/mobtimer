@@ -1,83 +1,85 @@
-import { Client, MobTimerResponses, Action, TimeUtils, Controller } from "./index";
-export function setSocketListener(
-  controller: Controller,
-  playAudio: () => void,
-  getActionButtonLabel: () => string
-) {
-    const client = controller.client as Client; 
+import {
+  Client,
+  MobTimerResponses,
+  Action,
+  TimeUtils,
+  Controller,
+} from "./index";
+
+type ListenerParameters = {
+  setSecondsRemainingString: (secondsRemainingString: string) => void;
+  setDurationMinutes: (durationMinutes: number) => void;
+  controller: Controller;
+  playAudio: () => void;
+  getActionButtonLabel: () => string;
+};
+
+export function setSocketListener(parameters: ListenerParameters) {
+  const client = parameters.controller.client as Client;
   if (!client.webSocket) {
     throw new Error("WebSocket is undefined");
   }
 
   client.webSocket.onmessageReceived = (message: { data: any }) => {
     // Get response from server
-    onmessageReceivedFunc(controller, message, playAudio, getActionButtonLabel);
+    onmessageReceivedFunc(message, parameters);
   };
+}
 
- }
+export const onmessageReceivedFunc = (
+  message: { data: any },
+  parameters: ListenerParameters
+) => {
+  const response = JSON.parse(
+    message.data
+  ) as MobTimerResponses.SuccessfulResponse;
 
-  export const onmessageReceivedFunc = (
-    controller: Controller,
-    message: { data: any },
-    playAudio: () => void,
-    getActionButtonLabel: () => string
-  ) => {
-    const response = JSON.parse(
-      message.data
-    ) as MobTimerResponses.SuccessfulResponse;
+  // todo: handle if response is not successful
+  consoleLogResponse(response);
 
-    // todo: handle if response is not successful
-    consoleLogResponse(response);
+  const controller = parameters.controller;
+  // Read response data
+  const { mobStatus, durationMinutes, participants, roles, secondsRemaining } =
+  controller.translateResponseData(response);
 
-    // Read response data
-    const {
-      mobStatus,
-      durationMinutes,
-      participants,
-      roles,
-      secondsRemaining,
-    } = controller.translateResponseData(response);
+  if (
+    response.actionInfo.action === Action.Expired ||
+    response.actionInfo.action === Action.Reset
+  ) {
+    parameters.playAudio();
+  }
 
-    if (
-      response.actionInfo.action === Action.Expired ||
-      response.actionInfo.action === Action.Reset
-    ) {
-      playAudio();
-    }
+  // modify frontend mob timer
+  controller.changeFrontendStatus(controller.frontendMobTimer, mobStatus);
+  controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
+  controller.frontendMobTimer.durationMinutes = durationMinutes;
+  controller.frontendMobTimer.editParticipants(participants);
+  controller.frontendMobTimer.editRoles(roles);
 
-    // modify frontend mob timer
-    controller.changeFrontendStatus(controller.frontendMobTimer, mobStatus);
-    controller.frontendMobTimer.setSecondsRemaining(secondsRemaining);
-    controller.frontendMobTimer.durationMinutes = durationMinutes;
-    controller.frontendMobTimer.editParticipants(participants);
-    controller.frontendMobTimer.editRoles(roles);
+  // Derive mob label from response status
+  const label = parameters.getActionButtonLabel();
 
-    // Derive mob label from response status
-    const label = getActionButtonLabel();
+  // update React state variables
+  parameters.setDurationMinutes(durationMinutes);
+  controller.setParticipants(participants);
+  controller.setRoles(roles);
+  parameters.setSecondsRemainingString(controller.frontendMobTimer.secondsRemainingString);
+  controller.setActionButtonLabel(label);
 
-    // update React state variables
-    controller.setDurationMinutes(durationMinutes);
-    controller.setParticipants(participants);
-    controller.setRoles(roles);
-    controller.setSecondsRemainingString(
-      controller.frontendMobTimer.secondsRemainingString
+  // Update browser tab title text
+  controller.updateSummary();
+
+  if (response.mobState.status !== controller.frontendMobTimer.status) {
+    console.error(
+      "PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
+        "Frontend Status: " +
+        controller.frontendMobTimer.status +
+        ", " +
+        "Backend Status:" +
+        response.mobState.status
     );
-    controller.setActionButtonLabel(label);
-
-    // Update browser tab title text
-    controller.updateSummary();
-
-    if (response.mobState.status !== controller.frontendMobTimer.status) {
-      console.error(
-        "PROBLEM - FRONT AND BACK END STATUS MISMATCH!!!!!!!!!! --- " +
-          "Frontend Status: " +
-          controller.frontendMobTimer.status +
-          ", " +
-          "Backend Status:" +
-          response.mobState.status
-      );
-    }
-  };
+  }
+};
 
 function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
   console.info(
@@ -102,4 +104,4 @@ function consoleLogResponse(response: MobTimerResponses.SuccessfulResponse) {
       TimeUtils.getTimeString(response.mobState.secondsRemaining) +
       ") "
   );
-};
+}
