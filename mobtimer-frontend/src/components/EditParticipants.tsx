@@ -13,10 +13,10 @@ type FormParameters = {
 
 const EditParticipants = (formParameters: FormParameters) => {
 
-    function areChangesPending(): boolean {
-        const changeString = formParameters.participantNames + formParameters.roleNames;
-        const compareString = controller.frontendMobTimer.participants.join(",") + controller.frontendMobTimer.roles.join(",");
-        return StringUtils.areSameWhenTrim(changeString,compareString);
+    function areChangesPending(): boolean {        
+        const participantsChanged = !StringUtils.areSameWhenTrim(formParameters.participantNames, controller.frontendMobTimer.participants.join(","));
+        const rolesChanged = !StringUtils.areSameWhenTrim(formParameters.roleNames, controller.frontendMobTimer.roles.join(","));
+        return participantsChanged || rolesChanged;
     };
 
     return (
