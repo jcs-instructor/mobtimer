@@ -37,6 +37,7 @@ Joel:
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Move document.title related code to UI
       - [ ] Change to BrowserRouter (to get "#" out of url)
+- [ ] **Add test coverage for utils**
 - [ ] **Split toggle button into separate buttons**: 1. Pause, 2. Start/Resume
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
       - [x] Show "Connecting..." message
