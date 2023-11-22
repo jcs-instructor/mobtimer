@@ -30,9 +30,8 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Address Edit Participants & Roles flakiness**
-     - [ ] Move/remove completed items from this backlog
       - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. We need to send more parameters in setSocketListener call in that file.
-      - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate)
+      - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Move document.title related code to UI
       - [ ] Change to BrowserRouter (to get "#" out of url)
