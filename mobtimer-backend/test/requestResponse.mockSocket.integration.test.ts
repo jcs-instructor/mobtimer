@@ -257,9 +257,10 @@ function setupController(controller: Controller) {
 
   // setTimeCreated(new Date());
   setSocketListener(
+    {
     controller,
     playAudio,
-    getActionButtonLabel
+    getActionButtonLabel}
   );
   return controller;
 }

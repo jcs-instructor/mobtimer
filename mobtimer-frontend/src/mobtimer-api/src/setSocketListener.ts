@@ -6,12 +6,16 @@ import {
   Controller,
 } from "./index";
 
-type ListenerParameters = {
+type StateSetters = {
   setRoles: (roles: string[]) => void;
   setParticipants: (participants: string[]) => void;
   setSecondsRemainingString: (secondsRemainingString: string) => void;
   setDurationMinutes: (durationMinutes: number) => void;
   setActionButtonLabel: (label: string) => void;
+};
+
+type ListenerParameters = {
+  stateSetters?: StateSetters;
   controller: Controller;
   playAudio: () => void;
   getActionButtonLabel: () => string;
@@ -63,11 +67,11 @@ export const onmessageReceivedFunc = (
   const label = parameters.getActionButtonLabel();
 
   // update React state variables
-  parameters.setDurationMinutes(durationMinutes);
-  parameters.setParticipants(participants);
-  parameters.setRoles(roles);
-  parameters.setSecondsRemainingString(controller.frontendMobTimer.secondsRemainingString);
-  parameters.setActionButtonLabel(label);
+  parameters.stateSetters?.setDurationMinutes(durationMinutes);
+  parameters.stateSetters?.setParticipants(participants);
+  parameters.stateSetters?.setRoles(roles);
+  parameters.stateSetters?.setSecondsRemainingString(controller.frontendMobTimer.secondsRemainingString);
+  parameters.stateSetters?.setActionButtonLabel(label);
 
   // Update browser tab title text
   controller.updateSummary();

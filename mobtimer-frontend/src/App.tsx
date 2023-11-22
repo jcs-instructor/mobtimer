@@ -9,8 +9,8 @@ import {
   MobTimer,
   TimeUtils,
   W3CClientSocket,
-  Controller, 
-  setSocketListener
+  Controller,
+  setSocketListener,
 } from "./mobtimer-api/src";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
@@ -20,7 +20,7 @@ import AlertBox from "./components/Alert";
 const controller = Controller.staticController;
 const useLocalHost = window.location.href.includes("localhost");
 const url = controller.getUrl(useLocalHost);
-const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || '') || 2;
+const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || "") || 2;
 const RETRY_MILLISECONDS = TimeUtils.secondsToMilliseconds(RETRY_SECONDS);
 console.info("App.tsx: url = " + url);
 console.info("process.env", process.env);
@@ -61,8 +61,9 @@ const App = () => {
   const [connecting, setConnecting] = useState(false);
 
   // Broadcast functions (send to server)
-  const broadcastDurationMinutes = (durationMinutes: number) => client?.update(durationMinutes);
-  
+  const broadcastDurationMinutes = (durationMinutes: number) =>
+    client?.update(durationMinutes);
+
   let client: Client;
   client = controller.client as Client;
 
@@ -81,17 +82,20 @@ const App = () => {
       }
       controller.client = new Client(wrapperSocket);
       // setTimeCreated(new Date());
-      setSocketListener({
+      const stateSetters = {
         setRoles,
         setParticipants,
         setSecondsRemainingString,
         setDurationMinutes,
         setActionButtonLabel,
+      };
+      setSocketListener({
+        stateSetters,
         controller,
         playAudio,
-        getActionButtonLabel}
-      );
-   };
+        getActionButtonLabel,
+      });
+    };
     // useEffect code
     if (connected) {
       return;
@@ -105,11 +109,9 @@ const App = () => {
     // see https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
     // Many articles say the same thing
     return () => clearInterval(interval);
-
-  }, [connecting, connected])
+  }, [connecting, connected]);
 
   // Set socket listener
-
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
@@ -122,13 +124,15 @@ const App = () => {
   };
 
   // Submit action
-  const submitToggleAction = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submitToggleAction = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     // Requred when using onSubmit to prevent the page from reloading page
     // which would completely bypass below code and bypass any html field validation
     event.preventDefault();
     controller.toggleStatus(client, controller.frontendMobTimer);
   };
-  
+
   // Browser router
   return (
     <HashRouter>
@@ -139,7 +143,7 @@ const App = () => {
           path="/:mobNameUrlParam"
           element={
             <Room
-              durationMinutes={durationMinutes} 
+              durationMinutes={durationMinutes}
               setDurationMinutes={setDurationMinutes}
               broadcastDurationMinutes={broadcastDurationMinutes}
               participants={participants}
