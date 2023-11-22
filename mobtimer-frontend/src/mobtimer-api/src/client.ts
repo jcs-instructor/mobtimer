@@ -33,7 +33,7 @@ class Client {
       throw new Error(noSocketErrorMessage)
     }
     return new Promise(function (resolve) {
-      const timeout = setTimeout(function () {
+      setTimeout(function () {
         if (socket.socketState === state) {
           resolve();
         } else {
@@ -100,11 +100,12 @@ class Client {
     this.sendToServer(MobRequestBuilder.reset());
   }
 
-  sendToServer(requestString: string) {
+  async sendToServer(requestString: string) {
     this.heartBeat?.restart();
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {
+      await this.waitForSocketState(this.webSocket?.OPEN_CODE);
       this._webSocket.sendToServer(requestString);
     }
   }

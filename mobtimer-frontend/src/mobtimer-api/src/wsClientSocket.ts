@@ -16,7 +16,8 @@ export class WSClientSocket implements IClientSocket {
     return this._webSocket.readyState;
   }
 
-  public sendToServer(message: string): void {
+  public async sendToServer(message: string) {
+    
     this._webSocket.send(message);
   }
 
