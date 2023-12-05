@@ -8,6 +8,7 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
+- [ ] See "Tests are failing in requestResponse.mockSocket.integration.test.ts" below
 - [ ] **Make yarn build scripts run sequentially**
 - [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
 - [ ] **Make yarn build scripts run sequentially**
@@ -32,7 +33,7 @@ Joel:
 - [ ] **Address Edit Participants & Roles flakiness**
       - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. 
             - [x] Send more parameters in setSocketListener call in test file
-            - [ ] One test is still failing
+            - [ ] Ethan check into this: One test is still failing
       - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Move document.title related code to UI

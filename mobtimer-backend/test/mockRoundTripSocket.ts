@@ -1,6 +1,5 @@
-import { IClientSocket } from "../../mobtimer-api/src/iClientSocket";
+import { IClientSocket, Client } from "../src/mobtimer-api";
 import { backendUtils } from "../src/server/backendUtils";
-import { Client } from 'mobtimer-api';
 
 export class MockRoundTripSocket implements IClientSocket {
   client?: Client;

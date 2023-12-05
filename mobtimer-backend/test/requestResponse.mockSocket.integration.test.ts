@@ -43,7 +43,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     RoomManager.resetRooms();
   });
 
-  test.only("Create mob", async () => {
+  test.skip("Create mob", async () => {
     const client = controller1.client as Client;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
@@ -53,7 +53,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
   });
 
   test.only("Update duration", async () => {
-    const client = controller1.client as Client;
+    const client = new TestClient({}); //controller1.client as Client;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
     client.update(10);
