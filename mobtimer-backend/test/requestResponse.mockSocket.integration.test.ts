@@ -14,7 +14,7 @@ import { Broadcaster } from "../src/server/broadcaster";
 import { MockRoundTripSocket } from "./mockRoundTripSocket";
 
 jest.useFakeTimers();
-let socketMobSocketMap: Map<IClientSocket, Client> =new Map();
+let socketMobSocketMap: Map<IClientSocket, Client> = new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
   const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
@@ -27,9 +27,11 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
     jest
       .spyOn(Broadcaster, "sendToClient")
-      .mockImplementation((comboSocket: WebSocket, message: string) => {
-        const roundTripSocket = comboSocket as unknown as MockRoundTripSocket;
-        const client = socketMobSocketMap.get(roundTripSocket);
+      // mockRoundTripSocket is a mock socket that is a combination of a mock socket for the client socket and server socket
+      // todo: consider splitting mockRoundTripSocket into two separate mocks, one for client socket and one for server socket
+      .mockImplementation((serverSocket: WebSocket, message: string) => {
+        const mockServerSocket = serverSocket as unknown as MockRoundTripSocket;
+        const client = socketMobSocketMap.get(mockServerSocket);
         client?.webSocket?.onmessageReceived({
           data: message,
         });
@@ -266,12 +268,12 @@ function setupController(controller: Controller) {
   socketMobSocketMap.set(socket, controller.client);
 
   // setTimeCreated(new Date());
-  setSocketListener(
-    {
-    controller,
-    playAudio,
-    getActionButtonLabel}
-  );
+  setSocketListener({
+    stateSetters: undefined,
+    controller: controller,
+    playAudio: playAudio,
+    getActionButtonLabel: getActionButtonLabel,
+  });
   return controller;
 }
 
