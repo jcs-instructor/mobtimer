@@ -27,8 +27,6 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
     jest
       .spyOn(Broadcaster, "sendToClient")
-      // mockRoundTripSocket is a mock socket that is a combination of a mock socket for the client socket and server socket
-      // todo: consider splitting mockRoundTripSocket into two separate mocks, one for client socket and one for server socket
       .mockImplementation((serverSocket: WebSocket, message: string) => {
         const mockServerSocket = serverSocket as unknown as MockRoundTripSocket;
         const client = socketMobSocketMap.get(mockServerSocket);
