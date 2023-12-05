@@ -52,7 +52,17 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
   });
 
-  test.only("Two mob", async () => {
+  test.only("Update duration", async () => {
+    const client = controller1.client as Client;
+    const mobName = "test-mob-1";
+    client.joinMob(mobName);
+    client.update(10);
+    expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
+    // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
+    // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
+  });
+
+  test.skip("Two mob", async () => {
     const client = controller1.client as Client;
     const mobName = "test-mob-1";
     client.joinMob(mobName);
