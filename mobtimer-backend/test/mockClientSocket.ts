@@ -5,6 +5,7 @@ export class MockClientSocket implements IClientSocket {
   
   client?: Client;
 
+  // As a mock socket, we directly call the server rather than sending a message to the server.
   sendToServer = (message: string) => {
     backendUtils.processRequest(message, this);
   };
@@ -15,6 +16,7 @@ export class MockClientSocket implements IClientSocket {
   CLOSED_CODE = 2;
   socketState = this.OPEN_CODE;
 
+  // As a mock socket, we never receive a message from the server, so this never gets called.
   onmessageReceived = (message: { data: any }) => {
     console.log(message);
   }
