@@ -11,7 +11,7 @@ import {
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
-import { MockClientSocket } from "./mockRoundTripSocket";
+import { MockClientSocket } from "./mockClientSocket";
 
 jest.useFakeTimers();
 let socketMobSocketMap: Map<IClientSocket, Client> = new Map();
