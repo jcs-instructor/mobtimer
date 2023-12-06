@@ -31,7 +31,8 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Address Edit Participants & Roles flakiness**      
-      - [ ] Refactor MockClientSocket.onmessageReceived method to be a real mock, not a dummny. See code comments.
+      - [ ] Refactor: MockClientSocket.onmessageReceived method to be a real mock, not a dummny. See code comments.
+      - [ ] Refactor: Rename socketMobSocketMap to reflect what it is (Key: IClientSocket, Value: Client)
       - [ ] Do some unit tests around await to see why working differently than expected              
       - [ ] Remove fake timers from mockSocket tests
       - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
