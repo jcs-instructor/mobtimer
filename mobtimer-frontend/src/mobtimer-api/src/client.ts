@@ -105,7 +105,9 @@ class Client {
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {
-      await this.waitForSocketState(this.webSocket?.OPEN_CODE);
+      if (this._webSocket?.OPEN_CODE !== this._webSocket?.socketState) { 
+        await this.waitForSocketState(this.webSocket?.OPEN_CODE);
+      }
       this._webSocket.sendToServer(requestString);
     }
   }
