@@ -34,6 +34,30 @@ Joel:
       - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. 
             - [x] Send more parameters in setSocketListener call in test file
             - [ ] Ethan check into this: One test is still failing
+      - [ ] Reactor
+            - See if can mock sendToServer instead of overriding.
+              - If yes, modify mockRoundTripSocket
+                - Rename fie to dummyRoundTripSocket.ts
+                - Replace all "MockRoundTripSocket" with "DummyRoundTripSocket"
+                - Change DummyRoundTripoSocket.sendToClient to do nothing
+                - Change socketMobSocketMap => serverSocketToClient
+                - Change first type of map to any, as follows: 
+                `let serverSocketToClient: Map<IClientSocket, Client> = new Map();` to
+                `let serverSocketToClient:Map<any, Client> = new Map()`
+
+                - For jest spy, change 
+```
+      .mockImplementation((serverSocket: WebSocket, message: string) => {
+        const mockServerSocket = serverSocket as unknown as MockRoundTripSocket;
+        const client = serverSocketToClient.get(mockServerSocket);
+``` 
+to
+```
+      .mockImplementation((key: WebSocket, message: string) => {
+        const client = serverSocketToClient.get(key);
+```
+      - [ ] Do some unit tests around await to see why working differently than expected              
+      - [ ] Remove fake timers from mockSocket tests
       - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Move document.title related code to UI
