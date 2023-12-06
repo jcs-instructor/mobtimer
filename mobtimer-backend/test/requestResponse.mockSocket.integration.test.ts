@@ -30,7 +30,6 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
       .mockImplementation((clientSocket: WebSocket, message: string) => {
         const mockClientSocket = clientSocket as unknown as MockClientSocket;
         const client = socketMobSocketMap.get(mockClientSocket);
-        // todo: 12/5/2023 start here (maybe all this is doing is console.log(message) - see also mockRoundTripSocket.ts)
         client?.webSocket?.onmessageReceived({
           data: message,
         });

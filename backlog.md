@@ -31,28 +31,7 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Address Edit Participants & Roles flakiness**      
-      - [ ] Refactor
-            - See if can mock sendToServer instead of overriding.
-              - If yes, modify mockRoundTripSocket
-                - Rename fie to dummyRoundTripSocket.ts
-                - Replace all "MockRoundTripSocket" with "DummyRoundTripSocket"
-                - Change DummyRoundTripoSocket.sendToClient to do nothing
-                - Change socketMobSocketMap => serverSocketToClient
-                - Change first type of map to any, as follows: 
-                `let serverSocketToClient: Map<IClientSocket, Client> = new Map();` to
-                `let serverSocketToClient:Map<any, Client> = new Map()`
-
-                - For jest spy, change 
-```
-      .mockImplementation((serverSocket: WebSocket, message: string) => {
-        const mockServerSocket = serverSocket as unknown as MockRoundTripSocket;
-        const client = serverSocketToClient.get(mockServerSocket);
-``` 
-to
-```
-      .mockImplementation((key: WebSocket, message: string) => {
-        const client = serverSocketToClient.get(key);
-```
+      - [ ] Refactor MockClientSocket.onmessageReceived method to be a real mock, not a dummny. See code comments.
       - [ ] Do some unit tests around await to see why working differently than expected              
       - [ ] Remove fake timers from mockSocket tests
       - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
