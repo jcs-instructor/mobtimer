@@ -11,7 +11,7 @@ import {
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
-import { MockRoundTripSocket } from "./mockRoundTripSocket";
+import { MockClientSocket } from "./mockRoundTripSocket";
 
 jest.useFakeTimers();
 let socketMobSocketMap: Map<IClientSocket, Client> = new Map();
@@ -27,9 +27,9 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     controller2 = setupController(controller2);
     jest
       .spyOn(Broadcaster, "sendToClient")
-      .mockImplementation((serverSocket: WebSocket, message: string) => {
-        const mockServerSocket = serverSocket as unknown as MockRoundTripSocket;
-        const client = socketMobSocketMap.get(mockServerSocket);
+      .mockImplementation((clientSocket: WebSocket, message: string) => {
+        const mockClientSocket = clientSocket as unknown as MockClientSocket;
+        const client = socketMobSocketMap.get(mockClientSocket);
         // todo: 12/5/2023 start here (maybe all this is doing is console.log(message) - see also mockRoundTripSocket.ts)
         client?.webSocket?.onmessageReceived({
           data: message,
@@ -262,8 +262,8 @@ function setupController(controller: Controller) {
   const playAudio = jest.fn();
   const getActionButtonLabel = jest.fn();
   controller = new Controller();
-  controller.client = new Client(new MockRoundTripSocket());
-  const socket = controller.client.webSocket as MockRoundTripSocket;
+  controller.client = new Client(new MockClientSocket());
+  const socket = controller.client.webSocket as MockClientSocket;
   socketMobSocketMap.set(socket, controller.client);
 
   // setTimeCreated(new Date());

@@ -1,7 +1,7 @@
 import { IClientSocket, Client } from "../src/mobtimer-api";
 import { backendUtils } from "../src/server/backendUtils";
 
-export class MockRoundTripSocket implements IClientSocket {
+export class MockClientSocket implements IClientSocket {
   
   client?: Client;
 
