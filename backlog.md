@@ -30,13 +30,8 @@ Joel:
 
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
-- [ ] **Address Edit Participants & Roles flakiness**
+- [ ] **Address Edit Participants & Roles flakiness**      
       - [ ] Refactor
-      - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. 
-            - [x] Send more parameters in setSocketListener call in test file
-            - [x] Ethan check into this: One test is still failing
-      - [ ] Add guard for pushing on dev - create branch if want to check in with failing test cases
-      - [ ] Reactor
             - See if can mock sendToServer instead of overriding.
               - If yes, modify mockRoundTripSocket
                 - Rename fie to dummyRoundTripSocket.ts

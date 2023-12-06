@@ -21,10 +21,10 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 
   let controller1: Controller;
   let controller2: Controller;
+
   beforeEach(() => {
     controller1 = setupController(controller1);
     controller2 = setupController(controller2);
-
     jest
       .spyOn(Broadcaster, "sendToClient")
       .mockImplementation((serverSocket: WebSocket, message: string) => {
