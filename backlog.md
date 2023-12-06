@@ -34,6 +34,7 @@ Joel:
       - [ ] Refactor: MockClientSocket.onmessageReceived method to be a real mock, not a dummny. See code comments.
       - [ ] Refactor: Rename socketMobSocketMap to reflect what it is (Key: IClientSocket, Value: Client)
       - [ ] Refactor: Remove unused code from mockSocket integration tests 
+      - [ ] Refactor: For all IClientSocket files, group fields at the top and methods at the bottom.
       - [ ] Look at TODO comments in code (esp. new ones)
       - [ ] Do some unit tests around await to see why working differently than expected              
       - [ ] Remove fake timers from mockSocket tests
