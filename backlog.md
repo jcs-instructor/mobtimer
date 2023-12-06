@@ -33,7 +33,8 @@ Joel:
 - [ ] **Address Edit Participants & Roles flakiness**
       - [ ] Tests are failing in requestResponse.mockSocket.integration.test.ts. 
             - [x] Send more parameters in setSocketListener call in test file
-            - [ ] Ethan check into this: One test is still failing
+            - [x] Ethan check into this: One test is still failing
+      - [ ] Add guard for pushing on dev - create branch if want to check in with failing test cases
       - [ ] Reactor
             - See if can mock sendToServer instead of overriding.
               - If yes, modify mockRoundTripSocket
