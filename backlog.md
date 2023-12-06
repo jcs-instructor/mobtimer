@@ -35,6 +35,7 @@ Joel:
       - [ ] Refactor: Rename socketMobSocketMap to reflect what it is (Key: IClientSocket, Value: Client)
       - [ ] Refactor: Remove unused code from mockSocket integration tests 
       - [ ] Refactor: For all IClientSocket files, group fields at the top and methods at the bottom.
+      - [ ] We might have accidentally enabled more than the original 2-3 tests in mockSocket integration tests.
       - [ ] Look at TODO comments in code (esp. new ones)
       - [ ] Do some unit tests around await to see why working differently than expected              
       - [ ] Remove fake timers from mockSocket tests
