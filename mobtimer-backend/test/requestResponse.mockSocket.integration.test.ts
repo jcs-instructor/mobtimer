@@ -4,7 +4,6 @@ import {
   TimeUtils,
   Action,
   Client,
-  setSocketListener,
   Controller,
   IClientSocket,
 } from "../src/mobtimer-api";
@@ -17,7 +16,6 @@ jest.useFakeTimers();
 let socketMobSocketMap: Map<IClientSocket, Client> = new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
-  const _toleranceSeconds = 0.05; // used to account for extra time it may take to complete timeout for time expired
 
   let controller1: Controller;
   let controller2: Controller;
@@ -48,8 +46,6 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     const mobName = "test-mob-1";
     client.joinMob(mobName);
     expect(controller1.frontendMobTimer.durationMinutes).toEqual(5);
-    // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
-    // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
   });
 
   test("Update duration", async () => {
@@ -58,8 +54,6 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     client.joinMob(mobName);
     client.update(10);
     expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
-    // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
-    // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
   });
 
   test("Two mob", async () => {
@@ -71,23 +65,8 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     client.update(10);
     expect(controller1.frontendMobTimer.durationMinutes).toEqual(10);
     expect(controller2.frontendMobTimer.durationMinutes).toEqual(10);
-    // expect(client.lastSuccessfulResponse.actionInfo.action).toEqual(Action.Join);
-    // expect(client.lastSuccessfulResponse.mobState.mobName).toEqual(mobName);
   });
 
-  // interval.test.js
-
-  function startInterval(callback, intervalTime) {
-    function loop() {
-      callback();
-      setTimeout(loop, intervalTime);
-    }
-
-    loop();
-  }
-
-  // Your interval function
-  // Test case
   test("Start timer", () => {
     const client = new TestClient({});
     const mobName = "test-mob-2";
@@ -254,11 +233,13 @@ let mobCounter = 0;
 
 function setupController(controller: Controller) {
   
-  const setDurationMinutes = jest.fn();
-  const setParticipants = jest.fn();
-  const setRoles = jest.fn();
-  const setSecondsRemainingString = jest.fn();
-  const setActionButtonLabel = jest.fn();
+  // TODO: Consider testing these set functions to verify that they are called with the expected values:
+  // const setDurationMinutes = jest.fn();
+  // const setParticipants = jest.fn();
+  // const setRoles = jest.fn();
+  // const setSecondsRemainingString = jest.fn();
+  // const setActionButtonLabel = jest.fn();
+
   const playAudio = jest.fn();
   const getActionButtonLabel = jest.fn();
   
@@ -271,9 +252,7 @@ function setupController(controller: Controller) {
   };
   controller.client = new Client(new MockClientSocket(listenerParameters));
   const socket = controller.client.webSocket as MockClientSocket;
-  socketMobSocketMap.set(socket, controller.client);
-
-  // setTimeCreated(new Date());
+  socketMobSocketMap.set(socket, controller.client);  
   
   return controller;
 }
