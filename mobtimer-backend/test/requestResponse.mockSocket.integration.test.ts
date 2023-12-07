@@ -13,7 +13,7 @@ import { Broadcaster } from "../src/server/broadcaster";
 import { MockClientSocket } from "./mockClientSocket";
 
 jest.useFakeTimers();
-let socketMobSocketMap: Map<IClientSocket, Client> = new Map();
+let socketToClient: Map<IClientSocket, Client> = new Map();
 
 describe("Process Raw Request tests (no socket communication, so no expiration tests here)", () => {
 
@@ -27,7 +27,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
       .spyOn(Broadcaster, "sendToClient")
       .mockImplementation((clientSocket: WebSocket, message: string) => {
         const mockClientSocket = clientSocket as unknown as MockClientSocket;
-        const client = socketMobSocketMap.get(mockClientSocket);
+        const client = socketToClient.get(mockClientSocket);
         client?.webSocket?.onmessageReceived({
           data: message,
         });
@@ -252,7 +252,7 @@ function setupController(controller: Controller) {
   };
   controller.client = new Client(new MockClientSocket(listenerParameters));
   const socket = controller.client.webSocket as MockClientSocket;
-  socketMobSocketMap.set(socket, controller.client);  
+  socketToClient.set(socket, controller.client);  
   
   return controller;
 }
