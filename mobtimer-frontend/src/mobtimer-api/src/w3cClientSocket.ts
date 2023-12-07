@@ -11,16 +11,20 @@ export class W3CClientSocket implements IClientSocket {
     }
   }
 
-  public get socketState(): number {
-    return this._webSocket.readyState;
-  }
-
   public sendToServer(message: string): void {
     this._webSocket.send(message);
   }
 
+  public set onmessageReceived(handler: (message: { data: any }) => void) {
+    this._webSocket.onmessage = handler;
+  }
+
   public closeSocket(): void {
     this._webSocket.close();
+  }
+
+  public get socketState(): number {
+    return this._webSocket.readyState;
   }
 
   public get OPEN_CODE(): number {
@@ -29,9 +33,5 @@ export class W3CClientSocket implements IClientSocket {
 
   public get CLOSED_CODE(): number {
     return this._webSocket.CLOSED;
-  }
-
-  public set onmessageReceived(handler: (message: { data: any }) => void) {
-    this._webSocket.onmessage = handler;
   }
 }
