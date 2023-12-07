@@ -36,10 +36,12 @@ Joel:
       - [x] Refactor: For all IClientSocket files, group fields at the top and methods at the bottom.
       - [x] Removed unneeded full integration tests.    
 - [ ] **Refresh browser problems**
+      - [ ] Change to BrowserRouter (to get "#" out of url) - maybe related to refresh problems?
+      - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
+            Error Message: "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission."
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Fully test/fix
 - [ ] Move document.title related code to UI
-- [ ] Change to BrowserRouter (to get "#" out of url)
 - [ ] **Add test coverage for utils**
 - [ ] **Split toggle button into separate buttons**: 1. Pause, 2. Start/Resume
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
