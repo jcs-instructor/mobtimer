@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Room from "./components/Room";
 import {
@@ -133,9 +133,8 @@ const App = () => {
     controller.toggleStatus(client, controller.frontendMobTimer);
   };
 
-  // Browser router
   return (
-    <HashRouter>
+    <BrowserRouter>
       {!connected && <AlertBox message="Connecting......" />}
       <Routes>
         <Route path="/" element={<Launch />} />
@@ -158,7 +157,7 @@ const App = () => {
           }
         />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
