@@ -8,7 +8,7 @@ Remember to review Improve Later and To be prioritized
 # Between sessions
 
 Ethan:
-- [ ] See "Tests are failing in requestResponse.mockSocket.integration.test.ts" below
+- [ ] Do some unit tests around await to see why working differently than expected   
 - [ ] **Make yarn build scripts run sequentially**
 - [ ] **Don't show error when trying to remove a file that doesn't exist** in scripts      
 - [ ] **Make yarn build scripts run sequentially**
@@ -34,14 +34,12 @@ Joel:
       - [x] Refactor: MockClientSocket.onmessageReceived method to be a real mock, not a dummy. 
       - [x] Refactor: Rename socketMobSocketMap to reflect what it is (Key: IClientSocket, Value: Client)      
       - [x] Refactor: For all IClientSocket files, group fields at the top and methods at the bottom.
-      - [x] Removed unneeded full integration tests.
-      - [ ] Look at TODO comments in code (esp. new ones)
-      - [ ] Do some unit tests around await to see why working differently than expected              
-      - [ ] Remove fake timers from mockSocket tests
-      - [ ] Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
+      - [x] Removed unneeded full integration tests.    
+- [ ] **Refresh browser problems**
       - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
-      - [ ] Move document.title related code to UI
-      - [ ] Change to BrowserRouter (to get "#" out of url)
+      - [ ] Fully test/fix
+- [ ] Move document.title related code to UI
+- [ ] Change to BrowserRouter (to get "#" out of url)
 - [ ] **Add test coverage for utils**
 - [ ] **Split toggle button into separate buttons**: 1. Pause, 2. Start/Resume
 - [ ] **Add Connecting Message on Timer Page** (similar to landing page when no backend server available);
@@ -54,6 +52,8 @@ Joel:
 
 = = STOP - EVALUATE FOR RELEASE (test, dogfood,...) = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
+- [ ] **Wrapping of controls in UI when narrow window**: Change style to keep all Edit Roles info togther (label and inputbox), wrapping all together if needed below Edit Participants as appropriate
+- [ ] **TODO comments** Look at TODO comments in code (esp. new ones)
 - [ ] **Address build flakiness** (if not addressed by Docker)
       - [x] **Symlink to src** instead of to node_modules see [proposal](./proposal-symlink.md)
       - [ ] **Refactor mobtimer-api folders**:
