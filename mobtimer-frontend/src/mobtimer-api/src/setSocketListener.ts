@@ -14,7 +14,7 @@ type StateSetters = {
   setActionButtonLabel: (label: string) => void;
 };
 
-type ListenerParameters = {
+export type ListenerParameters = {
   stateSetters?: StateSetters;
   controller: Controller;
   playAudio: () => void;

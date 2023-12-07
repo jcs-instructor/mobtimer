@@ -253,6 +253,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
 let mobCounter = 0;
 
 function setupController(controller: Controller) {
+  
   const setDurationMinutes = jest.fn();
   const setParticipants = jest.fn();
   const setRoles = jest.fn();
@@ -260,18 +261,20 @@ function setupController(controller: Controller) {
   const setActionButtonLabel = jest.fn();
   const playAudio = jest.fn();
   const getActionButtonLabel = jest.fn();
+  
   controller = new Controller();
-  controller.client = new Client(new MockClientSocket());
-  const socket = controller.client.webSocket as MockClientSocket;
-  socketMobSocketMap.set(socket, controller.client);
-
-  // setTimeCreated(new Date());
-  setSocketListener({
+  const listenerParameters = {
     stateSetters: undefined,
     controller: controller,
     playAudio: playAudio,
     getActionButtonLabel: getActionButtonLabel,
-  });
+  };
+  controller.client = new Client(new MockClientSocket(listenerParameters));
+  const socket = controller.client.webSocket as MockClientSocket;
+  socketMobSocketMap.set(socket, controller.client);
+
+  // setTimeCreated(new Date());
+  
   return controller;
 }
 

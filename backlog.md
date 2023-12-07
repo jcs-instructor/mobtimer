@@ -31,7 +31,7 @@ Joel:
 # Next (CURRENT TOP GOALS: 1. DOGFOOD, 2. PREP FOR CUSTOMERS TO USE)
 
 - [ ] **Address Edit Participants & Roles flakiness**      
-      - [ ] Refactor: MockClientSocket.onmessageReceived method to be a real mock, not a dummny. See code comments.
+      - [x] Refactor: MockClientSocket.onmessageReceived method to be a real mock, not a dummy. 
       - [ ] Refactor: Rename socketMobSocketMap to reflect what it is (Key: IClientSocket, Value: Client)
       - [ ] Refactor: Remove unused code from mockSocket integration tests 
       - [ ] Refactor: For all IClientSocket files, group fields at the top and methods at the bottom.
