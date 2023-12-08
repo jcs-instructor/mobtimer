@@ -48,7 +48,7 @@ export class RoomManager {
   }
 
   static getMobTimer(mobName: string): MobTimer | undefined {
-    return RoomManager._getRoom(mobName)?.mobTimer;
+    return RoomManager._getRoomByName(mobName)?.mobTimer;
   }
 
   static getMobTimerFromSocket(socket: WebSocketOrAny) {
@@ -57,11 +57,11 @@ export class RoomManager {
   }
 
   static getSocketsForMob(mobName: string): Set<WebSocketOrAny> | undefined {
-    return RoomManager._getRoom(mobName)?.sockets;
+    return RoomManager._getRoomByName(mobName)?.sockets;
   }
 
   static getOrRegisterRoom(mobName: string, socket: WebSocketOrAny) {
-    let room = RoomManager._getRoom(mobName);
+    let room = RoomManager._getRoomByName(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
     } else {
