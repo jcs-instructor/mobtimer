@@ -52,7 +52,7 @@ export class RoomManager {
   }
 
   static getMobTimerFromSocket(socket: WebSocketOrAny) {
-    const mobTimer = RoomManager._getRoom(socket)?.mobTimer;
+    const mobTimer = RoomManager._getRoomBySocketId(socket.id)?.mobTimer;
     return mobTimer;
   }
 
@@ -75,6 +75,7 @@ export class RoomManager {
     console.log("adding socket to room", socket.id);
     room.sockets.add(socket);
     RoomManager._roomsBySocketOrAny.set(socket, room);
+    RoomManager._roomsBySocketId.set(socket.id, room);
   }
 
   private static _createAndJoinRoom(mobName: string, socket: WebSocketOrAny) {
