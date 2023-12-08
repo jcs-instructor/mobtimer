@@ -14,11 +14,19 @@ export class RoomManager {
 
   private static _roomsByMobName: Map<string, Room> = new Map();
   private static _roomsBySocketOrAny: Map<WebSocketOrAny, Room> = new Map();
-  static get roomsBySocket() {
+  private static _roomsBySocketId: Map<string, Room> = new Map();
+  static get roomsBySocketMap() {
     for (const [key, value] of RoomManager._roomsBySocketOrAny) {
       console.log("A Socket ID:", key.id, value.mobTimer?.state?.mobName);
     }
     return RoomManager._roomsBySocketOrAny;
+  }
+
+  static get roomsBySocketIdMap() {
+    for (const [key, value] of RoomManager._roomsBySocketId) {
+      console.log("A Socket ID:", key, value.mobTimer?.state?.mobName);
+    }
+    return RoomManager._roomsBySocketId;
   }
 
   private static _getRoom(key: string | WebSocketOrAny): Room | undefined {
@@ -26,9 +34,17 @@ export class RoomManager {
       console.log("getting room by mob name", key);
       return RoomManager._roomsByMobName.get(key);
     } else {
-      console.log("getting room by socket", key.id);
       return RoomManager._roomsBySocketOrAny.get(key);
     }
+  }
+  private static _getRoomByName(key: string): Room | undefined {
+    console.log("getting room by mob name", key);
+    return RoomManager._roomsByMobName.get(key);
+  }
+  private static _getRoomBySocketId(
+    key: string | WebSocketOrAny
+  ): Room | undefined {
+    return RoomManager._roomsBySocketId.get(key);
   }
 
   static getMobTimer(mobName: string): MobTimer | undefined {
@@ -44,7 +60,7 @@ export class RoomManager {
     return RoomManager._getRoom(mobName)?.sockets;
   }
 
-  static getOrRegisterRoom(mobName: string, socket: WebSocketOrAny) { 
+  static getOrRegisterRoom(mobName: string, socket: WebSocketOrAny) {
     let room = RoomManager._getRoom(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
@@ -59,11 +75,6 @@ export class RoomManager {
     console.log("adding socket to room", socket.id);
     room.sockets.add(socket);
     RoomManager._roomsBySocketOrAny.set(socket, room);
-
-    // Loop through all rooms and console log the id of each socket
-    for (const [key, value] of RoomManager._roomsBySocketOrAny) {
-      console.log( "B Socket ID:", key.id, value.mobTimer?.state?.mobName);
-    }
   }
 
   private static _createAndJoinRoom(mobName: string, socket: WebSocketOrAny) {
@@ -80,5 +91,6 @@ export class RoomManager {
   static resetRooms() {
     RoomManager._roomsByMobName.clear();
     RoomManager._roomsBySocketOrAny.clear();
+    RoomManager._roomsBySocketId.clear();
   }
 }

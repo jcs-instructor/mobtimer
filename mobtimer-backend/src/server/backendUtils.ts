@@ -58,14 +58,6 @@ export class backendUtils {
       mobTimer = RoomManager.getOrRegisterRoom(mobName, socket);
     } else {
       mobTimer = RoomManager.getMobTimerFromSocket(socket);
-      console.log("debug", mobTimer?.state?.mobName, socket.id)
-      console.log("looking for", socket.id)
-      for (const [key, value] of RoomManager.roomsBySocket) {
-        console.log("X Socket ID:", key.id, value.mobTimer?.state?.mobName, key.id===socket.id);
-        const m2 = RoomManager.getMobTimerFromSocket(key);
-        console.log("m2", m2?.state?.mobName);
-      }
-    
     }      
     console.log("mobTimer in _process", mobTimer)
       
@@ -148,8 +140,9 @@ export class backendUtils {
       const currentTime = new Date();
       const minutes = currentTime.getMinutes();
       const seconds = currentTime.getSeconds();
-      webSocket.id = `${Object.keys(RoomManager.roomsBySocket).length}:${minutes}:${seconds}`;
-      console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocket));
+      const ms = currentTime.getMilliseconds();
+      webSocket.id = `${Object.keys(RoomManager.roomsBySocketIdMap).length}:${minutes}:${seconds}.${ms}}`;
+      console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocketIdMap));
       
       webSocket.on("message", function (request) {
         let requestString: string = backendUtils._requestToString(request);
