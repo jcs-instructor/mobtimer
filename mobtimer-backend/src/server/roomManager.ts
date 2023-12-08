@@ -13,14 +13,7 @@ export class RoomManager {
     */
 
   private static _roomsByMobName: Map<string, Room> = new Map();
-  private static _roomsBySocketOrAny: Map<WebSocketOrAny, Room> = new Map();
   private static _roomsBySocketId: Map<string, Room> = new Map();
-  static get roomsBySocketMap() {
-    for (const [key, value] of RoomManager._roomsBySocketOrAny) {
-      console.log("A Socket ID:", key.id, value.mobTimer?.state?.mobName);
-    }
-    return RoomManager._roomsBySocketOrAny;
-  }
 
   static get roomsBySocketIdMap() {
     for (const [key, value] of RoomManager._roomsBySocketId) {
@@ -29,14 +22,6 @@ export class RoomManager {
     return RoomManager._roomsBySocketId;
   }
 
-  private static _getRoom(key: string | WebSocketOrAny): Room | undefined {
-    if (typeof key === "string") {
-      console.log("getting room by mob name", key);
-      return RoomManager._roomsByMobName.get(key);
-    } else {
-      return RoomManager._roomsBySocketOrAny.get(key);
-    }
-  }
   private static _getRoomByName(key: string): Room | undefined {
     console.log("getting room by mob name", key);
     return RoomManager._roomsByMobName.get(key);
@@ -74,7 +59,6 @@ export class RoomManager {
   private static _joinRoom(room: Room, socket: WebSocketOrAny) {
     console.log("adding socket to room", socket.id);
     room.sockets.add(socket);
-    RoomManager._roomsBySocketOrAny.set(socket, room);
     RoomManager._roomsBySocketId.set(socket.id, room);
   }
 
@@ -91,7 +75,6 @@ export class RoomManager {
 
   static resetRooms() {
     RoomManager._roomsByMobName.clear();
-    RoomManager._roomsBySocketOrAny.clear();
     RoomManager._roomsBySocketId.clear();
   }
 }
