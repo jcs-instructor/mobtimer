@@ -5,6 +5,8 @@ import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Broadcaster } from "./broadcaster";
+import { randomUUID } from "crypto";
+type WebSocketWithId = WebSocket & { id: string };
 
 export class backendUtils {
   static async startMobServer(
@@ -45,7 +47,8 @@ export class backendUtils {
   private static _processMobTimerRequest(
     parsedRequest: MobTimerRequests.MobTimerRequest,
     socket: any // WebSocket
-  ) {
+  ) 
+  {
     let mobName: string | undefined;
     let mobTimer: MobTimer | undefined;
 
@@ -55,7 +58,17 @@ export class backendUtils {
       mobTimer = RoomManager.getOrRegisterRoom(mobName, socket);
     } else {
       mobTimer = RoomManager.getMobTimerFromSocket(socket);
-    }
+      console.log("debug", mobTimer?.state?.mobName, socket.id)
+      console.log("looking for", socket.id)
+      for (const [key, value] of RoomManager.roomsBySocket) {
+        console.log("X Socket ID:", key.id, value.mobTimer?.state?.mobName, key.id===socket.id);
+        const m2 = RoomManager.getMobTimerFromSocket(key);
+        console.log("m2", m2?.state?.mobName);
+      }
+    
+    }      
+    console.log("mobTimer in _process", mobTimer)
+      
 
     if (!mobTimer) {
       return;
@@ -125,12 +138,19 @@ export class backendUtils {
    * be started externally.
    * @param server The http server from which to create the WebSocket server
    */
+
   private static _addMobListeners(
     server: http.Server
   ): WebSocket.Server {
     const wss = new WebSocket.Server({ server });
 
-    wss.on("connection", async function (webSocket: WebSocket) {
+    wss.on("connection", async function (webSocket: WebSocketWithId) {
+      const currentTime = new Date();
+      const minutes = currentTime.getMinutes();
+      const seconds = currentTime.getSeconds();
+      webSocket.id = `${Object.keys(RoomManager.roomsBySocket).length}:${minutes}:${seconds}`;
+      console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocket));
+      
       webSocket.on("message", function (request) {
         let requestString: string = backendUtils._requestToString(request);
         backendUtils.processRequest(requestString, webSocket);
@@ -139,8 +159,10 @@ export class backendUtils {
     return wss;
   }
 
-  static processRequest(requestString: string, webSocket: WebSocket | any) {    
+  static processRequest(requestString: string, webSocket: WebSocket | any) { 
+    console.log("requestString", requestString, webSocket.id)
     let response = backendUtils.getResponse(requestString, webSocket);
+    console.log("response mob", (response as any)?.mobState?.mobName)
     backendUtils._sendResponse(response, webSocket);
   }
 
@@ -189,7 +211,9 @@ export class backendUtils {
 
     let mobTimer: MobTimer | undefined;
     if (isMobTimerRequest && parsedRequest) {
+      console.log("parsedRequest", parsedRequest, webSocket.id)
       mobTimer = backendUtils._processMobTimerRequest(parsedRequest, webSocket);
+      console.log("mobTimer", mobTimer)
       if (mobTimer) {
         response = {
           actionInfo: { action: parsedRequest.action },
