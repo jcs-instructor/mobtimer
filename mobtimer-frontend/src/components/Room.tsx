@@ -63,6 +63,7 @@ const Room = ({
   }
 
   useEffect(() => {
+    console.log("Room.tsx: useEffect: mobNameLowerCase: ", mobNameLowerCase); 
     setMobName(mobNameLowerCase);
     submitJoinMobRequest();
   }, [mobNameLowerCase, setMobName, submitJoinMobRequest]);

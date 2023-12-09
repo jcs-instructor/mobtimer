@@ -1,6 +1,6 @@
 import * as http from "http";
 import WebSocket from "ws";
-import { MobTimer, Action, MobTimerRequests, MobTimerResponses } from "../mobtimer-api";
+import { MobTimer, Action, MobTimerRequests, MobTimerResponses, Controller } from "../mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
@@ -59,7 +59,7 @@ export class backendUtils {
     } else {
       mobTimer = RoomManager.getMobTimerFromSocket(socket);
     }      
-    console.log("mobTimer in _process", mobTimer)
+    console.log("mobTimer in _process", mobTimer?.state?.mobName)
       
 
     if (!mobTimer) {
@@ -143,7 +143,7 @@ export class backendUtils {
       const ms = currentTime.getMilliseconds();
       webSocket.id = `${Object.keys(RoomManager.roomsBySocketIdMap).length}:${minutes}:${seconds}.${ms}}`;
       console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocketIdMap));
-      
+      console.log()
       webSocket.on("message", function (request) {
         let requestString: string = backendUtils._requestToString(request);
         backendUtils.processRequest(requestString, webSocket);
@@ -206,7 +206,7 @@ export class backendUtils {
     if (isMobTimerRequest && parsedRequest) {
       console.log("parsedRequest", parsedRequest, webSocket.id)
       mobTimer = backendUtils._processMobTimerRequest(parsedRequest, webSocket);
-      console.log("mobTimer", mobTimer)
+      console.log("mobTimer", mobTimer?.state?.mobName)
       if (mobTimer) {
         response = {
           actionInfo: { action: parsedRequest.action },
