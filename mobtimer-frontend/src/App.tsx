@@ -20,12 +20,14 @@ import AlertBox from "./components/Alert";
 const controller = Controller.staticController;
 const useLocalHost = window.location.href.includes("localhost");
 const url = controller.getUrl(useLocalHost);
-const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || "") || 2;
+const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || "") || 0.1;
 const RETRY_MILLISECONDS = TimeUtils.secondsToMilliseconds(RETRY_SECONDS);
+console.log(RETRY_MILLISECONDS);
 console.info("App.tsx: url = " + url);
 console.info("process.env", process.env);
 console.info("url", url);
 console.info("App.tsx redeployed 3 on", new Date());
+let wrapperSocket = new W3CClientSocket(url) as IClientSocket;
 
 function playAudio() {
   const audio = new Audio(soundSource);
@@ -57,8 +59,11 @@ const App = () => {
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [participants, setParticipants] = useState([] as string[]);
   const [roles, setRoles] = useState([] as string[]);
-  const [connected, setConnected] = useState(false);
-  const [connecting, setConnecting] = useState(false);
+  const [socketClosed, setSocketClosed] = useState(false);
+  // const [connecting, setConnecting] = useState(false);
+  const [renderCompleted, setRenderCompleted] = useState(false);
+  console.log("App.tsx: App() called", renderCompleted);
+  let interval: NodeJS.Timeout | undefined = undefined;
 
   // Broadcast functions (send to server)
   const broadcastDurationMinutes = (durationMinutes: number) =>
@@ -67,50 +72,58 @@ const App = () => {
   let client: Client;
   client = controller.client as Client;
 
-  useEffect(() => {
-    // initialize function
-    const initialize = () => {
-      if (wrapperSocket.socketState !== wrapperSocket.OPEN_CODE) {
-        setConnecting(true);
-        setConnected(false);
-        wrapperSocket = new W3CClientSocket(url) as IClientSocket;
-      } else {
-        console.info("Connected");
-        setConnected(true);
-        setConnecting(false);
-        clearInterval(interval);
-      }
-      controller.client = new Client(wrapperSocket);
-      // setTimeCreated(new Date());
-      const stateSetters = {
-        setRoles,
-        setParticipants,
-        setSecondsRemainingString,
-        setDurationMinutes,
-        setActionButtonLabel,
-      };
-      setSocketListener({
-        stateSetters,
-        controller,
-        playAudio,
-        getActionButtonLabel,
-      });
+
+  const initialize = (retry = false) => {
+    console.info("INITIALIZE CALLED", retry);
+
+    controller.client = new Client(wrapperSocket);
+    const stateSetters = {
+      setRoles,
+      setParticipants,
+      setSecondsRemainingString,
+      setDurationMinutes,
+      setActionButtonLabel,
     };
+    setSocketListener({
+      stateSetters,
+      controller,
+      playAudio,
+      getActionButtonLabel,
+    });
+  };
+  useEffect(() => {
+    console.log("INSIDE USEEFFECAT", renderCompleted);
+    // initialize function
     // useEffect code
-    if (connected) {
-      return;
-    }
-    let wrapperSocket = new W3CClientSocket(url) as IClientSocket;
-    if (!connecting) {
+    setRenderCompleted(true);
+  }, [renderCompleted]);
+  if (renderCompleted && !socketClosed) {
+    if (wrapperSocket.socketState === wrapperSocket.OPEN_CODE) {
       initialize();
+    } else {
+      console.log("DEFINING INTERVAL")
+      interval = setInterval(
+        () => {
+          console.log("INSIDE INTERVAL")
+          if (wrapperSocket.socketState === wrapperSocket.CLOSED_CODE) {
+            setSocketClosed(true);
+            console.log("App.tsx: closed setInterval: wrapperSocket.socketState", wrapperSocket.socketState);
+            wrapperSocket = new W3CClientSocket(url) as IClientSocket;
+          } else if (wrapperSocket.socketState === wrapperSocket.OPEN_CODE) {
+            console.log("App.tsx: connected setInterval: wrapperSocket.socketState", wrapperSocket.socketState);
+            initialize(true);
+            setSocketClosed(false);
+            clearInterval(interval);
+            interval = undefined;
+          }
+        },
+        RETRY_MILLISECONDS);
     }
-    const interval = setInterval(initialize, RETRY_MILLISECONDS);
+
     // required syntax for setInterval inside useEffect
     // see https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
     // Many articles say the same thing
-    return () => clearInterval(interval);
-  }, [connecting, connected]);
-
+  }
   // Set socket listener
 
   // Submit join mob request
@@ -135,7 +148,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {!connected && <AlertBox message="Connecting......" />}
+      {socketClosed && <AlertBox message="Connecting......" />}
       <Routes>
         <Route path="/" element={<Launch />} />
         <Route

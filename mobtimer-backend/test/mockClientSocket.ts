@@ -5,8 +5,10 @@ export class MockClientSocket implements IClientSocket {
   
   private _parameters: ListenerParameters;
   client?: Client;
+  CONNECTING_CODE = 0;
   OPEN_CODE = 1;
-  CLOSED_CODE = 2;
+  CLOSING_CODE = 2;
+  CLOSED_CODE = 3;
   socketState = this.OPEN_CODE;
 
   constructor(parameters: ListenerParameters) {
