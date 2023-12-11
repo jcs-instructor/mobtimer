@@ -92,7 +92,7 @@ export class MobTimer {
     this._previouslyAccumulatedElapsedSeconds +=
       this._whenPausedInSeconds - this._whenLastStartedInSeconds;
   }
-
+  
   public get state() {
     return {
       mobName: this._mobName,

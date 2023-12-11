@@ -3,6 +3,7 @@ import { Status, TimeUtils, Action } from "../src/mobtimer-api";
 import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
+import { WebSocketWithId } from "../src/server/webSocketWithId";
 
 jest.useFakeTimers();
 
@@ -68,7 +69,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     /* Resetting timer causes sendToClient to be run, which would give error, so mock  */
     jest
       .spyOn(Broadcaster, "sendToClient")
-      .mockImplementation((backendSocket: WebSocket, message: String) => {
+      .mockImplementation((backendSocket: WebSocketWithId, message: String) => {
         console.log("Parameters of mocked function", backendSocket, message);
       });
     const client = new TestClient({});

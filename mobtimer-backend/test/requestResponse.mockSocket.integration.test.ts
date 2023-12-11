@@ -11,6 +11,7 @@ import { RoomManager } from "../src/server/roomManager";
 import { TestClient } from "./testClient";
 import { Broadcaster } from "../src/server/broadcaster";
 import { MockClientSocket } from "./mockClientSocket";
+import { WebSocketWithId } from "../src/server/webSocketWithId";
 
 jest.useFakeTimers();
 let socketToClient: Map<IClientSocket, Client> = new Map();
@@ -25,7 +26,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     controller2 = setupController(controller2);
     jest
       .spyOn(Broadcaster, "sendToClient")
-      .mockImplementation((clientSocket: WebSocket, message: string) => {
+      .mockImplementation((clientSocket: WebSocketWithId, message: string) => {
         const mockClientSocket = clientSocket as unknown as MockClientSocket;
         const client = socketToClient.get(mockClientSocket);
         client?.webSocket?.onmessageReceived({
@@ -117,7 +118,7 @@ describe("Process Raw Request tests (no socket communication, so no expiration t
     /* Resetting timer causes sendToClient to be run, which would give error, so mock  */
     jest
       .spyOn(Broadcaster, "sendToClient")
-      .mockImplementation((backendSocket: WebSocket, message: String) => {
+      .mockImplementation((backendSocket: WebSocketWithId, message: String) => {
         console.log("Parameters of mocked function", backendSocket, message);
       });
     const client = new TestClient({});

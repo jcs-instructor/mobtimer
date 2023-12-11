@@ -7,6 +7,7 @@ export class WSClientSocket implements IClientSocket {
   OPEN_CODE: number;
   CLOSING_CODE: number;
   CLOSED_CODE: number;
+  id: string | undefined;
 
   constructor(url: string, webSocket?: WebSocket) {
     if (url) this._webSocket = new WebSocket(url);

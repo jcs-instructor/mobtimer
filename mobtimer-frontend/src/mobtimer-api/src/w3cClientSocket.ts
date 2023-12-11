@@ -7,6 +7,7 @@ export class W3CClientSocket implements IClientSocket {
   OPEN_CODE: number;
   CLOSING_CODE: number;
   CLOSED_CODE: number;
+  id: string | undefined;
 
   constructor(url: string, webSocket?: W3CWebSocket) {
     if (url) this._webSocket = new W3CWebSocket(url);
@@ -20,6 +21,7 @@ export class W3CClientSocket implements IClientSocket {
   }
 
   public sendToServer(message: string): void {
+    console.log("sending message", message, this.id)
     this._webSocket.send(message);
   }
 

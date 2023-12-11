@@ -1,4 +1,4 @@
 import { MobTimer } from "../mobtimer-api";
-import WebSocket from "ws";
+import { WebSocketWithId } from "./webSocketWithId";
 
-export type Room = { mobTimer: MobTimer; sockets: Set<WebSocket> };
+export type Room = { mobTimer: MobTimer; sockets: Set<WebSocketWithId> };

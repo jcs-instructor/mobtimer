@@ -1,6 +1,7 @@
 export interface IClientSocket {
   socketState: number;
   sendToServer: (message: string) => void;
+  id?: string;
   closeSocket: () => void;
   CONNECTING_CODE: number;
   OPEN_CODE: number;

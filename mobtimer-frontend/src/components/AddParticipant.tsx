@@ -6,6 +6,7 @@ const AddParticipant = () => {
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log("onSubmit AddParticipant", participantName, Controller.staticController?.client ? "client exists" : "client null"   );
         const trimmedName = participantName.trim();
         if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
             controller.client?.addParticipant(trimmedName);

@@ -2,7 +2,7 @@ import { Action } from "../src/mobtimer-api";
 import { MobState } from "../src/mobtimer-api";
 import { backendUtils } from "../src/server/backendUtils";
 import { MobRequestBuilder } from "../src/mobtimer-api";
-import { MobTimerResponse, SuccessfulResponse } from "mobtimer-api/mobTimerResponse";
+import { MobTimerResponse, SuccessfulResponse } from "../src/mobtimer-api/mobTimerResponse";
 
 class TestClient {
   private _successfulResponses: string[] = [];

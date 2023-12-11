@@ -1,8 +1,6 @@
-import { Action } from "./action";
-import * as MobTimerRequests from "./mobTimerRequests";
 import { IClientSocket } from "./iClientSocket";
 import { MobRequestBuilder } from "./mobRequestBuilder";
-import { Heartbeat } from './index';
+import { Controller, Heartbeat } from './index';
 const noSocketErrorMessage = "No socket";
 class Client {
   private _webSocket: IClientSocket | undefined;
@@ -66,6 +64,7 @@ class Client {
   }
 
   addParticipant(name: string) {
+    console.log("sending add participant request")
     this.sendToServer(MobRequestBuilder.addParticipant(name));
   }
 
@@ -102,6 +101,7 @@ class Client {
 
   async sendToServer(requestString: string) {
     this.heartBeat?.restart();
+    console.log("sending to server", Controller.staticController ? "existing controller" : "no controller")
     if (!this._webSocket) {
       throw new Error(noSocketErrorMessage);
     } else {

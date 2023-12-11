@@ -7,8 +7,8 @@ type FormParameters = {
     participantNames: string,
     setParticipantNames: (participantNames: string) => void,
     roleNames: string,
-    setRoleNames: (roles: string) => void,
-    submitEditParticipantsRequest: (event: React.FormEvent<HTMLFormElement>) => void
+    setRoleNames: (roleNames: string) => void,
+    submitEditParticipants: ({ participantNames, roleNames }: { participantNames: string, roleNames: string } ) => void
 };
 
 const EditParticipants = (formParameters: FormParameters) => {
@@ -20,7 +20,10 @@ const EditParticipants = (formParameters: FormParameters) => {
     };
 
     return (
-        <form onSubmit={(event) => formParameters.submitEditParticipantsRequest(event)}>
+        <form onSubmit={(event) => {
+            event.preventDefault();
+            formParameters.submitEditParticipants({ participantNames: formParameters.participantNames, roleNames: formParameters.roleNames });
+        }}>
             <label>Edit Participants: 
             <input
                 value={formParameters.participantNames}
