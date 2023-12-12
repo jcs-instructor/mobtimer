@@ -135,13 +135,11 @@ const App = () => {
       Controller.staticController ? "static controller exists" : "static controller null",
     controller.client ? "client controller exists" : "client controller null")
     const alreadyJoined = controller.frontendMobTimer.state.mobName === mobName;
-    if (!mobName || alreadyJoined || !controller.client) {
-      console.log("submitJoinMobRequest no submit: mobName", mobName, "alreadyJoined", alreadyJoined, "controller.client", controller.client ? "exists" : "null");  
+    if (!mobName || alreadyJoined) {
       return;
     }
-    console.log("submitJoinMobRequest joining")
     controller.frontendMobTimer = new MobTimer(mobName);
-    controller.client.joinMob(mobName);
+    controller.client?.joinMob(mobName);
   };
 
   const addParticipantName = (participantName: string) => {
