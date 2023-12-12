@@ -129,11 +129,13 @@ const App = () => {
   // Submit join mob request
   const submitJoinMobRequest = async () => {
     const alreadyJoined = controller.frontendMobTimer.state.mobName === mobName;
-    if (!mobName || alreadyJoined) {
+    if (!mobName || alreadyJoined || !controller.client) {
+      console.log("submitJoinMobRequest no submit: mobName", mobName, "alreadyJoined", alreadyJoined, "controller.client", controller.client ? "exists" : "null");  
       return;
     }
+    console.log("submitJoinMobRequest joining")
     controller.frontendMobTimer = new MobTimer(mobName);
-    controller.client?.joinMob(mobName);
+    controller.client.joinMob(mobName);
   };
 
   // Submit action
