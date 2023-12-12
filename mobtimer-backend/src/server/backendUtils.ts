@@ -146,7 +146,6 @@ export class backendUtils {
       console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocketIdMap));
       console.log()
       webSocket.on("message", function (request) {
-        console.log("Receiving message", webSocket.id)
         let requestString: string = backendUtils._requestToString(request);
         backendUtils.processRequest(requestString, webSocket);
       });

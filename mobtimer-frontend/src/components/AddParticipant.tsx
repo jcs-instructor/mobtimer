@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Controller } from '../mobtimer-api/src';
 const controller = Controller.staticController as Controller;
-const AddParticipant = ( { addParticipantName }: {addParticipantName: (participantName: string) => void }) => {
+const AddParticipant = () => {
     const [participantName, setParticipantName] = useState('');
     
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        addParticipantName(participantName)
+        console.log("onSubmit AddParticipant", participantName, Controller.staticController?.client ? "client exists" : "client null"   );
+        const trimmedName = participantName.trim();
+        if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
+            controller.client?.addParticipant(trimmedName);
+        }            
         setParticipantName('');
     }
 

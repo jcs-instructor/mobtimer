@@ -142,14 +142,6 @@ const App = () => {
     controller.client?.joinMob(mobName);
   };
 
-  const addParticipantName = (participantName: string) => {
-    console.log("onSubmit AddParticipant", participantName, Controller.staticController?.client ? "client exists" : "client null");
-    const trimmedName = participantName.trim();
-    if (trimmedName.length > 0) { // todo also check for duplicates, i.e.,  && !participants.includes(trimmedName))
-      controller.client?.addParticipant(trimmedName);
-    }            
-  }
-  
   const submitEditParticipantsRequest = (
     { participantNames, roleNames }: { participantNames: string, roleNames: string}    
   ) => {
@@ -189,7 +181,6 @@ const App = () => {
               submitToggleAction={submitToggleAction}
               submitJoinMobRequest={submitJoinMobRequest}
               submitEditParticipants={submitEditParticipantsRequest}
-              addParticipantName={addParticipantName}
             />
           }
         />

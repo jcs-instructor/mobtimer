@@ -23,7 +23,6 @@ type FormParameters = {
   submitToggleAction: (event: React.FormEvent<HTMLFormElement>) => void;
   submitJoinMobRequest: () => void;
   submitEditParticipants: ({ participantNames, roleNames }: {participantNames: string, roleNames: string}) => void;
-  addParticipantName: ( participantName: string ) => void;
 };
 
 const Room = ({
@@ -39,7 +38,6 @@ const Room = ({
   submitToggleAction,
   submitJoinMobRequest,
   submitEditParticipants,
-  addParticipantName,
 }: FormParameters) => {
   const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
   const controller = Controller.staticController as Controller;
@@ -117,7 +115,7 @@ const Room = ({
           </tbody>
         </table>
 
-        <AddParticipant addParticipantName={addParticipantName}/>
+        <AddParticipant />
         <hr />
         <EditParticipants
           participantNames={participantNames}

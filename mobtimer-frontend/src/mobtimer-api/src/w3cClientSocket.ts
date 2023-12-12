@@ -21,7 +21,7 @@ export class W3CClientSocket implements IClientSocket {
   }
 
   public sendToServer(message: string): void {
-    console.log("This is the real sendToServer function.")
+    console.log("sending message", message, this.id)
     this._webSocket.send(message);
   }
 
