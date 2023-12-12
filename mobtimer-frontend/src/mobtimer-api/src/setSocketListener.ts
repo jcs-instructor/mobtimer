@@ -23,7 +23,6 @@ export type ListenerParameters = {
 
 export function setSocketListener(parameters: ListenerParameters) {
   const client = parameters.controller.client as Client;
-  console.log("Setting socket listener", client ? "defined" : "undefined")
   if (!client.webSocket) {
     throw new Error("WebSocket is undefined");
   }
@@ -41,7 +40,6 @@ export const onmessageReceivedFunc = (
   const response = JSON.parse(
     message.data
   ) as MobTimerResponses.SuccessfulResponse;
-  console.log("Received response from server: ", response);
 
   // todo: handle if response is not successful
   consoleLogResponse(response);

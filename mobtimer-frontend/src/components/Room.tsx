@@ -8,7 +8,7 @@ import RotateParticipants from "./RotateParticipants";
 import EditParticipants from "./EditParticipants";
 import Reset from "./Reset";
 import ShuffleParticipants from "./ShuffleParticipants";
-import { Controller } from "../mobtimer-api/src";
+import { Controller, StringUtils } from "../mobtimer-api/src";
 
 type FormParameters = {
   durationMinutes: number;
@@ -22,7 +22,6 @@ type FormParameters = {
   timeString: string;
   submitToggleAction: (event: React.FormEvent<HTMLFormElement>) => void;
   submitJoinMobRequest: () => void;
-  submitEditParticipants: ({ participantNames, roleNames }: {participantNames: string, roleNames: string}) => void;
 };
 
 const Room = ({
@@ -37,12 +36,9 @@ const Room = ({
   timeString,
   submitToggleAction,
   submitJoinMobRequest,
-  submitEditParticipants,
 }: FormParameters) => {
   const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
   const controller = Controller.staticController as Controller;
-  console.log("ROOM.TSX", controller.client ? "debug client exists" : "client null",
-  Controller.staticController?.client ? "static client exists" : "static client null")
   const [participantNames, setParticipantNames] = useState(
     controller.frontendMobTimer.participants.join(",")
   );
@@ -50,6 +46,14 @@ const Room = ({
     controller.frontendMobTimer.roles.join(",")
   );
   const mobNameLowerCase = mobNameUrlParam.toLowerCase();
+
+  const submitEditParticipantsRequest = (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    controller.client?.editParticipants(StringUtils.splitAndTrim(participantNames));
+    controller.client?.editRoles(StringUtils.splitAndTrim(roleNames))
+  };
 
   // todo: refactor reduncant code for debug boolean (also in App.tsx)
 
@@ -120,7 +124,7 @@ const Room = ({
         <EditParticipants
           participantNames={participantNames}
           setParticipantNames={setParticipantNames}
-          submitEditParticipants={submitEditParticipants}
+          submitEditParticipantsRequest={submitEditParticipantsRequest}
           roleNames={roleNames}
           setRoleNames={setRoleNames}
         />

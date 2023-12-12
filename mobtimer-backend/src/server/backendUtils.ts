@@ -6,7 +6,7 @@ import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Broadcaster } from "./broadcaster";
 import { randomUUID } from "crypto";
-import { WebSocketWithId } from "./webSocketWithId";
+type WebSocketWithId = WebSocket & { id: string };
 
 export class backendUtils {
   static async startMobServer(
@@ -82,7 +82,6 @@ export class backendUtils {
           updateRequest.value.durationMinutes || mobTimer.durationMinutes;
         break;
       }
-      
       case Action.AddParticipant: {
         const addParticipantRequest =
           parsedRequest as MobTimerRequests.AddParticipantRequest;
@@ -153,7 +152,7 @@ export class backendUtils {
     return wss;
   }
 
-  static processRequest(requestString: string, webSocket: WebSocketWithId) { 
+  static processRequest(requestString: string, webSocket: WebSocket | any) { 
     console.log("requestString", requestString, webSocket.id)
     let response = backendUtils.getResponse(requestString, webSocket);
     console.log("response mob", (response as any)?.mobState?.mobName)

@@ -11,15 +11,13 @@ import {
   W3CClientSocket,
   Controller,
   setSocketListener,
-  StringUtils,
 } from "./mobtimer-api/src";
 import Launch from "./components/Launch";
 // import logo from './logo.svg';
 import { soundSource } from "./assets/soundSource";
 import AlertBox from "./components/Alert";
 
-let controller = Controller.staticController;
-controller = new Controller();
+const controller = Controller.staticController;
 const useLocalHost = window.location.href.includes("localhost");
 const url = controller.getUrl(useLocalHost);
 const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || "") || 0.1;
@@ -76,7 +74,7 @@ const App = () => {
 
 
   const initialize = (retry = false) => {
-    console.info("INITIALIZE CALLED", retry, Controller.staticController ? "static controller exists" : "static controller null");
+    console.info("INITIALIZE CALLED", retry);
 
     controller.client = new Client(wrapperSocket);
     const stateSetters = {
@@ -94,8 +92,7 @@ const App = () => {
     });
   };
   useEffect(() => {
-    console.log("INSIDE USEEFFECT", renderCompleted, controller?.frontendMobTimer?.state?.mobName,
-    Controller.staticController ? "static controller exists" : "static controller null");
+    console.log("INSIDE USEEFFECAT", renderCompleted);
     // initialize function
     // useEffect code
     setRenderCompleted(true);
@@ -131,23 +128,14 @@ const App = () => {
 
   // Submit join mob request
   const submitJoinMobRequest = async () => {
-    console.log("SUBMIT JOIN MOB REQUEST 2", mobName, 'x', controller.frontendMobTimer.state.mobName, 
-      Controller.staticController ? "static controller exists" : "static controller null",
-    controller.client ? "client controller exists" : "client controller null")
     const alreadyJoined = controller.frontendMobTimer.state.mobName === mobName;
-    if (!mobName || alreadyJoined) {
+    if (!mobName || alreadyJoined || !controller.client) {
+      console.log("submitJoinMobRequest no submit: mobName", mobName, "alreadyJoined", alreadyJoined, "controller.client", controller.client ? "exists" : "null");  
       return;
     }
+    console.log("submitJoinMobRequest joining")
     controller.frontendMobTimer = new MobTimer(mobName);
-    controller.client?.joinMob(mobName);
-  };
-
-  const submitEditParticipantsRequest = (
-    { participantNames, roleNames }: { participantNames: string, roleNames: string}    
-  ) => {
-    console.log("SUBMIT EDIT PARTICIPANTS REQUEST", participantNames, roleNames);
-    controller.client?.editParticipants(StringUtils.splitAndTrim(participantNames));
-    controller.client?.editRoles(StringUtils.splitAndTrim(roleNames))
+    controller.client.joinMob(mobName);
   };
 
   // Submit action
@@ -180,7 +168,6 @@ const App = () => {
               timeString={secondsRemainingString}
               submitToggleAction={submitToggleAction}
               submitJoinMobRequest={submitJoinMobRequest}
-              submitEditParticipants={submitEditParticipantsRequest}
             />
           }
         />
