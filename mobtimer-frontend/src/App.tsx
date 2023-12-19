@@ -83,25 +83,6 @@ const App = () => {
     });
   };
 
-
-  const initialize = (retry = false) => {
-    console.info("INITIALIZE CALLED", retry);
-
-    controller.client = new Client(wrapperSocket);
-    const stateSetters = {
-      setRoles,
-      setParticipants,
-      setSecondsRemainingString,
-      setDurationMinutes,
-      setActionButtonLabel,
-    };
-    setSocketListener({
-      stateSetters,
-      controller,
-      playAudio,
-      getActionButtonLabel,
-    });
-  };
   useEffect(() => {
     console.log("INSIDE USEEFFECAT", renderCompleted);
     // initialize function

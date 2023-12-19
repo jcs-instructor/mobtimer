@@ -6,7 +6,6 @@ import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Broadcaster } from "./broadcaster";
 import { randomUUID } from "crypto";
-type WebSocketWithId = WebSocket & { id: string };
 
 export type WebSocketWithId = WebSocket & { id: string };
 
