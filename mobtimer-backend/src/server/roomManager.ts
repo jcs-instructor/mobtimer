@@ -15,17 +15,15 @@ export class RoomManager {
   private static _roomsByMobName: Map<string, Room> = new Map();
   private static _roomsBySocketId: Map<string, Room> = new Map();
 
+  // todo: maybe delete; currently only used for backendUtils debugging id
   static get roomsBySocketIdMap() {
-    for (const [key, value] of RoomManager._roomsBySocketId) {
-      console.log("A Socket ID:", key, value.mobTimer?.state?.mobName);
-    }
     return RoomManager._roomsBySocketId;
   }
 
   private static _getRoomByName(key: string): Room | undefined {
-    console.log("getting room by mob name", key);
     return RoomManager._roomsByMobName.get(key);
   }
+  
   private static _getRoomBySocketId(
     key: string | WebSocketOrAny
   ): Room | undefined {

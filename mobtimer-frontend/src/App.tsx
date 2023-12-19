@@ -22,11 +22,6 @@ const useLocalHost = window.location.href.includes("localhost");
 const url = controller.getUrl(useLocalHost);
 const RETRY_SECONDS = Number.parseInt(process.env.RETRY_SECONDS || "") || 0.1;
 const RETRY_MILLISECONDS = TimeUtils.secondsToMilliseconds(RETRY_SECONDS);
-console.log(RETRY_MILLISECONDS);
-console.info("App.tsx: url = " + url);
-console.info("process.env", process.env);
-console.info("url", url);
-console.info("App.tsx redeployed 3 on", new Date());
 let wrapperSocket = new W3CClientSocket(url) as IClientSocket;
 
 function playAudio() {
@@ -69,8 +64,24 @@ const App = () => {
   const broadcastDurationMinutes = (durationMinutes: number) =>
     client?.update(durationMinutes);
 
-  let client: Client;
-  client = controller.client as Client;
+  let client = controller.client as Client;
+
+  const initialize = (_retry = false) => {
+    controller.client = new Client(wrapperSocket);
+    const stateSetters = {
+      setRoles,
+      setParticipants,
+      setSecondsRemainingString,
+      setDurationMinutes,
+      setActionButtonLabel,
+    };
+    setSocketListener({
+      stateSetters,
+      controller,
+      playAudio,
+      getActionButtonLabel,
+    });
+  };
 
 
   const initialize = (retry = false) => {
@@ -101,16 +112,12 @@ const App = () => {
     if (wrapperSocket.socketState === wrapperSocket.OPEN_CODE) {
       initialize();
     } else {
-      console.log("DEFINING INTERVAL")
       interval = setInterval(
         () => {
-          console.log("INSIDE INTERVAL")
           if (wrapperSocket.socketState === wrapperSocket.CLOSED_CODE) {
             setSocketClosed(true);
-            console.log("App.tsx: closed setInterval: wrapperSocket.socketState", wrapperSocket.socketState);
             wrapperSocket = new W3CClientSocket(url) as IClientSocket;
           } else if (wrapperSocket.socketState === wrapperSocket.OPEN_CODE) {
-            console.log("App.tsx: connected setInterval: wrapperSocket.socketState", wrapperSocket.socketState);
             initialize(true);
             setSocketClosed(false);
             clearInterval(interval);
@@ -129,8 +136,8 @@ const App = () => {
   // Submit join mob request
   const submitJoinMobRequest = async () => {
     const alreadyJoined = controller.frontendMobTimer.state.mobName === mobName;
+    // todo: refactor: already joined is different from the other 2 which have to do with being fully initialized
     if (!mobName || alreadyJoined || !controller.client) {
-      console.log("submitJoinMobRequest no submit: mobName", mobName, "alreadyJoined", alreadyJoined, "controller.client", controller.client ? "exists" : "null");  
       return;
     }
     console.log("submitJoinMobRequest joining")

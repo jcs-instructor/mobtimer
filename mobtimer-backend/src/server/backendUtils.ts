@@ -8,6 +8,8 @@ import { Broadcaster } from "./broadcaster";
 import { randomUUID } from "crypto";
 type WebSocketWithId = WebSocket & { id: string };
 
+export type WebSocketWithId = WebSocket & { id: string };
+
 export class backendUtils {
   static async startMobServer(
     port: number,
@@ -58,10 +60,8 @@ export class backendUtils {
       mobTimer = RoomManager.getOrRegisterRoom(mobName, socket);
     } else {
       mobTimer = RoomManager.getMobTimerFromSocket(socket);
-    }      
-    console.log("mobTimer in _process", mobTimer?.state?.mobName)
-      
-
+    }        
+    
     if (!mobTimer) {
       return;
     }
@@ -137,11 +137,7 @@ export class backendUtils {
     const wss = new WebSocket.Server({ server });
 
     wss.on("connection", async function (webSocket: WebSocketWithId) {
-      const currentTime = new Date();
-      const minutes = currentTime.getMinutes();
-      const seconds = currentTime.getSeconds();
-      const ms = currentTime.getMilliseconds();
-      webSocket.id = `${Object.keys(RoomManager.roomsBySocketIdMap).length}:${minutes}:${seconds}.${ms}}`;
+      webSocket.id = backendUtils.generateWebSocketId();
       console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocketIdMap));
       console.log()
       webSocket.on("message", function (request) {
@@ -151,9 +147,18 @@ export class backendUtils {
     });
     return wss;
   }
+  
+  private static generateWebSocketId() {
+    // todo: improve how we generate the id; note: as of now it's only used for debugging anyway
+    const currentTime = new Date();
+    const minutes = currentTime.getMinutes();
+    const seconds = currentTime.getSeconds();
+    const ms = currentTime.getMilliseconds();
+    const createWebSocketId = `${Object.keys(RoomManager.roomsBySocketIdMap).length}:${minutes}:${seconds}.${ms}}`;
+    return createWebSocketId;
+  }
 
   static processRequest(requestString: string, webSocket: WebSocket | any) { 
-    console.log("requestString", requestString, webSocket.id)
     let response = backendUtils.getResponse(requestString, webSocket);
     console.log("response mob", (response as any)?.mobState?.mobName)
     backendUtils._sendResponse(response, webSocket);
