@@ -6,6 +6,8 @@ import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Broadcaster } from "./broadcaster";
 
+export type WebSocketWithId = WebSocket & { id: string };
+
 export class backendUtils {
   static async startMobServer(
     port: number,
@@ -45,7 +47,8 @@ export class backendUtils {
   private static _processMobTimerRequest(
     parsedRequest: MobTimerRequests.MobTimerRequest,
     socket: any // WebSocket
-  ) {
+  ) 
+  {
     let mobName: string | undefined;
     let mobTimer: MobTimer | undefined;
 
@@ -55,7 +58,7 @@ export class backendUtils {
       mobTimer = RoomManager.getOrRegisterRoom(mobName, socket);
     } else {
       mobTimer = RoomManager.getMobTimerFromSocket(socket);
-    }
+    }        
 
     if (!mobTimer) {
       return;
@@ -125,12 +128,16 @@ export class backendUtils {
    * be started externally.
    * @param server The http server from which to create the WebSocket server
    */
+
   private static _addMobListeners(
     server: http.Server
   ): WebSocket.Server {
     const wss = new WebSocket.Server({ server });
 
-    wss.on("connection", async function (webSocket: WebSocket) {
+    wss.on("connection", async function (webSocket: WebSocketWithId) {
+      webSocket.id = backendUtils.generateWebSocketId();
+      console.log("connecting websocket", webSocket.id, Object.keys(RoomManager.roomsBySocketIdMap));
+      console.log()
       webSocket.on("message", function (request) {
         let requestString: string = backendUtils._requestToString(request);
         backendUtils.processRequest(requestString, webSocket);
@@ -139,7 +146,17 @@ export class backendUtils {
     return wss;
   }
 
-  static processRequest(requestString: string, webSocket: WebSocket | any) {    
+  private static generateWebSocketId() {
+    // todo: improve how we generate the id; note: as of now it's only used for debugging anyway
+    const currentTime = new Date();
+    const minutes = currentTime.getMinutes();
+    const seconds = currentTime.getSeconds();
+    const ms = currentTime.getMilliseconds();
+    const createWebSocketId = `${Object.keys(RoomManager.roomsBySocketIdMap).length}:${minutes}:${seconds}.${ms}}`;
+    return createWebSocketId;
+  }
+
+  static processRequest(requestString: string, webSocket: WebSocket | any) { 
     let response = backendUtils.getResponse(requestString, webSocket);
     backendUtils._sendResponse(response, webSocket);
   }

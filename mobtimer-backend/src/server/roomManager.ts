@@ -13,31 +13,37 @@ export class RoomManager {
     */
 
   private static _roomsByMobName: Map<string, Room> = new Map();
-  private static _roomsBySocketOrAny: Map<WebSocketOrAny, Room> = new Map();
+  private static _roomsBySocketId: Map<string, Room> = new Map();
 
-  private static _getRoom(key: string | WebSocketOrAny): Room | undefined {
-    if (typeof key === "string") {
-      return RoomManager._roomsByMobName.get(key);
-    } else {
-      return RoomManager._roomsBySocketOrAny.get(key);
-    }
+  // todo: maybe delete; currently only used for backendUtils debugging id
+  static get roomsBySocketIdMap() {
+    return RoomManager._roomsBySocketId;
+  }
+
+  private static _getRoomByName(key: string): Room | undefined {
+    return RoomManager._roomsByMobName.get(key);
+  }
+  private static _getRoomBySocketId(
+    key: string | WebSocketOrAny
+  ): Room | undefined {
+    return RoomManager._roomsBySocketId.get(key);
   }
 
   static getMobTimer(mobName: string): MobTimer | undefined {
-    return this._getRoom(mobName)?.mobTimer;
+    return RoomManager._getRoomByName(mobName)?.mobTimer;
   }
 
   static getMobTimerFromSocket(socket: WebSocketOrAny) {
-    const mobTimer = RoomManager._getRoom(socket)?.mobTimer;
+    const mobTimer = RoomManager._getRoomBySocketId(socket.id)?.mobTimer;
     return mobTimer;
   }
 
   static getSocketsForMob(mobName: string): Set<WebSocketOrAny> | undefined {
-    return RoomManager._getRoom(mobName)?.sockets;
+    return RoomManager._getRoomByName(mobName)?.sockets;
   }
 
-  static getOrRegisterRoom(mobName: string, socket: WebSocketOrAny) { 
-    let room = RoomManager._getRoom(mobName);
+  static getOrRegisterRoom(mobName: string, socket: WebSocketOrAny) {
+    let room = RoomManager._getRoomByName(mobName);
     if (room) {
       RoomManager._joinRoom(room, socket);
     } else {
@@ -49,7 +55,7 @@ export class RoomManager {
 
   private static _joinRoom(room: Room, socket: WebSocketOrAny) {
     room.sockets.add(socket);
-    RoomManager._roomsBySocketOrAny.set(socket, room);
+    RoomManager._roomsBySocketId.set(socket.id, room);
   }
 
   private static _createAndJoinRoom(mobName: string, socket: WebSocketOrAny) {
@@ -65,6 +71,6 @@ export class RoomManager {
 
   static resetRooms() {
     RoomManager._roomsByMobName.clear();
-    RoomManager._roomsBySocketOrAny.clear();
+    RoomManager._roomsBySocketId.clear();
   }
 }

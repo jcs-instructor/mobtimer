@@ -3,12 +3,20 @@ import { IClientSocket } from "./iClientSocket";
 
 export class W3CClientSocket implements IClientSocket {
   private _webSocket: W3CWebSocket;
+  CONNECTING_CODE: number;
+  OPEN_CODE: number;
+  CLOSING_CODE: number;
+  CLOSED_CODE: number;
 
   constructor(url: string, webSocket?: W3CWebSocket) {
     if (url) this._webSocket = new W3CWebSocket(url);
     else {
       this._webSocket = webSocket!;
     }
+    this.CONNECTING_CODE = this._webSocket.CONNECTING;
+    this.OPEN_CODE = this._webSocket.OPEN;
+    this.CLOSING_CODE = this._webSocket.CLOSING;
+    this.CLOSED_CODE = this._webSocket.CLOSED;
   }
 
   public sendToServer(message: string): void {
@@ -25,13 +33,5 @@ export class W3CClientSocket implements IClientSocket {
 
   public get socketState(): number {
     return this._webSocket.readyState;
-  }
-
-  public get OPEN_CODE(): number {
-    return this._webSocket.OPEN;
-  }
-
-  public get CLOSED_CODE(): number {
-    return this._webSocket.CLOSED;
   }
 }
