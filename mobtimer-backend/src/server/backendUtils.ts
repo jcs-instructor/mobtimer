@@ -1,10 +1,12 @@
 import * as http from "http";
 import WebSocket from "ws";
-import { MobTimer, Action, MobTimerRequests, MobTimerResponses } from "../mobtimer-api";
+import { MobTimer, Action, MobTimerRequests, MobTimerResponses, Controller } from "../mobtimer-api";
 import express from "express";
 import * as path from "path";
 import { RoomManager } from "./roomManager";
 import { Broadcaster } from "./broadcaster";
+import { randomUUID } from "crypto";
+type WebSocketWithId = WebSocket & { id: string };
 
 export type WebSocketWithId = WebSocket & { id: string };
 
@@ -59,7 +61,7 @@ export class backendUtils {
     } else {
       mobTimer = RoomManager.getMobTimerFromSocket(socket);
     }        
-
+    
     if (!mobTimer) {
       return;
     }
@@ -145,7 +147,7 @@ export class backendUtils {
     });
     return wss;
   }
-
+  
   private static generateWebSocketId() {
     // todo: improve how we generate the id; note: as of now it's only used for debugging anyway
     const currentTime = new Date();
@@ -158,6 +160,7 @@ export class backendUtils {
 
   static processRequest(requestString: string, webSocket: WebSocket | any) { 
     let response = backendUtils.getResponse(requestString, webSocket);
+    console.log("response mob", (response as any)?.mobState?.mobName)
     backendUtils._sendResponse(response, webSocket);
   }
 
@@ -206,7 +209,9 @@ export class backendUtils {
 
     let mobTimer: MobTimer | undefined;
     if (isMobTimerRequest && parsedRequest) {
+      console.log("parsedRequest", parsedRequest, webSocket.id)
       mobTimer = backendUtils._processMobTimerRequest(parsedRequest, webSocket);
+      console.log("mobTimer", mobTimer?.state?.mobName)
       if (mobTimer) {
         response = {
           actionInfo: { action: parsedRequest.action },

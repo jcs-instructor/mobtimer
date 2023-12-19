@@ -83,7 +83,27 @@ const App = () => {
     });
   };
 
+
+  const initialize = (retry = false) => {
+    console.info("INITIALIZE CALLED", retry);
+
+    controller.client = new Client(wrapperSocket);
+    const stateSetters = {
+      setRoles,
+      setParticipants,
+      setSecondsRemainingString,
+      setDurationMinutes,
+      setActionButtonLabel,
+    };
+    setSocketListener({
+      stateSetters,
+      controller,
+      playAudio,
+      getActionButtonLabel,
+    });
+  };
   useEffect(() => {
+    console.log("INSIDE USEEFFECAT", renderCompleted);
     // initialize function
     // useEffect code
     setRenderCompleted(true);
@@ -120,6 +140,7 @@ const App = () => {
     if (!mobName || alreadyJoined || !controller.client) {
       return;
     }
+    console.log("submitJoinMobRequest joining")
     controller.frontendMobTimer = new MobTimer(mobName);
     controller.client.joinMob(mobName);
   };

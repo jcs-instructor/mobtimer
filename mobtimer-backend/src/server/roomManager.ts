@@ -23,6 +23,7 @@ export class RoomManager {
   private static _getRoomByName(key: string): Room | undefined {
     return RoomManager._roomsByMobName.get(key);
   }
+  
   private static _getRoomBySocketId(
     key: string | WebSocketOrAny
   ): Room | undefined {
@@ -54,6 +55,7 @@ export class RoomManager {
   }
 
   private static _joinRoom(room: Room, socket: WebSocketOrAny) {
+    console.log("adding socket to room", socket.id);
     room.sockets.add(socket);
     RoomManager._roomsBySocketId.set(socket.id, room);
   }
