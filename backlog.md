@@ -39,7 +39,6 @@ Joel:
 - [ ] **Refresh browser problems**
       - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
             Error Message: "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission."
-      - [ ] Bug: After refresh while timer is running, timer shows 0:00 instead of actual time remaining
       - [ ] Bug: If edit roles while the textbox for edit participants doesn't match the current participants, 
             the participants are incorrectly updated to match the textbox when click Save
       - [ ] Fully test/fix

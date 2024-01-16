@@ -23,6 +23,12 @@ Joel & Ethan:
   - verify tests are working
   - verify UIs are working:
     - browser
+      - smoke test
+        - join mob
+        - add participant
+        - open browser tab (same mob)
+        - refesh testing
+          - while timer is paused, running,...
     - vscode extension
   - synchronize extension timer (stop, start, stop)
 - Read "Practices to Focus On" section below!!!!!!!!!!!!!!!!!!!!!!!
