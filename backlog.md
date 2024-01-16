@@ -37,10 +37,11 @@ Joel:
       - [x] Removed unneeded full integration tests.    
 - [x] Change to BrowserRouter (to get "#" out of url)
 - [ ] **Refresh browser problems**
-      - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
-            Error Message: "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission."
       - [ ] Bug: If edit roles while the textbox for edit participants doesn't match the current participants, 
             the participants are incorrectly updated to match the textbox when click Save
+            - NEXT: Consider trying drag-and-drop controls instead of an input box
+      - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
+            Error Message: "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission."
       - [ ] Fully test/fix
 - [ ] Move document.title related code to UI
 - [ ] **Add test coverage for utils**
