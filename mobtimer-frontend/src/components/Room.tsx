@@ -141,7 +141,7 @@ const Room = ({
         </React.StrictMode>
         
         {/* As of 1/17/2024, React.StrictMode isn't compatible with react-beautiful-dnd; see: https://github.com/atlassian/react-beautiful-dnd/issues/2407 */}
-        <ParticipantsDNDApp />
+        <ParticipantsDNDApp participants={participants} />
         
         <React.StrictMode>
           <EditParticipants

@@ -1,3 +1,4 @@
+import "../App.css"
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import {
@@ -8,6 +9,31 @@ import {
   DropResult,
   NotDraggingStyle
 } from "react-beautiful-dnd";
+
+type FormParameters = {
+    participants: string[];
+    //roles: string[];
+}
+
+/*
+const Participants = ({ participants, roles }: FormParameters) => {
+
+    const defaultRole = "";
+
+    return (
+        <div style={{ display: "block" }}>
+            <label>Participants: </label>
+            {participants.map((participant, i) =>
+                <div key={i} className="ParticipantRow">
+                    <div className="CellBox ParticipantBorder">{participant}</div>
+                    <div className="CellBox">{roles[i] || defaultRole}</div>
+                </div>)}
+        </div>
+    )
+}
+
+export default Participants
+*/
 
 interface Item {
   id: string;
@@ -20,6 +46,11 @@ const getItems = (count: number): Item[] =>
     id: `item-${k}`,
     content: `item ${k}`
   }));
+// const convertStringsToStringsWithIds = (strings: string[]): Item[] =>
+//   Array.from({ length: strings.length }, (_v, k) => k).map(k => ({
+//     id: `item-${k}`,
+//     content: `${strings[k]}`
+//   }));  
 
 // a little function to help us with reordering the result
 const reorder = (
@@ -58,8 +89,15 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
   width: 250
 });
 
-const ParticipantsDNDApp = (): JSX.Element => {
-  const [state, setState] = useState(getItems(5));
+//const Participants = ({ participants, roles }: FormParameters) => {
+const ParticipantsDNDApp = ({participants} : FormParameters): JSX.Element => {
+  const participantsWithId = (getItems(participants.length)); //convertStringsToStringsWithIds(participants);
+  const [state, setState] = useState(participantsWithId); //(getItems(5));  
+  console.log("PARTICIPANTS.LENGTH: " + participants.length);
+  console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
+  console.log("STATE: " + JSON.stringify(state));
+  console.log("PARTICIPANTS: " + participants);
+  console.log("GET ITEMS:" + JSON.stringify(getItems(participants.length)));
 
   const onDragEnd = (result: DropResult): void => {
     // dropped outside the list
