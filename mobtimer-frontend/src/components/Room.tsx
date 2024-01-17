@@ -16,7 +16,7 @@ import {
   DraggingStyle,
   Droppable,
   DropResult,
-  NotDraggingStyle
+  NotDraggingStyle,
 } from "react-beautiful-dnd";
 
 interface Item {
@@ -65,8 +65,10 @@ const Room = ({
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    controller.client?.editParticipants(StringUtils.splitAndTrim(participantNames));
-    controller.client?.editRoles(StringUtils.splitAndTrim(roleNames))
+    controller.client?.editParticipants(
+      StringUtils.splitAndTrim(participantNames)
+    );
+    controller.client?.editRoles(StringUtils.splitAndTrim(roleNames));
   };
 
   // todo: refactor reduncant code for debug boolean (also in App.tsx)
@@ -77,7 +79,7 @@ const Room = ({
   }
 
   useEffect(() => {
-    console.log("Room.tsx: useEffect: mobNameLowerCase: ", mobNameLowerCase); 
+    console.log("Room.tsx: useEffect: mobNameLowerCase: ", mobNameLowerCase);
     setMobName(mobNameLowerCase);
     submitJoinMobRequest();
   }, [mobNameLowerCase, setMobName, submitJoinMobRequest]);
@@ -85,65 +87,72 @@ const Room = ({
   return (
     <>
       <div className={"RoomBox"}>
-        <p className="Team">TEAM: {mobNameUrlParam}</p>
+        <React.StrictMode>
+          <p className="Team">TEAM: {mobNameUrlParam}</p>
 
-        <Timer
-          setSecondsRemainingString={setSecondsRemainingString}
-          timeString={timeString}
-        />
+          <Timer
+            setSecondsRemainingString={setSecondsRemainingString}
+            timeString={timeString}
+          />
 
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <form onSubmit={(e) => submitToggleAction(e)}>
-                  <button type="submit">
-                    {actionButtonLabel ||
-                      "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}
-                  </button>
-                </form>
-              </td>
-              <td>
-                <Reset /> {/* Cancel button */}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <form onSubmit={(e) => submitToggleAction(e)}>
+                    <button type="submit">
+                      {actionButtonLabel ||
+                        "Service Unavailable - Try Refreshing Your Browser in 1-3 minutes"}
+                    </button>
+                  </form>
+                </td>
+                <td>
+                  <Reset /> {/* Cancel button */}
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-        <Duration
-          durationMinutes={durationMinutes}
-          setDurationMinutes={setDurationMinutes}
-          broadcastDurationMinutes={broadcastDurationMinutes}
-        />
+          <Duration
+            durationMinutes={durationMinutes}
+            setDurationMinutes={setDurationMinutes}
+            broadcastDurationMinutes={broadcastDurationMinutes}
+          />
 
-        <hr />
+          <hr />
 
-        <Participants participants={participants} roles={roles} />
+          <Participants participants={participants} roles={roles} />
 
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <RotateParticipants />
-              </td>
-              <td>
-                <ShuffleParticipants />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <RotateParticipants />
+                </td>
+                <td>
+                  <ShuffleParticipants />
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-        <AddParticipant />
-        <hr />
-        <EditParticipants
-          participantNames={participantNames}
-          setParticipantNames={setParticipantNames}
-          submitEditParticipantsRequest={submitEditParticipantsRequest}
-          roleNames={roleNames}
-          setRoleNames={setRoleNames}
-        />
-        <hr />
-        <ParticipantsDNDApp />                        
+          <AddParticipant />
+          <hr />
+        </React.StrictMode>
+        
+        {/* As of 1/17/2024, React.StrictMode isn't compatible with react-beautiful-dnd; see: https://github.com/atlassian/react-beautiful-dnd/issues/2407 */}
+        <ParticipantsDNDApp />
+        
+        <React.StrictMode>
+          <EditParticipants
+            participantNames={participantNames}
+            setParticipantNames={setParticipantNames}
+            submitEditParticipantsRequest={submitEditParticipantsRequest}
+            roleNames={roleNames}
+            setRoleNames={setRoleNames}
+          />
+          <hr />
+        </React.StrictMode>
       </div>
     </>
   );

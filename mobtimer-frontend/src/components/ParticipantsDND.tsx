@@ -78,7 +78,7 @@ const ParticipantsDNDApp = (): JSX.Element => {
 
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
-  return (
+  return (    
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot): JSX.Element => (
