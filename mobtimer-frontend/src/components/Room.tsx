@@ -6,9 +6,23 @@ import Participants from "./Participants";
 import AddParticipant from "./AddParticipant";
 import RotateParticipants from "./RotateParticipants";
 import EditParticipants from "./EditParticipants";
+import ParticipantsDNDApp from "./ParticipantsDND";
 import Reset from "./Reset";
 import ShuffleParticipants from "./ShuffleParticipants";
 import { Controller, StringUtils } from "../mobtimer-api/src";
+import {
+  DragDropContext,
+  Draggable,
+  DraggingStyle,
+  Droppable,
+  DropResult,
+  NotDraggingStyle
+} from "react-beautiful-dnd";
+
+interface Item {
+  id: string;
+  content: string;
+}
 
 type FormParameters = {
   durationMinutes: number;
@@ -128,8 +142,8 @@ const Room = ({
           roleNames={roleNames}
           setRoleNames={setRoleNames}
         />
-
-
+        <hr />
+        <ParticipantsDNDApp />                        
       </div>
     </>
   );
