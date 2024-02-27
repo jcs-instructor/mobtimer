@@ -1,5 +1,5 @@
 import "../App.css"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   DragDropContext,
@@ -12,45 +12,24 @@ import {
 
 type FormParameters = {
     participants: string[];
+    setParticipants: (participants: string[]) => void;
     //roles: string[];
 }
-
-/*
-const Participants = ({ participants, roles }: FormParameters) => {
-
-    const defaultRole = "";
-
-    return (
-        <div style={{ display: "block" }}>
-            <label>Participants: </label>
-            {participants.map((participant, i) =>
-                <div key={i} className="ParticipantRow">
-                    <div className="CellBox ParticipantBorder">{participant}</div>
-                    <div className="CellBox">{roles[i] || defaultRole}</div>
-                </div>)}
-        </div>
-    )
-}
-
-export default Participants
-*/
 
 interface Item {
   id: string;
   content: string;
 }
 
-// fake data generator
-const getItems = (count: number): Item[] =>
-  Array.from({ length: count }, (_v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`
-  }));
-// const convertStringsToStringsWithIds = (strings: string[]): Item[] =>
-//   Array.from({ length: strings.length }, (_v, k) => k).map(k => ({
-//     id: `item-${k}`,
-//     content: `${strings[k]}`
-//   }));  
+const getItems = (participants: string[]): Item[] => {
+    const participantsWithId = participants.map((participant, index) => {
+      return {
+        id: `item-${index}`,
+        content: participant
+      }
+    });
+    return participantsWithId;
+  }
 
 // a little function to help us with reordering the result
 const reorder = (
@@ -90,16 +69,20 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 });
 
 //const Participants = ({ participants, roles }: FormParameters) => {
-const ParticipantsDNDApp = ({participants} : FormParameters): JSX.Element => {
-  const participantsWithId = (getItems(participants.length)); //convertStringsToStringsWithIds(participants);
-  const [state, setState] = useState(participantsWithId); //(getItems(5));  
+const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): JSX.Element => {
+  const [state, setState] = useState(getItems(participants)); //(getItems(5));  
   console.log("PARTICIPANTS.LENGTH: " + participants.length);
-  console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
+  // console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
   console.log("STATE: " + JSON.stringify(state));
   console.log("PARTICIPANTS: " + participants);
-  console.log("GET ITEMS:" + JSON.stringify(getItems(participants.length)));
+  console.log("GET ITEMS:" + JSON.stringify(getItems(participants)));
 
-  const onDragEnd = (result: DropResult): void => {
+  useEffect(() => {
+    const participantsWithId = (getItems(participants)); //convertStringsToStringsWithIds(participants);
+    setState(participantsWithId);
+  }, [state, participants]);
+  
+  const onDragEnd = (result: DropResult): void => {    
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -112,6 +95,8 @@ const ParticipantsDNDApp = ({participants} : FormParameters): JSX.Element => {
     );
 
     setState(items);
+    const changedParticipants = items.map(item => item.content);
+    setParticipants(changedParticipants);
   };
 
   // Normally you would want to split things out into separate components.

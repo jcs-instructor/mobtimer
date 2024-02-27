@@ -29,6 +29,7 @@ type FormParameters = {
   setDurationMinutes: (durationMinutes: number) => void;
   broadcastDurationMinutes: (durationMinutes: number) => void;
   participants: string[];
+  setParticipants: (participants: string[]) => void;
   roles: string[];
   actionButtonLabel: string;
   setMobName: (mobName: string) => void;
@@ -43,6 +44,7 @@ const Room = ({
   setDurationMinutes,
   broadcastDurationMinutes,
   participants,
+  setParticipants,
   roles,
   actionButtonLabel,
   setMobName,
@@ -141,7 +143,10 @@ const Room = ({
         </React.StrictMode>
         
         {/* As of 1/17/2024, React.StrictMode isn't compatible with react-beautiful-dnd; see: https://github.com/atlassian/react-beautiful-dnd/issues/2407 */}
-        <ParticipantsDNDApp participants={participants} />
+        <ParticipantsDNDApp 
+          participants={participants} 
+          setParticipants={setParticipants} 
+        />
         
         <React.StrictMode>
           <EditParticipants
