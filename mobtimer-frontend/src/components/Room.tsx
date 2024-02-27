@@ -146,6 +146,7 @@ const Room = ({
         <ParticipantsDNDApp 
           participants={participants} 
           setParticipants={setParticipants} 
+          roles={roles}
         />
         
         <React.StrictMode>

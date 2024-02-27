@@ -16,7 +16,7 @@ const controller = Controller.staticController as Controller;
 type FormParameters = {
     participants: string[];
     setParticipants: (participants: string[]) => void;
-    //roles: string[];
+    roles: string[];
 }
 
 interface Item {
@@ -72,8 +72,8 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 });
 
 //const Participants = ({ participants, roles }: FormParameters) => {
-const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): JSX.Element => {
-  const [state, setState] = useState(convertStringsToStringsWithIds(participants)); 
+const ParticipantsDNDApp = ({participants, setParticipants, roles} : FormParameters): JSX.Element => {
+  const [state, setState] = useState(convertStringsToStringsWithIds(participants));   
   // console.log("PARTICIPANTS.LENGTH: " + participants.length);
   // console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
   console.log("STATE: " + JSON.stringify(state));
@@ -103,6 +103,8 @@ const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): J
     controller.client?.editParticipants(changedParticipants);
   };
 
+  const defaultRole = "";
+
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   return (    
@@ -115,21 +117,24 @@ const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): J
             style={getListStyle(snapshot.isDraggingOver)}
           >
             {state.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {(provided, snapshot): JSX.Element => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={getItemStyle(
-                      snapshot.isDragging,
-                      provided.draggableProps.style
-                    )}
-                  >
-                    {item.content}
-                  </div>
-                )}
-              </Draggable>
+              <div>
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {(provided, snapshot): JSX.Element => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
+                      )}
+                    >
+                      {item.content}
+                    </div>
+                  )}
+                </Draggable>              
+                <div className="CellBox">{roles[index] || defaultRole}</div>                
+              </div>              
             ))}
             {provided.placeholder}
           </div>
