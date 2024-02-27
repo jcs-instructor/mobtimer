@@ -21,7 +21,7 @@ interface Item {
   content: string;
 }
 
-const getItems = (participants: string[]): Item[] => {
+const convertStringsToStringsWithIds = (participants: string[]): Item[] => {
     const participantsWithId = participants.map((participant, index) => {
       return {
         id: `item-${index}`,
@@ -70,15 +70,15 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 
 //const Participants = ({ participants, roles }: FormParameters) => {
 const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): JSX.Element => {
-  const [state, setState] = useState(getItems(participants)); //(getItems(5));  
-  console.log("PARTICIPANTS.LENGTH: " + participants.length);
+  const [state, setState] = useState(convertStringsToStringsWithIds(participants)); 
+  // console.log("PARTICIPANTS.LENGTH: " + participants.length);
   // console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
   console.log("STATE: " + JSON.stringify(state));
-  console.log("PARTICIPANTS: " + participants);
-  console.log("GET ITEMS:" + JSON.stringify(getItems(participants)));
+  // console.log("PARTICIPANTS: " + participants);
+  // console.log("GET ITEMS:" + JSON.stringify(convertStringsToStringsWithIds(participants)));
 
   useEffect(() => {
-    const participantsWithId = (getItems(participants)); //convertStringsToStringsWithIds(participants);
+    const participantsWithId = (convertStringsToStringsWithIds(participants));
     setState(participantsWithId);
   }, [state, participants]);
   
