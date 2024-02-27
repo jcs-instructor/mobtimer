@@ -2,11 +2,12 @@
 - [x] Modify getItems to take participants as an argument and iterate over participants, as we did previously
 - [x] Pass setParticipants from App to Room to ParticipantsDND
 - [x] Where setState is called, create a string array out of items array and call setParticipants
-- [] You should now see the correct values first time in and when you reorder the original participants 
+- [x] You should now see the correct values first time in and when you reorder the original participants 
 
 Next steps:
-- [] Modify Participants section by copying ParticipantsDND or by editing to have drag and drop
-- [] Remove ParticipantsDND
+- [] Dedupe:
+    - Modify Participants section by copying ParticipantsDND or by editing to have drag and drop
+    - Remove ParticipantsDND
 - [] Fix formatting
 - [] Add Move Up and Move Down icon to each participant?
-- [] Fix browser title text after drag and drop
+
