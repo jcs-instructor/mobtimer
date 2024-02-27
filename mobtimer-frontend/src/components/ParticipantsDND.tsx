@@ -9,6 +9,9 @@ import {
   DropResult,
   NotDraggingStyle
 } from "react-beautiful-dnd";
+import { Controller } from '../mobtimer-api/src';
+
+const controller = Controller.staticController as Controller;
 
 type FormParameters = {
     participants: string[];
@@ -97,6 +100,7 @@ const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): J
     setState(items);
     const changedParticipants = items.map(item => item.content);
     setParticipants(changedParticipants);
+    controller.client?.editParticipants(changedParticipants);
   };
 
   // Normally you would want to split things out into separate components.
