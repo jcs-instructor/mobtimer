@@ -80,7 +80,7 @@ const ParticipantsDNDApp = ({participants, setParticipants} : FormParameters): J
   useEffect(() => {
     const participantsWithId = (convertStringsToStringsWithIds(participants));
     setState(participantsWithId);
-  }, [state, participants]);
+  }, [participants]);
   
   const onDragEnd = (result: DropResult): void => {    
     // dropped outside the list
