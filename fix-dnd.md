@@ -15,6 +15,8 @@ Next steps:
 - [] Edit participant name
 so can get rid of Edit Participants control on bottom of form (TIPS: 
     1. ASK GPT !!!!! 
-    2. Keep browser side-by-side with VSCode so can immediately see UI changes as we work !!!!)
+    2. Keep browser side-by-side with VSCode so can immediately see UI changes as we work !!!!
+    3. Try rotating nav/driv roles again - even Ethan driving the whole time...
+    )
 - [] Add Move Up and Move Down icon to each participant?
 
