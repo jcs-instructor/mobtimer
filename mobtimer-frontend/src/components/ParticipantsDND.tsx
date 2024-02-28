@@ -73,7 +73,7 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 });
 
 //const Participants = ({ participants, roles }: FormParameters) => {
-const ParticipantsDNDApp = ({participants, setParticipants, roles} : FormParameters): JSX.Element => {
+const Participants = ({participants, setParticipants, roles} : FormParameters): JSX.Element => {
   const [state, setState] = useState(convertStringsToStringsWithIds(participants));   
   // console.log("PARTICIPANTS.LENGTH: " + participants.length);
   // console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
@@ -146,4 +146,4 @@ const ParticipantsDNDApp = ({participants, setParticipants, roles} : FormParamet
   );
 };
 
-export default ParticipantsDNDApp
+export default Participants
