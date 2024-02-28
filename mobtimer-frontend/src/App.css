@@ -41,6 +41,9 @@
   border-width: 0.1rem;
   margin: 0rem;
   padding: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ParticipantRow {

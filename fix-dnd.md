@@ -11,6 +11,6 @@ Next steps:
 - [] Fix formatting
     - [x] Keep Nav/Driver to the right when dragging participant
     - [x] When drag, make clear where can drop
-    - [] Keep participant cell height fixed (don't word wrap)
+    - [x] Keep participant cell height fixed (don't word wrap)
 - [] Add Move Up and Move Down icon to each participant?
 
