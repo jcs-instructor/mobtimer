@@ -1,5 +1,6 @@
 import "../App.css"
 import React, { useEffect, useState } from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ReactDOM from "react-dom";
 import {
   DragDropContext,
@@ -49,21 +50,21 @@ const reorder = (
 
 const grid = 8;
 
-const getItemStyle = (
-  isDragging: boolean,
-  draggableStyle: DraggingStyle | NotDraggingStyle | undefined
-): React.CSSProperties => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
+// const getItemStyle = (
+//   isDragging: boolean,
+//   draggableStyle: DraggingStyle | NotDraggingStyle | undefined
+// ): React.CSSProperties => ({
+//   // some basic styles to make the items look a bit nicer
+//   userSelect: "none",
+//   padding: grid * 2,
+//   margin: `0 0 ${grid}px 0`,
 
-  // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+//   // change background colour if dragging
+//   background: isDragging ? "lightgreen" : "grey",
 
-  // styles we need to apply on draggables
-  ...draggableStyle
-});
+//   // styles we need to apply on draggables
+//   ...draggableStyle
+// });
 
 const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
@@ -110,24 +111,25 @@ const Participants = ({participants, setParticipants, roles} : FormParameters): 
   return (    
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
-        {(provided, snapshot): JSX.Element => (
+        {(provided, _snapshot): JSX.Element => (
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
+            // style={getListStyle(snapshot.isDraggingOver)}
           >
             {state.map((item, index) => (
-              <div>
+              <div className="ParticipantRow">
                 <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot): JSX.Element => (
-                    <div
+                  {(provided, _snapshot): JSX.Element => (
+                    <div 
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
+                      // style={getItemStyle(
+                      //   snapshot.isDragging,
+                      //   provided.draggableProps.style
+                      // )}
+                      className="CellBox ParticipantBorder"
                     >
                       {item.content}
                     </div>
