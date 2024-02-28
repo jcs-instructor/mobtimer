@@ -149,6 +149,7 @@ const App = () => {
               setDurationMinutes={setDurationMinutes}
               broadcastDurationMinutes={broadcastDurationMinutes}
               participants={participants}
+              setParticipants={setParticipants}
               roles={roles}
               actionButtonLabel={actionButtonLabel}
               setMobName={setMobName}

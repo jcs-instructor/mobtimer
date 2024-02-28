@@ -39,9 +39,9 @@ Joel:
 - [ ] **Refresh browser problems**
       - [ ] Bug: If edit roles while the textbox for edit participants doesn't match the current participants, 
             the participants are incorrectly updated to match the textbox when click Save
-            - NEXT: Consider trying drag-and-drop controls instead of an input box
-                  - See GPT4 suggestion (Joel) - https://chat.openai.com/share/6bbc1646-e88a-4d9e-8075-1638a7fdd188
-                  - See article (Ethan) - https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/ 
+            - NEXT: 
+                  - [ ] See [document](./fix-dnd.md)
+                  - See also article (Ethan) - https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/                   
       - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
             Error Message: "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission."
       - [ ] Fully test/fix
