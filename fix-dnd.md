@@ -5,7 +5,7 @@
 - [x] You should now see the correct values first time in and when you reorder the original participants 
 
 Next steps:
-- [] Dedupe:
+- [x] Dedupe:
     - Modify Participants section by copying ParticipantsDND or by editing to have drag and drop
     - Remove ParticipantsDND
 - [] Fix formatting

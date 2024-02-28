@@ -6,7 +6,6 @@ import Participants from "./Participants";
 import AddParticipant from "./AddParticipant";
 import RotateParticipants from "./RotateParticipants";
 import EditParticipants from "./EditParticipants";
-import ParticipantsDNDApp from "./ParticipantsDND";
 import Reset from "./Reset";
 import ShuffleParticipants from "./ShuffleParticipants";
 import { Controller, StringUtils } from "../mobtimer-api/src";
@@ -122,9 +121,16 @@ const Room = ({
           />
 
           <hr />
+        </React.StrictMode>
 
-          <Participants participants={participants} roles={roles} />
+        {/* As of 1/17/2024, React.StrictMode isn't compatible with react-beautiful-dnd; see: https://github.com/atlassian/react-beautiful-dnd/issues/2407 */}
+        <Participants
+          participants={participants}
+          setParticipants={setParticipants}
+          roles={roles}
+        />
 
+        <React.StrictMode>
           <table>
             <tbody>
               <tr>
@@ -140,16 +146,7 @@ const Room = ({
 
           <AddParticipant />
           <hr />
-        </React.StrictMode>
-        
-        {/* As of 1/17/2024, React.StrictMode isn't compatible with react-beautiful-dnd; see: https://github.com/atlassian/react-beautiful-dnd/issues/2407 */}
-        <ParticipantsDNDApp 
-          participants={participants} 
-          setParticipants={setParticipants} 
-          roles={roles}
-        />
-        
-        <React.StrictMode>
+
           <EditParticipants
             participantNames={participantNames}
             setParticipantNames={setParticipantNames}
