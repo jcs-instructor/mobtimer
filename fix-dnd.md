@@ -9,7 +9,8 @@ Next steps:
     - Modify Participants section by copying ParticipantsDND or by editing to have drag and drop
     - Remove ParticipantsDND
 - [] Fix formatting
-    - [] Keep Nav/Driver to the right when dragging participant
-    - [] When drag, make clear where can drop
+    - [x] Keep Nav/Driver to the right when dragging participant
+    - [x] When drag, make clear where can drop
+    - [] Keep participant cell height fixed (don't word wrap)
 - [] Add Move Up and Move Down icon to each participant?
 

@@ -1,4 +1,4 @@
-import "../App.css"
+import "../App.css";
 import React, { useEffect, useState } from "react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ReactDOM from "react-dom";
@@ -8,17 +8,17 @@ import {
   DraggingStyle,
   Droppable,
   DropResult,
-  NotDraggingStyle
+  NotDraggingStyle,
 } from "react-beautiful-dnd";
-import { Controller } from '../mobtimer-api/src';
+import { Controller } from "../mobtimer-api/src";
 
 const controller = Controller.staticController as Controller;
 
 type FormParameters = {
-    participants: string[];
-    setParticipants: (participants: string[]) => void;
-    roles: string[];
-}
+  participants: string[];
+  setParticipants: (participants: string[]) => void;
+  roles: string[];
+};
 
 interface Item {
   id: string;
@@ -26,14 +26,14 @@ interface Item {
 }
 
 const convertStringsToStringsWithIds = (participants: string[]): Item[] => {
-    const participantsWithId = participants.map((participant, index) => {
-      return {
-        id: `item-${index}`,
-        content: participant
-      }
-    });
-    return participantsWithId;
-  }
+  const participantsWithId = participants.map((participant, index) => {
+    return {
+      id: `item-${index}`,
+      content: participant,
+    };
+  });
+  return participantsWithId;
+};
 
 // a little function to help us with reordering the result
 const reorder = (
@@ -56,25 +56,31 @@ const getItemStyle = (
 ): React.CSSProperties => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-//   padding: grid * 2,
-//   margin: `0 0 ${grid}px 0`,
+  //   padding: grid * 2,
+  //   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
   background: isDragging ? "lightyellow" : "white",
 
   // styles we need to apply on draggables
-  ...draggableStyle
+  ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
   background: isDraggingOver ? "lightblue" : "white",
-//   padding: grid,
-//   width: 250
+  //   padding: grid,
+  //   width: 250
 });
 
 //const Participants = ({ participants, roles }: FormParameters) => {
-const Participants = ({participants, setParticipants, roles} : FormParameters): JSX.Element => {
-  const [state, setState] = useState(convertStringsToStringsWithIds(participants));   
+const Participants = ({
+  participants,
+  setParticipants,
+  roles,
+}: FormParameters): JSX.Element => {
+  const [state, setState] = useState(
+    convertStringsToStringsWithIds(participants)
+  );
   // console.log("PARTICIPANTS.LENGTH: " + participants.length);
   // console.log("PARTICIPANTS WITH ID: " + JSON.stringify(participantsWithId));
   console.log("STATE: " + JSON.stringify(state));
@@ -82,11 +88,11 @@ const Participants = ({participants, setParticipants, roles} : FormParameters): 
   // console.log("GET ITEMS:" + JSON.stringify(convertStringsToStringsWithIds(participants)));
 
   useEffect(() => {
-    const participantsWithId = (convertStringsToStringsWithIds(participants));
+    const participantsWithId = convertStringsToStringsWithIds(participants);
     setState(participantsWithId);
   }, [participants]);
-  
-  const onDragEnd = (result: DropResult): void => {    
+
+  const onDragEnd = (result: DropResult): void => {
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -99,7 +105,7 @@ const Participants = ({participants, setParticipants, roles} : FormParameters): 
     );
 
     setState(items);
-    const changedParticipants = items.map(item => item.content);
+    const changedParticipants = items.map((item) => item.content);
     setParticipants(changedParticipants);
     controller.client?.editParticipants(changedParticipants);
   };
@@ -108,42 +114,51 @@ const Participants = ({participants, setParticipants, roles} : FormParameters): 
 
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
-  return (    
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable">
-        {(provided, snapshot): JSX.Element => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
-          >
-            {state.map((item, index) => (
-              <div className="ParticipantRow">
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot): JSX.Element => (
-                    <div 
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                      className="CellBox ParticipantBorder"
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>              
-                <div className="CellBox">{roles[index] || defaultRole}</div>                
-              </div>              
-            ))}
-            {provided.placeholder}
+  return (
+    <div style={{ display: "flex", flexDirection: "row" }}>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot): JSX.Element => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+              {state.map((item, index) => (
+                <div className="ParticipantRow">
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided, snapshot): JSX.Element => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                        className="CellBox ParticipantBorder"
+                      >
+                        {item.content}
+                      </div>
+                    )}
+                  </Draggable>
+                </div>
+              ))}
+
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+      <div>
+        {state.map((_item, index) => (
+          <div className="ParticipantRow">
+            <div className="CellBox">{roles[index] || defaultRole}</div>
           </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default Participants
+export default Participants;
