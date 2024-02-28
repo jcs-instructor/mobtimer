@@ -13,6 +13,6 @@ Next steps:
     - [x] When drag, make clear where can drop
     - [x] Keep participant cell height fixed (don't word wrap)
 - [] Edit participant name
-so can get rid of Edit Participants control on bottom of form
+so can get rid of Edit Participants control on bottom of form (TIP: ASK GPT !!!!! )
 - [] Add Move Up and Move Down icon to each participant?
 
