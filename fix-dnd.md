@@ -12,9 +12,14 @@ Next steps:
     - [x] Keep Nav/Driver to the right when dragging participant
     - [x] When drag, make clear where can drop
     - [x] Keep participant cell height fixed (don't word wrap)
+- [ ] Styling
+    - distance between participants and roles
+    - increase distance between rows
 - Participant controls
     - [] Edit participant name button etc.
-    - [] Delete participant button
+    - [x] Delete participant button
+    - [ ] Not have Delete Participant button float to left when dragging
+
     - [] Move participant up/down buttons
     - [] Texture indicating draggability
 - [] Add 
