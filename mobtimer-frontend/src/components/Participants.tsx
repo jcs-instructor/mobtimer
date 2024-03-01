@@ -150,7 +150,6 @@ const Participants = ({
                       </div>
                     )}
                   </Draggable>
-                  <button onClick={() => deleteParticipant(index)} className="CellBox">❌</button>
                 </div>
               ))}
 
@@ -159,6 +158,12 @@ const Participants = ({
           )}
         </Droppable>
       </DragDropContext>
+      <div className="ParticipantRow" style={{width: '30px'}}>
+        {state.map((_item, index) => (
+          <button onClick={() => deleteParticipant(index)} className="CellBox">❌</button>
+        ))}
+      </div>
+
       <div>
         {state.map((_item, index) => (
           <div className="ParticipantRow">
