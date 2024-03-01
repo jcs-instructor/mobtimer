@@ -8,11 +8,16 @@ Next steps:
 - [x] Dedupe:
     - Modify Participants section by copying ParticipantsDND or by editing to have drag and drop
     - Remove ParticipantsDND
-- [] Fix formatting
+- [x] Fix formatting
     - [x] Keep Nav/Driver to the right when dragging participant
     - [x] When drag, make clear where can drop
     - [x] Keep participant cell height fixed (don't word wrap)
-- [] Edit participant name
+- Participant controls
+    - [] Edit participant name button etc.
+    - [] Delete participant button
+    - [] Move participant up/down buttons
+    - [] Texture indicating draggability
+- [] Add 
 so can get rid of Edit Participants control on bottom of form (TIPS: 
     1. ASK GPT !!!!! 
     2. Keep browser side-by-side with VSCode so can immediately see UI changes as we work !!!!
