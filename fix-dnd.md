@@ -12,16 +12,15 @@ Next steps:
     - [x] Keep Nav/Driver to the right when dragging participant
     - [x] When drag, make clear where can drop
     - [x] Keep participant cell height fixed (don't word wrap)
+- Participant controls
+    - [x] Delete participant button
+    - [ ] WIP: Not have Delete Participant button float to left when dragging. Ask GPT how to to do this and keep the alignment of participant + delete button + role. (Optionally ask GPT how to keep the heights the same.)
+    - [] Edit participant name button etc.
+    - [] Move participant up/down buttons
+    - [] Texture indicating draggability
 - [ ] Styling
     - distance between participants and roles
     - increase distance between rows
-- Participant controls
-    - [] Edit participant name button etc.
-    - [x] Delete participant button
-    - [ ] Not have Delete Participant button float to left when dragging
-
-    - [] Move participant up/down buttons
-    - [] Texture indicating draggability
 - [] Add 
 so can get rid of Edit Participants control on bottom of form (TIPS: 
     1. ASK GPT !!!!! 
