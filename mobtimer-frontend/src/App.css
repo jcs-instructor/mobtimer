@@ -46,6 +46,7 @@
   text-overflow: ellipsis;
 }
 
+
 .ParticipantRow {
   display: flex;
   flex-wrap: wrap;

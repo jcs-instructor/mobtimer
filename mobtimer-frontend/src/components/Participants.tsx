@@ -78,6 +78,14 @@ const Participants = ({
   setParticipants,
   roles,
 }: FormParameters): JSX.Element => {
+  const deleteParticipant = (index: number): void => {
+    const newParticipants = [...state];
+    newParticipants.splice(index, 1);
+    setState(newParticipants);
+    setParticipants(newParticipants.map((item) => item.content));
+    controller.client?.editParticipants(newParticipants.map((item) => item.content));
+  };
+  
   const [state, setState] = useState(
     convertStringsToStringsWithIds(participants)
   );
@@ -142,6 +150,7 @@ const Participants = ({
                       </div>
                     )}
                   </Draggable>
+                  <button onClick={() => deleteParticipant(index)} className="CellBox">❌</button>
                 </div>
               ))}
 
