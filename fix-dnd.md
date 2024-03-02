@@ -15,17 +15,15 @@ Next steps:
 - Participant controls
     - [x] Delete participant button
     - [ ] WIP: Not have Delete Participant button float to left when dragging. Ask GPT how to to do this and keep the alignment of participant + delete button + role. (Optionally ask GPT how to keep the heights the same.)
-    - [] Edit participant name button etc.
-    - [] Move participant up/down buttons
-    - [] Texture indicating draggability
+    - [] Edit participant name 
+        - [] Add button to enter edit mode (✏️)
+    - [] Move participant up/down buttons (⬆️⬇️)
+    - [] Texture indicating draggability ()
+    - [] Get rid of Edit Participants control on bottom of form once it's redundant, i.e., once we have the edit (✏️), reorder/drag, and delete (❌) functionality done within the participants list
 - [ ] Styling
     - distance between participants and roles
     - increase distance between rows
-- [] Add 
-so can get rid of Edit Participants control on bottom of form (TIPS: 
+- TIPS: 
     1. ASK GPT !!!!! 
     2. Keep browser side-by-side with VSCode so can immediately see UI changes as we work !!!!
-    3. Try rotating nav/driv roles again - even Ethan driving the whole time...
-    )
-- [] Add Move Up and Move Down icon to each participant?
-
+    3. Try rotating nav/driv roles again - even Ethan driving the whole time...    
