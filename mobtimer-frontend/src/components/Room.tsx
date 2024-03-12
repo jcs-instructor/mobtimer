@@ -5,7 +5,7 @@ import Duration from "./Duration";
 import Participants from "./Participants";
 import AddParticipant from "./AddParticipant";
 import RotateParticipants from "./RotateParticipants";
-import EditParticipants from "./EditParticipants";
+import EditRoles from "./EditRoles";
 import Reset from "./Reset";
 import ShuffleParticipants from "./ShuffleParticipants";
 import { Controller, StringUtils } from "../mobtimer-api/src";
@@ -147,10 +147,8 @@ const Room = ({
           <AddParticipant />
           <hr />
 
-          <EditParticipants
-            participantNames={participantNames}
-            setParticipantNames={setParticipantNames}
-            submitEditParticipantsRequest={submitEditParticipantsRequest}
+          <EditRoles
+            submitEditRolesRequest={submitEditParticipantsRequest}
             roleNames={roleNames}
             setRoleNames={setRoleNames}
           />
