@@ -39,8 +39,9 @@ Joel:
 - [] Edit participants and roles 
     - [] Inline edit of participant names (✏️)
       - Consider updating on each keystroke (rather than clicking a submit/save button)
-      - https://codesandbox.io/examples/package/react-inline-editing
-      - https://www.google.com/search?q=codesandbox+edit+in+place+list+item+react&rlz=1C5CHFA_enUS1059US1059&oq=codesandbox+edit+in+place+list+item+react&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTIyMzc5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
+      - [codesandbox](https://codesandbox.io/examples/package/react-inline-editing)
+      - [google](https://www.google.com/search?q=codesandbox+edit+in+place+list+item+react&rlz=1C5CHFA_enUS1059US1059&oq=codesandbox+edit+in+place+list+item+react&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTIyMzc5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8)
+      - [step by step article](https://www.dhiwise.com/post/effortless-editing-how-to-make-a-react-table-editable)
     - [] Always show all roles, even if no participants have that role yet
     - [] Align role with partipant who has that role. 
     - [] Refactor: Extract a separate React component containing all/some of the controls associated with a participant name, e.g., the name, the edit button, delete button, etc., so they can all be moved together.
