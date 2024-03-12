@@ -14,7 +14,12 @@ Next steps:
     - [x] Keep participant cell height fixed (don't word wrap)
 - Participant controls
     - [x] Delete participant button
-    - [ ] WIP: Not have Delete Participant button float to left when dragging. Ask GPT how to to do this and keep the alignment of participant + delete button + role. (Optionally ask GPT how to keep the heights the same. Consider having a separate React component containing all the controls associated with a participant name, e.g., the name, the edit button, delete button, etc., so they can all be moved together.)
+    - [x] WIP: Not have Delete Participant button float to left when dragging. Ask GPT how to to do this and keep the alignment of participant + delete button + role. 
+    - [] Bug: Editing roles deletes all participants
+    - [] Always show all roles, even if no participants have that role yet
+    - [] Align role with partipant who has that role. 
+    - [] Refactor: Extract a separate React component containing all/some of the controls associated with a participant name, e.g., the name, the edit button, delete button, etc., so they can all be moved together.
+    - [] Delete this file / move contents to backlog.md
     - [] Edit participant name 
         - [] Add button to enter edit mode (✏️)
     - [] Consider adding a confirmation (OK/Cancel) when deleting a participant. (We'll probably have similar confirmation for editing a participant's name.)    
