@@ -38,11 +38,13 @@ Joel:
 - [x] Change to BrowserRouter (to get "#" out of url)
 - [] Edit participants and roles 
     - [] Inline edit of participant names (✏️)
+      - Consider updating on each keystroke (rather than clicking a submit/save button)
       - https://codesandbox.io/examples/package/react-inline-editing
       - https://www.google.com/search?q=codesandbox+edit+in+place+list+item+react&rlz=1C5CHFA_enUS1059US1059&oq=codesandbox+edit+in+place+list+item+react&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTIyMzc5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
     - [] Always show all roles, even if no participants have that role yet
     - [] Align role with partipant who has that role. 
     - [] Refactor: Extract a separate React component containing all/some of the controls associated with a participant name, e.g., the name, the edit button, delete button, etc., so they can all be moved together.
+    - [] Test what happens if you are deleting or editing a participant and then the timer expires (probably need a unique id for ea. participant)
     - [] Delete this file / move contents to backlog.md
     - [] Consider adding a confirmation (OK/Cancel) when deleting a participant. (We'll probably have similar confirmation for editing a participant's name.)    
     - [] Move participant up/down buttons (⬆️⬇️)
