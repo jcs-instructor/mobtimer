@@ -62,13 +62,10 @@ const Room = ({
   );
   const mobNameLowerCase = mobNameUrlParam.toLowerCase();
 
-  const submitEditParticipantsRequest = (
+  const submitEditRolesRequest = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    controller.client?.editParticipants(
-      StringUtils.splitAndTrim(participantNames)
-    );
     controller.client?.editRoles(StringUtils.splitAndTrim(roleNames));
   };
 
@@ -148,7 +145,7 @@ const Room = ({
           <hr />
 
           <EditRoles
-            submitEditRolesRequest={submitEditParticipantsRequest}
+            submitEditRolesRequest={submitEditRolesRequest}
             roleNames={roleNames}
             setRoleNames={setRoleNames}
           />

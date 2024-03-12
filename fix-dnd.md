@@ -15,7 +15,7 @@ Next steps:
 - Participant controls
     - [x] Delete participant button
     - [x] WIP: Not have Delete Participant button float to left when dragging. Ask GPT how to to do this and keep the alignment of participant + delete button + role. 
-    - [] Bug: Editing roles deletes all participants
+    - [x] Bug: Editing roles deletes all participants
     - [] Always show all roles, even if no participants have that role yet
     - [] Align role with partipant who has that role. 
     - [] Refactor: Extract a separate React component containing all/some of the controls associated with a participant name, e.g., the name, the edit button, delete button, etc., so they can all be moved together.
