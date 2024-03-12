@@ -9,19 +9,7 @@ import EditRoles from "./EditRoles";
 import Reset from "./Reset";
 import ShuffleParticipants from "./ShuffleParticipants";
 import { Controller, StringUtils } from "../mobtimer-api/src";
-import {
-  DragDropContext,
-  Draggable,
-  DraggingStyle,
-  Droppable,
-  DropResult,
-  NotDraggingStyle,
-} from "react-beautiful-dnd";
 
-interface Item {
-  id: string;
-  content: string;
-}
 
 type FormParameters = {
   durationMinutes: number;
@@ -54,9 +42,6 @@ const Room = ({
 }: FormParameters) => {
   const { mobNameUrlParam } = useParams() as { mobNameUrlParam: string };
   const controller = Controller.staticController as Controller;
-  const [participantNames, setParticipantNames] = useState(
-    controller.frontendMobTimer.participants.join(",")
-  );
   const [roleNames, setRoleNames] = useState(
     controller.frontendMobTimer.roles.join(",")
   );
