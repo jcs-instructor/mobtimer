@@ -36,15 +36,30 @@ Joel:
       - [x] Refactor: For all IClientSocket files, group fields at the top and methods at the bottom.
       - [x] Removed unneeded full integration tests.    
 - [x] Change to BrowserRouter (to get "#" out of url)
+- [] Edit participants and roles 
+    - [] Inline edit of participant names (✏️)
+      - https://codesandbox.io/examples/package/react-inline-editing
+      - https://www.google.com/search?q=codesandbox+edit+in+place+list+item+react&rlz=1C5CHFA_enUS1059US1059&oq=codesandbox+edit+in+place+list+item+react&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTIyMzc5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
+    - [] Always show all roles, even if no participants have that role yet
+    - [] Align role with partipant who has that role. 
+    - [] Refactor: Extract a separate React component containing all/some of the controls associated with a participant name, e.g., the name, the edit button, delete button, etc., so they can all be moved together.
+    - [] Delete this file / move contents to backlog.md
+    - [] Consider adding a confirmation (OK/Cancel) when deleting a participant. (We'll probably have similar confirmation for editing a participant's name.)    
+    - [] Move participant up/down buttons (⬆️⬇️)
+    - [] Texture indicating draggability (≡)
+    - [] Randomize icon isn't working on Ethan's Mac; consider a different one, e.g., "⇅"
+    - [] Get rid of Edit Participants control on bottom of form once it's redundant, i.e., once we have the edit (✏️), reorder/drag, and delete (❌) functionality done within the participants list
+- [ ] Styling
+    - distance between participants and roles
+    - increase distance between rows
 - [ ] **Refresh browser problems**
-      - [ ] Bug: If edit roles while the textbox for edit participants doesn't match the current participants, 
-            the participants are incorrectly updated to match the textbox when click Save
-            - NEXT: 
-                  - [ ] See [document](./fix-dnd.md)
-                  - See also article (Ethan) - https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/                   
-      - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
+       - [ ] Exception: Can't play sound after refresh (maybe unless you've interacted with the page first).
             Error Message: "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission."
       - [ ] Fully test/fix
+- TIPS: 
+    1. ASK GPT !!!!! 
+    2. Keep browser side-by-side with VSCode so can immediately see UI changes as we work !!!!
+    3. Try rotating nav/driv roles again - even Ethan driving the whole time...    
 - [ ] Move document.title related code to UI
 - [ ] **Add test coverage for utils**
 - [ ] **Split toggle button into separate buttons**: 1. Pause, 2. Start/Resume
